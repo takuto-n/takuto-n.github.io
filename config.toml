@@ -1,6 +1,6 @@
 theme = "hyde"
 languageCode = "en-us"
 title = "My New Hugo Site"
-baseurl = "https://takuto-n.github.io/"
+baseurl = "https://takuto-n.github.io/public"
 canonifyurls = true
 publishdir = "public"
