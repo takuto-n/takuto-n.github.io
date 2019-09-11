@@ -1,0 +1,5 @@
+theme = "hyde"
+languageCode = "en-us"
+title = "My New Hugo Site"
+baseurl = "https://takuto-n.github.io/"
+canonifyurls = true
