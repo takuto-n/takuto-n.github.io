@@ -1,1 +1,0 @@
-# takuto-n.github.io
