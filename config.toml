@@ -4,5 +4,6 @@ author = "takuto-nrkn"
 canonifyurls = true
 paginate = 3
 theme = "hyde"
+publishDir = "docs"
 hasCJKLanguage = true
 languageCode = "ja-jp"
