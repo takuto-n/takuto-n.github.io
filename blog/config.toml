@@ -1,3 +1,9 @@
-baseURL = "http://example.org/"
-languageCode = "en-us"
-title = "My New Hugo Site"
+baseurl = "https://takuto-n.github.io/blog/"
+title = "Little by little and bit by bit"
+author = "takuto-nrkn"
+canonifyurls = true
+paginate = 3
+theme = "hyde"
+publishDir = "docs"
+hasCJKLanguage = true
+languageCode = "ja-jp"
