@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://takuto-n.github.io/about/</loc>
+    <lastmod>2019-09-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://takuto-n.github.io/categories/</loc>
     <lastmod>2019-03-16T23:09:42+09:00</lastmod>
   </url>
@@ -25,11 +30,6 @@
   <url>
     <loc>https://takuto-n.github.io/posts/20190316-cors-basic_auth/</loc>
     <lastmod>2019-03-16T23:09:42+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/about/</loc>
-    <lastmod>2014-04-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
