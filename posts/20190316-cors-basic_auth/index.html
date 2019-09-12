@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>クロスドメイン制約とBASIC認証について | Charaka</title>
+
+<link rel="stylesheet" href="https://takuto-n.github.io/css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://takuto-n.github.io/js/highlight.js"></script>
+
+
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-minima.css" />
+<script type="text/javascript" src="https://takuto-n.github.io/js/jssocials.js"></script>
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://takuto-n.github.io"><h1 class="title is-3">Charaka</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="https://takuto-n.github.io/about" rel="me">
+                  <span class="icon">
+                    <i class="fas fa-info"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/natarajmb/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.linkedin.com/in/natarajmb/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-linkedin-in"></i>
+                  </span>
+                </a>
+              
+                <a href="https://twitter.com/natarajmb/" rel="me">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+
+<div class="container">
+  <h2 class="subtitle is-6">March 16, 2019</h2>
+  <h1 class="subtitle is-size-4-mobile is-size-3-desktop">クロスドメイン制約とBASIC認証について</h1>
+  <div class="content">
+    
+
+<p>初めての技術系ブログです。</p>
+
+<p>ご不明な点がありましたら、お気軽にコメント欄へ記入ください。</p>
+
+<p>初回は「<strong>ドメインXのサイトから、異なるドメインYのBASIC認証つきのサイトにアクセスできるのか</strong> 」について検証した結果を書きたいと思います。
+検証結果としては、</p>
+
+<pre><code>* ブラウザのセキュリティ設定をOnにしていればアクセスできません。
+* ブラウザのセキュリティ設定をOffにしていればアクセス出来ます。
+</code></pre>
+
+<p>以下でその理由について下記の流れで説明していきます。</p>
+
+<!-- TOC -->
+
+<ul>
+<li><a href="#basic認証について">BASIC認証について</a></li>
+<li><a href="#クロスドメイン制約について">クロスドメイン制約について</a></li>
+<li><a href="#corscross-origin-resource-sharingについて">CORS(Cross Origin Resource Sharing)について</a></li>
+<li><a href="#basic認証つきcorsについて">BASIC認証つきCORSについて</a></li>
+</ul>
+
+<!-- /TOC -->
+
+<p><a id="markdown-basic認証について" name="basic認証について"></a></p>
+
+<h2 id="basic認証について">BASIC認証について</h2>
+
+<p>まずBASIC認証とは、HTTPで定義される認証方式の一つです。</p>
+
+<p>認証の仕方としてはブラウザ側で「ユーザ名:パスワード」をBase64でエンコードして、サーバー側へ送信します。</p>
+
+<p>サーバー側では受信したBase64のデータをデコードし、ユーザー名とパスワードを取得して、認証を行う処理方式のことを指します。</p>
+
+<p><a id="markdown-クロスドメイン制約について" name="クロスドメイン制約について"></a></p>
+
+<h2 id="クロスドメイン制約について">クロスドメイン制約について</h2>
+
+<p>2つ目にクロスドメイン制約とは、「<strong>ブラウザ上で実行されるJavaScriptは同じドメインにしかリクエストの送信やクッキーの編集を行えない</strong>」という制限のことです。</p>
+
+<p>この制限がある理由は、<strong>あるサイトから悪意のあるサイトに勝手にアクセスできないようにするため</strong>です。
+もし、あるサイトから異なるドメインのサイトへアクセスしたい場合は、次の２つの方法があります。</p>
+
+<ol>
+<li>HTTPのリクエストヘッダに許可する外部ドメインを設定する方法</li>
+<li>JSONP(JSON with padding)</li>
+</ol>
+
+<p>1つ目の方法は、HTTPのリクエストヘッダ「Access-Control-Allow-Origin」に、外部ドメインを設定する方法です。</p>
+
+<p>2つ目の方法は、あるドメインXのサイトにJavaScriptを置き、その場所をドメインYのサイトにあらかじめ教えておきます。ドメインYからドメインXのJavaScriptを取得・実行すると、結果としてドメインYからドメインXのサイト内のデータにアクセスできるという方法です。</p>
+
+<p>今回は方法1で実現できる方法について検証します。</p>
+
+<blockquote>
+<p>方法2のJSONPは、ここでは詳しく説明しませんが、JSONPインジェクションという攻撃を受ける可能性があるため、方法1を採用します。</p>
+</blockquote>
+
+<p><a id="markdown-corscross-origin-resource-sharingについて" name="corscross-origin-resource-sharingについて"></a></p>
+
+<h2 id="cors-cross-origin-resource-sharing-について">CORS(Cross Origin Resource Sharing)について</h2>
+
+<p>CORS(Cross Origin Resource Sharing)は、JavaScriptでクロスドメインにアクセスする方法です。さきほど述べていたドメインとオリジンはほぼ同義です。
+クロスしている(異なる)オリジン（≒ドメイン）とリソースをシェアする方法です。</p>
+
+<p>CORSでは、JavaScriptで異なるドメインにアクセスする際に、シンプルなリクエストでない場合、preflightリクエストと呼ばれる通信がなされます。
+preflightリクエストとは、アクセスの許可設定を確認するための通信です。
+preflightリクエストが送られる条件については<a href="https://dev.classmethod.jp/etc/about-cors/">CORS(Cross-Origin Resource Sharing)について整理してみた ｜ DevelopersIO</a>をご覧ください。</p>
+
+<p>CORSの動作の流れは主に２パターンあり、以下で説明します。</p>
+
+<pre><code>【操作・設定の前提】
+* ブラウザは現在aaa.comに接続している。
+* サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。
+* bbb.comでは、aaa.comからのアクセス許可設定をしている。
+</code></pre>
+
+<ol>
+<li>preflightリクエストなしの場合
+
+<ol>
+<li>ブラウザがbbb.comにリクエストを送信する。</li>
+<li>aaa.comがbbb.comへのアクセスを許可しているため、ブラウザは欲しかった情報をbbb.comから取得できる。</li>
+</ol></li>
+<li>preflightリクエストありの場合
+
+<ol>
+<li>ブラウザからbbb.comにprefightリクエストを送信する。</li>
+<li>bbb.comがaaa.comからのアクセス許可設定を確認し、確認結果をブラウザに送信する。</li>
+<li>確認結果が良ければ、ブラウザはbbb.comにリクエストを送信する。</li>
+<li>bbb.comはブラウザにレスポンスを送信する。</li>
+</ol></li>
+</ol>
+
+<p><strong>パターン①の場合は1往復で済むのに対し、パターン②の場合は確認作業があるため、2往復必要ということになります。</strong></p>
+
+<blockquote>
+<p>ただし、ブラウザのセキュリティ設定がOffであればpreflightリクエストで確認しないため、いずれの場合も必ず1往復になります。（preflightリクエストは安全を担保するための確認処理であるため、セキュリティ設定をOffにすれば発生しない。）</p>
+</blockquote>
+
+<p><a id="markdown-basic認証つきcorsについて" name="basic認証つきcorsについて"></a></p>
+
+<h2 id="basic認証つきcorsについて">BASIC認証つきCORSについて</h2>
+
+<p>最後に本記事の目的であるBASIC認証つきCORSについて説明します。</p>
+
+<p>先ほどの環境の前提に、1つ条件を加えます。</p>
+
+<pre><code>【操作・設定の前提】
+ * ブラウザは現在aaa.comに接続している。
+ * サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。
+ * bbb.comでは、aaa.comからのアクセス許可設定をしている。
+ * 【追加条件】: アクセス先のbbb.comにBASIC認証をかけている。
+</code></pre>
+
+<p>この状態の時に、CORSが可能かどうかについて述べます。</p>
+
+<ol>
+<li>BASIC認証情報付きのCORS(Authorizationヘッダ付き)
+
+<ol>
+<li>ブラウザからbbb.comへのアクセスは、Authorizationヘッダつきであるため、まずpreflightリクエストを送信します。</li>
+<li>preflightリクエストにはAuthorizationヘッダは付いていないため、bbb.com側ではBASIC認証が解除できず、認証エラーをブラウザに返します。</li>
+<li>ブラウザはbbb.comへアクセス出来ずに通信終了となる。</li>
+</ol></li>
+<li>BASIC認証情報なしのCORS(Authorizationヘッダなし)
+
+<ol>
+<li>ブラウザからbbb.comへアクセスします。</li>
+<li>bbb.comでBASIC認証が解除できず、認証エラーとなりブラウザへ返します。</li>
+<li>ブラウザはbbb.comへアクセス出来ずに処理終了となる。</li>
+</ol></li>
+</ol>
+
+<p>上記理由で、通常であればいずれの場合であっても Basic認証付きCORSはできません。</p>
+
+<p><strong>しかし、ブラウザのセキュリティ設定がOffであれば、パターン①は以下のように変わり、Basic認証付きCORSができるようになる。</strong></p>
+
+<blockquote>
+<p>※ブラウザのセキュリティ設定がOffであればpreflightが発生しない。</p>
+</blockquote>
+
+<ol>
+<li>BASIC認証情報付きのCORS(Authorizationヘッダ付き)
+
+<ol>
+<li>ブラウザはaaa.comからJavaScriptを取得し、bbb.comへXMLHttpRequestが実行される。[Authorizationヘッダつきであるが、preflightリクエストは発生しない。]</li>
+<li>ブラウザからAuthorizationヘッダ付きリクエストがbbb.comへ送られる。</li>
+<li>Authorizationヘッダにユーザーとパスワードの情報があるため、bbb.comでBASIC認証が解除され、ブラウザに正常時のレスポンスを返します。</li>
+<li>ブラウザはbbb.comからレスポンスを受け取り、正常終了となる。</li>
+</ol></li>
+</ol>
+
+<p>以上より、冒頭でも記載しましたが、以下のような結果となります。</p>
+
+<pre><code>* ブラウザのセキュリティ設定をOnにしていればアクセスできません。
+* ブラウザのセキュリティ設定をOffにしていればアクセス出来ます。
+</code></pre>
+
+<p>ここまで読んで下さりありがとうございました。</p>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+    <aside><div id="share"></div></aside>
+    <script type="text/javascript">
+        $("#share").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+    </script>
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/natarajmb">Nataraj Basappa</a> 2018</p>
+  </div>
+</section>
+
+
