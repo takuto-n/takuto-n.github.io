@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>About takuto-n on Little by little and bit by bit</title>
+    <title>Abouts on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/about/</link>
-    <description>Recent content in About takuto-n on Little by little and bit by bit</description>
+    <description>Recent content in Abouts on Little by little and bit by bit - マイペースにこつこつと</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/takuto-n/takuto-n.github.io&#34;&gt;takuto-n&lt;/a&gt; 2019</copyright>
-    <lastBuildDate>Thu, 12 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <language>ja</language>
+    <copyright>takuto_n</copyright>
+    <lastBuildDate>Thu, 12 Sep 2019 21:38:52 +0800</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/about/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About takuto_n</title>
+      <link>https://takuto-n.github.io/about/about/</link>
+      <pubDate>Thu, 12 Sep 2019 21:38:52 +0800</pubDate>
+      
+      <guid>https://takuto-n.github.io/about/about/</guid>
+      <description>テニスと一眼レフが好きです。</description>
+    </item>
     
   </channel>
 </rss>

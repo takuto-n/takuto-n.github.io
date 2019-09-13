@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://takuto-n.github.io/sitemap.xml

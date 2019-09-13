@@ -1,39 +1,95 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<?xml-stylesheet type="text/xsl" href="https://takuto-n.github.io/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://takuto-n.github.io/about/</loc>
-    <lastmod>2019-09-12T00:00:00+00:00</lastmod>
+    <loc>https://takuto-n.github.io/about/about/</loc>
+    <lastmod>2019-09-12T21:38:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2019-03-16T23:09:42+09:00</lastmod>
+    <loc>https://takuto-n.github.io/about/</loc>
+    <lastmod>2019-09-12T21:38:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2019-03-16T23:09:42+09:00</lastmod>
+    <lastmod>2019-09-12T21:38:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/posts/20190809-architectiong-on-aws_memo/</loc>
+    <lastmod>2019-08-09T00:01:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/</loc>
+    <lastmod>2019-08-09T00:01:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/posts/</loc>
+    <lastmod>2019-08-09T00:01:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/preview/</loc>
+    <lastmod>2019-08-09T00:01:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/seminar/</loc>
+    <lastmod>2019-08-09T00:01:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/tag-4/</loc>
+    <lastmod>2019-08-09T00:01:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2019-08-09T00:01:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/</loc>
+    <lastmod>2019-08-09T00:01:44+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://takuto-n.github.io/categories/poc/</loc>
     <lastmod>2019-03-16T23:09:42+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/posts/</loc>
-    <lastmod>2019-03-16T23:09:42+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://takuto-n.github.io/posts/20190316-cors-basic_auth/</loc>
     <lastmod>2019-03-16T23:09:42+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
 </urlset>
