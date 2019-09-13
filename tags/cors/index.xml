@@ -14,10 +14,10 @@
     
     <item>
       <title>クロスドメイン制約とBASIC認証について</title>
-      <link>https://takuto-n.github.io/posts/20190316-cors-basic_auth/</link>
+      <link>https://takuto-n.github.io/post/20190316-cors-basic_auth/</link>
       <pubDate>Sat, 16 Mar 2019 23:09:42 +0900</pubDate>
       
-      <guid>https://takuto-n.github.io/posts/20190316-cors-basic_auth/</guid>
+      <guid>https://takuto-n.github.io/post/20190316-cors-basic_auth/</guid>
       <description>初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメインXのサイトから、異なるドメインYのBA</description>
     </item>
     
