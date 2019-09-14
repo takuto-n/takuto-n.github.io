@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://github.com/takuto-n/ctrl-key-6bit-mask&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 14 Sep 2019 02:37:45 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 14 Sep 2019 12:09:20 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>codebuild</title>
+      <link>https://takuto-n.github.io/tags/codebuild/</link>
+      <pubDate>Sat, 14 Sep 2019 12:09:20 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/tags/codebuild/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mattermost</title>
+      <link>https://takuto-n.github.io/tags/mattermost/</link>
+      <pubDate>Sat, 14 Sep 2019 12:09:20 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/tags/mattermost/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>notification</title>
+      <link>https://takuto-n.github.io/tags/notification/</link>
+      <pubDate>Sat, 14 Sep 2019 12:09:20 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/tags/notification/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>CI</title>
@@ -18,15 +45,6 @@
       <pubDate>Sat, 14 Sep 2019 02:37:45 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/tags/ci/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CodeBuild</title>
-      <link>https://takuto-n.github.io/tags/codebuild/</link>
-      <pubDate>Sat, 14 Sep 2019 02:37:45 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/tags/codebuild/</guid>
       <description></description>
     </item>
     

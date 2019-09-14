@@ -9,14 +9,70 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/post/20190909-sonarcloud_codebuild/</loc>
-    <lastmod>2019-09-14T02:37:45+09:00</lastmod>
+    <loc>https://takuto-n.github.io/categories/</loc>
+    <lastmod>2019-09-14T12:09:20+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/</loc>
+    <loc>https://takuto-n.github.io/categories/cicd/</loc>
+    <lastmod>2019-09-14T12:09:20+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/codebuild/</loc>
+    <lastmod>2019-09-14T12:09:20+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20190914-codebuild_mattermost/</loc>
+    <lastmod>2019-09-14T12:09:20+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2019-09-14T12:09:20+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/mattermost/</loc>
+    <lastmod>2019-09-14T12:09:20+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/notification/</loc>
+    <lastmod>2019-09-14T12:09:20+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2019-09-14T12:09:20+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2019-09-14T12:09:20+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20190909-sonarcloud_codebuild/</loc>
     <lastmod>2019-09-14T02:37:45+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -30,42 +86,7 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/cicd/</loc>
-    <lastmod>2019-09-14T02:37:45+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/codebuild/</loc>
-    <lastmod>2019-09-14T02:37:45+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2019-09-14T02:37:45+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2019-09-14T02:37:45+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/tags/sonarcloud/</loc>
-    <lastmod>2019-09-14T02:37:45+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2019-09-14T02:37:45+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
