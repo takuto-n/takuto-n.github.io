@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="オブジェクトの生成と消滅 Effective Java 第3版のまとめ 2-1 コンストラクタの代わりにstaticファクトリーメソッドを検討する 結論 コンストラクタの代わりにs" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="takuto_n" /><meta name="description" content="オブジェクトの生成と消滅 Effective Java 第3版の個人的メモ 2-1 コンストラクタの代わりにstaticファクトリーメソッドを検討する 結論 コンストラクタの代わり" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Effective Java 3rd [Chapter 2]" />
-<meta property="og:description" content="オブジェクトの生成と消滅 Effective Java 第3版のまとめ 2-1 コンストラクタの代わりにstaticファクトリーメソッドを検討する 結論 コンストラクタの代わりにs" />
+<meta property="og:description" content="オブジェクトの生成と消滅 Effective Java 第3版の個人的メモ 2-1 コンストラクタの代わりにstaticファクトリーメソッドを検討する 結論 コンストラクタの代わり" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20190921-effective-java-3rd-2/" />
 <meta property="article:published_time" content="2019-09-21T01:49:02+09:00" />
 <meta property="article:modified_time" content="2019-09-21T01:49:02+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 2]">
-<meta itemprop="description" content="オブジェクトの生成と消滅 Effective Java 第3版のまとめ 2-1 コンストラクタの代わりにstaticファクトリーメソッドを検討する 結論 コンストラクタの代わりにs">
+<meta itemprop="description" content="オブジェクトの生成と消滅 Effective Java 第3版の個人的メモ 2-1 コンストラクタの代わりにstaticファクトリーメソッドを検討する 結論 コンストラクタの代わり">
 
 
 <meta itemprop="datePublished" content="2019-09-21T01:49:02&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T01:49:02&#43;09:00" />
-<meta itemprop="wordCount" content="3661">
+<meta itemprop="wordCount" content="3663">
 
 
 
 <meta itemprop="keywords" content="java,オブジェクトの生成と消滅,まとめ," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 2]"/>
-<meta name="twitter:description" content="オブジェクトの生成と消滅 Effective Java 第3版のまとめ 2-1 コンストラクタの代わりにstaticファクトリーメソッドを検討する 結論 コンストラクタの代わりにs"/>
+<meta name="twitter:description" content="オブジェクトの生成と消滅 Effective Java 第3版の個人的メモ 2-1 コンストラクタの代わりにstaticファクトリーメソッドを検討する 結論 コンストラクタの代わり"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 3661 words </span>
+          <span class="more-meta"> 3663 words </span>
           <span class="more-meta"> 8 mins read </span>
         
       </div>
@@ -143,7 +143,7 @@
 
 <h1 id="オブジェクトの生成と消滅">オブジェクトの生成と消滅</h1>
 
-<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第3版</a>のまとめ</p>
+<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第3版</a>の個人的メモ</p>
 
 <h2 id="2-1-コンストラクタの代わりにstaticファクトリーメソッドを検討する">2-1 コンストラクタの代わりにstaticファクトリーメソッドを検討する</h2>
 
