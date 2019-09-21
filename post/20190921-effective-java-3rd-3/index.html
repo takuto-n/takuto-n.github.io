@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T19:17:52&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T19:17:52&#43;09:00" />
-<meta itemprop="wordCount" content="1877">
+<meta itemprop="wordCount" content="1867">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 1877 words </span>
+          <span class="more-meta"> 1867 words </span>
           <span class="more-meta"> 4 mins read </span>
         
       </div>
@@ -166,8 +166,11 @@
 
 <h3 id="1-1-a-name-a-どういう時にオーバーライドする必要があるのか">1.1. <a name=''></a>どういう時にオーバーライドする必要があるのか？</h3>
 
-<p><em>クラスが単なるオブジェクトの同一性とは異なる論理的等価性という概念を持っていて、他のインスタンスと比較する必要があるとき</em>
-&gt; ただし、スーパークラスがequalsをオーバーライドしていないこと。」</p>
+<p><em>クラスが単なるオブジェクトの同一性とは異なる論理的等価性という概念を持っていて、他のインスタンスと比較する必要があるとき</em></p>
+
+<blockquote>
+<p>ただし、スーパークラスがequalsをオーバーライドしていないこと。」</p>
+</blockquote>
 
 <h3 id="1-2-a-name-1-a-どうやってオーバーライドすれば良い">1.2. <a name='-1'></a>どうやってオーバーライドすれば良い？</h3>
 
@@ -176,16 +179,21 @@
 <p>以下のツールを使うと簡単に一般契約を実現できる。</p>
 
 <ol>
-<li><p>Annotation Processor(Java 6から追加)</p>
+<li>Annotation Processor(Java 6から追加)
 
 <ul>
 <li><code>lombok</code>の<code>@Data</code>など</li>
 <li>欠点：Annotation Processorを2つ利用していて、<code>@Data</code>とは別のAnnotationが<code>setter()</code>を要求している場合、コンパイルエラーとなる場合がある。
-<code>@Data</code>が後で処理されるようになっていると、<code>setter()</code>がないからである。この場合はどうしようもない。。
-&gt; Annotation Processorとは、コンパイル時に処理を行うもの。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、setter/getter/equals/hashCode/toStringなどのメソッドのバイトコードを突っ込んでくれる。</li>
+<code>@Data</code>が後で処理されるようになっていると、<code>setter()</code>がないからである。この場合はどうしようもない。。</li>
 </ul></li>
+</ol>
 
-<li><p>EclipseやIntellijの自動生成機能</p>
+<blockquote>
+<p>Annotation Processorとは、コンパイル時に処理を行うもの。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、<code>setter/getter/equals/hashCode/toString</code>などのメソッドのバイトコードを突っ込んでくれる。</p>
+</blockquote>
+
+<ol>
+<li>EclipseやIntellijの自動生成機能
 
 <ul>
 <li>GUIで簡単に生成可能</li>
@@ -262,9 +270,12 @@
 
 <h4 id="2-2-1-a-name-volatile-1-a-volatile修飾子とは">2.2.1. <a name='volatile-1'></a>volatile修飾子とは？</h4>
 
-<p><code>volatile修飾子</code>をつけると、「必ずメモリに書く」ようになる。
-&gt;並列処理などで、<code>あるインスタンスA</code>の<code>メンバ変数X</code>を更新する際、通常はスレッドキャッシュに書き込まれた後、メモリに書き込まれる。
-&gt;これをスレッドキャッシュへの書き込みをせず、メモリ書き込みを最初からさせることができるのが、<code>volatile修飾子</code>である。</p>
+<p><code>volatile修飾子</code>をつけると、「必ずメモリに書く」ようになる。</p>
+
+<blockquote>
+<p>並列処理などで、<code>あるインスタンスA</code>の<code>メンバ変数X</code>を更新する際、通常はスレッドキャッシュに書き込まれた後、メモリに書き込まれる。
+これをスレッドキャッシュへの書き込みをせず、メモリ書き込みを最初からさせることができるのが、<code>volatile修飾子</code>である。</p>
+</blockquote>
 
 <p>ただし、<a href="https://qiita.com/YukiMiyatake/items/0062c24b8a576eaab920">「volatileで排他制御出来ると、いつから思ってた？ atomicやsynchronized使うべし」</a>に記載があるように、<code>volatile修飾子</code>では排他制御はできない。。</p>
 
