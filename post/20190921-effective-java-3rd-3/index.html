@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T19:17:52&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T19:17:52&#43;09:00" />
-<meta itemprop="wordCount" content="1887">
+<meta itemprop="wordCount" content="1895">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 1887 words </span>
+          <span class="more-meta"> 1895 words </span>
           <span class="more-meta"> 4 mins read </span>
         
       </div>
@@ -172,11 +172,11 @@
 <p>ただし、スーパークラスがequalsをオーバーライドしていないこと。</p>
 </blockquote>
 
-<h3 id="1-2-a-name-1-a-どうやってオーバーライドすれば良い">1.2. <a name='-1'></a>どうやってオーバーライドすれば良い？</h3>
+<h3 id="1-2-a-name-1-a-どうやってオーバーライドすれば良いのか">1.2. <a name='-1'></a>どうやってオーバーライドすれば良いのか？</h3>
 
 <p><em>一般契約(反射性, 対照性, 推移性, 整合性, 非 null 性)に従うこと</em></p>
 
-<p>以下のツールを使うと簡単に一般契約を実現できる。</p>
+<p>以下のツールを使うと簡単に一般契約に従ったコードにできる。</p>
 
 <ol>
 <li>Annotation Processor(Java 6から追加)
@@ -189,7 +189,7 @@
 </ol>
 
 <blockquote>
-<p>Annotation Processorとは、コンパイル時に処理を行うもの。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、<code>setter/getter/equals/hashCode/toString</code>などのメソッドのバイトコードを突っ込んでくれる。</p>
+<p>Annotation Processorは、コンパイル時に処理される。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、<code>setter/getter/equals/hashCode/toString</code>メソッドのバイトコードを<code>.class</code>に突っ込んでくれる。</p>
 </blockquote>
 
 <ol>
