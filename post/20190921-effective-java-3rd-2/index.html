@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T01:49:02&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T01:49:02&#43;09:00" />
-<meta itemprop="wordCount" content="3989">
+<meta itemprop="wordCount" content="4374">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 3989 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 4374 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
@@ -701,8 +701,86 @@
 
 <h2 id="9-a-name-9try-finallytry-with-resources-a-項目9-try-finallyよりもtry-with-resourcesを使うべし">9. <a name='9try-finallytry-with-resources'></a>項目9 try-finallyよりもtry-with-resourcesを使うべし</h2>
 
-<p>まだ。</p>
+<h3 id="9-1-a-name-1-a-結論">9.1. <a name='-1'></a>結論</h3>
 
+<p><em><code>close</code>しなければならないリソースを扱う場合、<code>try-finally</code>ではなく、<code>try-with-resources</code>を使いましょう。</em></p>
+
+<h4 id="9-2-a-name-1-a-try-finallyの場合">9.2. <a name='-1'></a>try-finallyの場合</h4>
+
+<p><code>TryFinally.java</code>のように書く必要があり、以下の欠点がある。</p>
+
+<ul>
+<li>finally句で、非nullチェックする必要がある。</li>
+<li>finally句の中で例外が発生したらスローすることになる。</li>
+</ul>
+
+<p><em>TryFinally.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span>
+
+<span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">br</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">br</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="nf">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 例外処理
+</span><span class="c1"></span>        <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="9-3-a-name-1-a-try-with-resourcesの場合">9.3. <a name='-1'></a>try-with-resourcesの場合</h4>
+
+<p><code>TryWithResources.java</code>のように書け、以下のような利点がある。</p>
+
+<ul>
+<li><code>finally</code>句でcloseしなくても、自動的でcloseをしてくれる。</li>
+<li>close処理中に、例外が発生してもtry文の中の例外がスローされる。</li>
+</ul>
+
+<p><em>TryWithResources.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">void</span> <span class="n">getResource</span><span class="p">(</span><span class="n">String</span> <span class="nf">src</span><span class="p">,</span> <span class="n">String</span> <span class="nf">dest</span><span class="p">)</span> <span class="kd">throws</span> <span class="nf">IOException</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">(</span><span class="n">InputStream</span> <span class="nf">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">src</span><span class="p">);</span> <span class="n">OutputStream</span> <span class="nf">outputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="p">(</span><span class="n">dest</span><span class="p">))</span> <span class="p">{</span>
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     
