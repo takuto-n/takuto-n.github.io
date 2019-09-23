@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://github.com/takuto-n/ctrl-key-6bit-mask&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 21 Sep 2019 19:17:52 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 23 Sep 2019 15:55:16 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AsciiDoc</title>
+      <link>https://takuto-n.github.io/tags/asciidoc/</link>
+      <pubDate>Mon, 23 Sep 2019 15:55:16 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/tags/asciidoc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Google Docs</title>
+      <link>https://takuto-n.github.io/tags/google-docs/</link>
+      <pubDate>Mon, 23 Sep 2019 15:55:16 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/tags/google-docs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PlantUML</title>
+      <link>https://takuto-n.github.io/tags/plantuml/</link>
+      <pubDate>Mon, 23 Sep 2019 15:55:16 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/tags/plantuml/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>java</title>

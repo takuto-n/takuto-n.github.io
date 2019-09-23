@@ -9,8 +9,64 @@
   </url>
   
   <url>
+    <loc>https://takuto-n.github.io/tags/asciidoc/</loc>
+    <lastmod>2019-09-23T15:55:16+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2019-09-21T19:17:52+09:00</lastmod>
+    <lastmod>2019-09-23T15:55:16+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/google-docs/</loc>
+    <lastmod>2019-09-23T15:55:16+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2019-09-23T15:55:16+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/plantuml/</loc>
+    <lastmod>2019-09-23T15:55:16+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2019-09-23T15:55:16+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2019-09-23T15:55:16+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/useful-tools/</loc>
+    <lastmod>2019-09-23T15:55:16+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20190923-useful-tools/</loc>
+    <lastmod>2019-09-23T15:55:16+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -31,27 +87,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/tags/java/</loc>
-    <lastmod>2019-09-21T19:17:52+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2019-09-21T19:17:52+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2019-09-21T19:17:52+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2019-09-21T19:17:52+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
