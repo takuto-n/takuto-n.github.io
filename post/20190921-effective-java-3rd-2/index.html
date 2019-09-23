@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T01:49:02&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T01:49:02&#43;09:00" />
-<meta itemprop="wordCount" content="4374">
+<meta itemprop="wordCount" content="4507">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 4374 words </span>
+          <span class="more-meta"> 4507 words </span>
           <span class="more-meta"> 9 mins read </span>
         
       </div>
@@ -456,7 +456,7 @@
 </div>
 <p>参考サイト：<a href="https://sites.google.com/site/leihcrev/java/validsingleton">正しいシングルトンクラスの実装の仕方</a></p>
 
-<h3 id="3-2-a-name-enum-a-enum型使ったシングルトン">3.2. <a name='ENUM'></a>ENUM型使ったシングルトン</h3>
+<h3 id="3-2-a-name-enum-a-enum型を使ったシングルトン">3.2. <a name='ENUM'></a>ENUM型を使ったシングルトン</h3>
 
 <p><em>Elvis.java</em></p>
 <div class="highlight"><div class="chroma">
@@ -485,7 +485,7 @@
 
 <h3 id="4-1-a-name-1-a-結論">4.1. <a name='-1'></a>結論</h3>
 
-<p>題目の通り、ユーティリティクラスはprivateのコンストラクタでインスタンス化不可能を強制するとよい。</p>
+<p>ユーティリティクラスはprivateのコンストラクタでインスタンス化不可能を強制するとよい。</p>
 
 <h3 id="4-2-a-name-1-a-ユーティリティクラスとは">4.2. <a name='-1'></a>ユーティリティクラスとは</h3>
 
@@ -520,7 +520,7 @@
 </ul>
 
 <blockquote>
-<p><code>public final</code>とすることで、継承をさせる隙を与えない。</p>
+<p><code>public final</code>とすることで、継承をさせる隙すら与えない。</p>
 </blockquote>
 
 <h3 id="4-3-a-name-1-a-インスタンス化不可能にする理由">4.3. <a name='-1'></a>インスタンス化不可能にする理由</h3>
@@ -536,11 +536,12 @@
 
 <p>DI(Dependency Injection)を使うとテストがしやすくなる。</p>
 
-<h3 id="5-2-a-name-1-a-例">5.2. <a name='-1'></a>例</h3>
+<h3 id="5-2-a-name-1-a-資源を直接結び付ける例">5.2. <a name='-1'></a>資源を直接結び付ける例</h3>
 
-<p>以下のクラスのようにデータベースまわりの実装クラスと結びついていると、データベースが起動していないとテストできなくなる。（昔はそのようにテストしていた。）</p>
+<p>下記サンプルコードは、DBがMysqlであることが前提となっていて、Mysqlが起動していないとテストできない。
+（昔はそのようにテストしていた。）</p>
 
-<p><em>BLogic.java</em></p>
+<p><em>DaoBLogic.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -549,19 +550,52 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">BLogic</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">DaoBLogic</span> <span class="p">{</span>
     <span class="n">DAO</span> <span class="nf">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MysqlDao</span><span class="p">();</span>
     <span class="p">...</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>インジェクションには以下の３つの方法がある。</p>
+<h3 id="5-3-a-name-1-a-依存性注入の例">5.3. <a name='-1'></a>依存性注入の例</h3>
 
-<ul>
-<li>コンストラクタインジェクション</li>
-<li>セッターインジェクション</li>
-<li>フィールドインジェクション（Springなら@Autowired）</li>
-</ul>
+<p>下記サンプルコードは、DBが何であるかは、依存性注入時に決めることができる。
+つまり、MockのDBを注入してもテストできるため、柔軟である。</p>
+
+<p><em>DaoBLogic.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// 依存性注入は柔軟でありテストできる
+public class DaoBLogic {
+    private final Dao dao;
+
+    public DaoBLogic(Dao dao) {
+        this.dao = Objects.requireNonNull(dao);
+    }
+    ・
+    ・
+    ・
+}</pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>インジェクションには以下の３つの方法がある。
+* コンストラクタインジェクション
+* セッターインジェクション
+* フィールドインジェクション（Springなら@Autowired）</p>
+</blockquote>
 
 <h2 id="6-a-name-6-a-項目6-不必要なオブジェクトの生成を避ける">6. <a name='6'></a>項目6 不必要なオブジェクトの生成を避ける</h2>
 
