@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T19:17:52&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-29T19:17:52&#43;09:00" />
-<meta itemprop="wordCount" content="3596">
+<meta itemprop="wordCount" content="3602">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 3596 words </span>
+          <span class="more-meta"> 3602 words </span>
           <span class="more-meta"> 8 mins read </span>
         
       </div>
@@ -318,7 +318,7 @@
 
 <h2 id="3-a-name-12tostring-a-項目12-常にtostringをオーバーライドせよ">3. <a name='12toString'></a>項目12 常にtoStringをオーバーライドせよ</h2>
 
-<h3 id="まとめ">まとめ</h3>
+<h3 id="3-1-a-name-volatile-1-a-まとめ">3.1 <a name='volatile-1'></a>まとめ</h3>
 
 <ul>
 <li>toStringには、フィールド値を含んだ情報を提示しましょう。
@@ -359,7 +359,7 @@
 
 <h2 id="4-a-name-13clone-a-項目13-cloneをオーバーライドするときは注意せよ">4. <a name='13clone'></a>項目13 cloneをオーバーライドするときは注意せよ</h2>
 
-<h3 id="はじめに">はじめに</h3>
+<h3 id="4-1-a-name-volatile-1-a-はじめに">4.1 <a name='volatile-1'></a>はじめに</h3>
 
 <ul>
 <li><p>Cloneableインタフェースはオブジェクトが複製を許可していることを示すだけの空のインターフェースだよ。</p></li>
@@ -373,7 +373,7 @@
 </ul></li>
 </ul>
 
-<h3 id="結論">結論</h3>
+<h3 id="4-2-a-name-volatile-1-a-結論">4.2 <a name='volatile-1'></a>結論</h3>
 
 <ul>
 <li><p>純粋なJavaの世界では、<code>clone</code>メソッドを使わずに、<code>copyFactory</code>メソッドで複製できるように作る方法がいいよ。</p></li>
@@ -387,7 +387,7 @@
 
 <h2 id="5-a-name-14comparable-a-項目14-comparableを実装することを考慮せよ">5. <a name='14Comparable'></a>項目14 Comparableを実装することを考慮せよ</h2>
 
-<h3 id="はじめに-1">はじめに</h3>
+<h3 id="5-1-a-name-volatile-1-a-はじめに">5.1 <a name='volatile-1'></a>はじめに</h3>
 
 <ul>
 <li><p><code>compareTo()</code>は、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Comparable.html">Comparableインタフェース</a>の唯一のメソッド</p></li>
@@ -397,7 +397,7 @@
 <li><p><code>compareTo</code>契約(equalsの契約と同様)を破っていると、<code>compareTo()</code>メソッドに依存しているクラス（<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeSet.html">TreeSet</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeMap.html">TreeMap</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html">Collections</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Arrays.html">Arrays</a>など）が機能しなくなるので気をつけましょう。</p></li>
 </ul>
 
-<h3 id="どのように実装するか">どのように実装するか</h3>
+<h3 id="5-2-a-name-volatile-1-a-どのように実装するか">5.2 <a name='volatile-1'></a>どのように実装するか</h3>
 
 <ul>
 <li><code>compareTo</code>メソッドを実装している２つの例を確認しましょう。</li>
@@ -526,7 +526,7 @@
 <li>_PhoneNumber<em>2.java</em> は　_PhoneNumber<em>1.java</em>  と比べて計算量が少なくて速いが、最小値と最大値の差が、intの最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう。</li>
 </ul>
 
-<h3 id="結論-1">結論</h3>
+<h3 id="5-3-a-name-volatile-1-a-結論">5.3 <a name='volatile-1'></a>結論</h3>
 
 <p>最小値と最大値の差が、intの最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう可能性があれば、_PhoneNumber<em>1.java</em> のように実装しましょう。
 &gt; java標準のメソッドの<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性があるので、_PhoneNumber<em>1.java</em> のように実装しています。</p>
