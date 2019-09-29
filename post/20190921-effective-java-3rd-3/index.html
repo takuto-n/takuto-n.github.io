@@ -43,14 +43,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/" />
 <meta property="article:published_time" content="2019-09-21T19:17:52+09:00" />
-<meta property="article:modified_time" content="2019-09-21T19:17:52+09:00" />
+<meta property="article:modified_time" content="2019-09-29T19:17:52+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 3]">
 <meta itemprop="description" content="すべてのオブジェクトに共通のメソッド Effective Java 第3版の個人的メモ 項目10 equalsのoverrideは一般契約（general contracts">
 
 
 <meta itemprop="datePublished" content="2019-09-21T19:17:52&#43;09:00" />
-<meta itemprop="dateModified" content="2019-09-21T19:17:52&#43;09:00" />
-<meta itemprop="wordCount" content="1896">
+<meta itemprop="dateModified" content="2019-09-29T19:17:52&#43;09:00" />
+<meta itemprop="wordCount" content="3596">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 1896 words </span>
-          <span class="more-meta"> 4 mins read </span>
+          <span class="more-meta"> 3596 words </span>
+          <span class="more-meta"> 8 mins read </span>
         
       </div>
     </header>
@@ -318,9 +318,222 @@
 
 <h2 id="3-a-name-12tostring-a-項目12-常にtostringをオーバーライドせよ">3. <a name='12toString'></a>項目12 常にtoStringをオーバーライドせよ</h2>
 
+<h3 id="まとめ">まとめ</h3>
+
+<ul>
+<li>toStringには、フィールド値を含んだ情報を提示しましょう。
+
+<ul>
+<li>EclipseやIntellijで<code>toString()</code>を自動生成できる。</li>
+</ul></li>
+</ul>
+
+<p><em>ToStringSample.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nf">String</span> <span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;toStringSample [text=%s, id=%s, value=%s]&#34;</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+	<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><p><code>BigInteger</code>や<code>BigDecimal</code>などのように数値を扱うクラスは、<code>toString(), valueOf()</code>で相互変換できるようにしておきましょう。</p>
+
+<ul>
+<li>その方が使いやすくて便利。</li>
+</ul></li>
+
+<li><p><code>toString()</code>以外でもフィールド値などの情報を得られるようにしておきましょう。</p>
+
+<ul>
+<li>利用者側が、無理やり<code>toString</code>から値を取得するようなことになってしまうので、、、</li>
+</ul></li>
+</ul>
+
 <h2 id="4-a-name-13clone-a-項目13-cloneをオーバーライドするときは注意せよ">4. <a name='13clone'></a>項目13 cloneをオーバーライドするときは注意せよ</h2>
 
+<h3 id="はじめに">はじめに</h3>
+
+<ul>
+<li><p>Cloneableインタフェースはオブジェクトが複製を許可していることを示すだけの空のインターフェースだよ。</p></li>
+
+<li><p>java.lang.Objectのcloneメソッドはprotectedなので、Cloneableインタフェースを実装するだけではcloneメソッドを呼び出すことができないよ。</p></li>
+
+<li><p>可変オブジェクトの参照がある場合は、参照先を「<code>Deep Copy</code>」しましょう。</p>
+
+<ul>
+<li><code>Deep Copy</code>は配列やリストの値を1つずつコピーする方法で、対する<code>Shallow Copy</code>はアドレスを単にコピーするだけだよ。</li>
+</ul></li>
+</ul>
+
+<h3 id="結論">結論</h3>
+
+<ul>
+<li><p>純粋なJavaの世界では、<code>clone</code>メソッドを使わずに、<code>copyFactory</code>メソッドで複製できるように作る方法がいいよ。</p></li>
+
+<li><p>Springの世界では、<code>ApplicationContext</code>がインスタンスを管理しているので、<code>ApplicationContenxt#getBean()</code>で、<code>Prototype</code>としてインスタンスを取得する方法がいいよ。</p>
+
+<ul>
+<li><a href="http://javatechnology.net/spring/spring-singleton-scope/">springのシングルトン問題を@Scopeを使って回避する</a>のブログの通り、Springではシングルトン管理なので、何もしないと<code>Clone</code>ではなく、そのインスタンスを取得してしまうからですね。</li>
+</ul></li>
+</ul>
+
 <h2 id="5-a-name-14comparable-a-項目14-comparableを実装することを考慮せよ">5. <a name='14Comparable'></a>項目14 Comparableを実装することを考慮せよ</h2>
+
+<h3 id="はじめに-1">はじめに</h3>
+
+<ul>
+<li><p><code>compareTo()</code>は、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Comparable.html">Comparableインタフェース</a>の唯一のメソッド</p></li>
+
+<li><p><code>CompareTo()</code>メソッドを持っているクラスは、「自然な順序関係」(abc順や数値順、年代順など)を持っていることを表しているよ。</p></li>
+
+<li><p><code>compareTo</code>契約(equalsの契約と同様)を破っていると、<code>compareTo()</code>メソッドに依存しているクラス（<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeSet.html">TreeSet</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeMap.html">TreeMap</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html">Collections</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Arrays.html">Arrays</a>など）が機能しなくなるので気をつけましょう。</p></li>
+</ul>
+
+<h3 id="どのように実装するか">どのように実装するか</h3>
+
+<ul>
+<li><code>compareTo</code>メソッドを実装している２つの例を確認しましょう。</li>
+</ul>
+
+<p>_PhoneNumber<em>1.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">PhoneNumber</span> <span class="nf">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="p">{</span>
+
+	<span class="kd">private</span> <span class="nf">int</span> <span class="n">areaCode</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="nf">int</span> <span class="n">prefix</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="nf">int</span> <span class="n">lineNumber</span><span class="p">;</span>
+
+	<span class="kd">public</span> <span class="nf">int</span> <span class="n">CompareTo</span><span class="p">(</span><span class="n">PhoneNumber</span> <span class="nf">pn</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// 市外局番を比較する
+</span><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">areaCode</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">areaCode</span><span class="p">)</span>
+			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">areaCode</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">areaCode</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">1</span><span class="p">;</span>
+
+		<span class="c1">// 市外局番は等しく、市内局番の前半を比較する
+</span><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">prefix</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">prefix</span><span class="p">)</span>
+			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">prefix</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">prefix</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">1</span><span class="p">;</span>
+
+		<span class="c1">// 市外局番と市内局番の前半は等しく、市内局番の後半を比較する
+</span><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">lineNumber</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">lineNumber</span><span class="p">)</span>
+			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">lineNumber</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">lineNumber</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">1</span><span class="p">;</span>
+
+		<span class="c1">// 全てのフィールドが等しい
+</span><span class="c1"></span>		<span class="k">return</span> <span class="n">0</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>_PhoneNumber<em>2.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">PhoneNumber</span> <span class="nf">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="p">{</span>
+
+	<span class="kd">private</span> <span class="nf">int</span> <span class="n">areaCode</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="nf">int</span> <span class="n">prefix</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="nf">int</span> <span class="n">lineNumber</span><span class="p">;</span>
+
+	<span class="kd">public</span> <span class="nf">int</span> <span class="n">compareTo</span><span class="p">(</span><span class="n">PhoneNumber</span> <span class="nf">pn</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// 市外局番を比較する
+</span><span class="c1"></span>		<span class="kt">int</span> <span class="nf">areaCodeDiff</span> <span class="o">=</span> <span class="n">areaCode</span> <span class="o">-</span> <span class="n">pn</span><span class="p">.</span><span class="na">areaCode</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">areaCodeDiff</span> <span class="o">!=</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="n">areaCodeDiff</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="c1">// 市外局番は等しく、市内局番の前半を比較する
+</span><span class="c1"></span>		<span class="kt">int</span> <span class="nf">prefixDiff</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">-</span> <span class="n">pn</span><span class="p">.</span><span class="na">prefix</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">prefixDiff</span> <span class="o">!=</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="n">prefixDiff</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="c1">// 市外局番と市内局番の前半は等しく、市内局番の後半を比較する
+</span><span class="c1"></span>		<span class="k">return</span> <span class="n">lineNumber</span> <span class="o">-</span> <span class="n">pn</span><span class="p">.</span><span class="na">lineNumber</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>_PhoneNumber<em>1.java</em> は_PhoneNumber<em>2.java</em> と比べて計算量が多くて遅いけれど、確実に動作する。</li>
+<li>_PhoneNumber<em>2.java</em> は　_PhoneNumber<em>1.java</em>  と比べて計算量が少なくて速いが、最小値と最大値の差が、intの最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう。</li>
+</ul>
+
+<h3 id="結論-1">結論</h3>
+
+<p>最小値と最大値の差が、intの最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう可能性があれば、_PhoneNumber<em>1.java</em> のように実装しましょう。
+&gt; java標準のメソッドの<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性があるので、_PhoneNumber<em>1.java</em> のように実装しています。</p>
+
+<blockquote>
+<p><a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、_PhoneNumber<em>2.java</em> のように実装しています。</p>
+</blockquote>
 
     </div>
 
