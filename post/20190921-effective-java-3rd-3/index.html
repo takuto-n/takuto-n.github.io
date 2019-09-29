@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T19:17:52&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-29T19:17:52&#43;09:00" />
-<meta itemprop="wordCount" content="3602">
+<meta itemprop="wordCount" content="3639">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 3602 words </span>
+          <span class="more-meta"> 3639 words </span>
           <span class="more-meta"> 8 mins read </span>
         
       </div>
@@ -522,17 +522,18 @@
 </div>
 </div>
 <ul>
-<li>_PhoneNumber<em>1.java</em> は_PhoneNumber<em>2.java</em> と比べて計算量が多くて遅いけれど、確実に動作する。</li>
-<li>_PhoneNumber<em>2.java</em> は　_PhoneNumber<em>1.java</em>  と比べて計算量が少なくて速いが、最小値と最大値の差が、intの最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう。</li>
+<li><em>PhoneNumber_1.java</em> は<em>PhoneNumber_2.java</em> と比べて計算量が多くて遅いけれど、確実に動作する。</li>
+<li><em>PhoneNumber_2.java</em> は　<em>PhoneNumber_1.java</em>  と比べて計算量が少なくて速いが、最小値と最大値の差が、intの最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう。</li>
 </ul>
 
 <h3 id="5-3-a-name-volatile-1-a-結論">5.3 <a name='volatile-1'></a>結論</h3>
 
-<p>最小値と最大値の差が、intの最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう可能性があれば、_PhoneNumber<em>1.java</em> のように実装しましょう。
-&gt; java標準のメソッドの<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性があるので、_PhoneNumber<em>1.java</em> のように実装しています。</p>
+<p>最小値と最大値の差が、intの最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう可能性があれば、<em>PhoneNumber_1.java</em> のように実装しましょう。そうでなければ、<em>PhoneNumber_2.java</em> のように実装しましょう。</p>
 
 <blockquote>
-<p><a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、_PhoneNumber<em>2.java</em> のように実装しています。</p>
+<p>java標準のメソッドの<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性があるので、<em>PhoneNumber_1.java</em> のように実装しています。</p>
+
+<p><a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、<em>PhoneNumber_2.java</em> のように実装しています。</p>
 </blockquote>
 
     </div>
