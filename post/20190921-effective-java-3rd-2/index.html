@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T01:49:02&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-29T01:49:02&#43;09:00" />
-<meta itemprop="wordCount" content="5176">
+<meta itemprop="wordCount" content="5178">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 5176 words </span>
+          <span class="more-meta"> 5178 words </span>
           <span class="more-meta"> 11 mins read </span>
         
       </div>
@@ -916,13 +916,17 @@ MacBook-Air:~ takuto-no$ jstack 18372 | grep &#39;&#34;&#39;
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">void</span> <span class="n">getResource</span><span class="p">(</span><span class="n">String</span> <span class="nf">src</span><span class="p">,</span> <span class="n">String</span> <span class="nf">dest</span><span class="p">)</span> <span class="kd">throws</span> <span class="nf">IOException</span> <span class="p">{</span>
-    <span class="k">try</span> <span class="p">(</span><span class="n">InputStream</span> <span class="nf">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">src</span><span class="p">);</span> <span class="n">OutputStream</span> <span class="nf">outputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="p">(</span><span class="n">dest</span><span class="p">))</span> <span class="p">{</span>
-<span class="p">.</span>
-<span class="p">.</span>
-<span class="p">.</span>
+    <span class="k">try</span> <span class="p">(</span><span class="n">InputStream</span> <span class="nf">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">src</span><span class="p">);</span>
+         <span class="n">OutputStream</span> <span class="nf">outputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="p">(</span><span class="n">dest</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="p">.</span>
+        <span class="p">.</span>
+        <span class="p">.</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
