@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T19:17:52&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-29T19:17:52&#43;09:00" />
-<meta itemprop="wordCount" content="3673">
+<meta itemprop="wordCount" content="3797">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 3673 words </span>
+          <span class="more-meta"> 3797 words </span>
           <span class="more-meta"> 8 mins read </span>
         
       </div>
@@ -392,7 +392,18 @@
 <ul>
 <li><p><code>compareTo()</code>は、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Comparable.html">Comparableインタフェース</a>の唯一のメソッド</p></li>
 
-<li><p><code>CompareTo()</code>メソッドを持っているクラスは、「自然な順序関係」(abc順や数値順、年代順など)を持っていることを表しているよ。</p></li>
+<li><p><code>CompareTo()</code>メソッドを持っているクラスは、「自然な順序関係」(abc順や数値順、年代順など)を持っていることを表しているよ。</p>
+
+<ul>
+<li>自然な順序関係の例＝辞書順、数値順</li>
+<li>1,2,3,4,..,9,10,11,&hellip;,99,100 をソートする時にどの順序関係で扱うかで結果が変わる</li>
+<li>数値順＝上に記述した通り</li>
+<li>辞書順＝<code>1,10,100,11,..,2,20,21,...3,30...</code>
+
+<ul>
+<li>Javaだと、Stringでsortすると、辞書順ソートになる。</li>
+</ul></li>
+</ul></li>
 
 <li><p><code>compareTo</code>契約(equalsの契約と同様)を破っていると、<code>compareTo()</code>メソッドに依存しているクラス（<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeSet.html">TreeSet</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeMap.html">TreeMap</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html">Collections</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Arrays.html">Arrays</a>など）が機能しなくなるので気をつけましょう。</p></li>
 </ul>
