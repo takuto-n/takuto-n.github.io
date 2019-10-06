@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T16:59:30&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T16:59:30&#43;09:00" />
-<meta itemprop="wordCount" content="1482">
+<meta itemprop="wordCount" content="2307">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 1482 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 2307 words </span>
+          <span class="more-meta"> 5 mins read </span>
         
       </div>
     </header>
@@ -322,6 +322,228 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <h2 id="項目44-標準の関数型インタフェースを使う">項目44 標準の関数型インタフェースを使う</h2>
 
+<p>基本的には、標準の関数型インタフェースで事足りる。
+しかし、特定の場合に限っては独自の関数インタフェースを定義する必要がある。</p>
+
+<h3 id="標準の関数型インタフェース">標準の関数型インタフェース</h3>
+
+<ul>
+<li>使いやすく、すでに組み込まれている様々なメソッドの恩恵にあずかれる。</li>
+
+<li><p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">標準の関数型インタフェース</a>には、43個あり、主な6つは以下である。</p>
+
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Function.html">Function<T></a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Consumer.html">Consumer<T></a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Supplier.html">Supplier<T></a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Predicate.html">Predicate<T></a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/UnaryOperator.html">UnaryOperator<T></a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/BinaryOperator.html">BinaryOperator<T></a></li>
+</ul></li>
+
+<li><p>性能の観点から、プリミティブ型に対応していない関数型インターフェースには、プリミティブ型をボクシングしたオブジェクトは使わないでおきましょう。</p></li>
+</ul>
+
+<h3 id="独自の関数型インタフェース">独自の関数型インタフェース</h3>
+
+<p>以下の場合、独自の関数型インタフェースを作成しましょう。</p>
+
+<ul>
+<li>広く使われ、説明的な名前によってメリットがある場合</li>
+<li>強く関係する契約がある場合（?）</li>
+<li>独自のデフォルトメソッドによるメリットがある場合</li>
+</ul>
+
+<p>作成するときは、<code>@FunctionalInterface</code>を使いましょう。書き方に誤りがある場合、コンパイルエラーにしてくれます。</p>
+
+<blockquote>
+<p>同じ名前のメソッドで、異なる関数型インタフェースを引数に持つのは、ユーザーにとって曖昧となるのでやめましょう。<br>
+例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ExecutorService.html"><code>ExecutorService.submit()</code></a>は、異なる関数インタフェース「<code>Runnable</code>」と「<code>Callable&lt;T&gt;</code>」を引数に持っているのでよくありません。</p>
+</blockquote>
+
+<h3 id="標準の関数型インタフェースについての余談">標準の関数型インタフェースについての余談</h3>
+
+<h4 id="function-t">Function<T></h4>
+
+<ul>
+<li>従来の書き方</li>
+</ul>
+
+<p><em>MethodDefinition.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">functionName</span><span class="p">(</span><span class="n">T</span> <span class="nf">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">R</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><p>匿名クラスでの書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Function&lt;T, R&gt; functionalInstance = new Function&lt;T, R&gt;() {
+@Override
+public R apply(T arg) {
+    return new R();
+}
+};</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>lambda式を使った書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="nf">functionalInstance</span> <span class="o">=</span> <span class="n">arg</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">R</span><span class="p">();</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>呼び出し方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">returnValue</span> <span class="o">=</span> <span class="n">functionalInstance</span><span class="p">.</span><span class="na">apply</span><span class="p">((</span><span class="n">T</span><span class="p">)</span> <span class="n">argument</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h4 id="consumer-t">Consumer<T></h4>
+
+<ul>
+<li><p>従来の書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">void</span> <span class="nf">consumer</span><span class="p">(</span><span class="n">T</span> <span class="nf">arg</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">something</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>匿名クラスでの書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">consumer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="nf">void</span> <span class="n">accept</span><span class="p">(</span><span class="n">T</span> <span class="nf">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">something</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>lambda式を使った書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">consumer</span> <span class="o">=</span> <span class="n">arg</span> <span class="o">-&gt;</span> <span class="n">something</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>呼び出し方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">consumer</span><span class="p">.</span><span class="na">accept</span><span class="p">((</span><span class="n">T</span><span class="p">)</span> <span class="n">argument</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h4 id="supplier-t">Supplier<T></h4>
+
+<ul>
+<li><p>従来の書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">T</span> <span class="nf">consumer</span><span class="p">()</span> <span class="p">{</span>
+<span class="k">return</span> <span class="k">new</span> <span class="n">T</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>匿名クラスでの書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">supplier</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="nf">T</span> <span class="n">get</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">T</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>lambda式を使った書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">supplier</span> <span class="o">=</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">T</span><span class="p">();</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>呼び出し方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">supplier</span><span class="p">.</span><span class="na">get</span><span class="p">();</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h4 id="predicate-t">Predicate<T></h4>
+
+<h4 id="unaryoperator-t">UnaryOperator<T></h4>
+
+<h4 id="binaryoperator-t">BinaryOperator<T></h4>
+
 <h2 id="項目45-ストリームを注意して使う">項目45 ストリームを注意して使う</h2>
 
 <h2 id="項目46-ストリームで副作用のない関数を選ぶ">項目46 ストリームで副作用のない関数を選ぶ</h2>
@@ -340,6 +562,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/methodreference.html">Javaメソッド参照・コンストラクター参照</a></li>
 <li><a href="https://www.sejuku.net/blog/22592#i">【楽チンJava】メソッド参照での呼び出し方</a></li>
 <li><a href="https://riptutorial.com/ja/java/example/5080/%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%8F%82%E7%85%A7">RIP Tutorial メソッド参照</a></li>
+<li><a href="https://qiita.com/subaru44k/items/c55d9b9fc419f0d09c64">Java8のFunction, Consumer, Supplier, Predicateの調査</a></li>
 </ul>
     </div>
 
