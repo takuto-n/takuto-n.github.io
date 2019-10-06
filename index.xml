@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://github.com/takuto-n/ctrl-key-6bit-mask&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 23 Sep 2019 15:55:16 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 06 Oct 2019 16:59:30 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,6 +19,24 @@
       
       <guid>https://takuto-n.github.io/about/about/</guid>
       <description>テニスと一眼レフが好きです。</description>
+    </item>
+    
+    <item>
+      <title>Effective Java 3rd [Chapter 7]</title>
+      <link>https://takuto-n.github.io/post/20191006-effective-java-3rd-7/</link>
+      <pubDate>Sun, 06 Oct 2019 16:59:30 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20191006-effective-java-3rd-7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Effective Java 3rd [Chapter 4]</title>
+      <link>https://takuto-n.github.io/post/20191006-effective-java-3rd-4/</link>
+      <pubDate>Sun, 06 Oct 2019 15:27:10 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20191006-effective-java-3rd-4/</guid>
+      <description>クラスとインタフェース Effective Java 第3版の個人的メモ まだ項目を記載しただけで、内容はありません。随時追記していきます。 項目15 クラスとメンバーへのア</description>
     </item>
     
     <item>
