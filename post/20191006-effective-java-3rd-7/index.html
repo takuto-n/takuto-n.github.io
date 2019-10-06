@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T16:59:30&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T16:59:30&#43;09:00" />
-<meta itemprop="wordCount" content="765">
+<meta itemprop="wordCount" content="1436">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 765 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 1436 words </span>
+          <span class="more-meta"> 3 mins read </span>
         
       </div>
     </header>
@@ -214,9 +214,111 @@
 </blockquote>
 
 <p>Java8での関数型インタフェース一覧は<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">Oracle Java SE 8 (Uses of Class
-java.lang.FunctionalInterface)</a>にあります。</p>
+java.lang.FunctionalInterface)</a>にあります。
+3rd party製のライブラリで<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/FunctionalInterface.html">@FunctionalInterface</a>が付いているインタフェースも、関数型インタフェースですね。</p>
 
 <h2 id="項目43-ラムダよりもメソッド参照を選ぶ">項目43 ラムダよりもメソッド参照を選ぶ</h2>
+
+<h3 id="結論-1">結論</h3>
+
+<ul>
+<li>メソッド参照の利点：ラムダ式よりも簡潔に書ける。</li>
+<li>ただし、同クラスにあるメソッドを用いる場合は、ラムダ式の方が簡潔に書ける場合がある。</li>
+</ul>
+
+<h3 id="メソッド参照">メソッド参照</h3>
+
+<blockquote>
+<p>メソッド参照とは、、<br>
+関数型インターフェース（抽象メソッドが1つだけ定義されているインターフェース）の変数にメソッドそのものを代入することが出来る。これを「メソッド参照」と呼ぶ。</p>
+</blockquote>
+
+<p><em>MethodRefAndLambdaExpression.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">var</span> <span class="nf">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="nf">i</span> <span class="o">=</span> <span class="n">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// メソッド参照
+</span><span class="c1"></span><span class="n">list</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="o">::</span><span class="n">print</span><span class="p">);</span>
+
+<span class="c1">// ラムダ式
+</span><span class="c1"></span><span class="n">list</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">i</span><span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>メソッド参照の方が、簡潔に記載できていますね。</p>
+
+<h3 id="もう少しメソッド参照に突っ込む">もう少しメソッド参照に突っ込む</h3>
+
+<p>メソッド参照には、下記5種類がある。</p>
+
+<p>上記の例は、<code>System</code>クラスの<code>static</code>フィールド<code>out</code>の<code>println</code>メソッドなので、静的メソッド参照だったんですね。</p>
+
+<table>
+<thead>
+<tr>
+<th>メソッド参照形式</th>
+<th>コード</th>
+<th>等価ラムダ</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>静的メソッド</td>
+<td><code>TypeName::method</code></td>
+<td><code>(args) -&gt; TypeName.method(args)</code></td>
+</tr>
+
+<tr>
+<td>非静的メソッド（インスタンス#1の場合）</td>
+<td><code>instance::method</code></td>
+<td><code>(args) -&gt; instance.method(args)</code></td>
+</tr>
+
+<tr>
+<td>非静的メソッド（インスタンスなし）</td>
+<td><code>TypeName::method</code></td>
+<td><code>(instance, args) -&gt; instance.method(args)</code></td>
+</tr>
+
+<tr>
+<td>コンストラクタ#2</td>
+<td><code>TypeName::new</code></td>
+<td><code>(args) -&gt; new TypeName(args)</code></td>
+</tr>
+
+<tr>
+<td>配列コンストラクタ</td>
+<td><code>TypeName[]::new</code></td>
+<td><code>(int size) -&gt; new TypeName[size]</code></td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>#1 <br>
+<code>instance</code>は、インスタンスへの参照を評価する任意の式です。例えば、<code>getInstance()::method</code> 、<code>this::method</code></p>
+
+<p>#2 <br>
+<code>TypeName</code>が非静的な内部クラスである場合、コンストラクタ参照は外部クラスインスタンスのスコープ内でのみ有効です</p>
+</blockquote>
 
 <h2 id="項目44-標準の関数型インタフェースを使う">項目44 標準の関数型インタフェースを使う</h2>
 
@@ -235,6 +337,9 @@ java.lang.FunctionalInterface)</a>にあります。</p>
 <li><a href="https://qiita.com/minebreaker/items/de3b264093fd7c9639af">Effective Java Third Edition 2版からの更新点 個人的メモ</a></li>
 <li><a href="http://appresso.hatenablog.com/entry/2018/01/31/183452">Effective Java 第三版、ゲットだぜ！</a></li>
 <li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/functionalinterface.html">Java関数型インターフェース</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/methodreference.html">Javaメソッド参照・コンストラクター参照</a></li>
+<li><a href="https://www.sejuku.net/blog/22592#i">【楽チンJava】メソッド参照での呼び出し方</a></li>
+<li><a href="https://riptutorial.com/ja/java/example/5080/%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%8F%82%E7%85%A7">RIP Tutorial メソッド参照</a></li>
 </ul>
     </div>
 
