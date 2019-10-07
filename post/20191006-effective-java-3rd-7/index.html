@@ -383,20 +383,20 @@ java.lang.FunctionalInterface)</a>にあります。
 <li><p>匿名クラスでの書き方</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">Function&lt;T, R&gt; functionalInstance = new Function&lt;T, R&gt;() {
-@Override
-public R apply(T arg) {
-    return new R();
-}
-};</pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="nf">functionalInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="nf">R</span> <span class="n">apply</span><span class="p">(</span><span class="n">T</span> <span class="nf">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">R</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="p">};</span></code></pre></td></tr></table>
 </div>
 </div></li>
 
@@ -488,7 +488,7 @@ public R apply(T arg) {
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">T</span> <span class="nf">consumer</span><span class="p">()</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">T</span> <span class="nf">supplier</span><span class="p">()</span> <span class="p">{</span>
 <span class="k">return</span> <span class="k">new</span> <span class="n">T</span><span class="p">();</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
