@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="クラスとインタフェース Effective Java 第3版の個人的メモ まだ項目を記載しただけで、内容はありません。随時追記していきます。 項目15 クラスとメンバーへのア" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="takuto_n" /><meta name="description" content="クラスとインタフェース Effective Java 第3版の個人的メモ 項目15 クラスとメンバーへのアクセス可能性を最小限にする 結論 常にアクセス可能性をできる限り小さく" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Effective Java 3rd [Chapter 4]" />
-<meta property="og:description" content="クラスとインタフェース Effective Java 第3版の個人的メモ まだ項目を記載しただけで、内容はありません。随時追記していきます。 項目15 クラスとメンバーへのア" />
+<meta property="og:description" content="クラスとインタフェース Effective Java 第3版の個人的メモ 項目15 クラスとメンバーへのアクセス可能性を最小限にする 結論 常にアクセス可能性をできる限り小さく" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20191006-effective-java-3rd-4/" />
 <meta property="article:published_time" content="2019-10-06T15:27:10+09:00" />
 <meta property="article:modified_time" content="2019-10-06T15:27:10+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 4]">
-<meta itemprop="description" content="クラスとインタフェース Effective Java 第3版の個人的メモ まだ項目を記載しただけで、内容はありません。随時追記していきます。 項目15 クラスとメンバーへのア">
+<meta itemprop="description" content="クラスとインタフェース Effective Java 第3版の個人的メモ 項目15 クラスとメンバーへのアクセス可能性を最小限にする 結論 常にアクセス可能性をできる限り小さく">
 
 
 <meta itemprop="datePublished" content="2019-10-06T15:27:10&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T15:27:10&#43;09:00" />
-<meta itemprop="wordCount" content="349">
+<meta itemprop="wordCount" content="2306">
 
 
 
 <meta itemprop="keywords" content="java,クラスとインタフェース,個人的メモ," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 4]"/>
-<meta name="twitter:description" content="クラスとインタフェース Effective Java 第3版の個人的メモ まだ項目を記載しただけで、内容はありません。随時追記していきます。 項目15 クラスとメンバーへのア"/>
+<meta name="twitter:description" content="クラスとインタフェース Effective Java 第3版の個人的メモ 項目15 クラスとメンバーへのアクセス可能性を最小限にする 結論 常にアクセス可能性をできる限り小さく"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 349 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 2306 words </span>
+          <span class="more-meta"> 5 mins read </span>
         
       </div>
     </header>
@@ -145,13 +145,276 @@
 
 <p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第3版</a>の個人的メモ</p>
 
-<p>まだ項目を記載しただけで、内容はありません。随時追記していきます。</p>
-
 <h2 id="項目15-クラスとメンバーへのアクセス可能性を最小限にする">項目15 クラスとメンバーへのアクセス可能性を最小限にする</h2>
+
+<h3 id="結論">結論</h3>
+
+<ul>
+<li>常にアクセス可能性をできる限り小さくするべき</li>
+<li>publicのクラスはpublicのフィールドを持つべきではない</li>
+<li>public static finalのフィールドが配列の場合、その配列の内部も不変であることを保証するべき</li>
+</ul>
+
+<h3 id="常にアクセス可能性をできる限り小さくするべき">常にアクセス可能性をできる限り小さくするべき</h3>
+
+<p>情報秘匿(カプセル化)をすると以下の利点が得られるから。
+  - モジュールを分離し、個別に開発、テストなどができる
+  - モジュールを素早く理解できる
+  - ソフトウェアの再利用をするための必要条件</p>
+
+<h4 id="カプセル化の方法">カプセル化の方法</h4>
+
+<ul>
+<li>アクセス修飾子
+
+<ul>
+<li>private</li>
+<li>パッケージプライベート</li>
+<li>protected</li>
+<li>public
+
+<ul>
+<li>protected以上はAPIになることが多い。</li>
+</ul></li>
+</ul></li>
+<li>パッケージで分ける。</li>
+<li>モジュールシステムを利用する。</li>
+</ul>
+
+<blockquote>
+<p>モジュールシステムは、このような記述をし、以下を定義するために使用するもの。<br>
+・ どのパッケージを外部から見えるようにするか<br>
+・ 他のどのモジュールに依存するか<br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">module</span> <span class="nf">foo</span> <span class="p">{</span>
+    <span class="n">exports</span> <span class="nf">foo</span><span class="p">.</span><span class="na">api</span><span class="p">;</span>
+    <span class="n">requires</span> <span class="nf">bar</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+
+<h3 id="publicのクラスはpublicのフィールドを持つべきではない">publicのクラスはpublicのフィールドを持つべきではない</h3>
+
+<p>スレッドセーフにできないから。</p>
+
+<p>メソッドには<code>synchronized</code>が付けれるが、フィールド値には<code>synchronized</code>を付けれないので<code>getter</code>/<code>setter</code>を利用するようにしましょう。</p>
+
+<blockquote>
+<p>public static finalのフィールドは定数として使ってよい</p>
+</blockquote>
+
+<h2 id="public-static-finalのフィールドが配列の場合-参照されるオブジェクトが不変であることを保証するべき">public static finalのフィールドが配列の場合、参照されるオブジェクトが不変であることを保証するべき</h2>
+
+<p>以下のようなコードを記載すると、<code>VALUES</code>のアドレスは<code>final</code>であるが、要素は<code>final</code>ではない。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">Thing</span><span class="p">[]</span> <span class="n">VALUES</span><span class="o">=</span><span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
+  <span class="p">.</span>
+  <span class="p">.</span>
+  <span class="p">.</span>
+<span class="n">VALUES</span><span class="p">[</span><span class="n">0</span><span class="p">]</span><span class="o">=</span><span class="n">1</span><span class="p">;</span> <span class="o">//</span><span class="n">のように配列内のデータを変更できてしまう</span><span class="err">。</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="実装方法">実装方法</h3>
+
+<ul>
+<li><p>方法1</p>
+
+<ul>
+<li><p>定数にしたい配列をprivateにして、public static finalのリストに追加する</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">Thing</span><span class="p">[]</span> <span class="n">PRIVATE_VALUES</span><span class="o">=</span><span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
+<span class="kd">public</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">List</span> <span class="n">VALUES</span> <span class="o">=</span> <span class="n">Collections</span><span class="p">.</span><span class="na">unmodifiableList</span><span class="p">(</span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">PRIVATE_VALUES</span><span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+
+<li><p>方法2</p>
+
+<ul>
+<li><p>定数にしたい配列をprivateにして、publicメソッドで配列のコピーを返す</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">Thing</span><span class="p">[]</span> <span class="n">PRIVATE_VALUES</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
+<span class="kd">public</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">Thing</span><span class="p">[]</span> <span class="n">values</span><span class="p">()</span> <span class="p">{</span> 
+<span class="k">return</span> <span class="n">PRIVATE_VALUES</span><span class="p">.</span><span class="na">clone</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>備考：配列は低レイヤな扱いになってしまうので、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html"><code>java.util.Collections</code></a>を使うようにすると良さそう。</p>
+</blockquote>
 
 <h2 id="項目16-publicのクラスでは-publicのフィールドではなく-アクセッサーメソッドを使う">項目16 publicのクラスでは、publicのフィールドではなく、アクセッサーメソッドを使う</h2>
 
+<h3 id="結論-1">結論</h3>
+
+<ul>
+<li>そのクラスのパッケージ外からアクセス可能であれば、アクセッサーメソッドを提供するべき</li>
+<li>クラスがパッケージプライベート/privateのネストしたクラスの場合、そのフィールドは公開しても良い</li>
+</ul>
+
+<h3 id="そのクラスのパッケージ外からアクセス可能であれば-アクセッサーメソッドを提供するべき">そのクラスのパッケージ外からアクセス可能であれば、アクセッサーメソッドを提供するべき</h3>
+
+<p>メソッドには<code>synchronized</code>が付けれるが、フィールド値には<code>synchronized</code>を付けれないので<code>getter</code>/<code>setter</code>を利用するようにしましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">TestData</span><span class="p">{</span>
+    <span class="kd">private</span> <span class="nf">User</span> <span class="n">user</span><span class="p">;</span>
+    <span class="kd">synchronized</span> <span class="nf">public</span> <span class="n">User</span> <span class="nf">getUser</span><span class="p">();</span>
+    <span class="kd">synchronized</span> <span class="nf">public</span> <span class="kt">void</span> <span class="nf">setUser</span><span class="p">(</span><span class="n">User</span> <span class="nf">user</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="クラスがパッケージプライベート-privateのネストしたクラスの場合-そのフィールドは公開しても良い">クラスがパッケージプライベート/privateのネストしたクラスの場合、そのフィールドは公開しても良い</h2>
+
+<p>外部からアクセスされる心配がなく、コードの可読性が上がるから。</p>
+
+<blockquote>
+<p><code>Intellij</code>や<code>Eclipse</code>の機能で自動的に検出されるから、意識しなくても大丈夫そう。</p>
+</blockquote>
+
 <h2 id="項目17-可変性を最小限にする">項目17 可変性を最小限にする</h2>
+
+<h3 id="不変クラスとは">不変クラスとは</h3>
+
+<p>インスタンスに保持される全ての情報は、生成時に提供され、その後は変更できないクラスのこと。</p>
+
+<p>例：
+<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html"><code>java.lang.String</code></a>、基本データ型のラッパークラス(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Integer.html"><code>java.lang.Integer</code></a>等)、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigInteger.html"><code>java.math.BigInteger</code></a> 、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigDecimal.html"><code>java.math.BigDecimal</code></a>などが挙げられます。</p>
+
+<blockquote>
+<p>備考：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Integer.html"><code>java.lang.Integer</code></a>のオブジェクトで、以下のようなコードを実行すると、毎回新しいインスタンスが生成される。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">for</span><span class="p">(</span><span class="n">Integer</span> <span class="nf">i</span><span class="o">=</span><span class="n">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+
+<h2 id="不変クラスの規則">不変クラスの規則</h2>
+
+<ol>
+<li><code>setter</code>などオブジェクトの状態を変更するためのメソッドは提供しない。</li>
+<li>クラス拡張できないように、<code>final class</code>としましょう。</li>
+<li>変更不可能とするために、すべてのフィールドに<code>private final</code>を付けましょう。</li>
+</ol>
+
+<h2 id="不変クラスのメリット">不変クラスのメリット</h2>
+
+<ul>
+<li>スレッドセーフであること</li>
+<li>防御的コピーの必要なし、cloneメソッドやコピーコンストラクタ作成の必要もなし</li>
+<li>内部の状態も共有可能</li>
+</ul>
+
+<h2 id="不変クラスのデメリット">不変クラスのデメリット</h2>
+
+<ul>
+<li>一部だけ変更したいだけなので、全てを再生成しなければならないのがデメリット、、、しかし、コンパニオンクラスを使えば解決できる！（例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/StringBuilder.html"><code>java.lang.StringBuilder</code></a>）</li>
+</ul>
+
+<blockquote>
+<p>備考：コンパニオンクラスの<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/StringBuilder.html"><code>java.lang.StringBuilder</code></a>について調べてみた。
+<a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/lang/AbstractStringBuilder.java#L412"><code>AbstractStringBuilder#append</code></a>を見てみると、内部で
+<code>char[] value</code>のように持っておき、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html"><code>java.lang.String</code></a>を何度も生成しないように工夫していた。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">char</span><span class="p">[]</span> <span class="nf">value</span><span class="p">;</span>
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="kd">public</span> <span class="nf">AbstractStringBuilder</span> <span class="n">append</span><span class="p">(</span><span class="n">String</span> <span class="nf">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">str</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&#34;null&#34;</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="nf">len</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="na">length</span><span class="p">();</span>
+    <span class="n">ensureCapacityInternal</span><span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="n">len</span><span class="p">);</span>
+    <span class="n">str</span><span class="p">.</span><span class="na">getChars</span><span class="p">(</span><span class="n">0</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="n">len</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="kt">void</span> <span class="nf">expandCapacity</span><span class="p">(</span><span class="kt">int</span> <span class="nf">minimumCapacity</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="nf">newCapacity</span> <span class="o">=</span> <span class="n">value</span><span class="p">.</span><span class="na">length</span> <span class="o">*</span> <span class="n">2</span> <span class="o">+</span> <span class="n">2</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">minimumCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span>
+        <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">minimumCapacity</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">newCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">minimumCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="c1">// overflow
+</span><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">OutOfMemoryError</span><span class="p">();</span>
+        <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">newCapacity</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
 
 <h2 id="項目18-継承よりコンポジションを選ぶ">項目18 継承よりコンポジションを選ぶ</h2>
 
@@ -168,6 +431,12 @@
 <h2 id="項目24-非staticのメンバークラスよりstaticのメンバークラスを選ぶ">項目24 非staticのメンバークラスよりstaticのメンバークラスを選ぶ</h2>
 
 <h2 id="項目25-ソースファイルを単一のトップレベルのクラスに限定する">項目25 ソースファイルを単一のトップレベルのクラスに限定する</h2>
+
+<h2 id="参考url">参考URL</h2>
+
+<ul>
+<li><a href="https://qiita.com/opengl-8080/items/93c8e0cf58654d5f73cb#fn1">モジュールシステムを学ぶ</a></li>
+</ul>
 
     </div>
 

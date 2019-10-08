@@ -27,7 +27,7 @@
       <pubDate>Sun, 06 Oct 2019 15:27:10 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191006-effective-java-3rd-4/</guid>
-      <description>クラスとインタフェース Effective Java 第3版の個人的メモ まだ項目を記載しただけで、内容はありません。随時追記していきます。 項目15 クラスとメンバーへのア</description>
+      <description>クラスとインタフェース Effective Java 第3版の個人的メモ 項目15 クラスとメンバーへのアクセス可能性を最小限にする 結論 常にアクセス可能性をできる限り小さく</description>
     </item>
     
     <item>
