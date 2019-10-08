@@ -157,10 +157,13 @@
 
 <h3 id="常にアクセス可能性をできる限り小さくするべき">常にアクセス可能性をできる限り小さくするべき</h3>
 
-<p>情報秘匿(カプセル化)をすると以下の利点が得られるから。
-  - モジュールを分離し、個別に開発、テストなどができる
-  - モジュールを素早く理解できる
-  - ソフトウェアの再利用をするための必要条件</p>
+<p>情報秘匿(カプセル化)をすると以下の利点が得られるから。</p>
+
+<ul>
+<li>モジュールを分離し、個別に開発、テストなどができる</li>
+<li>モジュールを素早く理解できる</li>
+<li>ソフトウェアの再利用をするための必要条件</li>
+</ul>
 
 <h4 id="カプセル化の方法">カプセル化の方法</h4>
 
@@ -315,8 +318,7 @@
 
 <p>インスタンスに保持される全ての情報は、生成時に提供され、その後は変更できないクラスのこと。</p>
 
-<p>例：
-<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html"><code>java.lang.String</code></a>、基本データ型のラッパークラス(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Integer.html"><code>java.lang.Integer</code></a>等)、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigInteger.html"><code>java.math.BigInteger</code></a> 、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigDecimal.html"><code>java.math.BigDecimal</code></a>などが挙げられます。</p>
+<p>例として、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html"><code>java.lang.String</code></a>、基本データ型のラッパークラス(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Integer.html"><code>java.lang.Integer</code></a>等)、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigInteger.html"><code>java.math.BigInteger</code></a> 、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigDecimal.html"><code>java.math.BigDecimal</code></a>などが挙げられます。</p>
 
 <blockquote>
 <p>備考：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Integer.html"><code>java.lang.Integer</code></a>のオブジェクトで、以下のようなコードを実行すると、毎回新しいインスタンスが生成される。</p>
