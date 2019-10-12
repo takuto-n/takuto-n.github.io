@@ -781,29 +781,29 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">  <span class="p">.</span>
-  <span class="p">.</span>
-  <span class="p">.</span>
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="p">.</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
 <span class="kd">public</span> <span class="nf">class</span> <span class="n">CompositeItemWriter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">implements</span> <span class="n">ItemStreamWriter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">InitializingBean</span> <span class="p">{</span>
-	<span class="kd">private</span> <span class="nf">List</span><span class="o">&lt;</span><span class="n">ItemWriter</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nf">T</span><span class="o">&gt;&gt;</span> <span class="n">delegates</span><span class="p">;</span>
-  <span class="p">.</span>
-  <span class="p">.</span>
-  <span class="p">.</span>
+    <span class="kd">private</span> <span class="nf">List</span><span class="o">&lt;</span><span class="n">ItemWriter</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nf">T</span><span class="o">&gt;&gt;</span> <span class="n">delegates</span><span class="p">;</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
     <span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="nf">void</span> <span class="n">write</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nf">T</span><span class="o">&gt;</span> <span class="n">item</span><span class="p">)</span> <span class="kd">throws</span> <span class="nf">Exception</span> <span class="p">{</span>
-		<span class="k">for</span> <span class="p">(</span><span class="n">ItemWriter</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nf">T</span><span class="o">&gt;</span> <span class="n">writer</span> <span class="o">:</span> <span class="n">delegates</span><span class="p">)</span> <span class="p">{</span>
-			<span class="n">writer</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-  <span class="p">.</span>
-  <span class="p">.</span>
-  <span class="p">.</span>
-	<span class="kd">public</span> <span class="nf">void</span> <span class="n">setDelegates</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">ItemWriter</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nf">T</span><span class="o">&gt;&gt;</span> <span class="n">delegates</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">this</span><span class="p">.</span><span class="na">delegates</span> <span class="o">=</span> <span class="n">delegates</span><span class="p">;</span>
-	<span class="p">}</span>
-  <span class="p">.</span>
-  <span class="p">.</span>
-  <span class="p">.</span>
+    <span class="kd">public</span> <span class="nf">void</span> <span class="n">write</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nf">T</span><span class="o">&gt;</span> <span class="n">item</span><span class="p">)</span> <span class="kd">throws</span> <span class="nf">Exception</span> <span class="p">{</span>
+	    <span class="k">for</span> <span class="p">(</span><span class="n">ItemWriter</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nf">T</span><span class="o">&gt;</span> <span class="n">writer</span> <span class="o">:</span> <span class="n">delegates</span><span class="p">)</span> <span class="p">{</span>
+	        <span class="n">writer</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+	    <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+    <span class="kd">public</span> <span class="nf">void</span> <span class="n">setDelegates</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">ItemWriter</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nf">T</span><span class="o">&gt;&gt;</span> <span class="n">delegates</span><span class="p">)</span> <span class="p">{</span>
+	    <span class="k">this</span><span class="p">.</span><span class="na">delegates</span> <span class="o">=</span> <span class="n">delegates</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
