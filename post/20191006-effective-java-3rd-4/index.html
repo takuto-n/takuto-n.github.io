@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T15:27:10&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T15:27:10&#43;09:00" />
-<meta itemprop="wordCount" content="4286">
+<meta itemprop="wordCount" content="6579">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 4286 words </span>
-          <span class="more-meta"> 9 mins read </span>
+          <span class="more-meta"> 6579 words </span>
+          <span class="more-meta"> 14 mins read </span>
         
       </div>
     </header>
@@ -885,6 +885,402 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 
 <h2 id="項目20-抽象クラスよりインタフェースを選ぶ">項目20 抽象クラスよりインタフェースを選ぶ</h2>
 
+<p>以下の点で、インタフェースの方が抽象クラスよりも優れているので、インタフェースを選びましょう。</p>
+
+<ul>
+<li>既存クラスに新たなインタフェースを実装しやすいこと</li>
+<li>インタフェースは、<a href="https://ja.wikipedia.org/wiki/Mixin"><code>Mixin</code></a>を定義するには理想的であること
+
+<ul>
+<li>多重継承可であるから。</li>
+</ul></li>
+<li>階層を持たない型フレームワークを構築できること</li>
+<li>抽象クラスと組み合わせること(骨格実装クラス)で、よりユーザーにとって便利になること
+
+<ul>
+<li>ユーザがメソッドを実装しなくても良い。</li>
+</ul></li>
+</ul>
+
+<p>ただし、<code>public</code>のインタフェースは「リリース後の変更が不可である」ということを意識しておきましょう。（設計は注意深く、実装クラスのテストもしっかりと行いましょう。）</p>
+
+<blockquote>
+<p><a href="https://dzone.com/articles/interface-default-methods-java">java8からInterfaceにデフォルトメソッドを定義できるようになった</a>ので、抽象クラスとインタフェースを組み合わせる必要はなくなりましたね。</p>
+</blockquote>
+
+<h3 id="抽象クラスとインタフェース">抽象クラスとインタフェース</h3>
+
+<p>抽象クラスとインタフェースの違いは以下の2点。
+* 実装を<code>含めれる</code>か<code>否</code>か
+* 継承が<code>1:1</code>か<code>1:多</code>か</p>
+
+<h4 id="抽象クラス">抽象クラス</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">abstract</span> <span class="nf">class</span> <span class="n">AbstractClass</span> <span class="p">{</span>
+    <span class="kd">abstract</span> <span class="nf">void</span> <span class="n">abstractMethod</span><span class="p">(</span><span class="kt">int</span> <span class="nf">num</span><span class="p">,</span> <span class="n">String</span> <span class="nf">str</span><span class="p">);</span>
+    
+    <span class="c1">// 実装を含めることができる。
+</span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">nonAbstractMethod</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;非抽象メソッドより出力&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+ 
+<span class="c1">// クラスは１つの抽象クラスしか継承できない。
+</span><span class="c1"></span><span class="kd">public</span> <span class="nf">class</span> <span class="n">Main</span> <span class="nf">extends</span> <span class="n">AbstractClass</span> <span class="p">{</span>
+ 
+    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Main</span> <span class="nf">main</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Main</span><span class="p">();</span>
+        <span class="n">main</span><span class="p">.</span><span class="na">nonAbstractMethod</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="kd">public</span> <span class="nf">void</span> <span class="n">abstractMethod</span><span class="p">(</span><span class="kt">int</span> <span class="nf">num</span><span class="p">,</span> <span class="n">String</span> <span class="nf">str</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...
+</span><span class="c1"></span>    <span class="p">}</span>
+ 
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="インタフェース">インタフェース</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">interface</span> <span class="nf">Sub</span> <span class="p">{</span>
+    <span class="c1">// 実装を含めることができなかった。(過去形)
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="nf">sub</span><span class="p">(</span><span class="kt">int</span> <span class="nf">a</span><span class="p">,</span> <span class="kt">int</span> <span class="nf">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span> <span class="nf">Add</span> <span class="p">{</span> 
+    <span class="c1">// Java8からインタフェースに実装を含めることができるようになった。
+</span><span class="c1"></span>	<span class="k">default</span> <span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="nf">a</span><span class="p">,</span> <span class="kt">int</span> <span class="nf">b</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+ 
+<span class="c1">// クラスは複数のインタフェースを継承できる。
+</span><span class="c1"></span><span class="kd">class</span> <span class="nf">Calc</span> <span class="kd">implements</span> <span class="nf">Add</span><span class="p">,</span> <span class="n">Sub</span> <span class="p">{</span> 
+    <span class="kd">public</span> <span class="nf">int</span> <span class="n">sub</span><span class="p">(</span><span class="kt">int</span> <span class="nf">a</span><span class="p">,</span> <span class="kt">int</span> <span class="nf">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="インタフェースのgood-point">インタフェースのGood Point</h3>
+
+<h4 id="既存クラスに新たなインタフェースを実装しやすいこと">既存クラスに新たなインタフェースを実装しやすいこと</h4>
+
+<p>インタフェースでは単に実装するだけで良いが、抽象クラスでは、継承階層を意識しなければいけない。（抽象クラスが、複数の既存クラスで継承されていたら悩まされることに、、、）</p>
+
+<ul>
+<li><p>インタフェースの場合
+単に拡張したい既存クラスのクラス宣言に、<code>implements</code>節を追加して、メソッドを実装するだけで良い。</p></li>
+
+<li><p>抽象クラスの場合
+継承階層のどの位置に差し込むかについて考えた上で、<code>extends</code>節を追加する必要がある。</p></li>
+</ul>
+
+<h4 id="インタフェースは-mixin-https-ja-wikipedia-org-wiki-mixin-を定義するには理想的であること">インタフェースは、<a href="https://ja.wikipedia.org/wiki/Mixin"><code>Mixin</code></a>を定義するには理想的であること</h4>
+
+<p>インタフェースは多重継承可能であるため、<code>Mixin</code>ができる。</p>
+
+<p><code>Mixin</code>とは「クラスが「本来の型」に加えて、なんらかの任意の振る舞いを提供していることを宣言するための型のこと」である。</p>
+
+<ul>
+<li>例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Comparable.html">Comparable</a>
+
+<ul>
+<li>本来の機能に加えて、「他の相互比較可能なオブジェクトに対しての順序付けされていること」を宣言するために利用できるから。</li>
+</ul></li>
+</ul>
+
+<h4 id="階層を持たない型フレームワークを構築できること">階層を持たない型フレームワークを構築できること</h4>
+
+<p>フレームワークを構築する前提で、<code>N</code>個の属性をサポートすることを考える。</p>
+
+<ul>
+<li><p>インタフェースの場合</p>
+
+<ul>
+<li>フレームワーク構築者は、<code>N</code>個のインタフェースを作成すれば良い。</li>
+
+<li><p>ユーザは、利用したい属性を、<code>implements</code>節に足すだけで良い。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// フレームワーク構築者が準備
+</span><span class="c1"></span><span class="kd">public</span> <span class="nf">interface</span> <span class="n">Singer</span> <span class="p">{</span>
+<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// フレームワーク構築者が準備
+</span><span class="c1"></span><span class="kd">public</span> <span class="nf">interface</span> <span class="n">Songwriter</span> <span class="p">{</span>
+<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// ユーザが利用する
+</span><span class="c1"></span><span class="kd">public</span> <span class="nf">class</span> <span class="n">FukuyamaMasaharu</span> <span class="nf">implements</span> <span class="n">Singer</span><span class="p">,</span> <span class="n">Songwriter</span> <span class="p">{</span>
+<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">){</span>
+<span class="p">...</span>
+<span class="p">}</span>
+<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">){</span>
+<span class="p">...</span>
+<span class="p">}</span>
+<span class="n">AudioClip</span> <span class="nf">strum</span><span class="p">(){</span>
+<span class="p">...</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">actSensitive</span><span class="p">(){</span>
+<span class="p">...</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+
+<li><p>抽象クラスの場合</p>
+
+<ul>
+<li>フレームワーク構築者は、<code>N</code>個の属性を利用するか否かの<code>2^N</code>個のクラスを作成する必要がある。(<a href="https://ja.wikipedia.org/wiki/%E7%B5%84%E5%90%88%E3%81%9B%E7%88%86%E7%99%BA"><strong>組み合わせ爆発</strong></a>と呼ばれる事柄で、対処しづらくなっていく。)</li>
+
+<li><p>ユーザは、利用した属性を<code>2^N</code>個のクラスの中から選択し、そのクラスを継承し利用する。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// フレームワーク構築者が準備
+</span><span class="c1"></span><span class="kd">abstract</span> <span class="nf">class</span> <span class="n">Singer</span> <span class="p">{</span>
+<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// フレームワーク構築者が準備
+</span><span class="c1"></span><span class="kd">abstract</span> <span class="nf">class</span> <span class="n">Songwriter</span> <span class="p">{</span>
+<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// フレームワーク構築者が準備（Interfaceの場合では作らなくてもよかった。）
+</span><span class="c1"></span><span class="kd">abstract</span> <span class="nf">class</span> <span class="n">SingerSongWriter</span> <span class="p">{</span>
+<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">);</span>
+<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">);</span>
+<span class="n">AudioClip</span> <span class="nf">strum</span><span class="p">();</span>
+<span class="kt">void</span> <span class="nf">actSensitive</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="c1">// ユーザ側が利用する
+</span><span class="c1"></span><span class="kd">class</span> <span class="nf">FukuyamaMasaharu</span> <span class="kd">extends</span> <span class="nf">SingerSongWriter</span> <span class="p">{</span>
+<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">){</span>
+<span class="p">...</span>
+<span class="p">}</span>
+<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">){</span>
+<span class="p">...</span>
+<span class="p">}</span>
+<span class="n">AudioClip</span> <span class="nf">strum</span><span class="p">(){</span>
+<span class="p">...</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">actSensitive</span><span class="p">(){</span>
+<span class="p">...</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+</ul>
+
+<h4 id="抽象クラスと組み合わせること-骨格実装クラス-で-よりユーザーにとって便利になること">抽象クラスと組み合わせること(骨格実装クラス)で、よりユーザーにとって便利になること</h4>
+
+<p>骨格実装クラスにより、プログラマがインタフェースを独自実装する際の手助けになる。</p>
+
+<blockquote>
+<p>下記、 <em>AbstractMapEntry.java</em> の良い点は、単なる抽象クラスではなくて、インタフェースを実装しているから、型定義に関しての制約が課されることがない。</p>
+</blockquote>
+
+<p><em>AbstractMapEntry.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Skeletal Implementation
+</span><span class="c1"></span><span class="kn">package</span> <span class="nf">org</span><span class="p">.</span><span class="na">effectivejava</span><span class="p">.</span><span class="na">examples</span><span class="p">.</span><span class="na">chapter04</span><span class="p">.</span><span class="na">item18</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Map</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="nf">abstract</span> <span class="kd">class</span> <span class="nf">AbstractMapEntry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="nf">implements</span> <span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// 基本操作
+</span><span class="c1"></span>	<span class="kd">public</span> <span class="nf">abstract</span> <span class="n">K</span> <span class="nf">getKey</span><span class="p">();</span>
+	<span class="kd">public</span> <span class="nf">abstract</span> <span class="n">V</span> <span class="nf">getValue</span><span class="p">();</span>
+
+    <span class="c1">// 変更可能なマップでのエントリーは、このメソッドをオーバーライドしなければいけない。
+</span><span class="c1"></span>	<span class="kd">public</span> <span class="nf">V</span> <span class="n">setValue</span><span class="p">(</span><span class="n">V</span> <span class="nf">value</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="p">();</span>
+	<span class="p">}</span>
+
+    <span class="c1">// Map.Entry.equals の一般契約を実装
+</span><span class="c1"></span>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nf">boolean</span> <span class="n">equals</span><span class="p">(</span><span class="n">Object</span> <span class="nf">o</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">o</span> <span class="nf">instanceof</span> <span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="p">))</span>
+			<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+		<span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;?</span><span class="p">,</span> <span class="o">?&gt;</span> <span class="n">arg</span> <span class="o">=</span> <span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="p">)</span> <span class="n">o</span><span class="p">;</span>
+		<span class="k">return</span> <span class="n">equals</span><span class="p">(</span><span class="n">getKey</span><span class="p">(),</span> <span class="n">arg</span><span class="p">.</span><span class="na">getKey</span><span class="p">())</span>
+				<span class="o">&amp;&amp;</span> <span class="n">equals</span><span class="p">(</span><span class="n">getValue</span><span class="p">(),</span> <span class="n">arg</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="nf">static</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="p">(</span><span class="n">Object</span> <span class="nf">o1</span><span class="p">,</span> <span class="n">Object</span> <span class="nf">o2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">o1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">o2</span><span class="p">);</span>
+	<span class="p">}</span>
+
+    <span class="c1">// Map.Entry.hashCode の一般契約を実装
+</span><span class="c1"></span>	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nf">int</span> <span class="n">hashCode</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">hashCode</span><span class="p">(</span><span class="n">getKey</span><span class="p">())</span> <span class="o">^</span> <span class="n">hashCode</span><span class="p">(</span><span class="n">getValue</span><span class="p">());</span>
+	<span class="p">}</span>
+
+	<span class="kd">private</span> <span class="nf">static</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="p">(</span><span class="n">Object</span> <span class="nf">obj</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">obj</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="n">obj</span><span class="p">.</span><span class="na">hashCode</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="余談-抽象クラスの利点">余談(抽象クラスの利点)</h3>
+
+<p><strong>「抽象クラス : 実装クラス = 1 : 多」</strong>となるのであれば、インタフェースよりも抽象クラスを使いましょう。理由は、抽象クラスにメソッドを追加すれば、全ての実装クラスに反映されて容易だから。（インタフェースの場合は、反映先のクラス数が多く、大変になる。）</p>
+
+<blockquote>
+<p>極端な例ですが、、今から<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/List.html"><code>List&lt;E&gt;</code></a>インタフェースに新たなpublicメソッドを追加すると、影響範囲は大変なことになりますよね。笑</p>
+</blockquote>
+
 <h2 id="項目21-将来のためにインタフェースを選ぶ">項目21 将来のためにインタフェースを選ぶ</h2>
 
 <h2 id="項目22-型を定義するためだけにインタフェースを使う">項目22 型を定義するためだけにインタフェースを使う</h2>
@@ -899,6 +1295,8 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 
 <ul>
 <li><a href="https://qiita.com/opengl-8080/items/93c8e0cf58654d5f73cb#fn1">モジュールシステムを学ぶ</a></li>
+<li><a href="https://www.sejuku.net/blog/22689">【納得Java】抽象クラス(abstract)を使うメリット</a></li>
+<li><a href="https://www.sejuku.net/blog/25772">【Java入門】interface(インタフェース)の使い方総まとめ</a></li>
 </ul>
 
     </div>
