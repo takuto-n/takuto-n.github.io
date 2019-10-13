@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T15:27:10&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T15:27:10&#43;09:00" />
-<meta itemprop="wordCount" content="6579">
+<meta itemprop="wordCount" content="6568">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 6579 words </span>
+          <span class="more-meta"> 6568 words </span>
           <span class="more-meta"> 14 mins read </span>
         
       </div>
@@ -830,7 +830,7 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 
 <p>たいていの開発者は、コンポジションを委譲と同義で使うと理解すれば良さそう。</p>
 
-<h2 id="項目19-継承のために設計および文書かする-でなければ継承を禁止する">項目19 継承のために設計および文書かする、でなければ継承を禁止する</h2>
+<h2 id="項目19-継承のために設計および文書化する-でなければ継承を禁止する">項目19 継承のために設計および文書化する、でなければ継承を禁止する</h2>
 
 <h3 id="結論-3">結論</h3>
 
@@ -910,9 +910,12 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 
 <h3 id="抽象クラスとインタフェース">抽象クラスとインタフェース</h3>
 
-<p>抽象クラスとインタフェースの違いは以下の2点。
-* 実装を<code>含めれる</code>か<code>否</code>か
-* 継承が<code>1:1</code>か<code>1:多</code>か</p>
+<p>抽象クラスとインタフェースの違いは以下の2点。</p>
+
+<ul>
+<li>実装を<code>含めれる</code>か<code>否</code>か</li>
+<li>継承が<code>1:1</code>か<code>1:多</code>か</li>
+</ul>
 
 <h4 id="抽象クラス">抽象クラス</h4>
 <div class="highlight"><div class="chroma">
@@ -1012,14 +1015,20 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 
 <h4 id="既存クラスに新たなインタフェースを実装しやすいこと">既存クラスに新たなインタフェースを実装しやすいこと</h4>
 
-<p>インタフェースでは単に実装するだけで良いが、抽象クラスでは、継承階層を意識しなければいけない。（抽象クラスが、複数の既存クラスで継承されていたら悩まされることに、、、）</p>
+<p>インタフェースでは単に実装するだけで良いが、抽象クラスでは継承階層を意識しなければいけない。（抽象クラスが、複数の既存クラスで継承されていたら悩まされることに、、、）</p>
 
 <ul>
-<li><p>インタフェースの場合
-単に拡張したい既存クラスのクラス宣言に、<code>implements</code>節を追加して、メソッドを実装するだけで良い。</p></li>
+<li><p>インタフェースの場合</p>
 
-<li><p>抽象クラスの場合
-継承階層のどの位置に差し込むかについて考えた上で、<code>extends</code>節を追加する必要がある。</p></li>
+<ul>
+<li>単に拡張したい既存クラスのクラス宣言に、<code>implements</code>節を追加して、メソッドを実装するだけで良い。</li>
+</ul></li>
+
+<li><p>抽象クラスの場合</p>
+
+<ul>
+<li>継承階層のどの位置に差し込むかについて考えた上で、<code>extends</code>節を追加する必要がある。</li>
+</ul></li>
 </ul>
 
 <h4 id="インタフェースは-mixin-https-ja-wikipedia-org-wiki-mixin-を定義するには理想的であること">インタフェースは、<a href="https://ja.wikipedia.org/wiki/Mixin"><code>Mixin</code></a>を定義するには理想的であること</h4>
@@ -1032,7 +1041,7 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 <li>例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Comparable.html">Comparable</a>
 
 <ul>
-<li>本来の機能に加えて、「他の相互比較可能なオブジェクトに対しての順序付けされていること」を宣言するために利用できるから。</li>
+<li>「他の相互比較可能なオブジェクトに対しての順序付けされていること」を本来の機能に加えて宣言できるから。</li>
 </ul></li>
 </ul>
 
@@ -1076,26 +1085,26 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// フレームワーク構築者が準備
 </span><span class="c1"></span><span class="kd">public</span> <span class="nf">interface</span> <span class="n">Singer</span> <span class="p">{</span>
-<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">);</span>
+　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="c1">// フレームワーク構築者が準備
 </span><span class="c1"></span><span class="kd">public</span> <span class="nf">interface</span> <span class="n">Songwriter</span> <span class="p">{</span>
-<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">);</span>
+　　<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="c1">// ユーザが利用する
 </span><span class="c1"></span><span class="kd">public</span> <span class="nf">class</span> <span class="n">FukuyamaMasaharu</span> <span class="nf">implements</span> <span class="n">Singer</span><span class="p">,</span> <span class="n">Songwriter</span> <span class="p">{</span>
-<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">){</span>
-<span class="p">...</span>
-<span class="p">}</span>
-<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">){</span>
-<span class="p">...</span>
-<span class="p">}</span>
-<span class="n">AudioClip</span> <span class="nf">strum</span><span class="p">(){</span>
-<span class="p">...</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">actSensitive</span><span class="p">(){</span>
-<span class="p">...</span>
-<span class="p">}</span>
+　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">){</span>
+　　　　<span class="p">...</span>
+　　<span class="p">}</span>
+　　<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">){</span>
+　　　　<span class="p">...</span>
+　　<span class="p">}</span>
+　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="p">(){</span>
+　　　　<span class="p">...</span>
+　　<span class="p">}</span>
+　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="p">(){</span>
+　　　　<span class="p">...</span>
+　　<span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1143,33 +1152,33 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// フレームワーク構築者が準備
 </span><span class="c1"></span><span class="kd">abstract</span> <span class="nf">class</span> <span class="n">Singer</span> <span class="p">{</span>
-<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">);</span>
+　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="c1">// フレームワーク構築者が準備
 </span><span class="c1"></span><span class="kd">abstract</span> <span class="nf">class</span> <span class="n">Songwriter</span> <span class="p">{</span>
-<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">);</span>
+　　<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="c1">// フレームワーク構築者が準備（Interfaceの場合では作らなくてもよかった。）
 </span><span class="c1"></span><span class="kd">abstract</span> <span class="nf">class</span> <span class="n">SingerSongWriter</span> <span class="p">{</span>
-<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">);</span>
-<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">);</span>
-<span class="n">AudioClip</span> <span class="nf">strum</span><span class="p">();</span>
-<span class="kt">void</span> <span class="nf">actSensitive</span><span class="p">();</span>
+　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">);</span>
+　　<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">);</span>
+　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="p">();</span>
+　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="c1">// ユーザ側が利用する
 </span><span class="c1"></span><span class="kd">class</span> <span class="nf">FukuyamaMasaharu</span> <span class="kd">extends</span> <span class="nf">SingerSongWriter</span> <span class="p">{</span>
-<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">){</span>
-<span class="p">...</span>
-<span class="p">}</span>
-<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">){</span>
-<span class="p">...</span>
-<span class="p">}</span>
-<span class="n">AudioClip</span> <span class="nf">strum</span><span class="p">(){</span>
-<span class="p">...</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">actSensitive</span><span class="p">(){</span>
-<span class="p">...</span>
-<span class="p">}</span>
+　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="p">(</span><span class="n">Song</span> <span class="nf">s</span><span class="p">){</span>
+　　<span class="p">...</span>
+　　<span class="p">}</span>
+　　<span class="n">Song</span> <span class="nf">compose</span><span class="p">(</span><span class="kt">boolean</span> <span class="nf">hit</span><span class="p">){</span>
+　　<span class="p">...</span>
+　　<span class="p">}</span>
+　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="p">(){</span>
+　　<span class="p">...</span>
+　　<span class="p">}</span>
+　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="p">(){</span>
+　　<span class="p">...</span>
+　　<span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1236,40 +1245,40 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 <span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Map</span><span class="p">;</span>
 
 <span class="kd">public</span> <span class="nf">abstract</span> <span class="kd">class</span> <span class="nf">AbstractMapEntry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="nf">implements</span> <span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="c1">// 基本操作
-</span><span class="c1"></span>	<span class="kd">public</span> <span class="nf">abstract</span> <span class="n">K</span> <span class="nf">getKey</span><span class="p">();</span>
-	<span class="kd">public</span> <span class="nf">abstract</span> <span class="n">V</span> <span class="nf">getValue</span><span class="p">();</span>
+　　<span class="c1">// 基本操作
+</span><span class="c1"></span>　　<span class="kd">public</span> <span class="nf">abstract</span> <span class="n">K</span> <span class="nf">getKey</span><span class="p">();</span>
+　　<span class="kd">public</span> <span class="nf">abstract</span> <span class="n">V</span> <span class="nf">getValue</span><span class="p">();</span>
 
-    <span class="c1">// 変更可能なマップでのエントリーは、このメソッドをオーバーライドしなければいけない。
-</span><span class="c1"></span>	<span class="kd">public</span> <span class="nf">V</span> <span class="n">setValue</span><span class="p">(</span><span class="n">V</span> <span class="nf">value</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="p">();</span>
-	<span class="p">}</span>
+　　<span class="c1">// 変更可能なマップでのエントリーは、このメソッドをオーバーライドしなければいけない。
+</span><span class="c1"></span>　　<span class="kd">public</span> <span class="nf">V</span> <span class="n">setValue</span><span class="p">(</span><span class="n">V</span> <span class="nf">value</span><span class="p">)</span> <span class="p">{</span>
+　　　　<span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="p">();</span>
+　　<span class="p">}</span>
 
-    <span class="c1">// Map.Entry.equals の一般契約を実装
-</span><span class="c1"></span>	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="nf">boolean</span> <span class="n">equals</span><span class="p">(</span><span class="n">Object</span> <span class="nf">o</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="p">)</span>
-			<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">o</span> <span class="nf">instanceof</span> <span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="p">))</span>
-			<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-		<span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;?</span><span class="p">,</span> <span class="o">?&gt;</span> <span class="n">arg</span> <span class="o">=</span> <span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="p">)</span> <span class="n">o</span><span class="p">;</span>
-		<span class="k">return</span> <span class="n">equals</span><span class="p">(</span><span class="n">getKey</span><span class="p">(),</span> <span class="n">arg</span><span class="p">.</span><span class="na">getKey</span><span class="p">())</span>
-				<span class="o">&amp;&amp;</span> <span class="n">equals</span><span class="p">(</span><span class="n">getValue</span><span class="p">(),</span> <span class="n">arg</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span>
-	<span class="p">}</span>
+　　<span class="c1">// Map.Entry.equals の一般契約を実装
+</span><span class="c1"></span>　　<span class="nd">@Override</span>
+　　<span class="kd">public</span> <span class="nf">boolean</span> <span class="n">equals</span><span class="p">(</span><span class="n">Object</span> <span class="nf">o</span><span class="p">)</span> <span class="p">{</span>
+　　　　<span class="k">if</span> <span class="p">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="p">)</span>
+　　　　　　<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+　　　　<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">o</span> <span class="nf">instanceof</span> <span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="p">))</span>
+　　　　　　<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+　　　　<span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;?</span><span class="p">,</span> <span class="o">?&gt;</span> <span class="n">arg</span> <span class="o">=</span> <span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="p">)</span> <span class="n">o</span><span class="p">;</span>
+　　　　<span class="k">return</span> <span class="n">equals</span><span class="p">(</span><span class="n">getKey</span><span class="p">(),</span> <span class="n">arg</span><span class="p">.</span><span class="na">getKey</span><span class="p">())</span>
+　　　　　　　　<span class="o">&amp;&amp;</span> <span class="n">equals</span><span class="p">(</span><span class="n">getValue</span><span class="p">(),</span> <span class="n">arg</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span>
+　　<span class="p">}</span>
 
-	<span class="kd">private</span> <span class="nf">static</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="p">(</span><span class="n">Object</span> <span class="nf">o1</span><span class="p">,</span> <span class="n">Object</span> <span class="nf">o2</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">o1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">o2</span><span class="p">);</span>
-	<span class="p">}</span>
+　　<span class="kd">private</span> <span class="nf">static</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="p">(</span><span class="n">Object</span> <span class="nf">o1</span><span class="p">,</span> <span class="n">Object</span> <span class="nf">o2</span><span class="p">)</span> <span class="p">{</span>
+　　　　<span class="k">return</span> <span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">o1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">o2</span><span class="p">);</span>
+　　<span class="p">}</span>
 
-    <span class="c1">// Map.Entry.hashCode の一般契約を実装
-</span><span class="c1"></span>	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="nf">int</span> <span class="n">hashCode</span><span class="p">()</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="n">hashCode</span><span class="p">(</span><span class="n">getKey</span><span class="p">())</span> <span class="o">^</span> <span class="n">hashCode</span><span class="p">(</span><span class="n">getValue</span><span class="p">());</span>
-	<span class="p">}</span>
+　　<span class="c1">// Map.Entry.hashCode の一般契約を実装
+</span><span class="c1"></span>　　<span class="nd">@Override</span>
+　　<span class="kd">public</span> <span class="nf">int</span> <span class="n">hashCode</span><span class="p">()</span> <span class="p">{</span>
+　　　　<span class="k">return</span> <span class="n">hashCode</span><span class="p">(</span><span class="n">getKey</span><span class="p">())</span> <span class="o">^</span> <span class="n">hashCode</span><span class="p">(</span><span class="n">getValue</span><span class="p">());</span>
+　　<span class="p">}</span>
 
-	<span class="kd">private</span> <span class="nf">static</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="p">(</span><span class="n">Object</span> <span class="nf">obj</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="n">obj</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="n">obj</span><span class="p">.</span><span class="na">hashCode</span><span class="p">();</span>
-	<span class="p">}</span>
+　　<span class="kd">private</span> <span class="nf">static</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="p">(</span><span class="n">Object</span> <span class="nf">obj</span><span class="p">)</span> <span class="p">{</span>
+　　　　<span class="k">return</span> <span class="n">obj</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="n">obj</span><span class="p">.</span><span class="na">hashCode</span><span class="p">();</span>
+　　<span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
