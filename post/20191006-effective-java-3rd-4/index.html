@@ -1327,8 +1327,8 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 
 <blockquote>
 <p>例として、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collection.html#removeIf-java.util.function.Predicate-">Collection に removeIf がデフォルトメソッドとして追加された</a>。<br>
-しかし、<code>Collection</code> を <code>implements</code> している <a href="https://commons.apache.org/proper/commons-collections/apidocs/org/apache/commons/collections4/collection/SynchronizedCollection.html">Apache Commonsライブラリの <code>SynchronizedCollection</code></a> でこの <code>removeIf()</code> を呼び出した際には、同期されないメソッドとして呼び出され、<code>SynchronizedCollection</code> 使用における約束事が破られてしまう。<br>
-Javaライブラリではこれと同様のことを防ぐため、<a href="https://github.com/apache/commons-collections/blob/master/src/main/java/org/apache/commons/collections4/collection/SynchronizedCollection.java#L193"><code>Collections.synchronizedCollection</code> において <code>removeIf()</code> をオーバーライド</a>して対処している。</p>
+しかし、<code>Collection</code> を <code>implements</code> している <a href="https://commons.apache.org/proper/commons-collections/apidocs/org/apache/commons/collections4/collection/SynchronizedCollection.html">Apache Commonsライブラリの SynchronizedCollection</a> でこの <code>removeIf()</code> を呼び出した際には、同期されないメソッドとして呼び出され、<code>SynchronizedCollection</code> 使用における約束事が破られてしまう。<br>
+Javaライブラリではこれと同様のことを防ぐため、<a href="https://github.com/apache/commons-collections/blob/master/src/main/java/org/apache/commons/collections4/collection/SynchronizedCollection.java#L193">Collections.synchronizedCollectionにおいて removeIf() をオーバーライド</a>して対処している。</p>
 </blockquote>
 
 <h2 id="8-a-name-22-a-項目22-型を定義するためだけにインタフェースを使う">8. <a name='22'></a>項目22 型を定義するためだけにインタフェースを使う</h2>
