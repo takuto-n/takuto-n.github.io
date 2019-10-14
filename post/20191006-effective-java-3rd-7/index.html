@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T16:59:30&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T16:59:30&#43;09:00" />
-<meta itemprop="wordCount" content="2306">
+<meta itemprop="wordCount" content="2799">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 2306 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 2799 words </span>
+          <span class="more-meta"> 6 mins read </span>
         
       </div>
     </header>
@@ -363,6 +363,8 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <h3 id="標準の関数型インタフェースについての余談">標準の関数型インタフェースについての余談</h3>
 
+<p>各標準の関数型インタフェースの、「従来の書き方」、「匿名クラスでの書き方」、「lambda式を使った書き方」、「呼び出し方」についてまとめておきます。</p>
+
 <h4 id="function-t">Function<T></h4>
 
 <ul>
@@ -446,13 +448,15 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">consumer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
 <span class="nd">@Override</span>
 <span class="kd">public</span> <span class="nf">void</span> <span class="n">accept</span><span class="p">(</span><span class="n">T</span> <span class="nf">arg</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">something</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="p">}</span>
+<span class="p">};</span></code></pre></td></tr></table>
 </div>
 </div></li>
 
@@ -510,7 +514,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <span class="kd">public</span> <span class="nf">T</span> <span class="n">get</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="n">T</span><span class="p">();</span>
 <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="p">};</span></code></pre></td></tr></table>
 </div>
 </div></li>
 
@@ -537,9 +541,187 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <h4 id="predicate-t">Predicate<T></h4>
 
+<p>偶奇判定を例に記載します。</p>
+
+<ul>
+<li><p>従来の書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">boolean</span> <span class="nf">predicate</span><span class="p">(</span><span class="n">Integer</span> <span class="nf">i</span><span class="p">)</span> <span class="p">{</span>
+　　<span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>匿名クラスでの書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">boolean</span> <span class="nf">predicate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Predicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(){</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="nf">boolean</span> <span class="n">test</span><span class="p">(</span><span class="n">Integer</span> <span class="nf">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">};</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>lambda式を使った書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">checker</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">-&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span><span class="p">;</span> <span class="p">};</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>呼び出し方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">boolean</span> <span class="nf">result</span> <span class="o">=</span> <span class="n">checker</span><span class="p">.</span><span class="na">test</span><span class="p">(</span><span class="n">i</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
 <h4 id="unaryoperator-t">UnaryOperator<T></h4>
 
+<p>Stringを強調させるメソッドを例に記載します。</p>
+
+<ul>
+<li><p>従来の書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">String</span> <span class="n">apply</span><span class="p">(</span><span class="n">String</span> <span class="nf">t</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">return</span> <span class="s">&#34;** &#34;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&#34; **&#34;</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>匿名クラスでの書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="nf">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UnaryOperator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(){</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nf">String</span> <span class="n">apply</span><span class="p">(</span><span class="n">String</span> <span class="nf">t</span><span class="p">)</span> <span class="p">{</span>
+	    <span class="k">return</span> <span class="s">&#34;** &#34;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&#34; **&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>lambda式を使った書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">UnaryOperator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">operator</span> <span class="o">=</span> <span class="p">(</span><span class="n">String</span> <span class="nf">t</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;**&#34;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&#34;**&#34;</span><span class="p">;</span> <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>呼び出し方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="nf">newText</span> <span class="o">=</span> <span class="n">operator</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">text</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
 <h4 id="binaryoperator-t">BinaryOperator<T></h4>
+
+<p>足し算メソッドを例に記載します。</p>
+
+<ul>
+<li><p>従来の書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">Integer</span> <span class="n">binaryOperator</span><span class="p">(</span><span class="n">Integer</span> <span class="nf">i1</span><span class="p">,</span> <span class="n">Integer</span> <span class="nf">i2</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">return</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>匿名クラスでの書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">binaryOperator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="nf">Integer</span> <span class="n">apply</span><span class="p">(</span><span class="n">Integer</span> <span class="nf">i1</span><span class="p">,</span> <span class="n">Integer</span> <span class="nf">i2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">};</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>lambda式を使った書き方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">binaryOperator</span> <span class="o">=</span> <span class="p">(</span><span class="n">Integer</span> <span class="nf">i1</span><span class="p">,</span> <span class="n">Integer</span> <span class="nf">i2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span>
+<span class="k">return</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="p">;</span>
+<span class="p">};</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>呼び出し方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">actual</span> <span class="o">=</span> <span class="n">binaryOperator</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">2</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
 
 <h2 id="項目45-ストリームを注意して使う">項目45 ストリームを注意して使う</h2>
 
@@ -560,6 +742,10 @@ java.lang.FunctionalInterface)</a>にあります。
 <li><a href="https://www.sejuku.net/blog/22592#i">【楽チンJava】メソッド参照での呼び出し方</a></li>
 <li><a href="https://riptutorial.com/ja/java/example/5080/%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%8F%82%E7%85%A7">RIP Tutorial メソッド参照</a></li>
 <li><a href="https://qiita.com/subaru44k/items/c55d9b9fc419f0d09c64">Java8のFunction, Consumer, Supplier, Predicateの調査</a></li>
+<li><a href="http://www.dcom-web.co.jp/lab/java/functional_interface">[Java]メソッドの引数にメソッドを渡す方法[関数型インターフェース]</a></li>
+<li><a href="https://qiita.com/sano1202/items/64593e8e981e8d6439d3">Java8のラムダ式を理解する</a></li>
+<li><a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/An-example-of-UnaryOperator-in-functional-Lambda-expressions">An example of UnaryOperator in functional Lambda expressions</a></li>
+<li><a href="http://pppurple.hatenablog.com/entry/2016/08/28/213734">Java8 Project Lambda (ラムダ式)</a></li>
 </ul>
     </div>
 
