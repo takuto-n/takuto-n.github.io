@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T15:27:10&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T15:27:10&#43;09:00" />
-<meta itemprop="wordCount" content="6568">
+<meta itemprop="wordCount" content="6948">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 6568 words </span>
+          <span class="more-meta"> 6948 words </span>
           <span class="more-meta"> 14 mins read </span>
         
       </div>
@@ -1293,6 +1293,27 @@ s.getAddCount(); // =&gt; 6。3にならない。</pre></td></tr></table>
 <h2 id="項目21-将来のためにインタフェースを選ぶ">項目21 将来のためにインタフェースを選ぶ</h2>
 
 <h2 id="項目22-型を定義するためだけにインタフェースを使う">項目22 型を定義するためだけにインタフェースを使う</h2>
+
+<p>インタフェースの使用方法</p>
+
+<ul>
+<li>型を定義するためだけに使用する。</li>
+<li>定数を提供するためには使用すべきではない。</li>
+</ul>
+
+<h3 id="型を定義するためだけに使用する">型を定義するためだけに使用する。</h3>
+
+<p>インタフェースは、実装したクラスのインスタンスを参照するのに使用できる型(<em>type</em>)として機能する。(<code>型(_type_) = 「何ができるかを述べている。」</code>)</p>
+
+<p>「<code>何ができるかを述べている。</code>」以外の目的のために定義するのは不適切である。</p>
+
+<h3 id="定数を提供するためには使用すべきではない">定数を提供するためには使用すべきではない。</h3>
+
+<h4 id="定数インタフェース">定数インタフェース</h4>
+
+<p>定数インタフェース(例：<a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/io/ObjectStreamConstants.java"><code>java.io.ObjectStreamConstants.java</code></a>)は、「<strong>実装クラスに、この定数に関する責務を負わせることになる</strong>」ため使うべきではない。</p>
+
+<p>定数を利用したい場合は、<a href="https://docs.oracle.com/javase/jp/8/docs/technotes/guides/language/enums.html">Enum型</a>や定数ユーティリティクラス(例：<a href="https://github.com/spring-projects/spring-framework/blob/master/spring-core/src/main/java/org/springframework/core/Constants.java">org.springframework.core.Constants.java</a>)を利用しましょう。</p>
 
 <h2 id="項目23-タグ付クラスよりクラス階層を選ぶ">項目23 タグ付クラスよりクラス階層を選ぶ</h2>
 
