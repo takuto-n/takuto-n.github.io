@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T16:59:30&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T16:59:30&#43;09:00" />
-<meta itemprop="wordCount" content="2792">
+<meta itemprop="wordCount" content="3938">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 2792 words </span>
-          <span class="more-meta"> 6 mins read </span>
+          <span class="more-meta"> 3938 words </span>
+          <span class="more-meta"> 8 mins read </span>
         
       </div>
     </header>
@@ -731,6 +731,168 @@ java.lang.FunctionalInterface)</a>にあります。
 </ul>
 
 <h2 id="項目45-ストリームを注意して使う">項目45 ストリームを注意して使う</h2>
+
+<h3 id="結論-2">結論</h3>
+
+<p>Stream処理により簡単になる場合は、主に以下である。<br>
+いつ<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a>を使うべきかという、かっちりとしたルールはない。</p>
+
+<ul>
+<li>単純な要素の変換</li>
+<li>要素のフィルタリング処理</li>
+<li>単純なオペレーションで要素を結びつける処理</li>
+<li>要素を<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collection.html"><code>Collection</code></a>に集約する処理</li>
+<li>特定の基準を満たす要素を探す処理</li>
+</ul>
+
+<p>次のようなことになるのであれば、使わないでおきましょう。</p>
+
+<ul>
+<li>Stream処理ばかりで、複雑になる場合</li>
+<li>char型の値のStream処理</li>
+<li>コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream処理にしない。</li>
+</ul>
+
+<h3 id="stream処理ばかりで-複雑になる場合">Stream処理ばかりで、複雑になる場合</h3>
+
+<h4 id="改善前">改善前</h4>
+
+<p>ファイル内の単語(行単位)を、アナグラムごとにまとめて、指定数以上含まれている場合は出力するプログラム。</p>
+
+<blockquote>
+<p>アナグラム（anagram）とは、言葉遊びの一つで、単語または文の中の文字をいくつか入れ替えることによって、全く別の意味にさせる遊びである。<a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%8A%E3%82%B0%E3%83%A9%E3%83%A0">Wikipedia</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">var</span> <span class="nf">dictionary</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&#34;hoge.txt&#34;</span><span class="p">);</span>
+<span class="n">var</span> <span class="nf">minGroupSize</span> <span class="o">=</span> <span class="n">2</span><span class="p">;</span>
+<span class="n">var</span> <span class="nf">groups</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+
+<span class="k">try</span> <span class="p">(</span><span class="n">var</span> <span class="nf">words</span> <span class="o">=</span> <span class="n">Files</span><span class="p">.</span><span class="na">lines</span><span class="p">(</span><span class="n">dictionary</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">words</span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="n">word</span><span class="p">.</span><span class="na">chars</span><span class="p">().</span><span class="na">sorted</span><span class="p">()</span>
+            <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">StringBuilder</span><span class="o">::</span><span class="k">new</span><span class="p">,</span> <span class="p">(</span><span class="n">sb</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">((</span><span class="kt">char</span><span class="p">)</span> <span class="n">c</span><span class="p">),</span> <span class="n">StringBuilder</span><span class="o">::</span><span class="n">append</span><span class="p">).</span><span class="na">toString</span><span class="p">()))</span>
+            <span class="p">.</span><span class="na">values</span><span class="p">().</span><span class="na">stream</span><span class="p">().</span><span class="na">filter</span><span class="p">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="p">)</span>
+            <span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;:&#34;</span> <span class="o">+</span> <span class="n">group</span><span class="p">).</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>解説が必要なほど、複雑だと思うので、以下に記載します。。。（なんでもかんでも<code>Stream</code>処理が良いという訳ではないということですね。）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 行ごとの単語をソートする。（アナグラムとして捉えるため。）
+</span><span class="c1"></span><span class="n">word</span><span class="p">.</span><span class="na">chars</span><span class="p">().</span><span class="na">sorted</span><span class="p">()</span>
+
+<span class="c1">// StringBuilderでソートした文字列を組み立てる。
+</span><span class="c1"></span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">StringBuilder</span><span class="o">::</span><span class="k">new</span><span class="p">,</span> <span class="p">(</span><span class="n">sb</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">((</span><span class="kt">char</span><span class="p">)</span> <span class="n">c</span><span class="p">),</span> <span class="n">StringBuilder</span><span class="o">::</span><span class="n">append</span><span class="p">).</span><span class="na">toString</span><span class="p">()))</span>
+
+<span class="c1">// 指定数以上かどうかでフィルターをかける。
+</span><span class="c1"></span><span class="p">.</span><span class="na">values</span><span class="p">().</span><span class="na">stream</span><span class="p">().</span><span class="na">filter</span><span class="p">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="p">)</span>
+
+<span class="c1">// 表示形式を指定して、出力する。
+</span><span class="c1"></span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;:&#34;</span> <span class="o">+</span> <span class="n">group</span><span class="p">).</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="改善後">改善後</h4>
+
+<p>ファイル内の単語(行単位)を、アナグラムごとにまとめて、指定数以上含まれている場合は出力するプログラム。</p>
+
+<p>悪い例でややこしかった、文字列ソートの部分を<code>alphabetize</code>メソッドに切り出しているので、わかりやすくなっていますね。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">var</span> <span class="nf">dictionary</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&#34;hoge.txt&#34;</span><span class="p">);</span>
+<span class="n">var</span> <span class="nf">minGroupSize</span> <span class="o">=</span> <span class="n">2</span><span class="p">;</span>
+<span class="n">var</span> <span class="nf">groups</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+
+<span class="k">try</span> <span class="p">(</span><span class="n">var</span> <span class="nf">words</span> <span class="o">=</span> <span class="n">Files</span><span class="p">.</span><span class="na">lines</span><span class="p">(</span><span class="n">dictionary</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">words</span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="n">alphabetize</span><span class="p">(</span><span class="n">word</span><span class="p">)))</span>
+    <span class="p">.</span><span class="na">values</span><span class="p">().</span><span class="na">stream</span><span class="p">()</span>
+            <span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="p">)</span>
+            <span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">g</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">g</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;:&#34;</span> <span class="o">+</span> <span class="n">g</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="nf">static</span> <span class="n">String</span> <span class="nf">alphabetize</span><span class="p">(</span><span class="n">String</span> <span class="nf">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="nf">a</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">();</span>
+    <span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="char型の値のstream処理">char型の値のStream処理</h3>
+
+<p><code>char</code>型の<code>Stream</code>処理は直感的でない動きをしうるので、原則として<code>char</code>型の値を<code>Stream</code>処理で扱うべきでない。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"> <span class="s">&#34;Hello, world!&#34;</span><span class="p">.</span><span class="na">chars</span><span class="p">().</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="o">::</span><span class="n">print</span><span class="p">);</span>
+ <span class="c1">// 実行結果
+</span><span class="c1"></span> <span class="c1">// 72101108108111443211911111410810033
+</span><span class="c1"></span>
+<span class="c1">// (char)にキャストしてあげる。
+</span><span class="c1"></span> <span class="s">&#34;Hello, world!&#34;</span><span class="p">.</span><span class="na">chars</span><span class="p">().</span><span class="na">forEach</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">((</span><span class="kt">char</span><span class="p">)</span> <span class="n">x</span><span class="p">));</span>
+ <span class="c1">// 実行結果
+</span><span class="c1"></span> <span class="o">//</span> <span class="s">&#34;Hello, world!&#34;</span><span class="n">が表示</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="コードブロック内-で出来ることを捨ててまで-stream処理にしない">コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream処理にしない。</h3>
+
+<p>関数型オブジェクトを使用した<code>Stream</code>処理で出来ず、コードブロック内(<code>{...}</code>)で出来ること。</p>
+
+<ul>
+<li>ローカル変数の使用(ラムダ式では<code>final</code>でないと使用できない。)</li>
+<li>内部メソッドの<code>return</code>, ループ内での<code>break</code>/<code>continue</code>, 例外スロー（ラムダ式では出来ない。）</li>
+</ul>
 
 <h2 id="項目46-ストリームで副作用のない関数を選ぶ">項目46 ストリームで副作用のない関数を選ぶ</h2>
 
