@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T16:59:30&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T16:59:30&#43;09:00" />
-<meta itemprop="wordCount" content="3938">
+<meta itemprop="wordCount" content="5398">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 3938 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 5398 words </span>
+          <span class="more-meta"> 11 mins read </span>
         
       </div>
     </header>
@@ -896,6 +896,270 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <h2 id="項目46-ストリームで副作用のない関数を選ぶ">項目46 ストリームで副作用のない関数を選ぶ</h2>
 
+<h3 id="前提">前提</h3>
+
+<p><code>Stream</code>の最も重要なところは、<strong>純粋関数のみによる演算</strong> であること。</p>
+
+<blockquote>
+<p>純粋関数とは、副作用を持たない関数のことである。副作用とは、変数の再代入や入出力などによってプログラムの状態が変化することを指します。</p>
+
+<p>副作用があることによるデメリット<br />
+・全体の流れが分かりづらくなる可能性がある。<br />
+・速度が落ち、並列処理時の問題が出る可能性がある。</p>
+</blockquote>
+
+<h3 id="結論-3">結論</h3>
+
+<p>副作用を持たないようにするため、ストリーム処理は以下のようにする。</p>
+
+<ul>
+<li><code>forEach</code>は、ストリームの演算の結果を示すためだけに利用する。</li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html"><code>Collectors</code></a>を利用する。</li>
+</ul>
+
+<h3 id="foreach-は-ストリームの演算の結果を示すためだけに利用する"><code>forEach</code>は、ストリームの演算の結果を示すためだけに利用する。</h3>
+
+<p>ファイルに含まれる単語の頻度を求めるプログラム。</p>
+
+<p>以下は、ストリーム内で、外部の状態（<code>freq</code>変数）を変更しているため(副作用を持つため)、良くない。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Uses the streams API but not the paradigm--Don&#39;t do this!
+</span><span class="c1"></span><span class="n">var</span> <span class="nf">freq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">try</span> <span class="p">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="na">tokens</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">words</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="p">{</span>
+        <span class="n">freq</span><span class="p">.</span><span class="na">merge</span><span class="p">(</span><span class="n">word</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">(),</span> <span class="n">1L</span><span class="p">,</span> <span class="n">Long</span><span class="o">::</span><span class="n">sum</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以下が改善例。
+ストリーム内で、外部の状態（<code>freq</code>変数）を変更しておらず、戻り値を代入している。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Proper use of streams to initialize a frequency table
+</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">freq</span><span class="p">;</span>
+<span class="k">try</span> <span class="p">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="na">tokens</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">words</span>
+        <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">groupingBy</span><span class="p">(</span><span class="n">String</span><span class="o">::</span><span class="n">toLowerCase</span><span class="p">,</span> <span class="n">counting</span><span class="p">()));</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="collectors-https-docs-oracle-com-javase-jp-8-docs-api-java-util-stream-collectors-html-を利用する"><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html"><code>Collectors</code></a>を利用する。</h3>
+
+<p>ストリームパイプラインの可読性のために、Collectorsのメンバーはstaticインポートしておくべき。</p>
+
+<h4 id="toset-tocollection-tolist">toSet(), toCollection(), toList()</h4>
+
+<p><code>toSet(), toCollection(), toList()</code>を利用した例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">topTen</span> <span class="o">=</span> <span class="n">freq</span><span class="p">.</span><span class="na">keySet</span><span class="p">().</span><span class="na">stream</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">sorted</span><span class="p">(</span><span class="n">comparing</span><span class="p">(</span><span class="n">freq</span><span class="o">::</span><span class="n">get</span><span class="p">).</span><span class="na">reversed</span><span class="p">())</span>
+    <span class="p">.</span><span class="na">limit</span><span class="p">(</span><span class="n">10</span><span class="p">)</span>
+    <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">toList</span><span class="p">());</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="tomap">toMap()</h4>
+
+<p><code>toSet(), toCollection(), toList()</code>以外は、ストリームをMapにするためのものがほとんどである。</p>
+
+<p><code>toMap()</code>を使ったサンプルを載せる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// e.ordinal()は、列挙定数の序数を返す。
+</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">ENUM</span><span class="p">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">map</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">ENUM</span><span class="p">.</span><span class="na">values</span><span class="p">())</span>
+    <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toMap</span><span class="p">(</span>
+        <span class="c1">// key
+</span><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="p">,</span> 
+        <span class="c1">// value
+</span><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="p">.</span><span class="na">ordinal</span><span class="p">()</span>
+    <span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">ENUM</span><span class="p">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">map</span><span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">ENUM</span><span class="p">.</span><span class="na">values</span><span class="p">())</span>
+    <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toMap</span><span class="p">(</span>
+        <span class="c1">// key
+</span><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span>
+        <span class="c1">// value
+</span><span class="c1"></span>        <span class="p">,</span><span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="p">.</span><span class="na">ordinal</span><span class="p">()</span>
+        <span class="c1">// 同一キーの値が複数あった場合、最初の要素を優先する
+</span><span class="c1"></span>        <span class="c1">// 最後の要素を優先する場合は`(e1, e2) -&gt; e2`とする
+</span><span class="c1"></span>        <span class="p">,(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">e1</span>
+        <span class="c1">// HashMap型を指定する。
+</span><span class="c1"></span>        <span class="p">,</span><span class="n">HashMap</span><span class="o">::</span><span class="k">new</span>
+    <span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="groupingby">groupingBy()</h4>
+
+<p><code>groupingBy()</code>は、<code>classifier</code>をもとに要素をカテゴリー分けしたMapを生成する。</p>
+
+<p><code>classifier</code>には、以下のサンプルの<code>t -&gt; t.length()</code> や 「項目45 ストリームを注意して使う」で紹介した<code>alphabetize(word)</code>が該当する。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">s</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">,</span> <span class="s">&#34;c&#34;</span><span class="p">,</span> <span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;zzz&#34;</span><span class="p">);</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">m</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="p">.</span><span class="na">length</span><span class="p">()));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+<span class="c1">// 実行結果：
+</span><span class="c1"></span><span class="o">//</span> <span class="p">{</span><span class="n">1</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">],</span> <span class="n">3</span><span class="o">=</span><span class="p">[</span><span class="n">bar</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">zzz</span><span class="p">]}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>groupingBy()</code>の2つ引数を取るシンプルな例としては以下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nf">static</span> <span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">Collectors</span><span class="p">.</span><span class="o">*</span><span class="p">;</span>
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">words</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">,</span> <span class="s">&#34;Bar&#34;</span><span class="p">,</span> <span class="s">&#34;C&#34;</span><span class="p">,</span> <span class="s">&#34;fOO&#34;</span><span class="p">,</span> <span class="s">&#34;zZz&#34;</span><span class="p">,</span> <span class="s">&#34;A&#34;</span><span class="p">);</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">freq</span> <span class="o">=</span> <span class="n">words</span>
+        <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">groupingBy</span><span class="p">(</span><span class="n">String</span><span class="o">::</span><span class="n">toLowerCase</span><span class="p">,</span> <span class="n">counting</span><span class="p">()));</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">freq</span><span class="p">);</span>
+<span class="c1">// 実行結果
+</span><span class="c1"></span><span class="o">//</span> <span class="p">{</span><span class="n">a</span><span class="o">=</span><span class="n">2</span><span class="p">,</span> <span class="n">bar</span><span class="o">=</span><span class="n">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">1</span><span class="p">,</span> <span class="n">foo</span><span class="o">=</span><span class="n">1</span><span class="p">,</span> <span class="n">zzz</span><span class="o">=</span><span class="n">1</span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="その他のメソッド">その他のメソッド</h4>
+
+<p><code>downstream collector</code>としての利用に特化した以下のメソッドは、<code>collect(counting())</code>のように利用してはいけない。
+<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a>に同様の機能があるため。</p>
+
+<ul>
+<li>counting()
+
+<ul>
+<li>要素数を取得する。</li>
+</ul></li>
+<li>summing*()
+
+<ul>
+<li>入力値を型変換して、合算する。</li>
+</ul></li>
+<li>averaging*()
+
+<ul>
+<li>入力値を型変換して、平均値を算出する。
+空ストリームの場合は0を返す。</li>
+</ul></li>
+<li>summarizing*()
+
+<ul>
+<li>入力値を型変換して、各種集計値を算出する。</li>
+</ul></li>
+<li>reducing()
+
+<ul>
+<li>値を集約する。</li>
+</ul></li>
+<li>filtering()
+
+<ul>
+<li>条件を満たす値だけ他のコレクターに渡す。</li>
+</ul></li>
+<li>mapping()
+
+<ul>
+<li>値を変換して他のコレクターを呼び出す。</li>
+</ul></li>
+<li>flatMapping()
+
+<ul>
+<li>値をStreamに変換して他のコレクターを呼び出す。</li>
+</ul></li>
+<li>collectingAndThen()
+
+<ul>
+<li>他のコレクターを呼び出した結果を変換する。</li>
+</ul></li>
+<li>minBy()
+
+<ul>
+<li>最小値を取得する。</li>
+</ul></li>
+<li>maxBy()
+
+<ul>
+<li>最大値を取得する。</li>
+</ul></li>
+<li>joining()
+
+<ul>
+<li>結合してStringにする。</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html">Collectors</a>や<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html">Stream</a>の利用方法については、こちらのブログ(<a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a>, <a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a>)が入門として(大まかに把握するのに)良さそうである。</p>
+</blockquote>
+
 <h2 id="項目47-戻り値型としてstreamよりもcollectionを選ぶ">項目47 戻り値型としてStreamよりもCollectionを選ぶ</h2>
 
 <h2 id="項目48-ストリームを並列化するときは注意を払う">項目48 ストリームを並列化するときは注意を払う</h2>
@@ -915,6 +1179,11 @@ java.lang.FunctionalInterface)</a>にあります。
 <li><a href="https://qiita.com/sano1202/items/64593e8e981e8d6439d3">Java8のラムダ式を理解する</a></li>
 <li><a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/An-example-of-UnaryOperator-in-functional-Lambda-expressions">An example of UnaryOperator in functional Lambda expressions</a></li>
 <li><a href="http://pppurple.hatenablog.com/entry/2016/08/28/213734">Java8 Project Lambda (ラムダ式)</a></li>
+<li><a href="https://qiita.com/shintaness/items/f4c0a446ac168c730b89">Collectors.toMapで任意のMapクラスを返す</a></li>
+<li><a href="https://fits.hatenablog.com/entry/2015/04/20/205940">Java 8 でグルーピング処理 - List<V> を Map<K, V> へ変換</a></li>
+<li><a href="https://www.geeksforgeeks.org/java-8-collectors-counting-with-examples/">Java 8 | Collectors counting() with Examples</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a></li>
 </ul>
     </div>
 
