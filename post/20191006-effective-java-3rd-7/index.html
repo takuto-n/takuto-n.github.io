@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T16:59:30&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T16:59:30&#43;09:00" />
-<meta itemprop="wordCount" content="6484">
+<meta itemprop="wordCount" content="7943">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 6484 words </span>
-          <span class="more-meta"> 13 mins read </span>
+          <span class="more-meta"> 7943 words </span>
+          <span class="more-meta"> 16 mins read </span>
         
       </div>
     </header>
@@ -1218,7 +1218,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <code>{{}, {a}, {b}, {c}, {a, b}, {a, c}, {b, c}, {a, b, c}}</code></p>
 </blockquote>
 
-<p>このような場合は、<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Sets.java#L1537">GuavaのSets#powerSet()</a>などを利用しましょう。
+<p>このような場合は、<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Sets.java#L1537">GuavaのSets#powerSet()</a>などを利用しましょう。(もしThirdParty製のライブラリが無ければ、独自実装しましょう。)<br />
 中のロジックは、以下のようなSubsetを利用したビット演算である。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1349,6 +1349,221 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <h2 id="7-a-name-48-a-項目48-ストリームを並列化するときは注意を払う">7. <a name='48'></a>項目48 ストリームを並列化するときは注意を払う</h2>
 
+<h3 id="7-1-a-name-1-a-結論">7.1. <a name='-1'></a>結論</h3>
+
+<p>ストリームの並列化により、性能が良くなるのは以下です。</p>
+
+<ul>
+<li>サブレンジへの分割が容易であること</li>
+<li>逐次処理される時の<a href="https://ja.wikipedia.org/wiki/%E5%8F%82%E7%85%A7%E3%81%AE%E5%B1%80%E6%89%80%E6%80%A7">参照の局所性</a></li>
+<li>終端処理がリダクション処理や短絡評価である場合</li>
+</ul>
+
+<p>また、指標として、<code>(ストリームの要素の数) * (1要素に実行されるコード行数) &gt; 100000</code> であれば、並列化により性能が向上するかも。</p>
+
+<p>以下の場合、並列化をしても性能は良くならないでしょう。</p>
+
+<ul>
+<li><code>Stream.iterate</code>を使っている</li>
+<li>中間操作<code>limit</code>を使っている</li>
+</ul>
+
+<p>並列化により、間違った結果や予想できない動作を起こす可能性があるので気をつけましょう。例えば<code>forEach()</code>と<code>forEachOrded()</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// データの準備
+</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">list</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="k">new</span> <span class="n">String</span><span class="p">[]{</span><span class="s">&#34;あ&#34;</span><span class="p">,</span> <span class="s">&#34;い&#34;</span><span class="p">,</span> <span class="s">&#34;う&#34;</span><span class="p">,</span> <span class="s">&#34;え&#34;</span><span class="p">,</span> <span class="s">&#34;お&#34;</span><span class="p">});</span>
+
+<span class="c1">// forEach()の場合
+</span><span class="c1"></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">parallelStream1</span> <span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">parallelStream</span><span class="p">();</span>
+<span class="n">parallelStream1</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;forEach: &#34;</span> <span class="o">+</span> <span class="n">value</span><span class="p">));</span>
+
+<span class="c1">// forEachOrdered()の場合
+</span><span class="c1"></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">parallelStream2</span> <span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">parallelStream</span><span class="p">();</span>
+<span class="n">parallelStream2</span><span class="p">.</span><span class="na">forEachOrdered</span><span class="p">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;forEachOrdered: &#34;</span> <span class="o">+</span> <span class="n">value</span><span class="p">));</span>
+
+<span class="c1">// 実行結果
+</span><span class="c1"></span><span class="cm">/* forEach: う
+</span><span class="cm">   forEach: あ
+</span><span class="cm">   forEach: え
+</span><span class="cm">   forEach: い
+</span><span class="cm">   forEach: お
+</span><span class="cm">   forEachOrdered: あ
+</span><span class="cm">   forEachOrdered: い
+</span><span class="cm">   forEachOrdered: う
+</span><span class="cm">   forEachOrdered: え
+</span><span class="cm">   forEachOrdered: お
+</span><span class="cm">  */</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="7-2-a-name-1-a-サブレンジへの分割が容易であること-と-逐次処理される時の参照の局所性">7.2. <a name='-1'></a>「サブレンジへの分割が容易であること」と「逐次処理される時の参照の局所性」</h3>
+
+<p><code>ArrayList</code>、<code>HashMap</code>、<code>HashSet</code>、<code>ConcurrentHashMap</code>、配列、<code>int</code>の範囲をもったもの、<code>long</code>の範囲を持ったもののストリームであれば、以下。</p>
+
+<ul>
+<li>サブレンジへの分割ができる</li>
+<li>逐次処理される時の参照が局所化される</li>
+</ul>
+
+<h3 id="7-3-a-name-1-a-終端処理がリダクション処理や短絡評価である場合">7.3. <a name='-1'></a>「終端処理がリダクション処理や短絡評価である場合」</h3>
+
+<p>終端処理で、以下をやっていると並列による性能向上はあまり得られない。</p>
+
+<ul>
+<li>パイプライン全体に対して大量の処理をする</li>
+<li>終端処理が内部的に逐次処理を行うものである。</li>
+</ul>
+
+<h4 id="7-3-1-a-name-1-a-終端処理がリダクション処理">7.3.1. <a name='-1'></a>終端処理がリダクション処理</h4>
+
+<p>終端処理が、<code>min</code>、<code>max</code>、<code>count</code>、<code>sum</code>といったリダクション処理であれば、効果を得られる。</p>
+
+<blockquote>
+<p>リダクション処理とは、ストリーム内のすべての要素を累積関数を使って一つにまとめた結果を返す操作。</p>
+</blockquote>
+
+<h4 id="7-3-2-a-name-1-a-終端処理が短絡評価">7.3.2. <a name='-1'></a>終端処理が短絡評価</h4>
+
+<p>終端処理が、<code>anyMatch</code>、<code>allMatch</code>、<code>noneMatch</code>といった<a href="https://qiita.com/heatflat1021/items/fd09761df434f99cb829">短絡評価</a>は並列化の効果を得やすい。</p>
+
+<blockquote>
+<p>短絡評価とは、<code>&amp;&amp;</code>や<code>||</code>といった論理演算子において、左辺を評価した時点で、式全体の真偽値が決定し右辺を評価する必要がない場合、右辺を評価しないという機能のこと。（要は無駄な処理をしないで、真偽値を決めれる機能のこと）</p>
+</blockquote>
+
+<h3 id="7-4-a-name-1-a-並列処理による性能向上">7.4. <a name='-1'></a>並列処理による性能向上</h3>
+
+<p>並列化が効率的に行える、素数計数関数のプログラムで確認する。<br />
+(以下の例では、<code>.parallel()</code>を付けたことにより、36秒 ⇨ 24秒 に短縮できています。)</p>
+
+<blockquote>
+<p>素数計数関数とは、正の実数にそれ以下の素数の個数を対応させる関数のことであり、π(x) で表す。</p>
+</blockquote>
+
+<h4 id="7-4-1-a-name-1-a-並列化前">7.4.1. <a name='-1'></a>並列化前</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">math</span><span class="p">.</span><span class="na">BigInteger</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">LongStream</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="nf">class</span> <span class="n">ParallelTest1</span> <span class="p">{</span>
+    <span class="c1">// Prime-counting stream pipeline - benefits from parallelization
+</span><span class="c1"></span>    <span class="kd">static</span> <span class="nf">long</span> <span class="n">pi</span><span class="p">(</span><span class="kt">long</span> <span class="nf">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">LongStream</span><span class="p">.</span><span class="na">rangeClosed</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">n</span><span class="p">).</span><span class="na">mapToObj</span><span class="p">(</span><span class="n">BigInteger</span><span class="o">::</span><span class="n">valueOf</span><span class="p">).</span><span class="na">filter</span><span class="p">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="p">.</span><span class="na">isProbablePrime</span><span class="p">(</span><span class="n">50</span><span class="p">)).</span><span class="na">count</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+    	<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pi</span><span class="p">(</span><span class="n">10000000</span><span class="p">));</span>
+    	<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
+    	<span class="c1">// 実行結果
+</span><span class="c1"></span>    	<span class="cm">/*
+</span><span class="cm">	Tue Oct 22 21:47:03 JST 2019
+</span><span class="cm">	64579
+</span><span class="cm">	Tue Oct 22 21:47:39 JST 2019
+</span><span class="cm">	*/</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="7-4-2-a-name-1-a-並列化後">7.4.2. <a name='-1'></a>並列化後</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">math</span><span class="p">.</span><span class="na">BigInteger</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Date</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">LongStream</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="nf">class</span> <span class="n">ParallelTest2</span> <span class="p">{</span>
+	<span class="c1">// Prime-counting stream pipeline - benefits from parallelization
+</span><span class="c1"></span>	<span class="kd">static</span> <span class="nf">long</span> <span class="n">pi</span><span class="p">(</span><span class="kt">long</span> <span class="nf">n</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">LongStream</span><span class="p">.</span><span class="na">rangeClosed</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">n</span><span class="p">).</span><span class="na">parallel</span><span class="p">().</span><span class="na">mapToObj</span><span class="p">(</span><span class="n">BigInteger</span><span class="o">::</span><span class="n">valueOf</span><span class="p">).</span><span class="na">filter</span><span class="p">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="p">.</span><span class="na">isProbablePrime</span><span class="p">(</span><span class="n">50</span><span class="p">)).</span><span class="na">count</span><span class="p">();</span>
+	<span class="p">}</span>
+
+	<span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
+		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pi</span><span class="p">(</span><span class="n">10000000</span><span class="p">));</span>
+		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
+		<span class="c1">// 実行結果
+</span><span class="c1"></span>		<span class="cm">/*
+</span><span class="cm">		 Tue Oct 22 21:54:06 JST 2019
+</span><span class="cm">		 664579
+</span><span class="cm">		 Tue Oct 22 21:54:30 JST 2019
+</span><span class="cm">		 */</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="8-a-name-url-a-参考url">8. <a name='URL'></a>参考URL</h2>
 
 <ul>
@@ -1370,6 +1585,10 @@ java.lang.FunctionalInterface)</a>にあります。
 <li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a></li>
 <li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a></li>
 <li><a href="https://www.geeksforgeeks.org/power-set/">GeeksforGeeks</a></li>
+<li><a href="https://qiita.com/frost_star/items/a36e66dff419e7c07151">Java8 Streamのリダクション操作について</a></li>
+<li><a href="https://qiita.com/heatflat1021/items/fd09761df434f99cb829">短絡評価って本当に処理が速いの？ Javaにおける&amp;&amp;と&amp;の違い</a></li>
+<li><a href="http://mathworld.wolfram.com/PrimeCountingFunction.html">Prime Counting Function</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1405/20/news032_3.html">Stream APIの主なメソッドと処理結果のOptionalクラスの使い方 (<sup>3</sup>&frasl;<sub>4</sub>)</a></li>
 </ul>
 
     </div>
