@@ -18,7 +18,7 @@
       <pubDate>Sun, 06 Oct 2019 16:59:30 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191006-effective-java-3rd-7/</guid>
-      <description></description>
+      <description>ラムダ式とストリーム Effective Java 第3版の個人的メモ 項目42 匿名クラスよりもラムダ式を選ぶ 項目43 ラムダよりもメソッド参照を選ぶ 項目44 標準の関数型イ</description>
     </item>
     
     <item>
@@ -36,7 +36,7 @@
       <pubDate>Mon, 23 Sep 2019 15:55:16 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20190923-useful-tools/</guid>
-      <description></description>
+      <description>少しずつ便利だなぁと思ったものを追記していきます。 複数人でのドキュメント管理 結論 複数人でのドキュメント管理になると、このご時世Gitを使うの</description>
     </item>
     
     <item>
