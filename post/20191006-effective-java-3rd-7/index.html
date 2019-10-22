@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T16:59:30&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T16:59:30&#43;09:00" />
-<meta itemprop="wordCount" content="5591">
+<meta itemprop="wordCount" content="6484">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 5591 words </span>
-          <span class="more-meta"> 12 mins read </span>
+          <span class="more-meta"> 6484 words </span>
+          <span class="more-meta"> 13 mins read </span>
         
       </div>
     </header>
@@ -1182,6 +1182,169 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <h2 id="6-a-name-47streamcollection-a-項目47-戻り値型としてstreamよりもcollectionを選ぶ">6. <a name='47StreamCollection'></a>項目47 戻り値型としてStreamよりもCollectionを選ぶ</h2>
 
+<h3 id="6-1-a-name-1-a-結論">6.1. <a name='-1'></a>結論</h3>
+
+<p>連続した要素の戻り値型として以下のものがあげられる。</p>
+
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collection.html">Collection</a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Iterable.html">Iterable</a></li>
+<li>配列</li>
+<li>ストリーム</li>
+</ul>
+
+<p>大抵の場合は、最適な戻り値型は、<code>Collection</code>か<code>適切なCollectionのサブタイプ</code>である。<br />
+理由は、<code>Collection</code>は<code>iterator()</code>や<code>stream()</code>を持っており、イテレーション処理でもストリーム処理でも対応できるからである。</p>
+
+<blockquote>
+<p>もしイテレーション処理やストリーム処理を使う場合は、使用するユーザーによっては、<code>ストリームからイテレートできるように変換するコード</code>を作る必要になることを念頭に置いておきましょう。</p>
+</blockquote>
+
+<h3 id="6-2-a-name-collection-a-collectionを利用する場合">6.2. <a name='Collection'></a>Collectionを利用する場合</h3>
+
+<h4 id="6-2-1-a-name-1-a-返却する連続要素が小さい場合">6.2.1. <a name='-1'></a>返却する連続要素が小さい場合</h4>
+
+<p>Collectionを実装したもの(<code>ArrayList</code>や<code>HashSet</code>など)を返しましょう。</p>
+
+<h4 id="6-2-2-a-name-1-a-返却する連続要素が大きい場合">6.2.2. <a name='-1'></a>返却する連続要素が大きい場合</h4>
+
+<p>返却する連続要素が大きい場合の例として、与えられた集合のべき集合を返す場合を考える。<br />
+この場合、メモリに蓄えるべきではないです。下の例のように、組み合わせ数が膨大になっていくからである。(組み合わせ数 : <em><code>2^(要素数)</code></em>)</p>
+
+<blockquote>
+<p>{a,b,c}のべき集合の例:
+<code>{{}, {a}, {b}, {c}, {a, b}, {a, c}, {b, c}, {a, b, c}}</code></p>
+</blockquote>
+
+<p>このような場合は、<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Sets.java#L1537">GuavaのSets#powerSet()</a>などを利用しましょう。
+中のロジックは、以下のようなSubsetを利用したビット演算である。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Set</span>  <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">]</span>
+<span class="nf">power_set_size</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">8</span>
+<span class="nf">Run</span> <span class="k">for</span> <span class="n">binary</span> <span class="nf">counter</span> <span class="o">=</span> <span class="n">000</span> <span class="nf">to</span> <span class="n">111</span>
+
+<span class="nf">Value</span> <span class="n">of</span> <span class="nf">Counter</span>            <span class="n">Subset</span>
+    <span class="nf">000</span>                    <span class="o">-&gt;</span> <span class="n">Empty</span> <span class="nf">set</span>
+    <span class="n">001</span>                    <span class="o">-&gt;</span> <span class="n">a</span>
+    <span class="nf">010</span>                    <span class="o">-&gt;</span> <span class="n">b</span>
+    <span class="nf">011</span>                    <span class="o">-&gt;</span> <span class="n">ab</span>
+    <span class="nf">100</span>                    <span class="o">-&gt;</span> <span class="n">c</span>
+    <span class="nf">101</span>                    <span class="o">-&gt;</span> <span class="n">ac</span>
+    <span class="nf">110</span>                    <span class="o">-&gt;</span> <span class="n">bc</span>
+    <span class="nf">111</span>                    <span class="o">-&gt;</span> <span class="n">abc</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>サンプル実装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Java program for power set 
+</span><span class="c1"></span><span class="kn">import</span> <span class="nf">java</span> <span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="o">*</span><span class="p">;</span> 
+  
+<span class="kd">public</span> <span class="nf">class</span> <span class="n">GFG</span> <span class="p">{</span> 
+      
+    <span class="kd">static</span> <span class="nf">void</span> <span class="n">printPowerSet</span><span class="p">(</span><span class="kt">char</span> <span class="p">[]</span><span class="n">set</span><span class="p">,</span> 
+                            <span class="kt">int</span> <span class="nf">set_size</span><span class="p">)</span> 
+    <span class="p">{</span> 
+          
+        <span class="cm">/*set_size of power set of a set 
+</span><span class="cm">        with set_size n is (2**n -1)*/</span>
+        <span class="kt">long</span> <span class="nf">pow_set_size</span> <span class="o">=</span>  
+            <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">set_size</span><span class="p">);</span> 
+        <span class="kt">int</span> <span class="nf">counter</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span> 
+      
+        <span class="cm">/*Run from counter 000..0 to 
+</span><span class="cm">        111..1*/</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">counter</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">counter</span> <span class="o">&lt;</span>  
+                <span class="n">pow_set_size</span><span class="p">;</span> <span class="n">counter</span><span class="o">++</span><span class="p">)</span> 
+        <span class="p">{</span> 
+            <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">set_size</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> 
+            <span class="p">{</span> 
+                <span class="cm">/* Check if jth bit in the  
+</span><span class="cm">                counter is set If set then  
+</span><span class="cm">                print jth element from set */</span>
+                <span class="k">if</span><span class="p">((</span><span class="n">counter</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span> 
+                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">set</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span> 
+            <span class="p">}</span> 
+              
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span> 
+        <span class="p">}</span> 
+    <span class="p">}</span> 
+      
+    <span class="c1">// Driver program to test printPowerSet 
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> 
+    <span class="p">{</span> 
+        <span class="kt">char</span> <span class="p">[]</span><span class="n">set</span> <span class="o">=</span> <span class="p">{</span><span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">};</span> 
+        <span class="n">printPowerSet</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="n">3</span><span class="p">);</span> 
+    <span class="p">}</span> 
+<span class="p">}</span> 
+  
+<span class="o">//</span> <span class="n">This</span> <span class="nf">code</span> <span class="n">is</span> <span class="nf">contributed</span> <span class="n">by</span> <span class="nf">anuj_67</span><span class="p">.</span> </code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>メモ：集合が<code>31</code>以上の要素を持っている場合、<code>GuavaのSets#powerSet()</code>は例外をスローする。べき集合の大きさが<code>2^31</code>以上となり、<code>int size()</code>の最大値(<code>2^31-1</code>)的に対応できないからである。</p>
+</blockquote>
+
 <h2 id="7-a-name-48-a-項目48-ストリームを並列化するときは注意を払う">7. <a name='48'></a>項目48 ストリームを並列化するときは注意を払う</h2>
 
 <h2 id="8-a-name-url-a-参考url">8. <a name='URL'></a>参考URL</h2>
@@ -1204,6 +1367,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <li><a href="https://www.geeksforgeeks.org/java-8-collectors-counting-with-examples/">Java 8 | Collectors counting() with Examples</a></li>
 <li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a></li>
 <li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a></li>
+<li><a href="https://www.geeksforgeeks.org/power-set/">GeeksforGeeks</a></li>
 </ul>
     </div>
 
