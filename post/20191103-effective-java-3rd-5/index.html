@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Effective Java 3rd [Chapter 5] - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 rawタイプは使ってはならない 項目27 unchecked warnings は削除せよ 1. 項目26 rawタイプは使ってはならない Java 1.4 ま" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.58.1 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20191103-effective-java-3rd-5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Effective Java 3rd [Chapter 5]" />
+<meta property="og:description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 rawタイプは使ってはならない 項目27 unchecked warnings は削除せよ 1. 項目26 rawタイプは使ってはならない Java 1.4 ま" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20191103-effective-java-3rd-5/" />
+<meta property="article:published_time" content="2019-11-03T00:07:19+09:00" />
+<meta property="article:modified_time" content="2019-11-03T00:07:19+09:00" />
+<meta itemprop="name" content="Effective Java 3rd [Chapter 5]">
+<meta itemprop="description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 rawタイプは使ってはならない 項目27 unchecked warnings は削除せよ 1. 項目26 rawタイプは使ってはならない Java 1.4 ま">
+
+
+<meta itemprop="datePublished" content="2019-11-03T00:07:19&#43;09:00" />
+<meta itemprop="dateModified" content="2019-11-03T00:07:19&#43;09:00" />
+<meta itemprop="wordCount" content="660">
+
+
+
+<meta itemprop="keywords" content="java,ジェネリクス,個人的メモ," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Effective Java 3rd [Chapter 5]"/>
+<meta name="twitter:description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 rawタイプは使ってはならない 項目27 unchecked warnings は削除せよ 1. 項目26 rawタイプは使ってはならない Java 1.4 ま"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Effective Java 3rd [Chapter 5]</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-03 </span>
+        <div class="post-category">
+            <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+            </div>
+          <span class="more-meta"> 660 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      
+
+<h1 id="ジェネリクス">ジェネリクス</h1>
+
+<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第3版</a>の個人的メモ</p>
+
+<!-- vscode-markdown-toc -->
+
+<ol>
+<li><a href="#26raw">項目26 rawタイプは使ってはならない</a></li>
+<li><a href="#27uncheckedwarnings">項目27 unchecked warnings は削除せよ</a></li>
+</ol>
+
+<!-- vscode-markdown-toc-config
+    numbering=true
+    autoSave=true
+    /vscode-markdown-toc-config -->
+
+<!-- /vscode-markdown-toc -->
+
+<h2 id="1-a-name-26raw-a-項目26-rawタイプは使ってはならない">1. <a name='26raw'></a>項目26 rawタイプは使ってはならない</h2>
+
+<ul>
+<li>Java 1.4 までジェネリクスがなかった。</li>
+<li>Java 5 でジェネリクスが登場した。</li>
+</ul>
+
+<h3 id="1-1-a-name-a-結論">1.1. <a name=''></a>結論</h3>
+
+<p>ジェネリクスの型パラメータが指定できるときは必ず指定しましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Test</span> <span class="p">{</span>
+
+    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">List</span> <span class="nf">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="p">();</span>
+        <span class="c1">// どんな型でも入れれてしまう。
+</span><span class="c1"></span>        <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span>
+        <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">111</span><span class="p">);</span>
+        <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">DTO</span><span class="p">(</span><span class="s">&#34;user01&#34;</span><span class="p">,</span> <span class="n">11</span><span class="p">));</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+        <span class="c1">// 実行結果
+</span><span class="c1"></span>        <span class="c1">// [hello, 111, Test.DTO(name=user01, age=11)]
+</span><span class="c1"></span>    <span class="p">}</span>
+
+    <span class="nd">@Data</span>
+    <span class="nd">@AllArgsConstructor</span>
+    <span class="kd">private</span> <span class="nf">static</span> <span class="kd">class</span> <span class="nf">DTO</span> <span class="p">{</span>
+        <span class="n">String</span> <span class="nf">name</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="nf">age</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>List&lt;String&gt; list = new ArrayList();</code> とすればIntegerやDTOをいれようとすると コンパイルエラーになるので、早期検出できる。</p>
+
+<ul>
+<li>Java 1.4 までだと、誤ってIntegerをaddしても、実行時にしかわからなかった。</li>
+<li>結合テストなどまですり抜けていきやすい。</li>
+<li>事象が観測された時点であちこちに散財している状態になっている。</li>
+
+<li><p>ジェネリクス変数には色々な書き方がある。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="c1">// raw
+</span><span class="c1"></span><span class="n">List</span> <span class="nf">list1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="p">();</span>
+
+<span class="c1">// Java7まではこうかかないとダメ
+</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">list2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="c1">// Java8で右辺のパラメータを省略できるようになった
+</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">list3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="c1">// Java11でvarが使える
+</span><span class="c1"></span><span class="n">var</span> <span class="nf">list4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="c1">// これはダメな書き方
+</span><span class="c1"></span><span class="n">List</span> <span class="nf">list5</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">list5</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">111</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h2 id="2-a-name-27uncheckedwarnings-a-項目27-unchecked-warnings-は削除せよ">2. <a name='27uncheckedwarnings'></a>項目27 unchecked warnings は削除せよ</h2>
+
+<h3 id="2-1-a-name-1-a-結論">2.1. <a name='-1'></a>結論</h3>
+
+<p>@SuppressWarnings(&ldquo;unchecked&rdquo;) は気をつけて使いましょう</p>
+
+<ul>
+<li><code>@SuppressWarnings(&quot;unchecked&quot;)</code>は、クラス、メソッド、変数宣言に付与できる。
+
+<ul>
+<li>付与すると、その範囲の「型チェック実施していない」警告を抑止する。</li>
+<li>大きな範囲を抑止すると、抑止しようと思った対象以外も、抑止してしまうので、最小範囲で抑止すること。</li>
+</ul></li>
+</ul>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          <a href="/tags/%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AA%E3%82%AF%E3%82%B9/">ジェネリクス</a>
+          <a href="/tags/%E5%80%8B%E4%BA%BA%E7%9A%84%E3%83%A1%E3%83%A2/">個人的メモ</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/20191006-effective-java-3rd-7/">
+            <span class="next-text nav-default">Effective Java 3rd [Chapter 7]</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://github.com/takuto-n/ctrl-key-6bit-mask">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
