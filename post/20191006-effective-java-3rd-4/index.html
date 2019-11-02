@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-06T15:27:10&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T15:27:10&#43;09:00" />
-<meta itemprop="wordCount" content="7823">
+<meta itemprop="wordCount" content="11926">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 7823 words </span>
-          <span class="more-meta"> 16 mins read </span>
+          <span class="more-meta"> 11926 words </span>
+          <span class="more-meta"> 24 mins read </span>
         
       </div>
     </header>
@@ -1356,9 +1356,813 @@ Javaライブラリではこれと同様のことを防ぐため、<a href="http
 
 <h2 id="9-a-name-23-a-項目23-タグ付クラスよりクラス階層を選ぶ">9. <a name='23'></a>項目23 タグ付クラスよりクラス階層を選ぶ</h2>
 
+<h3 id="9-1-a-name-1-a-結論">9.1. <a name='-1'></a>結論</h3>
+
+<ul>
+<li>タグ付きクラスが適切な場合はほとんどない</li>
+<li>タグ付きクラスを作りたくなったら、またはタグ付きクラスに出くわしたら、クラス階層で置き換えられないかを検討する</li>
+</ul>
+
+<h3 id="9-2-a-name-1-a-タグ付きクラスとは">9.2. <a name='-1'></a>タグ付きクラスとは</h3>
+
+<ul>
+<li><p>次のような、インスタンスが複数の特性を持っていて、その特性を示すためにタグフィールドを持つクラス</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Figure</span> <span class="p">{</span>
+<span class="kd">enum</span> <span class="nf">Shape</span> <span class="p">{</span> <span class="n">RECTANGLE</span><span class="p">,</span> <span class="n">CIRCLE</span> <span class="p">}</span>
+    
+<span class="c1">// タグフィールド　図の形
+</span><span class="c1"></span><span class="kd">final</span> <span class="nf">Shape</span> <span class="n">shape</span><span class="p">;</span>
+    
+<span class="c1">// shape が RECTANGLE の場合だけ利用される 
+</span><span class="c1"></span><span class="kt">double</span> <span class="nf">length</span><span class="p">;</span>
+<span class="kt">double</span> <span class="nf">width</span><span class="p">;</span>
+    
+<span class="c1">// shape が CIRCLE の場合だけ利用される
+</span><span class="c1"></span><span class="kt">double</span> <span class="nf">radius</span><span class="p">;</span>
+    
+<span class="n">Figure</span><span class="p">(</span><span class="kt">double</span> <span class="nf">radius</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">Shape</span><span class="p">.</span><span class="na">CIRCLE</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">radius</span><span class="p">;</span>
+<span class="p">}</span>
+    
+<span class="n">Figure</span><span class="p">(</span><span class="kt">double</span> <span class="nf">length</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">width</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">Shape</span><span class="p">.</span><span class="na">RECTANGLE</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">length</span> <span class="o">=</span> <span class="n">length</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="p">;</span>
+<span class="p">}</span>
+    
+<span class="kt">double</span> <span class="nf">area</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">RECTANGLE</span><span class="o">:</span>
+            <span class="k">return</span> <span class="n">length</span> <span class="o">*</span> <span class="n">width</span><span class="p">;</span>
+        <span class="k">case</span> <span class="n">CIRCLE</span><span class="o">:</span>
+            <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">PI</span> <span class="o">*</span> <span class="p">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="p">);</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h3 id="9-3-a-name-1-a-タグ付きクラスの欠点">9.3. <a name='-1'></a>タグ付きクラスの欠点</h3>
+
+<ul>
+<li>複数の実装が単一クラスに詰め込まれているので、可読性が低い</li>
+<li>他の特性に属する関係のないフィールドを含んでいるので、余分にメモリを使う</li>
+
+<li><p>誤ったフィールドを初期化しても、コンパイラは検知せず、実行時に失敗する</p>
+
+<ul>
+<li><p>例として、次のように、誤ったタグフィールドで初期化しても、実行時に失敗するまでわからない</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Figure</span><span class="p">(</span><span class="kt">double</span> <span class="nf">radius</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">Shape</span><span class="p">.</span><span class="na">RECTANGLE</span><span class="p">;</span>
+<span class="k">this</span><span class="p">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">radius</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+
+<li><p>新しい特性を追加するには、ソースコードを修正しなければならない</p></li>
+</ul>
+
+<h3 id="9-4-a-name-1-a-解決策">9.4. <a name='-1'></a> 解決策</h3>
+
+<ul>
+<li><p>クラス階層を用いる</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">abstract</span> <span class="nf">class</span> <span class="n">Figure</span> <span class="p">{</span>
+<span class="kd">abstract</span> <span class="nf">double</span> <span class="n">area</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nf">Circle</span> <span class="kd">extends</span> <span class="nf">Figure</span> <span class="p">{</span>
+<span class="kd">final</span> <span class="nf">double</span> <span class="n">radius</span><span class="p">;</span>
+
+<span class="n">Circle</span><span class="p">(</span><span class="kt">double</span> <span class="nf">radius</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">radius</span> <span class="o">=</span> <span class="n">radius</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Override</span>
+<span class="kt">double</span> <span class="nf">area</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">PI</span> <span class="o">*</span> <span class="p">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nf">Rectangle</span> <span class="kd">extends</span> <span class="nf">Figure</span> <span class="p">{</span>
+<span class="kd">final</span> <span class="nf">double</span> <span class="n">length</span><span class="p">;</span>
+<span class="kd">final</span> <span class="nf">double</span> <span class="n">width</span><span class="p">;</span>
+
+<span class="n">Rectangle</span><span class="p">(</span><span class="kt">double</span> <span class="nf">length</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">width</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">length</span> <span class="o">=</span> <span class="n">length</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Override</span>
+<span class="kt">double</span> <span class="nf">area</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">length</span> <span class="o">*</span> <span class="n">width</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h3 id="9-5-a-name-1-a-クラス階層の良い点">9.5. <a name='-1'></a>クラス階層の良い点</h3>
+
+<ul>
+<li>タグ付きクラスの欠点がすべて解決できている
+
+<ul>
+<li>複数の実装が単一クラスに詰め込まれていない</li>
+<li>他の特性に属する関係のないフィールドを含んでいない</li>
+<li>誤ったフィールドを初期化することはない</li>
+</ul></li>
+<li>型間の自然な階層関係を反映できる
+
+<ul>
+<li><p>例えば、正方形はクラス階層を利用して以下のように作成できる</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nf">Square</span> <span class="kd">extends</span> <span class="nf">Rectangle</span> <span class="p">{</span>
+    <span class="n">Square</span><span class="p">(</span><span class="kt">double</span> <span class="nf">side</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">super</span><span class="p">(</span><span class="n">side</span><span class="p">,</span> <span class="n">side</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+</ul>
+
 <h2 id="10-a-name-24staticstatic-a-項目24-非staticのメンバークラスよりstaticのメンバークラスを選ぶ">10. <a name='24staticstatic'></a>項目24 非staticのメンバークラスよりstaticのメンバークラスを選ぶ</h2>
 
+<h3 id="10-1-a-name-1-a-結論">10.1. <a name='-1'></a>結論</h3>
+
+<ul>
+<li>ネストしたクラスはエンクロージングクラスに対して仕える目的のためだけに存在すべき
+
+<ul>
+<li>(エンクロージングクラスは内部クラスにとっての外部クラス)</li>
+</ul></li>
+<li>ネストしたクラスが、他の何らかの状況で有用なのであれば、トップレベルのクラスにするべき</li>
+<li>ネストしたクラスは4種類あり、それぞれ用途が異なる
+
+<ul>
+<li>staticのメンバークラスはクラスに関連したクラス</li>
+<li>非staticのメンバークラスはインスタンスに関連したクラス</li>
+<li>無名クラスはその場限りのクラス</li>
+<li>ローカルクラスもローカル変数のクラス版</li>
+</ul></li>
+<li>メンバークラスやローカルクラスは、外部クラスを離れては意味のないクラスを内部に隠蔽することができるのでカプセル化の点でメリットがある。(参考：<a href="https://qiita.com/liguofeng29/items/6cafca5bf92e0381ee42">javaの内部クラスおさらい</a>)</li>
+</ul>
+
+<h3 id="10-2-a-name-1-a-ネストしたクラスの種類">10.2. <a name='-1'></a>ネストしたクラスの種類</h3>
+
+<ul>
+<li>staticのメンバークラス</li>
+<li>非staticのメンバークラス</li>
+<li>無名クラス</li>
+
+<li><p>ローカルクラス</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nf">OuterClass</span><span class="p">{</span>
+<span class="kd">private</span> <span class="nf">int</span> <span class="n">outerField1</span><span class="p">;</span>
+<span class="kd">private</span> <span class="nf">static</span> <span class="kt">int</span> <span class="nf">outerField2</span><span class="p">;</span>
+
+<span class="c1">// staticのメンバークラス
+</span><span class="c1"></span><span class="kd">static</span> <span class="nf">class</span> <span class="n">StaticMemberClass</span><span class="p">{</span>
+    <span class="c1">// エンクロージングクラスのstaticのメンバーにアクセス可
+</span><span class="c1"></span>    <span class="n">outerField2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 非staticのメンバークラス
+</span><span class="c1"></span><span class="kd">class</span> <span class="nf">NonStaticMemberClass</span><span class="p">{</span>
+    <span class="c1">// エンクロージングクラスのメンバーにアクセス可
+</span><span class="c1"></span>    <span class="n">outerField1</span><span class="p">;</span>
+    <span class="n">outerField2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">hogeMethod</span><span class="p">(){</span>
+    <span class="c1">// 匿名クラス
+</span><span class="c1"></span>    <span class="n">FugaInterface</span> <span class="nf">fugaInterface</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FugaInterface</span><span class="p">(){</span>
+        <span class="kt">void</span> <span class="nf">fugaMethod</span><span class="p">{</span>
+            <span class="c1">// 処理
+</span><span class="c1"></span>        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="c1">// インターフェースだけではなくクラスでもOK。メソッドオーバーライドや抽象メソッドの実装をしないと意味ないが
+</span><span class="c1"></span>    <span class="n">FugaClass</span> <span class="nf">fugaClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FugaClass</span><span class="p">(){</span>
+        <span class="nd">@Override</span>
+        <span class="kt">void</span> <span class="nf">fugaMethod</span>
+        <span class="p">{</span>
+            <span class="c1">// 処理
+</span><span class="c1"></span>        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ローカルクラス
+</span><span class="c1"></span>    <span class="kd">class</span> <span class="nf">LocalClass</span><span class="p">{</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h3 id="10-3-a-name-static-a-staticのメンバークラス">10.3. <a name='static'></a>staticのメンバークラス</h3>
+
+<h4 id="10-3-1-a-name-1-a-特徴">10.3.1. <a name='-1'></a>特徴</h4>
+
+<ul>
+<li>最も単純なネストしたクラス</li>
+<li>通常の別クラスとして宣言し場合と近い感覚で利用できる</li>
+<li>通常のクラスとの違いはエンクロージングクラスのstaticのメンバーにアクセスできること</li>
+<li>メンバーなのでprivate,protectedが使える</li>
+</ul>
+
+<h4 id="10-3-2-a-name-1-a-使用例">10.3.2. <a name='-1'></a>使用例</h4>
+
+<ul>
+<li>その外部クラスを使用と一緒に使用すると有用なpublicのヘルパークラス
+
+<ul>
+<li>例えば、その外部クラスだけに関連しているenumクラス
+
+<ul>
+<li>(内部enumはstaticキーワードをつけなくてもstaticとして定義される。参考：<a href="https://skirnir.hatenadiary.org/entry/20091209/1260326768">内部enumはstatic扱い</a>)</li>
+</ul></li>
+<li>何かに属していることを明示したり、ジェネリクスを合わせたりといったメリット
+
+<ul>
+<li>Map.Entry　(publicクラスのpublicなインターフェース)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="10-4-a-name-static-1-a-非staticのメンバークラス">10.4. <a name='static-1'></a>非staticのメンバークラス</h3>
+
+<h4 id="10-4-1-a-name-1-a-特徴">10.4.1. <a name='-1'></a>特徴</h4>
+
+<ul>
+<li>エンクロージングインスタンスと関連付けられている
+
+<ul>
+<li>エンクロージングインスタンスなしで、非staticのメンバークラスのインスタンスは生成できない</li>
+</ul></li>
+<li>エンクロージングクラスのメンバーすべてにアクセスできる</li>
+<li>メンバーなのでprivate,protectedが使える</li>
+</ul>
+
+<h4 id="10-4-2-a-name-1-a-使用例">10.4.2. <a name='-1'></a>使用例</h4>
+
+<ul>
+<li><p>エンクロージングクラスのインスタンスを関係のないクラスのインスタンスとしてみなすことを可能にするAdapterを定義するときに使う</p>
+
+<ul>
+<li><p>Adapterパターンは既存クラスを修正することなく、 異なるインタフェースを持たせることができるデザインパターン</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">MySet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">extends</span> <span class="n">AbstractSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">{</span>
+<span class="c1">// 省略
+</span><span class="c1"></span>
+<span class="kd">public</span> <span class="nf">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">MyIterator</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="nf">class</span> <span class="n">MyIterator</span> <span class="nf">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+<span class="p">}</span> </code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>staticのメンバークラスと同様に何かに属していることを明示したり、ジェネリクスを合わせたりといったメリットがある</p>
+</blockquote>
+
+<h4 id="10-4-3-a-name-1-a-主張">10.4.3. <a name='-1'></a>主張</h4>
+
+<ul>
+<li>エンクロージングインスタンスへのアクセスが必要なければ、staticのメンバークラスを利用するべき
+
+<ul>
+<li><p>static修飾子をつけないと、個々のインスタンスはエンクロージングインスタンスへの参照を持ち、エンクロージングインスタンスが適切にGCされない可能性があるから(項目22：廃れたオブジェクト参照を取り除く)</p>
+
+<ul>
+<li><p>以下の例のような状況がある。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nf">Outer</span><span class="p">{</span>
+<span class="kd">class</span> <span class="nf">Inner</span><span class="p">{</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">var</span> <span class="nf">o</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Outer</span><span class="p">();</span>
+<span class="n">var</span> <span class="nf">i</span> <span class="o">=</span> <span class="k">new</span> <span class="n">o</span><span class="p">.</span><span class="na">Inner</span><span class="p">();</span>
+<span class="n">o</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="o">//</span><span class="n">i</span> <span class="nf">から</span> <span class="n">o</span> <span class="nf">への参照は残る</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="10-5-a-name-1-a-無名クラス">10.5. <a name='-1'></a>無名クラス</h3>
+
+<h4 id="10-5-1-a-name-1-a-特徴">10.5.1. <a name='-1'></a>特徴</h4>
+
+<ul>
+<li>他のネストしたクラスとは全く異なる</li>
+<li>クラス名が無い</li>
+<li>エンクロージングクラスのメンバーではない</li>
+<li>式が許されている場所であれば、コードのどの場所でも宣言できる</li>
+<li>宣言と同時にインスタンス化される</li>
+<li>非staticの文脈内で書かれたならば、エンクロージングインスタンスを持つ</li>
+<li>staticの文脈内で書かれてもstaticのメンバーを持つことができない</li>
+<li>instanceof検査やクラスの名前を指定する必要がある処理はできない</li>
+<li>外側で定義されているローカル変数を使う場合は、そのローカル変数に暗黙にfinalが付いているものと見なされる(<a href="http://www.ne.jp/asahi/hishidama/home/tech/java/class_use.html#h_effectively_final">Javaクラス使用メモ(Hishidama&rsquo;s Java Class use Memo)</a>)</li>
+</ul>
+
+<h4 id="10-5-2-a-name-1-a-使用例">10.5.2. <a name='-1'></a>使用例</h4>
+
+<ul>
+<li>その場で関数オブジェクトを生成
+
+<ul>
+<li><p>Comparator</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Hoge</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="nf">int</span> <span class="n">compare</span><span class="p">(</span><span class="n">Hoge</span> <span class="nf">o1</span><span class="p">,</span> <span class="n">Hoge</span> <span class="nf">o2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">o1</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">o2</span><span class="p">.</span><span class="na">id</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+<li>プロセスオブジェクトを生成
+
+<ul>
+<li>Thread</li>
+<li>Runnable</li>
+
+<li><p>TimerTask</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">public</span> <span class="nf">void</span> <span class="n">run</span><span class="p">(){</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nf">i</span><span class="o">=</span><span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">500</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="sc">&#39;*&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}).</span><span class="na">start</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><a href="https://qiita.com/joji/items/16fb782a6a8ec556d18d">JavaでThreadを実装して、無名クラス、ラムダを使ってみる - Qiita</a></p></li>
+</ul></li>
+
+<li><p>staticファクトリーメソッド内での使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="nf">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">intArrayAsList</span><span class="p">(</span><span class="kd">final</span> <span class="nf">int</span><span class="p">[]</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(){</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nf">int</span> <span class="n">size</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kd">public</span> <span class="nf">Integer</span> <span class="n">get</span><span class="p">(</span><span class="kt">int</span> <span class="nf">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nf">Integer</span> <span class="n">set</span><span class="p">(</span><span class="kt">int</span> <span class="nf">i</span><span class="p">,</span> <span class="n">Integer</span> <span class="nf">val</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="nf">oldVal</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+            <span class="k">return</span> <span class="n">oldVal</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>ラムダ式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">hogeList</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">forEach</span><span class="p">((</span><span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">&#34; &#34;</span><span class="p">);</span> <span class="p">}</span>
+    <span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><p>無名クラスの形に戻すと、以下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">hogeList</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="k">new</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="kd">public</span> <span class="nf">void</span> <span class="n">accept</span><span class="p">(</span><span class="n">Integer</span> <span class="nf">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">&#34; &#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>ラムダ式をコンパイルしたものを逆コンパイルしたのを見ると、無名クラスの形になる。</p></li>
+</ul></li>
+</ul>
+
+<h3 id="10-6-a-name-1-a-ローカル内部クラス">10.6. <a name='-1'></a>ローカル内部クラス</h3>
+
+<h4 id="10-6-1-a-name-1-a-特徴">10.6.1. <a name='-1'></a>特徴</h4>
+
+<ul>
+<li>private,protectedが使えない</li>
+<li>外部クラスのメンバーにはアクセス可能</li>
+<li>外側で定義されているローカル変数を使う場合は、そのローカル変数に暗黙にfinalが付いているものと見なされる</li>
+</ul>
+
+<h4 id="10-6-2-a-name-1-a-主張">10.6.2. <a name='-1'></a>主張</h4>
+
+<ul>
+<li>あまり使われない</li>
+<li>短くあるべき</li>
+<li>ローカル変数のようなもの</li>
+</ul>
+
 <h2 id="11-a-name-25-a-項目25-ソースファイルを単一のトップレベルのクラスに限定する">11. <a name='25'></a>項目25 ソースファイルを単一のトップレベルのクラスに限定する</h2>
+
+<h3 id="11-1-a-name-1-a-結論">11.1. <a name='-1'></a>結論</h3>
+
+<ul>
+<li>単一のソースファイルに複数のトップレベルのクラスを作るべきでない</li>
+</ul>
+
+<h3 id="11-2-a-name-1-a-理由">11.2. <a name='-1'></a>理由</h3>
+
+<ul>
+<li>コンパイルの順序によって結果が変わってしまうことがあるから
+
+<ul>
+<li>例えば、下記のようなMainクラス、<code>Utensil.java</code>、<code>Dessert.java</code>を考えるときに、
+
+<ul>
+<li><code>javac Main.java</code>または、<code>javac Main.java Utensil.java</code>でコンパイルして実行すると、<code>pancake</code>が表示される</li>
+<li><code>javac Main.java Dessert.java</code>でコンパイルして実行すると、<code>potpie</code>が表示される</li>
+<li>mainメソッド<code>System.out.println(Utensil.NAME + Dessert.NAME)</code>を<code>System.out.println(Dessert.NAME + Utensil.NAME)</code>に変更して<code>javac Main.java</code>でコンパイルして実行すると、<code>piepot</code>が表示される（Dessert.javaの方）</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p><em>Main.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Main</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Utensil</span><span class="p">.</span><span class="na">NAME</span> <span class="o">+</span> <span class="n">Dessert</span><span class="p">.</span><span class="na">NAME</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><em>Utensil.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nf">Utensil</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="nf">final</span> <span class="n">String</span> <span class="nf">NAME</span> <span class="o">=</span> <span class="s">&#34;pan&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nf">Dessert</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="nf">final</span> <span class="n">String</span> <span class="nf">NAME</span> <span class="o">=</span> <span class="s">&#34;cake&#34;</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><em>Dessert.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nf">Utensil</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="nf">final</span> <span class="n">String</span> <span class="nf">NAME</span> <span class="o">=</span> <span class="s">&#34;pot&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nf">Dessert</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="nf">final</span> <span class="n">String</span> <span class="nf">NAME</span> <span class="o">=</span> <span class="s">&#34;pie&#34;</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="11-3-a-name-javac-a-補足-javacの依存関係の解消の仕組み">11.3. <a name='javac'></a>補足：javacの依存関係の解消の仕組み</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">　javacはファイル間の依存関係を、あくまで簡単にですが、把握し、ソースファイルを自動的にコンパイルします。以下では、その仕組みについて説明します。
+
+　まず、javacは、直接コンパイルするよう指定されたソースファイルを解析し、そのソースファイル中で、どんなクラスが使用されているかを調べます。
+
+　次に、javacはソースファイル中に使われているクラスを検索します。javacはJava VMのように、ブートクラスパス、エクステンション(拡張)ディレクトリ、クラスパスの順に、クラスファイルを検索しますが、それに加えソースパスを検索し、検索しているクラスに対応するソースファイルがないかどうか調べます。ソースパスについては、オプション-sourcepathの説明を参照してください。
+
+　検索の結果、 もし、クラスファイルのみ見つかり、ソースファイルが見つからなかった場合は、単にそのクラスファイルを利用します。もし、ソースファイルのみ見つかり、クラスファイルが見つからなかった場合は、見つかったソースファイルをコンパイルします。</pre></td></tr></table>
+</div>
+</div>
+<p>出展：<a href="https://www.atmarkit.co.jp/fjava/onepoint/java/jv_jvc.html#ap02">Javaプログラミングの前提知識</a></p>
+
+<h3 id="11-4-a-name-1-a-解決法">11.4. <a name='-1'></a>解決法</h3>
+
+<ul>
+<li>１つソースファイルには1つだけトップレベルのクラスを作る</li>
+
+<li><p>staticなメンバクラスとして定義する</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Main</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Utensil</span><span class="p">.</span><span class="na">NAME</span> <span class="o">+</span> <span class="n">Dessert</span><span class="p">.</span><span class="na">NAME</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="nf">static</span> <span class="kd">class</span> <span class="nf">Utensil</span> <span class="p">{</span>
+        <span class="kd">static</span> <span class="nf">final</span> <span class="n">String</span> <span class="nf">NAME</span> <span class="o">=</span> <span class="s">&#34;pan&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="nf">static</span> <span class="kd">class</span> <span class="nf">Dessert</span> <span class="p">{</span>
+        <span class="kd">static</span> <span class="nf">final</span> <span class="n">String</span> <span class="nf">NAME</span> <span class="o">=</span> <span class="s">&#34;cake&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h3 id="11-5-a-name-1-a-意見">11.5. <a name='-1'></a>意見</h3>
+
+<ul>
+<li>FQCNが完全に同じクラスが２つあった時、先に読み込んだ方のクラスを使う</li>
+</ul>
 
 <h2 id="12-a-name-url-a-参考url">12. <a name='URL'></a>参考URL</h2>
 
