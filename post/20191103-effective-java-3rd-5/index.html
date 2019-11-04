@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 rawタイプは使ってはならない 項目27 unchecked warnings は削除せよ 1. 項目26 rawタイプは使ってはならない Java 1.4 ま" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="takuto_n" /><meta name="description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 原型を使わない 項目27 無検査警告を取り除く 項目28 配列よりリストを選ぶ 項目29 ジェネリック型を使う" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Effective Java 3rd [Chapter 5]" />
-<meta property="og:description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 rawタイプは使ってはならない 項目27 unchecked warnings は削除せよ 1. 項目26 rawタイプは使ってはならない Java 1.4 ま" />
+<meta property="og:description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 原型を使わない 項目27 無検査警告を取り除く 項目28 配列よりリストを選ぶ 項目29 ジェネリック型を使う" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20191103-effective-java-3rd-5/" />
 <meta property="article:published_time" content="2019-11-03T00:07:19+09:00" />
 <meta property="article:modified_time" content="2019-11-03T00:07:19+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 5]">
-<meta itemprop="description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 rawタイプは使ってはならない 項目27 unchecked warnings は削除せよ 1. 項目26 rawタイプは使ってはならない Java 1.4 ま">
+<meta itemprop="description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 原型を使わない 項目27 無検査警告を取り除く 項目28 配列よりリストを選ぶ 項目29 ジェネリック型を使う">
 
 
 <meta itemprop="datePublished" content="2019-11-03T00:07:19&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-03T00:07:19&#43;09:00" />
-<meta itemprop="wordCount" content="660">
+<meta itemprop="wordCount" content="2551">
 
 
 
 <meta itemprop="keywords" content="java,ジェネリクス,個人的メモ," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 5]"/>
-<meta name="twitter:description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 rawタイプは使ってはならない 項目27 unchecked warnings は削除せよ 1. 項目26 rawタイプは使ってはならない Java 1.4 ま"/>
+<meta name="twitter:description" content="ジェネリクス Effective Java 第3版の個人的メモ 項目26 原型を使わない 項目27 無検査警告を取り除く 項目28 配列よりリストを選ぶ 項目29 ジェネリック型を使う"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 660 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 2551 words </span>
+          <span class="more-meta"> 6 mins read </span>
         
       </div>
     </header>
@@ -148,8 +148,14 @@
 <!-- vscode-markdown-toc -->
 
 <ol>
-<li><a href="#26raw">項目26 rawタイプは使ってはならない</a></li>
-<li><a href="#27uncheckedwarnings">項目27 unchecked warnings は削除せよ</a></li>
+<li><a href="#26">項目26 原型を使わない</a></li>
+<li><a href="#27">項目27 無検査警告を取り除く</a></li>
+<li><a href="#28">項目28 配列よりリストを選ぶ</a></li>
+<li><a href="#29">項目29 ジェネリック型を使う</a></li>
+<li><a href="#30">項目30 ジェネリックメソッドを使う</a></li>
+<li><a href="#31API">項目31 APIの柔軟性向上のために境界ワイルドカードを使う</a></li>
+<li><a href="#32">項目32 ジェネリックと可変長引数を注意して組み合わせる</a></li>
+<li><a href="#33">項目33 型安全な異種コンテナを検討する</a></li>
 </ol>
 
 <!-- vscode-markdown-toc-config
@@ -159,7 +165,7 @@
 
 <!-- /vscode-markdown-toc -->
 
-<h2 id="1-a-name-26raw-a-項目26-rawタイプは使ってはならない">1. <a name='26raw'></a>項目26 rawタイプは使ってはならない</h2>
+<h2 id="1-a-name-26-a-項目26-原型を使わない">1. <a name='26'></a>項目26 原型を使わない</h2>
 
 <ul>
 <li>Java 1.4 までジェネリクスがなかった。</li>
@@ -171,7 +177,7 @@
 <p>ジェネリクスの型パラメータが指定できるときは必ず指定しましょう。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -194,7 +200,7 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Test</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Test</span> <span class="p">{</span>
 
     <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">List</span> <span class="nf">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="p">();</span>
@@ -227,7 +233,7 @@
 <li><p>ジェネリクス変数には色々な書き方がある。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -244,7 +250,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="c1">// raw
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// raw
 </span><span class="c1"></span><span class="n">List</span> <span class="nf">list1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="p">();</span>
 
 <span class="c1">// Java7まではこうかかないとダメ
@@ -263,7 +269,7 @@
 </div></li>
 </ul>
 
-<h2 id="2-a-name-27uncheckedwarnings-a-項目27-unchecked-warnings-は削除せよ">2. <a name='27uncheckedwarnings'></a>項目27 unchecked warnings は削除せよ</h2>
+<h2 id="2-a-name-27-a-項目27-無検査警告を取り除く">2. <a name='27'></a>項目27 無検査警告を取り除く</h2>
 
 <h3 id="2-1-a-name-1-a-結論">2.1. <a name='-1'></a>結論</h3>
 
@@ -277,6 +283,323 @@
 <li>大きな範囲を抑止すると、抑止しようと思った対象以外も、抑止してしまうので、最小範囲で抑止すること。</li>
 </ul></li>
 </ul>
+
+<h2 id="3-a-name-28-a-項目28-配列よりリストを選ぶ">3. <a name='28'></a>項目28 配列よりリストを選ぶ</h2>
+
+<h3 id="3-1-a-name-1-a-結論">3.1. <a name='-1'></a>結論</h3>
+
+<p>配列とリストは次の2点で大きく異なる。
+リストの方は、コンパイル時に型安全性を提供するから、バグが発生しにくい。（配列は実行時に型安全性を提供する。）</p>
+
+<ul>
+<li>配列は共変で、リストは不変。
+
+<ul>
+<li>共変：<code>Sub</code>が<code>Super</code>のサブタイプであれば、配列型<code>Sub[]</code>が<code>Super[]</code>のサブタイプということ。</li>
+<li>不変：2つの型<code>Type1</code>, <code>Type2</code>があったとき、<code>List&lt;Type1&gt;</code>と<code>List&lt;Type2&gt;</code>には互換性がない。</li>
+</ul></li>
+<li>配列は具象化されていて、リストはerasureで実装。
+
+<ul>
+<li>具象化：実行時に、その要素型を強制し、問題があれば<code>ArrayStoreException</code>が発生する。(コンパル時は確認しない。)</li>
+<li>erasure：コンパイル時に型制約を強制し、実行時には要素の型情報を廃棄する。</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p><a href="https://ejje.weblio.jp/content/erasure">erasure</a>の意味は「廃棄」</p>
+</blockquote>
+
+<h4 id="3-1-1-a-name-1-a-配列の場合">3.1.1. <a name='-1'></a>配列の場合</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="n">Super</span><span class="p">[]</span> <span class="nf">superArray</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sub</span><span class="p">[</span><span class="n">1</span><span class="p">];</span>
+  <span class="n">superArray</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Super</span><span class="p">();</span>
+  <span class="o">//</span> <span class="n">実行時にArrayStoreException</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="3-1-2-a-name-1-a-リストの場合">3.1.2. <a name='-1'></a>リストの場合</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="c1">// コンパイルエラー
+</span><span class="c1"></span>  <span class="n">List</span><span class="o">&lt;</span><span class="n">Type1</span><span class="o">&gt;</span> <span class="nf">type1List</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Type2</span><span class="o">&gt;</span><span class="p">();</span>  <span class="o">//</span> <span class="n">互換性のない型</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="3-2-a-name-1-a-リストと配列を混在させた場合">3.2. <a name='-1'></a>リストと配列を混在させた場合</h3>
+
+<p>リストと配列を混在させてしまった場合は、配列の代わりにリストを使うようにしましょう。
+* 混在させて、リストを配列にキャストする特殊なケースとして、次項「<a href="#29">項目29 ジェネリック型を使う</a>」があります。</p>
+
+<p>単純なジェネリックメソッドで確認する。</p>
+
+<h4 id="3-2-1-a-name-1-a-ステップ1-リスト-配列">3.2.1. <a name='1'></a>ステップ1(リスト→配列)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">E</span> <span class="n">reduce</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">list</span><span class="p">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">f</span><span class="p">,</span> <span class="n">E</span> <span class="nf">initVal</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">E</span><span class="p">[]</span> <span class="nf">snapshot</span> <span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">toArray</span><span class="p">();</span> <span class="c1">// リストを内部的にロック
+</span><span class="c1"></span>  <span class="n">E</span> <span class="nf">result</span> <span class="o">=</span> <span class="n">initVal</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">E</span> <span class="nf">e</span> <span class="o">:</span> <span class="n">snapshot</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/** コンパイルエラー
+</span><span class="cm">Reduction.java:12: 互換性のない型
+</span><span class="cm">検出値 : java.lang.Object[]
+</span><span class="cm">期待値 : E[]
+</span><span class="cm">      E[] snapshot = list.toArray(); // リストを内部的にロック
+</span><span class="cm">                                 ^
+</span><span class="cm">**/</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="3-2-2-a-name-2-a-ステップ2-リスト-キャスト-配列">3.2.2. <a name='2'></a>ステップ2(リスト[キャスト]→配列)</h4>
+
+<p>リストを配列<code>(E[])</code>にキャストした。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">E</span> <span class="n">reduce</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">list</span><span class="p">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">f</span><span class="p">,</span> <span class="n">E</span> <span class="nf">initVal</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">E</span><span class="p">[]</span> <span class="nf">snapshot</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span><span class="p">[])</span> <span class="n">list</span><span class="p">.</span><span class="na">toArray</span><span class="p">();</span> <span class="c1">// リストを内部的にロック
+</span><span class="c1"></span>  <span class="n">E</span> <span class="nf">result</span> <span class="o">=</span> <span class="n">initVal</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">E</span> <span class="nf">e</span> <span class="o">:</span> <span class="n">snapshot</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/** 警告
+</span><span class="cm">Reduction.java:12: 警告:[unchecked]無検査キャストです
+</span><span class="cm">検出値 : java.lang.Object[]
+</span><span class="cm">期待値 : E[]
+</span><span class="cm">      E[] snapshot = (E[])list.toArray(); // リストを内部的にロック
+</span><span class="cm">                                      ^
+</span><span class="cm">**/</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>実行時の<code>E</code>の型が不明で、実行時にリスト(ジェネリクス）の型情報はerasure(廃棄)されているから、キャストの安全性が検査できない。)</p>
+</blockquote>
+
+<h4 id="3-2-3-a-name-3-a-ステップ3-リスト-リスト">3.2.3. <a name='3'></a>ステップ3(リスト→リスト)</h4>
+
+<p>配列<code>(E[])</code>を使わず、リストにした。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">E</span> <span class="n">reduce</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">list</span><span class="p">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">f</span><span class="p">,</span> <span class="n">E</span> <span class="nf">initVal</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">snapshot</span><span class="p">;</span>
+  <span class="kd">synchronized</span><span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">snapshot</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">E</span> <span class="nf">result</span> <span class="o">=</span> <span class="n">initVal</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">E</span> <span class="nf">e</span> <span class="o">:</span> <span class="n">snapshot</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="4-a-name-29-a-項目29-ジェネリック型を使う">4. <a name='29'></a>項目29 ジェネリック型を使う</h2>
+
+<h3 id="4-1-a-name-1-a-結論">4.1. <a name='-1'></a>結論</h3>
+
+<p>以下の場合は、ジェネリクスを利用する良い機会なので使ってみましょう。</p>
+
+<ul>
+<li>利用者が、メソッドからの戻り値をキャストしないといけない</li>
+<li>利用者が、実行時にキャストが失敗する可能性がある</li>
+</ul>
+
+<p>スタックの実装をサンプルを作成します。
+作成時のポイントは2点です。</p>
+
+<ul>
+<li>無検査キャストが安全であると明確に示せる場合、警告を抑制しましょう。</li>
+<li>利用者はキャストしなくて済むので、楽になる。</li>
+</ul>
+
+<p><em><em>Stack.java</em></em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="p">{</span>
+　　<span class="kd">private</span> <span class="nf">E</span><span class="p">[]</span> <span class="n">elements</span><span class="p">;</span>
+　　<span class="kd">private</span> <span class="nf">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span>
+　　<span class="kd">private</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="n">16</span><span class="p">;</span>
+
+　　<span class="cm">/*
+</span><span class="cm">　　elements配列はpush(E)からのEインスタンスだけを含む。
+</span><span class="cm">　　そのことは、型安全性を保証するためには十分であるが、
+</span><span class="cm">　　配列の実行時の型はE[]ではない。常にObject[]である。
+</span><span class="cm">　　*/</span>
+　　<span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&#34;unchecked&#34;</span><span class="p">)</span>
+　　<span class="kd">public</span> <span class="nf">Stack</span><span class="p">()</span> <span class="p">{</span>
+　　　　<span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span><span class="p">[])</span> <span class="k">new</span> <span class="n">Object</span><span class="p">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="p">];</span>
+　　<span class="p">}</span>
+
+　　<span class="kd">public</span> <span class="nf">void</span> <span class="n">push</span><span class="p">(</span><span class="n">E</span> <span class="nf">e</span><span class="p">)</span> <span class="p">{</span>
+　　　　<span class="n">ensureCapacity</span><span class="p">();</span>
+　　　　<span class="n">elements</span><span class="p">[</span><span class="n">size</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">;</span>
+　　<span class="p">}</span>
+
+　　<span class="kd">public</span> <span class="nf">E</span> <span class="n">pop</span><span class="p">()</span> <span class="p">{</span>
+　　　　<span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">==</span> <span class="n">0</span><span class="p">)</span>
+　　　　　　<span class="k">throw</span> <span class="k">new</span> <span class="n">EmptyStackException</span><span class="p">();</span>
+　　　　<span class="n">E</span> <span class="nf">result</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="o">--</span><span class="n">size</span><span class="p">];</span>
+　　　　<span class="n">elements</span><span class="p">[</span><span class="n">size</span><span class="p">]</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// 廃れた参照を取り除く
+</span><span class="c1"></span>　　　　<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+　　<span class="p">}</span>
+
+　　<span class="kd">public</span> <span class="nf">boolean</span> <span class="n">isEmpty</span><span class="p">()</span> <span class="p">{</span>
+　　　　<span class="k">return</span> <span class="n">size</span> <span class="o">==</span> <span class="n">0</span><span class="p">;</span>
+　　<span class="p">}</span>
+
+　　<span class="kd">private</span> <span class="nf">void</span> <span class="n">ensureCapacity</span><span class="p">()</span> <span class="p">{</span>
+　　　　<span class="k">if</span> <span class="p">(</span><span class="n">elements</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">size</span><span class="p">)</span>
+　　　　　　<span class="n">elements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="n">1</span><span class="p">);</span>
+　　<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><em><em>Main.java</em></em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// ユーザ側のプログラム例
+</span><span class="c1"></span><span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">){</span>
+  <span class="n">var</span> <span class="nf">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="nf">arg</span> <span class="o">:</span> <span class="n">args</span><span class="p">){</span>
+    <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">()){</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">().</span><span class="na">toUpperCase</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="4-2-a-name-1-1-a-補足1-配列を使う理由">4.2. <a name='1-1'></a>補足1(配列を使う理由)</h3>
+
+<p>Javaはリストを直接はサポートしていない。</p>
+
+<ul>
+<li><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/ArrayList.java#L111">ArrayList</a>などのジェネリック型は配列を使用している。</li>
+</ul>
+
+<p>リストよりも配列の方が、パフォーマンスが良い。</p>
+
+<ul>
+<li><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/HashMap.java#L149">HashMap</a>などの他のジェネリック型は配列を使用している。</li>
+</ul>
+
+<h3 id="4-3-a-name-2-1-a-補足2-ジェネリクスの型の制限">4.3. <a name='2-1'></a>補足2(ジェネリクスの型の制限)</h3>
+
+<p>ジェネリクスの型が制限できる場合は、制限しましょう。</p>
+
+<p>例：<a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/concurrent/DelayQueue.java#L68">java.util.concurrent.DelayQueue</a>では、<code>DelayQueue&lt;E extends Delayed&gt;</code>としている。</p>
+
+<h2 id="5-a-name-30-a-項目30-ジェネリックメソッドを使う">5. <a name='30'></a>項目30 ジェネリックメソッドを使う</h2>
+
+<h2 id="6-a-name-31api-a-項目31-apiの柔軟性向上のために境界ワイルドカードを使う">6. <a name='31API'></a>項目31 APIの柔軟性向上のために境界ワイルドカードを使う</h2>
+
+<h2 id="7-a-name-32-a-項目32-ジェネリックと可変長引数を注意して組み合わせる">7. <a name='32'></a>項目32 ジェネリックと可変長引数を注意して組み合わせる</h2>
+
+<h2 id="8-a-name-33-a-項目33-型安全な異種コンテナを検討する">8. <a name='33'></a>項目33 型安全な異種コンテナを検討する</h2>
 
     </div>
 
