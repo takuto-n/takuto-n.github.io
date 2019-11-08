@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-11-03T00:07:19&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-03T00:07:19&#43;09:00" />
-<meta itemprop="wordCount" content="2552">
+<meta itemprop="wordCount" content="5147">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 2552 words </span>
-          <span class="more-meta"> 6 mins read </span>
+          <span class="more-meta"> 5147 words </span>
+          <span class="more-meta"> 11 mins read </span>
         
       </div>
     </header>
@@ -156,6 +156,7 @@
 <li><a href="#31API">項目31 APIの柔軟性向上のために境界ワイルドカードを使う</a></li>
 <li><a href="#32">項目32 ジェネリックと可変長引数を注意して組み合わせる</a></li>
 <li><a href="#33">項目33 型安全な異種コンテナを検討する</a></li>
+<li><a href="#URL">参考URL</a></li>
 </ol>
 
 <!-- vscode-markdown-toc-config
@@ -595,11 +596,479 @@
 
 <h2 id="5-a-name-30-a-項目30-ジェネリックメソッドを使う">5. <a name='30'></a>項目30 ジェネリックメソッドを使う</h2>
 
+<h3 id="5-1-a-name-1-a-結論">5.1. <a name='-1'></a>結論</h3>
+
+<ul>
+<li>ジェネリックメソッドの作り方、使い方を理解しましょう</li>
+<li>再帰型境界を使うことで、型パラメータの機能を制限できる</li>
+</ul>
+
+<h3 id="5-2-a-name-1-a-ジェネリックメソッド">5.2. <a name='-1'></a>ジェネリックメソッド</h3>
+
+<ul>
+<li>ジェネリッククラスと同じように、メソッド単位で型安全性を確保できる</li>
+
+<li><p>ジェネリッククラスとの文法上の違いは、メソッドの戻り値の型の手前にのように型パラメータを書くこと<br />
+<strong>ジェネリックメソッド</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">s1</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">s2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+    <span class="n">result</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>rawタイプのメソッド</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="n">Set</span> <span class="nf">union</span><span class="p">(</span><span class="n">Set</span> <span class="nf">s1</span><span class="p">,</span> <span class="n">Set</span> <span class="nf">s2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Set</span> <span class="nf">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+    <span class="n">result</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h3 id="5-3-a-name-1-a-再帰型境界">5.3. <a name='-1'></a>再帰型境界</h3>
+
+<ul>
+<li>再帰型境界は、<code>T extends HogeInterface</code>のように型パラメータを書くことで、TはHogeInterfaceが実装されている型であることを制限すること。</li>
+<li>よくある利用法はComparableインターフェース
+
+<ul>
+<li><p>下の最大値を返すmaxメソッドはTをComparableインターフェースが実装されている、つまり比較できること(compareToメソッドが使えること)を保証しているので、最大値を求めることができる</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="nf">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="nf">E</span> <span class="n">max</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">()){</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Empty collection&#34;</span><span class="p">);</span>
+        <span class="n">E</span> <span class="nf">result</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">E</span> <span class="nf">e</span> <span class="o">:</span> <span class="n">c</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">e</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">interface</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="nf">compareTo</span><span class="p">(</span><span class="n">T</span> <span class="nf">o</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+</ul>
+
+<h3 id="5-4-a-name-1-a-余談">5.4. <a name='-1'></a>余談</h3>
+
+<ul>
+<li>型パラメータの文字としてよく使われる<code>T</code>、<code>E</code>、<code>K</code>、<code>V</code>は何の略なのか</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="left">表記</th>
+<th align="left">意味</th>
+<th align="left">説明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">T</td>
+<td align="left">Type</td>
+<td align="left">汎用的</td>
+</tr>
+
+<tr>
+<td align="left">E</td>
+<td align="left">Element</td>
+<td align="left">配列の要素など</td>
+</tr>
+
+<tr>
+<td align="left">K</td>
+<td align="left">Key</td>
+<td align="left">連想配列やマップのキーなど</td>
+</tr>
+
+<tr>
+<td align="left">V</td>
+<td align="left">Value</td>
+<td align="left">配列の値や結果</td>
+</tr>
+
+<tr>
+<td align="left">N</td>
+<td align="left">Number</td>
+<td align="left">数値を表す</td>
+</tr>
+
+<tr>
+<td align="left">A</td>
+<td align="left">Array</td>
+<td align="left">A[]という形式で使われる</td>
+</tr>
+
+<tr>
+<td align="left">Args</td>
+<td align="left">Arguments</td>
+<td align="left">C++で使われることが多い</td>
+</tr>
+
+<tr>
+<td align="left">F, Fn, Func</td>
+<td align="left">Function</td>
+<td align="left">コールバック関数、クロージャー、ラムダ等</td>
+</tr>
+</tbody>
+</table>
+
 <h2 id="6-a-name-31api-a-項目31-apiの柔軟性向上のために境界ワイルドカードを使う">6. <a name='31API'></a>項目31 APIの柔軟性向上のために境界ワイルドカードを使う</h2>
 
+<h3 id="6-1-a-name-1-a-結論">6.1. <a name='-1'></a>結論</h3>
+
+<ul>
+<li>最大限の柔軟性のために、プロデューサーかコンシューマーを表す入力パラメータに対してワイルドカード型を使用するべき
+
+<ul>
+<li>PECS(producer extends, consumer super)と覚えよう！</li>
+</ul></li>
+</ul>
+
+<h3 id="6-2-a-name-1-a-境界ワイルドカードを使用しない場合の問題点">6.2. <a name='-1'></a>境界ワイルドカードを使用しない場合の問題点</h3>
+
+<ul>
+<li><p>下記のようなStackクラスがある。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="nf">Stack</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="kd">public</span> <span class="nf">void</span> <span class="n">push</span><span class="p">(</span><span class="n">E</span> <span class="nf">element</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="kd">public</span> <span class="nf">E</span> <span class="n">pop</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="kd">public</span> <span class="nf">boolean</span> <span class="n">isEmpty</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>一連の要素を受け取りそれら要素を全てスタックにプッシュするメソッド、pushAll()を下記のように追加したとする。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">void</span> <span class="n">pushAll</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">src</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">E</span> <span class="nf">e</span><span class="o">:</span> <span class="n">src</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>このとき、Number型のStackを定義して、一つのInterger変数をpushすることはできるが、List<Integer>をpushAllすることはできない。なぜなら、List<Integer>はList<Number>のサブクラスではないから。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="nf">numberStack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span> 
+
+<span class="n">numberStack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="k">new</span> <span class="n">Integer</span><span class="p">(</span><span class="n">1</span><span class="p">));</span><span class="c1">//これはOK
+</span><span class="c1"></span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">integers</span> <span class="o">=</span> <span class="p">...;</span>
+<span class="n">numbers</span><span class="p">.</span><span class="na">pushAll</span><span class="p">(</span><span class="n">integers</span><span class="p">);</span><span class="o">//</span><span class="n">これはコンパイルエラー</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>ひとつだと追加できるのに、複数だと追加できないのは非常に不便。</p></li>
+
+<li><p>次に、渡したリストにすべての要素を追加してくれるメソッド、popAll()を下記のように追加したとする。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">void</span> <span class="n">popAll</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">dst</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">dst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">pop</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>このとき、Number型のStackを定義して、popして１つのObject変数に代入することはできるが、popAllして List<Object>代入することできない。なぜなら、List<Object>はList<Number>のスーパークラスではないから。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="nf">numberStack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span> 
+
+<span class="n">numberStack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
+<span class="n">numberStack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">2</span><span class="p">);</span>
+<span class="n">numberStack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">3</span><span class="p">);</span>
+
+<span class="n">Object</span> <span class="nf">obj</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span><span class="c1">//これはOK
+</span><span class="c1"></span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">objects</span> <span class="o">=</span> <span class="p">...;</span>
+<span class="n">numbers</span><span class="p">.</span><span class="na">popAll</span><span class="p">(</span><span class="n">objects</span><span class="p">);</span><span class="o">//</span><span class="n">これはコンパイルエラー</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>これも不便。</p></li>
+</ul>
+
+<h3 id="6-3-a-name-1-a-境界ワイルドカードでの解決">6.3. <a name='-1'></a>境界ワイルドカードでの解決</h3>
+
+<ul>
+<li>前述の問題は境界ワイルドカードを使うことで解決できる</li>
+
+<li><p><code>pushAll()</code>や<code>popAll()</code>を下記のように境界ワイルドカードを使って定義することで、<code>List&lt;? extends E&gt;</code>は「Eのサブタイプをパラメータとするリスト」、<code>List&lt;? super E&gt;</code>「Eのスーパータイプをパラメータとするリスト」とすることができ、解決できる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">void</span> <span class="n">pushAll</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nf">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 同じ
+</span><span class="c1"></span>    <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="nf">void</span> <span class="n">popAll</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nf">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 同じ
+</span><span class="c1"></span>    <span class="p">...</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h3 id="6-4-a-name-getputpecs-a-get-put-原則-pecs">6.4. <a name='GETPUTPECS'></a>GET &amp; PUT 原則（PECS）</h3>
+
+<ul>
+<li><code>&lt;? extends E&gt;</code>と<code>&lt;? super E&gt;</code>のどちらを使うか決めるための原則
+
+<ul>
+<li>関数内において、ジェネリックス型の引数の役割が「プロデューサー（Producer）」であればextends</li>
+<li>「コンシューマー（Consumer）」であればsuper
+
+<ul>
+<li>プロデューサーは、関数内で何らかの値を生成（提供）する引数
+
+<ul>
+<li>pushAll()の引数srcは値を提供するのでプロデューサー</li>
+</ul></li>
+<li>コンシューマーは、関数内で何らかの値を消費（利用）する引数
+
+<ul>
+<li>popAll()の引数dstは値を消費するのでコンシューマー</li>
+</ul></li>
+</ul></li>
+<li>作用の方向で考えるとよい</li>
+</ul></li>
+</ul>
+
+<h3 id="6-5-a-name-getput-a-get-put-原則の例-問題">6.5. <a name='GETPUT'></a>GET &amp; PUT 原則の例(問題)</h3>
+
+<ul>
+<li><p>問1. 前項目で登場した下記のunionメソッドはどのように境界ワイルドカードを付けるべきか？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">s1</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">s2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+  <span class="n">result</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>問1の解答
+s1、s2は値を提供しているから。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nf">E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nf">E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+  <span class="n">result</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>問2. 前項目で登場した下記のmaxメソッドはどのように境界ワイルドカードを付けるべきか？(ヒント：2つ付ける。)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="nf">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="nf">E</span> <span class="n">max</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">()){</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Empty collection&#34;</span><span class="p">);</span>
+        <span class="n">E</span> <span class="nf">result</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">E</span> <span class="nf">e</span> <span class="o">:</span> <span class="n">c</span><span class="p">){}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">e</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>問2の解答</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="nf">extends</span> <span class="n">Comparable</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nf">E</span><span class="o">&gt;&gt;</span> <span class="n">E</span> <span class="nf">max</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nf">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Empty collection&#34;</span><span class="p">);</span>
+  <span class="n">E</span> <span class="nf">result</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">E</span> <span class="nf">e</span> <span class="o">:</span> <span class="n">c</span><span class="p">)</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">e</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span>
+          <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p><code>E extends Comparable&lt;? super E&gt;</code>の理由は以下。<br />
+    <code>
+    [PECSの原則に従うと]
+    Comparableは常に消費者(consumer)なので、Comparable&lt;T&gt;ではなくComparable&lt;? super T&gt;を常に使用するべき。
+</code></p>
+</blockquote></li>
+
+<li><p>上記の実際の例としては、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ScheduledFuture.html">ScheduledFutureインターフェース</a>がある。</p></li>
+</ul>
+
+<p>下記のリストを<code>Comparable&lt;E&gt;</code>のままのmaxメソッドで使おうとすると、コンパイルエラーになる。<br />
+なぜなら、<code>ScheduledFuture</code>は<code>Comparable&lt;ScheduledFuture&gt;</code>で拡張されていないからである。<br />
+しかし、<code>ScheduledFuture</code>は<code>Delayed</code>のサブインターフェースであり、<code>Delayed</code>は<code>Comparable&lt;Delayed&gt;</code>を拡張しているので、<code>ScheduledFuture</code>は<code>Comparable&lt;Delayed&gt;</code>で比較可能である。<br />
+したがって、<code>Comparable&lt;? super E&gt;</code>とすれば、下記のリストにmaxメソッドを使えるようになる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">ScheduledFuture</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">scheduledFutures</span><span class="o">=</span><span class="p">...;</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="7-a-name-32-a-項目32-ジェネリックと可変長引数を注意して組み合わせる">7. <a name='32'></a>項目32 ジェネリックと可変長引数を注意して組み合わせる</h2>
 
 <h2 id="8-a-name-33-a-項目33-型安全な異種コンテナを検討する">8. <a name='33'></a>項目33 型安全な異種コンテナを検討する</h2>
+
+<h2 id="9-a-name-url-a-参考url">9. <a name='URL'></a>参考URL</h2>
+
+<ul>
+<li><a href="https://marycore.jp/coding/generics-types/">ジェネリクスでよく使われているTやE, A、その他型パラメータの意味 | MaryCore</a></li>
+</ul>
 
     </div>
 
