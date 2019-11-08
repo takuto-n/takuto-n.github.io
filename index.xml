@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://github.com/takuto-n/ctrl-key-6bit-mask&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 03 Nov 2019 00:07:19 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 09 Nov 2019 00:36:53 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -22,21 +22,21 @@
     </item>
     
     <item>
+      <title>Effective Java 3rd [Chapter 6]</title>
+      <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-6/</link>
+      <pubDate>Sat, 09 Nov 2019 00:36:53 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-6/</guid>
+      <description>enumとアノテーション Effective Java 第3版の個人的メモ 項目34 int定数の代わりにenumを使う 項目35 序数の代わりにインスタンスフィールドを使う 項</description>
+    </item>
+    
+    <item>
       <title>Effective Java 3rd [Chapter 5]</title>
       <link>https://takuto-n.github.io/post/20191103-effective-java-3rd-5/</link>
       <pubDate>Sun, 03 Nov 2019 00:07:19 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191103-effective-java-3rd-5/</guid>
       <description>ジェネリクス Effective Java 第3版の個人的メモ 項目26 原型を使わない 項目27 無検査警告を取り除く 項目28 配列よりリストを選ぶ 項目29 ジェネリック型を使う</description>
-    </item>
-    
-    <item>
-      <title>Effective Java 3rd [Chapter 7]</title>
-      <link>https://takuto-n.github.io/post/20191006-effective-java-3rd-7/</link>
-      <pubDate>Sun, 06 Oct 2019 16:59:30 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/post/20191006-effective-java-3rd-7/</guid>
-      <description>ラムダ式とストリーム Effective Java 第3版の個人的メモ 項目42 匿名クラスよりもラムダ式を選ぶ 項目43 ラムダよりもメソッド参照を選ぶ 項目44 標準の関数型イ</description>
     </item>
     
     <item>
