@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-11-09T00:36:53&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:36:53&#43;09:00" />
-<meta itemprop="wordCount" content="2052">
+<meta itemprop="wordCount" content="2009">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 2052 words </span>
+          <span class="more-meta"> 2009 words </span>
           <span class="more-meta"> 5 mins read </span>
         
       </div>
@@ -233,7 +233,11 @@
 <li>コンパイル時の型安全性が提供される</li>
 <li>名前空間を提供する</li>
 <li>表示可能な文字列に変換できる</li>
-<li>シングルトンである。参考：<a href="https://takuto-n.github.io/post/20190921-effective-java-3rd-2/#3privateenum">項目3 privateのコンストラクタかenum型でシングルトン特性を強制する</a></li>
+<li>シングルトンである。
+
+<ul>
+<li>参考：<a href="https://takuto-n.github.io/post/20190921-effective-java-3rd-2/#3privateenum">項目3 privateのコンストラクタかenum型でシングルトン特性を強制する</a></li>
+</ul></li>
 <li>Objectの全てのメソッド(<a href="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/">第３章</a>)を提供する。</li>
 
 <li><p>Comparable(<a href="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/#12toString">項目12</a>)とSerializable(第11章)を実装している。</p>
@@ -594,15 +598,9 @@
 </div>
 <blockquote>
 <p>余談：<br />
-<a href="https://docs.oracle.com/javase/jp/7/api/java/lang/Enum.html#ordinal()">Enum#ordinal()のJavaDoc</a>に以下のように記載されています。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">列挙定数の序数 (列挙宣言での位置。初期定数はゼロの序数に割り当てられる) を返します。 このメソッドは、ほとんどのプログラマにとって役に立ちません。それは、EnumSet や EnumMap などの洗練された enum ベースのデータ構造で使用するために設計されています。</pre></td></tr></table>
-</div>
-</div></blockquote>
+<a href="https://docs.oracle.com/javase/jp/7/api/java/lang/Enum.html#ordinal()">Enum#ordinal()のJavaDoc</a>に以下のように記載されています。<br />
+このメソッドは、ほとんどのプログラマにとって役に立ちません。それは、EnumSet や EnumMap などの洗練された enum ベースのデータ構造で使用するために設計されています。</p>
+</blockquote>
 
 <h2 id="3-a-name-36enumset-a-項目36-ビットフィールドの代わりにenumsetを使う">3. <a name='36EnumSet'></a>項目36 ビットフィールドの代わりにEnumSetを使う</h2>
 
