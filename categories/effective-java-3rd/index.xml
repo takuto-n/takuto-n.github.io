@@ -7,55 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://github.com/takuto-n/ctrl-key-6bit-mask&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 09 Nov 2019 00:49:15 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 09 Nov 2019 00:37:53 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/categories/effective-java-3rd/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Effective Java 3rd [Chapter 12]</title>
-      <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-12/</link>
-      <pubDate>Sat, 09 Nov 2019 00:49:15 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-12/</guid>
-      <description>シリアライズ Effective Java 第3版の個人的メモ 項目85 Javaのシリアライズよりも代替手段を選ぶ 項目86 Serializableを細心の注意を払って実装</description>
-    </item>
-    
-    <item>
-      <title>Effective Java 3rd [Chapter 11]</title>
-      <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-11/</link>
-      <pubDate>Sat, 09 Nov 2019 00:49:04 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-11/</guid>
-      <description>並行性 Effective Java 第3版の個人的メモ 項目78 共有された可変データへのアクセスを同期する 項目79 過剰な同期は避ける 項目80 スレッドよりもエグゼキュータ</description>
-    </item>
-    
-    <item>
-      <title>Effective Java 3rd [Chapter 10]</title>
-      <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-10/</link>
-      <pubDate>Sat, 09 Nov 2019 00:49:01 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-10/</guid>
-      <description>例外 Effective Java 第3版の個人的メモ 項目69 例外的状態にだけ例外を使う 項目70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例</description>
-    </item>
-    
-    <item>
-      <title>Effective Java 3rd [Chapter 9]</title>
-      <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</link>
-      <pubDate>Sat, 09 Nov 2019 00:48:59 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</guid>
-      <description>プログラミング一般 Effective Java 第3版の個人的メモ 項目57 ローカル変数のスコープを最小限にする 項目58 従来のforループよりfor-eachループを選</description>
-    </item>
-    
-    <item>
-      <title>Effective Java 3rd [Chapter 8]</title>
-      <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-8/</link>
-      <pubDate>Sat, 09 Nov 2019 00:48:57 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-8/</guid>
-      <description>メソッド Effective Java 第3版の個人的メモ 項目49 パラメータの正当性を検査する 項目50 必要な場合、防御的にコピーする 項目51 メソッドのシグネチャを注意深</description>
-    </item>
     
     <item>
       <title>Effective Java 3rd [Chapter 7]</title>
