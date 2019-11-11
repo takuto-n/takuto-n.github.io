@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="enumとアノテーション Effective Java 第3版の個人的メモ 1. 項目34 int定数の代わりにenumを使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数として" /><meta name="keywords" content="java, enumとアノテーション, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="enumとアノテーション Effective Java 第3版の個人的メモ 項目34 int定数の代わりにenumを使う 項目35 序数の代わりにインスタンスフィールドを使う 項" /><meta name="keywords" content="java, enumとアノテーション, 個人的メモ" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Effective Java 3rd [Chapter 6]" />
-<meta property="og:description" content="enumとアノテーション Effective Java 第3版の個人的メモ 1. 項目34 int定数の代わりにenumを使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数として" />
+<meta property="og:description" content="enumとアノテーション Effective Java 第3版の個人的メモ 項目34 int定数の代わりにenumを使う 項目35 序数の代わりにインスタンスフィールドを使う 項" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-6/" />
 <meta property="article:published_time" content="2019-11-09T00:36:53+09:00" />
 <meta property="article:modified_time" content="2019-11-09T00:36:53+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 6]">
-<meta itemprop="description" content="enumとアノテーション Effective Java 第3版の個人的メモ 1. 項目34 int定数の代わりにenumを使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数として">
+<meta itemprop="description" content="enumとアノテーション Effective Java 第3版の個人的メモ 項目34 int定数の代わりにenumを使う 項目35 序数の代わりにインスタンスフィールドを使う 項">
 
 
 <meta itemprop="datePublished" content="2019-11-09T00:36:53&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:36:53&#43;09:00" />
-<meta itemprop="wordCount" content="2200">
+<meta itemprop="wordCount" content="2052">
 
 
 
 <meta itemprop="keywords" content="java,enumとアノテーション,個人的メモ," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 6]"/>
-<meta name="twitter:description" content="enumとアノテーション Effective Java 第3版の個人的メモ 1. 項目34 int定数の代わりにenumを使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数として"/>
+<meta name="twitter:description" content="enumとアノテーション Effective Java 第3版の個人的メモ 項目34 int定数の代わりにenumを使う 項目35 序数の代わりにインスタンスフィールドを使う 項"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 2200 words </span>
+          <span class="more-meta"> 2052 words </span>
           <span class="more-meta"> 5 mins read </span>
         
       </div>
@@ -147,43 +147,16 @@
 
 <!-- vscode-markdown-toc -->
 
-<ul>
-<li>1. <a href="#34intenum">項目34 int定数の代わりにenumを使う</a>
-
-<ul>
-<li>1.1. <a href="#">結論</a></li>
-<li>1.2. <a href="#intenum"><code>int enum</code>パターンの欠点</a></li>
-<li>1.3. <a href="#enum">単なる定数としての<code>enum</code></a></li>
-<li>1.4. <a href="#enum-1">定数固有メソッド実装を持つ<code>enum</code></a>
-
-<ul>
-<li>1.4.1. <a href="#-1">問題が多い例</a></li>
-<li>1.4.2. <a href="#enum-1">改善例(定数固有メソッド実装を持つ<code>enum</code>)</a></li>
-</ul></li>
-<li>1.5. <a href="#enum-1">戦略<code>enum</code>パターン</a>
-
-<ul>
-<li>1.5.1. <a href="#-1">問題が多い例</a></li>
-<li>1.5.2. <a href="#enum-1">改善例(戦略<code>enum</code>パターン)</a></li>
-</ul></li>
-</ul></li>
-<li>2. <a href="#35">項目35 序数の代わりにインスタンスフィールドを使う</a>
-
-<ul>
-<li>2.1. <a href="#-1">結論</a>
-
-<ul>
-<li>2.1.1. <a href="#-1">序数を使った例</a></li>
-<li>2.1.2. <a href="#-1">インスタンスフィールドを使った例</a></li>
-</ul></li>
-</ul></li>
-<li>3. <a href="#36EnumSet">項目36 ビットフィールドの代わりにEnumSetを使う</a></li>
-<li>4. <a href="#37EnumMap">項目37 序数インデックスの代わりにEnumMapを使う</a></li>
-<li>5. <a href="#38enum">項目38 拡張可能なenumをインタフェースで模倣する</a></li>
-<li>6. <a href="#39">項目39 命名パターンよりアノテーションを選ぶ</a></li>
-<li>7. <a href="#40Override">項目40 常にOverrideアノテーションを使う</a></li>
-<li>8. <a href="#41">項目41 型を定義するためにマーカーインタフェースを使う</a></li>
-</ul>
+<ol>
+<li><a href="#34intenum">項目34 int定数の代わりにenumを使う</a></li>
+<li><a href="#35">項目35 序数の代わりにインスタンスフィールドを使う</a></li>
+<li><a href="#36EnumSet">項目36 ビットフィールドの代わりにEnumSetを使う</a></li>
+<li><a href="#37EnumMap">項目37 序数インデックスの代わりにEnumMapを使う</a></li>
+<li><a href="#38enum">項目38 拡張可能なenumをインタフェースで模倣する</a></li>
+<li><a href="#39">項目39 命名パターンよりアノテーションを選ぶ</a></li>
+<li><a href="#40Override">項目40 常にOverrideアノテーションを使う</a></li>
+<li><a href="#41">項目41 型を定義するためにマーカーインタフェースを使う</a></li>
+</ol>
 
 <!-- vscode-markdown-toc-config
     numbering=true
