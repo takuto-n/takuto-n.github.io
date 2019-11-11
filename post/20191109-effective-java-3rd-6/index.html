@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="enumとアノテーション Effective Java 第3版の個人的メモ 項目34 int定数の代わりにenumを使う 項目35 序数の代わりにインスタンスフィールドを使う 項" /><meta name="keywords" content="java, enumとアノテーション, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="enumとアノテーション Effective Java 第3版の個人的メモ 1. 項目34 int定数の代わりにenumを使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数として" /><meta name="keywords" content="java, enumとアノテーション, 個人的メモ" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Effective Java 3rd [Chapter 6]" />
-<meta property="og:description" content="enumとアノテーション Effective Java 第3版の個人的メモ 項目34 int定数の代わりにenumを使う 項目35 序数の代わりにインスタンスフィールドを使う 項" />
+<meta property="og:description" content="enumとアノテーション Effective Java 第3版の個人的メモ 1. 項目34 int定数の代わりにenumを使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数として" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-6/" />
 <meta property="article:published_time" content="2019-11-09T00:36:53+09:00" />
 <meta property="article:modified_time" content="2019-11-09T00:36:53+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 6]">
-<meta itemprop="description" content="enumとアノテーション Effective Java 第3版の個人的メモ 項目34 int定数の代わりにenumを使う 項目35 序数の代わりにインスタンスフィールドを使う 項">
+<meta itemprop="description" content="enumとアノテーション Effective Java 第3版の個人的メモ 1. 項目34 int定数の代わりにenumを使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数として">
 
 
 <meta itemprop="datePublished" content="2019-11-09T00:36:53&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:36:53&#43;09:00" />
-<meta itemprop="wordCount" content="429">
+<meta itemprop="wordCount" content="2200">
 
 
 
 <meta itemprop="keywords" content="java,enumとアノテーション,個人的メモ," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 6]"/>
-<meta name="twitter:description" content="enumとアノテーション Effective Java 第3版の個人的メモ 項目34 int定数の代わりにenumを使う 項目35 序数の代わりにインスタンスフィールドを使う 項"/>
+<meta name="twitter:description" content="enumとアノテーション Effective Java 第3版の個人的メモ 1. 項目34 int定数の代わりにenumを使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数として"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 429 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 2200 words </span>
+          <span class="more-meta"> 5 mins read </span>
         
       </div>
     </header>
@@ -147,16 +147,43 @@
 
 <!-- vscode-markdown-toc -->
 
-<ol>
-<li><a href="#34intenum">項目34 int定数の代わりにenumを使う</a></li>
-<li><a href="#35">項目35 序数の代わりにインスタンスフィールドを使う</a></li>
-<li><a href="#36EnumSet">項目36 ビットフィールドの代わりにEnumSetを使う</a></li>
-<li><a href="#37EnumMap">項目37 序数インデックスの代わりにEnumMapを使う</a></li>
-<li><a href="#38enum">項目38 拡張可能なenumをインタフェースで模倣する</a></li>
-<li><a href="#39">項目39 命名パターンよりアノテーションを選ぶ</a></li>
-<li><a href="#40Override">項目40 常にOverrideアノテーションを使う</a></li>
-<li><a href="#41">項目41 型を定義するためにマーカーインタフェースを使う</a></li>
-</ol>
+<ul>
+<li>1. <a href="#34intenum">項目34 int定数の代わりにenumを使う</a>
+
+<ul>
+<li>1.1. <a href="#">結論</a></li>
+<li>1.2. <a href="#intenum"><code>int enum</code>パターンの欠点</a></li>
+<li>1.3. <a href="#enum">単なる定数としての<code>enum</code></a></li>
+<li>1.4. <a href="#enum-1">定数固有メソッド実装を持つ<code>enum</code></a>
+
+<ul>
+<li>1.4.1. <a href="#-1">問題が多い例</a></li>
+<li>1.4.2. <a href="#enum-1">改善例(定数固有メソッド実装を持つ<code>enum</code>)</a></li>
+</ul></li>
+<li>1.5. <a href="#enum-1">戦略<code>enum</code>パターン</a>
+
+<ul>
+<li>1.5.1. <a href="#-1">問題が多い例</a></li>
+<li>1.5.2. <a href="#enum-1">改善例(戦略<code>enum</code>パターン)</a></li>
+</ul></li>
+</ul></li>
+<li>2. <a href="#35">項目35 序数の代わりにインスタンスフィールドを使う</a>
+
+<ul>
+<li>2.1. <a href="#-1">結論</a>
+
+<ul>
+<li>2.1.1. <a href="#-1">序数を使った例</a></li>
+<li>2.1.2. <a href="#-1">インスタンスフィールドを使った例</a></li>
+</ul></li>
+</ul></li>
+<li>3. <a href="#36EnumSet">項目36 ビットフィールドの代わりにEnumSetを使う</a></li>
+<li>4. <a href="#37EnumMap">項目37 序数インデックスの代わりにEnumMapを使う</a></li>
+<li>5. <a href="#38enum">項目38 拡張可能なenumをインタフェースで模倣する</a></li>
+<li>6. <a href="#39">項目39 命名パターンよりアノテーションを選ぶ</a></li>
+<li>7. <a href="#40Override">項目40 常にOverrideアノテーションを使う</a></li>
+<li>8. <a href="#41">項目41 型を定義するためにマーカーインタフェースを使う</a></li>
+</ul>
 
 <!-- vscode-markdown-toc-config
     numbering=true
@@ -167,7 +194,442 @@
 
 <h2 id="1-a-name-34intenum-a-項目34-int定数の代わりにenumを使う">1. <a name='34intenum'></a>項目34 int定数の代わりにenumを使う</h2>
 
+<h3 id="1-1-a-name-a-結論">1.1. <a name=''></a>結論</h3>
+
+<ul>
+<li><code>int enum</code>パターン(<code>int</code>定数)は使わないでおきましょう。</li>
+<li><code>enum</code>を使いましょう。
+
+<ul>
+<li>単に定数として使う。</li>
+<li>定数に対するメソッドが必要であれば、定数固有メソッド</li>
+<li>複数の定数に対して共通のメソッドが必要であれば、戦略<code>enum</code>パターン</li>
+</ul></li>
+</ul>
+
+<h3 id="1-2-a-name-intenum-a-int-enum-パターンの欠点">1.2. <a name='intenum'></a><code>int enum</code>パターンの欠点</h3>
+
+<p>以下の欠点がある。</p>
+
+<ul>
+<li>型安全性が提供されない
+
+<ul>
+<li>例：<code>APPLE</code>と間違えて<code>ORANGE</code>を渡してもエラーにならない。</li>
+</ul></li>
+<li>名前空間が提供されない
+
+<ul>
+<li>例では接頭辞で分けている。</li>
+</ul></li>
+
+<li><p>表示可能な文字列に変換できない(変数名を出力できない)</p>
+
+<ul>
+<li><p><code>String enum</code>パターンも考えられるが文字列比較になりパフォーマンスが良くない。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// int enumパターン - かなり不完全
+</span><span class="c1"></span><span class="kd">public</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">int</span> <span class="n">APPLE_FUJI</span> <span class="o">=</span> <span class="n">0</span>
+<span class="nf">public</span> <span class="kd">static</span> <span class="nf">final</span> <span class="kt">int</span> <span class="nf">APPLE_PIPPIN</span> <span class="o">=</span> <span class="n">1</span>
+<span class="nf">public</span> <span class="kd">static</span> <span class="nf">final</span> <span class="kt">int</span> <span class="nf">APPLE_GRANNY_SMITH</span> <span class="o">=</span> <span class="n">2</span>
+
+<span class="nf">public</span> <span class="kd">static</span> <span class="nf">final</span> <span class="kt">int</span> <span class="nf">ORANGE_NAVEL</span> <span class="o">=</span> <span class="n">0</span>
+<span class="nf">public</span> <span class="kd">static</span> <span class="nf">final</span> <span class="kt">int</span> <span class="nf">ORANGE_TEMPLE</span> <span class="o">=</span> <span class="n">1</span>
+<span class="nf">public</span> <span class="kd">static</span> <span class="nf">final</span> <span class="kt">int</span> <span class="nf">ORANGE_BLOOD</span> <span class="o">=</span> <span class="n">2</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+</ul>
+
+<h3 id="1-3-a-name-enum-a-単なる定数としての-enum">1.3. <a name='enum'></a>単なる定数としての<code>enum</code></h3>
+
+<p>以下の利点がある。</p>
+
+<ul>
+<li>コンパイル時の型安全性が提供される</li>
+<li>名前空間を提供する</li>
+<li>表示可能な文字列に変換できる</li>
+<li>シングルトンである。参考：<a href="https://takuto-n.github.io/post/20190921-effective-java-3rd-2/#3privateenum">項目3 privateのコンストラクタかenum型でシングルトン特性を強制する</a></li>
+<li>Objectの全てのメソッド(<a href="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/">第３章</a>)を提供する。</li>
+
+<li><p>Comparable(<a href="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/#12toString">項目12</a>)とSerializable(第11章)を実装している。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">enum</span> <span class="n">Apple</span> <span class="p">{</span> <span class="n">FUJI</span><span class="p">,</span> <span class="n">PIPPIN</span><span class="p">,</span> <span class="n">GRANNY_SMITH</span> <span class="p">}</span>
+<span class="kd">public</span> <span class="nf">enum</span> <span class="n">ORANGE</span> <span class="p">{</span> <span class="n">NAVEL</span><span class="p">,</span> <span class="n">TEMPLE</span><span class="p">,</span> <span class="n">BLOOD</span> <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h3 id="1-4-a-name-enum-1-a-定数固有メソッド実装を持つ-enum">1.4. <a name='enum-1'></a>定数固有メソッド実装を持つ<code>enum</code></h3>
+
+<h4 id="1-4-1-a-name-1-a-問題が多い例">1.4.1. <a name='-1'></a>問題が多い例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 値によって切り替えるenum型
+</span><span class="c1"></span><span class="kd">public</span> <span class="nf">enum</span> <span class="n">Operation</span> <span class="p">{</span>
+  <span class="n">PLUS</span><span class="p">,</span> <span class="n">MINUS</span><span class="p">,</span> <span class="n">TIMES</span><span class="p">,</span> <span class="n">DIVIDE</span><span class="p">;</span>
+
+  <span class="c1">// 定数で表される算術操作を行う
+</span><span class="c1"></span>  <span class="kt">double</span> <span class="nf">apply</span><span class="p">(</span><span class="kt">double</span> <span class="nf">x</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="n">PLUS</span><span class="o">:</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">MINUS</span><span class="o">:</span> <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">TIMES</span><span class="o">:</span> <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">DIVIDE</span><span class="o">:</span> <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="p">(</span><span class="s">&#34;Unknown op: &#34;</span> <span class="o">+</span> <span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="1-4-2-a-name-enum-1-a-改善例-定数固有メソッド実装を持つ-enum">1.4.2. <a name='enum-1'></a>改善例(定数固有メソッド実装を持つ<code>enum</code>)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 定数固有メソッド実装を持つenum型
+</span><span class="c1"></span><span class="kd">public</span> <span class="nf">enum</span> <span class="n">Operation</span> <span class="p">{</span>
+  <span class="n">PLUS</span> <span class="p">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="p">(</span><span class="kt">double</span> <span class="nf">x</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">y</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;}</span> <span class="p">},</span>
+  <span class="n">MINUS</span> <span class="p">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="p">(</span><span class="kt">double</span> <span class="nf">x</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">y</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;}</span> <span class="p">},</span>
+  <span class="n">TIMES</span> <span class="p">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="p">(</span><span class="kt">double</span> <span class="nf">x</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">y</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">;}</span> <span class="p">},</span>
+  <span class="n">DIVIDE</span> <span class="p">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="p">(</span><span class="kt">double</span> <span class="nf">x</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">y</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">;}</span> <span class="p">};</span>
+
+  <span class="kd">abstract</span> <span class="nf">double</span> <span class="n">apply</span><span class="p">(</span><span class="kt">double</span> <span class="nf">x</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">y</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>抽象メソッドを具象メソッドでオーバーライドし忘れることがない。</p>
+</blockquote>
+
+<h3 id="1-5-a-name-enum-1-a-戦略-enum-パターン">1.5. <a name='enum-1'></a>戦略<code>enum</code>パターン</h3>
+
+<h4 id="1-5-1-a-name-1-a-問題が多い例">1.5.1. <a name='-1'></a>問題が多い例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// コードを共有するために値でswitchするenum
+</span><span class="c1"></span><span class="kd">enum</span> <span class="nf">PayrollDay</span> <span class="p">{</span>
+  <span class="n">MONDAY</span><span class="p">,</span>
+  <span class="n">TUESDAY</span><span class="p">,</span>
+  <span class="n">WEDNESDAY</span><span class="p">,</span>
+  <span class="n">THURSDAY</span><span class="p">,</span>
+  <span class="n">FRIDAY</span><span class="p">,</span>
+  <span class="n">SATURDAY</span><span class="p">,</span>
+  <span class="n">SUNDAY</span><span class="p">;</span>
+
+  <span class="kd">private</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">int</span> <span class="n">HOURS_PER_SHIFT</span> <span class="o">=</span> <span class="n">8</span><span class="p">;</span>
+
+  <span class="kt">double</span> <span class="nf">pay</span><span class="p">(</span><span class="kt">double</span> <span class="nf">hoursWorked</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">payRate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">double</span> <span class="nf">basePay</span> <span class="o">=</span> <span class="n">hoursWorked</span> <span class="o">*</span> <span class="n">payRate</span><span class="p">;</span>
+
+    <span class="kt">double</span> <span class="nf">overtimePay</span><span class="p">;</span> <span class="c1">// 残業手当
+</span><span class="c1"></span>    <span class="k">switch</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 働いた分だけ残業代
+</span><span class="c1"></span>      <span class="k">case</span> <span class="n">SATURDAY</span><span class="o">:</span> <span class="k">case</span> <span class="n">SUNDAY</span><span class="o">:</span>
+        <span class="n">overtimePay</span> <span class="o">=</span> <span class="n">hoursWorked</span> <span class="o">*</span> <span class="n">payRate</span> <span class="o">/</span> <span class="n">2</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="c1">// 定時以降分だけ残業代
+</span><span class="c1"></span>      <span class="k">default</span><span class="o">:</span>
+        <span class="n">overtimePay</span> <span class="o">=</span> <span class="n">hoursWorked</span> <span class="o">&lt;=</span> <span class="n">HOURS_PER_SHIFT</span> <span class="o">?</span>
+        <span class="n">0</span> <span class="o">:</span> <span class="p">(</span><span class="n">hoursWorked</span> <span class="o">-</span> <span class="n">HOURS_PER_SHIFT</span> <span class="p">)</span> <span class="o">*</span> <span class="n">payRate</span> <span class="o">/</span> <span class="n">2</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">basePay</span> <span class="o">+</span> <span class="n">overtimePay</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="1-5-2-a-name-enum-1-a-改善例-戦略-enum-パターン">1.5.2. <a name='enum-1'></a>改善例(戦略<code>enum</code>パターン)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 戦略enumパターン
+</span><span class="c1"></span><span class="kd">enum</span> <span class="nf">PayrollDay</span> <span class="p">{</span>
+  <span class="c1">// 平日
+</span><span class="c1"></span>  <span class="n">MONDAY</span><span class="p">(</span><span class="n">PayType</span><span class="p">.</span><span class="na">WEEKDAY</span><span class="p">),</span> 
+  <span class="n">TUESDAY</span><span class="p">(</span><span class="n">PayType</span><span class="p">.</span><span class="na">WEEKDAY</span><span class="p">),</span> 
+  <span class="n">WEDNESDAY</span><span class="p">(</span><span class="n">PayType</span><span class="p">.</span><span class="na">WEEKDAY</span><span class="p">),</span>
+  <span class="n">THURSDAY</span><span class="p">(</span><span class="n">PayType</span><span class="p">.</span><span class="na">WEEKDAY</span><span class="p">),</span>
+  <span class="n">FRIDAY</span><span class="p">(</span><span class="n">PayType</span><span class="p">.</span><span class="na">WEEKDAY</span><span class="p">),</span>
+  <span class="c1">// 土日
+</span><span class="c1"></span>  <span class="n">SATURDAY</span><span class="p">(</span><span class="n">PayType</span><span class="p">.</span><span class="na">WEEKEND</span><span class="p">),</span>
+  <span class="n">SUNDAY</span><span class="p">(</span><span class="n">PayType</span><span class="p">.</span><span class="na">WEEKEND</span><span class="p">);</span>
+
+  <span class="kd">private</span> <span class="nf">final</span> <span class="n">PayType</span> <span class="nf">payType</span><span class="p">;</span>
+
+  <span class="n">PayrollDay</span><span class="p">(</span><span class="n">PayType</span> <span class="nf">payType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">payType</span> <span class="o">=</span> <span class="n">payType</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">double</span> <span class="nf">pay</span><span class="p">(</span><span class="kt">double</span> <span class="nf">hoursWorked</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">payRate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">payType</span><span class="p">.</span><span class="na">pay</span><span class="p">(</span><span class="n">hoursWorked</span><span class="p">,</span> <span class="n">payRate</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 戦略enum型
+</span><span class="c1"></span>  <span class="kd">private</span> <span class="nf">enum</span> <span class="n">PayType</span> <span class="p">{</span>
+    <span class="c1">// 定時以降分だけ残業代
+</span><span class="c1"></span>    <span class="n">WEEKDAY</span> <span class="p">{</span>
+      <span class="kt">double</span> <span class="nf">overtimePay</span><span class="p">(</span><span class="kt">double</span> <span class="nf">hours</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">payRate</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">hours</span> <span class="o">&lt;=</span> <span class="n">HOURS_PER_SHIFT</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="p">(</span><span class="n">hours</span> <span class="o">-</span> <span class="n">HOURS_PER_SHIFT</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">payRate</span> <span class="o">/</span> <span class="n">2</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="c1">// 働いた分だけ残業代
+</span><span class="c1"></span>    <span class="n">WEEKEND</span> <span class="p">{</span>
+      <span class="kt">double</span> <span class="nf">overtimePay</span><span class="p">(</span><span class="kt">double</span> <span class="nf">hours</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">payRate</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">hours</span> <span class="o">*</span> <span class="n">payRate</span> <span class="o">/</span> <span class="n">2</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="kd">private</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">int</span> <span class="n">HOURS_PER_SHIFT</span> <span class="o">=</span> <span class="n">8</span><span class="p">;</span>
+
+    <span class="kd">abstract</span> <span class="nf">double</span> <span class="n">overtimePay</span><span class="p">(</span><span class="kt">double</span> <span class="nf">hrs</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">payRate</span><span class="p">);</span>
+
+    <span class="kt">double</span> <span class="nf">pay</span><span class="p">(</span><span class="kt">double</span> <span class="nf">hoursWorked</span><span class="p">,</span> <span class="kt">double</span> <span class="nf">payRate</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">double</span> <span class="nf">basePay</span> <span class="o">=</span> <span class="n">hoursWorked</span> <span class="o">*</span> <span class="n">payRate</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">basePay</span> <span class="o">+</span> <span class="n">overtimePay</span><span class="p">(</span><span class="n">hoursWorked</span><span class="p">,</span> <span class="n">payRate</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>enum定数を追加するたびに、指定することになるため、指定し忘れることがない。</p>
+</blockquote>
+
 <h2 id="2-a-name-35-a-項目35-序数の代わりにインスタンスフィールドを使う">2. <a name='35'></a>項目35 序数の代わりにインスタンスフィールドを使う</h2>
+
+<h3 id="2-1-a-name-1-a-結論">2.1. <a name='-1'></a>結論</h3>
+
+<p>タイトルのままですが、序数は使わずに、インスタンスフィールドを利用する。</p>
+
+<h4 id="2-1-1-a-name-1-a-序数を使った例">2.1.1. <a name='-1'></a>序数を使った例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 関連付けられた値を導き出すために`ordinal`を乱用
+</span><span class="c1"></span><span class="kd">public</span> <span class="nf">enum</span> <span class="n">Ensemble</span> <span class="p">{</span>
+  <span class="n">SOLO</span><span class="p">,</span>
+  <span class="n">DUET</span><span class="p">,</span>
+  <span class="n">TRIO</span><span class="p">,</span>
+  <span class="n">OUARTET</span><span class="p">,</span>
+  <span class="n">QUINTET</span><span class="p">,</span>
+  <span class="n">SEXTET</span><span class="p">,</span>
+  <span class="n">SEPTET</span><span class="p">,</span>
+  <span class="n">OCTET</span><span class="p">,</span>
+  <span class="n">NONET</span><span class="p">,</span>
+  <span class="n">DECTET</span><span class="p">;</span>
+  <span class="kd">public</span> <span class="nf">int</span> <span class="n">numberOfMusicians</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="n">ordinal</span><span class="p">()</span> <span class="o">+</span> <span class="n">1</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>定数が並び替えられたら、正しく動作しなくなるため、良くない。<br />
+11人は不要で、12人が必要な場合はダミーが必要、、、</p>
+</blockquote>
+
+<h4 id="2-1-2-a-name-1-a-インスタンスフィールドを使った例">2.1.2. <a name='-1'></a>インスタンスフィールドを使った例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">enum</span> <span class="n">Ensemble</span> <span class="p">{</span>
+  <span class="n">SOLO</span><span class="p">(</span><span class="n">1</span><span class="p">),</span>
+  <span class="n">DUET</span><span class="p">(</span><span class="n">2</span><span class="p">),</span>
+  <span class="n">TRIO</span><span class="p">(</span><span class="n">3</span><span class="p">),</span>
+  <span class="n">OUARTET</span><span class="p">(</span><span class="n">4</span><span class="p">),</span>
+  <span class="n">QUINTET</span><span class="p">(</span><span class="n">5</span><span class="p">),</span>
+  <span class="n">SEXTET</span><span class="p">(</span><span class="n">6</span><span class="p">),</span>
+  <span class="n">SEPTET</span><span class="p">(</span><span class="n">7</span><span class="p">),</span>
+  <span class="n">OCTET</span><span class="p">(</span><span class="n">8</span><span class="p">),</span>
+  <span class="n">NONET</span><span class="p">(</span><span class="n">9</span><span class="p">),</span>
+  <span class="n">DECTET</span><span class="p">(</span><span class="n">10</span><span class="p">),</span>
+  <span class="n">TRIPLE_OUARTET</span><span class="p">(</span><span class="n">12</span><span class="p">);</span>
+
+  <span class="kd">private</span> <span class="nf">final</span> <span class="kt">int</span> <span class="nf">numberOfMusicians</span><span class="p">;</span>
+  <span class="n">Ensemble</span><span class="p">(</span><span class="kt">int</span> <span class="nf">size</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">numberOfMusicians</span> <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">public</span> <span class="nf">int</span> <span class="n">numberOfMusicians</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="n">numberOfMusicians</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>余談：<br />
+<a href="https://docs.oracle.com/javase/jp/7/api/java/lang/Enum.html#ordinal()">Enum#ordinal()のJavaDoc</a>に以下のように記載されています。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">列挙定数の序数 (列挙宣言での位置。初期定数はゼロの序数に割り当てられる) を返します。 このメソッドは、ほとんどのプログラマにとって役に立ちません。それは、EnumSet や EnumMap などの洗練された enum ベースのデータ構造で使用するために設計されています。</pre></td></tr></table>
+</div>
+</div></blockquote>
 
 <h2 id="3-a-name-36enumset-a-項目36-ビットフィールドの代わりにenumsetを使う">3. <a name='36EnumSet'></a>項目36 ビットフィールドの代わりにEnumSetを使う</h2>
 

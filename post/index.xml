@@ -27,7 +27,7 @@
       <pubDate>Sat, 09 Nov 2019 00:36:53 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-6/</guid>
-      <description>enumとアノテーション Effective Java 第3版の個人的メモ 項目34 int定数の代わりにenumを使う 項目35 序数の代わりにインスタンスフィールドを使う 項</description>
+      <description>enumとアノテーション Effective Java 第3版の個人的メモ 1. 項目34 int定数の代わりにenumを使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数として</description>
     </item>
     
     <item>
