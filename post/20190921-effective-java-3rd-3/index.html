@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.58.1 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/" />
@@ -243,16 +243,16 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">final</span> <span class="kd">class</span> <span class="nf">PhoneNumber</span> <span class="p">{</span>
-        <span class="kd">private</span> <span class="nf">final</span> <span class="kt">short</span> <span class="nf">areaCode</span><span class="p">;</span>
-        <span class="kd">private</span> <span class="nf">final</span> <span class="kt">short</span> <span class="nf">prefix</span><span class="p">;</span>
-        <span class="kd">private</span> <span class="nf">final</span> <span class="kt">short</span> <span class="nf">lineNumber</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final class PhoneNumber </span><span class="p">{</span>
+        <span class="err">private final short areaCode</span><span class="p">;</span>
+        <span class="err">private final short prefix</span><span class="p">;</span>
+        <span class="err">private final short lineNumber</span><span class="p">;</span>
         <span class="p">.</span>
         <span class="p">.</span>
         <span class="p">.</span>
         <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="nf">int</span> <span class="n">hashCode</span><span class="p">()</span> <span class="p">{</span>
-            <span class="kt">int</span> <span class="nf">result</span> <span class="o">=</span> <span class="n">17</span><span class="p">;</span>
+        <span class="err">public int </span><span class="n">hashCode</span><span class="p">()</span> <span class="p">{</span>
+            <span class="err">int result </span><span class="o">=</span> <span class="n">17</span><span class="p">;</span>
             <span class="c1">// Hash関数については研究が進んでいるが、当分は以下が良いコードらしいです。
 </span><span class="c1"></span>            <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">areaCode</span><span class="p">;</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">prefix</span><span class="p">;</span>
@@ -300,7 +300,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="p">()</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static Singleton getInstance</span><span class="p">()</span>
 <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>
   <span class="p">{</span>
@@ -338,7 +338,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java">	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="nf">String</span> <span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+	<span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
 		<span class="k">return</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;toStringSample [text=%s, id=%s, value=%s]&#34;</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
 	<span class="p">}</span></code></pre></td></tr></table>
 </div>
@@ -448,13 +448,13 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">PhoneNumber</span> <span class="nf">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class PhoneNumber implements </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="p">{</span>
 
-	<span class="kd">private</span> <span class="nf">int</span> <span class="n">areaCode</span><span class="p">;</span>
-	<span class="kd">private</span> <span class="nf">int</span> <span class="n">prefix</span><span class="p">;</span>
-	<span class="kd">private</span> <span class="nf">int</span> <span class="n">lineNumber</span><span class="p">;</span>
+	<span class="err">private int </span><span class="n">areaCode</span><span class="p">;</span>
+	<span class="err">private int </span><span class="n">prefix</span><span class="p">;</span>
+	<span class="err">private int </span><span class="n">lineNumber</span><span class="p">;</span>
 
-	<span class="kd">public</span> <span class="nf">int</span> <span class="n">CompareTo</span><span class="p">(</span><span class="n">PhoneNumber</span> <span class="nf">pn</span><span class="p">)</span> <span class="p">{</span>
+	<span class="err">public int </span><span class="n">CompareTo</span><span class="p">(</span><span class="err">PhoneNumber pn</span><span class="p">)</span> <span class="p">{</span>
 		<span class="c1">// 市外局番を比較する
 </span><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">areaCode</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">areaCode</span><span class="p">)</span>
 			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="p">;</span>
@@ -507,21 +507,21 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">PhoneNumber</span> <span class="nf">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class PhoneNumber implements </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="p">{</span>
 
-	<span class="kd">private</span> <span class="nf">int</span> <span class="n">areaCode</span><span class="p">;</span>
-	<span class="kd">private</span> <span class="nf">int</span> <span class="n">prefix</span><span class="p">;</span>
-	<span class="kd">private</span> <span class="nf">int</span> <span class="n">lineNumber</span><span class="p">;</span>
+	<span class="err">private int </span><span class="n">areaCode</span><span class="p">;</span>
+	<span class="err">private int </span><span class="n">prefix</span><span class="p">;</span>
+	<span class="err">private int </span><span class="n">lineNumber</span><span class="p">;</span>
 
-	<span class="kd">public</span> <span class="nf">int</span> <span class="n">compareTo</span><span class="p">(</span><span class="n">PhoneNumber</span> <span class="nf">pn</span><span class="p">)</span> <span class="p">{</span>
+	<span class="err">public int </span><span class="n">compareTo</span><span class="p">(</span><span class="err">PhoneNumber pn</span><span class="p">)</span> <span class="p">{</span>
 		<span class="c1">// 市外局番を比較する
-</span><span class="c1"></span>		<span class="kt">int</span> <span class="nf">areaCodeDiff</span> <span class="o">=</span> <span class="n">areaCode</span> <span class="o">-</span> <span class="n">pn</span><span class="p">.</span><span class="na">areaCode</span><span class="p">;</span>
+</span><span class="c1"></span>		<span class="err">int areaCodeDiff </span><span class="o">=</span> <span class="n">areaCode</span> <span class="o">-</span> <span class="n">pn</span><span class="p">.</span><span class="na">areaCode</span><span class="p">;</span>
 		<span class="k">if</span> <span class="p">(</span><span class="n">areaCodeDiff</span> <span class="o">!=</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
 			<span class="k">return</span> <span class="n">areaCodeDiff</span><span class="p">;</span>
 		<span class="p">}</span>
 
 		<span class="c1">// 市外局番は等しく、市内局番の前半を比較する
-</span><span class="c1"></span>		<span class="kt">int</span> <span class="nf">prefixDiff</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">-</span> <span class="n">pn</span><span class="p">.</span><span class="na">prefix</span><span class="p">;</span>
+</span><span class="c1"></span>		<span class="err">int prefixDiff </span><span class="o">=</span> <span class="n">prefix</span> <span class="o">-</span> <span class="n">pn</span><span class="p">.</span><span class="na">prefix</span><span class="p">;</span>
 		<span class="k">if</span> <span class="p">(</span><span class="n">prefixDiff</span> <span class="o">!=</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
 			<span class="k">return</span> <span class="n">prefixDiff</span><span class="p">;</span>
 		<span class="p">}</span>

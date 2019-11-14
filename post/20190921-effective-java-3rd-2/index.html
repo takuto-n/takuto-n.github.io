@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.58.1 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190921-effective-java-3rd-2/" />
@@ -196,17 +196,17 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Human</span> <span class="p">{</span>
-    <span class="kd">private</span> <span class="nf">int</span> <span class="n">age</span><span class="p">;</span>
-    <span class="kd">private</span> <span class="nf">String</span> <span class="n">name</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Human</span> <span class="p">{</span>
+    <span class="err">private int </span><span class="n">age</span><span class="p">;</span>
+    <span class="err">private String </span><span class="n">name</span><span class="p">;</span>
 
-    <span class="n">Human</span><span class="p">(</span><span class="kt">int</span> <span class="nf">age</span><span class="p">,</span> <span class="n">String</span> <span class="nf">name</span><span class="p">){</span>
+    <span class="n">Human</span><span class="p">(</span><span class="err">int age</span><span class="p">,</span> <span class="err">String name</span><span class="p">){</span>
         <span class="k">this</span><span class="p">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="nf">static</span> <span class="n">Human</span> <span class="nf">create</span><span class="p">(</span><span class="kt">int</span> <span class="nf">age</span><span class="p">,</span> <span class="n">String</span> <span class="nf">name</span><span class="p">){</span>
-        <span class="n">var</span> <span class="nf">human</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Human</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+    <span class="err">public static Human create</span><span class="p">(</span><span class="err">int age</span><span class="p">,</span> <span class="err">String name</span><span class="p">){</span>
+        <span class="err">var human </span><span class="o">=</span> <span class="k">new</span> <span class="n">Human</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
         <span class="k">return</span> <span class="n">human</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
@@ -242,7 +242,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="n">Human</span> <span class="nf">create</span><span class="p">(</span><span class="kt">int</span> <span class="nf">age</span><span class="p">,</span> <span class="n">String</span> <span class="nf">name</span><span class="p">,</span> <span class="kt">boolean</span> <span class="nf">isMan</span><span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static Human create</span><span class="p">(</span><span class="err">int age</span><span class="p">,</span> <span class="err">String name</span><span class="p">,</span> <span class="err">boolean isMan</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">isMan</span><span class="p">){</span>
         <span class="k">return</span> <span class="k">new</span> <span class="n">Man</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">name</span><span class="p">);</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -336,35 +336,35 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Dog</span> <span class="p">{</span>
-    <span class="kd">private</span> <span class="nf">final</span> <span class="n">String</span> <span class="nf">name</span><span class="p">;</span>
-    <span class="kd">private</span> <span class="nf">final</span> <span class="n">Integer</span> <span class="nf">age</span><span class="p">;</span>
-    <span class="kd">private</span> <span class="nf">final</span> <span class="n">String</span> <span class="nf">hobby</span><span class="p">;</span>
-    <span class="kd">public</span> <span class="nf">static</span> <span class="kd">class</span> <span class="nf">Builder</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Dog</span> <span class="p">{</span>
+    <span class="err">private final String name</span><span class="p">;</span>
+    <span class="err">private final Integer age</span><span class="p">;</span>
+    <span class="err">private final String hobby</span><span class="p">;</span>
+    <span class="err">public static class Builder </span><span class="p">{</span>
         <span class="c1">//必須パラメータ
-</span><span class="c1"></span>        <span class="kd">private</span> <span class="nf">final</span> <span class="n">String</span> <span class="nf">name</span><span class="p">;</span>
+</span><span class="c1"></span>        <span class="err">private final String name</span><span class="p">;</span>
         <span class="c1">//オプションパラメータ デフォルト値に初期化
-</span><span class="c1"></span>        <span class="kd">private</span> <span class="nf">Integer</span> <span class="n">age</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span>
-        <span class="kd">private</span> <span class="nf">String</span> <span class="n">hobby</span> <span class="o">=</span> <span class="s">&#34;Run&#34;</span><span class="p">;</span>
+</span><span class="c1"></span>        <span class="err">private Integer </span><span class="n">age</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span>
+        <span class="err">private String </span><span class="n">hobby</span> <span class="o">=</span> <span class="s">&#34;Run&#34;</span><span class="p">;</span>
 
-        <span class="kd">public</span> <span class="nf">Builder</span><span class="p">(</span><span class="n">String</span> <span class="nf">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">public Builder</span><span class="p">(</span><span class="err">String name</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
             <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="kd">public</span> <span class="nf">Builder</span> <span class="n">age</span><span class="p">(</span><span class="kt">int</span> <span class="nf">age</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">public Builder </span><span class="n">age</span><span class="p">(</span><span class="err">int age</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
             <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="kd">public</span> <span class="nf">Builder</span> <span class="n">hobby</span><span class="p">(</span><span class="n">String</span> <span class="nf">hobby</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">public Builder </span><span class="n">hobby</span><span class="p">(</span><span class="err">String hobby</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="na">hobby</span> <span class="o">=</span> <span class="n">hobby</span><span class="p">;</span>
             <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="kd">public</span> <span class="nf">Dog</span> <span class="n">build</span><span class="p">()</span> <span class="p">{</span>
+        <span class="err">public Dog </span><span class="n">build</span><span class="p">()</span> <span class="p">{</span>
            <span class="k">return</span> <span class="k">new</span> <span class="n">Dog</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="kd">private</span> <span class="nf">Dog</span><span class="p">(</span><span class="n">Builder</span> <span class="nf">builder</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">private Dog</span><span class="p">(</span><span class="err">Builder builder</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="na">name</span><span class="p">;</span>
         <span class="n">age</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="na">age</span><span class="p">;</span>
         <span class="n">hobby</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="na">hobby</span><span class="p">;</span>
@@ -378,7 +378,7 @@
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Dog</span> <span class="nf">chihuahua</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span><span class="s">&#34;Chibi&#34;</span><span class="p">).</span><span class="na">age</span><span class="p">(</span><span class="n">3</span><span class="p">).</span><span class="na">hobby</span><span class="p">(</span><span class="s">&#34;Dance&#34;</span><span class="p">).</span><span class="na">build</span><span class="p">();</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Dog chihuahua </span><span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span><span class="s">&#34;Chibi&#34;</span><span class="p">).</span><span class="na">age</span><span class="p">(</span><span class="n">3</span><span class="p">).</span><span class="na">hobby</span><span class="p">(</span><span class="s">&#34;Dance&#34;</span><span class="p">).</span><span class="na">build</span><span class="p">();</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>参考サイト：<a href="http://4geek.net/learn-builder-patterns-in-java/">Builderパターンについて</a></p>
@@ -410,11 +410,11 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">Elvis</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">Elvis</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Elvis</span><span class="p">();</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Elvis</span> <span class="p">{</span>
+    <span class="err">public static final Elvis </span><span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Elvis</span><span class="p">();</span>
 
-    <span class="kd">private</span> <span class="nf">Elvis</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
-    <span class="kd">public</span> <span class="nf">void</span> <span class="n">leaveTheBuilding</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="err">private Elvis</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="err">public void </span><span class="n">leaveTheBuilding</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
@@ -442,13 +442,13 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">final</span> <span class="kd">class</span> <span class="nf">Singleton</span> <span class="p">{</span>
-    <span class="kd">private</span> <span class="nf">static</span> <span class="kd">final</span> <span class="nf">Singleton</span> <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="p">();</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final class Singleton </span><span class="p">{</span>
+    <span class="err">private static final Singleton </span><span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="p">();</span>
 
-    <span class="kd">private</span> <span class="nf">Singleton</span><span class="p">()</span> <span class="p">{</span>
+    <span class="err">private Singleton</span><span class="p">()</span> <span class="p">{</span>
     <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="nf">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="p">()</span> <span class="p">{</span>
+    <span class="err">public static Singleton getInstance</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
@@ -468,10 +468,10 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">enum</span> <span class="n">Elvis</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public enum </span><span class="n">Elvis</span> <span class="p">{</span>
     <span class="n">INSTANCE</span><span class="p">;</span>
 
-    <span class="kd">public</span> <span class="nf">void</span> <span class="n">leaveTheBuilding</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+    <span class="err">public void </span><span class="n">leaveTheBuilding</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
@@ -502,8 +502,8 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">final</span> <span class="kd">class</span> <span class="nf">UtilityClass</span> <span class="p">{</span>
-    <span class="kd">private</span> <span class="nf">UtilityClass</span><span class="p">()</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final class UtilityClass </span><span class="p">{</span>
+    <span class="err">private UtilityClass</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
@@ -550,8 +550,8 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">DaoBLogic</span> <span class="p">{</span>
-    <span class="n">DAO</span> <span class="nf">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MysqlDao</span><span class="p">();</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">DaoBLogic</span> <span class="p">{</span>
+    <span class="err">DAO dao </span><span class="o">=</span> <span class="k">new</span> <span class="n">MysqlDao</span><span class="p">();</span>
     <span class="p">...</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
@@ -838,7 +838,7 @@ MacBook-Air:~ takuto-no$ jstack 18372 | grep &#39;&#34;&#39;
     <span class="k">if</span> <span class="p">(</span><span class="n">br</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
         <span class="k">try</span> <span class="p">{</span>
             <span class="n">br</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="nf">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">IOException e</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// 例外処理
 </span><span class="c1"></span>        <span class="p">}</span>
 <span class="p">}</span>
@@ -876,21 +876,21 @@ MacBook-Air:~ takuto-no$ jstack 18372 | grep &#39;&#34;&#39;
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">    <span class="kt">void</span> <span class="nf">execute</span><span class="p">(){</span>
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="err">void execute</span><span class="p">(){</span>
 
-        <span class="n">var</span> <span class="nf">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestResource</span><span class="p">();</span>
+        <span class="err">var r </span><span class="o">=</span> <span class="k">new</span> <span class="n">TestResource</span><span class="p">();</span>
         <span class="k">try</span> <span class="p">{</span>
             <span class="n">r</span><span class="p">.</span><span class="na">highLayerClose</span><span class="p">();</span>
         <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
             <span class="k">try</span> <span class="p">{</span>
                 <span class="n">r</span><span class="p">.</span><span class="na">lowLayerClose</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Throwable</span> <span class="nf">th</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">Throwable th</span><span class="p">)</span> <span class="p">{</span>
                 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;揉み消す&#34;</span><span class="p">);</span>
             <span class="p">}</span>
 
             <span class="k">try</span> <span class="p">{</span>
                 <span class="n">r</span><span class="p">.</span><span class="na">highLayerClose</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Throwable</span> <span class="nf">th</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">Throwable th</span><span class="p">)</span> <span class="p">{</span>
                 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;揉み消す&#34;</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">}</span>
@@ -920,9 +920,9 @@ MacBook-Air:~ takuto-no$ jstack 18372 | grep &#39;&#34;&#39;
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">void</span> <span class="n">getResource</span><span class="p">(</span><span class="n">String</span> <span class="nf">src</span><span class="p">,</span> <span class="n">String</span> <span class="nf">dest</span><span class="p">)</span> <span class="kd">throws</span> <span class="nf">IOException</span> <span class="p">{</span>
-    <span class="k">try</span> <span class="p">(</span><span class="n">InputStream</span> <span class="nf">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">src</span><span class="p">);</span>
-         <span class="n">OutputStream</span> <span class="nf">outputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="p">(</span><span class="n">dest</span><span class="p">))</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">getResource</span><span class="p">(</span><span class="err">String src</span><span class="p">,</span> <span class="err">String dest</span><span class="p">)</span> <span class="err">throws IOException </span><span class="p">{</span>
+    <span class="k">try</span> <span class="p">(</span><span class="err">InputStream inputStream </span><span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">src</span><span class="p">);</span>
+         <span class="err">OutputStream outputStream </span><span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="p">(</span><span class="n">dest</span><span class="p">))</span>
     <span class="p">{</span>
         <span class="p">.</span>
         <span class="p">.</span>

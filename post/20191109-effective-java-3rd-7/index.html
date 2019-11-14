@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.58.1 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-7/" />
@@ -186,10 +186,10 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">words</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&#34;apple&#34;</span><span class="p">,</span> <span class="s">&#34;pen&#34;</span><span class="p">,</span> <span class="s">&#34;pineapple&#34;</span><span class="p">);</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">List&lt;String&gt; words </span><span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&#34;apple&#34;</span><span class="p">,</span> <span class="s">&#34;pen&#34;</span><span class="p">,</span> <span class="s">&#34;pineapple&#34;</span><span class="p">);</span>
 <span class="c1">// 匿名クラスで書く。
 </span><span class="c1"></span><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="nf">int</span> <span class="n">compare</span><span class="p">(</span><span class="n">String</span> <span class="nf">s1</span><span class="p">,</span> <span class="n">String</span> <span class="nf">s2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">public int </span><span class="n">compare</span><span class="p">(</span><span class="err">String s1</span><span class="p">,</span> <span class="err">String s2</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">Integer</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">(),</span> <span class="n">s2</span><span class="p">.</span><span class="na">length</span><span class="p">());</span>
     <span class="p">}</span>
 <span class="p">});</span></code></pre></td></tr></table>
@@ -207,7 +207,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">変数の型</span> <span class="nf">変数</span> <span class="o">=</span> <span class="k">new</span> <span class="n">クラス名</span><span class="o">/</span><span class="n">インターフェース名</span><span class="p">(</span> <span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">変数の型 変数 </span><span class="o">=</span> <span class="k">new</span> <span class="n">クラス名</span><span class="o">/</span><span class="n">インターフェース名</span><span class="p">(</span> <span class="p">)</span> <span class="p">{</span>
 <span class="n">メソッドの処理を記述</span>
 <span class="p">};</span></code></pre></td></tr></table>
 </div>
@@ -223,7 +223,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">words</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&#34;apple&#34;</span><span class="p">,</span> <span class="s">&#34;pen&#34;</span><span class="p">,</span> <span class="s">&#34;pineapple&#34;</span><span class="p">);</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">List&lt;String&gt; words </span><span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&#34;apple&#34;</span><span class="p">,</span> <span class="s">&#34;pen&#34;</span><span class="p">,</span> <span class="s">&#34;pineapple&#34;</span><span class="p">);</span>
 <span class="c1">// ラムダ式で書く。
 </span><span class="c1"></span><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Integer</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">(),</span> <span class="n">s2</span><span class="p">.</span><span class="na">length</span><span class="p">()));</span></code></pre></td></tr></table>
 </div>
@@ -271,9 +271,9 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">var</span> <span class="nf">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">var list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">();</span>
 
-<span class="k">for</span><span class="p">(</span><span class="n">var</span> <span class="nf">i</span> <span class="o">=</span> <span class="n">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span><span class="p">(</span><span class="err">var i </span><span class="o">=</span> <span class="n">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -405,7 +405,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">functionName</span><span class="p">(</span><span class="n">T</span> <span class="nf">arg</span><span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">R functionName</span><span class="p">(</span><span class="err">T arg</span><span class="p">)</span> <span class="p">{</span>
 <span class="k">return</span> <span class="k">new</span> <span class="n">R</span><span class="p">();</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
@@ -422,9 +422,9 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="nf">functionalInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="err">R&gt; functionalInstance </span><span class="o">=</span> <span class="k">new</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
 <span class="nd">@Override</span>
-<span class="kd">public</span> <span class="nf">R</span> <span class="n">apply</span><span class="p">(</span><span class="n">T</span> <span class="nf">arg</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">public R </span><span class="n">apply</span><span class="p">(</span><span class="err">T arg</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="n">R</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="p">};</span></code></pre></td></tr></table>
@@ -437,7 +437,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="nf">functionalInstance</span> <span class="o">=</span> <span class="n">arg</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">R</span><span class="p">();</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="err">R&gt; functionalInstance </span><span class="o">=</span> <span class="n">arg</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">R</span><span class="p">();</span></code></pre></td></tr></table>
 </div>
 </div></li>
 
@@ -447,7 +447,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">returnValue</span> <span class="o">=</span> <span class="n">functionalInstance</span><span class="p">.</span><span class="na">apply</span><span class="p">((</span><span class="n">T</span><span class="p">)</span> <span class="n">argument</span><span class="p">);</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">R returnValue </span><span class="o">=</span> <span class="n">functionalInstance</span><span class="p">.</span><span class="na">apply</span><span class="p">((</span><span class="n">T</span><span class="p">)</span> <span class="n">argument</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -463,7 +463,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">void</span> <span class="nf">consumer</span><span class="p">(</span><span class="n">T</span> <span class="nf">arg</span><span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">void consumer</span><span class="p">(</span><span class="err">T arg</span><span class="p">)</span> <span class="p">{</span>
 <span class="n">something</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
@@ -480,9 +480,9 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">consumer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Consumer&lt;T&gt; consumer </span><span class="o">=</span> <span class="k">new</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
 <span class="nd">@Override</span>
-<span class="kd">public</span> <span class="nf">void</span> <span class="n">accept</span><span class="p">(</span><span class="n">T</span> <span class="nf">arg</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">public void </span><span class="n">accept</span><span class="p">(</span><span class="err">T arg</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">something</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="p">};</span></code></pre></td></tr></table>
@@ -495,7 +495,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">consumer</span> <span class="o">=</span> <span class="n">arg</span> <span class="o">-&gt;</span> <span class="n">something</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Consumer&lt;T&gt; consumer </span><span class="o">=</span> <span class="n">arg</span> <span class="o">-&gt;</span> <span class="n">something</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
 </div></li>
 
@@ -521,7 +521,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">T</span> <span class="nf">supplier</span><span class="p">()</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">T supplier</span><span class="p">()</span> <span class="p">{</span>
 <span class="k">return</span> <span class="k">new</span> <span class="n">T</span><span class="p">();</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
@@ -538,9 +538,9 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">supplier</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Supplier&lt;T&gt; supplier </span><span class="o">=</span> <span class="k">new</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
 <span class="nd">@Override</span>
-<span class="kd">public</span> <span class="nf">T</span> <span class="n">get</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">public T </span><span class="n">get</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="n">T</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="p">};</span></code></pre></td></tr></table>
@@ -553,7 +553,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">supplier</span> <span class="o">=</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">T</span><span class="p">();</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Supplier&lt;T&gt; supplier </span><span class="o">=</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">T</span><span class="p">();</span></code></pre></td></tr></table>
 </div>
 </div></li>
 
@@ -581,7 +581,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">boolean</span> <span class="nf">predicate</span><span class="p">(</span><span class="n">Integer</span> <span class="nf">i</span><span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">boolean predicate</span><span class="p">(</span><span class="err">Integer i</span><span class="p">)</span> <span class="p">{</span>
 　　<span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
@@ -598,9 +598,9 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">boolean</span> <span class="nf">predicate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Predicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(){</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">boolean predicate </span><span class="o">=</span> <span class="k">new</span> <span class="n">Predicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(){</span>
 <span class="nd">@Override</span>
-<span class="kd">public</span> <span class="nf">boolean</span> <span class="n">test</span><span class="p">(</span><span class="n">Integer</span> <span class="nf">i</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">public boolean </span><span class="n">test</span><span class="p">(</span><span class="err">Integer i</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="p">};</span></code></pre></td></tr></table>
@@ -613,7 +613,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">checker</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">-&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span><span class="p">;</span> <span class="p">};</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Predicate&lt;Integer&gt; checker </span><span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">-&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span><span class="p">;</span> <span class="p">};</span></code></pre></td></tr></table>
 </div>
 </div></li>
 
@@ -623,7 +623,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">boolean</span> <span class="nf">result</span> <span class="o">=</span> <span class="n">checker</span><span class="p">.</span><span class="na">test</span><span class="p">(</span><span class="n">i</span><span class="p">);</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">boolean result </span><span class="o">=</span> <span class="n">checker</span><span class="p">.</span><span class="na">test</span><span class="p">(</span><span class="n">i</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -641,7 +641,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">String</span> <span class="n">apply</span><span class="p">(</span><span class="n">String</span> <span class="nf">t</span><span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public String </span><span class="n">apply</span><span class="p">(</span><span class="err">String t</span><span class="p">)</span> <span class="p">{</span>
 <span class="k">return</span> <span class="s">&#34;** &#34;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&#34; **&#34;</span><span class="p">;</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
@@ -658,9 +658,9 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="nf">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UnaryOperator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(){</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">String str </span><span class="o">=</span> <span class="k">new</span> <span class="n">UnaryOperator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(){</span>
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="nf">String</span> <span class="n">apply</span><span class="p">(</span><span class="n">String</span> <span class="nf">t</span><span class="p">)</span> <span class="p">{</span>
+	<span class="err">public String </span><span class="n">apply</span><span class="p">(</span><span class="err">String t</span><span class="p">)</span> <span class="p">{</span>
 	    <span class="k">return</span> <span class="s">&#34;** &#34;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&#34; **&#34;</span><span class="p">;</span>
 	<span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
@@ -673,7 +673,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">UnaryOperator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">operator</span> <span class="o">=</span> <span class="p">(</span><span class="n">String</span> <span class="nf">t</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;**&#34;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&#34;**&#34;</span><span class="p">;</span> <span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">UnaryOperator&lt;String&gt; operator </span><span class="o">=</span> <span class="p">(</span><span class="err">String t</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;**&#34;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&#34;**&#34;</span><span class="p">;</span> <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div></li>
 
@@ -683,7 +683,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="nf">newText</span> <span class="o">=</span> <span class="n">operator</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">text</span><span class="p">);</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">String newText </span><span class="o">=</span> <span class="n">operator</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">text</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -701,7 +701,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">Integer</span> <span class="n">binaryOperator</span><span class="p">(</span><span class="n">Integer</span> <span class="nf">i1</span><span class="p">,</span> <span class="n">Integer</span> <span class="nf">i2</span><span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public Integer </span><span class="n">binaryOperator</span><span class="p">(</span><span class="err">Integer i1</span><span class="p">,</span> <span class="err">Integer i2</span><span class="p">)</span> <span class="p">{</span>
 <span class="k">return</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="p">;</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
@@ -718,9 +718,9 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">binaryOperator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">BinaryOperator&lt;Integer&gt; binaryOperator </span><span class="o">=</span> <span class="k">new</span> <span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
 <span class="nd">@Override</span>
-<span class="kd">public</span> <span class="nf">Integer</span> <span class="n">apply</span><span class="p">(</span><span class="n">Integer</span> <span class="nf">i1</span><span class="p">,</span> <span class="n">Integer</span> <span class="nf">i2</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">public Integer </span><span class="n">apply</span><span class="p">(</span><span class="err">Integer i1</span><span class="p">,</span> <span class="err">Integer i2</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="p">};</span></code></pre></td></tr></table>
@@ -735,7 +735,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">binaryOperator</span> <span class="o">=</span> <span class="p">(</span><span class="n">Integer</span> <span class="nf">i1</span><span class="p">,</span> <span class="n">Integer</span> <span class="nf">i2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">BinaryOperator&lt;Integer&gt; binaryOperator </span><span class="o">=</span> <span class="p">(</span><span class="err">Integer i1</span><span class="p">,</span> <span class="err">Integer i2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span>
 <span class="k">return</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="p">;</span>
 <span class="p">};</span></code></pre></td></tr></table>
 </div>
@@ -747,7 +747,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">actual</span> <span class="o">=</span> <span class="n">binaryOperator</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">2</span><span class="p">);</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">int actual </span><span class="o">=</span> <span class="n">binaryOperator</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">2</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -798,11 +798,11 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">var</span> <span class="nf">dictionary</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&#34;hoge.txt&#34;</span><span class="p">);</span>
-<span class="n">var</span> <span class="nf">minGroupSize</span> <span class="o">=</span> <span class="n">2</span><span class="p">;</span>
-<span class="n">var</span> <span class="nf">groups</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">var dictionary </span><span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&#34;hoge.txt&#34;</span><span class="p">);</span>
+<span class="err">var minGroupSize </span><span class="o">=</span> <span class="n">2</span><span class="p">;</span>
+<span class="err">var groups </span><span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
 
-<span class="k">try</span> <span class="p">(</span><span class="n">var</span> <span class="nf">words</span> <span class="o">=</span> <span class="n">Files</span><span class="p">.</span><span class="na">lines</span><span class="p">(</span><span class="n">dictionary</span><span class="p">))</span> <span class="p">{</span>
+<span class="k">try</span> <span class="p">(</span><span class="err">var words </span><span class="o">=</span> <span class="n">Files</span><span class="p">.</span><span class="na">lines</span><span class="p">(</span><span class="n">dictionary</span><span class="p">))</span> <span class="p">{</span>
     <span class="n">words</span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="n">word</span><span class="p">.</span><span class="na">chars</span><span class="p">().</span><span class="na">sorted</span><span class="p">()</span>
             <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">StringBuilder</span><span class="o">::</span><span class="k">new</span><span class="p">,</span> <span class="p">(</span><span class="n">sb</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">((</span><span class="kt">char</span><span class="p">)</span> <span class="n">c</span><span class="p">),</span> <span class="n">StringBuilder</span><span class="o">::</span><span class="n">append</span><span class="p">).</span><span class="na">toString</span><span class="p">()))</span>
             <span class="p">.</span><span class="na">values</span><span class="p">().</span><span class="na">stream</span><span class="p">().</span><span class="na">filter</span><span class="p">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="p">)</span>
@@ -864,19 +864,19 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">var</span> <span class="nf">dictionary</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&#34;hoge.txt&#34;</span><span class="p">);</span>
-<span class="n">var</span> <span class="nf">minGroupSize</span> <span class="o">=</span> <span class="n">2</span><span class="p">;</span>
-<span class="n">var</span> <span class="nf">groups</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">var dictionary </span><span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&#34;hoge.txt&#34;</span><span class="p">);</span>
+<span class="err">var minGroupSize </span><span class="o">=</span> <span class="n">2</span><span class="p">;</span>
+<span class="err">var groups </span><span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="p">();</span>
 
-<span class="k">try</span> <span class="p">(</span><span class="n">var</span> <span class="nf">words</span> <span class="o">=</span> <span class="n">Files</span><span class="p">.</span><span class="na">lines</span><span class="p">(</span><span class="n">dictionary</span><span class="p">))</span> <span class="p">{</span>
+<span class="k">try</span> <span class="p">(</span><span class="err">var words </span><span class="o">=</span> <span class="n">Files</span><span class="p">.</span><span class="na">lines</span><span class="p">(</span><span class="n">dictionary</span><span class="p">))</span> <span class="p">{</span>
     <span class="n">words</span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="n">alphabetize</span><span class="p">(</span><span class="n">word</span><span class="p">)))</span>
     <span class="p">.</span><span class="na">values</span><span class="p">().</span><span class="na">stream</span><span class="p">()</span>
             <span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="p">)</span>
             <span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">g</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">g</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;:&#34;</span> <span class="o">+</span> <span class="n">g</span><span class="p">));</span>
 <span class="p">}</span>
 
-<span class="kd">private</span> <span class="nf">static</span> <span class="n">String</span> <span class="nf">alphabetize</span><span class="p">(</span><span class="n">String</span> <span class="nf">s</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">var</span> <span class="nf">a</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">();</span>
+<span class="err">private static String alphabetize</span><span class="p">(</span><span class="err">String s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">var a </span><span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">();</span>
     <span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
     <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 <span class="p">}</span></code></pre></td></tr></table>
@@ -956,8 +956,8 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Uses the streams API but not the paradigm--Don&#39;t do this!
-</span><span class="c1"></span><span class="n">var</span> <span class="nf">freq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="k">try</span> <span class="p">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="na">tokens</span><span class="p">())</span> <span class="p">{</span>
+</span><span class="c1"></span><span class="err">var freq </span><span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">try</span> <span class="p">(</span><span class="err">Stream&lt;String&gt; words </span><span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="na">tokens</span><span class="p">())</span> <span class="p">{</span>
     <span class="n">words</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="p">{</span>
         <span class="n">freq</span><span class="p">.</span><span class="na">merge</span><span class="p">(</span><span class="n">word</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">(),</span> <span class="n">1L</span><span class="p">,</span> <span class="n">Long</span><span class="o">::</span><span class="n">sum</span><span class="p">);</span>
     <span class="p">});</span>
@@ -977,8 +977,8 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Proper use of streams to initialize a frequency table
-</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">freq</span><span class="p">;</span>
-<span class="k">try</span> <span class="p">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="na">tokens</span><span class="p">())</span> <span class="p">{</span>
+</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="err">Long&gt; freq</span><span class="p">;</span>
+<span class="k">try</span> <span class="p">(</span><span class="err">Stream&lt;String&gt; words </span><span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="p">(</span><span class="n">file</span><span class="p">).</span><span class="na">tokens</span><span class="p">())</span> <span class="p">{</span>
     <span class="n">freq</span> <span class="o">=</span> <span class="n">words</span>
         <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">groupingBy</span><span class="p">(</span><span class="n">String</span><span class="o">::</span><span class="n">toLowerCase</span><span class="p">,</span> <span class="n">counting</span><span class="p">()));</span>
 <span class="p">}</span></code></pre></td></tr></table>
@@ -999,7 +999,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">topTen</span> <span class="o">=</span> <span class="n">freq</span><span class="p">.</span><span class="na">keySet</span><span class="p">().</span><span class="na">stream</span><span class="p">()</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">List&lt;String&gt; topTen </span><span class="o">=</span> <span class="n">freq</span><span class="p">.</span><span class="na">keySet</span><span class="p">().</span><span class="na">stream</span><span class="p">()</span>
     <span class="p">.</span><span class="na">sorted</span><span class="p">(</span><span class="n">comparing</span><span class="p">(</span><span class="n">freq</span><span class="o">::</span><span class="n">get</span><span class="p">).</span><span class="na">reversed</span><span class="p">())</span>
     <span class="p">.</span><span class="na">limit</span><span class="p">(</span><span class="n">10</span><span class="p">)</span>
     <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">toList</span><span class="p">());</span></code></pre></td></tr></table>
@@ -1023,7 +1023,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// e.ordinal()は、列挙定数の序数を返す。
-</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">ENUM</span><span class="p">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">map</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">ENUM</span><span class="p">.</span><span class="na">values</span><span class="p">())</span>
+</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">ENUM</span><span class="p">,</span> <span class="err">Integer&gt; map </span><span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">ENUM</span><span class="p">.</span><span class="na">values</span><span class="p">())</span>
     <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toMap</span><span class="p">(</span>
         <span class="c1">// key
 </span><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="p">,</span> 
@@ -1047,7 +1047,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">ENUM</span><span class="p">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">map</span><span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">ENUM</span><span class="p">.</span><span class="na">values</span><span class="p">())</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">ENUM</span><span class="p">,</span> <span class="err">Integer&gt; map</span><span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">ENUM</span><span class="p">.</span><span class="na">values</span><span class="p">())</span>
     <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toMap</span><span class="p">(</span>
         <span class="c1">// key
 </span><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span>
@@ -1075,8 +1075,8 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">s</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">,</span> <span class="s">&#34;c&#34;</span><span class="p">,</span> <span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;zzz&#34;</span><span class="p">);</span>
-<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">m</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="p">.</span><span class="na">length</span><span class="p">()));</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Stream&lt;String&gt; s </span><span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">,</span> <span class="s">&#34;c&#34;</span><span class="p">,</span> <span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;zzz&#34;</span><span class="p">);</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="err">List&lt;String&gt;&gt; m </span><span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">groupingBy</span><span class="p">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="p">.</span><span class="na">length</span><span class="p">()));</span>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
 <span class="c1">// 実行結果：
 </span><span class="c1"></span><span class="o">//</span> <span class="p">{</span><span class="n">1</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">],</span> <span class="n">3</span><span class="o">=</span><span class="p">[</span><span class="n">bar</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">zzz</span><span class="p">]}</span></code></pre></td></tr></table>
@@ -1097,12 +1097,12 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nf">static</span> <span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">Collectors</span><span class="p">.</span><span class="o">*</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">import static </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">Collectors</span><span class="p">.</span><span class="o">*</span><span class="p">;</span>
 <span class="p">.</span>
 <span class="p">.</span>
 <span class="p">.</span>
-<span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">words</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">,</span> <span class="s">&#34;Bar&#34;</span><span class="p">,</span> <span class="s">&#34;C&#34;</span><span class="p">,</span> <span class="s">&#34;fOO&#34;</span><span class="p">,</span> <span class="s">&#34;zZz&#34;</span><span class="p">,</span> <span class="s">&#34;A&#34;</span><span class="p">);</span>
-<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">freq</span> <span class="o">=</span> <span class="n">words</span>
+<span class="err">Stream&lt;String&gt; words </span><span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">,</span> <span class="s">&#34;Bar&#34;</span><span class="p">,</span> <span class="s">&#34;C&#34;</span><span class="p">,</span> <span class="s">&#34;fOO&#34;</span><span class="p">,</span> <span class="s">&#34;zZz&#34;</span><span class="p">,</span> <span class="s">&#34;A&#34;</span><span class="p">);</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="err">Long&gt; freq </span><span class="o">=</span> <span class="n">words</span>
         <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">groupingBy</span><span class="p">(</span><span class="n">String</span><span class="o">::</span><span class="n">toLowerCase</span><span class="p">,</span> <span class="n">counting</span><span class="p">()));</span>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">freq</span><span class="p">);</span>
 <span class="c1">// 実行結果
@@ -1237,19 +1237,19 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Set</span>  <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">]</span>
-<span class="nf">power_set_size</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">8</span>
-<span class="nf">Run</span> <span class="k">for</span> <span class="n">binary</span> <span class="nf">counter</span> <span class="o">=</span> <span class="n">000</span> <span class="nf">to</span> <span class="n">111</span>
-
-<span class="nf">Value</span> <span class="n">of</span> <span class="nf">Counter</span>            <span class="n">Subset</span>
-    <span class="nf">000</span>                    <span class="o">-&gt;</span> <span class="n">Empty</span> <span class="nf">set</span>
-    <span class="n">001</span>                    <span class="o">-&gt;</span> <span class="n">a</span>
-    <span class="nf">010</span>                    <span class="o">-&gt;</span> <span class="n">b</span>
-    <span class="nf">011</span>                    <span class="o">-&gt;</span> <span class="n">ab</span>
-    <span class="nf">100</span>                    <span class="o">-&gt;</span> <span class="n">c</span>
-    <span class="nf">101</span>                    <span class="o">-&gt;</span> <span class="n">ac</span>
-    <span class="nf">110</span>                    <span class="o">-&gt;</span> <span class="n">bc</span>
-    <span class="nf">111</span>                    <span class="o">-&gt;</span> <span class="n">abc</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Set</span>  <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="err">c]
+</span><span class="err">power_set_size </span><span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="err">8
+</span><span class="err">Run </span><span class="k">for</span> <span class="err">binary counter </span><span class="o">=</span> <span class="err">000 to 111
+</span><span class="err">
+</span><span class="err">Value of Counter            Subset
+</span><span class="err">    000                    </span><span class="o">-&gt;</span> <span class="err">Empty set
+</span><span class="err">    </span><span class="n">001</span>                    <span class="o">-&gt;</span> <span class="err">a
+</span><span class="err">    010                    </span><span class="o">-&gt;</span> <span class="err">b
+</span><span class="err">    011                    </span><span class="o">-&gt;</span> <span class="err">ab
+</span><span class="err">    100                    </span><span class="o">-&gt;</span> <span class="err">c
+</span><span class="err">    101                    </span><span class="o">-&gt;</span> <span class="err">ac
+</span><span class="err">    110                    </span><span class="o">-&gt;</span> <span class="err">bc
+</span><span class="err">    111                    </span><span class="o">-&gt;</span> <span class="n">abc</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>サンプル実装</p>
@@ -1300,19 +1300,19 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Java program for power set 
-</span><span class="c1"></span><span class="kn">import</span> <span class="nf">java</span> <span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="o">*</span><span class="p">;</span> 
+</span><span class="c1"></span><span class="err">import java </span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="o">*</span><span class="p">;</span> 
   
-<span class="kd">public</span> <span class="nf">class</span> <span class="n">GFG</span> <span class="p">{</span> 
+<span class="err">public class </span><span class="n">GFG</span> <span class="p">{</span> 
       
-    <span class="kd">static</span> <span class="nf">void</span> <span class="n">printPowerSet</span><span class="p">(</span><span class="kt">char</span> <span class="p">[]</span><span class="n">set</span><span class="p">,</span> 
-                            <span class="kt">int</span> <span class="nf">set_size</span><span class="p">)</span> 
+    <span class="err">static void </span><span class="n">printPowerSet</span><span class="p">(</span><span class="kt">char</span> <span class="p">[]</span><span class="n">set</span><span class="p">,</span> 
+                            <span class="err">int set_size</span><span class="p">)</span> 
     <span class="p">{</span> 
           
         <span class="cm">/*set_size of power set of a set 
 </span><span class="cm">        with set_size n is (2**n -1)*/</span>
-        <span class="kt">long</span> <span class="nf">pow_set_size</span> <span class="o">=</span>  
+        <span class="err">long pow_set_size </span><span class="o">=</span>  
             <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">set_size</span><span class="p">);</span> 
-        <span class="kt">int</span> <span class="nf">counter</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span> 
+        <span class="err">int counter</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span> 
       
         <span class="cm">/*Run from counter 000..0 to 
 </span><span class="cm">        111..1*/</span>
@@ -1333,14 +1333,14 @@ java.lang.FunctionalInterface)</a>にあります。
     <span class="p">}</span> 
       
     <span class="c1">// Driver program to test printPowerSet 
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> 
+</span><span class="c1"></span>    <span class="err">public static void main </span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> 
     <span class="p">{</span> 
         <span class="kt">char</span> <span class="p">[]</span><span class="n">set</span> <span class="o">=</span> <span class="p">{</span><span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">};</span> 
         <span class="n">printPowerSet</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="n">3</span><span class="p">);</span> 
     <span class="p">}</span> 
 <span class="p">}</span> 
   
-<span class="o">//</span> <span class="n">This</span> <span class="nf">code</span> <span class="n">is</span> <span class="nf">contributed</span> <span class="n">by</span> <span class="nf">anuj_67</span><span class="p">.</span> </code></pre></td></tr></table>
+<span class="o">//</span> <span class="err">This code is contributed by anuj_67</span><span class="p">.</span> </code></pre></td></tr></table>
 </div>
 </div>
 <blockquote>
@@ -1397,14 +1397,14 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// データの準備
-</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">list</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="k">new</span> <span class="n">String</span><span class="p">[]{</span><span class="s">&#34;あ&#34;</span><span class="p">,</span> <span class="s">&#34;い&#34;</span><span class="p">,</span> <span class="s">&#34;う&#34;</span><span class="p">,</span> <span class="s">&#34;え&#34;</span><span class="p">,</span> <span class="s">&#34;お&#34;</span><span class="p">});</span>
+</span><span class="c1"></span><span class="err">List&lt;String&gt; list </span><span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="k">new</span> <span class="n">String</span><span class="p">[]{</span><span class="s">&#34;あ&#34;</span><span class="p">,</span> <span class="s">&#34;い&#34;</span><span class="p">,</span> <span class="s">&#34;う&#34;</span><span class="p">,</span> <span class="s">&#34;え&#34;</span><span class="p">,</span> <span class="s">&#34;お&#34;</span><span class="p">});</span>
 
 <span class="c1">// forEach()の場合
-</span><span class="c1"></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">parallelStream1</span> <span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">parallelStream</span><span class="p">();</span>
+</span><span class="c1"></span><span class="err">Stream&lt;String&gt; parallelStream1 </span><span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">parallelStream</span><span class="p">();</span>
 <span class="n">parallelStream1</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;forEach: &#34;</span> <span class="o">+</span> <span class="n">value</span><span class="p">));</span>
 
 <span class="c1">// forEachOrdered()の場合
-</span><span class="c1"></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">parallelStream2</span> <span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">parallelStream</span><span class="p">();</span>
+</span><span class="c1"></span><span class="err">Stream&lt;String&gt; parallelStream2 </span><span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">parallelStream</span><span class="p">();</span>
 <span class="n">parallelStream2</span><span class="p">.</span><span class="na">forEachOrdered</span><span class="p">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;forEachOrdered: &#34;</span> <span class="o">+</span> <span class="n">value</span><span class="p">));</span>
 
 <span class="c1">// 実行結果
@@ -1490,16 +1490,16 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">math</span><span class="p">.</span><span class="na">BigInteger</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">LongStream</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">import java</span><span class="p">.</span><span class="na">math</span><span class="p">.</span><span class="na">BigInteger</span><span class="p">;</span>
+<span class="err">import java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">LongStream</span><span class="p">;</span>
 
-<span class="kd">public</span> <span class="nf">class</span> <span class="n">ParallelTest1</span> <span class="p">{</span>
+<span class="err">public class </span><span class="n">ParallelTest1</span> <span class="p">{</span>
     <span class="c1">// Prime-counting stream pipeline - benefits from parallelization
-</span><span class="c1"></span>    <span class="kd">static</span> <span class="nf">long</span> <span class="n">pi</span><span class="p">(</span><span class="kt">long</span> <span class="nf">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>    <span class="err">static long </span><span class="n">pi</span><span class="p">(</span><span class="err">long n</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">LongStream</span><span class="p">.</span><span class="na">rangeClosed</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">n</span><span class="p">).</span><span class="na">mapToObj</span><span class="p">(</span><span class="n">BigInteger</span><span class="o">::</span><span class="n">valueOf</span><span class="p">).</span><span class="na">filter</span><span class="p">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="p">.</span><span class="na">isProbablePrime</span><span class="p">(</span><span class="n">50</span><span class="p">)).</span><span class="na">count</span><span class="p">();</span>
     <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
     	<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
         <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pi</span><span class="p">(</span><span class="n">10000000</span><span class="p">));</span>
     	<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
@@ -1540,17 +1540,17 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">math</span><span class="p">.</span><span class="na">BigInteger</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Date</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">LongStream</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">import java</span><span class="p">.</span><span class="na">math</span><span class="p">.</span><span class="na">BigInteger</span><span class="p">;</span>
+<span class="err">import java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Date</span><span class="p">;</span>
+<span class="err">import java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">LongStream</span><span class="p">;</span>
 
-<span class="kd">public</span> <span class="nf">class</span> <span class="n">ParallelTest2</span> <span class="p">{</span>
+<span class="err">public class </span><span class="n">ParallelTest2</span> <span class="p">{</span>
 	<span class="c1">// Prime-counting stream pipeline - benefits from parallelization
-</span><span class="c1"></span>	<span class="kd">static</span> <span class="nf">long</span> <span class="n">pi</span><span class="p">(</span><span class="kt">long</span> <span class="nf">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>	<span class="err">static long </span><span class="n">pi</span><span class="p">(</span><span class="err">long n</span><span class="p">)</span> <span class="p">{</span>
 		<span class="k">return</span> <span class="n">LongStream</span><span class="p">.</span><span class="na">rangeClosed</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">n</span><span class="p">).</span><span class="na">parallel</span><span class="p">().</span><span class="na">mapToObj</span><span class="p">(</span><span class="n">BigInteger</span><span class="o">::</span><span class="n">valueOf</span><span class="p">).</span><span class="na">filter</span><span class="p">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="p">.</span><span class="na">isProbablePrime</span><span class="p">(</span><span class="n">50</span><span class="p">)).</span><span class="na">count</span><span class="p">();</span>
 	<span class="p">}</span>
 
-	<span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+	<span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
 		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
 		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pi</span><span class="p">(</span><span class="n">10000000</span><span class="p">));</span>
 		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
