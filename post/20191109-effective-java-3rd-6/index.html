@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-11-09T00:36:53&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:36:53&#43;09:00" />
-<meta itemprop="wordCount" content="2009">
+<meta itemprop="wordCount" content="3038">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 2009 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 3038 words </span>
+          <span class="more-meta"> 7 mins read </span>
         
       </div>
     </header>
@@ -604,7 +604,237 @@
 
 <h2 id="3-a-name-36enumset-a-項目36-ビットフィールドの代わりにenumsetを使う">3. <a name='36EnumSet'></a>項目36 ビットフィールドの代わりにEnumSetを使う</h2>
 
+<h3 id="3-1-a-name-1-a-結論">3.1. <a name='-1'></a>結論</h3>
+
+<ul>
+<li>集合としてenum型を使いたいときは、EnumSetを使用するべき</li>
+</ul>
+
+<h3 id="3-2-a-name-1-a-ビットフィールド列挙定数">3.2. <a name='-1'></a>ビットフィールド列挙定数</h3>
+
+<ul>
+<li><p>下のようにビットフィールド定数を列挙して、集合を表現する方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Text</span><span class="p">{</span>
+<span class="err">public static final int </span><span class="n">STYLE_BOLD</span>          <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">0</span><span class="p">;</span> <span class="c1">// 1
+</span><span class="c1"></span><span class="err">public static final int </span><span class="n">STYLE_ITALIC</span>        <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">1</span><span class="p">;</span> <span class="c1">// 2
+</span><span class="c1"></span><span class="err">public static final int </span><span class="n">STYLE_UNDERLINE</span>     <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">2</span><span class="p">;</span> <span class="c1">// 4
+</span><span class="c1"></span><span class="err">public static final int </span><span class="n">STYLE_STRIKETHROUGH</span> <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">3</span><span class="p">;</span> <span class="c1">// 8
+</span><span class="c1"></span><span class="err">public void </span><span class="n">applyStyles</span><span class="p">(</span><span class="err">int styles</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">text</span><span class="p">.</span><span class="na">applyStyles</span><span class="p">(</span><span class="n">STYLE_BOLD</span> <span class="o">|</span> <span class="n">STYLE_ITALIC</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>int enumパターンの欠点を持っているし、他にも欠点がある</p>
+
+<ul>
+<li>数値として表示された場合にビットフィールドを読み取るのが困難
+
+<ul>
+<li>「13」と言われてもぱっと見どんな集合か分からない</li>
+</ul></li>
+<li>集合のすべての要素をイテレートをする簡単な方法が無い</li>
+</ul></li>
+</ul>
+
+<h3 id="3-3-a-name-enumset-a-enumset">3.3. <a name='EnumSet'></a>EnumSet</h3>
+
+<ul>
+<li>EnumSetクラスは単一のenum型から選ばれた値の集合を効率的に表現できる</li>
+<li>EnumSetはSetの実装クラス</li>
+
+<li><p>EnumSetを使うと下記のようになる</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Text</span> <span class="p">{</span>
+<span class="err">public enum </span><span class="n">Style</span> <span class="p">{</span> <span class="n">BOLD</span><span class="p">,</span> <span class="n">ITALIC</span><span class="p">,</span> <span class="n">UNDERLINE</span><span class="p">,</span> <span class="n">STRIKETHROUGH</span> <span class="p">}</span>
+<span class="err">public void </span><span class="n">applyStyles</span><span class="p">(</span><span class="err">Set&lt;Style&gt; styles</span><span class="p">){</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">text</span><span class="p">.</span><span class="na">applyStyles</span><span class="p">(</span><span class="n">EnumSet</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">Style</span><span class="p">.</span><span class="na">BOLD</span><span class="p">,</span> <span class="n">Style</span><span class="p">.</span><span class="na">ITALIC</span><span class="p">));</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>デメリットの一つとして、不変なEnumSetを生成できないことがあげられる</p>
+
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html#unmodifiableSet-java.util.Set-">Collections.unmodifiableSet</a>で包むことができるが、簡潔性とパフォーマンスが損なわれる
+
+<ul>
+<li><code>Collections.unmodifiableSet</code>から返ってきたSetは更新しようとするとエラーになる</li>
+<li>コンポジットパターンで作られている。</li>
+</ul></li>
+</ul></li>
+</ul>
+
 <h2 id="4-a-name-37enummap-a-項目37-序数インデックスの代わりにenummapを使う">4. <a name='37EnumMap'></a>項目37 序数インデックスの代わりにEnumMapを使う</h2>
+
+<h3 id="4-1-a-name-1-a-結論">4.1. <a name='-1'></a>結論</h3>
+
+<ul>
+<li>enumの列挙子ごとにデータを持ちたい場合は、EnumMapを使うべき</li>
+</ul>
+
+<h3 id="4-2-a-name-1-a-序数インデックス">4.2. <a name='-1'></a>序数インデックス</h3>
+
+<ul>
+<li>ハーブの種類ごとに、ハーブをまとめたいとする。</li>
+
+<li><p>序数インデックス(<code>ordinal()</code>)を用いると下のようになる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Herb</span> <span class="p">{</span>
+<span class="err">public enum </span><span class="n">Type</span> <span class="p">{</span>
+    <span class="n">ANNUAL</span><span class="p">,</span> <span class="n">PERENNIAL</span><span class="p">,</span> <span class="n">BIENNIAL</span>
+<span class="p">}</span>
+
+<span class="err">private final String name</span><span class="p">;</span>
+<span class="err">public final Type type</span><span class="p">;</span>
+
+<span class="err">public Herb</span><span class="p">(</span><span class="err">String name</span><span class="p">,</span> <span class="err">Type type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">type</span> <span class="o">=</span> <span class="n">type</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Override</span>
+<span class="err">public String </span><span class="n">toString</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="n">name</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 庭園にあるハーブを表す配列
+</span><span class="c1"></span><span class="err">Herb[] garden </span><span class="o">=</span> <span class="k">new</span> <span class="n">Herb</span><span class="p">[]</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
+
+<span class="c1">// ハーブの種類ごとにSetを用意
+</span><span class="c1"></span><span class="err">Set&lt;Herb&gt;[] herbsByType </span><span class="o">=</span>
+   <span class="p">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;</span><span class="p">[])</span> <span class="k">new</span> <span class="n">Set</span><span class="p">[</span><span class="n">Herb</span><span class="p">.</span><span class="na">Type</span><span class="p">.</span><span class="na">values</span><span class="p">().</span><span class="na">length</span><span class="p">];</span> <span class="c1">// 無検査キャスト
+</span><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">herbsByType</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">herbsByType</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// ハーブを種類ごとに分類
+</span><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="err">Herb herb</span><span class="o">:</span> <span class="n">garden</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">herbsByType</span><span class="p">[</span><span class="n">herb</span><span class="p">.</span><span class="na">type</span><span class="p">.</span><span class="na">ordinal</span><span class="p">()].</span><span class="na">add</span><span class="p">(</span><span class="n">herb</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>欠点</p>
+
+<ul>
+<li>無検査キャストが発生</li>
+<li>配列の要素数以上のint値でアクセスすると<code>ArrayIndexOutOfBoundsException</code>が発生</li>
+</ul></li>
+</ul>
+
+<h3 id="4-3-a-name-enummap-a-enummap">4.3. <a name='EnumMap'></a>EnumMap</h3>
+
+<ul>
+<li>EnumMapはenum型をキーとしてMapを実装したクラス</li>
+
+<li><p>EnumMapで実装すると下のようになる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// ハーブの種類ごとに Set を用意
+</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Herb</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span> <span class="err">Set&lt;Herb&gt;&gt; map </span><span class="o">=</span> <span class="k">new</span> <span class="n">EnumMap</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Herb</span><span class="p">.</span><span class="na">Type</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="err">Herb.Type type</span><span class="o">:</span> <span class="n">Herb</span><span class="p">.</span><span class="na">Type</span><span class="p">.</span><span class="na">values</span><span class="p">()){</span>
+<span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// ハーブを種類ごとに分類
+</span><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="err">Herb herb</span><span class="o">:</span> <span class="n">garden</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">herb</span><span class="p">.</span><span class="na">type</span><span class="p">).</span><span class="na">add</span><span class="p">(</span><span class="n">herb</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="err">Herb.Type type</span><span class="o">:</span> <span class="n">Herb</span><span class="p">.</span><span class="na">Type</span><span class="p">.</span><span class="na">values</span><span class="p">()){</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">type</span><span class="o">+</span><span class="s">&#34; &#34;</span><span class="o">+</span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">type</span><span class="p">));</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>利点</p>
+
+<ul>
+<li>型安全である</li>
+<li><code>foreach</code>文が使えるので<code>ArrayIndexOutOfBoundsException</code>は発生しない</li>
+</ul></li>
+</ul>
 
 <h2 id="5-a-name-38enum-a-項目38-拡張可能なenumをインタフェースで模倣する">5. <a name='38enum'></a>項目38 拡張可能なenumをインタフェースで模倣する</h2>
 
