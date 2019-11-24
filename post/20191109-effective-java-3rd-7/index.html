@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="ラムダ式とストリーム Effective Java 第3版の個人的メモ 項目42 匿名クラスよりもラムダ式を選ぶ 項目43 ラムダよりもメソッド参照を選ぶ 項目44 標準の関数型イ" /><meta name="keywords" content="java, ラムダ式とストリーム, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ" /><meta name="keywords" content="java, ラムダ式とストリーム, 個人的メモ" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Effective Java 3rd [Chapter 7]" />
-<meta property="og:description" content="ラムダ式とストリーム Effective Java 第3版の個人的メモ 項目42 匿名クラスよりもラムダ式を選ぶ 項目43 ラムダよりもメソッド参照を選ぶ 項目44 標準の関数型イ" />
+<meta property="og:description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-7/" />
 <meta property="article:published_time" content="2019-11-09T00:37:53+09:00" />
 <meta property="article:modified_time" content="2019-11-09T00:37:53+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 7]">
-<meta itemprop="description" content="ラムダ式とストリーム Effective Java 第3版の個人的メモ 項目42 匿名クラスよりもラムダ式を選ぶ 項目43 ラムダよりもメソッド参照を選ぶ 項目44 標準の関数型イ">
+<meta itemprop="description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ">
 
 
 <meta itemprop="datePublished" content="2019-11-09T00:37:53&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:37:53&#43;09:00" />
-<meta itemprop="wordCount" content="7943">
+<meta itemprop="wordCount" content="7694">
 
 
 
 <meta itemprop="keywords" content="java,ラムダ式とストリーム,個人的メモ," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 7]"/>
-<meta name="twitter:description" content="ラムダ式とストリーム Effective Java 第3版の個人的メモ 項目42 匿名クラスよりもラムダ式を選ぶ 項目43 ラムダよりもメソッド参照を選ぶ 項目44 標準の関数型イ"/>
+<meta name="twitter:description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 7943 words </span>
+          <span class="more-meta"> 7694 words </span>
           <span class="more-meta"> 16 mins read </span>
         
       </div>
@@ -143,19 +143,19 @@
 
 <h1 id="ラムダ式とストリーム">ラムダ式とストリーム</h1>
 
-<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第3版</a>の個人的メモ</p>
+<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
 
 <!-- vscode-markdown-toc -->
 
 <ol>
-<li><a href="#42">項目42 匿名クラスよりもラムダ式を選ぶ</a></li>
-<li><a href="#43">項目43 ラムダよりもメソッド参照を選ぶ</a></li>
-<li><a href="#44">項目44 標準の関数型インタフェースを使う</a></li>
-<li><a href="#45">項目45 ストリームを注意して使う</a></li>
-<li><a href="#46">項目46 ストリームで副作用のない関数を選ぶ</a></li>
-<li><a href="#47StreamCollection">項目47 戻り値型としてStreamよりもCollectionを選ぶ</a></li>
-<li><a href="#48">項目48 ストリームを並列化するときは注意を払う</a></li>
-<li><a href="#URL">参考URL</a></li>
+<li><a href="#42">項目 42 匿名クラスよりもラムダ式を選ぶ</a></li>
+<li><a href="#43">項目 43 ラムダよりもメソッド参照を選ぶ</a></li>
+<li><a href="#44">項目 44 標準の関数型インタフェースを使う</a></li>
+<li><a href="#45">項目 45 ストリームを注意して使う</a></li>
+<li><a href="#46">項目 46 ストリームで副作用のない関数を選ぶ</a></li>
+<li><a href="#47StreamCollection">項目 47 戻り値型として Stream よりも Collection を選ぶ</a></li>
+<li><a href="#48">項目 48 ストリームを並列化するときは注意を払う</a></li>
+<li><a href="#URL">参考 URL</a></li>
 </ol>
 
 <!-- vscode-markdown-toc-config
@@ -165,7 +165,7 @@
 
 <!-- /vscode-markdown-toc -->
 
-<h2 id="1-a-name-42-a-項目42-匿名クラスよりもラムダ式を選ぶ">1. <a name='42'></a>項目42 匿名クラスよりもラムダ式を選ぶ</h2>
+<h2 id="1-a-name-42-a-項目-42-匿名クラスよりもラムダ式を選ぶ">1. <a name='42'></a>項目 42 匿名クラスよりもラムダ式を選ぶ</h2>
 
 <h3 id="1-1-a-name-a-結論">1.1. <a name=''></a>結論</h3>
 
@@ -195,11 +195,12 @@
 <span class="p">});</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>1行で済んでおり、自分への参照は不要なので、ラムダ式の方が良いですね。</p>
+<p>1 行で済んでおり、自分への参照は不要なので、ラムダ式の方が良いですね。</p>
 
 <blockquote>
 <p>そもそも匿名クラスとは、、<br>
 以下のように記述される処理のことですね。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -211,8 +212,7 @@
 <span class="n">メソッドの処理を記述</span>
 <span class="p">};</span></code></pre></td></tr></table>
 </div>
-</div></blockquote>
-
+</div>
 <h3 id="1-3-a-name-1-a-ラムダ式での実装">1.3. <a name='-1'></a>ラムダ式での実装</h3>
 
 <p><em>Anonymous.java</em></p>
@@ -228,18 +228,18 @@
 </span><span class="c1"></span><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Integer</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">(),</span> <span class="n">s2</span><span class="p">.</span><span class="na">length</span><span class="p">()));</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>数行で済んでおり、自分への参照はしておらず、<code>Collections.sort</code>の第2引数が関数型インターフェース(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Comparator.html">Comparator</a>)なので、ラムダ式が向いていますね。</p>
+<p>数行で済んでおり、自分への参照はしておらず、<code>Collections.sort</code>の第 2 引数が関数型インターフェース(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Comparator.html">Comparator</a>)なので、ラムダ式が向いていますね。</p>
 
 <blockquote>
 <p>関数型インタフェースとは、、<br>
-関数型インターフェースの条件は、大雑把に言って、定義されている抽象メソッドが1つだけあるインターフェース。(staticメソッドやObjectクラスにあるデフォルトメソッドはカウントしない。）</p>
+関数型インターフェースの条件は、大雑把に言って、定義されている抽象メソッドが 1 つだけあるインターフェース。(static メソッドや Object クラスにあるデフォルトメソッドはカウントしない。）</p>
 </blockquote>
 
-<p>Java8での関数型インタフェース一覧は<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">Oracle Java SE 8 (Uses of Class
+<p>Java8 での関数型インタフェース一覧は<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">Oracle Java SE 8 (Uses of Class
 java.lang.FunctionalInterface)</a>にあります。
-3rd party製のライブラリで<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/FunctionalInterface.html">@FunctionalInterface</a>が付いているインタフェースも、関数型インタフェースですね。</p>
+3rd party 製のライブラリで<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/FunctionalInterface.html">@FunctionalInterface</a>が付いているインタフェースも、関数型インタフェースですね。</p>
 
-<h2 id="2-a-name-43-a-項目43-ラムダよりもメソッド参照を選ぶ">2. <a name='43'></a>項目43 ラムダよりもメソッド参照を選ぶ</h2>
+<h2 id="2-a-name-43-a-項目-43-ラムダよりもメソッド参照を選ぶ">2. <a name='43'></a>項目 43 ラムダよりもメソッド参照を選ぶ</h2>
 
 <h3 id="2-1-a-name-1-a-結論">2.1. <a name='-1'></a>結論</h3>
 
@@ -252,7 +252,7 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <blockquote>
 <p>メソッド参照とは、、<br>
-関数型インターフェース（抽象メソッドが1つだけ定義されているインターフェース）の変数にメソッドそのものを代入することが出来る。これを「メソッド参照」と呼ぶ。</p>
+関数型インターフェース（抽象メソッドが 1 つだけ定義されているインターフェース）の変数にメソッドそのものを代入することが出来る。これを「メソッド参照」と呼ぶ。</p>
 </blockquote>
 
 <p><em>MethodRefAndLambdaExpression.java</em></p>
@@ -288,7 +288,7 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <h3 id="2-3-a-name-1-a-メソッド参照について深掘り">2.3. <a name='-1'></a>メソッド参照について深掘り</h3>
 
-<p>メソッド参照には、下記5種類がある。</p>
+<p>メソッド参照には、下記 5 種類がある。</p>
 
 <p>上記の例は、<code>System</code>クラスの<code>static</code>フィールド<code>out</code>の<code>println</code>メソッドなので、静的メソッド参照だったんですね。</p>
 
@@ -309,7 +309,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </tr>
 
 <tr>
-<td>非静的メソッド（インスタンス#1の場合）</td>
+<td>非静的メソッド（インスタンス#1 の場合）</td>
 <td><code>instance::method</code></td>
 <td><code>(args) -&gt; instance.method(args)</code></td>
 </tr>
@@ -342,7 +342,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <code>TypeName</code>が非静的な内部クラスである場合、コンストラクタ参照は外部クラスインスタンスのスコープ内でのみ有効です。（つまり、外からコンストラクタが見れる場合使えますよ。という内容です。）</p>
 </blockquote>
 
-<h2 id="3-a-name-44-a-項目44-標準の関数型インタフェースを使う">3. <a name='44'></a>項目44 標準の関数型インタフェースを使う</h2>
+<h2 id="3-a-name-44-a-項目-44-標準の関数型インタフェースを使う">3. <a name='44'></a>項目 44 標準の関数型インタフェースを使う</h2>
 
 <p>基本的には、標準の関数型インタフェースで事足りる。
 しかし、特定の場合に限っては独自の関数インタフェースを定義する必要がある。</p>
@@ -352,7 +352,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <ul>
 <li>使いやすく、すでに組み込まれている様々なメソッドの恩恵にあずかれる。</li>
 
-<li><p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">標準の関数型インタフェース</a>には、43個あり、主な6つは以下である。</p>
+<li><p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">標準の関数型インタフェース</a>には、43 個あり、主な 6 つは以下である。</p>
 
 <ul>
 <li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Function.html">Function<T></a></li>
@@ -390,7 +390,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <ul>
 <li>従来の書き方</li>
 <li>匿名クラスでの書き方</li>
-<li>lambda式を使った書き方</li>
+<li>lambda 式を使った書き方</li>
 <li>呼び出し方</li>
 </ul>
 
@@ -431,7 +431,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </div>
 </div></li>
 
-<li><p>lambda式を使った書き方</p>
+<li><p>lambda 式を使った書き方</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -489,7 +489,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </div>
 </div></li>
 
-<li><p>lambda式を使った書き方</p>
+<li><p>lambda 式を使った書き方</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -547,7 +547,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </div>
 </div></li>
 
-<li><p>lambda式を使った書き方</p>
+<li><p>lambda 式を使った書き方</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -607,7 +607,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </div>
 </div></li>
 
-<li><p>lambda式を使った書き方</p>
+<li><p>lambda 式を使った書き方</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -630,7 +630,7 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <h4 id="3-3-5-a-name-unaryoperatort-a-unaryoperator-t">3.3.5. <a name='UnaryOperatorT'></a>UnaryOperator<T></h4>
 
-<p>Stringを強調させるメソッドを例に記載します。</p>
+<p>String を強調させるメソッドを例に記載します。</p>
 
 <ul>
 <li><p>従来の書き方</p>
@@ -667,7 +667,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </div>
 </div></li>
 
-<li><p>lambda式を使った書き方</p>
+<li><p>lambda 式を使った書き方</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -727,7 +727,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </div>
 </div></li>
 
-<li><p>lambda式を使った書き方</p>
+<li><p>lambda 式を使った書き方</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -752,11 +752,11 @@ java.lang.FunctionalInterface)</a>にあります。
 </div></li>
 </ul>
 
-<h2 id="4-a-name-45-a-項目45-ストリームを注意して使う">4. <a name='45'></a>項目45 ストリームを注意して使う</h2>
+<h2 id="4-a-name-45-a-項目-45-ストリームを注意して使う">4. <a name='45'></a>項目 45 ストリームを注意して使う</h2>
 
 <h3 id="4-1-a-name-1-a-結論">4.1. <a name='-1'></a>結論</h3>
 
-<p>Stream処理により簡単になる場合は、主に以下である。<br>
+<p>Stream 処理により簡単になる場合は、主に以下である。<br>
 いつ<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a>を使うべきかという、かっちりとしたルールはない。</p>
 
 <ul>
@@ -770,12 +770,12 @@ java.lang.FunctionalInterface)</a>にあります。
 <p>次のようなことになるのであれば、使わないでおきましょう。</p>
 
 <ul>
-<li>Stream処理ばかりで、複雑になる場合</li>
-<li>char型の値のStream処理</li>
-<li>コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream処理にしない。</li>
+<li>Stream 処理ばかりで、複雑になる場合</li>
+<li>char 型の値の Stream 処理</li>
+<li>コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream 処理にしない。</li>
 </ul>
 
-<h3 id="4-2-a-name-stream-a-stream処理ばかりで-複雑になる場合">4.2. <a name='Stream'></a>Stream処理ばかりで、複雑になる場合</h3>
+<h3 id="4-2-a-name-stream-a-stream-処理ばかりで-複雑になる場合">4.2. <a name='Stream'></a>Stream 処理ばかりで、複雑になる場合</h3>
 
 <h4 id="4-2-1-a-name-1-a-改善前">4.2.1. <a name='-1'></a>改善前</h4>
 
@@ -882,7 +882,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<h3 id="4-3-a-name-charstream-a-char型の値のstream処理">4.3. <a name='charStream'></a>char型の値のStream処理</h3>
+<h3 id="4-3-a-name-charstream-a-char-型の値の-stream-処理">4.3. <a name='charStream'></a>char 型の値の Stream 処理</h3>
 
 <p><code>char</code>型の<code>Stream</code>処理は直感的でない動きをしうるので、原則として<code>char</code>型の値を<code>Stream</code>処理で扱うべきでない。</p>
 <div class="highlight"><div class="chroma">
@@ -907,7 +907,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="c1"></span> <span class="o">//</span> <span class="s">&#34;Hello, world!&#34;</span><span class="n">が表示</span></code></pre></td></tr></table>
 </div>
 </div>
-<h3 id="4-4-a-name-stream-a-コードブロック内-で出来ることを捨ててまで-stream処理にしない">4.4. <a name='...Stream'></a>コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream処理にしない。</h3>
+<h3 id="4-4-a-name-stream-a-コードブロック内-で出来ることを捨ててまで-stream-処理にしない">4.4. <a name='...Stream'></a>コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream 処理にしない。</h3>
 
 <p>関数型オブジェクトを使用した<code>Stream</code>処理で出来ず、コードブロック内(<code>{...}</code>)で出来ること。</p>
 
@@ -916,7 +916,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <li>内部メソッドの<code>return</code>, ループ内での<code>break</code>/<code>continue</code>, 例外スロー（ラムダ式では出来ない。）</li>
 </ul>
 
-<h2 id="5-a-name-46-a-項目46-ストリームで副作用のない関数を選ぶ">5. <a name='46'></a>項目46 ストリームで副作用のない関数を選ぶ</h2>
+<h2 id="5-a-name-46-a-項目-46-ストリームで副作用のない関数を選ぶ">5. <a name='46'></a>項目 46 ストリームで副作用のない関数を選ぶ</h2>
 
 <h3 id="5-1-a-name-1-a-前提">5.1. <a name='-1'></a>前提</h3>
 
@@ -986,7 +986,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </div>
 <h3 id="5-4-a-name-collectorshttps-docs-oracle-comjavasejp8docsapijavautilstreamcollectors-html-a-collectors-https-docs-oracle-com-javase-jp-8-docs-api-java-util-stream-collectors-html-を利用する">5.4. <a name='Collectorshttps:docs.oracle.comjavasejp8docsapijavautilstreamCollectors.html'></a><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html"><code>Collectors</code></a>を利用する。</h3>
 
-<p>ストリームパイプラインの可読性のために、Collectorsのメンバーはstaticインポートしておくべき。</p>
+<p>ストリームパイプラインの可読性のために、Collectors のメンバーは static インポートしておくべき。</p>
 
 <h4 id="5-4-1-a-name-tosettocollectiontolist-a-toset-tocollection-tolist">5.4.1. <a name='toSettoCollectiontoList'></a>toSet(), toCollection(), toList()</h4>
 
@@ -1007,7 +1007,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </div>
 <h4 id="5-4-2-a-name-tomap-a-tomap">5.4.2. <a name='toMap'></a>toMap()</h4>
 
-<p><code>toSet(), toCollection(), toList()</code>以外は、ストリームをMapにするためのものがほとんどである。</p>
+<p><code>toSet(), toCollection(), toList()</code>以外は、ストリームを Map にするためのものがほとんどである。</p>
 
 <p><code>toMap()</code>を使ったサンプルを載せる。</p>
 <div class="highlight"><div class="chroma">
@@ -1026,7 +1026,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">ENUM</span><span class="p">,</span> <span class="err">Integer&gt; map </span><span class="o">=</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">ENUM</span><span class="p">.</span><span class="na">values</span><span class="p">())</span>
     <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toMap</span><span class="p">(</span>
         <span class="c1">// key
-</span><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="p">,</span> 
+</span><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="p">,</span>
         <span class="c1">// value
 </span><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="p">.</span><span class="na">ordinal</span><span class="p">()</span>
     <span class="p">));</span></code></pre></td></tr></table>
@@ -1063,9 +1063,9 @@ java.lang.FunctionalInterface)</a>にあります。
 </div>
 <h4 id="5-4-3-a-name-groupingby-a-groupingby">5.4.3. <a name='groupingBy'></a>groupingBy()</h4>
 
-<p><code>groupingBy()</code>は、<code>classifier</code>をもとに要素をカテゴリー分けしたMapを生成する。</p>
+<p><code>groupingBy()</code>は、<code>classifier</code>をもとに要素をカテゴリー分けした Map を生成する。</p>
 
-<p><code>classifier</code>には、以下のサンプルの<code>t -&gt; t.length()</code> や 「項目45 ストリームを注意して使う」で紹介した<code>alphabetize(word)</code>が該当する。</p>
+<p><code>classifier</code>には、以下のサンプルの<code>t -&gt; t.length()</code> や 「項目 45 ストリームを注意して使う」で紹介した<code>alphabetize(word)</code>が該当する。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -1082,7 +1082,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="c1"></span><span class="o">//</span> <span class="p">{</span><span class="n">1</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">],</span> <span class="n">3</span><span class="o">=</span><span class="p">[</span><span class="n">bar</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">zzz</span><span class="p">]}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p><code>groupingBy()</code>の2つ引数を取るシンプルな例としては以下。</p>
+<p><code>groupingBy()</code>の 2 つ引数を取るシンプルな例としては以下。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -1129,7 +1129,7 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <ul>
 <li>入力値を型変換して、平均値を算出する。
-空ストリームの場合は0を返す。</li>
+空ストリームの場合は 0 を返す。</li>
 </ul></li>
 <li>summarizing*()
 
@@ -1154,7 +1154,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <li>flatMapping()
 
 <ul>
-<li>値をStreamに変換して他のコレクターを呼び出す。</li>
+<li>値を Stream に変換して他のコレクターを呼び出す。</li>
 </ul></li>
 <li>collectingAndThen()
 
@@ -1174,7 +1174,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <li>joining()
 
 <ul>
-<li>結合してStringにする。</li>
+<li>結合して String にする。</li>
 </ul></li>
 </ul>
 
@@ -1182,7 +1182,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <p><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html">Collectors</a>や<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html">Stream</a>の利用方法については、こちらのブログ(<a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a>, <a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a>)が入門として(大まかに把握するのに)良さそうである。</p>
 </blockquote>
 
-<h2 id="6-a-name-47streamcollection-a-項目47-戻り値型としてstreamよりもcollectionを選ぶ">6. <a name='47StreamCollection'></a>項目47 戻り値型としてStreamよりもCollectionを選ぶ</h2>
+<h2 id="6-a-name-47streamcollection-a-項目-47-戻り値型として-stream-よりも-collection-を選ぶ">6. <a name='47StreamCollection'></a>項目 47 戻り値型として Stream よりも Collection を選ぶ</h2>
 
 <h3 id="6-1-a-name-1-a-結論">6.1. <a name='-1'></a>結論</h3>
 
@@ -1202,11 +1202,11 @@ java.lang.FunctionalInterface)</a>にあります。
 <p>もしイテレーション処理やストリーム処理を使う場合は、使用するユーザーによっては、<code>ストリームからイテレートできるように変換するコード</code>を作る必要になることを念頭に置いておきましょう。</p>
 </blockquote>
 
-<h3 id="6-2-a-name-collection-a-collectionを利用する場合">6.2. <a name='Collection'></a>Collectionを利用する場合</h3>
+<h3 id="6-2-a-name-collection-a-collection-を利用する場合">6.2. <a name='Collection'></a>Collection を利用する場合</h3>
 
 <h4 id="6-2-1-a-name-1-a-返却する連続要素が小さい場合">6.2.1. <a name='-1'></a>返却する連続要素が小さい場合</h4>
 
-<p>Collectionを実装したもの(<code>ArrayList</code>や<code>HashSet</code>など)を返しましょう。</p>
+<p>Collection を実装したもの(<code>ArrayList</code>や<code>HashSet</code>など)を返しましょう。</p>
 
 <h4 id="6-2-2-a-name-1-a-返却する連続要素が大きい場合">6.2.2. <a name='-1'></a>返却する連続要素が大きい場合</h4>
 
@@ -1218,8 +1218,8 @@ java.lang.FunctionalInterface)</a>にあります。
 <code>{{}, {a}, {b}, {c}, {a, b}, {a, c}, {b, c}, {a, b, c}}</code></p>
 </blockquote>
 
-<p>このような場合は、<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Sets.java#L1537">GuavaのSets#powerSet()</a>などを利用しましょう。(もしThirdParty製のライブラリが無ければ、独自実装しましょう。)<br />
-中のロジックは、以下のようなSubsetを利用したビット演算である。</p>
+<p>このような場合は、<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Sets.java#L1537">Guava の Sets#powerSet()</a>などを利用しましょう。(もし ThirdParty 製のライブラリが無ければ、独自実装しましょう。)<br />
+中のロジックは、以下のような Subset を利用したビット演算である。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -1299,55 +1299,55 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Java program for power set 
-</span><span class="c1"></span><span class="err">import java </span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="o">*</span><span class="p">;</span> 
-  
-<span class="err">public class </span><span class="n">GFG</span> <span class="p">{</span> 
-      
-    <span class="err">static void </span><span class="n">printPowerSet</span><span class="p">(</span><span class="kt">char</span> <span class="p">[]</span><span class="n">set</span><span class="p">,</span> 
-                            <span class="err">int set_size</span><span class="p">)</span> 
-    <span class="p">{</span> 
-          
-        <span class="cm">/*set_size of power set of a set 
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Java program for power set
+</span><span class="c1"></span><span class="err">import java </span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="o">*</span><span class="p">;</span>
+
+<span class="err">public class </span><span class="n">GFG</span> <span class="p">{</span>
+
+    <span class="err">static void </span><span class="n">printPowerSet</span><span class="p">(</span><span class="kt">char</span> <span class="p">[]</span><span class="n">set</span><span class="p">,</span>
+                            <span class="err">int set_size</span><span class="p">)</span>
+    <span class="p">{</span>
+
+        <span class="cm">/*set_size of power set of a set
 </span><span class="cm">        with set_size n is (2**n -1)*/</span>
-        <span class="err">long pow_set_size </span><span class="o">=</span>  
-            <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">set_size</span><span class="p">);</span> 
-        <span class="err">int counter</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span> 
-      
-        <span class="cm">/*Run from counter 000..0 to 
+        <span class="err">long pow_set_size </span><span class="o">=</span>
+            <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">set_size</span><span class="p">);</span>
+        <span class="err">int counter</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+
+        <span class="cm">/*Run from counter 000..0 to
 </span><span class="cm">        111..1*/</span>
-        <span class="k">for</span><span class="p">(</span><span class="n">counter</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">counter</span> <span class="o">&lt;</span>  
-                <span class="n">pow_set_size</span><span class="p">;</span> <span class="n">counter</span><span class="o">++</span><span class="p">)</span> 
-        <span class="p">{</span> 
-            <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">set_size</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> 
-            <span class="p">{</span> 
-                <span class="cm">/* Check if jth bit in the  
-</span><span class="cm">                counter is set If set then  
+        <span class="k">for</span><span class="p">(</span><span class="n">counter</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">counter</span> <span class="o">&lt;</span>
+                <span class="n">pow_set_size</span><span class="p">;</span> <span class="n">counter</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">set_size</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="cm">/* Check if jth bit in the
+</span><span class="cm">                counter is set If set then
 </span><span class="cm">                print jth element from set */</span>
-                <span class="k">if</span><span class="p">((</span><span class="n">counter</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span> 
-                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">set</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span> 
-            <span class="p">}</span> 
-              
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span> 
-        <span class="p">}</span> 
-    <span class="p">}</span> 
-      
-    <span class="c1">// Driver program to test printPowerSet 
-</span><span class="c1"></span>    <span class="err">public static void main </span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> 
-    <span class="p">{</span> 
-        <span class="kt">char</span> <span class="p">[]</span><span class="n">set</span> <span class="o">=</span> <span class="p">{</span><span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">};</span> 
-        <span class="n">printPowerSet</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="n">3</span><span class="p">);</span> 
-    <span class="p">}</span> 
-<span class="p">}</span> 
-  
-<span class="o">//</span> <span class="err">This code is contributed by anuj_67</span><span class="p">.</span> </code></pre></td></tr></table>
+                <span class="k">if</span><span class="p">((</span><span class="n">counter</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span>
+                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">set</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Driver program to test printPowerSet
+</span><span class="c1"></span>    <span class="err">public static void main </span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">char</span> <span class="p">[]</span><span class="n">set</span> <span class="o">=</span> <span class="p">{</span><span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">};</span>
+        <span class="n">printPowerSet</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="n">3</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="err">This code is contributed by anuj_67</span><span class="p">.</span></code></pre></td></tr></table>
 </div>
 </div>
 <blockquote>
 <p>メモ：集合が<code>31</code>以上の要素を持っている場合、<code>GuavaのSets#powerSet()</code>は例外をスローする。べき集合の大きさが<code>2^31</code>以上となり、<code>int size()</code>の最大値(<code>2^31-1</code>)的に対応できないからである。</p>
 </blockquote>
 
-<h2 id="7-a-name-48-a-項目48-ストリームを並列化するときは注意を払う">7. <a name='48'></a>項目48 ストリームを並列化するときは注意を払う</h2>
+<h2 id="7-a-name-48-a-項目-48-ストリームを並列化するときは注意を払う">7. <a name='48'></a>項目 48 ストリームを並列化するときは注意を払う</h2>
 
 <h3 id="7-1-a-name-1-a-結論">7.1. <a name='-1'></a>結論</h3>
 
@@ -1458,7 +1458,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <h3 id="7-4-a-name-1-a-並列処理による性能向上">7.4. <a name='-1'></a>並列処理による性能向上</h3>
 
 <p>並列化が効率的に行える、素数計数関数のプログラムで確認する。<br />
-(以下の例では、<code>.parallel()</code>を付けたことにより、36秒 ⇨ 24秒 に短縮できています。)</p>
+(以下の例では、<code>.parallel()</code>を付けたことにより、36 秒 ⇨ 24 秒 に短縮できています。)</p>
 
 <blockquote>
 <p>素数計数関数とは、正の実数にそれ以下の素数の個数を対応させる関数のことであり、π(x) で表す。</p>
@@ -1564,31 +1564,31 @@ java.lang.FunctionalInterface)</a>にあります。
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<h2 id="8-a-name-url-a-参考url">8. <a name='URL'></a>参考URL</h2>
+<h2 id="8-a-name-url-a-参考-url">8. <a name='URL'></a>参考 URL</h2>
 
 <ul>
-<li><a href="https://qiita.com/nannany/items/7fa3bf6c3e7d69af8efd">effective java 3rdまとめ</a></li>
-<li><a href="https://qiita.com/minebreaker/items/de3b264093fd7c9639af">Effective Java Third Edition 2版からの更新点 個人的メモ</a></li>
+<li><a href="https://qiita.com/nannany/items/7fa3bf6c3e7d69af8efd">effective java 3rd まとめ</a></li>
+<li><a href="https://qiita.com/minebreaker/items/de3b264093fd7c9639af">Effective Java Third Edition 2 版からの更新点 個人的メモ</a></li>
 <li><a href="http://appresso.hatenablog.com/entry/2018/01/31/183452">Effective Java 第三版、ゲットだぜ！</a></li>
-<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/functionalinterface.html">Java関数型インターフェース</a></li>
-<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/methodreference.html">Javaメソッド参照・コンストラクター参照</a></li>
-<li><a href="https://www.sejuku.net/blog/22592#i">【楽チンJava】メソッド参照での呼び出し方</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/functionalinterface.html">Java 関数型インターフェース</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/methodreference.html">Java メソッド参照・コンストラクター参照</a></li>
+<li><a href="https://www.sejuku.net/blog/22592#i">【楽チン Java】メソッド参照での呼び出し方</a></li>
 <li><a href="https://riptutorial.com/ja/java/example/5080/%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%8F%82%E7%85%A7">RIP Tutorial メソッド参照</a></li>
-<li><a href="https://qiita.com/subaru44k/items/c55d9b9fc419f0d09c64">Java8のFunction, Consumer, Supplier, Predicateの調査</a></li>
+<li><a href="https://qiita.com/subaru44k/items/c55d9b9fc419f0d09c64">Java8 の Function, Consumer, Supplier, Predicate の調査</a></li>
 <li><a href="http://www.dcom-web.co.jp/lab/java/functional_interface">[Java]メソッドの引数にメソッドを渡す方法[関数型インターフェース]</a></li>
-<li><a href="https://qiita.com/sano1202/items/64593e8e981e8d6439d3">Java8のラムダ式を理解する</a></li>
+<li><a href="https://qiita.com/sano1202/items/64593e8e981e8d6439d3">Java8 のラムダ式を理解する</a></li>
 <li><a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/An-example-of-UnaryOperator-in-functional-Lambda-expressions">An example of UnaryOperator in functional Lambda expressions</a></li>
 <li><a href="http://pppurple.hatenablog.com/entry/2016/08/28/213734">Java8 Project Lambda (ラムダ式)</a></li>
-<li><a href="https://qiita.com/shintaness/items/f4c0a446ac168c730b89">Collectors.toMapで任意のMapクラスを返す</a></li>
+<li><a href="https://qiita.com/shintaness/items/f4c0a446ac168c730b89">Collectors.toMap で任意の Map クラスを返す</a></li>
 <li><a href="https://fits.hatenablog.com/entry/2015/04/20/205940">Java 8 でグルーピング処理 - List<V> を Map<K, V> へ変換</a></li>
 <li><a href="https://www.geeksforgeeks.org/java-8-collectors-counting-with-examples/">Java 8 | Collectors counting() with Examples</a></li>
 <li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a></li>
 <li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a></li>
 <li><a href="https://www.geeksforgeeks.org/power-set/">GeeksforGeeks</a></li>
-<li><a href="https://qiita.com/frost_star/items/a36e66dff419e7c07151">Java8 Streamのリダクション操作について</a></li>
-<li><a href="https://qiita.com/heatflat1021/items/fd09761df434f99cb829">短絡評価って本当に処理が速いの？ Javaにおける&amp;&amp;と&amp;の違い</a></li>
+<li><a href="https://qiita.com/frost_star/items/a36e66dff419e7c07151">Java8 Stream のリダクション操作について</a></li>
+<li><a href="https://qiita.com/heatflat1021/items/fd09761df434f99cb829">短絡評価って本当に処理が速いの？ Java における&amp;&amp;と&amp;の違い</a></li>
 <li><a href="http://mathworld.wolfram.com/PrimeCountingFunction.html">Prime Counting Function</a></li>
-<li><a href="https://www.atmarkit.co.jp/ait/articles/1405/20/news032_3.html">Stream APIの主なメソッドと処理結果のOptionalクラスの使い方 (<sup>3</sup>&frasl;<sub>4</sub>)</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1405/20/news032_3.html">Stream API の主なメソッドと処理結果の Optional クラスの使い方 (<sup>3</sup>&frasl;<sub>4</sub>)</a></li>
 </ul>
 
     </div>

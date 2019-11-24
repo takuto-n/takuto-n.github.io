@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメインXのサイトから、異なるドメインYのBA" /><meta name="keywords" content="CORS, クロスドメイン制約, BASIC認証" />
+<meta name="author" content="takuto_n" /><meta name="description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認" /><meta name="keywords" content="CORS, クロスドメイン制約, BASIC認証" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="クロスドメイン制約とBASIC認証" />
-<meta property="og:description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメインXのサイトから、異なるドメインYのBA" />
+<meta property="og:description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20190316-cors-basic_auth/" />
 <meta property="article:published_time" content="2019-03-16T23:09:42+09:00" />
 <meta property="article:modified_time" content="2019-03-16T23:09:42+09:00" />
 <meta itemprop="name" content="クロスドメイン制約とBASIC認証">
-<meta itemprop="description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメインXのサイトから、異なるドメインYのBA">
+<meta itemprop="description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認">
 
 
 <meta itemprop="datePublished" content="2019-03-16T23:09:42&#43;09:00" />
 <meta itemprop="dateModified" content="2019-03-16T23:09:42&#43;09:00" />
-<meta itemprop="wordCount" content="2994">
+<meta itemprop="wordCount" content="2536">
 
 
 
 <meta itemprop="keywords" content="CORS,クロスドメイン制約,BASIC認証," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="クロスドメイン制約とBASIC認証"/>
-<meta name="twitter:description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメインXのサイトから、異なるドメインYのBA"/>
+<meta name="twitter:description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/poc/"> poc </a>
             </div>
-          <span class="more-meta"> 2994 words </span>
+          <span class="more-meta"> 2536 words </span>
           <span class="more-meta"> 6 mins read </span>
         
       </div>
@@ -145,13 +145,13 @@
 
 <p>ご不明な点がありましたら、お気軽にコメント欄へ記入ください。</p>
 
-<p>初回は「<strong>ドメインXのサイトから、異なるドメインYのBASIC認証つきのサイトにアクセスできるのか</strong> 」について検証した結果を書きたいと思います。
+<p>初回は「<strong>ドメイン X のサイトから、異なるドメイン Y の BASIC 認証つきのサイトにアクセスできるのか</strong> 」について検証した結果を書きたいと思います。
 検証結果としては、</p>
 
 <blockquote>
 <ul>
-<li>ブラウザのセキュリティ設定をOnにしていればアクセスできません。</li>
-<li>ブラウザのセキュリティ設定をOffにしていればアクセス出来ます。</li>
+<li>ブラウザのセキュリティ設定を On にしていればアクセスできません。</li>
+<li>ブラウザのセキュリティ設定を Off にしていればアクセス出来ます。</li>
 </ul>
 </blockquote>
 
@@ -160,142 +160,148 @@
 <!-- TOC -->
 
 <ul>
-<li><a href="#basic認証について">BASIC認証について</a></li>
+<li><a href="#basic認証について">BASIC 認証について</a></li>
 <li><a href="#クロスドメイン制約について">クロスドメイン制約について</a></li>
 <li><a href="#corscross-origin-resource-sharingについて">CORS(Cross Origin Resource Sharing)について</a></li>
-<li><a href="#basic認証つきcorsについて">BASIC認証つきCORSについて</a></li>
+<li><a href="#basic認証つきcorsについて">BASIC 認証つき CORS について</a></li>
 </ul>
 
 <!-- /TOC -->
 
 <p><a id="markdown-basic認証について" name="basic認証について"></a></p>
 
-<h2 id="basic認証について">BASIC認証について</h2>
+<h2 id="basic-認証について">BASIC 認証について</h2>
 
-<p>まずBASIC認証とは、HTTPで定義される認証方式の一つです。</p>
+<p>まず BASIC 認証とは、HTTP で定義される認証方式の一つです。</p>
 
-<p>認証の仕方としてはブラウザ側で「ユーザ名:パスワード」をBase64でエンコードして、サーバー側へ送信します。</p>
+<p>認証の仕方としてはブラウザ側で「ユーザ名:パスワード」を Base64 でエンコードして、サーバー側へ送信します。</p>
 
-<p>サーバー側では受信したBase64のデータをデコードし、ユーザー名とパスワードを取得して、認証を行う処理方式のことを指します。</p>
+<p>サーバー側では受信した Base64 のデータをデコードし、ユーザー名とパスワードを取得して、認証を行う処理方式のことを指します。</p>
 
 <p><a id="markdown-クロスドメイン制約について" name="クロスドメイン制約について"></a></p>
 
 <h2 id="クロスドメイン制約について">クロスドメイン制約について</h2>
 
-<p>2つ目にクロスドメイン制約とは、「<strong>ブラウザ上で実行されるJavaScriptは同じドメインにしかリクエストの送信やクッキーの編集を行えない</strong>」という制限のことです。</p>
+<p>2 つ目にクロスドメイン制約とは、「<strong>ブラウザ上で実行される JavaScript は同じドメインにしかリクエストの送信やクッキーの編集を行えない</strong>」という制限のことです。</p>
 
 <p>この制限がある理由は、<strong>あるサイトから悪意のあるサイトに勝手にアクセスできないようにするため</strong>です。
 もし、あるサイトから異なるドメインのサイトへアクセスしたい場合は、次の２つの方法があります。</p>
 
 <ol>
-<li>HTTPのリクエストヘッダに許可する外部ドメインを設定する方法</li>
+<li>HTTP のリクエストヘッダに許可する外部ドメインを設定する方法</li>
 <li>JSONP(JSON with padding)</li>
 </ol>
 
-<p>1つ目の方法は、HTTPのリクエストヘッダ「Access-Control-Allow-Origin」に、外部ドメインを設定する方法です。</p>
+<p>1 つ目の方法は、HTTP のリクエストヘッダ「Access-Control-Allow-Origin」に、外部ドメインを設定する方法です。</p>
 
-<p>2つ目の方法は、あるドメインXのサイトにJavaScriptを置き、その場所をドメインYのサイトにあらかじめ教えておきます。ドメインYからドメインXのJavaScriptを取得・実行すると、結果としてドメインYからドメインXのサイト内のデータにアクセスできるという方法です。</p>
+<p>2 つ目の方法は、あるドメイン X のサイトに JavaScript を置き、その場所をドメイン Y のサイトにあらかじめ教えておきます。ドメイン Y からドメイン X の JavaScript を取得・実行すると、結果としてドメイン Y からドメイン X のサイト内のデータにアクセスできるという方法です。</p>
 
-<p>今回は方法1で実現できる方法について検証します。</p>
+<p>今回は方法 1 で実現できる方法について検証します。</p>
 
 <blockquote>
-<p>方法2のJSONPは、ここでは詳しく説明しませんが、JSONPインジェクションという攻撃を受ける可能性があるため、方法1を採用します。</p>
+<p>方法 2 の JSONP は、ここでは詳しく説明しませんが、JSONP インジェクションという攻撃を受ける可能性があるため、方法 1 を採用します。</p>
 </blockquote>
 
 <p><a id="markdown-corscross-origin-resource-sharingについて" name="corscross-origin-resource-sharingについて"></a></p>
 
 <h2 id="cors-cross-origin-resource-sharing-について">CORS(Cross Origin Resource Sharing)について</h2>
 
-<p>CORS(Cross Origin Resource Sharing)は、JavaScriptでクロスドメインにアクセスする方法です。さきほど述べていたドメインとオリジンはほぼ同義です。
-クロスしている(異なる)オリジン（≒ドメイン）とリソースをシェアする方法です。</p>
+<p>CORS(Cross Origin Resource Sharing)は、JavaScript でクロスドメインにアクセスする方法です。さきほど述べていたドメインとオリジンはほぼ同義です。
+クロスしている(異なる)オリジン（≒ ドメイン）とリソースをシェアする方法です。</p>
 
-<p>CORSでは、JavaScriptで異なるドメインにアクセスする際に、シンプルなリクエストでない場合、preflightリクエストと呼ばれる通信がなされます。
-preflightリクエストとは、アクセスの許可設定を確認するための通信です。
-preflightリクエストが送られる条件については<a href="https://dev.classmethod.jp/etc/about-cors/">CORS(Cross-Origin Resource Sharing)について整理してみた ｜ DevelopersIO</a>をご覧ください。</p>
+<p>CORS では、JavaScript で異なるドメインにアクセスする際に、シンプルなリクエストでない場合、preflight リクエストと呼ばれる通信がなされます。
+preflight リクエストとは、アクセスの許可設定を確認するための通信です。
+preflight リクエストが送られる条件については<a href="https://dev.classmethod.jp/etc/about-cors/">CORS(Cross-Origin Resource Sharing)について整理してみた ｜ DevelopersIO</a>をご覧ください。</p>
 
-<p>CORSの動作の流れは主に２パターンあり、以下で説明します。</p>
+<p>CORS の動作の流れは主に２パターンあり、以下で説明します。</p>
 
 <blockquote>
-<p>【操作・設定の前提】
-* ブラウザは現在aaa.comに接続している。
-* サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。
-* bbb.comでは、aaa.comからのアクセス許可設定をしている。</p>
+<p>【操作・設定の前提】</p>
+
+<ul>
+<li>ブラウザは現在 aaa.com に接続している。</li>
+<li>サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。</li>
+<li>bbb.com では、aaa.com からのアクセス許可設定をしている。</li>
+</ul>
 </blockquote>
 
 <ol>
-<li>preflightリクエストなしの場合
+<li>preflight リクエストなしの場合
 
 <ol>
-<li>ブラウザがbbb.comにリクエストを送信する。</li>
-<li>aaa.comがbbb.comへのアクセスを許可しているため、ブラウザは欲しかった情報をbbb.comから取得できる。</li>
+<li>ブラウザが bbb.com にリクエストを送信する。</li>
+<li>aaa.com が bbb.com へのアクセスを許可しているため、ブラウザは欲しかった情報を bbb.com から取得できる。</li>
 </ol></li>
-<li>preflightリクエストありの場合
+<li>preflight リクエストありの場合
 
 <ol>
-<li>ブラウザからbbb.comにprefightリクエストを送信する。</li>
-<li>bbb.comがaaa.comからのアクセス許可設定を確認し、確認結果をブラウザに送信する。</li>
-<li>確認結果が良ければ、ブラウザはbbb.comにリクエストを送信する。</li>
-<li>bbb.comはブラウザにレスポンスを送信する。</li>
+<li>ブラウザから bbb.com に prefight リクエストを送信する。</li>
+<li>bbb.com が aaa.com からのアクセス許可設定を確認し、確認結果をブラウザに送信する。</li>
+<li>確認結果が良ければ、ブラウザは bbb.com にリクエストを送信する。</li>
+<li>bbb.com はブラウザにレスポンスを送信する。</li>
 </ol></li>
 </ol>
 
-<p><strong>パターン①の場合は1往復で済むのに対し、パターン②の場合は確認作業があるため、2往復必要ということになります。</strong></p>
+<p><strong>パターン ① の場合は 1 往復で済むのに対し、パターン ② の場合は確認作業があるため、2 往復必要ということになります。</strong></p>
 
 <blockquote>
-<p>ただし、ブラウザのセキュリティ設定がOffであればpreflightリクエストで確認しないため、いずれの場合も必ず1往復になります。（preflightリクエストは安全を担保するための確認処理であるため、セキュリティ設定をOffにすれば発生しない。）</p>
+<p>ただし、ブラウザのセキュリティ設定が Off であれば preflight リクエストで確認しないため、いずれの場合も必ず 1 往復になります。（preflight リクエストは安全を担保するための確認処理であるため、セキュリティ設定を Off にすれば発生しない。）</p>
 </blockquote>
 
 <p><a id="markdown-basic認証つきcorsについて" name="basic認証つきcorsについて"></a></p>
 
-<h2 id="basic認証つきcorsについて">BASIC認証つきCORSについて</h2>
+<h2 id="basic-認証つき-cors-について">BASIC 認証つき CORS について</h2>
 
-<p>最後に本記事の目的であるBASIC認証つきCORSについて説明します。</p>
+<p>最後に本記事の目的である BASIC 認証つき CORS について説明します。</p>
 
-<p>先ほどの環境の前提に、1つ条件を加えます。</p>
+<p>先ほどの環境の前提に、1 つ条件を加えます。</p>
 
 <blockquote>
-<p>【操作・設定の前提】
-* ブラウザは現在aaa.comに接続している。
-* サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。
-* bbb.comでは、aaa.comからのアクセス許可設定をしている。
-* 【追加条件】: アクセス先のbbb.comにBASIC認証をかけている。</p>
+<p>【操作・設定の前提】</p>
+
+<ul>
+<li>ブラウザは現在 aaa.com に接続している。</li>
+<li>サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。</li>
+<li>bbb.com では、aaa.com からのアクセス許可設定をしている。</li>
+<li>【追加条件】: アクセス先の bbb.com に BASIC 認証をかけている。</li>
+</ul>
 </blockquote>
 
-<p>この状態の時に、CORSが可能かどうかについて述べます。</p>
+<p>この状態の時に、CORS が可能かどうかについて述べます。</p>
 
 <ol>
-<li>BASIC認証情報付きのCORS(Authorizationヘッダ付き)
+<li>BASIC 認証情報付きの CORS(Authorization ヘッダ付き)
 
 <ol>
-<li>ブラウザからbbb.comへのアクセスは、Authorizationヘッダつきであるため、まずpreflightリクエストを送信します。</li>
-<li>preflightリクエストにはAuthorizationヘッダは付いていないため、bbb.com側ではBASIC認証が解除できず、認証エラーをブラウザに返します。</li>
-<li>ブラウザはbbb.comへアクセス出来ずに通信終了となる。</li>
+<li>ブラウザから bbb.com へのアクセスは、Authorization ヘッダつきであるため、まず preflight リクエストを送信します。</li>
+<li>preflight リクエストには Authorization ヘッダは付いていないため、bbb.com 側では BASIC 認証が解除できず、認証エラーをブラウザに返します。</li>
+<li>ブラウザは bbb.com へアクセス出来ずに通信終了となる。</li>
 </ol></li>
-<li>BASIC認証情報なしのCORS(Authorizationヘッダなし)
+<li>BASIC 認証情報なしの CORS(Authorization ヘッダなし)
 
 <ol>
-<li>ブラウザからbbb.comへアクセスします。</li>
-<li>bbb.comでBASIC認証が解除できず、認証エラーとなりブラウザへ返します。</li>
-<li>ブラウザはbbb.comへアクセス出来ずに処理終了となる。</li>
+<li>ブラウザから bbb.com へアクセスします。</li>
+<li>bbb.com で BASIC 認証が解除できず、認証エラーとなりブラウザへ返します。</li>
+<li>ブラウザは bbb.com へアクセス出来ずに処理終了となる。</li>
 </ol></li>
 </ol>
 
-<p>上記理由で、通常であればいずれの場合であっても Basic認証付きCORSはできません。</p>
+<p>上記理由で、通常であればいずれの場合であっても Basic 認証付き CORS はできません。</p>
 
-<p><strong>しかし、ブラウザのセキュリティ設定がOffであれば、パターン①は以下のように変わり、Basic認証付きCORSができるようになる。</strong></p>
+<p><strong>しかし、ブラウザのセキュリティ設定が Off であれば、パターン ① は以下のように変わり、Basic 認証付き CORS ができるようになる。</strong></p>
 
 <blockquote>
-<p>※ブラウザのセキュリティ設定がOffであればpreflightが発生しない。</p>
+<p>※ブラウザのセキュリティ設定が Off であれば preflight が発生しない。</p>
 </blockquote>
 
 <ol>
-<li>BASIC認証情報付きのCORS(Authorizationヘッダ付き)
+<li>BASIC 認証情報付きの CORS(Authorization ヘッダ付き)
 
 <ol>
-<li>ブラウザはaaa.comからJavaScriptを取得し、bbb.comへXMLHttpRequestが実行される。[Authorizationヘッダつきであるが、preflightリクエストは発生しない。]</li>
-<li>ブラウザからAuthorizationヘッダ付きリクエストがbbb.comへ送られる。</li>
-<li>Authorizationヘッダにユーザーとパスワードの情報があるため、bbb.comでBASIC認証が解除され、ブラウザに正常時のレスポンスを返します。</li>
-<li>ブラウザはbbb.comからレスポンスを受け取り、正常終了となる。</li>
+<li>ブラウザは aaa.com から JavaScript を取得し、bbb.com へ XMLHttpRequest が実行される。[Authorization ヘッダつきであるが、preflight リクエストは発生しない。]</li>
+<li>ブラウザから Authorization ヘッダ付きリクエストが bbb.com へ送られる。</li>
+<li>Authorization ヘッダにユーザーとパスワードの情報があるため、bbb.com で BASIC 認証が解除され、ブラウザに正常時のレスポンスを返します。</li>
+<li>ブラウザは bbb.com からレスポンスを受け取り、正常終了となる。</li>
 </ol></li>
 </ol>
 
@@ -303,8 +309,8 @@ preflightリクエストが送られる条件については<a href="https://dev
 
 <blockquote>
 <ul>
-<li>ブラウザのセキュリティ設定をOnにしていればアクセスできません。</li>
-<li>ブラウザのセキュリティ設定をOffにしていればアクセス出来ます。</li>
+<li>ブラウザのセキュリティ設定を On にしていればアクセスできません。</li>
+<li>ブラウザのセキュリティ設定を Off にしていればアクセス出来ます。</li>
 </ul>
 </blockquote>
 

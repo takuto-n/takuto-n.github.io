@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="AWS CodeBuildからMattermostへ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild" /><meta name="keywords" content="codebuild, mattermost, aws" />
+<meta name="author" content="takuto_n" /><meta name="description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi" /><meta name="keywords" content="codebuild, mattermost, aws" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="AWS CodebuildからMattermostへの通知" />
-<meta property="og:description" content="AWS CodeBuildからMattermostへ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild" />
+<meta property="og:description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20190914-codebuild_mattermost/" />
 <meta property="article:published_time" content="2019-09-14T12:09:20+09:00" />
 <meta property="article:modified_time" content="2019-09-14T12:09:20+09:00" />
 <meta itemprop="name" content="AWS CodebuildからMattermostへの通知">
-<meta itemprop="description" content="AWS CodeBuildからMattermostへ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild">
+<meta itemprop="description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi">
 
 
 <meta itemprop="datePublished" content="2019-09-14T12:09:20&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-14T12:09:20&#43;09:00" />
-<meta itemprop="wordCount" content="1022">
+<meta itemprop="wordCount" content="975">
 
 
 
 <meta itemprop="keywords" content="codebuild,mattermost,notification," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AWS CodebuildからMattermostへの通知"/>
-<meta name="twitter:description" content="AWS CodeBuildからMattermostへ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild"/>
+<meta name="twitter:description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,19 +131,19 @@
         <div class="post-category">
             <a href="/categories/cicd/"> cicd </a>
             </div>
-          <span class="more-meta"> 1022 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 975 words </span>
+          <span class="more-meta"> 2 mins read </span>
         
       </div>
     </header>
 
     
     <div class="post-content">
-      <p>AWS CodeBuildからMattermostへ通知させる機会があったので、その方法についての備忘録として残しておきます。</p>
+      <p>AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。</p>
 
-<p>AWS CodeBuildの環境変数 <code>MattermostWebhookURL</code> に<code>Mattermost</code>の<code>Incomming Webhook URL</code>を保持しておきます。また、IAMからCodeBuildのロールに <code>AmazonSSMReadOnlyAccess</code>の権限を与えてください。</p>
+<p>AWS CodeBuild の環境変数 <code>MattermostWebhookURL</code> に<code>Mattermost</code>の<code>Incomming Webhook URL</code>を保持しておきます。また、IAM から CodeBuild のロールに <code>AmazonSSMReadOnlyAccess</code>の権限を与えてください。</p>
 
-<p><code>Mattermost</code>の<code>Incomming Webhook URL</code>の発行は、Mattermost上で <code>Account Settings → Integrations → Incoming Webhooks</code> から出来ます。</p>
+<p><code>Mattermost</code>の<code>Incomming Webhook URL</code>の発行は、Mattermost 上で <code>Account Settings → Integrations → Incoming Webhooks</code> から出来ます。</p>
 
 <p>下記ファイルが、実際の設定内容です。<code>[~]</code> 部分は、適宜変更してください。</p>
 
@@ -263,7 +263,7 @@ curl -X POST --data-urlencode <span class="s1">&#39;payload={&#34;channel&#34;: 
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml">version<span class="p">:</span><span class="w"> </span><span class="m">0.2</span><span class="w">
-</span><span class="w"> 
+</span><span class="w">
 </span><span class="w"></span>phases<span class="p">:</span><span class="w">
 </span><span class="w">  </span>install<span class="p">:</span><span class="w">
 </span><span class="w">    </span>runtime-versions<span class="p">:</span><span class="w">
@@ -283,7 +283,7 @@ curl -X POST --data-urlencode <span class="s1">&#39;payload={&#34;channel&#34;: 
 </span><span class="w">      </span>-<span class="w"> </span>./codebuild-to-mattermost.sh<span class="w"> </span>build-message.txt<span class="w"> </span>${MattermostWebhookURL}</code></pre></td></tr></table>
 </div>
 </div>
-<p><em>Mattermostへの通知Sample</em></p>
+<p><em>Mattermost への通知 Sample</em></p>
 
 <blockquote>
 <p>sample_repo <a>#BUILD_ARN</a> of branch/master by takuto_n <br>

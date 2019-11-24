@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="すべてのオブジェクトに共通のメソッド Effective Java 第3版の個人的メモ 項目10 equalsのoverrideは一般契約（general contracts" /><meta name="keywords" content="java, すべてのオブジェクトに共通のメソッド, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="すべてのオブジェクトに共通のメソッド Effective Java 第 3 版の個人的メモ 項目 10 equals の override は一般契約（general contracts）に従うべし 項目 11 equals をオー" /><meta name="keywords" content="java, すべてのオブジェクトに共通のメソッド, 個人的メモ" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Effective Java 3rd [Chapter 3]" />
-<meta property="og:description" content="すべてのオブジェクトに共通のメソッド Effective Java 第3版の個人的メモ 項目10 equalsのoverrideは一般契約（general contracts" />
+<meta property="og:description" content="すべてのオブジェクトに共通のメソッド Effective Java 第 3 版の個人的メモ 項目 10 equals の override は一般契約（general contracts）に従うべし 項目 11 equals をオー" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/" />
 <meta property="article:published_time" content="2019-09-21T19:17:52+09:00" />
 <meta property="article:modified_time" content="2019-09-29T19:17:52+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 3]">
-<meta itemprop="description" content="すべてのオブジェクトに共通のメソッド Effective Java 第3版の個人的メモ 項目10 equalsのoverrideは一般契約（general contracts">
+<meta itemprop="description" content="すべてのオブジェクトに共通のメソッド Effective Java 第 3 版の個人的メモ 項目 10 equals の override は一般契約（general contracts）に従うべし 項目 11 equals をオー">
 
 
 <meta itemprop="datePublished" content="2019-09-21T19:17:52&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-29T19:17:52&#43;09:00" />
-<meta itemprop="wordCount" content="3797">
+<meta itemprop="wordCount" content="3478">
 
 
 
 <meta itemprop="keywords" content="java,すべてのオブジェクトに共通のメソッド,個人的メモ," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 3]"/>
-<meta name="twitter:description" content="すべてのオブジェクトに共通のメソッド Effective Java 第3版の個人的メモ 項目10 equalsのoverrideは一般契約（general contracts"/>
+<meta name="twitter:description" content="すべてのオブジェクトに共通のメソッド Effective Java 第 3 版の個人的メモ 項目 10 equals の override は一般契約（general contracts）に従うべし 項目 11 equals をオー"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 3797 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 3478 words </span>
+          <span class="more-meta"> 7 mins read </span>
         
       </div>
     </header>
@@ -143,16 +143,16 @@
 
 <h1 id="すべてのオブジェクトに共通のメソッド">すべてのオブジェクトに共通のメソッド</h1>
 
-<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第3版</a>の個人的メモ</p>
+<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
 
 <!-- vscode-markdown-toc -->
 
 <ol>
-<li><a href="#10equalsoverridegeneralcontracts">項目10 equalsのoverrideは一般契約（general contracts）に従うべし</a></li>
-<li><a href="#11equalshashcode">項目11 equalsをオーバーライドする場合はhashcodeもオーバーライドせよ</a></li>
-<li><a href="#12toString">項目12 常にtoStringをオーバーライドせよ</a></li>
-<li><a href="#13clone">項目13 cloneをオーバーライドするときは注意せよ</a></li>
-<li><a href="#14Comparable">項目14 Comparableを実装することを考慮せよ</a></li>
+<li><a href="#10equalsoverridegeneralcontracts">項目 10 equals の override は一般契約（general contracts）に従うべし</a></li>
+<li><a href="#11equalshashcode">項目 11 equals をオーバーライドする場合は hashcode もオーバーライドせよ</a></li>
+<li><a href="#12toString">項目 12 常に toString をオーバーライドせよ</a></li>
+<li><a href="#13clone">項目 13 clone をオーバーライドするときは注意せよ</a></li>
+<li><a href="#14Comparable">項目 14 Comparable を実装することを考慮せよ</a></li>
 </ol>
 
 <!-- vscode-markdown-toc-config
@@ -162,14 +162,14 @@
 
 <!-- /vscode-markdown-toc -->
 
-<h2 id="1-a-name-10equalsoverridegeneralcontracts-a-項目10-equalsのoverrideは一般契約-general-contracts-に従うべし">1. <a name='10equalsoverridegeneralcontracts'></a>項目10 equalsのoverrideは一般契約（general contracts）に従うべし</h2>
+<h2 id="1-a-name-10equalsoverridegeneralcontracts-a-項目-10-equals-の-override-は一般契約-general-contracts-に従うべし">1. <a name='10equalsoverridegeneralcontracts'></a>項目 10 equals の override は一般契約（general contracts）に従うべし</h2>
 
 <h3 id="1-1-a-name-a-どういう時にオーバーライドする必要があるのか">1.1. <a name=''></a>どういう時にオーバーライドする必要があるのか？</h3>
 
 <p><em>クラスが単なるオブジェクトの同一性とは異なる論理的等価性という概念を持っていて、他のインスタンスと比較する必要があるとき</em></p>
 
 <blockquote>
-<p>ただし、スーパークラスがequalsをオーバーライドしていないこと。</p>
+<p>ただし、スーパークラスが equals をオーバーライドしていないこと。</p>
 </blockquote>
 
 <h3 id="1-2-a-name-1-a-どうやってオーバーライドすれば良いのか">1.2. <a name='-1'></a>どうやってオーバーライドすれば良いのか？</h3>
@@ -179,46 +179,46 @@
 <p>以下のツールを使うと簡単に一般契約に従ったコードにできる。</p>
 
 <ol>
-<li>Annotation Processor(Java 6から追加)
+<li>Annotation Processor(Java 6 から追加)</li>
+</ol>
 
 <ul>
 <li><code>lombok</code>の<code>@Data</code>など</li>
-<li>欠点：Annotation Processorを2つ利用していて、<code>@Data</code>とは別のAnnotationが<code>setter()</code>を要求している場合、コンパイルエラーとなる場合がある。
+<li>欠点：Annotation Processor を 2 つ利用していて、<code>@Data</code>とは別の Annotation が<code>setter()</code>を要求している場合、コンパイルエラーとなる場合がある。
 <code>@Data</code>が後で処理されるようになっていると、<code>setter()</code>がないからである。この場合はどうしようもない。。</li>
-</ul></li>
-</ol>
+</ul>
 
 <blockquote>
-<p>Annotation Processorは、コンパイル時に処理される。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、<code>setter/getter/equals/hashCode/toString</code>メソッドのバイトコードを<code>.class</code>に突っ込んでくれる。</p>
+<p>Annotation Processor は、コンパイル時に処理される。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、<code>setter/getter/equals/hashCode/toString</code>メソッドのバイトコードを<code>.class</code>に突っ込んでくれる。</p>
 </blockquote>
 
 <ol>
-<li>EclipseやIntellijの自動生成機能
-
-<ul>
-<li>GUIで簡単に生成可能</li>
-<li>欠点：メンバ変数を追加した際には、その都度、GUIで実行しないといけないから手間である。</li>
-</ul></li>
+<li>Eclipse や Intellij の自動生成機能</li>
 </ol>
 
-<h2 id="2-a-name-11equalshashcode-a-項目11-equalsをオーバーライドする場合はhashcodeもオーバーライドせよ">2. <a name='11equalshashcode'></a>項目11 equalsをオーバーライドする場合はhashcodeもオーバーライドせよ</h2>
+<ul>
+<li>GUI で簡単に生成可能</li>
+<li>欠点：メンバ変数を追加した際には、その都度、GUI で実行しないといけないから手間である。</li>
+</ul>
 
-<h3 id="2-1-a-name-hashcode-a-hashcodeもオーバーライドしないとどうなるのか">2.1. <a name='hashcode'></a>hashcodeもオーバーライドしないとどうなるのか？</h3>
+<h2 id="2-a-name-11equalshashcode-a-項目-11-equals-をオーバーライドする場合は-hashcode-もオーバーライドせよ">2. <a name='11equalshashcode'></a>項目 11 equals をオーバーライドする場合は hashcode もオーバーライドせよ</h2>
+
+<h3 id="2-1-a-name-hashcode-a-hashcode-もオーバーライドしないとどうなるのか">2.1. <a name='hashcode'></a>hashcode もオーバーライドしないとどうなるのか？</h3>
 
 <p><em>論理的に等しいが、<code>hashCode</code>の値は異なることになってしまう。</em></p>
 
 <p>論理的に等しいのに異なってしまうのはおかしいので、<code>hashCode</code>も同じであるべきである。</p>
 
 <ol>
-<li>論理的に等しい（フィールド値が同じである）ので、その値を使ったHash関数を作成しましょう。</li>
+<li>論理的に等しい（フィールド値が同じである）ので、その値を使った Hash 関数を作成しましょう。</li>
 </ol>
 
 <p>こちらも以下のツールを使いましょう</p>
 
 <ol>
-<li><p>Annotation Processor(Java 6から追加)</p></li>
+<li><p>Annotation Processor(Java 6 から追加)</p></li>
 
-<li><p>EclipseやIntellijの自動生成機能</p></li>
+<li><p>Eclipse や Intellij の自動生成機能</p></li>
 </ol>
 
 <p><em>PhoneNumber.java</em></p>
@@ -262,13 +262,13 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<h3 id="2-2-a-name-volatile-a-余談-volatile修飾子について">2.2. <a name='volatile'></a>【余談】volatile修飾子について</h3>
+<h3 id="2-2-a-name-volatile-a-余談-volatile-修飾子について">2.2. <a name='volatile'></a>【余談】volatile 修飾子について</h3>
 
 <blockquote>
-<p>項番78「共有されるmutableなデータには、同期したアクセスをすべし」で説明されるらしいですが、、この章に出てきたので。</p>
+<p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」で説明されるらしいですが、、この章に出てきたので。</p>
 </blockquote>
 
-<h4 id="2-2-1-a-name-volatile-1-a-volatile修飾子とは">2.2.1. <a name='volatile-1'></a>volatile修飾子とは？</h4>
+<h4 id="2-2-1-a-name-volatile-1-a-volatile-修飾子とは">2.2.1. <a name='volatile-1'></a>volatile 修飾子とは？</h4>
 
 <p><code>volatile修飾子</code>をつけると、「必ずメモリに書く」ようになる。</p>
 
@@ -277,13 +277,13 @@
 これをスレッドキャッシュへの書き込みをせず、メモリ書き込みを最初からさせるようにするのが、<code>volatile修飾子</code>である。</p>
 </blockquote>
 
-<p>ただし、<a href="https://qiita.com/YukiMiyatake/items/0062c24b8a576eaab920">「volatileで排他制御出来ると、いつから思ってた？ atomicやsynchronized使うべし」</a>に記載があるように、<code>volatile修飾子</code>では排他制御はできない。。</p>
+<p>ただし、<a href="https://qiita.com/YukiMiyatake/items/0062c24b8a576eaab920">「volatile で排他制御出来ると、いつから思ってた？ atomic や synchronized 使うべし」</a>に記載があるように、<code>volatile修飾子</code>では排他制御はできない。。</p>
 
 <p>そのため、結局は、<code>atomic</code>や<code>synchronized</code>を使って、排他制御することになる。</p>
 
 <h4 id="2-2-2-a-name-volatile-1-a-volatile修飾子-の使い所について">2.2.2. <a name='volatile-1'></a><code>volatile修飾子</code>の使い所について</h4>
 
-<p>項番78を見たところ、以下のdouble-checked lockingの話が出ているが、<a href="https://www.ibm.com/developerworks/jp/java/library/j-dcl/index.html">double-checked lockingとSingletonパターン</a>を読んだところ、結局、<code>volatile修飾子</code>は使えず、<code>同期化を受け入れる</code>か、<code>static field</code> を使うようである、、、つまり<code>volatile修飾子</code>は使われないよう、、、いつ使うねん。。笑</p>
+<p>項番 78 を見たところ、以下の double-checked locking の話が出ているが、<a href="https://www.ibm.com/developerworks/jp/java/library/j-dcl/index.html">double-checked locking と Singleton パターン</a>を読んだところ、結局、<code>volatile修飾子</code>は使えず、<code>同期化を受け入れる</code>か、<code>static field</code> を使うようである、、、つまり<code>volatile修飾子</code>は使われないよう、、、いつ使うねん。。笑</p>
 
 <p><em>Singleton.java</em></p>
 <div class="highlight"><div class="chroma">
@@ -313,18 +313,18 @@
 </div>
 </div>
 <blockquote>
-<p>項番78「共有されるmutableなデータには、同期したアクセスをすべし」まで、とりあえずは放置しておくことにする。</p>
+<p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」まで、とりあえずは放置しておくことにする。</p>
 </blockquote>
 
-<h2 id="3-a-name-12tostring-a-項目12-常にtostringをオーバーライドせよ">3. <a name='12toString'></a>項目12 常にtoStringをオーバーライドせよ</h2>
+<h2 id="3-a-name-12tostring-a-項目-12-常に-tostring-をオーバーライドせよ">3. <a name='12toString'></a>項目 12 常に toString をオーバーライドせよ</h2>
 
 <h3 id="3-1-a-name-volatile-1-a-まとめ">3.1 <a name='volatile-1'></a>まとめ</h3>
 
 <ul>
-<li>toStringには、フィールド値を含んだ情報を提示しましょう。
+<li>toString には、フィールド値を含んだ情報を提示しましょう。
 
 <ul>
-<li>EclipseやIntellijで<code>toString()</code>を自動生成できる。</li>
+<li>Eclipse や Intellij で<code>toString()</code>を自動生成できる。</li>
 </ul></li>
 </ul>
 
@@ -357,42 +357,42 @@
 </ul></li>
 </ul>
 
-<h2 id="4-a-name-13clone-a-項目13-cloneをオーバーライドするときは注意せよ">4. <a name='13clone'></a>項目13 cloneをオーバーライドするときは注意せよ</h2>
+<h2 id="4-a-name-13clone-a-項目-13-clone-をオーバーライドするときは注意せよ">4. <a name='13clone'></a>項目 13 clone をオーバーライドするときは注意せよ</h2>
 
 <h3 id="4-1-a-name-volatile-1-a-はじめに">4.1 <a name='volatile-1'></a>はじめに</h3>
 
 <ul>
-<li><p>Cloneableインタフェースはオブジェクトが複製を許可していることを示すだけの空のインターフェースだよ。</p></li>
+<li><p>Cloneable インタフェースはオブジェクトが複製を許可していることを示すだけの空のインターフェースだよ。</p></li>
 
-<li><p>java.lang.Objectのcloneメソッドはprotectedなので、Cloneableインタフェースを実装するだけではcloneメソッドを呼び出すことができないよ。</p></li>
+<li><p>java.lang.Object の clone メソッドは protected なので、Cloneable インタフェースを実装するだけでは clone メソッドを呼び出すことができないよ。</p></li>
 
 <li><p>可変オブジェクトの参照がある場合は、参照先を「<code>Deep Copy</code>」しましょう。</p>
 
 <ul>
-<li><code>Deep Copy</code>は配列やリストの値を1つずつコピーする方法で、対する<code>Shallow Copy</code>はアドレスを単にコピーするだけだよ。</li>
+<li><code>Deep Copy</code>は配列やリストの値を 1 つずつコピーする方法で、対する<code>Shallow Copy</code>はアドレスを単にコピーするだけだよ。</li>
 </ul></li>
 </ul>
 
 <h3 id="4-2-a-name-volatile-1-a-結論">4.2 <a name='volatile-1'></a>結論</h3>
 
 <ul>
-<li><p>純粋なJavaの世界では、<code>clone</code>メソッドを使わずに、<code>copyFactory</code>メソッドで複製できるように作る方法がいいよ。</p></li>
+<li><p>純粋な Java の世界では、<code>clone</code>メソッドを使わずに、<code>copyFactory</code>メソッドで複製できるように作る方法がいいよ。</p></li>
 
-<li><p>Springの世界では、<code>ApplicationContext</code>がインスタンスを管理しているので、<code>ApplicationContenxt#getBean()</code>で、<code>Prototype</code>としてインスタンスを取得する方法がいいよ。</p>
+<li><p>Spring の世界では、<code>ApplicationContext</code>がインスタンスを管理しているので、<code>ApplicationContenxt#getBean()</code>で、<code>Prototype</code>としてインスタンスを取得する方法がいいよ。</p>
 
 <ul>
-<li><a href="http://javatechnology.net/spring/spring-singleton-scope/">springのシングルトン問題を@Scopeを使って回避する</a>のブログの通り、Springではシングルトン管理なので、何もしないと<code>Clone</code>ではなく、そのインスタンスを取得してしまうからですね。</li>
+<li><a href="http://javatechnology.net/spring/spring-singleton-scope/">spring のシングルトン問題を@Scope を使って回避する</a>のブログの通り、Spring ではシングルトン管理なので、何もしないと<code>Clone</code>ではなく、そのインスタンスを取得してしまうからですね。</li>
 </ul></li>
 </ul>
 
-<h2 id="5-a-name-14comparable-a-項目14-comparableを実装することを考慮せよ">5. <a name='14Comparable'></a>項目14 Comparableを実装することを考慮せよ</h2>
+<h2 id="5-a-name-14comparable-a-項目-14-comparable-を実装することを考慮せよ">5. <a name='14Comparable'></a>項目 14 Comparable を実装することを考慮せよ</h2>
 
 <h3 id="5-1-a-name-volatile-1-a-はじめに">5.1 <a name='volatile-1'></a>はじめに</h3>
 
 <ul>
-<li><p><code>compareTo()</code>は、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Comparable.html">Comparableインタフェース</a>の唯一のメソッド</p></li>
+<li><p><code>compareTo()</code>は、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Comparable.html">Comparable インタフェース</a>の唯一のメソッド</p></li>
 
-<li><p><code>CompareTo()</code>メソッドを持っているクラスは、「自然な順序関係」(abc順や数値順、年代順など)を持っていることを表しているよ。</p>
+<li><p><code>CompareTo()</code>メソッドを持っているクラスは、「自然な順序関係」(abc 順や数値順、年代順など)を持っていることを表しているよ。</p>
 
 <ul>
 <li>自然な順序関係の例＝辞書順、数値順</li>
@@ -401,11 +401,11 @@
 <li>辞書順＝<code>1,10,100,11,..,2,20,21,...3,30...</code>
 
 <ul>
-<li>Javaだと、Stringでsortすると、辞書順ソートになる。</li>
+<li>Java だと、String で sort すると、辞書順ソートになる。</li>
 </ul></li>
 </ul></li>
 
-<li><p><code>compareTo</code>契約(equalsの契約と同様)を破っていると、<code>compareTo()</code>メソッドに依存しているクラス（<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeSet.html">TreeSet</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeMap.html">TreeMap</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html">Collections</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Arrays.html">Arrays</a>など）が機能しなくなるので気をつけましょう。</p></li>
+<li><p><code>compareTo</code>契約(equals の契約と同様)を破っていると、<code>compareTo()</code>メソッドに依存しているクラス（<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeSet.html">TreeSet</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeMap.html">TreeMap</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html">Collections</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Arrays.html">Arrays</a>など）が機能しなくなるので気をつけましょう。</p></li>
 </ul>
 
 <h3 id="5-2-a-name-volatile-1-a-どのように実装するか">5.2 <a name='volatile-1'></a>どのように実装するか</h3>
@@ -414,7 +414,7 @@
 <li><code>compareTo</code>メソッドを実装している２つの例を確認しましょう。</li>
 </ul>
 
-<p><em>PhoneNumber_1.java</em></p>
+<p>_PhoneNumber<em>1.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -479,7 +479,7 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p><em>PhoneNumber_2.java</em></p>
+<p>_PhoneNumber<em>2.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -533,18 +533,18 @@
 </div>
 </div>
 <ul>
-<li><em>PhoneNumber_1.java</em> は<em>PhoneNumber_2.java</em> と比べて計算量が多くて遅いけれど、確実に動作する。</li>
-<li><em>PhoneNumber_2.java</em> は　<em>PhoneNumber_1.java</em>  と比べて計算量が少なくて速いが、最小値と最大値の差が、intの最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう。</li>
+<li>_PhoneNumber<em>1.java</em> は<em>PhoneNumber_2.java</em> と比べて計算量が多くて遅いけれど、確実に動作する。</li>
+<li>_PhoneNumber<em>2.java</em> は　<em>PhoneNumber_1.java</em> と比べて計算量が少なくて速いが、最小値と最大値の差が、int の最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう。</li>
 </ul>
 
 <h3 id="5-3-a-name-volatile-1-a-結論">5.3 <a name='volatile-1'></a>結論</h3>
 
-<p>最小値と最大値の差が、intの最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう可能性がある、もしくは、数値の比較ではない場合、<em>PhoneNumber_1.java</em> のように実装しましょう。そうでなければ、<em>PhoneNumber_2.java</em> のように実装しましょう。</p>
+<p>最小値と最大値の差が、int の最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう可能性がある、もしくは、数値の比較ではない場合、_PhoneNumber<em>1.java</em> のように実装しましょう。そうでなければ、_PhoneNumber<em>2.java</em> のように実装しましょう。</p>
 
 <blockquote>
-<p>java標準の<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性がある、もしくは、数値での比較では無いので、<em>PhoneNumber_1.java</em> のように実装しています。</p>
+<p>java 標準の<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性がある、もしくは、数値での比較では無いので、_PhoneNumber<em>1.java</em> のように実装しています。</p>
 
-<p>java標準の<a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、<em>PhoneNumber_2.java</em> のように実装しています。</p>
+<p>java 標準の<a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、_PhoneNumber<em>2.java</em> のように実装しています。</p>
 </blockquote>
 
     </div>
