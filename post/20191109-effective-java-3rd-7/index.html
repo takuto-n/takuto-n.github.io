@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-11-09T00:37:53&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:37:53&#43;09:00" />
-<meta itemprop="wordCount" content="7694">
+<meta itemprop="wordCount" content="8138">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 7694 words </span>
-          <span class="more-meta"> 16 mins read </span>
+          <span class="more-meta"> 8138 words </span>
+          <span class="more-meta"> 17 mins read </span>
         
       </div>
     </header>
@@ -165,12 +165,25 @@
 
 <!-- /vscode-markdown-toc -->
 
+<h1 id="effective-java-3rd-勉強会-11-29">Effective Java 3rd 勉強会(<sup>11</sup>&frasl;<sub>29</sub>)</h1>
+
+<p>日時: 2019/11/29 14:00-14:45
+参加者(敬称略): 則兼、岩崎、倉元<br />
+以下、内容。</p>
+
 <h2 id="1-a-name-42-a-項目-42-匿名クラスよりもラムダ式を選ぶ">1. <a name='42'></a>項目 42 匿名クラスよりもラムダ式を選ぶ</h2>
 
 <h3 id="1-1-a-name-a-結論">1.1. <a name=''></a>結論</h3>
 
-<p>数行のコードで済む、もしくは、自分への参照が必要、関数型インターフェースの型しか使用しない場合は、ラムダ式を使いましょう。
-それ以外の場合は、匿名クラスを使いましょう。</p>
+<p>以下の場合は、ラムダ式を使いましょう。</p>
+
+<ul>
+<li>数行のコードで済む</li>
+<li>自分への参照が必要</li>
+<li>関数型インターフェースの型しか使用しない</li>
+</ul>
+
+<p>それ以外の場合は、匿名クラスを使いましょう。</p>
 
 <h3 id="1-2-a-name-1-a-匿名クラスでの実装">1.2. <a name='-1'></a>匿名クラスでの実装</h3>
 
@@ -228,6 +241,12 @@
 </span><span class="c1"></span><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Integer</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">(),</span> <span class="n">s2</span><span class="p">.</span><span class="na">length</span><span class="p">()));</span></code></pre></td></tr></table>
 </div>
 </div>
+<p>Collection.sortの第二引数が<code>Comparator</code>であると認識するのはなぜなのか？
+* <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html#sort-java.util.List-java.util.Comparator-">Collection.sort</a>の仕様は、引数「List<T> list, Comparator&lt;? super T&gt; c」となっていて、<code>Comparator</code>が関数型インタフェースだからラムダ式で表現できる。
+  * 似たような話で、<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html">org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor#submit()</a>の引数が、<code>Runnable</code>と<code>Callable</code>の識別方法がある。これは、引数の戻り値があるか否かで判断している。
+  * 戻り値があれば、<code>Callable</code>
+  * 戻り値がないと、<code>Runnable</code></p>
+
 <p>数行で済んでおり、自分への参照はしておらず、<code>Collections.sort</code>の第 2 引数が関数型インターフェース(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Comparator.html">Comparator</a>)なので、ラムダ式が向いていますね。</p>
 
 <blockquote>
@@ -238,6 +257,10 @@
 <p>Java8 での関数型インタフェース一覧は<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">Oracle Java SE 8 (Uses of Class
 java.lang.FunctionalInterface)</a>にあります。
 3rd party 製のライブラリで<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/FunctionalInterface.html">@FunctionalInterface</a>が付いているインタフェースも、関数型インタフェースですね。</p>
+
+<p><code>@FunctionalInterface</code>を付けることで以下のメリットがある。
+* コンパイルエラーにしてくれる。
+* IDEがもっとよい書き方を提案してくれる。</p>
 
 <h2 id="2-a-name-43-a-項目-43-ラムダよりもメソッド参照を選ぶ">2. <a name='43'></a>項目 43 ラムダよりもメソッド参照を選ぶ</h2>
 
@@ -372,7 +395,13 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <ul>
 <li>広く使われ、説明的な名前によってメリットがある場合</li>
-<li>強く関係する契約がある場合（?）</li>
+<li>強く関係する契約がある場合
+
+<ul>
+<li>引数に制約がある場合</li>
+<li>型の制約</li>
+<li>2つではなく3つの引数が必要な場合</li>
+</ul></li>
 <li>独自のデフォルトメソッドによるメリットがある場合</li>
 </ul>
 
@@ -563,7 +592,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">supplier</span><span class="p">.</span><span class="na">get</span><span class="p">();</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">T value </span><span class="o">=</span> <span class="n">supplier</span><span class="p">.</span><span class="na">get</span><span class="p">();</span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
