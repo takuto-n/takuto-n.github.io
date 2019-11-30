@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールド" /><meta name="keywords" content="java, enumとアノテーション, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 1. 項目 34 int 定数の代わりに enum を使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数としてのenum 1.4. 定数固" /><meta name="keywords" content="java, enum とアノテーション, 個人的メモ" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Effective Java 3rd [Chapter 6]" />
-<meta property="og:description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールド" />
+<meta property="og:description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 1. 項目 34 int 定数の代わりに enum を使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数としてのenum 1.4. 定数固" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-6/" />
 <meta property="article:published_time" content="2019-11-09T00:36:53+09:00" />
 <meta property="article:modified_time" content="2019-11-09T00:36:53+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 6]">
-<meta itemprop="description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールド">
+<meta itemprop="description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 1. 項目 34 int 定数の代わりに enum を使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数としてのenum 1.4. 定数固">
 
 
 <meta itemprop="datePublished" content="2019-11-09T00:36:53&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:36:53&#43;09:00" />
-<meta itemprop="wordCount" content="2887">
+<meta itemprop="wordCount" content="4797">
 
 
 
-<meta itemprop="keywords" content="java,enumとアノテーション,個人的メモ," />
+<meta itemprop="keywords" content="java,enum とアノテーション,個人的メモ," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 6]"/>
-<meta name="twitter:description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールド"/>
+<meta name="twitter:description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 1. 項目 34 int 定数の代わりに enum を使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数としてのenum 1.4. 定数固"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 2887 words </span>
-          <span class="more-meta"> 6 mins read </span>
+          <span class="more-meta"> 4797 words </span>
+          <span class="more-meta"> 10 mins read </span>
         
       </div>
     </header>
@@ -147,16 +147,86 @@
 
 <!-- vscode-markdown-toc -->
 
-<ol>
-<li><a href="#34intenum">項目 34 int 定数の代わりに enum を使う</a></li>
-<li><a href="#35">項目 35 序数の代わりにインスタンスフィールドを使う</a></li>
-<li><a href="#36EnumSet">項目 36 ビットフィールドの代わりに EnumSet を使う</a></li>
-<li><a href="#37EnumMap">項目 37 序数インデックスの代わりに EnumMap を使う</a></li>
-<li><a href="#38enum">項目 38 拡張可能な enum をインタフェースで模倣する</a></li>
-<li><a href="#39">項目 39 命名パターンよりアノテーションを選ぶ</a></li>
-<li><a href="#40Override">項目 40 常に Override アノテーションを使う</a></li>
-<li><a href="#41">項目 41 型を定義するためにマーカーインタフェースを使う</a></li>
-</ol>
+<ul>
+<li>1. <a href="#34intenum">項目 34 int 定数の代わりに enum を使う</a>
+
+<ul>
+<li>1.1. <a href="#">結論</a></li>
+<li>1.2. <a href="#intenum"><code>int enum</code>パターンの欠点</a></li>
+<li>1.3. <a href="#enum">単なる定数としての<code>enum</code></a></li>
+<li>1.4. <a href="#enum-1">定数固有メソッド実装を持つ<code>enum</code></a>
+
+<ul>
+<li>1.4.1. <a href="#-1">問題が多い例</a></li>
+<li>1.4.2. <a href="#enum-1">改善例(定数固有メソッド実装を持つ<code>enum</code>)</a></li>
+</ul></li>
+<li>1.5. <a href="#enum-1">戦略<code>enum</code>パターン</a>
+
+<ul>
+<li>1.5.1. <a href="#-1">問題が多い例</a></li>
+<li>1.5.2. <a href="#enum-1">改善例(戦略<code>enum</code>パターン)</a></li>
+</ul></li>
+</ul></li>
+<li>2. <a href="#35">項目 35 序数の代わりにインスタンスフィールドを使う</a>
+
+<ul>
+<li>2.1. <a href="#-1">結論</a>
+
+<ul>
+<li>2.1.1. <a href="#-1">序数を使った例</a></li>
+<li>2.1.2. <a href="#-1">インスタンスフィールドを使った例</a></li>
+</ul></li>
+</ul></li>
+<li>3. <a href="#36EnumSet">項目 36 ビットフィールドの代わりに EnumSet を使う</a>
+
+<ul>
+<li>3.1. <a href="#-1">結論</a></li>
+<li>3.2. <a href="#-1">ビットフィールド列挙定数</a></li>
+<li>3.3. <a href="#EnumSet">EnumSet</a></li>
+</ul></li>
+<li>4. <a href="#37EnumMap">項目 37 序数インデックスの代わりに EnumMap を使う</a>
+
+<ul>
+<li>4.1. <a href="#-1">結論</a></li>
+<li>4.2. <a href="#-1">序数インデックス</a></li>
+<li>4.3. <a href="#EnumMap">EnumMap</a></li>
+</ul></li>
+<li>5. <a href="#38enum">項目 38 拡張可能な enum をインタフェースで模倣する</a>
+
+<ul>
+<li>5.1. <a href="#-1">結論</a></li>
+<li>5.2. <a href="#Enum">疑似拡張Enumの例</a>
+
+<ul>
+<li>5.2.1. <a href="#-1">注意点</a></li>
+</ul></li>
+</ul></li>
+<li>6. <a href="#39">項目 39 命名パターンよりアノテーションを選ぶ</a>
+
+<ul>
+<li>6.1. <a href="#-1">結論</a>
+
+<ul>
+<li>6.1.1. <a href="#-1">命名パターンとはなにか</a></li>
+<li>6.1.2. <a href="#JUnit5Test">JUnit5の @Test の実装。</a></li>
+<li>6.1.3. <a href="#-1">使うときの例</a></li>
+</ul></li>
+<li>6.2. <a href="#-1">値アノテーション</a></li>
+</ul></li>
+<li>7. <a href="#40Override">項目 40 常に Override アノテーションを使う</a>
+
+<ul>
+<li>7.1. <a href="#-1">結論</a></li>
+<li>7.2. <a href="#-1">用途</a></li>
+</ul></li>
+<li>8. <a href="#41">項目 41 型を定義するためにマーカーインタフェースを使う</a>
+
+<ul>
+<li>8.1. <a href="#-1">結論</a></li>
+<li>8.2. <a href="#XXX">マーカXXXとは</a></li>
+<li>8.3. <a href="#-1">マーカーインタフェース の利点/欠点</a></li>
+</ul></li>
+</ul>
 
 <!-- vscode-markdown-toc-config
     numbering=true
@@ -832,11 +902,282 @@
 
 <h2 id="5-a-name-38enum-a-項目-38-拡張可能な-enum-をインタフェースで模倣する">5. <a name='38enum'></a>項目 38 拡張可能な enum をインタフェースで模倣する</h2>
 
+<h3 id="5-1-a-name-1-a-結論">5.1. <a name='-1'></a>結論</h3>
+
+<p>Enumは拡張できないけれど拡張性をもたせたい場合がある。
+そのような場合は、インタフェースで型を定義し、Enumでスタンダードな実装を提供すれば良い。このときのEnumを擬似拡張Enumと呼ぶ</p>
+
+<h3 id="5-2-a-name-enum-a-疑似拡張enumの例">5.2. <a name='Enum'></a>疑似拡張Enumの例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">interface Operation </span><span class="p">{</span>
+    <span class="err">double apply</span><span class="p">(</span><span class="err">double x</span><span class="p">,</span> <span class="err">double y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="err">public enum BasicOperation implements </span><span class="n">Operation</span> <span class="p">{</span>
+    <span class="n">PLUS</span><span class="p">(</span><span class="s">&#34;+&#34;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">@Override</span> <span class="err">public double </span><span class="n">apply</span><span class="p">(</span><span class="err">double x</span><span class="p">,</span> <span class="err">double y</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">MINUS</span><span class="p">(</span><span class="s">&#34;-&#34;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nd">@Override</span> <span class="err">public double </span><span class="n">apply</span><span class="p">(</span><span class="err">double x</span><span class="p">,</span> <span class="err">double y</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="err">private final String symbol</span><span class="p">;</span>
+    <span class="n">BasicOperation</span><span class="p">(</span><span class="err">String symbol</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">symbol</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">public enum ExtendedOperation implements </span><span class="n">Operation</span> <span class="p">{</span>
+    <span class="n">EXP</span><span class="p">(</span><span class="s">&#34;^&#34;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">public double </span><span class="n">apply</span><span class="p">(</span><span class="err">double x</span><span class="p">,</span> <span class="err">double y</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">REMAINDER</span><span class="p">(</span><span class="s">&#34;%&#34;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">public double </span><span class="n">apply</span><span class="p">(</span><span class="err">double x</span><span class="p">,</span> <span class="err">double y</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">x</span>  <span class="o">%</span> <span class="n">y</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="err">private final String symbol</span><span class="p">;</span>
+    <span class="n">ExtendedOperation</span><span class="p">(</span><span class="err">String symbol</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">symbol</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="5-2-1-a-name-1-a-注意点">5.2.1. <a name='-1'></a>注意点</h4>
+
+<p>Enumであるため、実装の継承を使えない。コードの重複を排除する際は、ヘルパーに切り出す等で対応する。</p>
+
+<p>引数はインタフェース or Enumのどちらを選択するか</p>
+
+<ul>
+<li>疑似拡張Enumを考慮すると、メソッドの引数にはインタフェースで宣言したほうがよい。</li>
+
+<li><p>Enumでは要素すべてを処理するということがあるが、いずれの場合でも実現できる。</p>
+
+<ul>
+<li>Enum をメソッド引数の宣言としていれば、すべての定数を列挙する方法は 単に Enum.values() を用いればよい。</li>
+
+<li><p>引数として実装したインタフェースをうけとるようにした場合、Class オブジェクトの getEnumConstants を使う方法がある。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private static </span><span class="o">&lt;</span><span class="err">T extends </span><span class="n">Enum</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="err">Operation&gt; void </span><span class="n">getAllConstants</span><span class="p">(</span><span class="err">Class&lt;T&gt; opSet</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span> <span class="p">(</span><span class="err">Operation op </span><span class="o">:</span> <span class="n">opSet</span><span class="p">.</span><span class="na">getEnumConstants</span><span class="p">())</span> <span class="p">{</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&#34;Operation: %s%n&#34;</span><span class="p">,</span> <span class="n">op</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+</ul>
+
+<p><code>getEnumConstants</code> は Class オブジェクトが Enum 型を表していた場合に、すべての定数の配列を返す。</p>
+
+<p>もし、Enum 型を表さない場合には null が返る。
+ポイントは T の制約。
+* Enum を継承していること（= Enum であること）
+* Operation を継承していること</p>
+
+<p>この制約によって、Operation を実装し、Enum であることが保障される。</p>
+
 <h2 id="6-a-name-39-a-項目-39-命名パターンよりアノテーションを選ぶ">6. <a name='39'></a>項目 39 命名パターンよりアノテーションを選ぶ</h2>
 
+<h3 id="6-1-a-name-1-a-結論">6.1. <a name='-1'></a>結論</h3>
+
+<ul>
+<li>過去、メソッド名にルールをつけることを強制するツールやフレームワークがあった。</li>
+<li>現在は、アノテーションによって実現されていることがほとんど。
+
+<ul>
+<li>アノテーションを採用するメリットは大きい。</li>
+</ul></li>
+</ul>
+
+<h4 id="6-1-1-a-name-1-a-命名パターンとはなにか">6.1.1. <a name='-1'></a>命名パターンとはなにか</h4>
+
+<p>JUnit 3.x では、 テストメソッドは test から始める必要があった(JUnit4以降、アノテーションで指定するようになった)。</p>
+
+<p>一言でいうと、命名パターンはミスしやすく、後から確認しにくい、という致命的なデメリットがある。
+細かく言うと以下があがる。</p>
+
+<ul>
+<li>コンパイラが間違いを判断できない</li>
+<li>パラメータを関連付けにくい</li>
+<li>利用箇所を限定できない</li>
+<li>アノテーションによる指定の例</li>
+</ul>
+
+<h4 id="6-1-2-a-name-junit5test-a-junit5の-test-の実装">6.1.2. <a name='JUnit5Test'></a>JUnit5の @Test の実装。</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Target</span><span class="p">({</span> <span class="n">ElementType</span><span class="p">.</span><span class="na">ANNOTATION_TYPE</span><span class="p">,</span> <span class="n">ElementType</span><span class="p">.</span><span class="na">METHOD</span> <span class="p">})</span>
+<span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@API</span><span class="p">(</span><span class="n">status</span> <span class="o">=</span> <span class="n">STABLE</span><span class="p">,</span> <span class="n">since</span> <span class="o">=</span> <span class="s">&#34;5.0&#34;</span><span class="p">)</span>
+<span class="nd">@Testable</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">Test</span> <span class="p">{</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="6-1-3-a-name-1-a-使うときの例">6.1.3. <a name='-1'></a>使うときの例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class SampleTest </span><span class="p">{</span>
+    <span class="nd">@Test</span>
+    <span class="err">void plus</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">assertThat</span><span class="p">(</span><span class="n">1</span><span class="o">+</span><span class="n">2</span><span class="p">).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">3</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="6-2-a-name-1-a-値アノテーション">6.2. <a name='-1'></a>値アノテーション</h3>
+
+<p>アノテーション宣言時に値を付与することで、より柔軟な宣言が実現できる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JUnit4の場合
+</span><span class="c1"></span><span class="nd">@Test</span><span class="p">(</span><span class="n">expected</span> <span class="o">=</span> <span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="err">public void </span><span class="n">exception1</span><span class="p">()</span> <span class="p">{</span>
+    <span class="err">Example1 target </span><span class="o">=</span> <span class="k">new</span> <span class="n">Example1</span><span class="p">();</span>
+    <span class="n">target</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="7-a-name-40override-a-項目-40-常に-override-アノテーションを使う">7. <a name='40Override'></a>項目 40 常に Override アノテーションを使う</h2>
 
+<h3 id="7-1-a-name-1-a-結論">7.1. <a name='-1'></a>結論</h3>
+
+<p>親クラスのメソッドをオーバーライドするときは、 必ず @Override をつける。例外はなし。</p>
+
+<h3 id="7-2-a-name-1-a-用途">7.2. <a name='-1'></a>用途</h3>
+
+<ul>
+<li><code>@Override</code> アノテーションが付けられているのに、実際にはオーバーライドしていない場合にはコンパイルエラーとなる</li>
+<li>オーバーライドするつもりがないのに意図せずオーバーライドしてしまう場合には IDE が警告を出してくれる(ことがある)</li>
+</ul>
+
 <h2 id="8-a-name-41-a-項目-41-型を定義するためにマーカーインタフェースを使う">8. <a name='41'></a>項目 41 型を定義するためにマーカーインタフェースを使う</h2>
+
+<h3 id="8-1-a-name-1-a-結論">8.1. <a name='-1'></a>結論</h3>
+
+<p>マーカーインタフェース、マーカーアノテーションのどちらをつかえばいいか
+* 型を縛る＝マーカーインタフェース
+* メタデータを定義する＝マーカーアノテーション</p>
+
+<p>Effective Java では、マーカーインタフェースが使える場合はそちらを使うべき とある。</p>
+
+<p>一般的な Java フレームワークでは、アノテーションベースが主流。</p>
+
+<h3 id="8-2-a-name-xxx-a-マーカxxxとは">8.2. <a name='XXX'></a>マーカXXXとは</h3>
+
+<ul>
+<li>マーカーインタフェース
+
+<ul>
+<li>メソッドを一つももたないインタフェース</li>
+<li>ex) Serializable, Cloneable</li>
+</ul></li>
+<li>メタデータを定義する＝マーカーアノテーション
+
+<ul>
+<li>アノテーション自体がマークアップするためのものなので、アノテーションはマーカーアノテーションとして機能する。</li>
+</ul></li>
+</ul>
+
+<h3 id="8-3-a-name-1-a-マーカーインタフェース-の利点-欠点">8.3. <a name='-1'></a>マーカーインタフェース の利点/欠点</h3>
+
+<ul>
+<li>利点:: マーカーインタフェースは型なので、コンパイル時にチェックできる。
+
+<ul>
+<li>マーカーアノテーションは実行時までチェックできない。</li>
+</ul></li>
+<li>欠点:: マーカーインタフェースはクラス以外をマークできない。
+
+<ul>
+<li>メソッドや値をマークするなら、必然的にアノテーションになる。</li>
+</ul></li>
+</ul>
 
     </div>
 
@@ -844,7 +1185,7 @@
 <footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/java/">java</a>
-          <a href="/tags/enum%E3%81%A8%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3/">enumとアノテーション</a>
+          <a href="/tags/enum-%E3%81%A8%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3/">enum とアノテーション</a>
           <a href="/tags/%E5%80%8B%E4%BA%BA%E7%9A%84%E3%83%A1%E3%83%A2/">個人的メモ</a>
           </div>
       <nav class="post-nav">

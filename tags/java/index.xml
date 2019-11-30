@@ -18,7 +18,7 @@
       <pubDate>Sat, 09 Nov 2019 00:37:53 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-7/</guid>
-      <description>ラムダ式とストリーム Effective Java 第3版の個人的メモ 項目42 匿名クラスよりもラムダ式を選ぶ 項目43 ラムダよりもメソッド参照を選ぶ 項目44 標準の関数型イ</description>
+      <description>ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ</description>
     </item>
     
     <item>
@@ -27,7 +27,7 @@
       <pubDate>Sat, 09 Nov 2019 00:36:53 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-6/</guid>
-      <description>enum とアノテーション Effective Java 第 3 版の個人的メモ 項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールド</description>
+      <description>enum とアノテーション Effective Java 第 3 版の個人的メモ 1. 項目 34 int 定数の代わりに enum を使う 1.1. 結論 1.2. int enumパターンの欠点 1.3. 単なる定数としてのenum 1.4. 定数固</description>
     </item>
     
     <item>
@@ -36,7 +36,7 @@
       <pubDate>Sun, 03 Nov 2019 00:07:19 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191103-effective-java-3rd-5/</guid>
-      <description>ジェネリクス Effective Java 第3版の個人的メモ 項目26 原型を使わない 項目27 無検査警告を取り除く 項目28 配列よりリストを選ぶ 項目29 ジェネリック型を使う</description>
+      <description>ジェネリクス Effective Java 第 3 版の個人的メモ 項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジ</description>
     </item>
     
     <item>
@@ -45,7 +45,7 @@
       <pubDate>Sun, 06 Oct 2019 15:27:10 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191006-effective-java-3rd-4/</guid>
-      <description>クラスとインタフェース Effective Java 第3版の個人的メモ 項目15 クラスとメンバーへのアクセス可能性を最小限にする 項目16 publicのクラスでは、pub</description>
+      <description>クラスとインタフェース Effective Java 第 3 版の個人的メモ 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィー</description>
     </item>
     
     <item>
@@ -54,7 +54,7 @@
       <pubDate>Sat, 21 Sep 2019 19:17:52 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20190921-effective-java-3rd-3/</guid>
-      <description>すべてのオブジェクトに共通のメソッド Effective Java 第3版の個人的メモ 項目10 equalsのoverrideは一般契約（general contracts</description>
+      <description>すべてのオブジェクトに共通のメソッド Effective Java 第 3 版の個人的メモ 項目 10 equals の override は一般契約（general contracts）に従うべし 項目 11 equals をオー</description>
     </item>
     
     <item>
@@ -63,7 +63,7 @@
       <pubDate>Sat, 21 Sep 2019 01:49:02 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20190921-effective-java-3rd-2/</guid>
-      <description>オブジェクトの生成と消滅 Effective Java 第3版の個人的メモ 項目1 コンストラクタの代わりにstaticファクトリーメソッドを検討する 項目2 数多くのコンスト</description>
+      <description>オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ</description>
     </item>
     
   </channel>

@@ -18,7 +18,7 @@
       <pubDate>Sat, 21 Sep 2019 01:49:02 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20190921-effective-java-3rd-2/</guid>
-      <description>オブジェクトの生成と消滅 Effective Java 第3版の個人的メモ 項目1 コンストラクタの代わりにstaticファクトリーメソッドを検討する 項目2 数多くのコンスト</description>
+      <description>オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ</description>
     </item>
     
   </channel>

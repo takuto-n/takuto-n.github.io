@@ -18,7 +18,7 @@
       <pubDate>Sat, 21 Sep 2019 19:17:52 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20190921-effective-java-3rd-3/</guid>
-      <description>すべてのオブジェクトに共通のメソッド Effective Java 第3版の個人的メモ 項目10 equalsのoverrideは一般契約（general contracts</description>
+      <description>すべてのオブジェクトに共通のメソッド Effective Java 第 3 版の個人的メモ 項目 10 equals の override は一般契約（general contracts）に従うべし 項目 11 equals をオー</description>
     </item>
     
   </channel>
