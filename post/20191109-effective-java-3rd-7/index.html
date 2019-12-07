@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-11-09T00:37:53&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:37:53&#43;09:00" />
-<meta itemprop="wordCount" content="8138">
+<meta itemprop="wordCount" content="7378">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 8138 words </span>
-          <span class="more-meta"> 17 mins read </span>
+          <span class="more-meta"> 7378 words </span>
+          <span class="more-meta"> 15 mins read </span>
         
       </div>
     </header>
@@ -1215,189 +1215,125 @@ java.lang.FunctionalInterface)</a>にあります。
 
 <h3 id="6-1-a-name-1-a-結論">6.1. <a name='-1'></a>結論</h3>
 
-<p>連続した要素の戻り値型として以下のものがあげられる。</p>
+<p>連続した要素をどの型で返すべきか？については、Collection一択</p>
+
+<h3 id="6-2-a-name-1-a-選択肢にはなにがあるか">6.2. <a name='-1'></a>選択肢にはなにがあるか</h3>
+
+<p>以下4択。</p>
 
 <ul>
-<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collection.html">Collection</a></li>
-<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Iterable.html">Iterable</a></li>
-<li>配列</li>
 <li>ストリーム</li>
+<li>Iterable</li>
+<li>collectionインターフェース</li>
+<li>配列</li>
 </ul>
 
-<p>大抵の場合は、最適な戻り値型は、<code>Collection</code>か<code>適切なCollectionのサブタイプ</code>である。<br />
-理由は、<code>Collection</code>は<code>iterator()</code>や<code>stream()</code>を持っており、イテレーション処理でもストリーム処理でも対応できるからである。</p>
+<h3 id="6-3-a-name-1-a-ストリームで返す">6.3. <a name='-1'></a>ストリームで返す</h3>
 
-<blockquote>
-<p>もしイテレーション処理やストリーム処理を使う場合は、使用するユーザーによっては、<code>ストリームからイテレートできるように変換するコード</code>を作る必要になることを念頭に置いておきましょう。</p>
-</blockquote>
+<p>StreamはIterableを継承していない。
+ストリームを処理する場合には、さらに加工が必要。</p>
 
-<h3 id="6-2-a-name-collection-a-collection-を利用する場合">6.2. <a name='Collection'></a>Collection を利用する場合</h3>
+<p>for-eachの場合は、Streamのiteratorメソッドを使うしかない。</p>
 
-<h4 id="6-2-1-a-name-1-a-返却する連続要素が小さい場合">6.2.1. <a name='-1'></a>返却する連続要素が小さい場合</h4>
-
-<p>Collection を実装したもの(<code>ArrayList</code>や<code>HashSet</code>など)を返しましょう。</p>
-
-<h4 id="6-2-2-a-name-1-a-返却する連続要素が大きい場合">6.2.2. <a name='-1'></a>返却する連続要素が大きい場合</h4>
-
-<p>返却する連続要素が大きい場合の例として、与えられた集合のべき集合を返す場合を考える。<br />
-この場合、メモリに蓄えるべきではないです。下の例のように、組み合わせ数が膨大になっていくからである。(組み合わせ数 : <em><code>2^(要素数)</code></em>)</p>
-
-<blockquote>
-<p>{a,b,c}のべき集合の例:
-<code>{{}, {a}, {b}, {c}, {a, b}, {a, c}, {b, c}, {a, b, c}}</code></p>
-</blockquote>
-
-<p>このような場合は、<a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/collect/Sets.java#L1537">Guava の Sets#powerSet()</a>などを利用しましょう。(もし ThirdParty 製のライブラリが無ければ、独自実装しましょう。)<br />
-中のロジックは、以下のような Subset を利用したビット演算である。</p>
+<p>以下のようにするとコンパイルできないので…</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Set</span>  <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="err">c]
-</span><span class="err">power_set_size </span><span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">3</span><span class="p">)</span> <span class="o">=</span> <span class="err">8
-</span><span class="err">Run </span><span class="k">for</span> <span class="err">binary counter </span><span class="o">=</span> <span class="err">000 to 111
-</span><span class="err">
-</span><span class="err">Value of Counter            Subset
-</span><span class="err">    000                    </span><span class="o">-&gt;</span> <span class="err">Empty set
-</span><span class="err">    </span><span class="n">001</span>                    <span class="o">-&gt;</span> <span class="err">a
-</span><span class="err">    010                    </span><span class="o">-&gt;</span> <span class="err">b
-</span><span class="err">    011                    </span><span class="o">-&gt;</span> <span class="err">ab
-</span><span class="err">    100                    </span><span class="o">-&gt;</span> <span class="err">c
-</span><span class="err">    101                    </span><span class="o">-&gt;</span> <span class="err">ac
-</span><span class="err">    110                    </span><span class="o">-&gt;</span> <span class="err">bc
-</span><span class="err">    111                    </span><span class="o">-&gt;</span> <span class="n">abc</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">var list </span><span class="o">=</span> <span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="s">&#34;3&#34;</span><span class="p">).</span><span class="na">stream</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="err">Object o </span><span class="o">:</span> <span class="n">list</span><span class="p">.</span><span class="na">iterator</span><span class="p">())</span> <span class="p">{</span>  <span class="c1">// cannot compile
+</span><span class="c1"></span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>サンプル実装</p>
+<p>以下のような対処が必要。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Java program for power set
-</span><span class="c1"></span><span class="err">import java </span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="o">*</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">var list </span><span class="o">=</span> <span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="s">&#34;3&#34;</span><span class="p">).</span><span class="na">stream</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="err">Iterator&lt;String&gt; it </span><span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span> <span class="n">it</span><span class="p">.</span><span class="na">hasNext</span><span class="p">();</span> <span class="p">)</span> <span class="p">{</span> <span class="c1">// just workaround 
+</span><span class="c1"></span>    <span class="err">Object o </span><span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
 
-<span class="err">public class </span><span class="n">GFG</span> <span class="p">{</span>
-
-    <span class="err">static void </span><span class="n">printPowerSet</span><span class="p">(</span><span class="kt">char</span> <span class="p">[]</span><span class="n">set</span><span class="p">,</span>
-                            <span class="err">int set_size</span><span class="p">)</span>
-    <span class="p">{</span>
-
-        <span class="cm">/*set_size of power set of a set
-</span><span class="cm">        with set_size n is (2**n -1)*/</span>
-        <span class="err">long pow_set_size </span><span class="o">=</span>
-            <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">set_size</span><span class="p">);</span>
-        <span class="err">int counter</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
-
-        <span class="cm">/*Run from counter 000..0 to
-</span><span class="cm">        111..1*/</span>
-        <span class="k">for</span><span class="p">(</span><span class="n">counter</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">counter</span> <span class="o">&lt;</span>
-                <span class="n">pow_set_size</span><span class="p">;</span> <span class="n">counter</span><span class="o">++</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">set_size</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-            <span class="p">{</span>
-                <span class="cm">/* Check if jth bit in the
-</span><span class="cm">                counter is set If set then
-</span><span class="cm">                print jth element from set */</span>
-                <span class="k">if</span><span class="p">((</span><span class="n">counter</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span>
-                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">set</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
-            <span class="p">}</span>
-
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Driver program to test printPowerSet
-</span><span class="c1"></span>    <span class="err">public static void main </span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="kt">char</span> <span class="p">[]</span><span class="n">set</span> <span class="o">=</span> <span class="p">{</span><span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">};</span>
-        <span class="n">printPowerSet</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="n">3</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="o">//</span> <span class="err">This code is contributed by anuj_67</span><span class="p">.</span></code></pre></td></tr></table>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<blockquote>
-<p>メモ：集合が<code>31</code>以上の要素を持っている場合、<code>GuavaのSets#powerSet()</code>は例外をスローする。べき集合の大きさが<code>2^31</code>以上となり、<code>int size()</code>の最大値(<code>2^31-1</code>)的に対応できないからである。</p>
-</blockquote>
+<p>これを簡素にするクラスをつくってもいいが、このようにユーザコード側が煩雑になることを理解する。</p>
+
+<h3 id="6-4-a-name-iterable-a-iterable-で返す">6.4. <a name='Iterable'></a>Iterable で返す</h3>
+
+<p>ストリームと同じなので割愛</p>
+
+<h3 id="6-5-a-name-collection-a-collection-で返す">6.5. <a name='collection'></a>collection で返す</h3>
+
+<p>CollectionインターフェースはIterableのサブタイプであり、ストリームのメソッドも持っているので、イテレーション処理でもストリーム処理でも対応できる。
+そのため、連続した要素を返すメソッドの最適な戻り値型は、たいていの場合、Collectionとなる。</p>
+
+<p>もし返却する連続要素が十分小さければ、ArrayListやHashSetなどのCollectionを実装したものを返せばいいのだが、Collectionとして返却するために、大きな連続要素をメモリに蓄えることはすべきでない(このときは、StreamやIteratorも可。JDBCのResultSetと同じといっても良い。)。</p>
+
+<p>返却する連続要素が、大きいけれど簡潔に表現できるものであれば、特別にcollectionを実装してやることを考える。</p>
+
+<h3 id="6-6-a-name-1-a-先輩からいただいたありがたいお言葉">6.6. <a name='-1'></a>先輩からいただいたありがたいお言葉</h3>
+
+<p>そもそも、複数の値を返却するAPIが、Streamを返却するということに違和感があります。
+たいていのAPIは、「XXXという条件のものを全部くれ」という言い方になるので、集合であることが普通です。<br />
+Streamだと、その名の通り「流れ」になるので、継続的に流れてくる(なので、前の要素には戻らない)、という意味がでてきます。
+集合とは違う概念が混ざってくる認識です。<br />
+<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html">https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html</a>
+を読んでみると違いが書いています。</p>
 
 <h2 id="7-a-name-48-a-項目-48-ストリームを並列化するときは注意を払う">7. <a name='48'></a>項目 48 ストリームを並列化するときは注意を払う</h2>
 
 <h3 id="7-1-a-name-1-a-結論">7.1. <a name='-1'></a>結論</h3>
 
-<p>ストリームの並列化により、性能が良くなるのは以下です。</p>
+<p>気軽に並列化できる点は素晴らしいのですが、その裏の仕組みが変わるわけでは有りません。
+並列処理独特の考慮点がなくなるわけではないので、慎重に使いましょう。</p>
+
+<h3 id="7-2-a-name-1-a-得意-不得意">7.2. <a name='-1'></a>得意/不得意</h3>
+
+<h4 id="7-2-1-a-name-1-a-得意">7.2.1. <a name='-1'></a>得意</h4>
+
+<p>要素1つで独立した操作ができるとき</p>
 
 <ul>
-<li>サブレンジへの分割が容易であること</li>
-<li>逐次処理される時の<a href="https://ja.wikipedia.org/wiki/%E5%8F%82%E7%85%A7%E3%81%AE%E5%B1%80%E6%89%80%E6%80%A7">参照の局所性</a></li>
-<li>終端処理がリダクション処理や短絡評価である場合</li>
-</ul>
-
-<p>また、指標として、<code>(ストリームの要素の数) * (1要素に実行されるコード行数) &gt; 100000</code> であれば、並列化により性能が向上するかも。</p>
-
-<p>以下の場合、並列化をしても性能は良くならないでしょう。</p>
+<li>Collectionに対して処理する
 
 <ul>
-<li><code>Stream.iterate</code>を使っている</li>
-<li>中間操作<code>limit</code>を使っている</li>
+<li>ArrayList、HashMap、HashSet、ConcurrentHashMap</li>
+<li>intやlongのrangeも同等</li>
+</ul></li>
+<li>リダクション操作
+
+<ul>
+<li>min、max、count、sum</li>
+</ul></li>
+<li>短絡評価
+
+<ul>
+<li>anyMatch、allMatch、noneMatch</li>
+<li>filterも同等</li>
+</ul></li>
 </ul>
 
-<p>並列化により、間違った結果や予想できない動作を起こす可能性があるので気をつけましょう。例えば<code>forEach()</code>と<code>forEachOrded()</code>。</p>
+<h4 id="7-2-2-a-name-1-a-不得意">7.2.2. <a name='-1'></a>不得意</h4>
+
+<p>他の要素と関係を踏まえた操作のとき</p>
+
+<ul>
+<li>limit</li>
+<li>collectメソッドによって行われる可変リダクション操作(と書いてあるが、ケースバイケース)</li>
+</ul>
+
+<h4 id="7-2-3-a-name-1-a-一例">7.2.3. <a name='-1'></a>一例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -1410,189 +1346,36 @@ java.lang.FunctionalInterface)</a>にあります。
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// データの準備
-</span><span class="c1"></span><span class="err">List&lt;String&gt; list </span><span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="k">new</span> <span class="n">String</span><span class="p">[]{</span><span class="s">&#34;あ&#34;</span><span class="p">,</span> <span class="s">&#34;い&#34;</span><span class="p">,</span> <span class="s">&#34;う&#34;</span><span class="p">,</span> <span class="s">&#34;え&#34;</span><span class="p">,</span> <span class="s">&#34;お&#34;</span><span class="p">});</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">var stopWatch </span><span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="p">();</span>
+<span class="n">stopWatch</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="n">IntStream</span><span class="p">.</span><span class="na">range</span><span class="p">(</span><span class="n">0</span><span class="p">,</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span>
+<span class="c1">//      .parallel()
+</span><span class="c1"></span>        <span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="n">value</span> <span class="o">%</span> <span class="n">10000</span> <span class="o">==</span> <span class="n">0</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">boxed</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toSet</span><span class="p">());</span>
+<span class="n">stopWatch</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span>
 
-<span class="c1">// forEach()の場合
-</span><span class="c1"></span><span class="err">Stream&lt;String&gt; parallelStream1 </span><span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">parallelStream</span><span class="p">();</span>
-<span class="n">parallelStream1</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;forEach: &#34;</span> <span class="o">+</span> <span class="n">value</span><span class="p">));</span>
-
-<span class="c1">// forEachOrdered()の場合
-</span><span class="c1"></span><span class="err">Stream&lt;String&gt; parallelStream2 </span><span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">parallelStream</span><span class="p">();</span>
-<span class="n">parallelStream2</span><span class="p">.</span><span class="na">forEachOrdered</span><span class="p">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;forEachOrdered: &#34;</span> <span class="o">+</span> <span class="n">value</span><span class="p">));</span>
-
-<span class="c1">// 実行結果
-</span><span class="c1"></span><span class="cm">/* forEach: う
-</span><span class="cm">   forEach: あ
-</span><span class="cm">   forEach: え
-</span><span class="cm">   forEach: い
-</span><span class="cm">   forEach: お
-</span><span class="cm">   forEachOrdered: あ
-</span><span class="cm">   forEachOrdered: い
-</span><span class="cm">   forEachOrdered: う
-</span><span class="cm">   forEachOrdered: え
-</span><span class="cm">   forEachOrdered: お
-</span><span class="cm">  */</span></code></pre></td></tr></table>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">stopWatch</span><span class="p">.</span><span class="na">prettyPrint</span><span class="p">());</span><span class="err">`</span></code></pre></td></tr></table>
 </div>
 </div>
-<h3 id="7-2-a-name-1-a-サブレンジへの分割が容易であること-と-逐次処理される時の参照の局所性">7.2. <a name='-1'></a>「サブレンジへの分割が容易であること」と「逐次処理される時の参照の局所性」</h3>
+<p>paralellの有りなしで、↑のような話だと恩恵を受けやすい。</p>
 
-<p><code>ArrayList</code>、<code>HashMap</code>、<code>HashSet</code>、<code>ConcurrentHashMap</code>、配列、<code>int</code>の範囲をもったもの、<code>long</code>の範囲を持ったもののストリームであれば、以下。</p>
+<p>paralellなしだと3秒、paralellありだと1秒くらい(環境によって差がある)</p>
+
+<h4 id="7-2-4-a-name-1-a-並列化すると起きる問題">7.2.4. <a name='-1'></a>並列化すると起きる問題</h4>
+
+<p>ストリームだから起きるというわけではなくが、ストリームだから手軽にかけてしまい、ついつい起こしてしまいやすい、ことになる。</p>
+
+<p>一言で言えば、副作用がない処理をする、なのだが、StreamのJavadocには重要なことが書いてある。</p>
 
 <ul>
-<li>サブレンジへの分割ができる</li>
-<li>逐次処理される時の参照が局所化される</li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html#Associativity">結合的</a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html#NonInterference">非干渉</a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html#Statelessness">ステートレス</a></li>
 </ul>
 
-<h3 id="7-3-a-name-1-a-終端処理がリダクション処理や短絡評価である場合">7.3. <a name='-1'></a>「終端処理がリダクション処理や短絡評価である場合」</h3>
-
-<p>終端処理で、以下をやっていると並列による性能向上はあまり得られない。</p>
-
-<ul>
-<li>パイプライン全体に対して大量の処理をする</li>
-<li>終端処理が内部的に逐次処理を行うものである。</li>
-</ul>
-
-<h4 id="7-3-1-a-name-1-a-終端処理がリダクション処理">7.3.1. <a name='-1'></a>終端処理がリダクション処理</h4>
-
-<p>終端処理が、<code>min</code>、<code>max</code>、<code>count</code>、<code>sum</code>といったリダクション処理であれば、効果を得られる。</p>
-
-<blockquote>
-<p>リダクション処理とは、ストリーム内のすべての要素を累積関数を使って一つにまとめた結果を返す操作。</p>
-</blockquote>
-
-<h4 id="7-3-2-a-name-1-a-終端処理が短絡評価">7.3.2. <a name='-1'></a>終端処理が短絡評価</h4>
-
-<p>終端処理が、<code>anyMatch</code>、<code>allMatch</code>、<code>noneMatch</code>といった<a href="https://qiita.com/heatflat1021/items/fd09761df434f99cb829">短絡評価</a>は並列化の効果を得やすい。</p>
-
-<blockquote>
-<p>短絡評価とは、<code>&amp;&amp;</code>や<code>||</code>といった論理演算子において、左辺を評価した時点で、式全体の真偽値が決定し右辺を評価する必要がない場合、右辺を評価しないという機能のこと。（要は無駄な処理をしないで、真偽値を決めれる機能のこと）</p>
-</blockquote>
-
-<h3 id="7-4-a-name-1-a-並列処理による性能向上">7.4. <a name='-1'></a>並列処理による性能向上</h3>
-
-<p>並列化が効率的に行える、素数計数関数のプログラムで確認する。<br />
-(以下の例では、<code>.parallel()</code>を付けたことにより、36 秒 ⇨ 24 秒 に短縮できています。)</p>
-
-<blockquote>
-<p>素数計数関数とは、正の実数にそれ以下の素数の個数を対応させる関数のことであり、π(x) で表す。</p>
-</blockquote>
-
-<h4 id="7-4-1-a-name-1-a-並列化前">7.4.1. <a name='-1'></a>並列化前</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">import java</span><span class="p">.</span><span class="na">math</span><span class="p">.</span><span class="na">BigInteger</span><span class="p">;</span>
-<span class="err">import java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">LongStream</span><span class="p">;</span>
-
-<span class="err">public class </span><span class="n">ParallelTest1</span> <span class="p">{</span>
-    <span class="c1">// Prime-counting stream pipeline - benefits from parallelization
-</span><span class="c1"></span>    <span class="err">static long </span><span class="n">pi</span><span class="p">(</span><span class="err">long n</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">LongStream</span><span class="p">.</span><span class="na">rangeClosed</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">n</span><span class="p">).</span><span class="na">mapToObj</span><span class="p">(</span><span class="n">BigInteger</span><span class="o">::</span><span class="n">valueOf</span><span class="p">).</span><span class="na">filter</span><span class="p">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="p">.</span><span class="na">isProbablePrime</span><span class="p">(</span><span class="n">50</span><span class="p">)).</span><span class="na">count</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-    	<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pi</span><span class="p">(</span><span class="n">10000000</span><span class="p">));</span>
-    	<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
-    	<span class="c1">// 実行結果
-</span><span class="c1"></span>    	<span class="cm">/*
-</span><span class="cm">	Tue Oct 22 21:47:03 JST 2019
-</span><span class="cm">	64579
-</span><span class="cm">	Tue Oct 22 21:47:39 JST 2019
-</span><span class="cm">	*/</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-<h4 id="7-4-2-a-name-1-a-並列化後">7.4.2. <a name='-1'></a>並列化後</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">import java</span><span class="p">.</span><span class="na">math</span><span class="p">.</span><span class="na">BigInteger</span><span class="p">;</span>
-<span class="err">import java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Date</span><span class="p">;</span>
-<span class="err">import java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">stream</span><span class="p">.</span><span class="na">LongStream</span><span class="p">;</span>
-
-<span class="err">public class </span><span class="n">ParallelTest2</span> <span class="p">{</span>
-	<span class="c1">// Prime-counting stream pipeline - benefits from parallelization
-</span><span class="c1"></span>	<span class="err">static long </span><span class="n">pi</span><span class="p">(</span><span class="err">long n</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="n">LongStream</span><span class="p">.</span><span class="na">rangeClosed</span><span class="p">(</span><span class="n">2</span><span class="p">,</span> <span class="n">n</span><span class="p">).</span><span class="na">parallel</span><span class="p">().</span><span class="na">mapToObj</span><span class="p">(</span><span class="n">BigInteger</span><span class="o">::</span><span class="n">valueOf</span><span class="p">).</span><span class="na">filter</span><span class="p">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="p">.</span><span class="na">isProbablePrime</span><span class="p">(</span><span class="n">50</span><span class="p">)).</span><span class="na">count</span><span class="p">();</span>
-	<span class="p">}</span>
-
-	<span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
-		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pi</span><span class="p">(</span><span class="n">10000000</span><span class="p">));</span>
-		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">new</span> <span class="n">Date</span><span class="p">());</span>
-		<span class="c1">// 実行結果
-</span><span class="c1"></span>		<span class="cm">/*
-</span><span class="cm">		 Tue Oct 22 21:54:06 JST 2019
-</span><span class="cm">		 664579
-</span><span class="cm">		 Tue Oct 22 21:54:30 JST 2019
-</span><span class="cm">		 */</span>
-	<span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
 <h2 id="8-a-name-url-a-参考-url">8. <a name='URL'></a>参考 URL</h2>
 
 <ul>
