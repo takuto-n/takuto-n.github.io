@@ -18,7 +18,7 @@
       <pubDate>Sat, 09 Nov 2019 00:48:57 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-8/</guid>
-      <description>メソッド Effective Java 第 3 版の個人的メモ 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 1.2. 良い例 1.3. アサーションの紹介 2. 項目 50 必要な場合、防御的にコピーする 3.</description>
+      <description>メソッド Effective Java 第 3 版の個人的メモ 項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計</description>
     </item>
     
     <item>
