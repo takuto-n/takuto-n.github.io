@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://github.com/takuto-n/ctrl-key-6bit-mask&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 09 Nov 2019 00:37:53 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 09 Nov 2019 00:48:57 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/tags/%E5%80%8B%E4%BA%BA%E7%9A%84%E3%83%A1%E3%83%A2/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Effective Java 3rd [Chapter 8]</title>
+      <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-8/</link>
+      <pubDate>Sat, 09 Nov 2019 00:48:57 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-8/</guid>
+      <description>メソッド Effective Java 第 3 版の個人的メモ 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 1.2. 良い例 1.3. アサーションの紹介 2. 項目 50 必要な場合、防御的にコピーする 3.</description>
+    </item>
     
     <item>
       <title>Effective Java 3rd [Chapter 7]</title>

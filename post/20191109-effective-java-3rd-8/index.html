@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="メソッド Effective Java 第3版の個人的メモ 項目49 パラメータの正当性を検査する 項目50 必要な場合、防御的にコピーする 項目51 メソッドのシグネチャを注意深" /><meta name="keywords" content="java, メソッド, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="メソッド Effective Java 第 3 版の個人的メモ 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 1.2. 良い例 1.3. アサーションの紹介 2. 項目 50 必要な場合、防御的にコピーする 3." /><meta name="keywords" content="java, メソッド, 個人的メモ" />
 
 
 
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.58.1 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-8/" />
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="Effective Java 3rd [Chapter 8]" />
-<meta property="og:description" content="メソッド Effective Java 第3版の個人的メモ 項目49 パラメータの正当性を検査する 項目50 必要な場合、防御的にコピーする 項目51 メソッドのシグネチャを注意深" />
+<meta property="og:description" content="メソッド Effective Java 第 3 版の個人的メモ 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 1.2. 良い例 1.3. アサーションの紹介 2. 項目 50 必要な場合、防御的にコピーする 3." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-8/" />
 <meta property="article:published_time" content="2019-11-09T00:48:57+09:00" />
 <meta property="article:modified_time" content="2019-11-09T00:48:57+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 8]">
-<meta itemprop="description" content="メソッド Effective Java 第3版の個人的メモ 項目49 パラメータの正当性を検査する 項目50 必要な場合、防御的にコピーする 項目51 メソッドのシグネチャを注意深">
+<meta itemprop="description" content="メソッド Effective Java 第 3 版の個人的メモ 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 1.2. 良い例 1.3. アサーションの紹介 2. 項目 50 必要な場合、防御的にコピーする 3.">
 
 
 <meta itemprop="datePublished" content="2019-11-09T00:48:57&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:48:57&#43;09:00" />
-<meta itemprop="wordCount" content="363">
+<meta itemprop="wordCount" content="1891">
 
 
 
 <meta itemprop="keywords" content="java,メソッド,個人的メモ," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 8]"/>
-<meta name="twitter:description" content="メソッド Effective Java 第3版の個人的メモ 項目49 パラメータの正当性を検査する 項目50 必要な場合、防御的にコピーする 項目51 メソッドのシグネチャを注意深"/>
+<meta name="twitter:description" content="メソッド Effective Java 第 3 版の個人的メモ 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 1.2. 良い例 1.3. アサーションの紹介 2. 項目 50 必要な場合、防御的にコピーする 3."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 363 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 1891 words </span>
+          <span class="more-meta"> 4 mins read </span>
         
       </div>
     </header>
@@ -143,20 +143,27 @@
 
 <h1 id="メソッド">メソッド</h1>
 
-<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第3版</a>の個人的メモ</p>
+<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
 
 <!-- vscode-markdown-toc -->
 
-<ol>
-<li><a href="#49">項目49 パラメータの正当性を検査する</a></li>
-<li><a href="#50">項目50 必要な場合、防御的にコピーする</a></li>
-<li><a href="#51">項目51 メソッドのシグネチャを注意深く設計する</a></li>
-<li><a href="#52">項目52 オーバーロードを注意して使う</a></li>
-<li><a href="#53">項目53 可変長引数を注意して使う</a></li>
-<li><a href="#54null">項目54 nullではなく、空コレクションか空配列を返す</a></li>
-<li><a href="#55">項目55 オプショナルを注意して返す</a></li>
-<li><a href="#56API">項目56 すべての公開API要素に対してドキュメントコメントを書く</a></li>
-</ol>
+<ul>
+<li>1. <a href="#49">項目 49 パラメータの正当性を検査する</a>
+
+<ul>
+<li>1.1. <a href="#">結論</a></li>
+<li>1.2. <a href="#-1">良い例</a></li>
+<li>1.3. <a href="#-1">アサーションの紹介</a></li>
+</ul></li>
+<li>2. <a href="#50">項目 50 必要な場合、防御的にコピーする</a></li>
+<li>3. <a href="#51">項目 51 メソッドのシグネチャを注意深く設計する</a></li>
+<li>4. <a href="#52">項目 52 オーバーロードを注意して使う</a></li>
+<li>5. <a href="#53">項目 53 可変長引数を注意して使う</a></li>
+<li>6. <a href="#54null">項目 54 null ではなく、空コレクションか空配列を返す</a></li>
+<li>7. <a href="#55">項目 55 オプショナルを注意して返す</a></li>
+<li>8. <a href="#56API">項目 56 すべての公開 API 要素に対してドキュメントコメントを書く</a></li>
+<li>9. <a href="#URL">参考URL</a></li>
+</ul>
 
 <!-- vscode-markdown-toc-config
     numbering=true
@@ -165,21 +172,317 @@
 
 <!-- /vscode-markdown-toc -->
 
-<h2 id="1-a-name-49-a-項目49-パラメータの正当性を検査する">1. <a name='49'></a>項目49 パラメータの正当性を検査する</h2>
+<h2 id="1-a-name-49-a-項目-49-パラメータの正当性を検査する">1. <a name='49'></a>項目 49 パラメータの正当性を検査する</h2>
 
-<h2 id="2-a-name-50-a-項目50-必要な場合-防御的にコピーする">2. <a name='50'></a>項目50 必要な場合、防御的にコピーする</h2>
+<h3 id="1-1-a-name-a-結論">1.1. <a name=''></a>結論</h3>
 
-<h2 id="3-a-name-51-a-項目51-メソッドのシグネチャを注意深く設計する">3. <a name='51'></a>項目51 メソッドのシグネチャを注意深く設計する</h2>
+<ul>
+<li>入力値のチェックをしましょう</li>
+<li>Javadocに入力値の説明と例外の説明は記入しましょう</li>
+</ul>
 
-<h2 id="4-a-name-52-a-項目52-オーバーロードを注意して使う">4. <a name='52'></a>項目52 オーバーロードを注意して使う</h2>
+<h3 id="1-2-a-name-1-a-良い例">1.2. <a name='-1'></a>良い例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">	<span class="cm">/**
+</span><span class="cm">	 * 値が(this mod m)であるBigIntegerを返します。
+</span><span class="cm">	 * このメソッドは、remainderメソッドとは異なり、
+</span><span class="cm">   * 常に負でないBigIntegerを返します。
+</span><span class="cm">	 * 
+</span><span class="cm">	 * @param m 正でなければならない
+</span><span class="cm">	 * @return this mod m.
+</span><span class="cm">	 * @throws ArithmetricException m &lt;= 0の場合.
+</span><span class="cm">	 */</span>
+	<span class="err">public BigInteger </span><span class="n">mod</span><span class="p">(</span><span class="err">BigInteger m</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="na">signum</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="n">ArithmeticException</span><span class="p">(</span><span class="s">&#34;Modulus &lt;= 0: &#34;</span> <span class="o">+</span> <span class="n">m</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="c1">// 計算を行う
+</span><span class="c1"></span>	<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>最初に入力値チェックをすることで、以下を防げる。</p>
 
-<h2 id="5-a-name-53-a-項目53-可変長引数を注意して使う">5. <a name='53'></a>項目53 可変長引数を注意して使う</h2>
+<ul>
+<li>メソッドの処理部で例外が発生してしまうこと(後から解析が必要になる。)</li>
+<li>処理で例外が出ずに、変な値が返却されてしまうこと（これは最悪の場合）</li>
+</ul>
 
-<h2 id="6-a-name-54null-a-項目54-nullではなく-空コレクションか空配列を返す">6. <a name='54null'></a>項目54 nullではなく、空コレクションか空配列を返す</h2>
+<blockquote>
+<p>余談：<code>@throws ArithmetricException m &lt;= 0の場合.</code>の<code>@throws</code>はメソッドに<code>throws</code>がついていないので忘れがちかもしれないなと思いました。（IDEで自動的に付加されないので。）</p>
+</blockquote>
 
-<h2 id="7-a-name-55-a-項目55-オプショナルを注意して返す">7. <a name='55'></a>項目55 オプショナルを注意して返す</h2>
+<h3 id="1-3-a-name-1-a-アサーションの紹介">1.3. <a name='-1'></a>アサーションの紹介</h3>
 
-<h2 id="8-a-name-56api-a-項目56-すべての公開api要素に対してドキュメントコメントを書く">8. <a name='56API'></a>項目56 すべての公開API要素に対してドキュメントコメントを書く</h2>
+<p><code>private</code>メソッド（外部には公開しない）の場合は、そのパッケージの作成者として、どのような状況でメソッドが呼び出されるのかを
+<a href="https://www.ipa.go.jp/security/awareness/vendor/programmingv1/a03_05.html">アサーション</a>を用いて入力値の検査をすべき。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">int price </span><span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">0</span><span class="p">]);</span>
+    <span class="err">int num </span><span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">1</span><span class="p">]);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">price</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">||</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">int sum </span><span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&#34;%d + %d = %d%n&#34;</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;価格と数量には正の値を指定してください&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">private static int sum</span><span class="p">(</span><span class="err">int price</span><span class="p">,</span> <span class="err">int num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">assert</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">:</span> <span class="s">&#34;price: &#34;</span> <span class="o">+</span> <span class="n">price</span><span class="p">;</span>
+    <span class="k">assert</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">:</span> <span class="s">&#34;num: &#34;</span> <span class="o">+</span> <span class="n">num</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">price</span> <span class="o">*</span> <span class="n">num</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 第1引数は0より大きな数である必要がある
+</span><span class="c1"></span><span class="n">java</span> <span class="o">-</span><span class="err">ea EJ38 0 3
+</span><span class="err"></span><span class="cm">/**
+</span><span class="cm">* 実行結果
+</span><span class="cm">* Exception in thread &#34;main&#34; java.lang.AssertionError: price: 0
+</span><span class="cm">* at com.example.takuto_no.effective_java.chapter8.EJ38.sum(EJ38.java:39)
+</span><span class="cm">* at com.example.takuto_no.effective_java.chapter8.EJ38.main(EJ38.java:29)
+</span><span class="cm">*/</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>-ea</code>(<code>-enableassertions</code>)をつけた場合のみ<code>assert</code>は有効になる。
+<code>-ea</code>を付けなければ、<code>assert</code>は有効にならないので、実運用時にコストは発生しない。</p>
+
+<h2 id="2-a-name-50-a-項目-50-必要な場合-防御的にコピーする">2. <a name='50'></a>項目 50 必要な場合、防御的にコピーする</h2>
+
+<h3 id="結論">結論</h3>
+
+<ul>
+<li>クライアントが信頼できない場合は、防御的にコピーしましょう</li>
+<li>クライアントが信頼できて、コピーのコストが非常に高い場合は、Javadocに記載しても良いです。</li>
+</ul>
+
+<h3 id="防御的コピー">防御的コピー</h3>
+
+<p>クライアントが、クラスの不等式を破壊するために徹底した努力をすると想定しましょう。</p>
+
+<h4 id="悪い例">悪い例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Period</span> <span class="p">{</span>
+	<span class="err">private final Date start</span><span class="p">;</span>
+	<span class="err">private final Date end</span><span class="p">;</span>
+
+	<span class="cm">/**
+</span><span class="cm">	 * @param start 期間の開始
+</span><span class="cm">	 * @param end 期間の終わり。開始よりも前であってはならない
+</span><span class="cm">	 * @throws IllegalArgumentException startがendの後の場合
+</span><span class="cm">	 * @throws NullPointerException startかendがnullの場合
+</span><span class="cm">	 */</span>
+	<span class="err">public Period</span><span class="p">(</span><span class="err">Date start</span><span class="p">,</span> <span class="err">Date end</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">start</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">end</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="s">&#34; after &#34;</span> <span class="o">+</span> <span class="n">end</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="na">start</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="na">end</span> <span class="o">=</span> <span class="n">end</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="err">public Date </span><span class="n">start</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">start</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="err">public Date </span><span class="n">end</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">end</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Date start </span><span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="p">();</span>
+<span class="err">Date end </span><span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="p">();</span>
+<span class="err">Period p </span><span class="o">=</span> <span class="k">new</span> <span class="n">Period</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+<span class="c1">// Attack 1
+</span><span class="c1">// Period内部のendと、endが同じアドレスを指しているため、これで、Period内部を変更できてしまう。
+</span><span class="c1"></span><span class="n">end</span><span class="p">.</span><span class="na">setYear</span><span class="p">(</span><span class="n">78</span><span class="p">);</span>
+
+<span class="c1">// Attack 2
+</span><span class="c1">// Period#end()で、periodのendを取得できるため、Period内部を変更できてしまう。
+</span><span class="c1"></span><span class="n">p</span><span class="p">.</span><span class="na">end</span><span class="p">().</span><span class="na">setYear</span><span class="p">(</span><span class="n">78</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="良い例">良い例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Period</span> <span class="p">{</span>
+	<span class="err">private final Date start</span><span class="p">;</span>
+	<span class="err">private final Date end</span><span class="p">;</span>
+
+	<span class="cm">/**
+</span><span class="cm">	 * @param start 期間の開始
+</span><span class="cm">	 * @param end 期間の終わり。開始よりも前であってはならない
+</span><span class="cm">	 * @throws IllegalArgumentException startがendの後の場合
+</span><span class="cm">	 * @throws NullPointerException startかendがnullの場合
+</span><span class="cm">	 */</span>
+	<span class="err">public Period</span><span class="p">(</span><span class="err">Date start</span><span class="p">,</span> <span class="err">Date end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Attack 1の対策
+</span><span class="c1"></span>    <span class="c1">// 元のパラメータのコピーを保存する
+</span><span class="c1"></span>		<span class="k">this</span><span class="p">.</span><span class="na">start</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="p">(</span><span class="n">start</span><span class="p">.</span><span class="na">getTime</span><span class="p">());</span>
+		<span class="k">this</span><span class="p">.</span><span class="na">end</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="p">(</span><span class="n">end</span><span class="p">.</span><span class="na">getTime</span><span class="p">());</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="n">start</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">end</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="s">&#34; after &#34;</span> <span class="o">+</span> <span class="n">end</span><span class="p">);</span>
+	<span class="p">}</span>
+
+  <span class="c1">// Attack 2の対策
+</span><span class="c1"></span>  <span class="c1">// コピーを返却する
+</span><span class="c1"></span>	<span class="err">public Date </span><span class="n">start</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">Date</span><span class="p">(</span><span class="n">start</span><span class="p">.</span><span class="na">getTime</span><span class="p">());</span>
+	<span class="p">}</span>
+
+	<span class="err">public Date </span><span class="n">end</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="n">Date</span><span class="p">(</span><span class="n">end</span><span class="p">.</span><span class="na">getTime</span><span class="p">());</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>もし<code>Date</code>のコピーが非常にコストの高い行為であり、クライアントが信頼できる場合は、<br>
+&ldquo;影響を受ける要素を変更しないこと&rdquo;をクライアントの責任であると、Javadocに示すことで対応しても良い。</p>
+</blockquote>
+
+<h2 id="3-a-name-51-a-項目-51-メソッドのシグネチャを注意深く設計する">3. <a name='51'></a>項目 51 メソッドのシグネチャを注意深く設計する</h2>
+
+<h2 id="4-a-name-52-a-項目-52-オーバーロードを注意して使う">4. <a name='52'></a>項目 52 オーバーロードを注意して使う</h2>
+
+<h2 id="5-a-name-53-a-項目-53-可変長引数を注意して使う">5. <a name='53'></a>項目 53 可変長引数を注意して使う</h2>
+
+<h2 id="6-a-name-54null-a-項目-54-null-ではなく-空コレクションか空配列を返す">6. <a name='54null'></a>項目 54 null ではなく、空コレクションか空配列を返す</h2>
+
+<h2 id="7-a-name-55-a-項目-55-オプショナルを注意して返す">7. <a name='55'></a>項目 55 オプショナルを注意して返す</h2>
+
+<h2 id="8-a-name-56api-a-項目-56-すべての公開-api-要素に対してドキュメントコメントを書く">8. <a name='56API'></a>項目 56 すべての公開 API 要素に対してドキュメントコメントを書く</h2>
+
+<h2 id="9-a-name-url-a-参考url">9. <a name='URL'></a>参考URL</h2>
+
+<ul>
+<li><a href="https://techacademy.jp/magazine/19024">assertの使い方！Javaのアサーションを使う方法【初心者向け】</a></li>
+</ul>
 
     </div>
 
@@ -191,11 +494,7 @@
           <a href="/tags/%E5%80%8B%E4%BA%BA%E7%9A%84%E3%83%A1%E3%83%A2/">個人的メモ</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/20191109-effective-java-3rd-9/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Effective Java 3rd [Chapter 9]</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
+        
         <a class="next" href="/post/20191109-effective-java-3rd-7/">
             <span class="next-text nav-default">Effective Java 3rd [Chapter 7]</span>
             <span class="next-text nav-mobile">Next</span>

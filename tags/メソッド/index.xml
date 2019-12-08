@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>メソッド on Little by little and bit by bit - マイペースにこつこつと</title>
@@ -18,7 +18,7 @@
       <pubDate>Sat, 09 Nov 2019 00:48:57 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-8/</guid>
-      <description>メソッド Effective Java 第3版の個人的メモ 項目49 パラメータの正当性を検査する 項目50 必要な場合、防御的にコピーする 項目51 メソッドのシグネチャを注意深</description>
+      <description>メソッド Effective Java 第 3 版の個人的メモ 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 1.2. 良い例 1.3. アサーションの紹介 2. 項目 50 必要な場合、防御的にコピーする 3.</description>
     </item>
     
   </channel>
