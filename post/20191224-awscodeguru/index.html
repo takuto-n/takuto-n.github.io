@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>20191224 AWS CodeGuru - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="" /><meta name="keywords" content="codeguru, 静的解析, aws" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20191224-awscodeguru/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="20191224 AWS CodeGuru" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20191224-awscodeguru/" />
+<meta property="article:published_time" content="2019-12-24T23:36:29+09:00" />
+<meta property="article:modified_time" content="2019-12-24T23:36:29+09:00" />
+<meta itemprop="name" content="20191224 AWS CodeGuru">
+<meta itemprop="description" content="">
+
+
+<meta itemprop="datePublished" content="2019-12-24T23:36:29&#43;09:00" />
+<meta itemprop="dateModified" content="2019-12-24T23:36:29&#43;09:00" />
+<meta itemprop="wordCount" content="897">
+
+
+
+<meta itemprop="keywords" content="codeguru,静的解析,aws," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="20191224 AWS CodeGuru"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">20191224 AWS CodeGuru</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-24 </span>
+        <div class="post-category">
+            <a href="/categories/cicd/"> cicd </a>
+            </div>
+          <span class="more-meta"> 897 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="aws-codeguru">AWS-CodeGuru</h1>
+
+<p>AWS re;Invent 2019で発表された機械学習を応用したソースコード解析ツール<code>AWS CodeGuru</code>を使ってみました。
+その使用感や解析結果をまとめたいと思います。</p>
+
+<h2 id="結論">結論</h2>
+
+<p>正直、今後に乞うご期待！！という所感です…</p>
+
+<h3 id="使用感">使用感</h3>
+
+<ul>
+<li><code>AWS CodeCommit</code>や<code>Github</code>との連携は簡単</li>
+<li>解析結果はプルリクエストに対して、レビューア(AWS CodeGuru Bot)の指摘として表示される</li>
+</ul>
+
+<h3 id="解析結果">解析結果</h3>
+
+<ul>
+<li>一般的な静的解析ツール（<code>FindBugs</code>や<code>SonarQube</code>、<code>IDEによる指摘</code>など）で発見されるバグは、ほとんど指摘されない</li>
+<li>AWSのAPIの使い方に関する指摘は鋭い</li>
+</ul>
+
+<h2 id="前提">前提</h2>
+
+<p><code>Amazon CodeGuru</code> は、「「自動化されたコードレビュー」とアプリケーションパフォーマンスの推奨事項を提供する」機械学習サービスです。（引用元：<a href="https://aws.amazon.com/jp/codeguru/）">https://aws.amazon.com/jp/codeguru/）</a></p>
+
+<h3 id="バージョン管理システム">バージョン管理システム</h3>
+
+<p>以下の２つに対応。（今回はAWS CodeCommitを使用した）</p>
+
+<ul>
+<li>Github</li>
+<li>AWS CodeCommit</li>
+</ul>
+
+<p><img src="../images/20191224/AWS_CodeGuru_Repository.PNG" alt="AWS_CodeGuru_Repository" /></p>
+
+<p>参考URL : <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html">https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html</a></p>
+
+<h3 id="aws-codecommitの利用">AWS CodeCommitの利用</h3>
+
+<p>参考URLに記載の通りであるが、以下の手順を実施する。</p>
+
+<ol>
+<li>CodeCommit の初期設定（リポジトリ作成画面に<code>AWS CodeGuru</code>との連携オプションあり。）</li>
+</ol>
+
+<p><img src="/uploads/85be0dfaa87aa5d7cb3aba97d320290c/AWS_CodeCommit_作成画面.PNG" alt="AWS_CodeCommit_作成画面" /></p>
+
+<ol>
+<li>Git をインストールする</li>
+<li>CodeCommit への HTTPS 接続用の Git 認証情報を作成する</li>
+<li>CodeCommit コンソールに接続し、リポジトリを複製する</li>
+</ol>
+
+<p>参考URL : <a href="https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html">https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html</a></p>
+
+<h3 id="aws-codeguruについて">AWS CodeGuruについて</h3>
+
+<h4 id="指摘の観点">指摘の観点</h4>
+
+<p><a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html">https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html</a></p>
+
+<h4 id="指摘方法">指摘方法</h4>
+
+<p>マージリクエストに対して、レビュアーのような立場でソースコードに指摘をしてくれる。<br />
+（指摘場所は、<code>AWS CodeCommit</code>のアクティビティ画面）</p>
+
+<p><img src="/uploads/b4086465f75e566cbd91581fc9ccd414/CodeGuruによる指摘.png" alt="CodeGuruによる指摘" /></p>
+
+<p>なかなか指摘されないのですが、、以下のコードに対しては指摘されました。<br />
+指摘内容としては、「タイムゾーンの指定がない」です。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">String dateString </span><span class="o">=</span> <span class="s">&#34;2016/01/01 00:00:00&#34;</span><span class="p">;</span>
+<span class="err">SimpleDateFormat sdf </span><span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s">&#34;yyyy/MM/dd HH:mm:ss&#34;</span><span class="p">);</span>
+<span class="err">Long epochTime </span><span class="o">=</span> <span class="n">sdf</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">dateString</span><span class="p">).</span><span class="na">getTime</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">epochTime</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="aws-codeguruによる指摘結果">AWS CodeGuruによる指摘結果</h4>
+
+<p><img src="/uploads/915133f3a8afdb7d18ac7da58b261c2a/CodeGuruの解析結果.PNG" alt="CodeGuruの解析結果" /></p>
+
+<p>指摘内容としては、以下の２点。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">指摘対象
+new BasicAWSCredentials(psfEnvProp.getAccesskey(), psfEnvProp.getSecretkey())));
+
+指摘内容
+If possible, use temporary security credentials (IAM roles) instead of long-term access keys. Long-term access keys, such as those associated with IAM users and AWS account root users, remain valid until you manually revoke them. However, temporary security credentials obtained through IAM roles and other features of the AWS Security Token Service expire after a short period of time. Use temporary security credentials to help reduce your risk in case credentials are accidentally exposed. Learn more about best practices for managing AWS access keys.</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">指摘対象
+getQueryResultsResult = amazonAthena.getQueryResults(getQueryResultsRequest);
+
+指摘内容
+This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results.</pre></td></tr></table>
+</div>
+</div>
+<p>URL:
+<a href="https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/rtm-sample-repository/pull-requests/4/activity?region=us-east-1">https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/rtm-sample-repository/pull-requests/4/activity?region=us-east-1</a></p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/codeguru/">codeguru</a>
+          <a href="/tags/%E9%9D%99%E7%9A%84%E8%A7%A3%E6%9E%90/">静的解析</a>
+          <a href="/tags/aws/">aws</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/20191109-effective-java-3rd-8/">
+            <span class="next-text nav-default">Effective Java 3rd [Chapter 8]</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://github.com/takuto-n/ctrl-key-6bit-mask">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
