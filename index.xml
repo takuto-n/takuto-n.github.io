@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://github.com/takuto-n/ctrl-key-6bit-mask&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 24 Dec 2019 23:36:29 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 09 Nov 2019 00:48:57 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,15 +19,6 @@
       
       <guid>https://takuto-n.github.io/about/about/</guid>
       <description>テニスと一眼レフが好きです。</description>
-    </item>
-    
-    <item>
-      <title>20191224 AWS CodeGuru</title>
-      <link>https://takuto-n.github.io/post/20191224-awscodeguru/</link>
-      <pubDate>Tue, 24 Dec 2019 23:36:29 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/post/20191224-awscodeguru/</guid>
-      <description></description>
     </item>
     
     <item>

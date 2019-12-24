@@ -9,64 +9,8 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/post/20191224-awscodeguru/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/aws/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/categories/cicd/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/codeguru/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/%E9%9D%99%E7%9A%84%E8%A7%A3%E6%9E%90/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
+    <lastmod>2019-11-09T00:48:57+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -87,6 +31,27 @@
   
   <url>
     <loc>https://takuto-n.github.io/tags/java/</loc>
+    <lastmod>2019-11-09T00:48:57+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2019-11-09T00:48:57+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2019-11-09T00:48:57+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2019-11-09T00:48:57+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -227,6 +192,13 @@
   
   <url>
     <loc>https://takuto-n.github.io/post/20190914-codebuild_mattermost/</loc>
+    <lastmod>2019-09-14T12:09:20+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/cicd/</loc>
     <lastmod>2019-09-14T12:09:20+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
