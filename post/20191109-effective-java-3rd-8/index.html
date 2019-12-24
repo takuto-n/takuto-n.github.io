@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-11-09T00:48:57&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:48:57&#43;09:00" />
-<meta itemprop="wordCount" content="1904">
+<meta itemprop="wordCount" content="5235">
 
 
 
@@ -131,8 +131,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 1904 words </span>
-          <span class="more-meta"> 4 mins read </span>
+          <span class="more-meta"> 5235 words </span>
+          <span class="more-meta"> 11 mins read </span>
         
       </div>
     </header>
@@ -466,15 +466,532 @@
 
 <h2 id="3-a-name-51-a-項目-51-メソッドのシグネチャを注意深く設計する">3. <a name='51'></a>項目 51 メソッドのシグネチャを注意深く設計する</h2>
 
+<h3 id="3-1-a-name-1-a-結論">3.1. <a name='-1'></a>結論</h3>
+
+<ul>
+<li>メソッド名を注意深く選ぶべし</li>
+<li>便利なメソッドを提供しすぎないようにするべし</li>
+<li>長いパラメータのリストを避けるべし</li>
+<li>パラメータ型に関しては、クラスよりインタフェースを選ぶべし</li>
+<li>booleanパラメータよりは2つの要素を持つenum型を使用するべし</li>
+</ul>
+
+<h3 id="3-2-a-name-1-a-メソッド名を注意深く選ぶべし">3.2. <a name='-1'></a>メソッド名を注意深く選ぶべし</h3>
+
+<p>APIを使う人が誤解なく使えるようにするために、以下をすること</p>
+
+<ul>
+<li>標準命名規約に従う</li>
+<li>パッケージ内のほかの名前と矛盾のない名前にする</li>
+<li>広範囲のコンセンサスと矛盾がない名前を選ぶ
+
+<ul>
+<li>getHogeならhogeを返すなど</li>
+</ul></li>
+</ul>
+
+<h3 id="3-3-a-name-1-a-便利なメソッドを提供しすぎないようにするべし">3.3. <a name='-1'></a>便利なメソッドを提供しすぎないようにするべし</h3>
+
+<ul>
+<li>提供するか迷ったらやめるべき</li>
+<li>【理由】多くのメソッドを用意すると、学習、使用、文書化、テスト、保守を困難にするから</li>
+</ul>
+
+<h3 id="3-4-a-name-1-a-長いパラメータのリストを避けるべし">3.4. <a name='-1'></a>長いパラメータのリストを避けるべし</h3>
+
+<ul>
+<li>特に同じ型のパラメータが続くことは避けるべき
+
+<ul>
+<li>【理由1】利用者は多くのパラメータを覚えることができないので、ドキュメンテーションを常に参照しなければならなくなるから</li>
+<li>【理由2】同じ型のパラメータに対して順序を間違うと、コンパイルエラーにならず、利用者の期待した動作をしないから</li>
+</ul></li>
+</ul>
+
+<p>長いパラメータリストを避けるテクニックは３つある</p>
+
+<ol>
+<li>必要最低限の（細かな）単位でメソッドを作成する
+
+<ul>
+<li>例：サブリストから指定された要素が最初に検出された位置のインデックスを返す<code>indexOfSubList(Object o, int fromIndex, int toIndex)</code>がある場合、<br />
+次のように、複数のメソッドに分割する。<br />
+<code>list.subList(fromIndex, toIndex).indexOf(o)</code></li>
+</ul></li>
+<li>パラメータ間に繋がりがある場合はまとめる
+
+<ul>
+<li>例：トランプの数字と種類をパラメータに取るメソッド<code>hogemethod(int num, TrampSuit suit)</code>があった場合、<br />
+数字と種類をまとめたヘルパークラスを作成し、パラメータにヘルパークラスをとるようにする<br />
+<code>hogeMethod(Tramp tramp)</code></li>
+</ul></li>
+<li>引数が多いコンストラクタの引数が多い場合は、ビルダーパターンを使う。</li>
+</ol>
+
+<h3 id="3-5-a-name-1-a-パラメータ型に関しては-クラスよりインタフェースを選ぶべし">3.5. <a name='-1'></a>パラメータ型に関しては、クラスよりインタフェースを選ぶべし</h3>
+
+<ul>
+<li>パラメータの型は実装クラスよりもインタフェースを使用するべき
+
+<ul>
+<li>例えば、HashMapではなくMapにする</li>
+</ul></li>
+<li>【理由】制約をゆるくするため。</li>
+</ul>
+
+<h3 id="3-6-a-name-boolean2enum-a-booleanパラメータよりは2つの要素を持つenum型を使用するべし">3.6. <a name='boolean2enum'></a>booleanパラメータよりは2つの要素を持つenum型を使用するべし</h3>
+
+<p>enum型を使用したほうが利用者にとってわかりやすいから。また、新たな状態を追加しやすいから。
+  * 例：Thermometer型があったとして、<code>Thermometer.newInstance(true)</code>より、<code>Thermometer.newInstance(TemperatureScale.CELSIUS)</code>の方が、分かりやすい。<br />
+  また、簡単に<code>TemperatureScale.KELVIN</code>を追加できる。</p>
+
 <h2 id="4-a-name-52-a-項目-52-オーバーロードを注意して使う">4. <a name='52'></a>項目 52 オーバーロードを注意して使う</h2>
+
+<h3 id="4-1-a-name-1-a-結論">4.1. <a name='-1'></a>結論</h3>
+
+<ul>
+<li>パラメータの数が同一のオーバーロードされたメソッドを提供するべきでない</li>
+</ul>
+
+<h3 id="4-2-a-name-1-a-オーバーロード">4.2. <a name='-1'></a>オーバーロード</h3>
+
+<h4 id="4-2-1-a-name-1-a-コードと実行結果-その1">4.2.1. <a name='_1'></a>コードと実行結果_その1</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class TypeClassifier </span><span class="p">{</span>
+	<span class="err">public static String classify</span><span class="p">(</span><span class="err">int a</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;int&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="err">public static String classify</span><span class="p">(</span><span class="err">char a</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;char&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="err">public static String classify</span><span class="p">(</span><span class="err">double a</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;double&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">classify</span><span class="p">(</span><span class="n">1</span><span class="p">));</span>
+		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">classify</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">));</span>
+		<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">classify</span><span class="p">(</span><span class="n">1</span><span class="p">.</span><span class="na">0</span><span class="p">));</span>
+		<span class="c1">// 実行結果
+</span><span class="c1"></span>		<span class="cm">/*
+</span><span class="cm">		   int
+</span><span class="cm">		   char
+</span><span class="cm">		   double
+</span><span class="cm">		*/</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="4-2-2-a-name-2-a-コードと実行結果-その2">4.2.2. <a name='_2'></a>コードと実行結果_その2</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class CollectionClassifier </span><span class="p">{</span>
+	<span class="err">public static String classify</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;?&gt;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;Set&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="err">public static String classify</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;List&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="err">public static String classify</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;Collection&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">Collection</span><span class="o">&lt;?&gt;</span><span class="p">[]</span> <span class="n">collections</span> <span class="o">=</span> <span class="p">{</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(),</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(),</span>
+				<span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="o">&gt;</span><span class="p">().</span><span class="na">values</span><span class="p">()</span> <span class="p">};</span>
+
+		<span class="k">for</span> <span class="p">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span> <span class="o">:</span> <span class="n">collections</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">classify</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+		<span class="p">}</span>
+		<span class="c1">// 実行結果
+</span><span class="c1"></span>		<span class="cm">/*
+</span><span class="cm">		   Collection
+</span><span class="cm">		   Collection
+</span><span class="cm">		   Collection
+</span><span class="cm">		*/</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>オーバーロードされたどのメソッドが呼び出されるかの選択はコンパイル時に行われるため。<br />
+上の例では、3回のループで、パラメータのコンパイル時の型は<code>Collection&lt;?&gt;</code>であるので、<code>classify(Collection&lt;?&gt; s)</code>が呼び出される。</p>
+</blockquote>
+
+<h3 id="4-3-a-name-1-a-オーバーライド">4.3. <a name='-1'></a>オーバーライド</h3>
+
+<h4 id="4-3-1-a-name-3-a-コードと実行結果-その3">4.3.1. <a name='_3'></a>コードと実行結果_その3</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class Wine </span><span class="p">{</span>
+	<span class="err">String name</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;wine&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class SparklingWine extends Wine </span><span class="p">{</span>
+	<span class="nd">@Override</span>
+	<span class="err">String name</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;sparkling wine&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Champagne extends SparklingWine </span><span class="p">{</span>
+	<span class="nd">@Override</span>
+	<span class="err">String name</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s">&#34;champagne&#34;</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Overriding </span><span class="p">{</span>
+	<span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+		<span class="err">List&lt;Wine&gt; list </span><span class="o">=</span> <span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span> <span class="n">Wine</span><span class="p">(),</span> <span class="k">new</span> <span class="n">SparklingWine</span><span class="p">(),</span> <span class="k">new</span> <span class="n">Champagne</span><span class="p">());</span>
+
+		<span class="k">for</span> <span class="p">(</span><span class="err">Wine wine </span><span class="o">:</span> <span class="n">list</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">wine</span><span class="p">.</span><span class="na">name</span><span class="p">());</span>
+		<span class="p">}</span>
+		<span class="c1">// 実行結果
+</span><span class="c1"></span>		<span class="cm">/*
+</span><span class="cm">		   wine
+</span><span class="cm">		   sparkling wine
+</span><span class="cm">		   champagne
+</span><span class="cm">		*/</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>オーバーライドは実行時に呼び出されるメソッドが決められるため。</p>
+</blockquote>
+
+<h3 id="4-4-a-name-1-a-オーバーロードの利用">4.4. <a name='-1'></a>オーバーロードの利用</h3>
+
+<ul>
+<li>最も安全な方針は、 <strong>パラメータの数が同一のオーバーロードされたメソッドを提供しないこと</strong>
+
+<ul>
+<li>回避策の例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/io/ObjectOutputStream.html">ObjectOutputStream</a>は、<code>write()</code>をオーバーロードするのではなく、<code>writeBoolean(boolean)</code>、<code>writeInt(int)</code>、<code>writeLong(long)</code>としている。</li>
+</ul></li>
+<li>上記の方針を破らなければならない時は、限定されたオーバーロードをより一般的なオーバーロードに転送させるべき
+
+<ul>
+<li><p>例えば、<code>String#contentEquals()</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public boolean </span><span class="n">contentEquals</span><span class="p">(</span><span class="err">StringBuffer sb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">contentEquals</span><span class="p">((</span><span class="n">CharSequence</span><span class="p">)</span><span class="n">sb</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul></li>
+<li>コンストラクタの場合は、異なる名前を使用できないが、staticファクトリーメソッドを提供するという選択肢がある</li>
+<li>そもそもオーバーロードを使いまくらないことが多いけど、パラメータの数が同一のオーバーロードされたメソッドを作ることもある
+
+<ul>
+<li><code>StringBuilder#append()</code>はオーバーロードを使っている良い例</li>
+</ul></li>
+</ul>
 
 <h2 id="5-a-name-53-a-項目-53-可変長引数を注意して使う">5. <a name='53'></a>項目 53 可変長引数を注意して使う</h2>
 
+<h3 id="5-1-a-name-1-a-結論">5.1. <a name='-1'></a>結論</h3>
+
+<p>すべての引数の型が同じでも、全部可変長ではなく、一部のみにしたほうがいいことがある。</p>
+
+<p>ex) 必須パラメータ と オプションパラメータ で分けたいとき。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Varargs</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">min1</span><span class="p">(</span><span class="n">99</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">min2</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">2</span><span class="p">,</span> <span class="n">3</span><span class="p">));</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// ugly
+</span><span class="c1"></span>    <span class="err">static int </span><span class="n">min1</span><span class="p">(</span><span class="err">int... args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span><span class="p">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Too few arguments&#34;</span><span class="p">);</span>
+        <span class="err">int min </span><span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="n">0</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">args</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min</span><span class="p">)</span>
+                <span class="n">min</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">return</span> <span class="n">min</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// better
+</span><span class="c1"></span>    <span class="err">static int </span><span class="n">min2</span><span class="p">(</span><span class="err">int firstArg</span><span class="p">,</span> <span class="err">int... remainingArgs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">int min </span><span class="o">=</span> <span class="n">firstArg</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int arg </span><span class="o">:</span> <span class="n">remainingArgs</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">arg</span> <span class="o">&lt;</span> <span class="n">min</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">min</span> <span class="o">=</span> <span class="n">arg</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">min</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="6-a-name-54null-a-項目-54-null-ではなく-空コレクションか空配列を返す">6. <a name='54null'></a>項目 54 null ではなく、空コレクションか空配列を返す</h2>
+
+<h3 id="6-1-a-name-1-a-結論">6.1. <a name='-1'></a>結論</h3>
+
+<p>nullよりも、 空オブジェクト を常に使うこと。</p>
+
+<h3 id="6-2-a-name-1-a-理由">6.2. <a name='-1'></a>理由</h3>
+
+<ul>
+<li>nullが返ってくる -&gt; 使う側は常にnullチェックを強制される。</li>
+
+<li><p>場合によっては、コレクションが空or要素があるのどちらかを考慮せずコードがかける。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 要素があれば、そのSetが返却される
+</span><span class="c1">// 要素がなければ、空のSetが返却される
+</span><span class="c1"></span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">map</span><span class="p">(</span><span class="n">str</span> <span class="o">-&gt;</span> <span class="n">str</span><span class="p">.</span><span class="na">upperCase</span><span class="p">()).</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toSet</span><span class="p">());</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<p>なお、空オブジェクトを返す挙動を <strong>必ず</strong> javadocに記述すること。</p>
+
+<ul>
+<li>null と 空オブジェクト で意味が異なる場合は、もちろん、両方の意味を定義して使い分けること</li>
+<li>古いAPIだと 空オブジェクトで良い場面でnullを使っているケースがある</li>
+</ul>
 
 <h2 id="7-a-name-55-a-項目-55-オプショナルを注意して返す">7. <a name='55'></a>項目 55 オプショナルを注意して返す</h2>
 
+<h3 id="7-1-a-name-1-a-結論">7.1. <a name='-1'></a>結論</h3>
+
+<p>java8 から <code>Optional&lt;T&gt;</code> が入ってきた。定義をjavadocから引用すると…</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">null以外の値が含まれている場合も含まれていない場合もあるコンテナ・オブジェクトです。
+値が存在する場合、isPresent()はtrueを返し、get()は値を返します。</pre></td></tr></table>
+</div>
+</div>
+<p>基本これを使うと、NULLセーフできる。</p>
+
+<p>また、Optionalを使うと、以下が改善できるシーンがでてくる</p>
+
+<ul>
+<li>if文のブロックを可読性の高いシンプルなコードに置き換えることができる</li>
+<li>lambdaと相性がよいので、stream処理のmap、filterに自然に組み込むことができる</li>
+</ul>
+
+<h3 id="7-2-a-name-1-a-補足">7.2. <a name='-1'></a>補足</h3>
+
+<ul>
+<li>Optionalが戻り値であるメソッドからnullを返してはならない。これを行うと、Optionalを導入した意味がなくなる。
+
+<ul>
+<li>Intellij は警告してくれる</li>
+</ul></li>
+</ul>
+
 <h2 id="8-a-name-56api-a-項目-56-すべての公開-api-要素に対してドキュメントコメントを書く">8. <a name='56API'></a>項目 56 すべての公開 API 要素に対してドキュメントコメントを書く</h2>
+
+<h3 id="8-1-a-name-1-a-結論">8.1. <a name='-1'></a>結論</h3>
+
+<p>(状況に応じて、できる範囲で)必ず書きなさい。</p>
+
+<ul>
+<li>利用者の範囲
+
+<ul>
+<li>OSS</li>
+<li>会社内共通</li>
+<li>プロジェクト共通</li>
+<li>個別業務ロジック</li>
+</ul></li>
+<li>ライフサイクル
+
+<ul>
+<li>長く維持する</li>
+<li>一発</li>
+</ul></li>
+<li>使う場所
+
+<ul>
+<li>製品コード</li>
+<li>テストコード</li>
+<li>ツール
+etc&hellip;</li>
+</ul></li>
+</ul>
+
+<p>必ず、記述粒度は書き始める前に関係者で話しておくこと。</p>
+
+<p>いかのタイミングで重要なタグが追加された。</p>
+
+<ul>
+<li>Java9で@index</li>
+<li>Java8では@implSpec
+
+<ul>
+<li>継承元となる設計をされたクラスは@implSpecタグでメソッドとサブクラスとの決まり事を記述する。</li>
+</ul></li>
+<li>Java5では@literalと@code</li>
+</ul>
+
+<h3 id="8-2-a-name-1-a-書き方">8.2. <a name='-1'></a>書き方</h3>
+
+<p><a href="http://www.oracle.com/technetwork/java/javase/tech/index-137868.html">How to Write Doc Comments</a>
+<a href="https://www.amazon.co.jp/エンジニアのためのJavadoc再入門講座-現場で使えるAPI仕様書の作り方-佐藤-竜一/dp/4798119482">https://www.amazon.co.jp/エンジニアのためのJavadoc再入門講座-現場で使えるAPI仕様書の作り方-佐藤-竜一/dp/4798119482</a></p>
+
+<p>結局、一言でいうと、「制約を順序立てて記述する」ことを念頭に置くと、だいたい大丈夫です。</p>
+
+<p>なにか迷ったら、本家のjavadocをパクる。</p>
+
+<ul>
+<li>public, protected は絶対書く</li>
+<li>重複している役割のものがある(<code>@throws</code> , <code>@exception</code> / <code>{@code}</code> , <code>&lt;code&gt;</code>)ので、
+どれを使うかは、チームで軽く決めるとよい。</li>
+</ul>
+
+<p>意外とわすれがちなのは、スレッドセーフかどうか、シリアライズ関連。
+特別な考慮事項があれば記述すること。</p>
 
 <h2 id="9-a-name-url-a-参考url">9. <a name='URL'></a>参考URL</h2>
 
