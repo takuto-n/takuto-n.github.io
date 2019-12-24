@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="" /><meta name="keywords" content="codeguru, 静的解析, aws" />
+<meta name="author" content="takuto_n" /><meta name="description" content="AWS-CodeGuru AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使用感や解析結果をまとめたいと" /><meta name="keywords" content="codeguru, 静的解析, aws" />
 
 
 
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="20191224 AWS CodeGuru" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="AWS-CodeGuru AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使用感や解析結果をまとめたいと" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20191224-awscodeguru/" />
 <meta property="article:published_time" content="2019-12-24T23:36:29+09:00" />
 <meta property="article:modified_time" content="2019-12-24T23:36:29+09:00" />
 <meta itemprop="name" content="20191224 AWS CodeGuru">
-<meta itemprop="description" content="">
+<meta itemprop="description" content="AWS-CodeGuru AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使用感や解析結果をまとめたいと">
 
 
 <meta itemprop="datePublished" content="2019-12-24T23:36:29&#43;09:00" />
 <meta itemprop="dateModified" content="2019-12-24T23:36:29&#43;09:00" />
-<meta itemprop="wordCount" content="897">
+<meta itemprop="wordCount" content="1976">
 
 
 
 <meta itemprop="keywords" content="codeguru,静的解析,aws," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="20191224 AWS CodeGuru"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="AWS-CodeGuru AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使用感や解析結果をまとめたいと"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -131,65 +131,163 @@
         <div class="post-category">
             <a href="/categories/cicd/"> cicd </a>
             </div>
-          <span class="more-meta"> 897 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 1976 words </span>
+          <span class="more-meta"> 4 mins read </span>
         
       </div>
     </header>
 
     
     <div class="post-content">
-      <h1 id="aws-codeguru">AWS-CodeGuru</h1>
+      
 
-<p>AWS re;Invent 2019で発表された機械学習を応用したソースコード解析ツール<code>AWS CodeGuru</code>を使ってみました。
+<h1 id="aws-codeguru">AWS-CodeGuru</h1>
+
+<p>AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツール<a href="https://aws.amazon.com/jp/codeguru/">AWS CodeGuru</a>を使ってみました。
 その使用感や解析結果をまとめたいと思います。</p>
 
-<h2 id="結論">結論</h2>
+<!-- vscode-markdown-toc -->
 
-<p>正直、今後に乞うご期待！！という所感です…</p>
+<ul>
+<li>1. <a href="#">結論</a>
 
-<h3 id="使用感">使用感</h3>
+<ul>
+<li>1.1. <a href="#-1">使用感</a></li>
+<li>1.2. <a href="#-1">解析結果</a></li>
+</ul></li>
+<li>2. <a href="#-1">前提</a>
+
+<ul>
+<li>2.1. <a href="#-1">連携できるバージョン管理システム</a></li>
+<li>2.2. <a href="#-1">解析単価</a></li>
+<li>2.3. <a href="#-1">指摘の観点</a></li>
+</ul></li>
+<li>3. <a href="#-1">使用感</a>
+
+<ul>
+<li>3.1. <a href="#-1">セットアップについて</a></li>
+<li>3.2. <a href="#-1">運用性について</a></li>
+</ul></li>
+<li>4. <a href="#-1">指摘結果</a>
+
+<ul>
+<li>4.1. <a href="#-1">指摘されなかったコード</a></li>
+<li>4.2. <a href="#-1">指摘されたコード</a></li>
+</ul></li>
+</ul>
+
+<!-- vscode-markdown-toc-config
+    numbering=true
+    autoSave=true
+    /vscode-markdown-toc-config -->
+
+<!-- /vscode-markdown-toc -->
+
+<h2 id="1-a-name-a-結論">1. <a name=''></a>結論</h2>
+
+<p>利用者は以下のような方かなと。</p>
+
+<ul>
+<li>他の静的解析ツールも使っている
+
+<ul>
+<li>(AWS CodeGuru一本化は厳しそう)</li>
+</ul></li>
+<li>AWSのAPIの使用方法が合っているかよくわからないので、確認したい</li>
+<li>お金に余裕がある</li>
+</ul>
+
+<h3 id="1-1-a-name-1-a-使用感">1.1. <a name='-1'></a>使用感</h3>
 
 <ul>
 <li><code>AWS CodeCommit</code>や<code>Github</code>との連携は簡単</li>
 <li>解析結果はプルリクエストに対して、レビューア(AWS CodeGuru Bot)の指摘として表示される</li>
 </ul>
 
-<h3 id="解析結果">解析結果</h3>
+<h3 id="1-2-a-name-1-a-解析結果">1.2. <a name='-1'></a>解析結果</h3>
 
 <ul>
-<li>一般的な静的解析ツール（<code>FindBugs</code>や<code>SonarQube</code>、<code>IDEによる指摘</code>など）で発見されるバグは、ほとんど指摘されない</li>
+<li>一般的な静的解析ツール（<code>FindBugs</code>や<code>SonarQube</code>、<code>Coverity</code>、<code>IDEによる指摘</code>など）で発見されるバグは、ほとんど指摘されない</li>
 <li>AWSのAPIの使い方に関する指摘は鋭い</li>
 </ul>
 
-<h2 id="前提">前提</h2>
+<h2 id="2-a-name-1-a-前提">2. <a name='-1'></a>前提</h2>
 
 <p><code>Amazon CodeGuru</code> は、「「自動化されたコードレビュー」とアプリケーションパフォーマンスの推奨事項を提供する」機械学習サービスです。（引用元：<a href="https://aws.amazon.com/jp/codeguru/）">https://aws.amazon.com/jp/codeguru/）</a></p>
 
-<h3 id="バージョン管理システム">バージョン管理システム</h3>
+<p>以下のような静的解析ツールの仲間ですね。</p>
 
-<p>以下の２つに対応。（今回はAWS CodeCommitを使用した）</p>
+<ul>
+<li><a href="https://www.sonarqube.org/">SonarQube</a></li>
+<li><a href="http://findbugs.sourceforge.net/">FindBugs</a></li>
+<li><a href="https://www.synopsys.com/ja-jp/software-integrity/security-testing/static-analysis-sast.html">Coverity</a></li>
+</ul>
+
+<h3 id="2-1-a-name-1-a-連携できるバージョン管理システム">2.1. <a name='-1'></a>連携できるバージョン管理システム</h3>
+
+<p>以下の２つに対応（今回はAWS CodeCommitを使用した）</p>
 
 <ul>
 <li>Github</li>
 <li>AWS CodeCommit</li>
 </ul>
 
-<p><img src="../images/20191224/AWS_CodeGuru_Repository.PNG" alt="AWS_CodeGuru_Repository" /></p>
+<p><img src="/img/20191224/AWS_CodeGuru_Repository.PNG" width=80%></p>
 
 <p>参考URL : <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html">https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html</a></p>
 
-<h3 id="aws-codecommitの利用">AWS CodeCommitの利用</h3>
+<h3 id="2-2-a-name-1-a-解析単価">2.2. <a name='-1'></a>解析単価</h3>
 
-<p>参考URLに記載の通りであるが、以下の手順を実施する。</p>
+<p>まぁまぁ高いので、使う際は気をつけましょう。。今後、巨大なMR作って事故る人出るかもしれないですね、、、</p>
+
+<blockquote>
+<p>コード 100 行あたり 0.75 USD<br>
+例：10,000行のコードだったら、75USD(201912時点で約8200円)</p>
+</blockquote>
+
+<p>引用元：<a href="https://aws.amazon.com/jp/codeguru/pricing/">https://aws.amazon.com/jp/codeguru/pricing/</a></p>
+
+<h3 id="2-3-a-name-1-a-指摘の観点">2.3. <a name='-1'></a>指摘の観点</h3>
+
+<ul>
+<li>AWS Best Practices
+
+<ul>
+<li>AWS APIの使い方について</li>
+</ul></li>
+<li>Concurrency
+
+<ul>
+<li>並行性の実装について(原子性違反を見てくれる)</li>
+</ul></li>
+<li>Resource Leak Prevention
+
+<ul>
+<li>リソース漏れについて</li>
+</ul></li>
+<li>Sensitive Information Leak Prevention
+
+<ul>
+<li>機密情報の漏洩について</li>
+</ul></li>
+<li>Common Coding Best Practices
+
+<ul>
+<li>一般的なコーティングについて</li>
+</ul></li>
+</ul>
+
+<p>引用元：<a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html">https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html</a></p>
+
+<h2 id="3-a-name-1-a-使用感">3. <a name='-1'></a>使用感</h2>
+
+<h3 id="3-1-a-name-1-a-セットアップについて">3.1. <a name='-1'></a>セットアップについて</h3>
+
+<p>参考URLに記載の通りであるが、以下の手順で、10分ほどあれば完了するので簡単。</p>
 
 <ol>
-<li>CodeCommit の初期設定（リポジトリ作成画面に<code>AWS CodeGuru</code>との連携オプションあり。）</li>
-</ol>
-
-<p><img src="/uploads/85be0dfaa87aa5d7cb3aba97d320290c/AWS_CodeCommit_作成画面.PNG" alt="AWS_CodeCommit_作成画面" /></p>
-
-<ol>
+<li>CodeCommit の初期設定（リポジトリ作成画面に<code>AWS CodeGuru</code>との連携オプションあり。）
+<img src="/img/20191224/AWS_CodeCommit_作成画面.PNG" width=80%></li>
 <li>Git をインストールする</li>
 <li>CodeCommit への HTTPS 接続用の Git 認証情報を作成する</li>
 <li>CodeCommit コンソールに接続し、リポジトリを複製する</li>
@@ -197,21 +295,220 @@
 
 <p>参考URL : <a href="https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html">https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html</a></p>
 
-<h3 id="aws-codeguruについて">AWS CodeGuruについて</h3>
+<h3 id="3-2-a-name-1-a-運用性について">3.2. <a name='-1'></a>運用性について</h3>
 
-<h4 id="指摘の観点">指摘の観点</h4>
+<p>マージリクエストに対して、レビュアーのような立場でソースコードに指摘をしてくれるので、運用上指摘を見逃すことがない。</p>
 
-<p><a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html">https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html</a></p>
+<blockquote>
+<p>指摘場所は、<code>AWS CodeCommit</code>のアクティビティ画面</p>
+</blockquote>
 
-<h4 id="指摘方法">指摘方法</h4>
+<p><img src="/img/20191224/CodeGuruによる指摘.png" width=80%></p>
 
-<p>マージリクエストに対して、レビュアーのような立場でソースコードに指摘をしてくれる。<br />
-（指摘場所は、<code>AWS CodeCommit</code>のアクティビティ画面）</p>
+<h2 id="4-a-name-1-a-指摘結果">4. <a name='-1'></a>指摘結果</h2>
 
-<p><img src="/uploads/b4086465f75e566cbd91581fc9ccd414/CodeGuruによる指摘.png" alt="CodeGuruによる指摘" /></p>
+<h3 id="4-1-a-name-1-a-指摘されなかったコード">4.1. <a name='-1'></a>指摘されなかったコード</h3>
 
-<p>なかなか指摘されないのですが、、以下のコードに対しては指摘されました。<br />
-指摘内容としては、「タイムゾーンの指定がない」です。</p>
+<p>下のコードはいずれも他の静的解析ツールで指摘されるのですが、、<code>AWS CodeGuru</code>では指摘されなかったです。<br />
+このようなひどいコードは学習対象にないんですかね？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// ひどいコード1
+</span><span class="c1"></span><span class="err">var test1 </span><span class="o">=</span> <span class="s">&#34;test1&#34;</span><span class="p">;</span>
+<span class="err">var test2 </span><span class="o">=</span> <span class="s">&#34;test2&#34;</span><span class="p">;</span>
+<span class="err">var test3 </span><span class="o">=</span> <span class="s">&#34;test3&#34;</span><span class="p">;</span>
+<span class="err">var test4 </span><span class="o">=</span> <span class="s">&#34;test4&#34;</span><span class="p">;</span>
+
+<span class="c1">// ひどいコード2
+</span><span class="c1"></span><span class="k">do</span><span class="p">{</span>
+	<span class="c1">//処理
+</span><span class="c1"></span><span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+<span class="c1">// ひどいコード3
+</span><span class="c1"></span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+
+<span class="p">}</span>
+
+<span class="c1">// ひどいコード4
+</span><span class="c1">// リソースのcloseなし
+</span><span class="c1"></span><span class="k">try</span> <span class="p">{</span>
+    <span class="err">InputStream in </span><span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">src</span><span class="p">);</span>
+
+    <span class="err">OutputStream out </span><span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="p">(</span><span class="n">dst</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ひどいコード5
+</span><span class="c1">// 引用元：https://qiita.com/negi111111/items/510daace637b7c57c2da
+</span><span class="c1"></span><span class="err">public class </span><span class="n">ClassSample</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String args</span><span class="p">[])</span> <span class="p">{</span>
+        <span class="err">int proc </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">0</span> <span class="p">){</span>
+                <span class="c1">// 正常処理
+</span><span class="c1"></span>                <span class="k">try</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">1</span> <span class="p">){</span>
+                        <span class="c1">// 正常処理
+</span><span class="c1"></span>                        <span class="k">try</span> <span class="p">{</span>
+                            <span class="k">if</span> <span class="p">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">2</span> <span class="p">){</span>
+                                <span class="c1">// 正常処理
+</span><span class="c1"></span>                                <span class="k">try</span> <span class="p">{</span>
+                                    <span class="k">if</span> <span class="p">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">3</span> <span class="p">){</span>
+                                        <span class="c1">// 正常処理
+</span><span class="c1"></span>                                        <span class="k">try</span> <span class="p">{</span>
+                                            <span class="k">if</span> <span class="p">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">4</span> <span class="p">){</span>
+                                                <span class="c1">// 正常処理
+</span><span class="c1"></span>                                                <span class="k">if</span> <span class="p">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">5</span> <span class="p">){</span>
+                                                    <span class="c1">// 正常処理
+</span><span class="c1"></span>                                                    <span class="c1">// まだまだ続くよ！
+</span><span class="c1"></span>                                                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                                                    <span class="c1">// 異常処理
+</span><span class="c1"></span>                                                <span class="p">}</span>
+                                            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                                                <span class="c1">// 異常処理
+</span><span class="c1"></span>                                            <span class="p">}</span>
+                                        <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="err">Exception e</span><span class="p">)</span> <span class="p">{</span>
+                                            <span class="c1">// 例外処理
+</span><span class="c1"></span>                                        <span class="p">}</span>
+                                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                                        <span class="c1">// 異常処理
+</span><span class="c1"></span>                                    <span class="p">}</span>
+                                <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="err">Exception e</span><span class="p">)</span> <span class="p">{</span>
+                                    <span class="c1">// 例外処理
+</span><span class="c1"></span>                                <span class="p">}</span>
+                            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                                <span class="c1">// 異常処理
+</span><span class="c1"></span>                            <span class="p">}</span>
+                        <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="err">Exception e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="c1">// 例外処理
+</span><span class="c1"></span>                        <span class="p">}</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="c1">// 異常処理
+</span><span class="c1"></span>                    <span class="p">}</span>
+                <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="err">Exception e</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// 例外処理
+</span><span class="c1"></span>                <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// 異常処理
+</span><span class="c1"></span>            <span class="p">}</span>
+
+        <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="err">Exception e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 握りつぶす
+</span><span class="c1"></span>        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello! World!&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="4-2-a-name-1-a-指摘されたコード">4.2. <a name='-1'></a>指摘されたコード</h3>
+
+<p>一般的なコーディングに対する指摘ですね。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">String dateString </span><span class="o">=</span> <span class="s">&#34;2016/01/01 00:00:00&#34;</span><span class="p">;</span>
+<span class="err">SimpleDateFormat sdf </span><span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s">&#34;yyyy/MM/dd HH:mm:ss&#34;</span><span class="p">);</span>
+<span class="err">Long epochTime </span><span class="o">=</span> <span class="n">sdf</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">dateString</span><span class="p">).</span><span class="na">getTime</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">epochTime</span><span class="p">);</span>
+
+<span class="c1">// 指摘内容
+</span><span class="c1"></span><span class="o">//</span> <span class="err">「</span><span class="n">タイムゾーンの指定がない</span><span class="err">」</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以下はAWSのAPIについての指摘です。結構詳しく記載されていて、「流石です」という所感です。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -220,50 +517,25 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">String dateString </span><span class="o">=</span> <span class="s">&#34;2016/01/01 00:00:00&#34;</span><span class="p">;</span>
-<span class="err">SimpleDateFormat sdf </span><span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s">&#34;yyyy/MM/dd HH:mm:ss&#34;</span><span class="p">);</span>
-<span class="err">Long epochTime </span><span class="o">=</span> <span class="n">sdf</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">dateString</span><span class="p">).</span><span class="na">getTime</span><span class="p">();</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">epochTime</span><span class="p">);</span></code></pre></td></tr></table>
-</div>
-</div>
-<h4 id="aws-codeguruによる指摘結果">AWS CodeGuruによる指摘結果</h4>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">new</span> <span class="n">BasicAWSCredentials</span><span class="p">(</span><span class="n">EnvProp</span><span class="p">.</span><span class="na">getAccesskey</span><span class="p">(),</span> <span class="n">EnvProp</span><span class="p">.</span><span class="na">getSecretkey</span><span class="p">())));</span>
 
-<p><img src="/uploads/915133f3a8afdb7d18ac7da58b261c2a/CodeGuruの解析結果.PNG" alt="CodeGuruの解析結果" /></p>
-
-<p>指摘内容としては、以下の２点。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">指摘対象
-new BasicAWSCredentials(psfEnvProp.getAccesskey(), psfEnvProp.getSecretkey())));
-
-指摘内容
-If possible, use temporary security credentials (IAM roles) instead of long-term access keys. Long-term access keys, such as those associated with IAM users and AWS account root users, remain valid until you manually revoke them. However, temporary security credentials obtained through IAM roles and other features of the AWS Security Token Service expire after a short period of time. Use temporary security credentials to help reduce your risk in case credentials are accidentally exposed. Learn more about best practices for managing AWS access keys.</pre></td></tr></table>
+<span class="c1">// 指摘内容
+</span><span class="c1"></span><span class="o">//</span> <span class="err">If possible</span><span class="p">,</span> <span class="err">use temporary security credentials </span><span class="p">(</span><span class="err">IAM roles</span><span class="p">)</span> <span class="err">instead of </span><span class="kt">long</span><span class="o">-</span><span class="err">term access keys. Long</span><span class="o">-</span><span class="err">term access </span><span class="n">keys</span><span class="p">,</span> <span class="err">such as those associated with IAM users and AWS account root users</span><span class="p">,</span> <span class="err">remain valid until you manually revoke them. However</span><span class="p">,</span> <span class="err">temporary security credentials obtained through IAM roles and other features of the AWS Security Token Service expire after a short period of time. Use temporary security credentials to help reduce your risk in case credentials are accidentally exposed</span><span class="p">.</span> <span class="err">Learn more about best practices for managing AWS access keys</span><span class="p">.</span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">指摘対象
-getQueryResultsResult = amazonAthena.getQueryResults(getQueryResultsRequest);
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">getQueryResultsResult</span> <span class="o">=</span> <span class="n">amazonAthena</span><span class="p">.</span><span class="na">getQueryResults</span><span class="p">(</span><span class="n">getQueryResultsRequest</span><span class="p">);</span>
 
-指摘内容
-This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results.</pre></td></tr></table>
+<span class="c1">// 指摘内容
+</span><span class="c1"></span><span class="o">//</span> <span class="err">This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results</span><span class="p">.</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>URL:
-<a href="https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/rtm-sample-repository/pull-requests/4/activity?region=us-east-1">https://us-east-1.console.aws.amazon.com/codesuite/codecommit/repositories/rtm-sample-repository/pull-requests/4/activity?region=us-east-1</a></p>
     </div>
 
     
