@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/" />
@@ -46,16 +46,13 @@
 <meta property="article:modified_time" content="2019-09-29T19:17:52+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 3]">
 <meta itemprop="description" content="すべてのオブジェクトに共通のメソッド Effective Java 第 3 版の個人的メモ 項目 10 equals の override は一般契約（general contracts）に従うべし 項目 11 equals をオー">
-
-
 <meta itemprop="datePublished" content="2019-09-21T19:17:52&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-29T19:17:52&#43;09:00" />
 <meta itemprop="wordCount" content="3478">
 
 
 
-<meta itemprop="keywords" content="java,すべてのオブジェクトに共通のメソッド,個人的メモ," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="java,すべてのオブジェクトに共通のメソッド,個人的メモ," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 3]"/>
 <meta name="twitter:description" content="すべてのオブジェクトに共通のメソッド Effective Java 第 3 版の個人的メモ 項目 10 equals の override は一般契約（general contracts）に従うべし 項目 11 equals をオー"/>
 
@@ -139,14 +136,9 @@
 
     
     <div class="post-content">
-      
-
-<h1 id="すべてのオブジェクトに共通のメソッド">すべてのオブジェクトに共通のメソッド</h1>
-
-<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
-
-<!-- vscode-markdown-toc -->
-
+      <h1 id="heading">すべてのオブジェクトに共通のメソッド</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- raw HTML omitted -->
 <ol>
 <li><a href="#10equalsoverridegeneralcontracts">項目 10 equals の override は一般契約（general contracts）に従うべし</a></li>
 <li><a href="#11equalshashcode">項目 11 equals をオーバーライドする場合は hashcode もオーバーライドせよ</a></li>
@@ -154,77 +146,56 @@
 <li><a href="#13clone">項目 13 clone をオーバーライドするときは注意せよ</a></li>
 <li><a href="#14Comparable">項目 14 Comparable を実装することを考慮せよ</a></li>
 </ol>
-
-<!-- vscode-markdown-toc-config
-    numbering=true
-    autoSave=true
-    /vscode-markdown-toc-config -->
-
-<!-- /vscode-markdown-toc -->
-
-<h2 id="1-a-name-10equalsoverridegeneralcontracts-a-項目-10-equals-の-override-は一般契約-general-contracts-に従うべし">1. <a name='10equalsoverridegeneralcontracts'></a>項目 10 equals の override は一般契約（general contracts）に従うべし</h2>
-
-<h3 id="1-1-a-name-a-どういう時にオーバーライドする必要があるのか">1.1. <a name=''></a>どういう時にオーバーライドする必要があるのか？</h3>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="1-a-name10equalsoverridegeneralcontractsa-10-equals--override-general-contracts">1. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 10 equals の override は一般契約（general contracts）に従うべし</h2>
+<h3 id="11-a-namea">1.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->どういう時にオーバーライドする必要があるのか？</h3>
 <p><em>クラスが単なるオブジェクトの同一性とは異なる論理的等価性という概念を持っていて、他のインスタンスと比較する必要があるとき</em></p>
-
 <blockquote>
 <p>ただし、スーパークラスが equals をオーバーライドしていないこと。</p>
 </blockquote>
-
-<h3 id="1-2-a-name-1-a-どうやってオーバーライドすれば良いのか">1.2. <a name='-1'></a>どうやってオーバーライドすれば良いのか？</h3>
-
+<h3 id="12-a-name-1a">1.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->どうやってオーバーライドすれば良いのか？</h3>
 <p><em>一般契約(反射性, 対照性, 推移性, 整合性, 非 null 性)に従うこと</em></p>
-
 <p>以下のツールを使うと簡単に一般契約に従ったコードにできる。</p>
-
 <ol>
 <li>Annotation Processor(Java 6 から追加)</li>
 </ol>
-
 <ul>
 <li><code>lombok</code>の<code>@Data</code>など</li>
 <li>欠点：Annotation Processor を 2 つ利用していて、<code>@Data</code>とは別の Annotation が<code>setter()</code>を要求している場合、コンパイルエラーとなる場合がある。
 <code>@Data</code>が後で処理されるようになっていると、<code>setter()</code>がないからである。この場合はどうしようもない。。</li>
 </ul>
-
 <blockquote>
 <p>Annotation Processor は、コンパイル時に処理される。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、<code>setter/getter/equals/hashCode/toString</code>メソッドのバイトコードを<code>.class</code>に突っ込んでくれる。</p>
 </blockquote>
-
-<ol>
+<ol start="2">
 <li>Eclipse や Intellij の自動生成機能</li>
 </ol>
-
 <ul>
 <li>GUI で簡単に生成可能</li>
 <li>欠点：メンバ変数を追加した際には、その都度、GUI で実行しないといけないから手間である。</li>
 </ul>
-
-<h2 id="2-a-name-11equalshashcode-a-項目-11-equals-をオーバーライドする場合は-hashcode-もオーバーライドせよ">2. <a name='11equalshashcode'></a>項目 11 equals をオーバーライドする場合は hashcode もオーバーライドせよ</h2>
-
-<h3 id="2-1-a-name-hashcode-a-hashcode-もオーバーライドしないとどうなるのか">2.1. <a name='hashcode'></a>hashcode もオーバーライドしないとどうなるのか？</h3>
-
+<h2 id="2-a-name11equalshashcodea-11-equals--hashcode-">2. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 11 equals をオーバーライドする場合は hashcode もオーバーライドせよ</h2>
+<h3 id="21-a-namehashcodeahashcode-">2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->hashcode もオーバーライドしないとどうなるのか？</h3>
 <p><em>論理的に等しいが、<code>hashCode</code>の値は異なることになってしまう。</em></p>
-
 <p>論理的に等しいのに異なってしまうのはおかしいので、<code>hashCode</code>も同じであるべきである。</p>
-
-<ol>
+<ol start="5">
 <li>論理的に等しい（フィールド値が同じである）ので、その値を使った Hash 関数を作成しましょう。</li>
 </ol>
-
 <p>こちらも以下のツールを使いましょう</p>
-
 <ol>
-<li><p>Annotation Processor(Java 6 から追加)</p></li>
-
-<li><p>Eclipse や Intellij の自動生成機能</p></li>
+<li>
+<p>Annotation Processor(Java 6 から追加)</p>
+</li>
+<li>
+<p>Eclipse や Intellij の自動生成機能</p>
+</li>
 </ol>
-
 <p><em>PhoneNumber.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -243,52 +214,43 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final class PhoneNumber </span><span class="p">{</span>
-        <span class="err">private final short areaCode</span><span class="p">;</span>
-        <span class="err">private final short prefix</span><span class="p">;</span>
-        <span class="err">private final short lineNumber</span><span class="p">;</span>
-        <span class="p">.</span>
-        <span class="p">.</span>
-        <span class="p">.</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">PhoneNumber</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="kd">final</span> <span class="kt">short</span> <span class="n">areaCode</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kd">final</span> <span class="kt">short</span> <span class="n">prefix</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kd">final</span> <span class="kt">short</span> <span class="n">lineNumber</span><span class="o">;</span>
+        <span class="o">.</span>
+        <span class="o">.</span>
+        <span class="o">.</span>
         <span class="nd">@Override</span>
-        <span class="err">public int </span><span class="n">hashCode</span><span class="p">()</span> <span class="p">{</span>
-            <span class="err">int result </span><span class="o">=</span> <span class="n">17</span><span class="p">;</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">17</span><span class="o">;</span>
             <span class="c1">// Hash関数については研究が進んでいるが、当分は以下が良いコードらしいです。
-</span><span class="c1"></span>            <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">areaCode</span><span class="p">;</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">prefix</span><span class="p">;</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">lineNumber</span><span class="p">;</span>
-            <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-        <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span>            <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">areaCode</span><span class="o">;</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">prefix</span><span class="o">;</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">lineNumber</span><span class="o">;</span>
+            <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="2-2-a-name-volatile-a-余談-volatile-修飾子について">2.2. <a name='volatile'></a>【余談】volatile 修飾子について</h3>
-
+</div><h3 id="22-a-namevolatileavolatile-">2.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->【余談】volatile 修飾子について</h3>
 <blockquote>
 <p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」で説明されるらしいですが、、この章に出てきたので。</p>
 </blockquote>
-
-<h4 id="2-2-1-a-name-volatile-1-a-volatile-修飾子とは">2.2.1. <a name='volatile-1'></a>volatile 修飾子とは？</h4>
-
+<h4 id="221-a-namevolatile-1avolatile-">2.2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->volatile 修飾子とは？</h4>
 <p><code>volatile修飾子</code>をつけると、「必ずメモリに書く」ようになる。</p>
-
 <blockquote>
 <p>並列処理などで、<code>あるインスタンスA</code>の<code>メンバ変数X</code>を更新する際、通常はスレッドキャッシュに書き込まれた後、メモリに書き込まれる。
 これをスレッドキャッシュへの書き込みをせず、メモリ書き込みを最初からさせるようにするのが、<code>volatile修飾子</code>である。</p>
 </blockquote>
-
 <p>ただし、<a href="https://qiita.com/YukiMiyatake/items/0062c24b8a576eaab920">「volatile で排他制御出来ると、いつから思ってた？ atomic や synchronized 使うべし」</a>に記載があるように、<code>volatile修飾子</code>では排他制御はできない。。</p>
-
 <p>そのため、結局は、<code>atomic</code>や<code>synchronized</code>を使って、排他制御することになる。</p>
-
-<h4 id="2-2-2-a-name-volatile-1-a-volatile修飾子-の使い所について">2.2.2. <a name='volatile-1'></a><code>volatile修飾子</code>の使い所について</h4>
-
+<h4 id="222-a-namevolatile-1avolatile">2.2.2. <!-- raw HTML omitted --><!-- raw HTML omitted --><code>volatile修飾子</code>の使い所について</h4>
 <p>項番 78 を見たところ、以下の double-checked locking の話が出ているが、<a href="https://www.ibm.com/developerworks/jp/java/library/j-dcl/index.html">double-checked locking と Singleton パターン</a>を読んだところ、結局、<code>volatile修飾子</code>は使えず、<code>同期化を受け入れる</code>か、<code>static field</code> を使うようである、、、つまり<code>volatile修飾子</code>は使われないよう、、、いつ使うねん。。笑</p>
-
 <p><em>Singleton.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -300,124 +262,121 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static Singleton getInstance</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>
-  <span class="p">{</span>
-    <span class="kd">synchronized</span><span class="p">(</span><span class="n">Singleton</span><span class="p">.</span><span class="na">class</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="p">();</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">(</span><span class="o">)</span>
+<span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span><span class="o">)</span>
+  <span class="o">{</span>
+    <span class="kd">synchronized</span><span class="o">(</span><span class="n">Singleton</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<blockquote>
+</div><blockquote>
 <p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」まで、とりあえずは放置しておくことにする。</p>
 </blockquote>
-
-<h2 id="3-a-name-12tostring-a-項目-12-常に-tostring-をオーバーライドせよ">3. <a name='12toString'></a>項目 12 常に toString をオーバーライドせよ</h2>
-
-<h3 id="3-1-a-name-volatile-1-a-まとめ">3.1 <a name='volatile-1'></a>まとめ</h3>
-
+<h2 id="3-a-name12tostringa-12--tostring-">3. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 12 常に toString をオーバーライドせよ</h2>
+<h3 id="31-a-namevolatile-1a">3.1 <!-- raw HTML omitted --><!-- raw HTML omitted -->まとめ</h3>
 <ul>
 <li>toString には、フィールド値を含んだ情報を提示しましょう。
-
 <ul>
 <li>Eclipse や Intellij で<code>toString()</code>を自動生成できる。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p><em>ToStringSample.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java">	<span class="nd">@Override</span>
-	<span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&#34;toStringSample [text=%s, id=%s, value=%s]&#34;</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
-	<span class="p">}</span></code></pre></td></tr></table>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;toStringSample [text=%s, id=%s, value=%s]&#34;</span><span class="o">,</span> <span class="n">text</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">value</span><span class="o">)</span><span class="o">;</span>
+	<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li><p><code>BigInteger</code>や<code>BigDecimal</code>などのように数値を扱うクラスは、<code>toString(), valueOf()</code>で相互変換できるようにしておきましょう。</p>
-
+</div><ul>
+<li>
+<p><code>BigInteger</code>や<code>BigDecimal</code>などのように数値を扱うクラスは、<code>toString(), valueOf()</code>で相互変換できるようにしておきましょう。</p>
 <ul>
 <li>その方が使いやすくて便利。</li>
-</ul></li>
-
-<li><p><code>toString()</code>以外でもフィールド値などの情報を得られるようにしておきましょう。</p>
-
+</ul>
+</li>
+<li>
+<p><code>toString()</code>以外でもフィールド値などの情報を得られるようにしておきましょう。</p>
 <ul>
 <li>利用者側が、無理やり<code>toString</code>から値を取得するようなことになってしまうので、、、</li>
-</ul></li>
 </ul>
-
-<h2 id="4-a-name-13clone-a-項目-13-clone-をオーバーライドするときは注意せよ">4. <a name='13clone'></a>項目 13 clone をオーバーライドするときは注意せよ</h2>
-
-<h3 id="4-1-a-name-volatile-1-a-はじめに">4.1 <a name='volatile-1'></a>はじめに</h3>
-
+</li>
+</ul>
+<h2 id="4-a-name13clonea-13-clone-">4. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 13 clone をオーバーライドするときは注意せよ</h2>
+<h3 id="41-a-namevolatile-1a">4.1 <!-- raw HTML omitted --><!-- raw HTML omitted -->はじめに</h3>
 <ul>
-<li><p>Cloneable インタフェースはオブジェクトが複製を許可していることを示すだけの空のインターフェースだよ。</p></li>
-
-<li><p>java.lang.Object の clone メソッドは protected なので、Cloneable インタフェースを実装するだけでは clone メソッドを呼び出すことができないよ。</p></li>
-
-<li><p>可変オブジェクトの参照がある場合は、参照先を「<code>Deep Copy</code>」しましょう。</p>
-
+<li>
+<p>Cloneable インタフェースはオブジェクトが複製を許可していることを示すだけの空のインターフェースだよ。</p>
+</li>
+<li>
+<p>java.lang.Object の clone メソッドは protected なので、Cloneable インタフェースを実装するだけでは clone メソッドを呼び出すことができないよ。</p>
+</li>
+<li>
+<p>可変オブジェクトの参照がある場合は、参照先を「<code>Deep Copy</code>」しましょう。</p>
 <ul>
 <li><code>Deep Copy</code>は配列やリストの値を 1 つずつコピーする方法で、対する<code>Shallow Copy</code>はアドレスを単にコピーするだけだよ。</li>
-</ul></li>
 </ul>
-
-<h3 id="4-2-a-name-volatile-1-a-結論">4.2 <a name='volatile-1'></a>結論</h3>
-
+</li>
+</ul>
+<h3 id="42-a-namevolatile-1a">4.2 <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <ul>
-<li><p>純粋な Java の世界では、<code>clone</code>メソッドを使わずに、<code>copyFactory</code>メソッドで複製できるように作る方法がいいよ。</p></li>
-
-<li><p>Spring の世界では、<code>ApplicationContext</code>がインスタンスを管理しているので、<code>ApplicationContenxt#getBean()</code>で、<code>Prototype</code>としてインスタンスを取得する方法がいいよ。</p>
-
+<li>
+<p>純粋な Java の世界では、<code>clone</code>メソッドを使わずに、<code>copyFactory</code>メソッドで複製できるように作る方法がいいよ。</p>
+</li>
+<li>
+<p>Spring の世界では、<code>ApplicationContext</code>がインスタンスを管理しているので、<code>ApplicationContenxt#getBean()</code>で、<code>Prototype</code>としてインスタンスを取得する方法がいいよ。</p>
 <ul>
 <li><a href="http://javatechnology.net/spring/spring-singleton-scope/">spring のシングルトン問題を@Scope を使って回避する</a>のブログの通り、Spring ではシングルトン管理なので、何もしないと<code>Clone</code>ではなく、そのインスタンスを取得してしまうからですね。</li>
-</ul></li>
 </ul>
-
-<h2 id="5-a-name-14comparable-a-項目-14-comparable-を実装することを考慮せよ">5. <a name='14Comparable'></a>項目 14 Comparable を実装することを考慮せよ</h2>
-
-<h3 id="5-1-a-name-volatile-1-a-はじめに">5.1 <a name='volatile-1'></a>はじめに</h3>
-
+</li>
+</ul>
+<h2 id="5-a-name14comparablea-14-comparable-">5. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 14 Comparable を実装することを考慮せよ</h2>
+<h3 id="51-a-namevolatile-1a">5.1 <!-- raw HTML omitted --><!-- raw HTML omitted -->はじめに</h3>
 <ul>
-<li><p><code>compareTo()</code>は、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Comparable.html">Comparable インタフェース</a>の唯一のメソッド</p></li>
-
-<li><p><code>CompareTo()</code>メソッドを持っているクラスは、「自然な順序関係」(abc 順や数値順、年代順など)を持っていることを表しているよ。</p>
-
+<li>
+<p><code>compareTo()</code>は、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Comparable.html">Comparable インタフェース</a>の唯一のメソッド</p>
+</li>
+<li>
+<p><code>CompareTo()</code>メソッドを持っているクラスは、「自然な順序関係」(abc 順や数値順、年代順など)を持っていることを表しているよ。</p>
 <ul>
 <li>自然な順序関係の例＝辞書順、数値順</li>
-<li>1,2,3,4,..,9,10,11,&hellip;,99,100 をソートする時にどの順序関係で扱うかで結果が変わる</li>
+<li>1,2,3,4,..,9,10,11,&hellip;,99,100 をソートする時にどの順序関係で扱うかで結果が変わる
+<ul>
 <li>数値順＝上に記述した通り</li>
 <li>辞書順＝<code>1,10,100,11,..,2,20,21,...3,30...</code>
-
 <ul>
 <li>Java だと、String で sort すると、辞書順ソートになる。</li>
-</ul></li>
-</ul></li>
-
-<li><p><code>compareTo</code>契約(equals の契約と同様)を破っていると、<code>compareTo()</code>メソッドに依存しているクラス（<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeSet.html">TreeSet</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeMap.html">TreeMap</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html">Collections</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Arrays.html">Arrays</a>など）が機能しなくなるので気をつけましょう。</p></li>
 </ul>
-
-<h3 id="5-2-a-name-volatile-1-a-どのように実装するか">5.2 <a name='volatile-1'></a>どのように実装するか</h3>
-
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>compareTo</code>契約(equals の契約と同様)を破っていると、<code>compareTo()</code>メソッドに依存しているクラス（<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeSet.html">TreeSet</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeMap.html">TreeMap</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html">Collections</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Arrays.html">Arrays</a>など）が機能しなくなるので気をつけましょう。</p>
+</li>
+</ul>
+<h3 id="52-a-namevolatile-1a">5.2 <!-- raw HTML omitted --><!-- raw HTML omitted -->どのように実装するか</h3>
 <ul>
 <li><code>compareTo</code>メソッドを実装している２つの例を確認しましょう。</li>
 </ul>
-
-<p>_PhoneNumber<em>1.java</em></p>
+<p><em>PhoneNumber_1.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -448,41 +407,41 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class PhoneNumber implements </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhoneNumber</span> <span class="kd">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="o">{</span>
 
-	<span class="err">private int </span><span class="n">areaCode</span><span class="p">;</span>
-	<span class="err">private int </span><span class="n">prefix</span><span class="p">;</span>
-	<span class="err">private int </span><span class="n">lineNumber</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">areaCode</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">prefix</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">lineNumber</span><span class="o">;</span>
 
-	<span class="err">public int </span><span class="n">CompareTo</span><span class="p">(</span><span class="err">PhoneNumber pn</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">CompareTo</span><span class="o">(</span><span class="n">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">{</span>
 		<span class="c1">// 市外局番を比較する
-</span><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">areaCode</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">areaCode</span><span class="p">)</span>
-			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">areaCode</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">areaCode</span><span class="p">)</span>
-			<span class="k">return</span> <span class="n">1</span><span class="p">;</span>
+</span><span class="c1"></span>		<span class="k">if</span> <span class="o">(</span><span class="n">areaCode</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">)</span>
+			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">areaCode</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">)</span>
+			<span class="k">return</span> <span class="n">1</span><span class="o">;</span>
 
 		<span class="c1">// 市外局番は等しく、市内局番の前半を比較する
-</span><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">prefix</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">prefix</span><span class="p">)</span>
-			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">prefix</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">prefix</span><span class="p">)</span>
-			<span class="k">return</span> <span class="n">1</span><span class="p">;</span>
+</span><span class="c1"></span>		<span class="k">if</span> <span class="o">(</span><span class="n">prefix</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">)</span>
+			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">prefix</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">)</span>
+			<span class="k">return</span> <span class="n">1</span><span class="o">;</span>
 
 		<span class="c1">// 市外局番と市内局番の前半は等しく、市内局番の後半を比較する
-</span><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">lineNumber</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">lineNumber</span><span class="p">)</span>
-			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">lineNumber</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="p">.</span><span class="na">lineNumber</span><span class="p">)</span>
-			<span class="k">return</span> <span class="n">1</span><span class="p">;</span>
+</span><span class="c1"></span>		<span class="k">if</span> <span class="o">(</span><span class="n">lineNumber</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNumber</span><span class="o">)</span>
+			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">lineNumber</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNumber</span><span class="o">)</span>
+			<span class="k">return</span> <span class="n">1</span><span class="o">;</span>
 
 		<span class="c1">// 全てのフィールドが等しい
-</span><span class="c1"></span>		<span class="k">return</span> <span class="n">0</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span>		<span class="k">return</span> <span class="n">0</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>_PhoneNumber<em>2.java</em></p>
+</div><p><em>PhoneNumber_2.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -507,44 +466,42 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class PhoneNumber implements </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhoneNumber</span> <span class="kd">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">PhoneNumber</span><span class="o">&gt;</span> <span class="o">{</span>
 
-	<span class="err">private int </span><span class="n">areaCode</span><span class="p">;</span>
-	<span class="err">private int </span><span class="n">prefix</span><span class="p">;</span>
-	<span class="err">private int </span><span class="n">lineNumber</span><span class="p">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">areaCode</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">prefix</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">lineNumber</span><span class="o">;</span>
 
-	<span class="err">public int </span><span class="n">compareTo</span><span class="p">(</span><span class="err">PhoneNumber pn</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">{</span>
 		<span class="c1">// 市外局番を比較する
-</span><span class="c1"></span>		<span class="err">int areaCodeDiff </span><span class="o">=</span> <span class="n">areaCode</span> <span class="o">-</span> <span class="n">pn</span><span class="p">.</span><span class="na">areaCode</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">areaCodeDiff</span> <span class="o">!=</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="n">areaCodeDiff</span><span class="p">;</span>
-		<span class="p">}</span>
+</span><span class="c1"></span>		<span class="kt">int</span> <span class="n">areaCodeDiff</span> <span class="o">=</span> <span class="n">areaCode</span> <span class="o">-</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">areaCodeDiff</span> <span class="o">!</span><span class="o">=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="n">areaCodeDiff</span><span class="o">;</span>
+		<span class="o">}</span>
 
 		<span class="c1">// 市外局番は等しく、市内局番の前半を比較する
-</span><span class="c1"></span>		<span class="err">int prefixDiff </span><span class="o">=</span> <span class="n">prefix</span> <span class="o">-</span> <span class="n">pn</span><span class="p">.</span><span class="na">prefix</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">prefixDiff</span> <span class="o">!=</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="n">prefixDiff</span><span class="p">;</span>
-		<span class="p">}</span>
+</span><span class="c1"></span>		<span class="kt">int</span> <span class="n">prefixDiff</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">-</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">prefixDiff</span> <span class="o">!</span><span class="o">=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="n">prefixDiff</span><span class="o">;</span>
+		<span class="o">}</span>
 
 		<span class="c1">// 市外局番と市内局番の前半は等しく、市内局番の後半を比較する
-</span><span class="c1"></span>		<span class="k">return</span> <span class="n">lineNumber</span> <span class="o">-</span> <span class="n">pn</span><span class="p">.</span><span class="na">lineNumber</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span>		<span class="k">return</span> <span class="n">lineNumber</span> <span class="o">-</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>_PhoneNumber<em>1.java</em> は<em>PhoneNumber_2.java</em> と比べて計算量が多くて遅いけれど、確実に動作する。</li>
-<li>_PhoneNumber<em>2.java</em> は　<em>PhoneNumber_1.java</em> と比べて計算量が少なくて速いが、最小値と最大値の差が、int の最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう。</li>
+</div><ul>
+<li><em>PhoneNumber_1.java</em> は<em>PhoneNumber_2.java</em> と比べて計算量が多くて遅いけれど、確実に動作する。</li>
+<li><em>PhoneNumber_2.java</em> は　<em>PhoneNumber_1.java</em> と比べて計算量が少なくて速いが、最小値と最大値の差が、int の最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう。</li>
 </ul>
-
-<h3 id="5-3-a-name-volatile-1-a-結論">5.3 <a name='volatile-1'></a>結論</h3>
-
-<p>最小値と最大値の差が、int の最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう可能性がある、もしくは、数値の比較ではない場合、_PhoneNumber<em>1.java</em> のように実装しましょう。そうでなければ、_PhoneNumber<em>2.java</em> のように実装しましょう。</p>
-
+<h3 id="53-a-namevolatile-1a">5.3 <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<p>最小値と最大値の差が、int の最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう可能性がある、もしくは、数値の比較ではない場合、<em>PhoneNumber_1.java</em> のように実装しましょう。そうでなければ、<em>PhoneNumber_2.java</em> のように実装しましょう。</p>
 <blockquote>
-<p>java 標準の<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性がある、もしくは、数値での比較では無いので、_PhoneNumber<em>1.java</em> のように実装しています。</p>
-
-<p>java 標準の<a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、_PhoneNumber<em>2.java</em> のように実装しています。</p>
+<p>java 標準の<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性がある、もしくは、数値での比較では無いので、<em>PhoneNumber_1.java</em> のように実装しています。</p>
+</blockquote>
+<blockquote>
+<p>java 標準の<a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、<em>PhoneNumber_2.java</em> のように実装しています。</p>
 </blockquote>
 
     </div>

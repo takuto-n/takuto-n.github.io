@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191103-effective-java-3rd-5/" />
@@ -46,16 +46,13 @@
 <meta property="article:modified_time" content="2019-11-03T00:07:19+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 5]">
 <meta itemprop="description" content="ジェネリクス Effective Java 第 3 版の個人的メモ 項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジ">
-
-
 <meta itemprop="datePublished" content="2019-11-03T00:07:19&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-03T00:07:19&#43;09:00" />
 <meta itemprop="wordCount" content="6636">
 
 
 
-<meta itemprop="keywords" content="java,ジェネリクス,個人的メモ," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="java,ジェネリクス,個人的メモ," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 5]"/>
 <meta name="twitter:description" content="ジェネリクス Effective Java 第 3 版の個人的メモ 項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジ"/>
 
@@ -139,14 +136,9 @@
 
     
     <div class="post-content">
-      
-
-<h1 id="ジェネリクス">ジェネリクス</h1>
-
-<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
-
-<!-- vscode-markdown-toc -->
-
+      <h1 id="heading">ジェネリクス</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- raw HTML omitted -->
 <ol>
 <li><a href="#26">項目 26 原型を使わない</a></li>
 <li><a href="#27">項目 27 無検査警告を取り除く</a></li>
@@ -158,27 +150,19 @@
 <li><a href="#33">項目 33 型安全な異種コンテナを検討する</a></li>
 <li><a href="#URL">参考 URL</a></li>
 </ol>
-
-<!-- vscode-markdown-toc-config
-    numbering=true
-    autoSave=true
-    /vscode-markdown-toc-config -->
-
-<!-- /vscode-markdown-toc -->
-
-<h2 id="1-a-name-26-a-項目-26-原型を使わない">1. <a name='26'></a>項目 26 原型を使わない</h2>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="1-a-name26a-26-">1. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 26 原型を使わない</h2>
 <ul>
 <li>Java 1.4 までジェネリクスがなかった。</li>
 <li>Java 5 でジェネリクスが登場した。</li>
 </ul>
-
-<h3 id="1-1-a-name-a-結論">1.1. <a name=''></a>結論</h3>
-
+<h3 id="11-a-namea">1.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>ジェネリクスの型パラメータが指定できるときは必ず指定しましょう。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -201,40 +185,39 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Test</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
 
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="err">List list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="p">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
         <span class="c1">// どんな型でも入れれてしまう。
-</span><span class="c1"></span>        <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span>
-        <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">111</span><span class="p">);</span>
-        <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">DTO</span><span class="p">(</span><span class="s">&#34;user01&#34;</span><span class="p">,</span> <span class="n">11</span><span class="p">));</span>
+</span><span class="c1"></span>        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;hello&#34;</span><span class="o">)</span><span class="o">;</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">111</span><span class="o">)</span><span class="o">;</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">DTO</span><span class="o">(</span><span class="s">&#34;user01&#34;</span><span class="o">,</span> <span class="n">11</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
 
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">)</span><span class="o">;</span>
         <span class="c1">// 実行結果
 </span><span class="c1"></span>        <span class="c1">// [hello, 111, Test.DTO(name=user01, age=11)]
-</span><span class="c1"></span>    <span class="p">}</span>
+</span><span class="c1"></span>    <span class="o">}</span>
 
     <span class="nd">@Data</span>
     <span class="nd">@AllArgsConstructor</span>
-    <span class="err">private static class DTO </span><span class="p">{</span>
-        <span class="err">String name</span><span class="p">;</span>
-        <span class="err">int age</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">DTO</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><code>List&lt;String&gt; list = new ArrayList();</code> とすれば Integer や DTO をいれようとすると コンパイルエラーになるので、早期検出できる。</p>
-
+</div><p><code>List&lt;String&gt; list = new ArrayList();</code> とすれば Integer や DTO をいれようとすると コンパイルエラーになるので、早期検出できる。</p>
 <ul>
 <li>Java 1.4 までだと、誤って Integer を add しても、実行時にしかわからなかった。</li>
 <li>結合テストなどまですり抜けていきやすい。</li>
 <li>事象が観測された時点であちこちに散財している状態になっている。</li>
-
-<li><p>ジェネリクス変数には色々な書き方がある。</p>
+<li>ジェネリクス変数には色々な書き方がある。</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -252,104 +235,90 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// raw
-</span><span class="c1"></span><span class="err">List list1 </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="p">();</span>
+</span><span class="c1"></span><span class="n">List</span> <span class="n">list1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
 
 <span class="c1">// Java7まではこうかかないとダメ
-</span><span class="c1"></span><span class="err">List&lt;String&gt; list2 </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
 
 <span class="c1">// Java8で右辺のパラメータを省略できるようになった
-</span><span class="c1"></span><span class="err">List&lt;String&gt; list3 </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</span><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
 
 <span class="c1">// Java11でvarが使える
-</span><span class="c1"></span><span class="err">var list4 </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+</span><span class="c1"></span><span class="n">var</span> <span class="n">list4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
 
 <span class="c1">// これはダメな書き方
-</span><span class="c1"></span><span class="err">List list5 </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">list5</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">111</span><span class="p">);</span></code></pre></td></tr></table>
+</span><span class="c1"></span><span class="n">List</span> <span class="n">list5</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+<span class="n">list5</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">111</span><span class="o">)</span><span class="o">;</span>
+</code></pre></td></tr></table>
 </div>
-</div></li>
-</ul>
-
-<h2 id="2-a-name-27-a-項目-27-無検査警告を取り除く">2. <a name='27'></a>項目 27 無検査警告を取り除く</h2>
-
-<h3 id="2-1-a-name-1-a-結論">2.1. <a name='-1'></a>結論</h3>
-
+</div><h2 id="2-a-name27a-27-">2. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 27 無検査警告を取り除く</h2>
+<h3 id="21-a-name-1a">2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>@SuppressWarnings(&ldquo;unchecked&rdquo;) は気をつけて使いましょう</p>
-
 <ul>
 <li><code>@SuppressWarnings(&quot;unchecked&quot;)</code>は、クラス、メソッド、変数宣言に付与できる。
-
 <ul>
 <li>付与すると、その範囲の「型チェック実施していない」警告を抑止する。</li>
 <li>大きな範囲を抑止すると、抑止しようと思った対象以外も、抑止してしまうので、最小範囲で抑止すること。</li>
-</ul></li>
 </ul>
-
-<h2 id="3-a-name-28-a-項目-28-配列よりリストを選ぶ">3. <a name='28'></a>項目 28 配列よりリストを選ぶ</h2>
-
-<h3 id="3-1-a-name-1-a-結論">3.1. <a name='-1'></a>結論</h3>
-
+</li>
+</ul>
+<h2 id="3-a-name28a-28-">3. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 28 配列よりリストを選ぶ</h2>
+<h3 id="31-a-name-1a">3.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>配列とリストは次の 2 点で大きく異なる。
 リストの方は、コンパイル時に型安全性を提供するから、バグが発生しにくい。（配列は実行時に型安全性を提供する。）</p>
-
 <ul>
-<li>配列は共変で、リストは不変。
-
+<li>
+<p>配列は共変で、リストは不変。</p>
 <ul>
 <li>共変：<code>Sub</code>が<code>Super</code>のサブタイプであれば、配列型<code>Sub[]</code>が<code>Super[]</code>のサブタイプということ。</li>
 <li>不変：2 つの型<code>Type1</code>, <code>Type2</code>があったとき、<code>List&lt;Type1&gt;</code>と<code>List&lt;Type2&gt;</code>には互換性がない。</li>
-</ul></li>
-
-<li><p>配列は具象化されていて、リストは erasure で実装。</p>
-
+</ul>
+</li>
+<li>
+<p>配列は具象化されていて、リストは erasure で実装。</p>
 <ul>
 <li>具象化：実行時に、その要素型を強制し、問題があれば<code>ArrayStoreException</code>が発生する。(コンパイル時は確認しない。)</li>
 <li>erasure：コンパイル時に型制約を強制し、実行時には要素の型情報を廃棄する。</li>
-</ul></li>
 </ul>
-
 <blockquote>
 <p><a href="https://ejje.weblio.jp/content/erasure">erasure</a>の意味は「廃棄」</p>
 </blockquote>
-
-<h4 id="3-1-1-a-name-1-a-配列の場合">3.1.1. <a name='-1'></a>配列の場合</h4>
+</li>
+</ul>
+<h4 id="311-a-name-1a">3.1.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->配列の場合</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">  <span class="err">Super[] superArray </span><span class="o">=</span> <span class="k">new</span> <span class="n">Sub</span><span class="p">[</span><span class="n">1</span><span class="p">];</span>
-  <span class="n">superArray</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Super</span><span class="p">();</span>
-  <span class="o">//</span> <span class="n">実行時にArrayStoreException</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="n">Super</span><span class="o">[</span><span class="o">]</span> <span class="n">superArray</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sub</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="o">;</span>
+  <span class="n">superArray</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Super</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+  <span class="c1">// 実行時にArrayStoreException
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="3-1-2-a-name-1-a-リストの場合">3.1.2. <a name='-1'></a>リストの場合</h4>
+</div><h4 id="312-a-name-1a">3.1.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->リストの場合</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java">  <span class="c1">// コンパイルエラー
-</span><span class="c1"></span>  <span class="err">List&lt;Type1&gt; type1List </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Type2</span><span class="o">&gt;</span><span class="p">();</span>  <span class="o">//</span> <span class="n">互換性のない型</span></code></pre></td></tr></table>
+</span><span class="c1"></span>  <span class="n">List</span><span class="o">&lt;</span><span class="n">Type1</span><span class="o">&gt;</span> <span class="n">type1List</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Type2</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>  <span class="c1">// 互換性のない型
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="3-2-a-name-1-a-リストと配列を混在させた場合">3.2. <a name='-1'></a>リストと配列を混在させた場合</h3>
-
+</div><h3 id="32-a-name-1a">3.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->リストと配列を混在させた場合</h3>
 <p>リストと配列を混在させてしまった場合は、配列の代わりにリストを使うようにしましょう。</p>
-
 <ul>
 <li>混在させて、リストを配列にキャストする特殊なケースとして、次項「<a href="#29">項目 29 ジェネリック型を使う</a>」があります。</li>
 </ul>
-
 <p>単純なジェネリックメソッドで確認する。</p>
-
-<h4 id="3-2-1-a-name-1-a-ステップ-1-リスト-配列">3.2.1. <a name='1'></a>ステップ 1(リスト → 配列)</h4>
+<h4 id="321-a-name1a-1--">3.2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->ステップ 1(リスト → 配列)</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -365,28 +334,27 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="o">&lt;</span><span class="err">E&gt; E </span><span class="n">reduce</span><span class="p">(</span><span class="err">List&lt;E&gt; list</span><span class="p">,</span> <span class="err">Function&lt;E&gt; f</span><span class="p">,</span> <span class="err">E initVal</span><span class="p">)</span> <span class="p">{</span>
-  <span class="err">E[] snapshot </span><span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="na">toArray</span><span class="p">();</span> <span class="c1">// リストを内部的にロック
-</span><span class="c1"></span>  <span class="err">E result </span><span class="o">=</span> <span class="n">initVal</span><span class="p">;</span>
-  <span class="k">for</span> <span class="p">(</span><span class="err">E e </span><span class="o">:</span> <span class="n">snapshot</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">E</span> <span class="nf">reduce</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span><span class="o">,</span> <span class="n">E</span> <span class="n">initVal</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">E</span><span class="o">[</span><span class="o">]</span> <span class="n">snapshot</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="c1">// リストを内部的にロック
+</span><span class="c1"></span>  <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="n">initVal</span><span class="o">;</span>
+  <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">snapshot</span><span class="o">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">e</span><span class="o">)</span><span class="o">;</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
 <span class="cm">/** コンパイルエラー
 </span><span class="cm">Reduction.java:12: 互換性のない型
 </span><span class="cm">検出値 : java.lang.Object[]
 </span><span class="cm">期待値 : E[]
 </span><span class="cm">      E[] snapshot = list.toArray(); // リストを内部的にロック
 </span><span class="cm">                                 ^
-</span><span class="cm">**/</span></code></pre></td></tr></table>
+</span><span class="cm">**/</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="3-2-2-a-name-2-a-ステップ-2-リスト-キャスト-配列">3.2.2. <a name='2'></a>ステップ 2(リスト[キャスト]→ 配列)</h4>
-
+</div><h4 id="322-a-name2a-2-">3.2.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->ステップ 2(リスト[キャスト]→ 配列)</h4>
 <p>リストを配列<code>(E[])</code>にキャストした。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -402,32 +370,30 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="o">&lt;</span><span class="err">E&gt; E </span><span class="n">reduce</span><span class="p">(</span><span class="err">List&lt;E&gt; list</span><span class="p">,</span> <span class="err">Function&lt;E&gt; f</span><span class="p">,</span> <span class="err">E initVal</span><span class="p">)</span> <span class="p">{</span>
-  <span class="err">E[] snapshot </span><span class="o">=</span> <span class="p">(</span><span class="n">E</span><span class="p">[])</span> <span class="n">list</span><span class="p">.</span><span class="na">toArray</span><span class="p">();</span> <span class="c1">// リストを内部的にロック
-</span><span class="c1"></span>  <span class="err">E result </span><span class="o">=</span> <span class="n">initVal</span><span class="p">;</span>
-  <span class="k">for</span> <span class="p">(</span><span class="err">E e </span><span class="o">:</span> <span class="n">snapshot</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">E</span> <span class="nf">reduce</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span><span class="o">,</span> <span class="n">E</span> <span class="n">initVal</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">E</span><span class="o">[</span><span class="o">]</span> <span class="n">snapshot</span> <span class="o">=</span> <span class="o">(</span><span class="n">E</span><span class="o">[</span><span class="o">]</span><span class="o">)</span> <span class="n">list</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="c1">// リストを内部的にロック
+</span><span class="c1"></span>  <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="n">initVal</span><span class="o">;</span>
+  <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">snapshot</span><span class="o">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">e</span><span class="o">)</span><span class="o">;</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
 <span class="cm">/** 警告
 </span><span class="cm">Reduction.java:12: 警告:[unchecked]無検査キャストです
 </span><span class="cm">検出値 : java.lang.Object[]
 </span><span class="cm">期待値 : E[]
 </span><span class="cm">      E[] snapshot = (E[])list.toArray(); // リストを内部的にロック
 </span><span class="cm">                                      ^
-</span><span class="cm">**/</span></code></pre></td></tr></table>
+</span><span class="cm">**/</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<blockquote>
+</div><blockquote>
 <p>実行時の<code>E</code>の型が不明で、実行時にリスト(ジェネリクス）の型情報は erasure(廃棄)されているから、キャストの安全性が検査できない。)</p>
 </blockquote>
-
-<h4 id="3-2-3-a-name-3-a-ステップ-3-リスト-リスト">3.2.3. <a name='3'></a>ステップ 3(リスト → リスト)</h4>
-
+<h4 id="323-a-name3a-3--">3.2.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->ステップ 3(リスト → リスト)</h4>
 <p>配列<code>(E[])</code>を使わず、リストにした。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -439,41 +405,35 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="o">&lt;</span><span class="err">E&gt; E </span><span class="n">reduce</span><span class="p">(</span><span class="err">List&lt;E&gt; list</span><span class="p">,</span> <span class="err">Function&lt;E&gt; f</span><span class="p">,</span> <span class="err">E initVal</span><span class="p">)</span> <span class="p">{</span>
-  <span class="err">List&lt;E&gt; snapshot</span><span class="p">;</span>
-  <span class="kd">synchronized</span><span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">snapshot</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="err">E result </span><span class="o">=</span> <span class="n">initVal</span><span class="p">;</span>
-  <span class="k">for</span> <span class="p">(</span><span class="err">E e </span><span class="o">:</span> <span class="n">snapshot</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">E</span> <span class="nf">reduce</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">f</span><span class="o">,</span> <span class="n">E</span> <span class="n">initVal</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">snapshot</span><span class="o">;</span>
+  <span class="kd">synchronized</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">snapshot</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="o">(</span><span class="n">list</span><span class="o">)</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="n">initVal</span><span class="o">;</span>
+  <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">snapshot</span><span class="o">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">e</span><span class="o">)</span><span class="o">;</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="4-a-name-29-a-項目-29-ジェネリック型を使う">4. <a name='29'></a>項目 29 ジェネリック型を使う</h2>
-
-<h3 id="4-1-a-name-1-a-結論">4.1. <a name='-1'></a>結論</h3>
-
+</div><h2 id="4-a-name29a-29-">4. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 29 ジェネリック型を使う</h2>
+<h3 id="41-a-name-1a">4.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>以下の場合は、ジェネリクスを利用する良い機会なので使ってみましょう。</p>
-
 <ul>
 <li>利用者が、メソッドからの戻り値をキャストしないといけない</li>
 <li>利用者が、実行時にキャストが失敗する可能性がある</li>
 </ul>
-
 <p>スタックの実装をサンプルを作成します。
 作成時のポイントは 2 点です。</p>
-
 <ul>
 <li>無検査キャストが安全であると明確に示せる場合、警告を抑制しましょう。</li>
 <li>利用者はキャストしなくて済むので、楽になる。</li>
 </ul>
-
 <p><em><em>Stack.java</em></em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -512,49 +472,49 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="p">{</span>
-　　<span class="err">private E</span><span class="p">[]</span> <span class="n">elements</span><span class="p">;</span>
-　　<span class="err">private int </span><span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span>
-　　<span class="err">private static final int </span><span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="n">16</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+　　<span class="kd">private</span> <span class="n">E</span><span class="o">[</span><span class="o">]</span> <span class="n">elements</span><span class="o">;</span>
+　　<span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+　　<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="n">16</span><span class="o">;</span>
 
 　　<span class="cm">/*
 </span><span class="cm">　　elements配列はpush(E)からのEインスタンスだけを含む。
 </span><span class="cm">　　そのことは、型安全性を保証するためには十分であるが、
 </span><span class="cm">　　配列の実行時の型はE[]ではない。常にObject[]である。
 </span><span class="cm">　　*/</span>
-　　<span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&#34;unchecked&#34;</span><span class="p">)</span>
-　　<span class="err">public Stack</span><span class="p">()</span> <span class="p">{</span>
-　　　　<span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span><span class="p">[])</span> <span class="k">new</span> <span class="n">Object</span><span class="p">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="p">];</span>
-　　<span class="p">}</span>
+　　<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&#34;unchecked&#34;</span><span class="o">)</span>
+　　<span class="kd">public</span> <span class="nf">Stack</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+　　　　<span class="n">elements</span> <span class="o">=</span> <span class="o">(</span><span class="n">E</span><span class="o">[</span><span class="o">]</span><span class="o">)</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">]</span><span class="o">;</span>
+　　<span class="o">}</span>
 
-　　<span class="err">public void </span><span class="n">push</span><span class="p">(</span><span class="err">E e</span><span class="p">)</span> <span class="p">{</span>
-　　　　<span class="n">ensureCapacity</span><span class="p">();</span>
-　　　　<span class="n">elements</span><span class="p">[</span><span class="n">size</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">;</span>
-　　<span class="p">}</span>
+　　<span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+　　　　<span class="n">ensureCapacity</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+　　　　<span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">+</span><span class="o">+</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+　　<span class="o">}</span>
 
-　　<span class="err">public E </span><span class="n">pop</span><span class="p">()</span> <span class="p">{</span>
-　　　　<span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">==</span> <span class="n">0</span><span class="p">)</span>
-　　　　　　<span class="k">throw</span> <span class="k">new</span> <span class="n">EmptyStackException</span><span class="p">();</span>
-　　　　<span class="err">E result </span><span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="o">--</span><span class="n">size</span><span class="p">];</span>
-　　　　<span class="n">elements</span><span class="p">[</span><span class="n">size</span><span class="p">]</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// 廃れた参照を取り除く
-</span><span class="c1"></span>　　　　<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-　　<span class="p">}</span>
+　　<span class="kd">public</span> <span class="n">E</span> <span class="nf">pop</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+　　　　<span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">=</span><span class="o">=</span> <span class="n">0</span><span class="o">)</span>
+　　　　　　<span class="k">throw</span> <span class="k">new</span> <span class="n">EmptyStackException</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+　　　　<span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[</span><span class="o">-</span><span class="o">-</span><span class="n">size</span><span class="o">]</span><span class="o">;</span>
+　　　　<span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// 廃れた参照を取り除く
+</span><span class="c1"></span>　　　　<span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+　　<span class="o">}</span>
 
-　　<span class="err">public boolean </span><span class="n">isEmpty</span><span class="p">()</span> <span class="p">{</span>
-　　　　<span class="k">return</span> <span class="n">size</span> <span class="o">==</span> <span class="n">0</span><span class="p">;</span>
-　　<span class="p">}</span>
+　　<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+　　　　<span class="k">return</span> <span class="n">size</span> <span class="o">=</span><span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+　　<span class="o">}</span>
 
-　　<span class="err">private void </span><span class="n">ensureCapacity</span><span class="p">()</span> <span class="p">{</span>
-　　　　<span class="k">if</span> <span class="p">(</span><span class="n">elements</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">size</span><span class="p">)</span>
-　　　　　　<span class="n">elements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="n">1</span><span class="p">);</span>
-　　<span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+　　<span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureCapacity</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+　　　　<span class="k">if</span> <span class="o">(</span><span class="n">elements</span><span class="o">.</span><span class="na">length</span> <span class="o">=</span><span class="o">=</span> <span class="n">size</span><span class="o">)</span>
+　　　　　　<span class="n">elements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="n">1</span><span class="o">)</span><span class="o">;</span>
+　　<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><em><em>Main.java</em></em></p>
+</div><p><em><em>Main.java</em></em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -567,100 +527,87 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// ユーザ側のプログラム例
-</span><span class="c1"></span><span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">){</span>
-  <span class="err">var stack </span><span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
-  <span class="k">for</span> <span class="p">(</span><span class="err">var arg </span><span class="o">:</span> <span class="n">args</span><span class="p">){</span>
-    <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">()){</span>
-    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">().</span><span class="na">toUpperCase</span><span class="p">());</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span><span class="o">{</span>
+  <span class="n">var</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+  <span class="k">for</span> <span class="o">(</span><span class="n">var</span> <span class="n">arg</span> <span class="o">:</span> <span class="n">args</span><span class="o">)</span><span class="o">{</span>
+    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="k">while</span> <span class="o">(</span><span class="o">!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">(</span><span class="o">)</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="4-2-a-name-1-1-a-補足-1-配列を使う理由">4.2. <a name='1-1'></a>補足 1(配列を使う理由)</h3>
-
+</div><h3 id="42-a-name1-1a-1">4.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->補足 1(配列を使う理由)</h3>
 <p>Java はリストを直接はサポートしていない。</p>
-
 <ul>
 <li><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/ArrayList.java#L111">ArrayList</a>などのジェネリック型は配列を使用している。</li>
 </ul>
-
 <p>リストよりも配列の方が、パフォーマンスが良い。</p>
-
 <ul>
 <li><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/HashMap.java#L149">HashMap</a>などの他のジェネリック型は配列を使用している。</li>
 </ul>
-
-<h3 id="4-3-a-name-2-1-a-補足-2-ジェネリクスの型の制限">4.3. <a name='2-1'></a>補足 2(ジェネリクスの型の制限)</h3>
-
+<h3 id="43-a-name2-1a-2">4.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->補足 2(ジェネリクスの型の制限)</h3>
 <p>ジェネリクスの型が制限できる場合は、制限しましょう。</p>
-
 <p>例：<a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/concurrent/DelayQueue.java#L68">java.util.concurrent.DelayQueue</a>では、<code>DelayQueue&lt;E extends Delayed&gt;</code>としている。</p>
-
-<h2 id="5-a-name-30-a-項目-30-ジェネリックメソッドを使う">5. <a name='30'></a>項目 30 ジェネリックメソッドを使う</h2>
-
-<h3 id="5-1-a-name-1-a-結論">5.1. <a name='-1'></a>結論</h3>
-
+<h2 id="5-a-name30a-30-">5. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 30 ジェネリックメソッドを使う</h2>
+<h3 id="51-a-name-1a">5.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <ul>
 <li>ジェネリックメソッドの作り方、使い方を理解しましょう</li>
 <li>再帰型境界を使うことで、型パラメータの機能を制限できる</li>
 </ul>
-
-<h3 id="5-2-a-name-1-a-ジェネリックメソッド">5.2. <a name='-1'></a>ジェネリックメソッド</h3>
-
+<h3 id="52-a-name-1a">5.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->ジェネリックメソッド</h3>
 <ul>
-<li>ジェネリッククラスと同じように、メソッド単位で型安全性を確保できる</li>
-
-<li><p>ジェネリッククラスとの文法上の違いは、メソッドの戻り値の型の手前にのように型パラメータを書くこと<br />
+<li>
+<p>ジェネリッククラスと同じように、メソッド単位で型安全性を確保できる</p>
+</li>
+<li>
+<p>ジェネリッククラスとの文法上の違いは、メソッドの戻り値の型の手前にのように型パラメータを書くこと<br>
 <strong>ジェネリックメソッド</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static </span><span class="o">&lt;</span><span class="err">E&gt; Set</span><span class="o">&lt;</span><span class="err">E&gt; union</span><span class="p">(</span><span class="err">Set&lt;E&gt; s1</span><span class="p">,</span> <span class="err">Set&lt;E&gt; s2</span><span class="p">)</span> <span class="p">{</span>
-  <span class="err">Set&lt;E&gt; result </span><span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
-  <span class="n">result</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="n">s1</span><span class="o">)</span><span class="o">;</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">s2</span><span class="o">)</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>raw タイプのメソッド</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Set</span> <span class="nf">union</span><span class="o">(</span><span class="n">Set</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Set</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">(</span><span class="n">s1</span><span class="o">)</span><span class="o">;</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">s2</span><span class="o">)</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
-
-<p><strong>raw タイプのメソッド</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">  <span class="err">public static Set union</span><span class="p">(</span><span class="err">Set s1</span><span class="p">,</span> <span class="err">Set s2</span><span class="p">)</span> <span class="p">{</span>
-      <span class="err">Set result </span><span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
-      <span class="n">result</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
-      <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-  <span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-<h3 id="5-3-a-name-1-a-再帰型境界">5.3. <a name='-1'></a>再帰型境界</h3>
-
+<h3 id="53-a-name-1a">5.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->再帰型境界</h3>
 <ul>
 <li>再帰型境界は、<code>T extends HogeInterface</code>のように型パラメータを書くことで、T は HogeInterface が実装されている型であることを制限すること。</li>
-
-<li><p>よくある利用法は Comparable インターフェース</p>
-
+<li>よくある利用法は Comparable インターフェース
 <ul>
-<li><p>下の最大値を返す max メソッドは T を Comparable インターフェースが実装されている、つまり比較できること(compareTo メソッドが使えること)を保証しているので、最大値を求めることができる</p>
+<li>下の最大値を返す max メソッドは T を Comparable インターフェースが実装されている、つまり比較できること(compareTo メソッドが使えること)を保証しているので、最大値を求めることができる
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -673,39 +620,39 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static </span><span class="o">&lt;</span><span class="err">E extends Comparable&lt;E&gt;&gt; E </span><span class="n">max</span><span class="p">(</span><span class="err">Collection&lt;E&gt; c</span><span class="p">)</span> <span class="p">{</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">()){</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Empty collection&#34;</span><span class="p">);</span>
-    <span class="err">E result </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">for</span> <span class="p">(</span><span class="err">E e </span><span class="o">:</span> <span class="n">c</span><span class="p">){</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">e</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">E</span> <span class="nf">max</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Empty collection&#34;</span><span class="o">)</span><span class="o">;</span>
+        <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span><span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span> <span class="o">|</span><span class="o">|</span> <span class="n">e</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">result</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">e</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public interface </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
-<span class="err">int compareTo</span><span class="p">(</span><span class="err">T o</span><span class="p">);</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">T</span> <span class="n">o</span><span class="o">)</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></li>
-</ul></li>
 </ul>
-
-<h3 id="5-4-a-name-1-a-余談">5.4. <a name='-1'></a>余談</h3>
-
+</li>
+</ul>
+<h3 id="54-a-name-1a">5.4. <!-- raw HTML omitted --><!-- raw HTML omitted -->余談</h3>
 <ul>
 <li>型パラメータの文字としてよく使われる<code>T</code>、<code>E</code>、<code>K</code>、<code>V</code>は何の略なのか</li>
 </ul>
-
 <table>
 <thead>
 <tr>
@@ -714,50 +661,42 @@
 <th align="left">説明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">T</td>
 <td align="left">Type</td>
 <td align="left">汎用的</td>
 </tr>
-
 <tr>
 <td align="left">E</td>
 <td align="left">Element</td>
 <td align="left">配列の要素など</td>
 </tr>
-
 <tr>
 <td align="left">K</td>
 <td align="left">Key</td>
 <td align="left">連想配列やマップのキーなど</td>
 </tr>
-
 <tr>
 <td align="left">V</td>
 <td align="left">Value</td>
 <td align="left">配列の値や結果</td>
 </tr>
-
 <tr>
 <td align="left">N</td>
 <td align="left">Number</td>
 <td align="left">数値を表す</td>
 </tr>
-
 <tr>
 <td align="left">A</td>
 <td align="left">Array</td>
 <td align="left">A[]という形式で使われる</td>
 </tr>
-
 <tr>
 <td align="left">Args</td>
 <td align="left">Arguments</td>
 <td align="left">C++で使われることが多い</td>
 </tr>
-
 <tr>
 <td align="left">F, Fn, Func</td>
 <td align="left">Function</td>
@@ -765,26 +704,22 @@
 </tr>
 </tbody>
 </table>
-
-<h2 id="6-a-name-31api-a-項目-31-api-の柔軟性向上のために境界ワイルドカードを使う">6. <a name='31API'></a>項目 31 API の柔軟性向上のために境界ワイルドカードを使う</h2>
-
-<h3 id="6-1-a-name-1-a-結論">6.1. <a name='-1'></a>結論</h3>
-
+<h2 id="6-a-name31apia-31-api-">6. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 31 API の柔軟性向上のために境界ワイルドカードを使う</h2>
+<h3 id="61-a-name-1a">6.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <ul>
 <li>最大限の柔軟性のために、プロデューサーかコンシューマーを表す入力パラメータに対してワイルドカード型を使用するべき
-
 <ul>
 <li>PECS(producer extends, consumer super)と覚えよう！</li>
-</ul></li>
 </ul>
-
-<h3 id="6-2-a-name-1-a-境界ワイルドカードを使用しない場合の問題点">6.2. <a name='-1'></a>境界ワイルドカードを使用しない場合の問題点</h3>
-
+</li>
+</ul>
+<h3 id="62-a-name-1a">6.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->境界ワイルドカードを使用しない場合の問題点</h3>
 <ul>
-<li><p>下記のような Stack クラスがある。</p>
+<li>
+<p>下記のような Stack クラスがある。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -792,37 +727,39 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="p">{</span>
-  <span class="err">public Stack</span><span class="p">()</span> <span class="p">{}</span>
-  <span class="err">public void </span><span class="n">push</span><span class="p">(</span><span class="err">E element</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
-  <span class="err">public E </span><span class="n">pop</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
-  <span class="err">public boolean </span><span class="n">isEmpty</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Stack</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span><span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">E</span> <span class="nf">pop</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>一連の要素を受け取りそれら要素を全てスタックにプッシュするメソッド、pushAll()を下記のように追加したとする。</p>
+<li>
+<p>一連の要素を受け取りそれら要素を全てスタックにプッシュするメソッド、pushAll()を下記のように追加したとする。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">pushAll</span><span class="p">(</span><span class="err">List&lt;E&gt; src</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="p">(</span><span class="err">E e</span><span class="o">:</span> <span class="n">src</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">pushAll</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">:</span> <span class="n">src</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">e</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>このとき、Number 型の Stack を定義して、一つの Interger 変数を push することはできるが、List<Integer>を pushAll することはできない。なぜなら、List<Integer>は List<Number>のサブクラスではないから。</p>
+<li>
+<p>このとき、Number 型の Stack を定義して、一つの Interger 変数を push することはできるが、List<!-- raw HTML omitted -->を pushAll することはできない。なぜなら、List<!-- raw HTML omitted -->は List<!-- raw HTML omitted -->のサブクラスではないから。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -830,39 +767,42 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Stack&lt;Number&gt; numberStack </span><span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="n">numberStack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
 
-<span class="n">numberStack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="k">new</span> <span class="n">Integer</span><span class="p">(</span><span class="n">1</span><span class="p">));</span><span class="c1">//これはOK
+<span class="n">numberStack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">1</span><span class="o">)</span><span class="o">)</span><span class="o">;</span><span class="c1">//これはOK
 </span><span class="c1"></span>
-<span class="err">List&lt;Integer&gt; integers </span><span class="o">=</span> <span class="p">...;</span>
-<span class="n">numbers</span><span class="p">.</span><span class="na">pushAll</span><span class="p">(</span><span class="n">integers</span><span class="p">);</span><span class="o">//</span><span class="n">これはコンパイルエラー</span></code></pre></td></tr></table>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">integers</span> <span class="o">=</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">;</span>
+<span class="n">numbers</span><span class="o">.</span><span class="na">pushAll</span><span class="o">(</span><span class="n">integers</span><span class="o">)</span><span class="o">;</span><span class="c1">//これはコンパイルエラー
+</span></code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>ひとつだと追加できるのに、複数だと追加できないのは非常に不便。</p></li>
-
-<li><p>次に、渡したリストにすべての要素を追加してくれるメソッド、popAll()を下記のように追加したとする。</p>
+<li>
+<p>ひとつだと追加できるのに、複数だと追加できないのは非常に不便。</p>
+</li>
+<li>
+<p>次に、渡したリストにすべての要素を追加してくれるメソッド、popAll()を下記のように追加したとする。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">popAll</span><span class="p">(</span><span class="err">List&lt;E&gt; dst</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
-      <span class="n">dst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">pop</span><span class="p">());</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">popAll</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">dst</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">while</span> <span class="o">(</span><span class="o">!</span><span class="n">isEmpty</span><span class="o">(</span><span class="o">)</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">dst</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pop</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>このとき、Number 型の Stack を定義して、pop して１つの Object 変数に代入することはできるが、popAll して List<Object>代入することできない。なぜなら、List<Object>は List<Number>のスーパークラスではないから。</p>
+<li>
+<p>このとき、Number 型の Stack を定義して、pop して１つの Object 変数に代入することはできるが、popAll して List<!-- raw HTML omitted -->代入することできない。なぜなら、List<!-- raw HTML omitted -->は List<!-- raw HTML omitted -->のスーパークラスではないから。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -874,31 +814,33 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Stack&lt;Number&gt; numberStack </span><span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="n">numberStack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
 
-<span class="n">numberStack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
-<span class="n">numberStack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">2</span><span class="p">);</span>
-<span class="n">numberStack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">3</span><span class="p">);</span>
+<span class="n">numberStack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">1</span><span class="o">)</span><span class="o">;</span>
+<span class="n">numberStack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">2</span><span class="o">)</span><span class="o">;</span>
+<span class="n">numberStack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">3</span><span class="o">)</span><span class="o">;</span>
 
-<span class="err">Object obj </span><span class="o">=</span> <span class="n">numbers</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span><span class="c1">//これはOK
+<span class="n">Object</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">pop</span><span class="o">(</span><span class="o">)</span><span class="o">;</span><span class="c1">//これはOK
 </span><span class="c1"></span>
-<span class="err">List&lt;Object&gt; objects </span><span class="o">=</span> <span class="p">...;</span>
-<span class="n">numbers</span><span class="p">.</span><span class="na">popAll</span><span class="p">(</span><span class="n">objects</span><span class="p">);</span><span class="o">//</span><span class="n">これはコンパイルエラー</span></code></pre></td></tr></table>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">objects</span> <span class="o">=</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">;</span>
+<span class="n">numbers</span><span class="o">.</span><span class="na">popAll</span><span class="o">(</span><span class="n">objects</span><span class="o">)</span><span class="o">;</span><span class="c1">//これはコンパイルエラー
+</span></code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>これも不便。</p></li>
+<li>
+<p>これも不便。</p>
+</li>
 </ul>
-
-<h3 id="6-3-a-name-1-a-境界ワイルドカードでの解決">6.3. <a name='-1'></a>境界ワイルドカードでの解決</h3>
-
+<h3 id="63-a-name-1a">6.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->境界ワイルドカードでの解決</h3>
 <ul>
-<li>前述の問題は境界ワイルドカードを使うことで解決できる</li>
-
-<li><p><code>pushAll()</code>や<code>popAll()</code>を下記のように境界ワイルドカードを使って定義することで、<code>List&lt;? extends E&gt;</code>は「E のサブタイプをパラメータとするリスト」、<code>List&lt;? super E&gt;</code>「E のスーパータイプをパラメータとするリスト」とすることができ、解決できる。</p>
+<li>
+<p>前述の問題は境界ワイルドカードを使うことで解決できる</p>
+</li>
+<li>
+<p><code>pushAll()</code>や<code>popAll()</code>を下記のように境界ワイルドカードを使って定義することで、<code>List&lt;? extends E&gt;</code>は「E のサブタイプをパラメータとするリスト」、<code>List&lt;? super E&gt;</code>「E のスーパータイプをパラメータとするリスト」とすることができ、解決できる。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -909,85 +851,88 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">pushAll</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="err">extends E</span><span class="o">&gt;</span> <span class="n">src</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// 同じ
-</span><span class="c1"></span>  <span class="p">...</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">pushAll</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 同じ
+</span><span class="c1"></span>    <span class="o">.</span><span class="o">.</span><span class="o">.</span>
+<span class="o">}</span>
 
-<span class="err">public void </span><span class="n">popAll</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="err">super E</span><span class="o">&gt;</span> <span class="n">src</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// 同じ
-</span><span class="c1"></span>  <span class="p">...</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">popAll</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">super</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">src</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 同じ
+</span><span class="c1"></span>    <span class="o">.</span><span class="o">.</span><span class="o">.</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
-
-<h3 id="6-4-a-name-getputpecs-a-get-put-原則-pecs">6.4. <a name='GETPUTPECS'></a>GET &amp; PUT 原則（PECS）</h3>
-
+<h3 id="64-a-namegetputpecsaget--put-pecs">6.4. <!-- raw HTML omitted --><!-- raw HTML omitted -->GET &amp; PUT 原則（PECS）</h3>
 <ul>
 <li><code>&lt;? extends E&gt;</code>と<code>&lt;? super E&gt;</code>のどちらを使うか決めるための原則
-
 <ul>
 <li>関数内において、ジェネリックス型の引数の役割が「プロデューサー（Producer）」であれば extends</li>
-<li>「コンシューマー（Consumer）」であれば super</li>
+<li>「コンシューマー（Consumer）」であれば super
+<ul>
 <li>プロデューサーは、関数内で何らかの値を生成（提供）する引数
-
 <ul>
 <li>pushAll()の引数 src は値を提供するのでプロデューサー</li>
-</ul></li>
+</ul>
+</li>
 <li>コンシューマーは、関数内で何らかの値を消費（利用）する引数
-
 <ul>
 <li>popAll()の引数 dst は値を消費するのでコンシューマー</li>
-</ul></li>
-<li>作用の方向で考えるとよい</li>
-</ul></li>
 </ul>
-
-<h3 id="6-5-a-name-getput-a-get-put-原則の例-問題">6.5. <a name='GETPUT'></a>GET &amp; PUT 原則の例(問題)</h3>
-
+</li>
+</ul>
+</li>
+<li>作用の方向で考えるとよい</li>
+</ul>
+</li>
+</ul>
+<h3 id="65-a-namegetputaget--put-">6.5. <!-- raw HTML omitted --><!-- raw HTML omitted -->GET &amp; PUT 原則の例(問題)</h3>
 <ul>
-<li><p>問 1. 前項目で登場した下記の union メソッドはどのように境界ワイルドカードを付けるべきか？</p>
+<li>
+<p>問 1. 前項目で登場した下記の union メソッドはどのように境界ワイルドカードを付けるべきか？</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static </span><span class="o">&lt;</span><span class="err">E&gt; Set</span><span class="o">&lt;</span><span class="err">E&gt; union</span><span class="p">(</span><span class="err">Set&lt;E&gt; s1</span><span class="p">,</span> <span class="err">Set&lt;E&gt; s2</span><span class="p">)</span> <span class="p">{</span>
-  <span class="err">Set&lt;E&gt; result </span><span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
-  <span class="n">result</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="n">s1</span><span class="o">)</span><span class="o">;</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">s2</span><span class="o">)</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>問 1 の解答
+<li>
+<p>問 1 の解答
 s1、s2 は値を提供しているから。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static </span><span class="o">&lt;</span><span class="err">E&gt; Set</span><span class="o">&lt;</span><span class="err">E&gt; union</span><span class="p">(</span><span class="n">Set</span><span class="o">&lt;?</span> <span class="err">extends E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="p">,</span> <span class="n">Set</span><span class="o">&lt;?</span> <span class="err">extends E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
-  <span class="err">Set&lt;E&gt; result </span><span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
-  <span class="n">result</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">union</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">s1</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="n">s1</span><span class="o">)</span><span class="o">;</span>
+    <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">s2</span><span class="o">)</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>問 2. 前項目で登場した下記の max メソッドはどのように境界ワイルドカードを付けるべきか？(ヒント：2 つ付ける。)</p>
+<li>
+<p>問 2. 前項目で登場した下記の max メソッドはどのように境界ワイルドカードを付けるべきか？(ヒント：2 つ付ける。)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1000,24 +945,25 @@ s1、s2 は値を提供しているから。</p>
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static </span><span class="o">&lt;</span><span class="err">E extends Comparable&lt;E&gt;&gt; E </span><span class="n">max</span><span class="p">(</span><span class="err">Collection&lt;E&gt; c</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">()){</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Empty collection&#34;</span><span class="p">);</span>
-      <span class="err">E result </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">for</span> <span class="p">(</span><span class="err">E e </span><span class="o">:</span> <span class="n">c</span><span class="p">){}</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">e</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span>
-          <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">E</span> <span class="nf">max</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Empty collection&#34;</span><span class="o">)</span><span class="o">;</span>
+        <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span><span class="o">{</span><span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span> <span class="o">|</span><span class="o">|</span> <span class="n">e</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">result</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">e</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>問 2 の解答</p>
+<li>
+<p>問 2 の解答</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1028,60 +974,54 @@ s1、s2 は値を提供しているから。</p>
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static </span><span class="o">&lt;</span><span class="err">E extends </span><span class="n">Comparable</span><span class="o">&lt;?</span> <span class="err">super E</span><span class="o">&gt;&gt;</span> <span class="err">E max</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="err">extends E</span><span class="o">&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Empty collection&#34;</span><span class="p">);</span>
-  <span class="err">E result </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-  <span class="k">for</span> <span class="p">(</span><span class="err">E e </span><span class="o">:</span> <span class="n">c</span><span class="p">)</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">e</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span>
-          <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">E</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">super</span> <span class="n">E</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">E</span> <span class="nf">max</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="o">)</span><span class="o">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Empty collection&#34;</span><span class="o">)</span><span class="o">;</span>
+    <span class="n">E</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span> <span class="o">|</span><span class="o">|</span> <span class="n">e</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">result</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">e</span><span class="o">)</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<blockquote>
+</div><blockquote>
 <p><code>E extends Comparable&lt;? super E&gt;</code>の理由は以下。
-     <code>
-     [PECSの原則に従うと]
-     Comparableは常に消費者(consumer)なので、Comparable&lt;T&gt;ではなくComparable&lt;? super T&gt;を常に使用するべき。
-</code></p>
-</blockquote></li>
-
-<li><p>上記の実際の例としては、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ScheduledFuture.html">ScheduledFuture インターフェース</a>がある。</p></li>
+<code>[PECSの原則に従うと] Comparableは常に消費者(consumer)なので、Comparable&lt;T&gt;ではなくComparable&lt;? super T&gt;を常に使用するべき。</code></p>
+</blockquote>
+</li>
+<li>
+<p>上記の実際の例としては、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ScheduledFuture.html">ScheduledFuture インターフェース</a>がある。</p>
+</li>
 </ul>
-
-<p>下記のリストを<code>Comparable&lt;E&gt;</code>のままの max メソッドで使おうとすると、コンパイルエラーになる。<br />
-なぜなら、<code>ScheduledFuture</code>は<code>Comparable&lt;ScheduledFuture&gt;</code>で拡張されていないからである。<br />
-しかし、<code>ScheduledFuture</code>は<code>Delayed</code>のサブインターフェースであり、<code>Delayed</code>は<code>Comparable&lt;Delayed&gt;</code>を拡張しているので、<code>ScheduledFuture</code>は<code>Comparable&lt;Delayed&gt;</code>で比較可能である。<br />
+<p>下記のリストを<code>Comparable&lt;E&gt;</code>のままの max メソッドで使おうとすると、コンパイルエラーになる。<br>
+なぜなら、<code>ScheduledFuture</code>は<code>Comparable&lt;ScheduledFuture&gt;</code>で拡張されていないからである。<br>
+しかし、<code>ScheduledFuture</code>は<code>Delayed</code>のサブインターフェースであり、<code>Delayed</code>は<code>Comparable&lt;Delayed&gt;</code>を拡張しているので、<code>ScheduledFuture</code>は<code>Comparable&lt;Delayed&gt;</code>で比較可能である。<br>
 したがって、<code>Comparable&lt;? super E&gt;</code>とすれば、下記のリストに max メソッドを使えるようになる。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">ScheduledFuture</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">scheduledFutures</span><span class="o">=</span><span class="p">...;</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">ScheduledFuture</span><span class="o">&lt;</span><span class="o">?</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">scheduledFutures</span><span class="o">=</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="7-a-name-32-a-項目-32-ジェネリックと可変長引数を注意して組み合わせる">7. <a name='32'></a>項目 32 ジェネリックと可変長引数を注意して組み合わせる</h2>
-
-<h3 id="7-1-a-name-1-a-結論">7.1. <a name='-1'></a>結論</h3>
-
+</div><h2 id="7-a-name32a-32-">7. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 32 ジェネリックと可変長引数を注意して組み合わせる</h2>
+<h3 id="71-a-name-1a">7.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <ul>
 <li>ジェネリクスと可変長引数を同時に使用する場合は、以下を守った上で <code>@SafeVarargs</code> を付与する
-
 <ol>
 <li>配列を変更していない(要素に値を格納していない)</li>
 <li>引数を呼び出し側に参照させていない(return していない)</li>
-</ol></li>
+</ol>
+</li>
 <li>コレクションをネストさせる等で対処することも検討する</li>
 </ul>
-
-<h3 id="7-2-a-name-1-a-ジェネリクスと可変長引数を同時に使用すると-タイプアンセーフになる">7.2. <a name='-1'></a>ジェネリクスと可変長引数を同時に使用すると、タイプアンセーフになる。</h3>
-
+<h3 id="72-a-name-1a">7.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->ジェネリクスと可変長引数を同時に使用すると、タイプアンセーフになる。</h3>
 <p>以下のように、ジェネリック型の可変長引数に値を格納するのは安全でないケースが存在する。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1091,28 +1031,25 @@ s1、s2 は値を提供しているから。</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Mixing generics and varargs can violate type safety!
-</span><span class="c1"></span><span class="err">static void </span><span class="n">dangerous</span><span class="p">(</span><span class="err">List&lt;String&gt;... stringLists</span><span class="p">)</span> <span class="p">{</span>
-    <span class="err">List&lt;Integer&gt; intList </span><span class="o">=</span> <span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">42</span><span class="p">);</span>
-    <span class="err">Object[] objects </span><span class="o">=</span> <span class="n">stringLists</span><span class="p">;</span>
-    <span class="n">objects</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">intList</span><span class="p">;</span>             <span class="c1">// Heap pollution
-</span><span class="c1"></span>    <span class="err">String s </span><span class="o">=</span> <span class="n">stringLists</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="na">get</span><span class="p">(</span><span class="n">0</span><span class="p">);</span> <span class="c1">// ClassCastException
-</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span><span class="kd">static</span> <span class="kt">void</span> <span class="nf">dangerous</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="n">stringLists</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">42</span><span class="o">)</span><span class="o">;</span>
+    <span class="n">Object</span><span class="o">[</span><span class="o">]</span> <span class="n">objects</span> <span class="o">=</span> <span class="n">stringLists</span><span class="o">;</span>
+    <span class="n">objects</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">intList</span><span class="o">;</span>             <span class="c1">// Heap pollution
+</span><span class="c1"></span>    <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">stringLists</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">0</span><span class="o">)</span><span class="o">;</span> <span class="c1">// ClassCastException
+</span><span class="c1"></span><span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>なお、このような可能性があるため、コンパイル時にジェネリクスと可変長引数を組み合わせたメソッドを呼び出す部分で
+</div><p>なお、このような可能性があるため、コンパイル時にジェネリクスと可変長引数を組み合わせたメソッドを呼び出す部分で
 <code>unchecked generic array creation for varargs parameter</code> と警告がでる。</p>
-
 <p>とはいえ、以下の標準 API ではジェネリック型の可変長引数が定義されており、必ず問題となるわけではない。これらはタイプセーフ。</p>
-
 <ul>
 <li><code>Arrays.asList(T... a)</code></li>
 <li><code>Collections.addAll(Collection&lt;? super T&gt; c, T... elements)</code></li>
 </ul>
-
 <p>また、本当に安全ならば、メソッドに <code>@SafeVarargs</code> を付与することで、コンパイル時の警告は抑止できる。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1122,25 +1059,22 @@ s1、s2 は値を提供しているから。</p>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// java.util.Arrays#asList
 </span><span class="c1"></span><span class="nd">@SafeVarargs</span>
-<span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&#34;varargs&#34;</span><span class="p">)</span>
-<span class="err">public static </span><span class="o">&lt;</span><span class="err">T&gt; List</span><span class="o">&lt;</span><span class="err">T&gt; asList</span><span class="p">(</span><span class="err">T... a</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&#34;varargs&#34;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">asList</span><span class="o">(</span><span class="n">T</span><span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="n">a</span><span class="o">)</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="7-3-a-name-1-a-本当にタイプセーフなのかを知るには">7.3. <a name='-1'></a>本当にタイプセーフなのかを知るには</h3>
-
+</div><h3 id="73-a-name-1a">7.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->本当にタイプセーフなのかを知るには</h3>
 <p>可変長配列の引数が以下の両方を満たす状態ならばタイプセーフと言える</p>
-
 <ol>
 <li>配列を変更していない(要素に値を格納していない)</li>
 <li>引数を呼び出し側に参照させていない(return していない)</li>
 </ol>
-
 <p>以下は 2.に違反している NG ケース</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1159,29 +1093,29 @@ s1、s2 は値を提供しているから。</p>
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Test</span> <span class="p">{</span>
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="err">String[] attributes </span><span class="o">=</span> <span class="n">pickTwo</span><span class="p">(</span><span class="s">&#34;Good&#34;</span><span class="p">,</span> <span class="s">&#34;Fast&#34;</span><span class="p">,</span> <span class="s">&#34;Cheap&#34;</span><span class="p">);</span> <span class="c1">// String型であるため、&#39;T&#39;に渡しても型推論ができる。
-</span><span class="c1"></span>    <span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">attributes</span> <span class="o">=</span> <span class="n">pickTwo</span><span class="o">(</span><span class="s">&#34;Good&#34;</span><span class="o">,</span> <span class="s">&#34;Fast&#34;</span><span class="o">,</span> <span class="s">&#34;Cheap&#34;</span><span class="o">)</span><span class="o">;</span> <span class="c1">// String型であるため、&#39;T&#39;に渡しても型推論ができる。
+</span><span class="c1"></span>    <span class="o">}</span>
 
-    <span class="kd">static</span> <span class="o">&lt;</span><span class="err">T&gt; T</span><span class="p">[]</span> <span class="n">toArray</span><span class="p">(</span><span class="err">T... args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">args</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kd">static</span> <span class="o">&lt;</span><span class="err">T&gt; T</span><span class="p">[]</span> <span class="n">pickTwo</span><span class="p">(</span><span class="err">T a</span><span class="p">,</span> <span class="err">T b</span><span class="p">,</span> <span class="err">T c</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">switch</span><span class="p">(</span><span class="n">ThreadLocalRandom</span><span class="p">.</span><span class="na">current</span><span class="p">().</span><span class="na">nextInt</span><span class="p">(</span><span class="n">3</span><span class="p">))</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="n">0</span><span class="o">:</span> <span class="k">return</span> <span class="n">toArray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span> <span class="c1">// 型が推測できないため、Object[]型でreturnする
-</span><span class="c1"></span>        <span class="k">case</span> <span class="n">1</span><span class="o">:</span> <span class="k">return</span> <span class="n">toArray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span> <span class="c1">// 引数が&#39;T&#39;であり、そこから&#39;T&#39;のメソッドの渡すため、型推論ができない。
-</span><span class="c1"></span>        <span class="k">case</span> <span class="n">2</span><span class="o">:</span> <span class="k">return</span> <span class="n">toArray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="p">();</span> <span class="c1">// Can&#39;t get here
-</span><span class="c1"></span>    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span><span class="o">[</span><span class="o">]</span> <span class="nf">toArray</span><span class="o">(</span><span class="n">T</span><span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">args</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span><span class="o">[</span><span class="o">]</span> <span class="nf">pickTwo</span><span class="o">(</span><span class="n">T</span> <span class="n">a</span><span class="o">,</span> <span class="n">T</span> <span class="n">b</span><span class="o">,</span> <span class="n">T</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">switch</span><span class="o">(</span><span class="n">ThreadLocalRandom</span><span class="o">.</span><span class="na">current</span><span class="o">(</span><span class="o">)</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">3</span><span class="o">)</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="n">0</span><span class="o">:</span> <span class="k">return</span> <span class="n">toArray</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span><span class="o">;</span> <span class="c1">// 型が推測できないため、Object[]型でreturnする
+</span><span class="c1"></span>        <span class="k">case</span> <span class="n">1</span><span class="o">:</span> <span class="k">return</span> <span class="n">toArray</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span><span class="o">;</span> <span class="c1">// 引数が&#39;T&#39;であり、そこから&#39;T&#39;のメソッドの渡すため、型推論ができない。
+</span><span class="c1"></span>        <span class="k">case</span> <span class="n">2</span><span class="o">:</span> <span class="k">return</span> <span class="n">toArray</span><span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="c1">// Can&#39;t get here
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>そもそも、以下のようにすればよいという話はある。</p>
+</div><p>そもそも、以下のようにすればよいという話はある。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1191,22 +1125,22 @@ s1、s2 は値を提供しているから。</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// List as a typesafe alternative to a generic varargs parameter
-</span><span class="c1"></span><span class="kd">static</span> <span class="o">&lt;</span><span class="err">T&gt; List</span><span class="o">&lt;</span><span class="err">T&gt; flatten</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;?</span> <span class="err">extends T</span><span class="o">&gt;&gt;</span> <span class="n">lists</span><span class="p">)</span> <span class="p">{</span>
-    <span class="err">List&lt;T&gt; result </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="err">extends T</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">:</span> <span class="n">lists</span><span class="p">)</span>
-        <span class="n">result</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span><span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">flatten</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">lists</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">:</span> <span class="n">lists</span><span class="o">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">list</span><span class="o">)</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<blockquote>
-<p>コレクションがネストした時点で、利用側にミスを誘発しやすい。<br />
-ネストの何段目を操作しているのか混乱しやすく、ミスをコンパイルで発見しにくくなる。<br />
+</div><blockquote>
+<p>コレクションがネストした時点で、利用側にミスを誘発しやすい。<br>
+ネストの何段目を操作しているのか混乱しやすく、ミスをコンパイルで発見しにくくなる。<br>
 その場合は、クラスでくるむことで、意図を明確にしやすくなる。</p>
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1229,56 +1163,49 @@ s1、s2 は値を提供しているから。</p>
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Test</span> <span class="p">{</span>
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">flatten</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span> <span class="n">Record</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="s">&#34;aaa&#34;</span><span class="p">),</span><span class="k">new</span> <span class="n">Record</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="s">&#34;bbb&#34;</span><span class="p">,</span><span class="s">&#34;ccc&#34;</span><span class="p">))));</span>
-    <span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">flatten</span><span class="o">(</span><span class="n">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="k">new</span> <span class="n">Record</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="s">&#34;aaa&#34;</span><span class="o">)</span><span class="o">,</span><span class="k">new</span> <span class="n">Record</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="s">&#34;bbb&#34;</span><span class="o">,</span><span class="s">&#34;ccc&#34;</span><span class="o">)</span><span class="o">)</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    <span class="kd">static</span> <span class="o">&lt;</span><span class="err">T&gt; List</span><span class="o">&lt;</span><span class="err">T&gt; flatten</span><span class="p">(</span><span class="err">List&lt;Record&lt;T&gt;&gt; lists</span><span class="p">)</span> <span class="p">{</span>
-        <span class="err">List&lt;T&gt; result </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="k">for</span> <span class="p">(</span><span class="err">Record&lt;T&gt; record </span><span class="o">:</span> <span class="n">lists</span><span class="p">)</span>
-            <span class="n">result</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">record</span><span class="p">.</span><span class="na">getElements</span><span class="p">());</span>
-        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">flatten</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Record</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">lists</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Record</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">record</span> <span class="o">:</span> <span class="n">lists</span><span class="o">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">record</span><span class="o">.</span><span class="na">getElements</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
 
     <span class="nd">@Value</span>
-    <span class="err">public static class Record</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="err">List&lt;T&gt; elements</span><span class="p">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Record</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">elements</span><span class="o">;</span>
 
-        <span class="err">public Record</span><span class="p">(</span><span class="err">T... elements</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">elements</span> <span class="o">=</span> <span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">elements</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span class="kd">public</span> <span class="nf">Record</span><span class="o">(</span><span class="n">T</span><span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="n">elements</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">elements</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">elements</span><span class="o">)</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="8-a-name-33-a-項目-33-型安全な異種コンテナを検討する">8. <a name='33'></a>項目 33 型安全な異種コンテナを検討する</h2>
-
-<h3 id="8-1-a-name-1-a-結論">8.1. <a name='-1'></a>結論</h3>
-
-<h4 id="8-1-1-a-name-1-a-前提">8.1.1. <a name='-1'></a>前提</h4>
-
+</div><h2 id="8-a-name33a-33-">8. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 33 型安全な異種コンテナを検討する</h2>
+<h3 id="81-a-name-1a">8.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h4 id="811-a-name-1a">8.1.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->前提</h4>
 <ul>
 <li>型安全とは、String 型のインスタンスを要求したときに、その型のインスタンスを返すこと。</li>
 <li>異種コンテナとは、クラスをキー(<code>Key</code>)、そのクラスのインスタンスを値(<code>Value</code>)とするもの</li>
 </ul>
-
-<h4 id="8-1-2-a-name-1-a-ポイント">8.1.2. <a name='-1'></a>ポイント</h4>
-
+<h4 id="812-a-name-1a">8.1.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->ポイント</h4>
 <ul>
 <li>Map は キーとバリューの対応を、型では保証していない。</li>
 <li>put は何も考えずに格納する</li>
 <li>get 時に辻褄が合うように型変換する</li>
 </ul>
-
-<h3 id="8-2-a-name-1-a-型パラメータの個数を可変にする方法">8.2. <a name='-1'></a>型パラメータの個数を可変にする方法</h3>
-
-<p><code>Set&lt;E&gt;</code> は 1 個、 <code>Map&lt;K,V&gt;</code> は 2 個とパラメータ数が固定だが、これを固定したくない(できない)ケースがある。<br />
+<h3 id="82-a-name-1a">8.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->型パラメータの個数を可変にする方法</h3>
+<p><code>Set&lt;E&gt;</code> は 1 個、 <code>Map&lt;K,V&gt;</code> は 2 個とパラメータ数が固定だが、これを固定したくない(できない)ケースがある。<br>
 代表的なものは、コンテナを実装するとき。
 このケースでは、キーをパラメータ化することで様々な型を受け取れるようにする。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1306,58 +1233,52 @@ s1、s2 は値を提供しているから。</p>
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Test</span> <span class="p">{</span>
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="err">Favorites f </span><span class="o">=</span> <span class="k">new</span> <span class="n">Favorites</span><span class="p">();</span>
-        <span class="n">f</span><span class="p">.</span><span class="na">putFavorite</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="s">&#34;Java&#34;</span><span class="p">);</span>
-        <span class="n">f</span><span class="p">.</span><span class="na">putFavorite</span><span class="p">(</span><span class="n">Integer</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="n">0xcafebabe</span><span class="p">);</span>
-        <span class="n">f</span><span class="p">.</span><span class="na">putFavorite</span><span class="p">(</span><span class="n">Class</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="n">Favorites</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Favorites</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Favorites</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">putFavorite</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">&#34;Java&#34;</span><span class="o">)</span><span class="o">;</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">putFavorite</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">0xcafebabe</span><span class="o">)</span><span class="o">;</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">putFavorite</span><span class="o">(</span><span class="n">Class</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">Favorites</span><span class="o">.</span><span class="na">class</span><span class="o">)</span><span class="o">;</span>
 
-        <span class="err">String favoriteString </span><span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">getFavorite</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
-        <span class="err">int favoriteInteger </span><span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">getFavorite</span><span class="p">(</span><span class="n">Integer</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
-        <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">favoriteClass</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">getFavorite</span><span class="p">(</span><span class="n">Class</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+        <span class="n">String</span> <span class="n">favoriteString</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">getFavorite</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">)</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">favoriteInteger</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">getFavorite</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span><span class="o">;</span>
+        <span class="n">Class</span><span class="o">&lt;</span><span class="o">?</span><span class="o">&gt;</span> <span class="n">favoriteClass</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="na">getFavorite</span><span class="o">(</span><span class="n">Class</span><span class="o">.</span><span class="na">class</span><span class="o">)</span><span class="o">;</span>
 
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&#34;%s %x %s%n&#34;</span><span class="p">,</span> <span class="n">favoriteString</span><span class="p">,</span> <span class="n">favoriteInteger</span><span class="p">,</span> <span class="n">favoriteClass</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
-    <span class="p">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&#34;%s %x %s%n&#34;</span><span class="o">,</span> <span class="n">favoriteString</span><span class="o">,</span> <span class="n">favoriteInteger</span><span class="o">,</span> <span class="n">favoriteClass</span><span class="o">.</span><span class="na">getName</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    <span class="err">public static class Favorites </span><span class="p">{</span>
-        <span class="err">private Map</span><span class="o">&lt;</span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="p">,</span> <span class="err">Object&gt; favorites </span><span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Favorites</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Class</span><span class="o">&lt;</span><span class="o">?</span><span class="o">&gt;</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">favorites</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
 
-        <span class="kd">public</span> <span class="o">&lt;</span><span class="err">T&gt; void </span><span class="n">putFavorite</span><span class="p">(</span><span class="err">Class&lt;T&gt; type</span><span class="p">,</span> <span class="err">T instance</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">favorites</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">type</span><span class="p">),</span> <span class="n">instance</span><span class="p">);</span>
-        <span class="p">}</span>
+        <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">putFavorite</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">type</span><span class="o">,</span> <span class="n">T</span> <span class="n">instance</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">favorites</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">type</span><span class="o">)</span><span class="o">,</span> <span class="n">instance</span><span class="o">)</span><span class="o">;</span>
+        <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="o">&lt;</span><span class="err">T&gt; T </span><span class="n">getFavorite</span><span class="p">(</span><span class="err">Class&lt;T&gt; type</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">type</span><span class="p">.</span><span class="na">cast</span><span class="p">(</span><span class="n">favorites</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">type</span><span class="p">));</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">getFavorite</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">type</span><span class="o">.</span><span class="na">cast</span><span class="o">(</span><span class="n">favorites</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">type</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>ポイントは以下。</p>
-
+</div><p>ポイントは以下。</p>
 <ul>
 <li>Map は キーとバリューの対応を、型では保証していない。</li>
 <li>put は何も考えずに格納する</li>
 <li>get 時に辻褄が合うように型変換する</li>
 </ul>
-
 <p>注意点は以下。</p>
-
 <ul>
 <li>raw タイプな Class オブジェクトを使って Favorites クラスのタイプセーフを破ってくる
-
 <ul>
 <li>putFavorite メソッドにおいて、 cast メソッドを使って確かめればよい。</li>
-</ul></li>
+</ul>
+</li>
 <li>non-reifiable(具象化可能＝ new できる)な型を利用できない。つまり、 <code>String</code> や、 <code>String[]</code> を格納することはできるが、 <code>List&lt;String&gt;</code> を格納することはできない。
 ジェネリクスはイレイジャで実行時に消されてしまうので。</li>
 </ul>
-
 <p>前述の型パラメータは extends を用いて境界を設けることも可能。</p>
-
-<h2 id="9-a-name-url-a-参考-url">9. <a name='URL'></a>参考 URL</h2>
-
+<h2 id="9-a-nameurla-url">9. <!-- raw HTML omitted --><!-- raw HTML omitted -->参考 URL</h2>
 <ul>
 <li><a href="https://marycore.jp/coding/generics-types/">ジェネリクスでよく使われている T や E, A、その他型パラメータの意味 | MaryCore</a></li>
 </ul>

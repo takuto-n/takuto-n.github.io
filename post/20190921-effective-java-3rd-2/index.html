@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190921-effective-java-3rd-2/" />
@@ -46,16 +46,13 @@
 <meta property="article:modified_time" content="2019-09-29T01:49:02+09:00" />
 <meta itemprop="name" content="Effective Java 3rd [Chapter 2]">
 <meta itemprop="description" content="オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ">
-
-
 <meta itemprop="datePublished" content="2019-09-21T01:49:02&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-29T01:49:02&#43;09:00" />
-<meta itemprop="wordCount" content="4815">
+<meta itemprop="wordCount" content="4816">
 
 
 
-<meta itemprop="keywords" content="java,オブジェクトの生成と消滅,個人的メモ," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="java,オブジェクトの生成と消滅,個人的メモ," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 2]"/>
 <meta name="twitter:description" content="オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ"/>
 
@@ -131,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 4815 words </span>
+          <span class="more-meta"> 4816 words </span>
           <span class="more-meta"> 10 mins read </span>
         
       </div>
@@ -139,14 +136,9 @@
 
     
     <div class="post-content">
-      
-
-<h1 id="オブジェクトの生成と消滅">オブジェクトの生成と消滅</h1>
-
-<p><a href="https://www.amazon.co.jp/Effective-Java-第3版-ジョシュア・ブロック-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
-
-<!-- vscode-markdown-toc -->
-
+      <h1 id="heading">オブジェクトの生成と消滅</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- raw HTML omitted -->
 <ol>
 <li><a href="#1static">項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する</a></li>
 <li><a href="#2">項目 2 数多くのコンストラクタパラメータに直面した時にはビルダーパターンを検討する。</a></li>
@@ -158,29 +150,19 @@
 <li><a href="#8finalizercleaner">項目 8 finalizer と cleaner の使用は避けるべし</a></li>
 <li><a href="#9try-finallytry-with-resources">項目 9 try-finally よりも try-with-resources を使うべし</a></li>
 </ol>
-
-<!-- vscode-markdown-toc-config
-    numbering=true
-    autoSave=true
-    /vscode-markdown-toc-config -->
-
-<!-- /vscode-markdown-toc -->
-
-<h2 id="1-a-name-1static-a-項目-1-コンストラクタの代わりに-static-ファクトリーメソッドを検討する">1. <a name='1static'></a>項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する</h2>
-
-<h3 id="1-1-a-name-a-結論">1.1. <a name=''></a>結論</h3>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="1-a-name1statica-1--static-">1. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する</h2>
+<h3 id="11-a-namea">1.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>コンストラクタの代わりに static ファクトリーメソッドを使用すると様々なメリットがある。
 そのメリットが必要ない時はコンストラクタを使用すればよい。</p>
-
-<h3 id="1-2-a-name-static-a-static-ファクトリーメソッドとは">1.2. <a name='static'></a>static ファクトリーメソッドとは</h3>
-
+<h3 id="12-a-namestaticastatic-">1.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->static ファクトリーメソッドとは</h3>
 <p>static ファクトリーメソッドとは、下記の例の<code>Human#create()</code>のようなインスタンスを返す static メソッドである。</p>
-
 <p><em>Human.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -196,47 +178,42 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Human</span> <span class="p">{</span>
-    <span class="err">private int </span><span class="n">age</span><span class="p">;</span>
-    <span class="err">private String </span><span class="n">name</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Human</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
 
-    <span class="n">Human</span><span class="p">(</span><span class="err">int age</span><span class="p">,</span> <span class="err">String name</span><span class="p">){</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span class="n">Human</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span><span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    <span class="err">public static Human create</span><span class="p">(</span><span class="err">int age</span><span class="p">,</span> <span class="err">String name</span><span class="p">){</span>
-        <span class="err">var human </span><span class="o">=</span> <span class="k">new</span> <span class="n">Human</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">human</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Human</span> <span class="nf">create</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span><span class="o">{</span>
+        <span class="n">var</span> <span class="n">human</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Human</span><span class="o">(</span><span class="n">age</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">human</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="1-3-a-name-static-1-a-static-ファクトリーメソッドのメリット">1.3. <a name='static-1'></a>static ファクトリーメソッドのメリット</h3>
-
+</div><h3 id="13-a-namestatic-1astatic-">1.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->static ファクトリーメソッドのメリット</h3>
 <ol>
 <li>分かりやすいメソッド名を付けられる</li>
 <li>オブジェクト生成のために新しいインスタンスを毎回生成する必要がない。</li>
 </ol>
-
 <ul>
 <li>コンストラクタの場合、新しいインスタンスを生成する必要がある。</li>
 <li>static ファクトリーメソッドの場合、新しいインスタンスを生成しなくてもよい。（シングルトンパターンにできる。）</li>
 </ul>
-
-<ol>
+<ol start="3">
 <li>サブクラスのインスタンスでも生成できる（柔軟性が高く、自由に処理を入れることができる。）</li>
 <li>引数によって、異なるインスタンスを生成できる</li>
 </ol>
-
 <ul>
 <li>下記の例のように、引数によって異なるインスタンスを生成することができる。</li>
 </ul>
-
 <p><em>Human.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -245,68 +222,52 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static Human create</span><span class="p">(</span><span class="err">int age</span><span class="p">,</span> <span class="err">String name</span><span class="p">,</span> <span class="err">boolean isMan</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">isMan</span><span class="p">){</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">Man</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">name</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">Woman</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">name</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">Human</span> <span class="nf">create</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isMan</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">isMan</span><span class="o">)</span><span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Man</span><span class="o">(</span><span class="n">age</span><span class="o">,</span><span class="n">name</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Woman</span><span class="o">(</span><span class="n">age</span><span class="o">,</span><span class="n">name</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="1-4-a-name-static-1-a-static-ファクトリーメソッドの使いどころ">1.4. <a name='static-1'></a>static ファクトリーメソッドの使いどころ</h3>
-
+</div><h3 id="14-a-namestatic-1astatic-">1.4. <!-- raw HTML omitted --><!-- raw HTML omitted -->static ファクトリーメソッドの使いどころ</h3>
 <ol>
 <li>上記 4 つのメリットを享受したい場合は static ファクトリーメソッドの使用を検討する。</li>
 </ol>
-
 <ul>
 <li>例：Logger</li>
 </ul>
-
-<ol>
+<ol start="2">
 <li>上記 4 つのメリットがない場合は必要ない。</li>
 </ol>
-
 <ul>
 <li>例：DTO</li>
 </ul>
-
-<h2 id="2-a-name-2-a-項目-2-数多くのコンストラクタパラメータに直面した時にはビルダーパターンを検討する">2. <a name='2'></a>項目 2 数多くのコンストラクタパラメータに直面した時にはビルダーパターンを検討する。</h2>
-
-<h3 id="2-1-a-name-telescopingconstructor-a-telescoping-constructor">2.1. <a name='Telescopingconstructor'></a>Telescoping constructor</h3>
-
+<h2 id="2-a-name2a-2-">2. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 2 数多くのコンストラクタパラメータに直面した時にはビルダーパターンを検討する。</h2>
+<h3 id="21-a-nametelescopingconstructoratelescoping-constructor">2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->Telescoping constructor</h3>
 <p>Telescoping =「順番にあてはめる」=１つ１つ順番にあてはめられるように、受け取れる引数が１つずつ増えていくようにコンストラクタを作成し、それらを順番に呼び出そう。</p>
-
 <ul>
 <li>欠点：コンストラクタの引数の何番目に何を設定すれば良いのかがわからなくなる。</li>
 </ul>
-
-<h3 id="2-2-a-name-javabeans-a-javabeans-パターン">2.2. <a name='JavaBeans'></a>JavaBeans パターン</h3>
-
+<h3 id="22-a-namejavabeansajavabeans-">2.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->JavaBeans パターン</h3>
 <p>メンバー変数があり、各メンバー変数のセッターがあるもの。</p>
-
 <ul>
 <li>利点：set メソッドで何をセットしているのかはわかりやすい。</li>
 <li>欠点：インスタンス生成時が、完成した状態ではない。生成後に変更(セット）しないと使えない。</li>
 </ul>
-
-<h3 id="2-3-a-name-builder-a-builder-パターン">2.3. <a name='Builder'></a>Builder パターン</h3>
-
+<h3 id="23-a-namebuilderabuilder-">2.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->Builder パターン</h3>
 <p>値を設定していき、最後にビルドしてインスタンスを生成する方法のこと</p>
-
 <ul>
 <li>利点：メンバ変数に final 修飾子をつけておけば、生成後にメンバ変数を変更できないため、インスタンス生成時の状態であることを保証できる。</li>
 </ul>
-
 <blockquote>
 <p>また下記のような Builder パターンは、fluent API として知られており、<code>assertThat(&quot;hoge&quot;).isEqualTo(&quot;Hoge&quot;);</code>のように、左から右へ流し読み(一読)できるようになっている。</p>
 </blockquote>
-
 <p><em>Builder パターンのクラス例</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -342,73 +303,68 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Dog</span> <span class="p">{</span>
-    <span class="err">private final String name</span><span class="p">;</span>
-    <span class="err">private final Integer age</span><span class="p">;</span>
-    <span class="err">private final String hobby</span><span class="p">;</span>
-    <span class="err">public static class Builder </span><span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Dog</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Integer</span> <span class="n">age</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">hobby</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Builder</span> <span class="o">{</span>
         <span class="c1">//必須パラメータ
-</span><span class="c1"></span>        <span class="err">private final String name</span><span class="p">;</span>
+</span><span class="c1"></span>        <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
         <span class="c1">//オプションパラメータ デフォルト値に初期化
-</span><span class="c1"></span>        <span class="err">private Integer </span><span class="n">age</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span>
-        <span class="err">private String </span><span class="n">hobby</span> <span class="o">=</span> <span class="s">&#34;Run&#34;</span><span class="p">;</span>
+</span><span class="c1"></span>        <span class="kd">private</span> <span class="n">Integer</span> <span class="n">age</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">hobby</span> <span class="o">=</span> <span class="s">&#34;Run&#34;</span><span class="o">;</span>
 
-        <span class="err">public Builder</span><span class="p">(</span><span class="err">String name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
-            <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="err">public Builder </span><span class="n">age</span><span class="p">(</span><span class="err">int age</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
-            <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="err">public Builder </span><span class="n">hobby</span><span class="p">(</span><span class="err">String hobby</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">hobby</span> <span class="o">=</span> <span class="n">hobby</span><span class="p">;</span>
-            <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="err">public Dog </span><span class="n">build</span><span class="p">()</span> <span class="p">{</span>
-           <span class="k">return</span> <span class="k">new</span> <span class="n">Dog</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+        <span class="kd">public</span> <span class="nf">Builder</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">age</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">hobby</span><span class="o">(</span><span class="n">String</span> <span class="n">hobby</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">hobby</span> <span class="o">=</span> <span class="n">hobby</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">Dog</span> <span class="nf">build</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+           <span class="k">return</span> <span class="k">new</span> <span class="n">Dog</span><span class="o">(</span><span class="k">this</span><span class="o">)</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-    <span class="err">private Dog</span><span class="p">(</span><span class="err">Builder builder</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="na">name</span><span class="p">;</span>
-        <span class="n">age</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="na">age</span><span class="p">;</span>
-        <span class="n">hobby</span> <span class="o">=</span> <span class="n">builder</span><span class="p">.</span><span class="na">hobby</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="kd">private</span> <span class="nf">Dog</span><span class="o">(</span><span class="n">Builder</span> <span class="n">builder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
+        <span class="n">age</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">age</span><span class="o">;</span>
+        <span class="n">hobby</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">hobby</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><em>Builder パターンの利用方法例</em></p>
+</div><p><em>Builder パターンの利用方法例</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Dog chihuahua </span><span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="p">.</span><span class="na">Builder</span><span class="p">(</span><span class="s">&#34;Chibi&#34;</span><span class="p">).</span><span class="na">age</span><span class="p">(</span><span class="n">3</span><span class="p">).</span><span class="na">hobby</span><span class="p">(</span><span class="s">&#34;Dance&#34;</span><span class="p">).</span><span class="na">build</span><span class="p">();</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Dog</span> <span class="n">chihuahua</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="s">&#34;Chibi&#34;</span><span class="o">)</span><span class="o">.</span><span class="na">age</span><span class="o">(</span><span class="n">3</span><span class="o">)</span><span class="o">.</span><span class="na">hobby</span><span class="o">(</span><span class="s">&#34;Dance&#34;</span><span class="o">)</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>参考サイト：<a href="http://4geek.net/learn-builder-patterns-in-java/">Builder パターンについて</a></p>
-
-<h2 id="3-a-name-3privateenum-a-項目-3-private-のコンストラクタか-enum-型でシングルトン特性を強制する">3. <a name='3privateenum'></a>項目 3 private のコンストラクタか enum 型でシングルトン特性を強制する</h2>
-
-<h3 id="3-1-a-name-1-a-シングルトンなクラス設計の方法について">3.1. <a name='-1'></a>シングルトンなクラス設計の方法について</h3>
-
+</div><p>参考サイト：<a href="http://4geek.net/learn-builder-patterns-in-java/">Builder パターンについて</a></p>
+<h2 id="3-a-name3privateenuma-3-private--enum-">3. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 3 private のコンストラクタか enum 型でシングルトン特性を強制する</h2>
+<h3 id="31-a-name-1a">3.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->シングルトンなクラス設計の方法について</h3>
 <ol>
 <li>private のコンストラクタ</li>
 </ol>
-
 <ul>
 <li><code>public final</code>のフィールドによるシングルトン
-
 <ul>
 <li>欠点：リフレクションにより、<code>private</code>のコンストラクタを呼び出せるので、シングルトンが破綻すること</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p><em>Elvis.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -416,27 +372,26 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Elvis</span> <span class="p">{</span>
-    <span class="err">public static final Elvis </span><span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Elvis</span><span class="p">();</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Elvis</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Elvis</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Elvis</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
 
-    <span class="err">private Elvis</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
-    <span class="err">public void </span><span class="n">leaveTheBuilding</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="kd">private</span> <span class="nf">Elvis</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">leaveTheBuilding</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li><code>static</code>ファクトリーメソッドによるシングルトン
-
 <ul>
 <li>利点 1：final を利用しているので、リフレクションを使ったとしても防止できる。</li>
 <li>利点 2：API を変更せずに、シングルトンか否かを変更できる。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p><em>Singleton.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -448,132 +403,112 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final class Singleton </span><span class="p">{</span>
-    <span class="err">private static final Singleton </span><span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="p">();</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Singleton</span> <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
 
-    <span class="err">private Singleton</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">}</span>
+    <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span>
 
-    <span class="err">public static Singleton getInstance</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>参考サイト：<a href="https://sites.google.com/site/leihcrev/java/validsingleton">正しいシングルトンクラスの実装の仕方</a></p>
-
-<h3 id="3-2-a-name-enum-a-enum-型を使ったシングルトン">3.2. <a name='ENUM'></a>ENUM 型を使ったシングルトン</h3>
-
+</div><p>参考サイト：<a href="https://sites.google.com/site/leihcrev/java/validsingleton">正しいシングルトンクラスの実装の仕方</a></p>
+<h3 id="32-a-nameenumaenum-">3.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->ENUM 型を使ったシングルトン</h3>
 <p><em>Elvis.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public enum </span><span class="n">Elvis</span> <span class="p">{</span>
-    <span class="n">INSTANCE</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Elvis</span> <span class="o">{</span>
+    <span class="n">INSTANCE</span><span class="o">;</span>
 
-    <span class="err">public void </span><span class="n">leaveTheBuilding</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">leaveTheBuilding</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li>Java の世界でインスタンスが 1 つであることを保証</li>
 <li>並列処理の場合でも必ず１つ</li>
 <li>シリアライズについて考慮しなくて良いから推奨</li>
 </ul>
-
-<h2 id="4-a-name-4private-a-項目-4-private-のコンストラクタでインスタンス化不可能を強制する">4. <a name='4private'></a>項目 4 private のコンストラクタでインスタンス化不可能を強制する</h2>
-
-<h3 id="4-1-a-name-1-a-結論">4.1. <a name='-1'></a>結論</h3>
-
+<h2 id="4-a-name4privatea-4-private-">4. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 4 private のコンストラクタでインスタンス化不可能を強制する</h2>
+<h3 id="41-a-name-1a">4.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>ユーティリティクラスは private のコンストラクタでインスタンス化不可能を強制するとよい。</p>
-
-<h3 id="4-2-a-name-1-a-ユーティリティクラスとは">4.2. <a name='-1'></a>ユーティリティクラスとは</h3>
-
+<h3 id="42-a-name-1a">4.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->ユーティリティクラスとは</h3>
 <p>ユーティリティクラスとは、static メソッドをまとめたクラス</p>
-
 <ul>
 <li>例：java.util.Math や java.util.Arrays)</li>
 </ul>
-
 <p><em>実装例</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final class UtilityClass </span><span class="p">{</span>
-    <span class="err">private UtilityClass</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">UtilityClass</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nf">UtilityClass</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li>利点
-
 <ul>
 <li>インスタンス化する意味がないクラスをインスタンス化不可能にできる点。</li>
 <li>副次的に、サブクラスを作成することを防げる点。</li>
 <li>防げる理由は、すべてのクラスはスーパークラスのコンストラクタを呼び出さなければならないが、呼び出せるアクセス可能なコンストラクタがないため。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <blockquote>
 <p><code>public final</code>とすることで、継承をさせる隙すら与えない。</p>
 </blockquote>
-
-<h3 id="4-3-a-name-1-a-インスタンス化不可能にする理由">4.3. <a name='-1'></a>インスタンス化不可能にする理由</h3>
-
+<h3 id="43-a-name-1a">4.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->インスタンス化不可能にする理由</h3>
 <ul>
 <li>インスタンス化する必要がないのであれば、使う人に考えさせないようにインスタンス化不可能にするべき</li>
 <li>java.util.Math のようなユーティリティクラスは 1996 年からあり、メモリが少ない時代であったという時代背景もありそう。</li>
 </ul>
-
-<h2 id="5-a-name-5-a-項目-5-資源を直接結び付けるよりも依存性注入を選ぶ">5. <a name='5'></a>項目 5 資源を直接結び付けるよりも依存性注入を選ぶ</h2>
-
-<h3 id="5-1-a-name-1-a-結論">5.1. <a name='-1'></a>結論</h3>
-
+<h2 id="5-a-name5a-5-">5. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 5 資源を直接結び付けるよりも依存性注入を選ぶ</h2>
+<h3 id="51-a-name-1a">5.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>DI(Dependency Injection)を使うとテストがしやすくなる。</p>
-
-<h3 id="5-2-a-name-1-a-資源を直接結び付ける例">5.2. <a name='-1'></a>資源を直接結び付ける例</h3>
-
+<h3 id="52-a-name-1a">5.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->資源を直接結び付ける例</h3>
 <p>下記サンプルコードは、DB が Mysql であることが前提となっていて、Mysql が起動していないとテストできない。
 （昔はそのようにテストしていた。）</p>
-
 <p><em>DaoBLogic.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">DaoBLogic</span> <span class="p">{</span>
-    <span class="err">DAO dao </span><span class="o">=</span> <span class="k">new</span> <span class="n">MysqlDao</span><span class="p">();</span>
-    <span class="p">...</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DaoBLogic</span> <span class="o">{</span>
+    <span class="n">DAO</span> <span class="n">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MysqlDao</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">.</span><span class="o">.</span><span class="o">.</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="5-3-a-name-1-a-依存性注入の例">5.3. <a name='-1'></a>依存性注入の例</h3>
-
+</div><h3 id="53-a-name-1a">5.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->依存性注入の例</h3>
 <p>下記サンプルコードは、DB が何であるかは、依存性注入時に決めることができる。
 つまり、Mock の DB を注入してもテストできるため、柔軟である。</p>
-
 <p><em>DaoBLogic.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -584,9 +519,9 @@
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">// 依存性注入は柔軟でありテストできる
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">// 依存性注入は柔軟でありテストできる
 public class DaoBLogic {
     private final Dao dao;
 
@@ -596,147 +531,125 @@ public class DaoBLogic {
     ・
     ・
     ・
-}</pre></td></tr></table>
+}
+</code></pre></td></tr></table>
 </div>
-</div>
-<blockquote>
+</div><blockquote>
 <p>インジェクションには以下の３つの方法がある。</p>
-
 <ul>
 <li>コンストラクタインジェクション</li>
 <li>セッターインジェクション</li>
 <li>フィールドインジェクション（Spring なら@Autowired）</li>
 </ul>
 </blockquote>
-
-<h2 id="6-a-name-6-a-項目-6-不必要なオブジェクトの生成を避ける">6. <a name='6'></a>項目 6 不必要なオブジェクトの生成を避ける</h2>
-
-<h3 id="6-1-a-name-1-a-結論">6.1. <a name='-1'></a>結論</h3>
-
+<h2 id="6-a-name6a-6-">6. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 6 不必要なオブジェクトの生成を避ける</h2>
+<h3 id="61-a-name-1a">6.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>一度生成されたら変更されないオブジェクトは再利用したり、自動ボクシングに注意したりすることで、パフォーマンスを落とさないようにしよう。</p>
-
-<h3 id="6-2-a-name-1-a-生成に時間がかかる処理について">6.2. <a name='-1'></a>生成に時間がかかる処理について</h3>
-
+<h3 id="62-a-name-1a">6.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->生成に時間がかかる処理について</h3>
 <ul>
 <li><code>java.util.Calendar</code>クラス
-
 <ul>
 <li>デフォルトロケール取得等の処理が必要であるため。</li>
-</ul></li>
+</ul>
+</li>
 <li>例外クラス
-
 <ul>
 <li>stacktrace を収集するため。</li>
-</ul></li>
+</ul>
+</li>
 <li>DB コネクションクラス
-
 <ul>
 <li>接続コスト(TCP コネクション確立～ DB の認証）のため。</li>
-</ul></li>
+</ul>
+</li>
 <li>正規表現のパース処理
-
 <ul>
 <li>正規表現と検査文字列の長さに対して、O(n^2)のオーダーがかかるため。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <blockquote>
 <p>自動ボクシングにも時間がかかる。
 インスタンス生成が走るため。int -&gt; Integer など。</p>
 </blockquote>
-
-<h2 id="7-a-name-7-a-項目-7-廃れたオブジェクト参照を取り除く">7. <a name='7'></a>項目 7 廃れたオブジェクト参照を取り除く</h2>
-
-<h3 id="7-1-a-name-1-a-参照について">7.1. <a name='-1'></a>参照について</h3>
-
+<h2 id="7-a-name7a-7-">7. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 7 廃れたオブジェクト参照を取り除く</h2>
+<h3 id="71-a-name-1a">7.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->参照について</h3>
 <ul>
 <li>直接参照
-
 <ul>
 <li>直接値を見ている参照</li>
-</ul></li>
+</ul>
+</li>
 <li>関節参照
-
 <ul>
 <li>アドレスから値を取得している参照</li>
-</ul></li>
 </ul>
-
-<h3 id="7-2-a-name-1-a-強参照と弱参照">7.2. <a name='-1'></a>強参照と弱参照</h3>
-
+</li>
+</ul>
+<h3 id="72-a-name-1a">7.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->強参照と弱参照</h3>
 <ul>
 <li>強参照
-
 <ul>
 <li>変数によりアドレスが参照されている状態</li>
-</ul></li>
+</ul>
+</li>
 <li>弱参照, (ソフト参照、ファントム参照)
-
 <ul>
 <li>アドレスがどの変数からも参照されていない状態</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <blockquote>
 <p>強参照が無くなったオブジェクトは、GC の対象となる。</p>
 </blockquote>
-
-<h3 id="7-3-a-name-1-a-気をつけること">7.3. <a name='-1'></a>気をつけること</h3>
-
+<h3 id="73-a-name-1a">7.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->気をつけること</h3>
 <p>MAP などは、強参照で保持し続けるため、個数の上限を決めて、LRU(Least Recently Used)や FIFO などのアルゴリズムで対処しましょう。</p>
-
 <p>以下のライブラリを使うという方法もある。</p>
-
 <ul>
 <li>Ehcache
-
 <ul>
 <li>Java のキャッシュライブラリの代表で高機能。</li>
-</ul></li>
+</ul>
+</li>
 <li>Guava Cache
-
 <ul>
 <li>Google のライブラリである Guava に、キャッシュ用のパッケージも含まれており、基本的なことは可能。</li>
-</ul></li>
+</ul>
+</li>
 <li>Apache DirectMemory
-
 <ul>
 <li>JavaVM ヒープ外のメモリをキャッシュに使用。</li>
 <li>利点：ヒープ内のキャッシュと比べて、GC の影響を受けない。</li>
 <li>欠点：シリアライズ／デシリアライズのコストがかかる。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>参考サイト：<a href="https://kazuhira-r.hatenablog.com/entry/20130723/1374587549">Java で使えるオープンソース・キャッシュライブラリ</a></p>
-
-<h2 id="8-a-name-8finalizercleaner-a-項目-8-finalizer-と-cleaner-の使用は避けるべし">8. <a name='8finalizercleaner'></a>項目 8 finalizer と cleaner の使用は避けるべし</h2>
-
-<h3 id="8-1-a-name-finalizercleaner-a-finalizer-cleaner">8.1. <a name='FinalizerCleaner'></a>Finalizer/Cleaner</h3>
-
+<h2 id="8-a-name8finalizercleanera-8-finalizer--cleaner-">8. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 8 finalizer と cleaner の使用は避けるべし</h2>
+<h3 id="81-a-namefinalizercleanerafinalizercleaner">8.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->Finalizer/Cleaner</h3>
 <ul>
 <li>finalizer : オブジェクトが GC で回収されるときに、 <code>java.lang.Object#finalize</code>が実行される。
-
 <ul>
 <li>実行する人：Finalizer スレッド</li>
 <li><code>GCスレッド -(put)-&gt; (Finzelizerキュー) -(get)-&gt; Finalizerスレッド</code></li>
-</ul></li>
+</ul>
+</li>
 <li>finalize でやりたいこと
-
 <ul>
 <li>リソースの解放(DB コネクションのクローズ、ファイルの接続)</li>
-</ul></li>
+</ul>
+</li>
 <li>問題 1
-
 <ul>
 <li>ファイナライザいつまでたっても終わらない問題</li>
 <li>tomcat スレッド数が 10-20 に対して、GC を行う Finalizer スレッドが 1 スレッドなので、1 対多となり、GC が間に合わなくなる時がある。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>参考：Finalizer スレッドは 1 つで、<code>http-nio</code>スレッドは複数ありますね。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -760,9 +673,9 @@ public class DaoBLogic {
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">MacBook-Air:~ takuto-no$ jps
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">MacBook-Air:~ takuto-no$ jps
 18372 SpringBootApplication
 .
 .
@@ -785,44 +698,34 @@ MacBook-Air:~ takuto-no$ jstack 18372 | grep &#39;&#34;&#39;
 &#34;Finalizer&#34; #3 daemon prio=8 os_prio=31 tid=0x00007fdac1859000 nid=0x2e03 in Object.wait() [0x0000700000a5a000]
 .
 .
-.</pre></td></tr></table>
+.
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li>問題 2
-
 <ul>
 <li>ファイナライザ内で例外おきたらどうなるの問題</li>
 <li>Finalizer スレッドが、A -&gt; B の順でクローズすべきところを、B -&gt; A の順でしてしまい例外など。</li>
 <li>なお、Finalizer スレッド内の順序制御は出来ない。</li>
-</ul></li>
 </ul>
-
-<h3 id="8-2-a-name-1-a-結論">8.2. <a name='-1'></a>結論</h3>
-
+</li>
+</ul>
+<h3 id="82-a-name-1a">8.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>try-finally の finally 句内で正しい順序でクローズしましょう。</p>
-
 <p>Spring にも終了時の処理を挟む API があるので、使いましょう。</p>
-
-<h2 id="9-a-name-9try-finallytry-with-resources-a-項目-9-try-finally-よりも-try-with-resources-を使うべし">9. <a name='9try-finallytry-with-resources'></a>項目 9 try-finally よりも try-with-resources を使うべし</h2>
-
-<h3 id="9-1-a-name-1-a-結論">9.1. <a name='-1'></a>結論</h3>
-
+<h2 id="9-a-name9try-finallytry-with-resourcesa-9-try-finally--try-with-resources-">9. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 9 try-finally よりも try-with-resources を使うべし</h2>
+<h3 id="91-a-name-1a">9.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p><em>基本的には、<code>close</code>しなければならないリソースを扱う場合、<code>try-finally</code>ではなく、<code>try-with-resources</code>を使いましょう。</em></p>
-
-<h4 id="9-2-a-name-1-a-try-finally-の場合">9.2. <a name='-1'></a>try-finally の場合</h4>
-
+<h4 id="92-a-name-1atry-finally-">9.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->try-finally の場合</h4>
 <p><code>TryFinally.java</code>のように書く必要があり、以下の欠点がある。</p>
-
 <ul>
 <li>finally 句で、非 null チェックする必要がある。</li>
 <li>finally 句の中で例外が発生したらスローすることになる。</li>
 </ul>
-
 <p><em>TryFinally.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -837,34 +740,35 @@ MacBook-Air:~ takuto-no$ jstack 18372 | grep &#39;&#34;&#39;
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="p">.</span>
-<span class="p">.</span>
-<span class="p">.</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="o">.</span>
+<span class="o">.</span>
+<span class="o">.</span>
 
-<span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">br</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">br</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">IOException e</span><span class="p">)</span> <span class="p">{</span>
+<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">br</span> <span class="o">!</span><span class="o">=</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">br</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
             <span class="c1">// 例外処理
-</span><span class="c1"></span>        <span class="p">}</span>
-<span class="p">}</span>
-<span class="p">.</span>
-<span class="p">.</span>
-<span class="p">.</span></code></pre></td></tr></table>
-</div>
-</div>
-<p><em>豆知識</em></p>
+</span><span class="c1"></span>        <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="o">.</span>
 
+</code></pre></td></tr></table>
+</div>
+</div><p><em>豆知識</em></p>
 <blockquote>
-<p>try 句内で例外が発生し、finally 句でも例外が発生すると、finally 句の例外だけがエラーメッセージとして出る。<br />
+<p>try 句内で例外が発生し、finally 句でも例外が発生すると、finally 句の例外だけがエラーメッセージとして出る。<br>
 以下のように、finally 句で出た例外を揉み消せば、try 句内で出た例外がスローされるよ。</p>
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -885,40 +789,37 @@ MacBook-Air:~ takuto-no$ jstack 18372 | grep &#39;&#34;&#39;
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">    <span class="err">void execute</span><span class="p">(){</span>
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="kt">void</span> <span class="nf">execute</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
 
-        <span class="err">var r </span><span class="o">=</span> <span class="k">new</span> <span class="n">TestResource</span><span class="p">();</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">r</span><span class="p">.</span><span class="na">highLayerClose</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">r</span><span class="p">.</span><span class="na">lowLayerClose</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">Throwable th</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;揉み消す&#34;</span><span class="p">);</span>
-            <span class="p">}</span>
+        <span class="n">var</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestResource</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">r</span><span class="o">.</span><span class="na">highLayerClose</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">r</span><span class="o">.</span><span class="na">lowLayerClose</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">th</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;揉み消す&#34;</span><span class="o">)</span><span class="o">;</span>
+            <span class="o">}</span>
 
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">r</span><span class="p">.</span><span class="na">highLayerClose</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">Throwable th</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;揉み消す&#34;</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span></code></pre></td></tr></table>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">r</span><span class="o">.</span><span class="na">highLayerClose</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">th</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;揉み消す&#34;</span><span class="o">)</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="9-3-a-name-1-a-try-with-resources-の場合">9.3. <a name='-1'></a>try-with-resources の場合</h4>
-
+</div><h4 id="93-a-name-1atry-with-resources-">9.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->try-with-resources の場合</h4>
 <p><code>TryWithResources.java</code>のように書きましょう。以下のような利点がある。</p>
-
 <ul>
 <li><code>finally</code>句で close しなくても、自動的で close をしてくれる。</li>
 <li>close 処理中に、例外が発生しても try 文の中の例外がスローされる。</li>
 </ul>
-
 <p><em>TryWithResources.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -929,18 +830,18 @@ MacBook-Air:~ takuto-no$ jstack 18372 | grep &#39;&#34;&#39;
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">getResource</span><span class="p">(</span><span class="err">String src</span><span class="p">,</span> <span class="err">String dest</span><span class="p">)</span> <span class="err">throws IOException </span><span class="p">{</span>
-    <span class="k">try</span> <span class="p">(</span><span class="err">InputStream inputStream </span><span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">src</span><span class="p">);</span>
-         <span class="err">OutputStream outputStream </span><span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="p">(</span><span class="n">dest</span><span class="p">))</span>
-    <span class="p">{</span>
-        <span class="p">.</span>
-        <span class="p">.</span>
-        <span class="p">.</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">getResource</span><span class="o">(</span><span class="n">String</span> <span class="n">src</span><span class="o">,</span> <span class="n">String</span> <span class="n">dest</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">(</span><span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">src</span><span class="o">)</span><span class="o">;</span>
+         <span class="n">OutputStream</span> <span class="n">outputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">dest</span><span class="o">)</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="o">.</span>
+        <span class="o">.</span>
+        <span class="o">.</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>ただし、<a href="https://qiita.com/nesheep5/items/6a68d862c5902e5994a4">try-with-resources でリソース解放されないパターン</a>で紹介されているように、「<strong>リソース解放の対象クラスをネストさせてインスタンス生成した場合、コンストラクタで例外が発生するとリソース解放されません。</strong>」ので、この場合は、[
+</div><p>ただし、<a href="https://qiita.com/nesheep5/items/6a68d862c5902e5994a4">try-with-resources でリソース解放されないパターン</a>で紹介されているように、「<strong>リソース解放の対象クラスをネストさせてインスタンス生成した場合、コンストラクタで例外が発生するとリソース解放されません。</strong>」ので、この場合は、[
 <strong>個別にフィールドを宣言し、それぞれインスタンス生成</strong>]して対処するようにしましょう。</p>
 
     </div>

@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.62.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190914-codebuild_mattermost/" />
@@ -46,16 +46,13 @@
 <meta property="article:modified_time" content="2019-09-14T12:09:20+09:00" />
 <meta itemprop="name" content="AWS CodebuildからMattermostへの通知">
 <meta itemprop="description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi">
-
-
 <meta itemprop="datePublished" content="2019-09-14T12:09:20&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-14T12:09:20&#43;09:00" />
-<meta itemprop="wordCount" content="975">
+<meta itemprop="wordCount" content="974">
 
 
 
-<meta itemprop="keywords" content="codebuild,mattermost,notification," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="codebuild,mattermost,notification," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AWS CodebuildからMattermostへの通知"/>
 <meta name="twitter:description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi"/>
 
@@ -131,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/cicd/"> cicd </a>
             </div>
-          <span class="more-meta"> 975 words </span>
+          <span class="more-meta"> 974 words </span>
           <span class="more-meta"> 2 mins read </span>
         
       </div>
@@ -140,17 +137,13 @@
     
     <div class="post-content">
       <p>AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。</p>
-
 <p>AWS CodeBuild の環境変数 <code>MattermostWebhookURL</code> に<code>Mattermost</code>の<code>Incomming Webhook URL</code>を保持しておきます。また、IAM から CodeBuild のロールに <code>AmazonSSMReadOnlyAccess</code>の権限を与えてください。</p>
-
 <p><code>Mattermost</code>の<code>Incomming Webhook URL</code>の発行は、Mattermost 上で <code>Account Settings → Integrations → Incoming Webhooks</code> から出来ます。</p>
-
 <p>下記ファイルが、実際の設定内容です。<code>[~]</code> 部分は、適宜変更してください。</p>
-
 <p><em>codebuild-to-mattermost.sh</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -235,13 +228,13 @@
 <span class="nv">MESSAGE</span><span class="o">=</span><span class="si">${</span><span class="nv">SRC_DIR</span><span class="si">}</span><span class="s1">&#39; [#BUILD_ARN](&#39;</span><span class="si">${</span><span class="nv">BUILD_ARN_URL</span><span class="si">}</span><span class="s1">&#39;) of &#39;</span><span class="si">${</span><span class="nv">BRANCH</span><span class="si">}</span><span class="s1">&#39; by &#39;</span><span class="si">${</span><span class="nv">USERNAME</span><span class="si">}</span><span class="s1">&#39;\n```\n&#39;</span><span class="si">${</span><span class="nv">BUILD_RESULT</span><span class="si">}</span><span class="s1">&#39;\n```&#39;</span>
 
 <span class="c1"># 上記設定値に基づき、mattermostへ通知する。</span>
-curl -X POST --data-urlencode <span class="s1">&#39;payload={&#34;channel&#34;: &#34;&#39;</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">CHANNEL</span><span class="si">}</span><span class="s2">&#34;</span><span class="s1">&#39;&#34;, &#34;username&#34;: &#34;&#39;</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">USERNAME</span><span class="si">}</span><span class="s2">&#34;</span><span class="s1">&#39;&#34;, &#34;text&#34;: &#34;&#39;</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">MESSAGE</span><span class="si">}</span><span class="s2">&#34;</span><span class="s1">&#39;&#34;}&#39;</span> <span class="nv">$WEBHOOK_URL</span></code></pre></td></tr></table>
+curl -X POST --data-urlencode <span class="s1">&#39;payload={&#34;channel&#34;: &#34;&#39;</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">CHANNEL</span><span class="si">}</span><span class="s2">&#34;</span><span class="s1">&#39;&#34;, &#34;username&#34;: &#34;&#39;</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">USERNAME</span><span class="si">}</span><span class="s2">&#34;</span><span class="s1">&#39;&#34;, &#34;text&#34;: &#34;&#39;</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">MESSAGE</span><span class="si">}</span><span class="s2">&#34;</span><span class="s1">&#39;&#34;}&#39;</span> <span class="nv">$WEBHOOK_URL</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><em>buildspec.yml</em></p>
+</div><p><em>buildspec.yml</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -280,13 +273,12 @@ curl -X POST --data-urlencode <span class="s1">&#39;payload={&#34;channel&#34;: 
 </span><span class="w">
 </span><span class="w">  </span>post_build<span class="p">:</span><span class="w">
 </span><span class="w">    </span>commands<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>./codebuild-to-mattermost.sh<span class="w"> </span>build-message.txt<span class="w"> </span>${MattermostWebhookURL}</code></pre></td></tr></table>
+</span><span class="w">      </span>-<span class="w"> </span>./codebuild-to-mattermost.sh<span class="w"> </span>build-message.txt<span class="w"> </span>${MattermostWebhookURL}<span class="w">
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<p><em>Mattermost への通知 Sample</em></p>
-
+</div><p><em>Mattermost への通知 Sample</em></p>
 <blockquote>
-<p>sample_repo <a>#BUILD_ARN</a> of branch/master by takuto_n <br>
+<p>sample_repo <!-- raw HTML omitted -->#BUILD_ARN<!-- raw HTML omitted --> of branch/master by takuto_n <!-- raw HTML omitted -->
 BUILD SUCCESSFUL in 18 secs</p>
 </blockquote>
 
