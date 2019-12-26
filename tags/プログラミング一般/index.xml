@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>プログラミング一般 on Little by little and bit by bit - マイペースにこつこつと</title>
@@ -18,7 +18,7 @@
       <pubDate>Sat, 09 Nov 2019 00:48:59 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</guid>
-      <description>プログラミング一般 Effective Java 第3版の個人的メモ 項目57 ローカル変数のスコープを最小限にする 項目58 従来のforループよりfor-eachループを選</description>
+      <description>プログラミング一般 Effective Java 第 3 版の個人的メモ 項目 57 ローカル変数のスコープを最小限にする 項目 58 従来の for ループより for-each ループを選ぶ 項目 59 ライブラリを知</description>
     </item>
     
   </channel>

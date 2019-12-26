@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://github.com/takuto-n/ctrl-key-6bit-mask&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 09 Nov 2019 00:48:57 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 09 Nov 2019 00:48:59 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Effective Java 3rd [Chapter 9]</title>
+      <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</link>
+      <pubDate>Sat, 09 Nov 2019 00:48:59 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</guid>
+      <description>プログラミング一般 Effective Java 第 3 版の個人的メモ 項目 57 ローカル変数のスコープを最小限にする 項目 58 従来の for ループより for-each ループを選ぶ 項目 59 ライブラリを知</description>
+    </item>
     
     <item>
       <title>Effective Java 3rd [Chapter 8]</title>
