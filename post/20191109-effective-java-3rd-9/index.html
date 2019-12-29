@@ -48,7 +48,7 @@
 <meta itemprop="description" content="プログラミング一般 Effective Java 第 3 版の個人的メモ 項目 57 ローカル変数のスコープを最小限にする 項目 58 従来の for ループより for-each ループを選ぶ 項目 59 ライブラリを知">
 <meta itemprop="datePublished" content="2019-11-09T00:48:59&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:48:59&#43;09:00" />
-<meta itemprop="wordCount" content="5886">
+<meta itemprop="wordCount" content="6363">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 5886 words </span>
-          <span class="more-meta"> 12 mins read </span>
+          <span class="more-meta"> 6363 words </span>
+          <span class="more-meta"> 13 mins read </span>
         
       </div>
     </header>
@@ -242,6 +242,11 @@
 </ul>
 </li>
 </ul>
+<blockquote>
+<p>Collectionに対して変更できるが、フェイルファストには気を付けましょう。<!-- raw HTML omitted -->
+Collectionによっては、iteratorおよびlistIteratorメソッドによって返されるイテレータは、フェイルファストです。イテレータの作成後に、イテレータ自体のremoveまたはaddメソッド以外の方法でリストが構造的に変更されると、イテレータはConcurrentModificationExceptionをスローします。
+<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/ArrayList.html">https://docs.oracle.com/javase/jp/8/docs/api/java/util/ArrayList.html</a></p>
+</blockquote>
 <h3 id="22-a-name-1a">2.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->サンプル</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -297,8 +302,6 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">enum</span> <span class="n">Suit</span> <span class="o">{</span> <span class="n">CLUB</span><span class="o">,</span> <span class="n">DIAMOND</span><span class="o">,</span> <span class="n">HEART</span><span class="o">,</span> <span class="n">SPADE</span> <span class="o">}</span>
@@ -308,10 +311,8 @@
 <span class="n">Collection</span> <span class="n">suits</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">Suit</span><span class="o">.</span><span class="na">values</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
 <span class="n">Collection</span> <span class="n">ranks</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">Rank</span><span class="o">.</span><span class="na">values</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
 <span class="n">List</span> <span class="n">deck</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">suits</span><span class="o">.</span><span class="na">iterator</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="o">)</span>
-<span class="o">{</span>
-	<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="na">iterator</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="n">j</span><span class="o">.</span><span class="na">hasNext</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="o">)</span>
-	<span class="o">{</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">suits</span><span class="o">.</span><span class="na">iterator</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="o">)</span><span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="na">iterator</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="n">j</span><span class="o">.</span><span class="na">hasNext</span><span class="o">(</span><span class="o">)</span><span class="o">;</span> <span class="o">)</span><span class="o">{</span>
 		<span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Card</span><span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">(</span><span class="o">)</span><span class="o">,</span> <span class="n">j</span><span class="o">.</span><span class="na">next</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
@@ -654,13 +655,19 @@
 <li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/package-summary.html">Concurrency Utilities</a>
 <ul>
 <li>マルチスレッドプログラムの処理を単純化するためのユーティリティがある</li>
+<li>java.util.concurrent.atomic</li>
+<li>java.util.concurrent.locks</li>
 </ul>
 </li>
 </ul>
 <h3 id="33-a-name-1a">3.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->ポイント</h3>
 <ul>
 <li>無駄な努力はしないでください</li>
-<li>ライブラリが存在するのかを知らなかったら調べてください</li>
+<li>ライブラリが存在するのかを知らなかったら調べてください
+<ul>
+<li>apache, spring, guavaあたりはよく利用しますね。</li>
+</ul>
+</li>
 <li>あなたのコードよりもライブラリの方が優れています</li>
 </ul>
 <h2 id="4-a-name60floatdoublea-60-float--double-">4. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 60 正確な答えが必要ならば、float と double を避ける</h2>
@@ -670,7 +677,7 @@
 <ul>
 <li>9桁以内であれば、<code>int</code></li>
 <li>18桁以内であれば、<code>long</code></li>
-<li>それ以上の桁数であれば、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigDecimal.html">BigDecimal</a></li>
+<li>正確な計算が必要もしくは、18桁以上であれば、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigDecimal.html">BigDecimal</a></li>
 </ul>
 </li>
 </ul>
@@ -786,7 +793,37 @@
 </div>
 </div></li>
 </ul>
-<h2 id="5-a-name61boxedprimitiveprimitivea-61-boxed-primitiveprimitive">5. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 61 ボクシングされたプリミティブ型（boxed primitive）より、プリミティブ型（primitive）を選択すべし</h2>
+<h3 id="43-a-name-1a-">4.3. <!-- raw HTML omitted --><!-- raw HTML omitted --> 備考</h3>
+<p>正確に計算できなければ、<code>ArithmeticException</code>がスローされる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">BigDecimal</span> <span class="n">bigDecimal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">1</span><span class="o">)</span><span class="o">;</span>
+    <span class="n">bigDecimal</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">3</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bigDecimal</span><span class="o">)</span><span class="o">;</span>
+    <span class="c1">// 実行結果
+</span><span class="c1"></span>    <span class="cm">/**
+</span><span class="cm">        * Exception in thread &#34;main&#34; java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.
+</span><span class="cm">        * 	at java.base/java.math.BigDecimal.divide(BigDecimal.java:1722)
+</span><span class="cm">        * 	at effectivejava.EJ60.main(EJ60.java:8)
+</span><span class="cm">        */</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="5-a-name61boxedprimitiveprimitivea-61-boxed-primitiveprimitive">5. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 61 ボクシングされたプリミティブ型（boxed primitive）より、プリミティブ型（primitive）を選択すべし</h2>
 <h3 id="51-a-name-1a">5.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>基本データ型の方が演算が速く、処理の危険性がないため、<br>
 以下の場合を除いて、ボクシングされたプリミティブ型(<code>Integer</code>や<code>Double</code>, <code>Boolean</code>など)よりもプリミティブ型(<code>int</code>や<code>double</code>, <code>boolean</code>など)を使いましょう。</p>
@@ -1010,7 +1047,10 @@
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">ThreadLocalインスタンスは、状態をスレッドに関連付けてくれるので、スレッドセーフとなる。
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="7-a-name63a-63-">7. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 63 文字列結合のパフォーマンスに用心する</h2>
+</div><blockquote>
+<p>備考：<code>ThreadLocal</code>は副作用が強いので、使用する際は気を付けた方が良いですね。</p>
+</blockquote>
+<h2 id="7-a-name63a-63-">7. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 63 文字列結合のパフォーマンスに用心する</h2>
 <h3 id="71-a-name-1a">7.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>簡単な文字列結合でなく、<br>
 <code>n</code>個の文字列を結合する場合は<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a>を使いましょう。<br>
@@ -1061,7 +1101,10 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="8-a-name64a-64-">8. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 64 インタフェースでオブジェクトを参照する</h2>
+</div><blockquote>
+<p>備考：定数の文字列連結の場合は、<code>+</code>による連結だとコンパイル時に行われるので、実行時のコストは0になる。</p>
+</blockquote>
+<h2 id="8-a-name64a-64-">8. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 64 インタフェースでオブジェクトを参照する</h2>
 <h3 id="81-a-name-1a">8.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
 <p>実装を切り替える際に、宣言の1行を変更するだけで済むので、<br>
 オブジェクト参照には、</p>
@@ -1111,6 +1154,7 @@
 <li>パフォーマンスが悪くなる
 <ul>
 <li>2-50倍遅くなる。by <code>Joshua Bloch</code></li>
+<li>1ns が 50nsになったところで、、なことが多い。機械学習とか計算量が多いと問題になるかもしれないですね。</li>
 </ul>
 </li>
 </ul>
@@ -1206,7 +1250,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="93-a-name-1a">9.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->ポイント</h3>
-<p>どの型が来るか分からない場合にリフレクションは使えるが、<br>
+<p>どの型が来ても良い場合にリフレクションは使えるが、<br>
 そうではない限りインタフェースを使いましょう。</p>
 <h2 id="10-a-name66a-66-">10. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 66 ネイティブメソッドを注意して使う</h2>
 <h2 id="11-a-name67a-67-">11. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 67 注意して最適化する</h2>
