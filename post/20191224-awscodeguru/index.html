@@ -48,7 +48,7 @@
 <meta itemprop="description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使">
 <meta itemprop="datePublished" content="2019-12-24T23:36:29&#43;09:00" />
 <meta itemprop="dateModified" content="2019-12-24T23:36:29&#43;09:00" />
-<meta itemprop="wordCount" content="2249">
+<meta itemprop="wordCount" content="2247">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/cicd/"> cicd </a>
             </div>
-          <span class="more-meta"> 2249 words </span>
+          <span class="more-meta"> 2247 words </span>
           <span class="more-meta"> 5 mins read </span>
         
       </div>
@@ -142,7 +142,7 @@
 <blockquote>
 <p>参考：使用したのは<code>CodeGuru Reviewer </code>のみで<code>CodeGuru Profiler</code>は使っていません。</p>
 </blockquote>
-<!-- raw HTML omitted -->
+<!-- vscode-markdown-toc -->
 <ul>
 <li>
 <ol>
@@ -187,10 +187,12 @@
 </ol>
 </li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h2 id="1-a-namea">1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h2>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namea">1. <a name=''></a>結論</h2>
 <p>利用者は以下のような方かなと。</p>
 <ul>
 <li>他の静的解析ツールも使っている
@@ -201,17 +203,17 @@
 <li>AWSのAPIの使用方法が合っているかよくわからないので確認したい</li>
 <li>お金に余裕がある</li>
 </ul>
-<h3 id="11-a-name-1a">1.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->使用感</h3>
+<h3 id="11-a-name-1a">1.1. <a name='-1'></a>使用感</h3>
 <ul>
 <li><code>AWS CodeCommit</code>や<code>Github</code>との連携は簡単</li>
 <li>解析結果はプルリクエストに対して、レビューア(AWS CodeGuru Bot)の指摘として表示される</li>
 </ul>
-<h3 id="12-a-name-1a">1.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->解析結果</h3>
+<h3 id="12-a-name-1a">1.2. <a name='-1'></a>解析結果</h3>
 <ul>
 <li>一般的な静的解析ツール（<code>FindBugs</code>や<code>SonarQube</code>、<code>Coverity</code>、<code>IDEによる指摘</code>など）で発見されるバグは、ほとんど指摘されない</li>
 <li>AWSのAPIの使い方に関する指摘は鋭い</li>
 </ul>
-<h2 id="2-a-name-1a">2. <!-- raw HTML omitted --><!-- raw HTML omitted -->前提</h2>
+<h2 id="2-a-name-1a">2. <a name='-1'></a>前提</h2>
 <p><code>Amazon CodeGuru</code> は、「自動化されたコードレビュー」と「アプリケーションパフォーマンスの推奨事項を提供する」機械学習サービスです。（引用元：https://aws.amazon.com/jp/codeguru/）</p>
 <p>以下のような静的解析ツールの仲間ですね。</p>
 <ul>
@@ -222,23 +224,23 @@
 <blockquote>
 <p>現状(2019/12時点)では、Amazon CodeGuruはJava言語のみ対応。</p>
 </blockquote>
-<h3 id="21-a-name-1a">2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->連携できるバージョン管理システム</h3>
+<h3 id="21-a-name-1a">2.1. <a name='-1'></a>連携できるバージョン管理システム</h3>
 <p>以下の２つに対応（今回はAWS CodeCommitを使用した）</p>
 <ul>
 <li>Github</li>
 <li>AWS CodeCommit</li>
 </ul>
-<!-- raw HTML omitted -->
+<img src="/img/20191224/AWS_CodeGuru_Repository.PNG" width=80%>
 <p>参考URL : <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html">https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html</a></p>
-<h3 id="22-a-name-1a">2.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->解析単価</h3>
+<h3 id="22-a-name-1a">2.2. <a name='-1'></a>解析単価</h3>
 <p>まぁまぁ高いので、使う際は気をつけましょう。。<br>
 今後、巨大なMR作って事故る人出るかもしれないですね、、、</p>
 <blockquote>
-<p>コード 100 行あたり 0.75 USD<!-- raw HTML omitted -->
+<p>コード 100 行あたり 0.75 USD<br>
 例：10,000行のコードだったら、75USD(2019/12時点で約8200円)</p>
 </blockquote>
 <p>引用元：https://aws.amazon.com/jp/codeguru/pricing/</p>
-<h3 id="23-a-name-1a">2.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->指摘の観点</h3>
+<h3 id="23-a-name-1a">2.3. <a name='-1'></a>指摘の観点</h3>
 <ul>
 <li>AWS Best Practices
 <ul>
@@ -267,25 +269,25 @@
 </li>
 </ul>
 <p>引用元：https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html</p>
-<h2 id="3-a-name-1a">3. <!-- raw HTML omitted --><!-- raw HTML omitted -->使用感</h2>
-<h3 id="31-a-name-1a">3.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->セットアップについて</h3>
+<h2 id="3-a-name-1a">3. <a name='-1'></a>使用感</h2>
+<h3 id="31-a-name-1a">3.1. <a name='-1'></a>セットアップについて</h3>
 <p>参考URLに記載の通りであるが、以下の手順で、10分ほどあれば完了するので簡単。</p>
 <ol>
 <li>CodeCommit の初期設定（リポジトリ作成画面に<code>AWS CodeGuru</code>との連携オプションあり。）
-<!-- raw HTML omitted --></li>
+<img src="/img/20191224/AWS_CodeCommit_作成画面.PNG" width=80%></li>
 <li>Git をインストールする</li>
 <li>CodeCommit への HTTPS 接続用の Git 認証情報を作成する</li>
 <li>CodeCommit コンソールに接続し、リポジトリを複製する</li>
 </ol>
 <p>参考URL : <a href="https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html">https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html</a></p>
-<h3 id="32-a-name-1a">3.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->運用性について</h3>
+<h3 id="32-a-name-1a">3.2. <a name='-1'></a>運用性について</h3>
 <p>マージリクエストに対して、レビュアーのような立場でソースコードに指摘をしてくれるので、運用上指摘を見逃すことがない。</p>
 <blockquote>
 <p>指摘場所は、<code>AWS CodeCommit</code>のアクティビティ画面</p>
 </blockquote>
-<!-- raw HTML omitted -->
-<h2 id="4-a-name-1a">4. <!-- raw HTML omitted --><!-- raw HTML omitted -->指摘結果</h2>
-<h3 id="41-a-name-1a">4.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->指摘されなかったコード</h3>
+<img src="/img/20191224/CodeGuruによる指摘.png" width=80%>
+<h2 id="4-a-name-1a">4. <a name='-1'></a>指摘結果</h2>
+<h3 id="41-a-name-1a">4.1. <a name='-1'></a>指摘されなかったコード</h3>
 <p>下のコードはいずれも他の静的解析ツールで指摘されるのですが、、<code>AWS CodeGuru</code>では指摘されなかったです。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -461,7 +463,7 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="42-a-name-1a">4.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->指摘されたコード</h3>
+</div><h3 id="42-a-name-1a">4.2. <a name='-1'></a>指摘されたコード</h3>
 <p>一般的なコーディングに対する指摘ですね。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -512,7 +514,7 @@
 </span><span class="c1"></span><span class="c1">// This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results.
 </span></code></pre></td></tr></table>
 </div>
-</div><h2 id="5-a-name-1a">5. <!-- raw HTML omitted --><!-- raw HTML omitted -->余談</h2>
+</div><h2 id="5-a-name-1a">5. <a name='-1'></a>余談</h2>
 <p>某約20KStepのJavaプロジェクトに対して、<code>AWS CodeGuru</code>をかけたのですが、ヒットしたのは「指摘されたコード」に記載のAWSのAPIに関する2種類の指摘のみでした。。</p>
 <p>これからユーザからのフィードバックを受けてどんどん賢くなっていくとのことなので、今後に期待しましょう！</p>
 <blockquote>

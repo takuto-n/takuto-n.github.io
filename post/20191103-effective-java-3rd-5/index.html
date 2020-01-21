@@ -138,7 +138,7 @@
     <div class="post-content">
       <h1 id="heading">ジェネリクス</h1>
 <p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
-<!-- raw HTML omitted -->
+<!-- vscode-markdown-toc -->
 <ol>
 <li><a href="#26">項目 26 原型を使わない</a></li>
 <li><a href="#27">項目 27 無検査警告を取り除く</a></li>
@@ -150,15 +150,17 @@
 <li><a href="#33">項目 33 型安全な異種コンテナを検討する</a></li>
 <li><a href="#URL">参考 URL</a></li>
 </ol>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h2 id="1-a-name26a-26-">1. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 26 原型を使わない</h2>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name26a-26-">1. <a name='26'></a>項目 26 原型を使わない</h2>
 <ul>
 <li>Java 1.4 までジェネリクスがなかった。</li>
 <li>Java 5 でジェネリクスが登場した。</li>
 </ul>
-<h3 id="11-a-namea">1.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h3 id="11-a-namea">1.1. <a name=''></a>結論</h3>
 <p>ジェネリクスの型パラメータが指定できるときは必ず指定しましょう。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -251,8 +253,8 @@
 <span class="n">list5</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">111</span><span class="o">)</span><span class="o">;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="2-a-name27a-27-">2. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 27 無検査警告を取り除く</h2>
-<h3 id="21-a-name-1a">2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+</div><h2 id="2-a-name27a-27-">2. <a name='27'></a>項目 27 無検査警告を取り除く</h2>
+<h3 id="21-a-name-1a">2.1. <a name='-1'></a>結論</h3>
 <p>@SuppressWarnings(&ldquo;unchecked&rdquo;) は気をつけて使いましょう</p>
 <ul>
 <li><code>@SuppressWarnings(&quot;unchecked&quot;)</code>は、クラス、メソッド、変数宣言に付与できる。
@@ -262,8 +264,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="3-a-name28a-28-">3. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 28 配列よりリストを選ぶ</h2>
-<h3 id="31-a-name-1a">3.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h2 id="3-a-name28a-28-">3. <a name='28'></a>項目 28 配列よりリストを選ぶ</h2>
+<h3 id="31-a-name-1a">3.1. <a name='-1'></a>結論</h3>
 <p>配列とリストは次の 2 点で大きく異なる。
 リストの方は、コンパイル時に型安全性を提供するから、バグが発生しにくい。（配列は実行時に型安全性を提供する。）</p>
 <ul>
@@ -285,7 +287,7 @@
 </blockquote>
 </li>
 </ul>
-<h4 id="311-a-name-1a">3.1.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->配列の場合</h4>
+<h4 id="311-a-name-1a">3.1.1. <a name='-1'></a>配列の場合</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -298,7 +300,7 @@
   <span class="c1">// 実行時にArrayStoreException
 </span></code></pre></td></tr></table>
 </div>
-</div><h4 id="312-a-name-1a">3.1.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->リストの場合</h4>
+</div><h4 id="312-a-name-1a">3.1.2. <a name='-1'></a>リストの場合</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -309,13 +311,13 @@
 </span><span class="c1"></span>  <span class="n">List</span><span class="o">&lt;</span><span class="n">Type1</span><span class="o">&gt;</span> <span class="n">type1List</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Type2</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>  <span class="c1">// 互換性のない型
 </span></code></pre></td></tr></table>
 </div>
-</div><h3 id="32-a-name-1a">3.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->リストと配列を混在させた場合</h3>
+</div><h3 id="32-a-name-1a">3.2. <a name='-1'></a>リストと配列を混在させた場合</h3>
 <p>リストと配列を混在させてしまった場合は、配列の代わりにリストを使うようにしましょう。</p>
 <ul>
 <li>混在させて、リストを配列にキャストする特殊なケースとして、次項「<a href="#29">項目 29 ジェネリック型を使う</a>」があります。</li>
 </ul>
 <p>単純なジェネリックメソッドで確認する。</p>
-<h4 id="321-a-name1a-1--">3.2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->ステップ 1(リスト → 配列)</h4>
+<h4 id="321-a-name1a-1--">3.2.1. <a name='1'></a>ステップ 1(リスト → 配列)</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -350,7 +352,7 @@
 </span><span class="cm">**/</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="322-a-name2a-2-">3.2.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->ステップ 2(リスト[キャスト]→ 配列)</h4>
+</div><h4 id="322-a-name2a-2-">3.2.2. <a name='2'></a>ステップ 2(リスト[キャスト]→ 配列)</h4>
 <p>リストを配列<code>(E[])</code>にキャストした。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -389,7 +391,7 @@
 </div><blockquote>
 <p>実行時の<code>E</code>の型が不明で、実行時にリスト(ジェネリクス）の型情報は erasure(廃棄)されているから、キャストの安全性が検査できない。)</p>
 </blockquote>
-<h4 id="323-a-name3a-3--">3.2.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->ステップ 3(リスト → リスト)</h4>
+<h4 id="323-a-name3a-3--">3.2.3. <a name='3'></a>ステップ 3(リスト → リスト)</h4>
 <p>配列<code>(E[])</code>を使わず、リストにした。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -417,8 +419,8 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="4-a-name29a-29-">4. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 29 ジェネリック型を使う</h2>
-<h3 id="41-a-name-1a">4.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+</div><h2 id="4-a-name29a-29-">4. <a name='29'></a>項目 29 ジェネリック型を使う</h2>
+<h3 id="41-a-name-1a">4.1. <a name='-1'></a>結論</h3>
 <p>以下の場合は、ジェネリクスを利用する良い機会なので使ってみましょう。</p>
 <ul>
 <li>利用者が、メソッドからの戻り値をキャストしないといけない</li>
@@ -538,7 +540,7 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="42-a-name1-1a-1">4.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->補足 1(配列を使う理由)</h3>
+</div><h3 id="42-a-name1-1a-1">4.2. <a name='1-1'></a>補足 1(配列を使う理由)</h3>
 <p>Java はリストを直接はサポートしていない。</p>
 <ul>
 <li><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/ArrayList.java#L111">ArrayList</a>などのジェネリック型は配列を使用している。</li>
@@ -547,16 +549,16 @@
 <ul>
 <li><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/HashMap.java#L149">HashMap</a>などの他のジェネリック型は配列を使用している。</li>
 </ul>
-<h3 id="43-a-name2-1a-2">4.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->補足 2(ジェネリクスの型の制限)</h3>
+<h3 id="43-a-name2-1a-2">4.3. <a name='2-1'></a>補足 2(ジェネリクスの型の制限)</h3>
 <p>ジェネリクスの型が制限できる場合は、制限しましょう。</p>
 <p>例：<a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/concurrent/DelayQueue.java#L68">java.util.concurrent.DelayQueue</a>では、<code>DelayQueue&lt;E extends Delayed&gt;</code>としている。</p>
-<h2 id="5-a-name30a-30-">5. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 30 ジェネリックメソッドを使う</h2>
-<h3 id="51-a-name-1a">5.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h2 id="5-a-name30a-30-">5. <a name='30'></a>項目 30 ジェネリックメソッドを使う</h2>
+<h3 id="51-a-name-1a">5.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>ジェネリックメソッドの作り方、使い方を理解しましょう</li>
 <li>再帰型境界を使うことで、型パラメータの機能を制限できる</li>
 </ul>
-<h3 id="52-a-name-1a">5.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->ジェネリックメソッド</h3>
+<h3 id="52-a-name-1a">5.2. <a name='-1'></a>ジェネリックメソッド</h3>
 <ul>
 <li>
 <p>ジェネリッククラスと同じように、メソッド単位で型安全性を確保できる</p>
@@ -599,7 +601,7 @@
 </div>
 </div></li>
 </ul>
-<h3 id="53-a-name-1a">5.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->再帰型境界</h3>
+<h3 id="53-a-name-1a">5.3. <a name='-1'></a>再帰型境界</h3>
 <ul>
 <li>再帰型境界は、<code>T extends HogeInterface</code>のように型パラメータを書くことで、T は HogeInterface が実装されている型であることを制限すること。</li>
 <li>よくある利用法は Comparable インターフェース
@@ -649,7 +651,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="54-a-name-1a">5.4. <!-- raw HTML omitted --><!-- raw HTML omitted -->余談</h3>
+<h3 id="54-a-name-1a">5.4. <a name='-1'></a>余談</h3>
 <ul>
 <li>型パラメータの文字としてよく使われる<code>T</code>、<code>E</code>、<code>K</code>、<code>V</code>は何の略なのか</li>
 </ul>
@@ -704,8 +706,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="6-a-name31apia-31-api-">6. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 31 API の柔軟性向上のために境界ワイルドカードを使う</h2>
-<h3 id="61-a-name-1a">6.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h2 id="6-a-name31apia-31-api-">6. <a name='31API'></a>項目 31 API の柔軟性向上のために境界ワイルドカードを使う</h2>
+<h3 id="61-a-name-1a">6.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>最大限の柔軟性のために、プロデューサーかコンシューマーを表す入力パラメータに対してワイルドカード型を使用するべき
 <ul>
@@ -713,7 +715,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="62-a-name-1a">6.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->境界ワイルドカードを使用しない場合の問題点</h3>
+<h3 id="62-a-name-1a">6.2. <a name='-1'></a>境界ワイルドカードを使用しない場合の問題点</h3>
 <ul>
 <li>
 <p>下記のような Stack クラスがある。</p>
@@ -756,7 +758,7 @@
 </div>
 </div></li>
 <li>
-<p>このとき、Number 型の Stack を定義して、一つの Interger 変数を push することはできるが、List<!-- raw HTML omitted -->を pushAll することはできない。なぜなら、List<!-- raw HTML omitted -->は List<!-- raw HTML omitted -->のサブクラスではないから。</p>
+<p>このとき、Number 型の Stack を定義して、一つの Interger 変数を push することはできるが、List<Integer>を pushAll することはできない。なぜなら、List<Integer>は List<Number>のサブクラスではないから。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -799,7 +801,7 @@
 </div>
 </div></li>
 <li>
-<p>このとき、Number 型の Stack を定義して、pop して１つの Object 変数に代入することはできるが、popAll して List<!-- raw HTML omitted -->代入することできない。なぜなら、List<!-- raw HTML omitted -->は List<!-- raw HTML omitted -->のスーパークラスではないから。</p>
+<p>このとき、Number 型の Stack を定義して、pop して１つの Object 変数に代入することはできるが、popAll して List<Object>代入することできない。なぜなら、List<Object>は List<Number>のスーパークラスではないから。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -831,7 +833,7 @@
 <p>これも不便。</p>
 </li>
 </ul>
-<h3 id="63-a-name-1a">6.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->境界ワイルドカードでの解決</h3>
+<h3 id="63-a-name-1a">6.3. <a name='-1'></a>境界ワイルドカードでの解決</h3>
 <ul>
 <li>
 <p>前述の問題は境界ワイルドカードを使うことで解決できる</p>
@@ -864,7 +866,7 @@
 </div>
 </div></li>
 </ul>
-<h3 id="64-a-namegetputpecsaget--put-pecs">6.4. <!-- raw HTML omitted --><!-- raw HTML omitted -->GET &amp; PUT 原則（PECS）</h3>
+<h3 id="64-a-namegetputpecsaget--put-pecs">6.4. <a name='GETPUTPECS'></a>GET &amp; PUT 原則（PECS）</h3>
 <ul>
 <li><code>&lt;? extends E&gt;</code>と<code>&lt;? super E&gt;</code>のどちらを使うか決めるための原則
 <ul>
@@ -887,7 +889,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="65-a-namegetputaget--put-">6.5. <!-- raw HTML omitted --><!-- raw HTML omitted -->GET &amp; PUT 原則の例(問題)</h3>
+<h3 id="65-a-namegetputaget--put-">6.5. <a name='GETPUT'></a>GET &amp; PUT 原則の例(問題)</h3>
 <ul>
 <li>
 <p>問 1. 前項目で登場した下記の union メソッドはどのように境界ワイルドカードを付けるべきか？</p>
@@ -1006,8 +1008,8 @@ s1、s2 は値を提供しているから。</p>
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">ScheduledFuture</span><span class="o">&lt;</span><span class="o">?</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">scheduledFutures</span><span class="o">=</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="7-a-name32a-32-">7. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 32 ジェネリックと可変長引数を注意して組み合わせる</h2>
-<h3 id="71-a-name-1a">7.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+</div><h2 id="7-a-name32a-32-">7. <a name='32'></a>項目 32 ジェネリックと可変長引数を注意して組み合わせる</h2>
+<h3 id="71-a-name-1a">7.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>ジェネリクスと可変長引数を同時に使用する場合は、以下を守った上で <code>@SafeVarargs</code> を付与する
 <ol>
@@ -1017,7 +1019,7 @@ s1、s2 は値を提供しているから。</p>
 </li>
 <li>コレクションをネストさせる等で対処することも検討する</li>
 </ul>
-<h3 id="72-a-name-1a">7.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->ジェネリクスと可変長引数を同時に使用すると、タイプアンセーフになる。</h3>
+<h3 id="72-a-name-1a">7.2. <a name='-1'></a>ジェネリクスと可変長引数を同時に使用すると、タイプアンセーフになる。</h3>
 <p>以下のように、ジェネリック型の可変長引数に値を格納するのは安全でないケースが存在する。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1065,7 +1067,7 @@ s1、s2 は値を提供しているから。</p>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="73-a-name-1a">7.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->本当にタイプセーフなのかを知るには</h3>
+</div><h3 id="73-a-name-1a">7.3. <a name='-1'></a>本当にタイプセーフなのかを知るには</h3>
 <p>可変長配列の引数が以下の両方を満たす状態ならばタイプセーフと言える</p>
 <ol>
 <li>配列を変更していない(要素に値を格納していない)</li>
@@ -1186,20 +1188,20 @@ s1、s2 は値を提供しているから。</p>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="8-a-name33a-33-">8. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 33 型安全な異種コンテナを検討する</h2>
-<h3 id="81-a-name-1a">8.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
-<h4 id="811-a-name-1a">8.1.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->前提</h4>
+</div><h2 id="8-a-name33a-33-">8. <a name='33'></a>項目 33 型安全な異種コンテナを検討する</h2>
+<h3 id="81-a-name-1a">8.1. <a name='-1'></a>結論</h3>
+<h4 id="811-a-name-1a">8.1.1. <a name='-1'></a>前提</h4>
 <ul>
 <li>型安全とは、String 型のインスタンスを要求したときに、その型のインスタンスを返すこと。</li>
 <li>異種コンテナとは、クラスをキー(<code>Key</code>)、そのクラスのインスタンスを値(<code>Value</code>)とするもの</li>
 </ul>
-<h4 id="812-a-name-1a">8.1.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->ポイント</h4>
+<h4 id="812-a-name-1a">8.1.2. <a name='-1'></a>ポイント</h4>
 <ul>
 <li>Map は キーとバリューの対応を、型では保証していない。</li>
 <li>put は何も考えずに格納する</li>
 <li>get 時に辻褄が合うように型変換する</li>
 </ul>
-<h3 id="82-a-name-1a">8.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->型パラメータの個数を可変にする方法</h3>
+<h3 id="82-a-name-1a">8.2. <a name='-1'></a>型パラメータの個数を可変にする方法</h3>
 <p><code>Set&lt;E&gt;</code> は 1 個、 <code>Map&lt;K,V&gt;</code> は 2 個とパラメータ数が固定だが、これを固定したくない(できない)ケースがある。<br>
 代表的なものは、コンテナを実装するとき。
 このケースでは、キーをパラメータ化することで様々な型を受け取れるようにする。</p>
@@ -1278,7 +1280,7 @@ s1、s2 は値を提供しているから。</p>
 ジェネリクスはイレイジャで実行時に消されてしまうので。</li>
 </ul>
 <p>前述の型パラメータは extends を用いて境界を設けることも可能。</p>
-<h2 id="9-a-nameurla-url">9. <!-- raw HTML omitted --><!-- raw HTML omitted -->参考 URL</h2>
+<h2 id="9-a-nameurla-url">9. <a name='URL'></a>参考 URL</h2>
 <ul>
 <li><a href="https://marycore.jp/coding/generics-types/">ジェネリクスでよく使われている T や E, A、その他型パラメータの意味 | MaryCore</a></li>
 </ul>

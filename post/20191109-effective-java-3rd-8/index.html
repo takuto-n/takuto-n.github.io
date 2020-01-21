@@ -138,7 +138,7 @@
     <div class="post-content">
       <h1 id="heading">メソッド</h1>
 <p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
-<!-- raw HTML omitted -->
+<!-- vscode-markdown-toc -->
 <ol>
 <li><a href="#49">項目 49 パラメータの正当性を検査する</a></li>
 <li><a href="#50">項目 50 必要な場合、防御的にコピーする</a></li>
@@ -150,16 +150,18 @@
 <li><a href="#56API">項目 56 すべての公開 API 要素に対してドキュメントコメントを書く</a></li>
 <li><a href="#URL">参考URL</a></li>
 </ol>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h2 id="1-a-name49a-49-">1. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 49 パラメータの正当性を検査する</h2>
-<h3 id="11-a-namea">1.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name49a-49-">1. <a name='49'></a>項目 49 パラメータの正当性を検査する</h2>
+<h3 id="11-a-namea">1.1. <a name=''></a>結論</h3>
 <ul>
 <li>入力値のチェックをしましょう</li>
 <li>Javadocに入力値の説明と例外の説明は記入しましょう</li>
 </ul>
-<h3 id="12-a-name-1a">1.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->良い例</h3>
+<h3 id="12-a-name-1a">1.2. <a name='-1'></a>良い例</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -204,7 +206,7 @@
 <blockquote>
 <p>余談：<code>@throws ArithmetricException m &lt;= 0の場合.</code>の<code>@throws</code>はメソッドに<code>throws</code>がついていないので忘れがちかもしれないなと思いました。（IDEで自動的に付加されないので。）</p>
 </blockquote>
-<h3 id="13-a-name-1a">1.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->アサーションの紹介</h3>
+<h3 id="13-a-name-1a">1.3. <a name='-1'></a>アサーションの紹介</h3>
 <p><code>private</code>メソッド（外部には公開しない）の場合は、そのパッケージの作成者として、どのような状況でメソッドが呼び出されるのかを
 <a href="https://www.ipa.go.jp/security/awareness/vendor/programmingv1/a03_05.html">アサーション</a>を用いて入力値の検査をすべき。</p>
 <div class="highlight"><div class="chroma">
@@ -273,15 +275,15 @@
 </div>
 </div><p><code>-ea</code>(<code>-enableassertions</code>)をつけた場合のみ<code>assert</code>は有効になる。
 <code>-ea</code>を付けなければ、<code>assert</code>は有効にならないので、実運用時にコストは発生しない。</p>
-<h2 id="2-a-name50a-50-">2. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 50 必要な場合、防御的にコピーする</h2>
-<h3 id="21-a-name-1a">2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h2 id="2-a-name50a-50-">2. <a name='50'></a>項目 50 必要な場合、防御的にコピーする</h2>
+<h3 id="21-a-name-1a">2.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>クライアントが信頼できない場合は、防御的にコピーしましょう</li>
 <li>クライアントが信頼できて、コピーのコストが非常に高い場合は、Javadocに記載しても良いです。</li>
 </ul>
-<h3 id="22-a-name-1a">2.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->防御的コピー</h3>
+<h3 id="22-a-name-1a">2.2. <a name='-1'></a>防御的コピー</h3>
 <p>クライアントが、クラスの不等式を破壊するために徹底した努力をすると想定しましょう。</p>
-<h4 id="221-a-name-1a">2.2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->悪い例</h4>
+<h4 id="221-a-name-1a">2.2.1. <a name='-1'></a>悪い例</h4>
 <p><code>Date</code>はmutable（フィールドを変更可能なオブジェクト）です。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -365,7 +367,7 @@
 </span><span class="c1"></span><span class="n">p</span><span class="o">.</span><span class="na">end</span><span class="o">(</span><span class="o">)</span><span class="o">.</span><span class="na">setYear</span><span class="o">(</span><span class="n">78</span><span class="o">)</span><span class="o">;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="222-a-name-1a">2.2.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->良い例</h4>
+</div><h4 id="222-a-name-1a">2.2.2. <a name='-1'></a>良い例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -435,11 +437,11 @@
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>もし<code>Date</code>のコピーが非常にコストの高い行為であり、クライアントが信頼できる場合は、<!-- raw HTML omitted -->
+<p>もし<code>Date</code>のコピーが非常にコストの高い行為であり、クライアントが信頼できる場合は、<br>
 &ldquo;影響を受ける要素を変更しないこと&quot;をクライアントの責任であると、Javadocに示すことで対応しても良い。</p>
 </blockquote>
-<h2 id="3-a-name51a-51-">3. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 51 メソッドのシグネチャを注意深く設計する</h2>
-<h3 id="31-a-name-1a">3.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h2 id="3-a-name51a-51-">3. <a name='51'></a>項目 51 メソッドのシグネチャを注意深く設計する</h2>
+<h3 id="31-a-name-1a">3.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>メソッド名を注意深く選ぶべし</li>
 <li>便利なメソッドを提供しすぎないようにするべし</li>
@@ -447,7 +449,7 @@
 <li>パラメータ型に関しては、クラスよりインタフェースを選ぶべし</li>
 <li>booleanパラメータよりは2つの要素を持つenum型を使用するべし</li>
 </ul>
-<h3 id="32-a-name-1a">3.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->メソッド名を注意深く選ぶべし</h3>
+<h3 id="32-a-name-1a">3.2. <a name='-1'></a>メソッド名を注意深く選ぶべし</h3>
 <p>APIを使う人が誤解なく使えるようにするために、以下をすること</p>
 <ul>
 <li>標準命名規約に従う</li>
@@ -458,12 +460,12 @@
 </ul>
 </li>
 </ul>
-<h3 id="33-a-name-1a">3.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->便利なメソッドを提供しすぎないようにするべし</h3>
+<h3 id="33-a-name-1a">3.3. <a name='-1'></a>便利なメソッドを提供しすぎないようにするべし</h3>
 <ul>
 <li>提供するか迷ったらやめるべき</li>
 <li>【理由】多くのメソッドを用意すると、学習、使用、文書化、テスト、保守を困難にするから</li>
 </ul>
-<h3 id="34-a-name-1a">3.4. <!-- raw HTML omitted --><!-- raw HTML omitted -->長いパラメータのリストを避けるべし</h3>
+<h3 id="34-a-name-1a">3.4. <a name='-1'></a>長いパラメータのリストを避けるべし</h3>
 <ul>
 <li>特に同じ型のパラメータが続くことは避けるべき
 <ul>
@@ -492,7 +494,7 @@
 <ol start="3">
 <li>引数が多いコンストラクタの引数が多い場合は、ビルダーパターンを使う。</li>
 </ol>
-<h3 id="35-a-name-1a">3.5. <!-- raw HTML omitted --><!-- raw HTML omitted -->パラメータ型に関しては、クラスよりインタフェースを選ぶべし</h3>
+<h3 id="35-a-name-1a">3.5. <a name='-1'></a>パラメータ型に関しては、クラスよりインタフェースを選ぶべし</h3>
 <ul>
 <li>パラメータの型は実装クラスよりもインタフェースを使用するべき
 <ul>
@@ -501,19 +503,19 @@
 </li>
 <li>【理由】制約をゆるくするため。</li>
 </ul>
-<h3 id="36-a-nameboolean2enumaboolean2enum">3.6. <!-- raw HTML omitted --><!-- raw HTML omitted -->booleanパラメータよりは2つの要素を持つenum型を使用するべし</h3>
+<h3 id="36-a-nameboolean2enumaboolean2enum">3.6. <a name='boolean2enum'></a>booleanパラメータよりは2つの要素を持つenum型を使用するべし</h3>
 <p>enum型を使用したほうが利用者にとってわかりやすいから。また、新たな状態を追加しやすいから。</p>
 <ul>
 <li>例：Thermometer型があったとして、<code>Thermometer.newInstance(true)</code>より、<code>Thermometer.newInstance(TemperatureScale.CELSIUS)</code>の方が、分かりやすい。<br>
 また、簡単に<code>TemperatureScale.KELVIN</code>を追加できる。</li>
 </ul>
-<h2 id="4-a-name52a-52-">4. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 52 オーバーロードを注意して使う</h2>
-<h3 id="41-a-name-1a">4.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h2 id="4-a-name52a-52-">4. <a name='52'></a>項目 52 オーバーロードを注意して使う</h2>
+<h3 id="41-a-name-1a">4.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>パラメータの数が同一のオーバーロードされたメソッドを提供するべきでない</li>
 </ul>
-<h3 id="42-a-name-1a">4.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->オーバーロード</h3>
-<h4 id="421-a-name-1a-1">4.2.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->コードと実行結果_その1</h4>
+<h3 id="42-a-name-1a">4.2. <a name='-1'></a>オーバーロード</h3>
+<h4 id="421-a-name-1a-1">4.2.1. <a name='_1'></a>コードと実行結果_その1</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -566,7 +568,7 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="422-a-name-2a-2">4.2.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->コードと実行結果_その2</h4>
+</div><h4 id="422-a-name-2a-2">4.2.2. <a name='_2'></a>コードと実行結果_その2</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -633,8 +635,8 @@
 <p>オーバーロードされたどのメソッドが呼び出されるかの選択はコンパイル時に行われるため。<br>
 上の例では、3回のループで、パラメータのコンパイル時の型は<code>Collection&lt;?&gt;</code>であるので、<code>classify(Collection&lt;?&gt; s)</code>が呼び出される。</p>
 </blockquote>
-<h3 id="43-a-name-1a">4.3. <!-- raw HTML omitted --><!-- raw HTML omitted -->オーバーライド</h3>
-<h4 id="431-a-name-3a-3">4.3.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->コードと実行結果_その3</h4>
+<h3 id="43-a-name-1a">4.3. <a name='-1'></a>オーバーライド</h3>
+<h4 id="431-a-name-3a-3">4.3.1. <a name='_3'></a>コードと実行結果_その3</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -714,7 +716,7 @@
 </div><blockquote>
 <p>オーバーライドは実行時に呼び出されるメソッドが決められるため。</p>
 </blockquote>
-<h3 id="44-a-name-1a">4.4. <!-- raw HTML omitted --><!-- raw HTML omitted -->オーバーロードの利用</h3>
+<h3 id="44-a-name-1a">4.4. <a name='-1'></a>オーバーロードの利用</h3>
 <ul>
 <li>最も安全な方針は、 <strong>パラメータの数が同一のオーバーロードされたメソッドを提供しないこと</strong>
 <ul>
@@ -746,8 +748,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="5-a-name53a-53-">5. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 53 可変長引数を注意して使う</h2>
-<h3 id="51-a-name-1a">5.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h2 id="5-a-name53a-53-">5. <a name='53'></a>項目 53 可変長引数を注意して使う</h2>
+<h3 id="51-a-name-1a">5.1. <a name='-1'></a>結論</h3>
 <p>すべての引数の型が同じでも、全部可変長ではなく、一部のみにしたほうがいいことがある。</p>
 <p>ex) 必須パラメータ と オプションパラメータ で分けたいとき。</p>
 <div class="highlight"><div class="chroma">
@@ -816,10 +818,10 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="6-a-name54nulla-54-null-">6. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 54 null ではなく、空コレクションか空配列を返す</h2>
-<h3 id="61-a-name-1a">6.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+</div><h2 id="6-a-name54nulla-54-null-">6. <a name='54null'></a>項目 54 null ではなく、空コレクションか空配列を返す</h2>
+<h3 id="61-a-name-1a">6.1. <a name='-1'></a>結論</h3>
 <p>nullよりも、 空オブジェクト を常に使うこと。</p>
-<h3 id="62-a-name-1a">6.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->理由</h3>
+<h3 id="62-a-name-1a">6.2. <a name='-1'></a>理由</h3>
 <ul>
 <li>nullが返ってくる -&gt; 使う側は常にnullチェックを強制される。</li>
 <li>場合によっては、コレクションが空or要素があるのどちらかを考慮せずコードがかける。</li>
@@ -841,8 +843,8 @@
 <li>null と 空オブジェクト で意味が異なる場合は、もちろん、両方の意味を定義して使い分けること</li>
 <li>古いAPIだと 空オブジェクトで良い場面でnullを使っているケースがある</li>
 </ul>
-<h2 id="7-a-name55a-55-">7. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 55 オプショナルを注意して返す</h2>
-<h3 id="71-a-name-1a">7.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h2 id="7-a-name55a-55-">7. <a name='55'></a>項目 55 オプショナルを注意して返す</h2>
+<h3 id="71-a-name-1a">7.1. <a name='-1'></a>結論</h3>
 <p>java8 から <code>Optional&lt;T&gt;</code> が入ってきた。定義をjavadocから引用すると…</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -860,7 +862,7 @@
 <li>if文のブロックを可読性の高いシンプルなコードに置き換えることができる</li>
 <li>lambdaと相性がよいので、stream処理のmap、filterに自然に組み込むことができる</li>
 </ul>
-<h3 id="72-a-name-1a">7.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->補足</h3>
+<h3 id="72-a-name-1a">7.2. <a name='-1'></a>補足</h3>
 <ul>
 <li>Optionalが戻り値であるメソッドからnullを返してはならない。これを行うと、Optionalを導入した意味がなくなる。
 <ul>
@@ -868,8 +870,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="8-a-name56apia-56--api-">8. <!-- raw HTML omitted --><!-- raw HTML omitted -->項目 56 すべての公開 API 要素に対してドキュメントコメントを書く</h2>
-<h3 id="81-a-name-1a">8.1. <!-- raw HTML omitted --><!-- raw HTML omitted -->結論</h3>
+<h2 id="8-a-name56apia-56--api-">8. <a name='56API'></a>項目 56 すべての公開 API 要素に対してドキュメントコメントを書く</h2>
+<h3 id="81-a-name-1a">8.1. <a name='-1'></a>結論</h3>
 <p>(状況に応じて、できる範囲で)必ず書きなさい。</p>
 <ul>
 <li>利用者の範囲
@@ -906,7 +908,7 @@ etc&hellip;</li>
 </li>
 <li>Java5では@literalと@code</li>
 </ul>
-<h3 id="82-a-name-1a">8.2. <!-- raw HTML omitted --><!-- raw HTML omitted -->書き方</h3>
+<h3 id="82-a-name-1a">8.2. <a name='-1'></a>書き方</h3>
 <p><a href="http://www.oracle.com/technetwork/java/javase/tech/index-137868.html">How to Write Doc Comments</a>
 <a href="https://www.amazon.co.jp/">https://www.amazon.co.jp/</a>エンジニアのためのJavadoc再入門講座-現場で使えるAPI仕様書の作り方-佐藤-竜一/dp/4798119482</p>
 <p>結局、一言でいうと、「制約を順序立てて記述する」ことを念頭に置くと、だいたい大丈夫です。</p>
@@ -918,7 +920,7 @@ etc&hellip;</li>
 </ul>
 <p>意外とわすれがちなのは、スレッドセーフかどうか、シリアライズ関連。
 特別な考慮事項があれば記述すること。</p>
-<h2 id="9-a-nameurlaurl">9. <!-- raw HTML omitted --><!-- raw HTML omitted -->参考URL</h2>
+<h2 id="9-a-nameurlaurl">9. <a name='URL'></a>参考URL</h2>
 <ul>
 <li><a href="https://techacademy.jp/magazine/19024">assertの使い方！Javaのアサーションを使う方法【初心者向け】</a></li>
 </ul>
