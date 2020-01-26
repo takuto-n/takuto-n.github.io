@@ -9,6 +9,69 @@
   </url>
   
   <url>
+    <loc>https://takuto-n.github.io/categories/</loc>
+    <lastmod>2020-01-25T00:49:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20191109-effective-java-3rd-10/</loc>
+    <lastmod>2020-01-25T00:49:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/effective-java-3rd/</loc>
+    <lastmod>2020-01-25T00:49:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/java/</loc>
+    <lastmod>2020-01-25T00:49:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2020-01-25T00:49:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2020-01-25T00:49:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2020-01-25T00:49:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/%E4%BE%8B%E5%A4%96/</loc>
+    <lastmod>2020-01-25T00:49:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/%E5%80%8B%E4%BA%BA%E7%9A%84%E3%83%A1%E3%83%A2/</loc>
+    <lastmod>2020-01-25T00:49:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://takuto-n.github.io/tags/aws/</loc>
     <lastmod>2019-12-24T23:36:29+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -17,13 +80,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/post/20191224-awscodeguru/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/categories/</loc>
     <lastmod>2019-12-24T23:36:29+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -44,27 +100,6 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/tags/%E9%9D%99%E7%9A%84%E8%A7%A3%E6%9E%90/</loc>
     <lastmod>2019-12-24T23:36:29+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -72,78 +107,43 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/post/20191109-effective-java-3rd-10/</loc>
-    <lastmod>2019-11-09T00:49:01+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/categories/effective-java-3rd/</loc>
-    <lastmod>2019-11-09T00:49:01+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/java/</loc>
-    <lastmod>2019-11-09T00:49:01+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/%E4%BE%8B%E5%A4%96/</loc>
-    <lastmod>2019-11-09T00:49:01+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/%E5%80%8B%E4%BA%BA%E7%9A%84%E3%83%A1%E3%83%A2/</loc>
-    <lastmod>2019-11-09T00:49:01+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</loc>
-    <lastmod>2019-11-09T00:48:59+09:00</lastmod>
+    <lastmod>2019-12-24T00:48:59+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://takuto-n.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E4%B8%80%E8%88%AC/</loc>
-    <lastmod>2019-11-09T00:48:59+09:00</lastmod>
+    <lastmod>2019-12-24T00:48:59+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://takuto-n.github.io/post/20191109-effective-java-3rd-8/</loc>
-    <lastmod>2019-11-09T00:48:57+09:00</lastmod>
+    <lastmod>2019-12-09T00:48:57+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://takuto-n.github.io/tags/%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89/</loc>
-    <lastmod>2019-11-09T00:48:57+09:00</lastmod>
+    <lastmod>2019-12-09T00:48:57+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://takuto-n.github.io/post/20191109-effective-java-3rd-7/</loc>
-    <lastmod>2019-11-09T00:37:53+09:00</lastmod>
+    <lastmod>2019-11-25T00:37:53+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://takuto-n.github.io/tags/%E3%83%A9%E3%83%A0%E3%83%80%E5%BC%8F%E3%81%A8%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0/</loc>
-    <lastmod>2019-11-09T00:37:53+09:00</lastmod>
+    <lastmod>2019-11-25T00:37:53+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
