@@ -31,6 +31,15 @@
     </item>
     
     <item>
+      <title>Effective Java 3rd [Chapter 10]</title>
+      <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-10/</link>
+      <pubDate>Sat, 09 Nov 2019 00:49:01 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-10/</guid>
+      <description>例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を</description>
+    </item>
+    
+    <item>
       <title>Effective Java 3rd [Chapter 9]</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</link>
       <pubDate>Sat, 09 Nov 2019 00:48:59 +0900</pubDate>
