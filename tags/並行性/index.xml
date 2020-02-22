@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>並行性 on Little by little and bit by bit - マイペースにこつこつと</title>
@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://github.com/takuto-n/ctrl-key-6bit-mask&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 09 Nov 2019 00:49:04 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 22 Feb 2020 00:49:04 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/tags/%E4%B8%A6%E8%A1%8C%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,10 +15,10 @@
     <item>
       <title>Effective Java 3rd [Chapter 11]</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-11/</link>
-      <pubDate>Sat, 09 Nov 2019 00:49:04 +0900</pubDate>
+      <pubDate>Sat, 22 Feb 2020 00:49:04 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-11/</guid>
-      <description>並行性 Effective Java 第3版の個人的メモ 項目78 共有された可変データへのアクセスを同期する 項目79 過剰な同期は避ける 項目80 スレッドよりもエグゼキュータ</description>
+      <description>並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス</description>
     </item>
     
   </channel>
