@@ -48,7 +48,7 @@
 <meta itemprop="description" content="並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス">
 <meta itemprop="datePublished" content="2020-02-22T00:49:04&#43;09:00" />
 <meta itemprop="dateModified" content="2020-02-22T00:49:04&#43;09:00" />
-<meta itemprop="wordCount" content="8190">
+<meta itemprop="wordCount" content="8182">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 8190 words </span>
+          <span class="more-meta"> 8182 words </span>
           <span class="more-meta"> 17 mins read </span>
         
       </div>
@@ -615,7 +615,7 @@
 <li>thisがロックオブジェクト</li>
 </ul>
 </li>
-<li>ロックオブジェクトの話を見ておくといい(倉元)
+<li>ロックオブジェクトの話を見ておくといい
 <ul>
 <li><a href="https://www.ne.jp/asahi/hishidama/home/tech/java/thread.html">Javaスレッドメモ(Hishidama's Java thread Memo)</a></li>
 </ul>
@@ -1131,7 +1131,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </div>
 </div><blockquote>
 <p>普段使用するのに対しては、非標準な技法だけれども、アーキテクチャによっては、フィールドへのアクセスが速くなります。<br>
-理由は、同期しないので別スレッドの処理を待たなくなるから？（則兼）</p>
+理由は、同期しないので別スレッドの処理を待たなくなるから？</p>
 </blockquote>
 <h4 id="622-a-namestaticastatic">6.2.2. <a name='static'></a>staticフィールドの遅延初期化</h4>
 <p><code>getField()</code>が初めて呼ばれた時に、初めて<code>FieldHolder.field</code>が読み出されて、初期化される。</p>
