@@ -48,7 +48,7 @@
 <meta itemprop="description" content="並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス">
 <meta itemprop="datePublished" content="2020-02-22T00:49:04&#43;09:00" />
 <meta itemprop="dateModified" content="2020-02-22T00:49:04&#43;09:00" />
-<meta itemprop="wordCount" content="8411">
+<meta itemprop="wordCount" content="9146">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 8411 words </span>
-          <span class="more-meta"> 17 mins read </span>
+          <span class="more-meta"> 9146 words </span>
+          <span class="more-meta"> 19 mins read </span>
         
       </div>
     </header>
@@ -1086,6 +1086,48 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
+</div><blockquote>
+<p>備考：lockオブジェクトを<code>private static final</code>にしていれば、複数のインスタンスで1つのlockオブジェクトとなり、JVM上で1つしか実行できないようにする等はできる。</p>
+</blockquote>
+<p>同期化する箇所を、局所化する際にロックオブジェクトを使う例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">DataAccessor</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;&gt;</span> <span class="n">item</span><span class="o">;</span>
+
+  <span class="n">get</span><span class="o">(){}</span>
+  <span class="n">remove</span><span class="o">(){}</span>
+
+  <span class="n">get</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;&gt;</span> <span class="n">itemClone</span><span class="o">;</span>
+    <span class="kd">synchronized</span><span class="o">(</span><span class="n">lock</span><span class="o">){</span>
+      <span class="n">item</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+      <span class="n">var</span> <span class="n">itemClone</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+      <span class="c1">// itemClone の加工
+</span><span class="c1"></span>    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">itemClone</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
 </div><ul>
 <li>条件付きスレッドセーフ</li>
 </ul>
@@ -1194,6 +1236,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 <p>備考：ローカル変数<code>result</code>は厳密には不要。<br>
 しかし、約25%のパフォーマンス改善のために使用している。2回目以降のアクセス時に、<code>field</code>値の読み込みが1回しか行われないよう保証している。</p>
 </blockquote>
+<p>「Java 5からダブルチェックイデオムが使えるようになった。Java 1.4まで機能しそうに見えて、機能しなかった。」ということを知っておきましょう。</p>
 <h5 id="単一チェックイデオム">単一チェックイデオム</h5>
 <ul>
 <li>何度も初期化する可能性がある場合に利用する。</li>
@@ -1213,7 +1256,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">volatile</span> <span class="n">FieldType</span> <span class="n">field</span><span class="o">;</span>
 
-<span class="kd">private</span> <span class="kd">synchronized</span> <span class="n">FieldType</span> <span class="nf">getField</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">private</span> <span class="n">FieldType</span> <span class="nf">getField</span><span class="o">()</span> <span class="o">{</span>
     <span class="n">FieldType</span> <span class="n">result</span> <span class="o">=</span> <span class="n">field</span><span class="o">;</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
         <span class="n">field</span> <span class="o">=</span> <span class="n">result</span> <span class="o">=</span> <span class="n">computeFieldValue</span><span class="o">();</span>
@@ -1223,31 +1266,42 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </div>
 </div><blockquote>
 <p>普段使用するのに対しては、非標準な技法だけれども、アーキテクチャによっては、フィールドへのアクセスが速くなります。<br>
-理由は、同期しないので別スレッドの処理を待たなくなるから？</p>
+理由は、同期しないので別スレッドの処理を待たなくなるから。</p>
 </blockquote>
 <h4 id="622-a-namestaticastaticフィールドの遅延初期化">6.2.2. <a name='static'></a>staticフィールドの遅延初期化</h4>
+<p>クラスが初めて見られたときに、初期化するというクラスローダの仕組みを利用している。</p>
 <p><code>getField()</code>が初めて呼ばれた時に、初めて<code>FieldHolder.field</code>が読み出されて、初期化される。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">FieldHolder</span> <span class="o">{</span>
-  <span class="kd">static</span> <span class="kd">final</span> <span class="n">FieldType</span> <span class="n">field</span> <span class="o">=</span> <span class="n">computeFieldValue</span><span class="o">();</span>
-<span class="o">}</span>
-<span class="kd">private</span> <span class="kd">static</span> <span class="n">FieldType</span> <span class="nf">getField</span><span class="o">()</span> <span class="o">{</span>
-  <span class="k">return</span> <span class="n">FieldHolder</span><span class="o">.</span><span class="na">field</span><span class="o">;</span>
-<span class="o">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleClass</span><span class="o">{</span>
 
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">FieldHolder</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="kd">final</span> <span class="n">FieldType</span> <span class="n">field</span> <span class="o">=</span> <span class="n">computeFieldValue</span><span class="o">();</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="n">FieldType</span> <span class="nf">getField</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">FieldHolder</span><span class="o">.</span><span class="na">field</span><span class="o">;</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="63-a-name-1aポイント">6.3. <a name='-1'></a>ポイント</h3>
+</div><blockquote>
+<p>Springを使っている場合は、アノテーション<code>@Lazy(true)</code>を使うことが多いでしょう。<br>
+テストのしやすさも、Javaだと<code>ClassLoader</code>を触らないとダメだが、Spring管理だとUTの範囲ではなくなる。SIとかに回せる。</p>
+</blockquote>
+<h3 id="63-a-name-1aポイント">6.3. <a name='-1'></a>ポイント</h3>
 <p>遅延初期化は普通は使わないけれど、利用するシーンとしては以下。</p>
 <ul>
 <li>パフォーマンス目標を達成するため。</li>
@@ -1281,6 +1335,18 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </ul>
 </li>
 </ul>
+<p>極端な話、もしスレッド数が1万スレッドになった場合、何が起きるんでしょうか？
+関連キーワード：<code>context switch</code>, <code>c10k問題</code></p>
+<blockquote>
+<ol>
+<li>1スレッド=1クライアント(1万スレッド=1万クライアント)</li>
+<li>1スレッドあたり2MB</li>
+<li>1万スレッド=20GB</li>
+<li>メモリが足りてもCPUが対応できなくなっていく。</li>
+<li>context switchが多くなる。（コンピュータの処理装置(CPU)が現在実行している処理の流れ(プロセス、スレッド)を一時停止し、別のものに切り替えて実行を再開すること。）</li>
+<li>スレッド数には限界値を設けましょう。</li>
+</ol>
+</blockquote>
 <h3 id="72-a-name-1aサンプル">7.2. <a name='-1'></a>サンプル</h3>
 <p>スレッドは<code>busy wait</code>を行うべきではない。<br>
 <code>busy wait</code>は、プロセッサへの負荷をかなり増大させて、他のスレッドができる処理の量を減らしてしまう可能性がある。</p>
@@ -1315,6 +1381,9 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">SlowCountDownLatch</span> <span class="o">{</span>
@@ -1327,6 +1396,9 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
     <span class="o">}</span>
 
     <span class="c1">// ここの実装がめっちゃbusy-wait
+</span><span class="c1"></span>    <span class="c1">// スピンロック（Spinlock）ともいう。
+</span><span class="c1"></span>    <span class="c1">// ソフトウェア工学におけるロックの一種で、
+</span><span class="c1"></span>    <span class="c1">// スレッドがロックを獲得できるまで単純にループ（スピン）して定期的にロックをチェックしながら待つ方式。
 </span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">await</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
             <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
