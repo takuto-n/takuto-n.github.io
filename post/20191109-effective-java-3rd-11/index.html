@@ -48,7 +48,7 @@
 <meta itemprop="description" content="並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス">
 <meta itemprop="datePublished" content="2020-02-22T00:49:04&#43;09:00" />
 <meta itemprop="dateModified" content="2020-02-22T00:49:04&#43;09:00" />
-<meta itemprop="wordCount" content="9146">
+<meta itemprop="wordCount" content="9161">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 9146 words </span>
+          <span class="more-meta"> 9161 words </span>
           <span class="more-meta"> 19 mins read </span>
         
       </div>
@@ -1339,12 +1339,12 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 関連キーワード：<code>context switch</code>, <code>c10k問題</code></p>
 <blockquote>
 <ol>
-<li>1スレッド=1クライアント(1万スレッド=1万クライアント)</li>
+<li>1スレッド=1クライアント(1万スレッド=1万クライアント)：c10k問題</li>
 <li>1スレッドあたり2MB</li>
 <li>1万スレッド=20GB</li>
-<li>メモリが足りてもCPUが対応できなくなっていく。</li>
+<li>もしメモリが足りてもCPUが対応できなくなっていく。</li>
 <li>context switchが多くなる。（コンピュータの処理装置(CPU)が現在実行している処理の流れ(プロセス、スレッド)を一時停止し、別のものに切り替えて実行を再開すること。）</li>
-<li>スレッド数には限界値を設けましょう。</li>
+<li>結論として、スレッド数には限界値を設けましょう。</li>
 </ol>
 </blockquote>
 <h3 id="72-a-name-1aサンプル">7.2. <a name='-1'></a>サンプル</h3>
