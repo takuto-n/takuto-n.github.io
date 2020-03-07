@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://github.com/takuto-n/ctrl-key-6bit-mask&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 22 Feb 2020 00:49:04 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 07 Mar 2020 00:49:15 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Effective Java 3rd [Chapter 12]</title>
+      <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-12/</link>
+      <pubDate>Sat, 07 Mar 2020 00:49:15 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-12/</guid>
+      <description>シリアライズ Effective Java 第 3 版の個人的メモ 項目 85 Java のシリアライズよりも代替手段を選ぶ 項目 86 Serializable を細心の注意を払って実装する 項目 87 カスタムシリアライズ形</description>
+    </item>
     
     <item>
       <title>Effective Java 3rd [Chapter 11]</title>
