@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.62.0 with theme even" />
+<meta name="generator" content="Hugo 0.66.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-6/" />
@@ -136,7 +136,7 @@
 
     
     <div class="post-content">
-      <h1 id="enum-">enum とアノテーション</h1>
+      <h1 id="enum-とアノテーション">enum とアノテーション</h1>
 <p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
 <!-- vscode-markdown-toc -->
 <ol>
@@ -154,8 +154,8 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-name34intenuma-34-int--enum-">1. <a name='34intenum'></a>項目 34 int 定数の代わりに enum を使う</h2>
-<h3 id="11-a-namea">1.1. <a name=''></a>結論</h3>
+<h2 id="1-a-name34intenuma項目-34-int-定数の代わりに-enum-を使う">1. <a name='34intenum'></a>項目 34 int 定数の代わりに enum を使う</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
 <ul>
 <li><code>int enum</code>パターン(<code>int</code>定数)は使わないでおきましょう。</li>
 <li><code>enum</code>を使いましょう。
@@ -166,7 +166,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="12-a-nameintenumaint-enum">1.2. <a name='intenum'></a><code>int enum</code>パターンの欠点</h3>
+<h3 id="12-a-nameintenumaint-enumパターンの欠点">1.2. <a name='intenum'></a><code>int enum</code>パターンの欠点</h3>
 <p>以下の欠点がある。</p>
 <ul>
 <li>型安全性が提供されない
@@ -207,7 +207,7 @@
 <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">ORANGE_BLOOD</span> <span class="o">=</span> <span class="n">2</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="13-a-nameenumaenum">1.3. <a name='enum'></a>単なる定数としての<code>enum</code></h3>
+</div><h3 id="13-a-nameenuma単なる定数としてのenum">1.3. <a name='enum'></a>単なる定数としての<code>enum</code></h3>
 <p>以下の利点がある。</p>
 <ul>
 <li>コンパイル時の型安全性が提供される</li>
@@ -231,8 +231,8 @@
 <span class="kd">public</span> <span class="kd">enum</span> <span class="n">ORANGE</span> <span class="o">{</span> <span class="n">NAVEL</span><span class="o">,</span> <span class="n">TEMPLE</span><span class="o">,</span> <span class="n">BLOOD</span> <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="14-a-nameenum-1aenum">1.4. <a name='enum-1'></a>定数固有メソッド実装を持つ<code>enum</code></h3>
-<h4 id="141-a-name-1a">1.4.1. <a name='-1'></a>問題が多い例</h4>
+</div><h3 id="14-a-nameenum-1a定数固有メソッド実装を持つenum">1.4. <a name='enum-1'></a>定数固有メソッド実装を持つ<code>enum</code></h3>
+<h4 id="141-a-name-1a問題が多い例">1.4.1. <a name='-1'></a>問題が多い例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -265,13 +265,13 @@
       <span class="k">case</span> <span class="n">TIMES</span><span class="o">:</span> <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">;</span>
       <span class="k">case</span> <span class="n">DIVIDE</span><span class="o">:</span> <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="o">(</span><span class="s">&#34;Unknown op: &#34;</span> <span class="o">+</span> <span class="k">this</span><span class="o">)</span><span class="o">;</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="o">(</span><span class="s">&#34;Unknown op: &#34;</span> <span class="o">+</span> <span class="k">this</span><span class="o">);</span>
   <span class="o">}</span>
 <span class="o">}</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="142-a-nameenum-1aenum">1.4.2. <a name='enum-1'></a>改善例(定数固有メソッド実装を持つ<code>enum</code>)</h4>
+</div><h4 id="142-a-nameenum-1a改善例定数固有メソッド実装を持つenum">1.4.2. <a name='enum-1'></a>改善例(定数固有メソッド実装を持つ<code>enum</code>)</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -287,20 +287,20 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 定数固有メソッド実装を持つenum型
 </span><span class="c1"></span><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Operation</span> <span class="o">{</span>
-  <span class="n">PLUS</span> <span class="o">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span><span class="o">}</span> <span class="o">}</span><span class="o">,</span>
-  <span class="n">MINUS</span> <span class="o">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">;</span><span class="o">}</span> <span class="o">}</span><span class="o">,</span>
-  <span class="n">TIMES</span> <span class="o">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">;</span><span class="o">}</span> <span class="o">}</span><span class="o">,</span>
-  <span class="n">DIVIDE</span> <span class="o">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">;</span><span class="o">}</span> <span class="o">}</span><span class="o">;</span>
+  <span class="n">PLUS</span> <span class="o">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;}</span> <span class="o">},</span>
+  <span class="n">MINUS</span> <span class="o">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">;}</span> <span class="o">},</span>
+  <span class="n">TIMES</span> <span class="o">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">;}</span> <span class="o">},</span>
+  <span class="n">DIVIDE</span> <span class="o">{</span><span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span><span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">;}</span> <span class="o">};</span>
 
-  <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span><span class="o">;</span>
+  <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>抽象メソッドを具象メソッドでオーバーライドし忘れることがない。</p>
 </blockquote>
-<h3 id="15-a-nameenum-1aenum">1.5. <a name='enum-1'></a>戦略<code>enum</code>パターン</h3>
-<h4 id="151-a-name-1a">1.5.1. <a name='-1'></a>問題が多い例</h4>
+<h3 id="15-a-nameenum-1a戦略enumパターン">1.5. <a name='enum-1'></a>戦略<code>enum</code>パターン</h3>
+<h4 id="151-a-name-1a問題が多い例">1.5.1. <a name='-1'></a>問題が多い例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -360,7 +360,7 @@
         <span class="k">break</span><span class="o">;</span>
       <span class="c1">// 定時以降分だけ残業代
 </span><span class="c1"></span>      <span class="k">default</span><span class="o">:</span>
-        <span class="n">overtimePay</span> <span class="o">=</span> <span class="n">hoursWorked</span> <span class="o">&lt;</span><span class="o">=</span> <span class="n">HOURS_PER_SHIFT</span> <span class="o">?</span>
+        <span class="n">overtimePay</span> <span class="o">=</span> <span class="n">hoursWorked</span> <span class="o">&lt;=</span> <span class="n">HOURS_PER_SHIFT</span> <span class="o">?</span>
         <span class="n">0</span> <span class="o">:</span> <span class="o">(</span><span class="n">hoursWorked</span> <span class="o">-</span> <span class="n">HOURS_PER_SHIFT</span> <span class="o">)</span> <span class="o">*</span> <span class="n">payRate</span> <span class="o">/</span> <span class="n">2</span><span class="o">;</span>
         <span class="k">break</span><span class="o">;</span>
     <span class="o">}</span>
@@ -371,7 +371,7 @@
 
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="152-a-nameenum-1aenum">1.5.2. <a name='enum-1'></a>改善例(戦略<code>enum</code>パターン)</h4>
+</div><h4 id="152-a-nameenum-1a改善例戦略enumパターン">1.5.2. <a name='enum-1'></a>改善例(戦略<code>enum</code>パターン)</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -426,14 +426,14 @@
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 戦略enumパターン
 </span><span class="c1"></span><span class="kd">enum</span> <span class="n">PayrollDay</span> <span class="o">{</span>
   <span class="c1">// 平日
-</span><span class="c1"></span>  <span class="n">MONDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKDAY</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">TUESDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKDAY</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">WEDNESDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKDAY</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">THURSDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKDAY</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">FRIDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKDAY</span><span class="o">)</span><span class="o">,</span>
+</span><span class="c1"></span>  <span class="n">MONDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKDAY</span><span class="o">),</span>
+  <span class="n">TUESDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKDAY</span><span class="o">),</span>
+  <span class="n">WEDNESDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKDAY</span><span class="o">),</span>
+  <span class="n">THURSDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKDAY</span><span class="o">),</span>
+  <span class="n">FRIDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKDAY</span><span class="o">),</span>
   <span class="c1">// 土日
-</span><span class="c1"></span>  <span class="n">SATURDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKEND</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">SUNDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKEND</span><span class="o">)</span><span class="o">;</span>
+</span><span class="c1"></span>  <span class="n">SATURDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKEND</span><span class="o">),</span>
+  <span class="n">SUNDAY</span><span class="o">(</span><span class="n">PayType</span><span class="o">.</span><span class="na">WEEKEND</span><span class="o">);</span>
 
   <span class="kd">private</span> <span class="kd">final</span> <span class="n">PayType</span> <span class="n">payType</span><span class="o">;</span>
 
@@ -442,7 +442,7 @@
   <span class="o">}</span>
 
   <span class="kt">double</span> <span class="nf">pay</span><span class="o">(</span><span class="kt">double</span> <span class="n">hoursWorked</span><span class="o">,</span> <span class="kt">double</span> <span class="n">payRate</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">payType</span><span class="o">.</span><span class="na">pay</span><span class="o">(</span><span class="n">hoursWorked</span><span class="o">,</span> <span class="n">payRate</span><span class="o">)</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">payType</span><span class="o">.</span><span class="na">pay</span><span class="o">(</span><span class="n">hoursWorked</span><span class="o">,</span> <span class="n">payRate</span><span class="o">);</span>
   <span class="o">}</span>
 
   <span class="c1">// 戦略enum型
@@ -450,23 +450,23 @@
     <span class="c1">// 定時以降分だけ残業代
 </span><span class="c1"></span>    <span class="n">WEEKDAY</span> <span class="o">{</span>
       <span class="kt">double</span> <span class="nf">overtimePay</span><span class="o">(</span><span class="kt">double</span> <span class="n">hours</span><span class="o">,</span> <span class="kt">double</span> <span class="n">payRate</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">hours</span> <span class="o">&lt;</span><span class="o">=</span> <span class="n">HOURS_PER_SHIFT</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">(</span><span class="n">hours</span> <span class="o">-</span> <span class="n">HOURS_PER_SHIFT</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">hours</span> <span class="o">&lt;=</span> <span class="n">HOURS_PER_SHIFT</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="o">(</span><span class="n">hours</span> <span class="o">-</span> <span class="n">HOURS_PER_SHIFT</span><span class="o">)</span>
             <span class="o">*</span> <span class="n">payRate</span> <span class="o">/</span> <span class="n">2</span><span class="o">;</span>
       <span class="o">}</span>
-    <span class="o">}</span><span class="o">,</span>
+    <span class="o">},</span>
     <span class="c1">// 働いた分だけ残業代
 </span><span class="c1"></span>    <span class="n">WEEKEND</span> <span class="o">{</span>
       <span class="kt">double</span> <span class="nf">overtimePay</span><span class="o">(</span><span class="kt">double</span> <span class="n">hours</span><span class="o">,</span> <span class="kt">double</span> <span class="n">payRate</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">hours</span> <span class="o">*</span> <span class="n">payRate</span> <span class="o">/</span> <span class="n">2</span><span class="o">;</span>
       <span class="o">}</span>
-    <span class="o">}</span><span class="o">;</span>
+    <span class="o">};</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">HOURS_PER_SHIFT</span> <span class="o">=</span> <span class="n">8</span><span class="o">;</span>
 
-    <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">overtimePay</span><span class="o">(</span><span class="kt">double</span> <span class="n">hrs</span><span class="o">,</span> <span class="kt">double</span> <span class="n">payRate</span><span class="o">)</span><span class="o">;</span>
+    <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">overtimePay</span><span class="o">(</span><span class="kt">double</span> <span class="n">hrs</span><span class="o">,</span> <span class="kt">double</span> <span class="n">payRate</span><span class="o">);</span>
 
     <span class="kt">double</span> <span class="nf">pay</span><span class="o">(</span><span class="kt">double</span> <span class="n">hoursWorked</span><span class="o">,</span> <span class="kt">double</span> <span class="n">payRate</span><span class="o">)</span> <span class="o">{</span>
       <span class="kt">double</span> <span class="n">basePay</span> <span class="o">=</span> <span class="n">hoursWorked</span> <span class="o">*</span> <span class="n">payRate</span><span class="o">;</span>
-      <span class="k">return</span> <span class="n">basePay</span> <span class="o">+</span> <span class="n">overtimePay</span><span class="o">(</span><span class="n">hoursWorked</span><span class="o">,</span> <span class="n">payRate</span><span class="o">)</span><span class="o">;</span>
+      <span class="k">return</span> <span class="n">basePay</span> <span class="o">+</span> <span class="n">overtimePay</span><span class="o">(</span><span class="n">hoursWorked</span><span class="o">,</span> <span class="n">payRate</span><span class="o">);</span>
     <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -475,10 +475,10 @@
 </div><blockquote>
 <p>enum 定数を追加するたびに、指定することになるため、指定し忘れることがない。</p>
 </blockquote>
-<h2 id="2-a-name35a-35-">2. <a name='35'></a>項目 35 序数の代わりにインスタンスフィールドを使う</h2>
-<h3 id="21-a-name-1a">2.1. <a name='-1'></a>結論</h3>
+<h2 id="2-a-name35a項目-35-序数の代わりにインスタンスフィールドを使う">2. <a name='35'></a>項目 35 序数の代わりにインスタンスフィールドを使う</h2>
+<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
 <p>タイトルのままですが、序数は使わずに、インスタンスフィールドを利用する。</p>
-<h4 id="211-a-name-1a">2.1.1. <a name='-1'></a>序数を使った例</h4>
+<h4 id="211-a-name-1a序数を使った例">2.1.1. <a name='-1'></a>序数を使った例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -511,8 +511,8 @@
   <span class="n">OCTET</span><span class="o">,</span>
   <span class="n">NONET</span><span class="o">,</span>
   <span class="n">DECTET</span><span class="o">;</span>
-  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">numberOfMusicians</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
-    <span class="k">return</span> <span class="n">ordinal</span><span class="o">(</span><span class="o">)</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">numberOfMusicians</span><span class="o">(){</span>
+    <span class="k">return</span> <span class="n">ordinal</span><span class="o">()</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
@@ -521,7 +521,7 @@
 <p>定数が並び替えられたら、正しく動作しなくなるため、良くない。<br>
 11 人は不要で、12 人が必要な場合はダミーが必要、、、</p>
 </blockquote>
-<h4 id="212-a-name-1a">2.1.2. <a name='-1'></a>インスタンスフィールドを使った例</h4>
+<h4 id="212-a-name-1aインスタンスフィールドを使った例">2.1.2. <a name='-1'></a>インスタンスフィールドを使った例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -548,23 +548,23 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Ensemble</span> <span class="o">{</span>
-  <span class="n">SOLO</span><span class="o">(</span><span class="n">1</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">DUET</span><span class="o">(</span><span class="n">2</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">TRIO</span><span class="o">(</span><span class="n">3</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">OUARTET</span><span class="o">(</span><span class="n">4</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">QUINTET</span><span class="o">(</span><span class="n">5</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">SEXTET</span><span class="o">(</span><span class="n">6</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">SEPTET</span><span class="o">(</span><span class="n">7</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">OCTET</span><span class="o">(</span><span class="n">8</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">NONET</span><span class="o">(</span><span class="n">9</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">DECTET</span><span class="o">(</span><span class="n">10</span><span class="o">)</span><span class="o">,</span>
-  <span class="n">TRIPLE_OUARTET</span><span class="o">(</span><span class="n">12</span><span class="o">)</span><span class="o">;</span>
+  <span class="n">SOLO</span><span class="o">(</span><span class="n">1</span><span class="o">),</span>
+  <span class="n">DUET</span><span class="o">(</span><span class="n">2</span><span class="o">),</span>
+  <span class="n">TRIO</span><span class="o">(</span><span class="n">3</span><span class="o">),</span>
+  <span class="n">OUARTET</span><span class="o">(</span><span class="n">4</span><span class="o">),</span>
+  <span class="n">QUINTET</span><span class="o">(</span><span class="n">5</span><span class="o">),</span>
+  <span class="n">SEXTET</span><span class="o">(</span><span class="n">6</span><span class="o">),</span>
+  <span class="n">SEPTET</span><span class="o">(</span><span class="n">7</span><span class="o">),</span>
+  <span class="n">OCTET</span><span class="o">(</span><span class="n">8</span><span class="o">),</span>
+  <span class="n">NONET</span><span class="o">(</span><span class="n">9</span><span class="o">),</span>
+  <span class="n">DECTET</span><span class="o">(</span><span class="n">10</span><span class="o">),</span>
+  <span class="n">TRIPLE_OUARTET</span><span class="o">(</span><span class="n">12</span><span class="o">);</span>
 
   <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">numberOfMusicians</span><span class="o">;</span>
-  <span class="n">Ensemble</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">)</span><span class="o">{</span>
+  <span class="n">Ensemble</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">){</span>
     <span class="k">this</span><span class="o">.</span><span class="na">numberOfMusicians</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span>
   <span class="o">}</span>
-  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">numberOfMusicians</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">numberOfMusicians</span><span class="o">(){</span>
     <span class="k">return</span> <span class="n">numberOfMusicians</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -575,12 +575,12 @@
 <a href="https://docs.oracle.com/javase/jp/7/api/java/lang/Enum.html#ordinal()">Enum#ordinal()の JavaDoc</a>に以下のように記載されています。<br>
 このメソッドは、ほとんどのプログラマにとって役に立ちません。それは、EnumSet や EnumMap などの洗練された enum ベースのデータ構造で使用するために設計されています。</p>
 </blockquote>
-<h2 id="3-a-name36enumseta-36--enumset-">3. <a name='36EnumSet'></a>項目 36 ビットフィールドの代わりに EnumSet を使う</h2>
-<h3 id="31-a-name-1a">3.1. <a name='-1'></a>結論</h3>
+<h2 id="3-a-name36enumseta項目-36-ビットフィールドの代わりに-enumset-を使う">3. <a name='36EnumSet'></a>項目 36 ビットフィールドの代わりに EnumSet を使う</h2>
+<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>集合として enum 型を使いたいときは、EnumSet を使用するべき</li>
 </ul>
-<h3 id="32-a-name-1a">3.2. <a name='-1'></a>ビットフィールド列挙定数</h3>
+<h3 id="32-a-name-1aビットフィールド列挙定数">3.2. <a name='-1'></a>ビットフィールド列挙定数</h3>
 <ul>
 <li>下のようにビットフィールド定数を列挙して、集合を表現する方法</li>
 </ul>
@@ -598,14 +598,14 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Text</span><span class="o">{</span>
-   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_BOLD</span>          <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">0</span><span class="o">;</span> <span class="c1">// 1
-</span><span class="c1"></span>   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_ITALIC</span>        <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">1</span><span class="o">;</span> <span class="c1">// 2
-</span><span class="c1"></span>   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_UNDERLINE</span>     <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">2</span><span class="o">;</span> <span class="c1">// 4
-</span><span class="c1"></span>   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_STRIKETHROUGH</span> <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">3</span><span class="o">;</span> <span class="c1">// 8
-</span><span class="c1"></span>   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">applyStyles</span><span class="o">(</span><span class="kt">int</span> <span class="n">styles</span><span class="o">)</span> <span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_BOLD</span>          <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">0</span><span class="o">;</span> <span class="c1">// 1
+</span><span class="c1"></span>   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_ITALIC</span>        <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">1</span><span class="o">;</span> <span class="c1">// 2
+</span><span class="c1"></span>   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_UNDERLINE</span>     <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">2</span><span class="o">;</span> <span class="c1">// 4
+</span><span class="c1"></span>   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">STYLE_STRIKETHROUGH</span> <span class="o">=</span> <span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="n">3</span><span class="o">;</span> <span class="c1">// 8
+</span><span class="c1"></span>   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">applyStyles</span><span class="o">(</span><span class="kt">int</span> <span class="n">styles</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="n">text</span><span class="o">.</span><span class="na">applyStyles</span><span class="o">(</span><span class="n">STYLE_BOLD</span> <span class="o">|</span> <span class="n">STYLE_ITALIC</span><span class="o">)</span><span class="o">;</span>
+<span class="n">text</span><span class="o">.</span><span class="na">applyStyles</span><span class="o">(</span><span class="n">STYLE_BOLD</span> <span class="o">|</span> <span class="n">STYLE_ITALIC</span><span class="o">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -638,10 +638,10 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Text</span> <span class="o">{</span>
    <span class="kd">public</span> <span class="kd">enum</span> <span class="n">Style</span> <span class="o">{</span> <span class="n">BOLD</span><span class="o">,</span> <span class="n">ITALIC</span><span class="o">,</span> <span class="n">UNDERLINE</span><span class="o">,</span> <span class="n">STRIKETHROUGH</span> <span class="o">}</span>
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">applyStyles</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Style</span><span class="o">&gt;</span> <span class="n">styles</span><span class="o">)</span><span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">applyStyles</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Style</span><span class="o">&gt;</span> <span class="n">styles</span><span class="o">){</span> <span class="o">...</span> <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="n">text</span><span class="o">.</span><span class="na">applyStyles</span><span class="o">(</span><span class="n">EnumSet</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">Style</span><span class="o">.</span><span class="na">BOLD</span><span class="o">,</span> <span class="n">Style</span><span class="o">.</span><span class="na">ITALIC</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+<span class="n">text</span><span class="o">.</span><span class="na">applyStyles</span><span class="o">(</span><span class="n">EnumSet</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">Style</span><span class="o">.</span><span class="na">BOLD</span><span class="o">,</span> <span class="n">Style</span><span class="o">.</span><span class="na">ITALIC</span><span class="o">));</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -656,12 +656,12 @@
 </ul>
 </li>
 </ul>
-<h2 id="4-a-name37enummapa-37--enummap-">4. <a name='37EnumMap'></a>項目 37 序数インデックスの代わりに EnumMap を使う</h2>
-<h3 id="41-a-name-1a">4.1. <a name='-1'></a>結論</h3>
+<h2 id="4-a-name37enummapa項目-37-序数インデックスの代わりに-enummap-を使う">4. <a name='37EnumMap'></a>項目 37 序数インデックスの代わりに EnumMap を使う</h2>
+<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>enum の列挙子ごとにデータを持ちたい場合は、EnumMap を使うべき</li>
 </ul>
-<h3 id="42-a-name-1a">4.2. <a name='-1'></a>序数インデックス</h3>
+<h3 id="42-a-name-1a序数インデックス">4.2. <a name='-1'></a>序数インデックス</h3>
 <ul>
 <li>ハーブの種類ごとに、ハーブをまとめたいとする。</li>
 <li>序数インデックス(<code>ordinal()</code>)を用いると下のようになる。</li>
@@ -702,7 +702,7 @@
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">(){</span>
         <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -727,18 +727,18 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 庭園にあるハーブを表す配列
-</span><span class="c1"></span><span class="n">Herb</span><span class="o">[</span><span class="o">]</span> <span class="n">garden</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Herb</span><span class="o">[</span><span class="o">]</span> <span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span><span class="o">;</span>
+</span><span class="c1"></span><span class="n">Herb</span><span class="o">[]</span> <span class="n">garden</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Herb</span><span class="o">[]</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
 
 <span class="c1">// ハーブの種類ごとにSetを用意
-</span><span class="c1"></span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;</span><span class="o">[</span><span class="o">]</span> <span class="n">herbsByType</span> <span class="o">=</span>
-       <span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;</span><span class="o">[</span><span class="o">]</span><span class="o">)</span> <span class="k">new</span> <span class="n">Set</span><span class="o">[</span><span class="n">Herb</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">values</span><span class="o">(</span><span class="o">)</span><span class="o">.</span><span class="na">length</span><span class="o">]</span><span class="o">;</span> <span class="c1">// 無検査キャスト
-</span><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">herbsByType</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">+</span><span class="o">+</span><span class="o">)</span> <span class="o">{</span>
-   <span class="n">herbsByType</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+</span><span class="c1"></span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;[]</span> <span class="n">herbsByType</span> <span class="o">=</span>
+       <span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;[])</span> <span class="k">new</span> <span class="n">Set</span><span class="o">[</span><span class="n">Herb</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">];</span> <span class="c1">// 無検査キャスト
+</span><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">herbsByType</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+   <span class="n">herbsByType</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;();</span>
 <span class="o">}</span>
 
 <span class="c1">// ハーブを種類ごとに分類
 </span><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="n">Herb</span> <span class="n">herb</span><span class="o">:</span> <span class="n">garden</span><span class="o">)</span> <span class="o">{</span>
-   <span class="n">herbsByType</span><span class="o">[</span><span class="n">herb</span><span class="o">.</span><span class="na">type</span><span class="o">.</span><span class="na">ordinal</span><span class="o">(</span><span class="o">)</span><span class="o">]</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">herb</span><span class="o">)</span><span class="o">;</span>
+   <span class="n">herbsByType</span><span class="o">[</span><span class="n">herb</span><span class="o">.</span><span class="na">type</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()].</span><span class="na">add</span><span class="o">(</span><span class="n">herb</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -774,18 +774,18 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// ハーブの種類ごとに Set を用意
-</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">.</span><span class="na">Type</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EnumMap</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="n">Herb</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">class</span><span class="o">)</span><span class="o">;</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">Herb</span><span class="o">.</span><span class="na">Type</span> <span class="n">type</span><span class="o">:</span> <span class="n">Herb</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">values</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">{</span>
-    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">type</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+</span><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">.</span><span class="na">Type</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EnumMap</span><span class="o">&lt;&gt;(</span><span class="n">Herb</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Herb</span><span class="o">.</span><span class="na">Type</span> <span class="n">type</span><span class="o">:</span> <span class="n">Herb</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">values</span><span class="o">()){</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">type</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Herb</span><span class="o">&gt;());</span>
 <span class="o">}</span>
 
 <span class="c1">// ハーブを種類ごとに分類
 </span><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="n">Herb</span> <span class="n">herb</span><span class="o">:</span> <span class="n">garden</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">herb</span><span class="o">.</span><span class="na">type</span><span class="o">)</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">herb</span><span class="o">)</span><span class="o">;</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">herb</span><span class="o">.</span><span class="na">type</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">herb</span><span class="o">);</span>
 <span class="o">}</span>
 
-<span class="k">for</span> <span class="o">(</span><span class="n">Herb</span><span class="o">.</span><span class="na">Type</span> <span class="n">type</span><span class="o">:</span> <span class="n">Herb</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">values</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">type</span><span class="o">+</span><span class="s">&#34; &#34;</span><span class="o">+</span><span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">type</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">Herb</span><span class="o">.</span><span class="na">Type</span> <span class="n">type</span><span class="o">:</span> <span class="n">Herb</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">values</span><span class="o">()){</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">type</span><span class="o">+</span><span class="s">&#34; &#34;</span><span class="o">+</span><span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">type</span><span class="o">));</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -797,11 +797,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="5-a-name38enuma-38--enum-">5. <a name='38enum'></a>項目 38 拡張可能な enum をインタフェースで模倣する</h2>
-<h3 id="51-a-name-1a">5.1. <a name='-1'></a>結論</h3>
+<h2 id="5-a-name38enuma項目-38-拡張可能な-enum-をインタフェースで模倣する">5. <a name='38enum'></a>項目 38 拡張可能な enum をインタフェースで模倣する</h2>
+<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
 <p>Enumは拡張できないけれど拡張性をもたせたい場合がある。
 そのような場合は、インタフェースで型を定義し、Enumでスタンダードな実装を提供すれば良い。このときのEnumを擬似拡張Enumと呼ぶ</p>
-<h3 id="52-a-nameenumaenum">5.2. <a name='Enum'></a>疑似拡張Enumの例</h3>
+<h3 id="52-a-nameenuma疑似拡張enumの例">5.2. <a name='Enum'></a>疑似拡張Enumの例</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -846,7 +846,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">interface</span> <span class="nc">Operation</span> <span class="o">{</span>
-    <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">);</span>
 <span class="o">}</span>
 
 <span class="kd">public</span> <span class="kd">enum</span> <span class="n">BasicOperation</span> <span class="kd">implements</span> <span class="n">Operation</span> <span class="o">{</span>
@@ -854,12 +854,12 @@
         <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
         <span class="o">}</span>
-    <span class="o">}</span><span class="o">,</span>
+    <span class="o">},</span>
     <span class="n">MINUS</span><span class="o">(</span><span class="s">&#34;-&#34;</span><span class="o">)</span> <span class="o">{</span>
         <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">;</span>
         <span class="o">}</span>
-    <span class="o">}</span><span class="o">;</span>
+    <span class="o">};</span>
 
     <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">symbol</span><span class="o">;</span>
     <span class="n">BasicOperation</span><span class="o">(</span><span class="n">String</span> <span class="n">symbol</span><span class="o">)</span> <span class="o">{</span>
@@ -870,14 +870,14 @@
 <span class="kd">public</span> <span class="kd">enum</span> <span class="n">ExtendedOperation</span> <span class="kd">implements</span> <span class="n">Operation</span> <span class="o">{</span>
     <span class="n">EXP</span><span class="o">(</span><span class="s">&#34;^&#34;</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span><span class="o">;</span>
+            <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
         <span class="o">}</span>
-    <span class="o">}</span><span class="o">,</span>
+    <span class="o">},</span>
     <span class="n">REMAINDER</span><span class="o">(</span><span class="s">&#34;%&#34;</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">double</span> <span class="nf">apply</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">double</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">x</span>  <span class="o">%</span> <span class="n">y</span><span class="o">;</span>
         <span class="o">}</span>
-    <span class="o">}</span><span class="o">;</span>
+    <span class="o">};</span>
 
     <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">symbol</span><span class="o">;</span>
     <span class="n">ExtendedOperation</span><span class="o">(</span><span class="n">String</span> <span class="n">symbol</span><span class="o">)</span> <span class="o">{</span>
@@ -886,7 +886,7 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="521-a-name-1a">5.2.1. <a name='-1'></a>注意点</h4>
+</div><h4 id="521-a-name-1a注意点">5.2.1. <a name='-1'></a>注意点</h4>
 <p>Enumであるため、実装の継承を使えない。コードの重複を排除する際は、ヘルパーに切り出す等で対応する。</p>
 <p>引数はインタフェース or Enumのどちらを選択するか</p>
 <ul>
@@ -908,8 +908,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Enum</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">Operation</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">getAllConstants</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">opSet</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Operation</span> <span class="n">op</span> <span class="o">:</span> <span class="n">opSet</span><span class="o">.</span><span class="na">getEnumConstants</span><span class="o">(</span><span class="o">)</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&#34;Operation: %s%n&#34;</span><span class="o">,</span> <span class="n">op</span><span class="o">)</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Operation</span> <span class="n">op</span> <span class="o">:</span> <span class="n">opSet</span><span class="o">.</span><span class="na">getEnumConstants</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&#34;Operation: %s%n&#34;</span><span class="o">,</span> <span class="n">op</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
@@ -922,8 +922,8 @@
 <li>Operation を継承していること</li>
 </ul>
 <p>この制約によって、Operation を実装し、Enum であることが保障される。</p>
-<h2 id="6-a-name39a-39-">6. <a name='39'></a>項目 39 命名パターンよりアノテーションを選ぶ</h2>
-<h3 id="61-a-name-1a">6.1. <a name='-1'></a>結論</h3>
+<h2 id="6-a-name39a項目-39-命名パターンよりアノテーションを選ぶ">6. <a name='39'></a>項目 39 命名パターンよりアノテーションを選ぶ</h2>
+<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>過去、メソッド名にルールをつけることを強制するツールやフレームワークがあった。</li>
 <li>現在は、アノテーションによって実現されていることがほとんど。
@@ -932,7 +932,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="611-a-name-1a">6.1.1. <a name='-1'></a>命名パターンとはなにか</h4>
+<h4 id="611-a-name-1a命名パターンとはなにか">6.1.1. <a name='-1'></a>命名パターンとはなにか</h4>
 <p>JUnit 3.x では、 テストメソッドは test から始める必要があった(JUnit4以降、アノテーションで指定するようになった)。</p>
 <p>一言でいうと、命名パターンはミスしやすく、後から確認しにくい、という致命的なデメリットがある。
 細かく言うと以下があがる。</p>
@@ -942,7 +942,7 @@
 <li>利用箇所を限定できない</li>
 <li>アノテーションによる指定の例</li>
 </ul>
-<h4 id="612-a-namejunit5testajunit5-test-">6.1.2. <a name='JUnit5Test'></a>JUnit5の @Test の実装。</h4>
+<h4 id="612-a-namejunit5testajunit5の-test-の実装">6.1.2. <a name='JUnit5Test'></a>JUnit5の @Test の実装。</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -954,7 +954,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Target</span><span class="o">(</span><span class="o">{</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">ANNOTATION_TYPE</span><span class="o">,</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span> <span class="o">}</span><span class="o">)</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Target</span><span class="o">({</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">ANNOTATION_TYPE</span><span class="o">,</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span> <span class="o">})</span>
 <span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
 <span class="nd">@Documented</span>
 <span class="nd">@API</span><span class="o">(</span><span class="n">status</span> <span class="o">=</span> <span class="n">STABLE</span><span class="o">,</span> <span class="n">since</span> <span class="o">=</span> <span class="s">&#34;5.0&#34;</span><span class="o">)</span>
@@ -963,7 +963,7 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="613-a-name-1a">6.1.3. <a name='-1'></a>使うときの例</h4>
+</div><h4 id="613-a-name-1a使うときの例">6.1.3. <a name='-1'></a>使うときの例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -976,13 +976,13 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">SampleTest</span> <span class="o">{</span>
     <span class="nd">@Test</span>
-    <span class="kt">void</span> <span class="nf">plus</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">assertThat</span><span class="o">(</span><span class="n">1</span><span class="o">+</span><span class="n">2</span><span class="o">)</span><span class="o">.</span><span class="na">isEqualTo</span><span class="o">(</span><span class="n">3</span><span class="o">)</span><span class="o">;</span>
+    <span class="kt">void</span> <span class="nf">plus</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">1</span><span class="o">+</span><span class="n">2</span><span class="o">).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="n">3</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="62-a-name-1a">6.2. <a name='-1'></a>値アノテーション</h3>
+</div><h3 id="62-a-name-1a値アノテーション">6.2. <a name='-1'></a>値アノテーション</h3>
 <p>アノテーション宣言時に値を付与することで、より柔軟な宣言が実現できる。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -996,22 +996,22 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JUnit4の場合
 </span><span class="c1"></span><span class="nd">@Test</span><span class="o">(</span><span class="n">expected</span> <span class="o">=</span> <span class="n">IllegalArgumentException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">exception1</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Example1</span> <span class="n">target</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Example1</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-    <span class="n">target</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">exception1</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">Example1</span> <span class="n">target</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Example1</span><span class="o">();</span>
+    <span class="n">target</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="7-a-name40overridea-40--override-">7. <a name='40Override'></a>項目 40 常に Override アノテーションを使う</h2>
-<h3 id="71-a-name-1a">7.1. <a name='-1'></a>結論</h3>
+</div><h2 id="7-a-name40overridea項目-40-常に-override-アノテーションを使う">7. <a name='40Override'></a>項目 40 常に Override アノテーションを使う</h2>
+<h3 id="71-a-name-1a結論">7.1. <a name='-1'></a>結論</h3>
 <p>親クラスのメソッドをオーバーライドするときは、 必ず @Override をつける。例外はなし。</p>
-<h3 id="72-a-name-1a">7.2. <a name='-1'></a>用途</h3>
+<h3 id="72-a-name-1a用途">7.2. <a name='-1'></a>用途</h3>
 <ul>
 <li><code>@Override</code> アノテーションが付けられているのに、実際にはオーバーライドしていない場合にはコンパイルエラーとなる</li>
 <li>オーバーライドするつもりがないのに意図せずオーバーライドしてしまう場合には IDE が警告を出してくれる(ことがある)</li>
 </ul>
-<h2 id="8-a-name41a-41-">8. <a name='41'></a>項目 41 型を定義するためにマーカーインタフェースを使う</h2>
-<h3 id="81-a-name-1a">8.1. <a name='-1'></a>結論</h3>
+<h2 id="8-a-name41a項目-41-型を定義するためにマーカーインタフェースを使う">8. <a name='41'></a>項目 41 型を定義するためにマーカーインタフェースを使う</h2>
+<h3 id="81-a-name-1a結論">8.1. <a name='-1'></a>結論</h3>
 <p>マーカーインタフェース、マーカーアノテーションのどちらをつかえばいいか</p>
 <ul>
 <li>型を縛る＝マーカーインタフェース</li>
@@ -1019,7 +1019,7 @@
 </ul>
 <p>Effective Java では、マーカーインタフェースが使える場合はそちらを使うべき とある。</p>
 <p>一般的な Java フレームワークでは、アノテーションベースが主流。</p>
-<h3 id="82-a-namexxxaxxx">8.2. <a name='XXX'></a>マーカXXXとは</h3>
+<h3 id="82-a-namexxxaマーカxxxとは">8.2. <a name='XXX'></a>マーカXXXとは</h3>
 <ul>
 <li>マーカーインタフェース
 <ul>
@@ -1036,7 +1036,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="83-a-name-1a-">8.3. <a name='-1'></a>マーカーインタフェース の利点/欠点</h3>
+<h3 id="83-a-name-1aマーカーインタフェース-の利点欠点">8.3. <a name='-1'></a>マーカーインタフェース の利点/欠点</h3>
 <ul>
 <li>利点:: マーカーインタフェースは型なので、コンパイル時にチェックできる。
 <ul>

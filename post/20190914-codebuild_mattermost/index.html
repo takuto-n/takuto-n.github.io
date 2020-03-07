@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.62.0 with theme even" />
+<meta name="generator" content="Hugo 0.66.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190914-codebuild_mattermost/" />
@@ -48,7 +48,7 @@
 <meta itemprop="description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi">
 <meta itemprop="datePublished" content="2019-09-14T12:09:20&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-14T12:09:20&#43;09:00" />
-<meta itemprop="wordCount" content="975">
+<meta itemprop="wordCount" content="979">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/cicd/"> cicd </a>
             </div>
-          <span class="more-meta"> 975 words </span>
+          <span class="more-meta"> 979 words </span>
           <span class="more-meta"> 2 mins read </span>
         
       </div>
@@ -255,25 +255,25 @@ curl -X POST --data-urlencode <span class="s1">&#39;payload={&#34;channel&#34;: 
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">version<span class="p">:</span><span class="w"> </span><span class="m">0.2</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="m">0.2</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span>phases<span class="p">:</span><span class="w">
-</span><span class="w">  </span>install<span class="p">:</span><span class="w">
-</span><span class="w">    </span>runtime-versions<span class="p">:</span><span class="w">
-</span><span class="w">      </span>java<span class="p">:</span><span class="w"> </span>corretto11<span class="w">
+</span><span class="w"></span><span class="k">phases</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">install</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">runtime-versions</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">java</span><span class="p">:</span><span class="w"> </span>corretto11<span class="w">
 </span><span class="w">
-</span><span class="w">  </span>pre_build<span class="p">:</span><span class="w">
-</span><span class="w">    </span>commands<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>./gradlew<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>./codebuild-to-mattermost.sh<span class="w">
+</span><span class="w">  </span><span class="k">pre_build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- chmod<span class="w"> </span>+x<span class="w"> </span>./gradlew<span class="w">
+</span><span class="w">      </span>- chmod<span class="w"> </span>+x<span class="w"> </span>./codebuild-to-mattermost.sh<span class="w">
 </span><span class="w">
-</span><span class="w">  </span>build<span class="p">:</span><span class="w">
-</span><span class="w">    </span>commands<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>./gradlew<span class="w"> </span>clean<span class="w"> </span>build<span class="w"> </span><span class="cp">&amp;&gt;</span><span class="w"> </span>build-message.txt<span class="w">
+</span><span class="w">  </span><span class="k">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- ./gradlew<span class="w"> </span>clean<span class="w"> </span>build<span class="w"> </span><span class="cp">&amp;&gt;</span><span class="w"> </span>build-message.txt<span class="w">
 </span><span class="w">
-</span><span class="w">  </span>post_build<span class="p">:</span><span class="w">
-</span><span class="w">    </span>commands<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>./codebuild-to-mattermost.sh<span class="w"> </span>build-message.txt<span class="w"> </span>${MattermostWebhookURL}<span class="w">
+</span><span class="w">  </span><span class="k">post_build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- ./codebuild-to-mattermost.sh<span class="w"> </span>build-message.txt<span class="w"> </span>${MattermostWebhookURL}<span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p><em>Mattermost への通知 Sample</em></p>

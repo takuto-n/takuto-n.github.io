@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.62.0 with theme even" />
+<meta name="generator" content="Hugo 0.66.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190909-sonarcloud_codebuild/" />
@@ -48,7 +48,7 @@
 <meta itemprop="description" content="AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 SonarCloudAccessToken に SonarCloud のアクセストークンを保持しておきます">
 <meta itemprop="datePublished" content="2019-09-09T02:37:45&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-09T02:37:45&#43;09:00" />
-<meta itemprop="wordCount" content="391">
+<meta itemprop="wordCount" content="393">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/cicd/"> cicd </a>
             </div>
-          <span class="more-meta"> 391 words </span>
+          <span class="more-meta"> 393 words </span>
           <span class="more-meta"> 1 min read </span>
         
       </div>
@@ -190,7 +190,7 @@
       <span class="n">maven</span> <span class="o">{</span>
         <span class="n">url</span> <span class="s2">&#34;https://plugins.gradle.org/m2/&#34;</span>
       <span class="o">}</span>
-      <span class="n">mavenLocal</span><span class="o">(</span><span class="o">)</span>
+      <span class="n">mavenLocal</span><span class="o">()</span>
     <span class="o">}</span>
     <span class="n">dependencies</span> <span class="o">{</span>
       <span class="n">classpath</span> <span class="s2">&#34;org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5&#34;</span>
@@ -211,7 +211,7 @@
         <span class="n">property</span> <span class="s2">&#34;sonar.login&#34;</span><span class="o">,</span> <span class="n">SonarCloudAccessToken</span>
         <span class="n">property</span> <span class="s2">&#34;sonar.host.url&#34;</span><span class="o">,</span> <span class="s2">&#34;https://sonarcloud.io/&#34;</span>
         <span class="n">property</span> <span class="s2">&#34;sonar.projectKey&#34;</span><span class="o">,</span> <span class="o">[</span><span class="n">SonarCloudで解析する対象のプロジェクトキー</span><span class="o">]</span>
-        <span class="n">property</span> <span class="s2">&#34;sonar.organization&#34;</span><span class="o">,</span> <span class="o">[</span><span class="o">&lt;</span><span class="err">あ</span><span class="err">な</span><span class="err">た</span><span class="err">の</span><span class="n">organization</span><span class="o">&gt;</span><span class="o">]</span>
+        <span class="n">property</span> <span class="s2">&#34;sonar.organization&#34;</span><span class="o">,</span> <span class="o">[&lt;</span><span class="err">あなたの</span><span class="n">organization</span><span class="o">&gt;]</span>
         <span class="n">property</span> <span class="s2">&#34;sonar.jacoco.reportPaths&#34;</span><span class="o">,</span> <span class="s2">&#34;target/jacoco/test.exec&#34;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -232,16 +232,16 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">version<span class="p">:</span><span class="w"> </span><span class="m">0.2</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="m">0.2</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span>phases<span class="p">:</span><span class="w">
-</span><span class="w">  </span>install<span class="p">:</span><span class="w">
-</span><span class="w">    </span>runtime-versions<span class="p">:</span><span class="w">
-</span><span class="w">      </span>java<span class="p">:</span><span class="w"> </span>corretto11<span class="w">
-</span><span class="w">  </span>build<span class="p">:</span><span class="w">
-</span><span class="w">    </span>commands<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>./gradlew<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>./gradlew<span class="w"> </span>build<span class="w"> </span>sonarqube<span class="w"> </span>-PSonarCloudAccessToken=${SonarCloudAccessToken}<span class="w">
+</span><span class="w"></span><span class="k">phases</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">install</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">runtime-versions</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">java</span><span class="p">:</span><span class="w"> </span>corretto11<span class="w">
+</span><span class="w">  </span><span class="k">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- chmod<span class="w"> </span>+x<span class="w"> </span>./gradlew<span class="w">
+</span><span class="w">      </span>- ./gradlew<span class="w"> </span>build<span class="w"> </span>sonarqube<span class="w"> </span>-PSonarCloudAccessToken=${SonarCloudAccessToken}<span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div>

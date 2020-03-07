@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.62.0 with theme even" />
+<meta name="generator" content="Hugo 0.66.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190316-cors-basic_auth/" />
@@ -156,12 +156,12 @@
 </ul>
 <!-- /TOC -->
 <p><a id="markdown-basic認証について" name="basic認証について"></a></p>
-<h2 id="basic-">BASIC 認証について</h2>
+<h2 id="basic-認証について">BASIC 認証について</h2>
 <p>まず BASIC 認証とは、HTTP で定義される認証方式の一つです。</p>
 <p>認証の仕方としてはブラウザ側で「ユーザ名:パスワード」を Base64 でエンコードして、サーバー側へ送信します。</p>
 <p>サーバー側では受信した Base64 のデータをデコードし、ユーザー名とパスワードを取得して、認証を行う処理方式のことを指します。</p>
 <p><a id="markdown-クロスドメイン制約について" name="クロスドメイン制約について"></a></p>
-<h2 id="heading">クロスドメイン制約について</h2>
+<h2 id="クロスドメイン制約について">クロスドメイン制約について</h2>
 <p>2 つ目にクロスドメイン制約とは、「<strong>ブラウザ上で実行される JavaScript は同じドメインにしかリクエストの送信やクッキーの編集を行えない</strong>」という制限のことです。</p>
 <p>この制限がある理由は、<strong>あるサイトから悪意のあるサイトに勝手にアクセスできないようにするため</strong>です。
 もし、あるサイトから異なるドメインのサイトへアクセスしたい場合は、次の２つの方法があります。</p>
@@ -176,7 +176,7 @@
 <p>方法 2 の JSONP は、ここでは詳しく説明しませんが、JSONP インジェクションという攻撃を受ける可能性があるため、方法 1 を採用します。</p>
 </blockquote>
 <p><a id="markdown-corscross-origin-resource-sharingについて" name="corscross-origin-resource-sharingについて"></a></p>
-<h2 id="corscross-origin-resource-sharing">CORS(Cross Origin Resource Sharing)について</h2>
+<h2 id="corscross-origin-resource-sharingについて">CORS(Cross Origin Resource Sharing)について</h2>
 <p>CORS(Cross Origin Resource Sharing)は、JavaScript でクロスドメインにアクセスする方法です。さきほど述べていたドメインとオリジンはほぼ同義です。
 クロスしている(異なる)オリジン（≒ ドメイン）とリソースをシェアする方法です。</p>
 <p>CORS では、JavaScript で異なるドメインにアクセスする際に、シンプルなリクエストでない場合、preflight リクエストと呼ばれる通信がなされます。
@@ -212,7 +212,7 @@ preflight リクエストが送られる条件については<a href="https://de
 <p>ただし、ブラウザのセキュリティ設定が Off であれば preflight リクエストで確認しないため、いずれの場合も必ず 1 往復になります。（preflight リクエストは安全を担保するための確認処理であるため、セキュリティ設定を Off にすれば発生しない。）</p>
 </blockquote>
 <p><a id="markdown-basic認証つきcorsについて" name="basic認証つきcorsについて"></a></p>
-<h2 id="basic--cors-">BASIC 認証つき CORS について</h2>
+<h2 id="basic-認証つき-cors-について">BASIC 認証つき CORS について</h2>
 <p>最後に本記事の目的である BASIC 認証つき CORS について説明します。</p>
 <p>先ほどの環境の前提に、1 つ条件を加えます。</p>
 <blockquote>

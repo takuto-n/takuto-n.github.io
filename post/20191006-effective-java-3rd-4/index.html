@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.62.0 with theme even" />
+<meta name="generator" content="Hugo 0.66.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191006-effective-java-3rd-4/" />
@@ -48,7 +48,7 @@
 <meta itemprop="description" content="クラスとインタフェース Effective Java 第 3 版の個人的メモ 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィー">
 <meta itemprop="datePublished" content="2019-10-06T15:27:10&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-06T15:27:10&#43;09:00" />
-<meta itemprop="wordCount" content="11549">
+<meta itemprop="wordCount" content="11555">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
             </div>
-          <span class="more-meta"> 11549 words </span>
+          <span class="more-meta"> 11555 words </span>
           <span class="more-meta"> 24 mins read </span>
         
       </div>
@@ -136,7 +136,7 @@
 
     
     <div class="post-content">
-      <h1 id="heading">クラスとインタフェース</h1>
+      <h1 id="クラスとインタフェース">クラスとインタフェース</h1>
 <p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
 <!-- vscode-markdown-toc -->
 <ol>
@@ -158,21 +158,21 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-name15a-15-">1. <a name='15'></a>項目 15 クラスとメンバーへのアクセス可能性を最小限にする</h2>
-<h3 id="11-a-namea">1.1. <a name=''></a>結論</h3>
+<h2 id="1-a-name15a項目-15-クラスとメンバーへのアクセス可能性を最小限にする">1. <a name='15'></a>項目 15 クラスとメンバーへのアクセス可能性を最小限にする</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
 <ul>
 <li>常にアクセス可能性をできる限り小さくするべき</li>
 <li>public のクラスは public のフィールドを持つべきではない</li>
 <li>public static final のフィールドが配列の場合、その配列の内部も不変であることを保証するべき</li>
 </ul>
-<h3 id="12-a-name-1a">1.2. <a name='-1'></a>常にアクセス可能性をできる限り小さくするべき</h3>
+<h3 id="12-a-name-1a常にアクセス可能性をできる限り小さくするべき">1.2. <a name='-1'></a>常にアクセス可能性をできる限り小さくするべき</h3>
 <p>情報秘匿(カプセル化)をすると以下の利点が得られるから。</p>
 <ul>
 <li>モジュールを分離し、個別に開発、テストなどができる</li>
 <li>モジュールを素早く理解できる</li>
 <li>ソフトウェアの再利用をするための必要条件</li>
 </ul>
-<h4 id="121-a-name-1a">1.2.1. <a name='-1'></a>カプセル化の方法</h4>
+<h4 id="121-a-name-1aカプセル化の方法">1.2.1. <a name='-1'></a>カプセル化の方法</h4>
 <ul>
 <li>アクセス修飾子
 <ul>
@@ -208,13 +208,13 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="13-a-namepublicpublicapublic--public-">1.3. <a name='publicpublic'></a>public のクラスは public のフィールドを持つべきではない</h3>
+</div><h3 id="13-a-namepublicpublicapublic-のクラスは-public-のフィールドを持つべきではない">1.3. <a name='publicpublic'></a>public のクラスは public のフィールドを持つべきではない</h3>
 <p>スレッドセーフにできないから。</p>
 <p>メソッドには<code>synchronized</code>が付けれるが、フィールド値には<code>synchronized</code>を付けれないので<code>getter</code>/<code>setter</code>を利用するようにしましょう。</p>
 <blockquote>
 <p>public static final のフィールドは定数として使ってよい</p>
 </blockquote>
-<h3 id="14-a-namepublicstaticfinalapublic-static-final-">1.4. <a name='publicstaticfinal'></a>public static final のフィールドが配列の場合、参照されるオブジェクトが不変であることを保証するべき</h3>
+<h3 id="14-a-namepublicstaticfinalapublic-static-final-のフィールドが配列の場合参照されるオブジェクトが不変であることを保証するべき">1.4. <a name='publicstaticfinal'></a>public static final のフィールドが配列の場合、参照されるオブジェクトが不変であることを保証するべき</h3>
 <p>以下のようなコードを記載すると、<code>VALUES</code>のアドレスは<code>final</code>であるが、要素は<code>final</code>ではない。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -225,14 +225,14 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[</span><span class="o">]</span> <span class="n">VALUES</span><span class="o">=</span><span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[]</span> <span class="n">VALUES</span><span class="o">={</span> <span class="o">...</span> <span class="o">};</span>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-<span class="n">VALUES</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="o">=</span><span class="n">1</span><span class="o">;</span> <span class="c1">//のように配列内のデータを変更できてしまう。
+<span class="n">VALUES</span><span class="o">[</span><span class="n">0</span><span class="o">]=</span><span class="n">1</span><span class="o">;</span> <span class="c1">//のように配列内のデータを変更できてしまう。
 </span></code></pre></td></tr></table>
 </div>
-</div><h4 id="141-a-name-1a">1.4.1. <a name='-1'></a>実装方法</h4>
+</div><h4 id="141-a-name-1a実装方法">1.4.1. <a name='-1'></a>実装方法</h4>
 <ul>
 <li>方法 1
 <ul>
@@ -246,8 +246,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[</span><span class="o">]</span> <span class="n">PRIVATE_VALUES</span><span class="o">=</span><span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">List</span> <span class="n">VALUES</span> <span class="o">=</span> <span class="n">Collections</span><span class="o">.</span><span class="na">unmodifiableList</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">PRIVATE_VALUES</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[]</span> <span class="n">PRIVATE_VALUES</span><span class="o">={</span> <span class="o">...</span> <span class="o">};</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">List</span> <span class="n">VALUES</span> <span class="o">=</span> <span class="n">Collections</span><span class="o">.</span><span class="na">unmodifiableList</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">PRIVATE_VALUES</span><span class="o">));</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -262,9 +262,9 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[</span><span class="o">]</span> <span class="n">PRIVATE_VALUES</span> <span class="o">=</span> <span class="o">{</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="o">}</span><span class="o">;</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[</span><span class="o">]</span> <span class="nf">values</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">PRIVATE_VALUES</span><span class="o">.</span><span class="na">clone</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[]</span> <span class="n">PRIVATE_VALUES</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">};</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[]</span> <span class="nf">values</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">PRIVATE_VALUES</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -275,13 +275,13 @@
 <blockquote>
 <p>備考：配列は低レイヤな扱いになってしまうので、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html"><code>java.util.Collections</code></a>を使うようにすると良さそう。</p>
 </blockquote>
-<h2 id="2-a-name16publicpublica-16-public-public-">2. <a name='16publicpublic'></a>項目 16 public のクラスでは、public のフィールドではなく、アクセッサーメソッドを使う</h2>
-<h3 id="21-a-name-1a">2.1. <a name='-1'></a>結論</h3>
+<h2 id="2-a-name16publicpublica項目-16-public-のクラスではpublic-のフィールドではなくアクセッサーメソッドを使う">2. <a name='16publicpublic'></a>項目 16 public のクラスでは、public のフィールドではなく、アクセッサーメソッドを使う</h2>
+<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>そのクラスのパッケージ外からアクセス可能であれば、アクセッサーメソッドを提供するべき</li>
 <li>クラスがパッケージプライベート/private のネストしたクラスの場合、そのフィールドは公開しても良い</li>
 </ul>
-<h3 id="22-a-name-1a">2.2. <a name='-1'></a>そのクラスのパッケージ外からアクセス可能であれば、アクセッサーメソッドを提供するべき</h3>
+<h3 id="22-a-name-1aそのクラスのパッケージ外からアクセス可能であればアクセッサーメソッドを提供するべき">2.2. <a name='-1'></a>そのクラスのパッケージ外からアクセス可能であれば、アクセッサーメソッドを提供するべき</h3>
 <p>メソッドには<code>synchronized</code>が付けれるが、フィールド値には<code>synchronized</code>を付けれないので<code>getter</code>/<code>setter</code>を利用するようにしましょう。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -294,18 +294,18 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestData</span><span class="o">{</span>
     <span class="kd">private</span> <span class="n">User</span> <span class="n">user</span><span class="o">;</span>
-    <span class="kd">synchronized</span> <span class="kd">public</span> <span class="n">User</span> <span class="nf">getUser</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-    <span class="kd">synchronized</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUser</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">)</span><span class="o">;</span>
+    <span class="kd">synchronized</span> <span class="kd">public</span> <span class="n">User</span> <span class="nf">getUser</span><span class="o">();</span>
+    <span class="kd">synchronized</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUser</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="23-a-nameprivateaprivate-">2.3. <a name='private'></a>クラスがパッケージプライベート/private のネストしたクラスの場合、そのフィールドは公開しても良い</h3>
+</div><h3 id="23-a-nameprivateaクラスがパッケージプライベートprivate-のネストしたクラスの場合そのフィールドは公開しても良い">2.3. <a name='private'></a>クラスがパッケージプライベート/private のネストしたクラスの場合、そのフィールドは公開しても良い</h3>
 <p>外部からアクセスされる心配がなく、コードの可読性が上がるから。</p>
 <blockquote>
 <p><code>Intellij</code>や<code>Eclipse</code>の機能で自動的に検出されるから、意識しなくても大丈夫そう。</p>
 </blockquote>
-<h2 id="3-a-name17a-17-">3. <a name='17'></a>項目 17 可変性を最小限にする</h2>
-<h3 id="31-a-name-1a">3.1. <a name='-1'></a>不変クラスとは</h3>
+<h2 id="3-a-name17a項目-17-可変性を最小限にする">3. <a name='17'></a>項目 17 可変性を最小限にする</h2>
+<h3 id="31-a-name-1a不変クラスとは">3.1. <a name='-1'></a>不変クラスとは</h3>
 <p>インスタンスに保持される全ての情報は、生成時に提供され、その後は変更できないクラスのこと。</p>
 <p>例として、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html"><code>java.lang.String</code></a>、基本データ型のラッパークラス(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Integer.html"><code>java.lang.Integer</code></a>等)、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigInteger.html"><code>java.math.BigInteger</code></a> 、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigDecimal.html"><code>java.math.BigDecimal</code></a>などが挙げられます。</p>
 <blockquote>
@@ -317,23 +317,23 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">for</span><span class="o">(</span><span class="n">Integer</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">100</span><span class="o">;</span> <span class="n">i</span><span class="o">+</span><span class="o">+</span><span class="o">)</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">for</span><span class="o">(</span><span class="n">Integer</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
     <span class="o">;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="32-a-name-1a">3.2. <a name='-1'></a>不変クラスの規則</h3>
+</div><h3 id="32-a-name-1a不変クラスの規則">3.2. <a name='-1'></a>不変クラスの規則</h3>
 <ol>
 <li><code>setter</code>などオブジェクトの状態を変更するためのメソッドは提供しない。</li>
 <li>クラス拡張できないように、<code>final class</code>としましょう。</li>
 <li>変更不可能とするために、すべてのフィールドに<code>private final</code>を付けましょう。</li>
 </ol>
-<h3 id="33-a-name-1a">3.3. <a name='-1'></a>不変クラスのメリット</h3>
+<h3 id="33-a-name-1a不変クラスのメリット">3.3. <a name='-1'></a>不変クラスのメリット</h3>
 <ul>
 <li>スレッドセーフであること</li>
 <li>防御的コピーの必要なし、clone メソッドやコピーコンストラクタ作成の必要もなし</li>
 <li>内部の状態も共有可能</li>
 </ul>
-<h3 id="34-a-name-1a">3.4. <a name='-1'></a>不変クラスのデメリット</h3>
+<h3 id="34-a-name-1a不変クラスのデメリット">3.4. <a name='-1'></a>不変クラスのデメリット</h3>
 <ul>
 <li>一部だけ変更したいだけなので、全てを再生成しなければならないのがデメリット、、、しかし、コンパニオンクラスを使えば解決できる！（例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/StringBuilder.html"><code>java.lang.StringBuilder</code></a>）</li>
 </ul>
@@ -373,16 +373,16 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">char</span><span class="o">[</span><span class="o">]</span> <span class="n">value</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">char</span><span class="o">[]</span> <span class="n">value</span><span class="o">;</span>
 <span class="o">.</span>
 <span class="o">.</span>
 <span class="o">.</span>
 <span class="kd">public</span> <span class="n">AbstractStringBuilder</span> <span class="nf">append</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">str</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span><span class="o">)</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&#34;null&#34;</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">count</span> <span class="o">+</span> <span class="n">len</span><span class="o">)</span><span class="o">;</span>
-    <span class="n">str</span><span class="o">.</span><span class="na">getChars</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">len</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">count</span><span class="o">)</span><span class="o">;</span>
-    <span class="n">count</span> <span class="o">+</span><span class="o">=</span> <span class="n">len</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">str</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&#34;null&#34;</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">count</span> <span class="o">+</span> <span class="n">len</span><span class="o">);</span>
+    <span class="n">str</span><span class="o">.</span><span class="na">getChars</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">len</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="n">len</span><span class="o">;</span>
     <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
 <span class="o">}</span>
 <span class="o">.</span>
@@ -394,21 +394,21 @@
         <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">minimumCapacity</span><span class="o">;</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">minimumCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="c1">// overflow
-</span><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">OutOfMemoryError</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+</span><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">OutOfMemoryError</span><span class="o">();</span>
         <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">newCapacity</span><span class="o">)</span><span class="o">;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">newCapacity</span><span class="o">);</span>
 <span class="o">}</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="4-a-name18a-18-">4. <a name='18'></a>項目 18 継承よりコンポジションを選ぶ</h2>
-<h3 id="41-a-name-1a">4.1. <a name='-1'></a>結論</h3>
+</div><h2 id="4-a-name18a項目-18-継承よりコンポジションを選ぶ">4. <a name='18'></a>項目 18 継承よりコンポジションを選ぶ</h2>
+<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
 <p>継承は、実装全部を継承することを理解して使う。<br>
 機能を流用したいだけならば、コンポジションを使うことが適切なことが多い。<br>
 is-a 関係にあれば使える局面があるが、使うべき局面は多くない。<br>
 本当に多重階層にすることが妥当かを検討すべし。</p>
-<h3 id="42-a-name-1a">4.2. <a name='-1'></a>継承/コンポジションとはなにか</h3>
+<h3 id="42-a-name-1a継承コンポジションとはなにか">4.2. <a name='-1'></a>継承/コンポジションとはなにか</h3>
 <ul>
 <li>継承
 <ul>
@@ -433,7 +433,7 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 </ul>
 </li>
 </ul>
-<h3 id="43-a-name-1a">4.3. <a name='-1'></a>継承のデメリット</h3>
+<h3 id="43-a-name-1a継承のデメリット">4.3. <a name='-1'></a>継承のデメリット</h3>
 <p>継承をした際に、サブクラスの実装によってクラスの整合性が失われやすい。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -468,26 +468,26 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstrumentedHashSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">InstrumentedHashSet</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">InstrumentedHashSet</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="nf">InstrumentedHashSet</span><span class="o">(</span><span class="kt">int</span> <span class="n">initCap</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">initCap</span><span class="o">,</span> <span class="n">loadFactor</span><span class="o">)</span><span class="o">;</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">initCap</span><span class="o">,</span> <span class="n">loadFactor</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">addCount</span><span class="o">+</span><span class="o">+</span><span class="o">;</span>
-        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">)</span><span class="o">;</span>
+        <span class="n">addCount</span><span class="o">++;</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">addCount</span> <span class="o">+</span><span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">)</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">addCount</span> <span class="o">+=</span> <span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAddCount</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAddCount</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">addCount</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -507,7 +507,7 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </code></pre></td></tr></table>
 </div>
 </div><p>なぜなら、HashSet の addAll は、内部的に add メソッドを利用して実装されているため。</p>
-<h3 id="44-a-name-1a">4.4. <a name='-1'></a>コンポジションの例</h3>
+<h3 id="44-a-name-1aコンポジションの例">4.4. <a name='-1'></a>コンポジションの例</h3>
 <p>コンポジションは、 <code>処理を他のクラスにお願いする</code> と思っておけばよい。</p>
 <p>以下が例。</p>
 <div class="highlight"><div class="chroma">
@@ -630,68 +630,68 @@ s.getAddCount(); // =&gt; 6。3にならない。
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">();</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
 	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">o</span><span class="o">)</span><span class="o">;</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">iterator</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="n">Object</span><span class="o">[</span><span class="o">]</span> <span class="nf">toArray</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="n">Object</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span><span class="o">[</span><span class="o">]</span> <span class="nf">toArray</span><span class="o">(</span><span class="n">T</span><span class="o">[</span><span class="o">]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="n">a</span><span class="o">)</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">(</span><span class="n">T</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
 	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">)</span><span class="o">;</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
 	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">)</span><span class="o">;</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="o">?</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">containsAll</span><span class="o">(</span><span class="n">c</span><span class="o">)</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">containsAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">)</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retainAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="o">?</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">retainAll</span><span class="o">(</span><span class="n">c</span><span class="o">)</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retainAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">retainAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">removeAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="o">?</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">c</span><span class="o">)</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">removeAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">set</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">clear</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">set</span><span class="o">.</span><span class="na">clear</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">clear</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">set</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
 	<span class="o">}</span>
 <span class="o">}</span>
 
@@ -699,22 +699,22 @@ s.getAddCount(); // =&gt; 6。3にならない。
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
 
     <span class="kd">public</span> <span class="nf">InstrumentedHashSet</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">s</span><span class="o">)</span><span class="o">;</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">addCount</span><span class="o">+</span><span class="o">+</span><span class="o">;</span>
-        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">)</span><span class="o">;</span>
+        <span class="n">addCount</span><span class="o">++;</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">addCount</span> <span class="o">+</span><span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">)</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">addCount</span> <span class="o">+=</span> <span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAddCount</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAddCount</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">addCount</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -727,8 +727,8 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Ser</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stringSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-<span class="n">InstrumentedHashSet</span><span class="o">&lt;</span><span class="n">String</span> <span class="o">&gt;</span> <span class="n">ihSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InstrumentedHashSet</span><span class="o">&lt;</span><span class="o">&gt;</span><span class="o">(</span><span class="n">stringSet</span><span class="o">)</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Ser</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stringSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+<span class="n">InstrumentedHashSet</span><span class="o">&lt;</span><span class="n">String</span> <span class="o">&gt;</span> <span class="n">ihSet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InstrumentedHashSet</span><span class="o">&lt;&gt;(</span><span class="n">stringSet</span><span class="o">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Spring で利用されているコンポジションの例</p>
@@ -764,21 +764,21 @@ s.getAddCount(); // =&gt; 6。3にならない。
 <pre class="chroma"><code class="language-java" data-lang="java">    <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CompositeItemWriter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">ItemStreamWriter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="o">,</span> <span class="n">InitializingBean</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">ItemWriter</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">delegates</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CompositeItemWriter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">ItemStreamWriter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;,</span> <span class="n">InitializingBean</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">ItemWriter</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">delegates</span><span class="o">;</span>
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">item</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-	    <span class="k">for</span> <span class="o">(</span><span class="n">ItemWriter</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">writer</span> <span class="o">:</span> <span class="n">delegates</span><span class="o">)</span> <span class="o">{</span>
-	        <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">item</span><span class="o">)</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">item</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+	    <span class="k">for</span> <span class="o">(</span><span class="n">ItemWriter</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">writer</span> <span class="o">:</span> <span class="n">delegates</span><span class="o">)</span> <span class="o">{</span>
+	        <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
 	    <span class="o">}</span>
     <span class="o">}</span>
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDelegates</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">ItemWriter</span><span class="o">&lt;</span><span class="o">?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">delegates</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDelegates</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">ItemWriter</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">delegates</span><span class="o">)</span> <span class="o">{</span>
 	    <span class="k">this</span><span class="o">.</span><span class="na">delegates</span> <span class="o">=</span> <span class="n">delegates</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="o">.</span>
@@ -789,7 +789,7 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </div>
 </div><p>様々な<a href="https://docs.spring.io/spring-batch/trunk/apidocs/org/springframework/batch/item/ItemWriter.html">ItemWriter</a>を合成(Composite)して
 、同じように扱って書き込み処理している。</p>
-<h3 id="45-a-name-1a">4.5. <a name='-1'></a>コンポジションと委譲</h3>
+<h3 id="45-a-name-1aコンポジションと委譲">4.5. <a name='-1'></a>コンポジションと委譲</h3>
 <p>コンポジションで実現することは転送(forward)と訳される事が多い。<br>
 その他一般的な用語では、委譲(delegate)という言葉がある。<br>
 この 2 つの違いは曖昧。<br>
@@ -806,11 +806,11 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </div>
 </div><p>といわれるが、これも誤りらしい。</p>
 <p>たいていの開発者は、コンポジションを委譲と同義で使うと理解すれば良さそう。</p>
-<h2 id="5-a-name19a-19-">5. <a name='19'></a>項目 19 継承のために設計および文書化する、でなければ継承を禁止する</h2>
-<h3 id="51-a-name-1a">5.1. <a name='-1'></a>結論</h3>
+<h2 id="5-a-name19a項目-19-継承のために設計および文書化するでなければ継承を禁止する">5. <a name='19'></a>項目 19 継承のために設計および文書化する、でなければ継承を禁止する</h2>
+<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
 <p>一言でいってしまえば、protected なクラス/メソッドは、拡張される可能性があるため、
 継承した場合にどのように使うのか、ルール/制約等を全部記述すべきだということ。</p>
-<h3 id="52-a-name-1a">5.2. <a name='-1'></a>理由</h3>
+<h3 id="52-a-name-1a理由">5.2. <a name='-1'></a>理由</h3>
 <p>第 18 節の通り、かんたんに不整合がうまれるため。
 これを防ぐには手厚いドキュメントが必要。</p>
 <p>とはいえ、</p>
@@ -821,11 +821,11 @@ s.getAddCount(); // =&gt; 6。3にならない。
 <p>という一文の通り、良い API ドキュメントでは、手厚いドキュメントはあまり好ましいことではない。
 付け加えるならば、本来 API は何も考えずに使える(脳死できる)ことが望ましく、
 最新の注意を払う時点でバグを生む。</p>
-<h3 id="53-a-name-1a">5.3. <a name='-1'></a>継承できることを担保する</h3>
+<h3 id="53-a-name-1a継承できることを担保する">5.3. <a name='-1'></a>継承できることを担保する</h3>
 <p>継承されるクラスを作成する際、
 実際に、そのクラスを継承したクラスを用いたテストを十分にする必要がある。<br>
 拡張前提の AP フレームワークの場合、これを十分行う必要がある。</p>
-<h3 id="54-a-name-1a">5.4. <a name='-1'></a>継承させるべきでないもの</h3>
+<h3 id="54-a-name-1a継承させるべきでないもの">5.4. <a name='-1'></a>継承させるべきでないもの</h3>
 <ul>
 <li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Cloneable.html"><code>Cloneable</code></a> と <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/io/Serializable.html"><code>Serializable</code></a>
 <ul>
@@ -834,7 +834,7 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </ul>
 </li>
 </ul>
-<h3 id="55-a-name-1a---">5.5. <a name='-1'></a>継承させる / させない ことを考える</h3>
+<h3 id="55-a-name-1a継承させる--させない-ことを考える">5.5. <a name='-1'></a>継承させる / させない ことを考える</h3>
 <ul>
 <li>継承させないなら、コンストラクタを <code>private</code> か<code>パッケージプライベート</code>にする or クラスを<code>final</code>にする</li>
 <li>継承させた上で、あるメソッドは参照させるのみならば <code>final</code> にする
@@ -848,7 +848,7 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </ul>
 </li>
 </ul>
-<h2 id="6-a-name20a-20-">6. <a name='20'></a>項目 20 抽象クラスよりインタフェースを選ぶ</h2>
+<h2 id="6-a-name20a項目-20-抽象クラスよりインタフェースを選ぶ">6. <a name='20'></a>項目 20 抽象クラスよりインタフェースを選ぶ</h2>
 <p>以下の点で、インタフェースの方が抽象クラスよりも優れているので、インタフェースを選びましょう。</p>
 <ul>
 <li>既存クラスに新たなインタフェースを実装しやすいこと</li>
@@ -865,13 +865,13 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </li>
 </ul>
 <p>ただし、<code>public</code>のインタフェースは「リリース後の変更が不可である」ということを意識しておきましょう。（設計は注意深く、実装クラスのテストもしっかりと行いましょう。）</p>
-<h3 id="61-a-name-1a">6.1. <a name='-1'></a>抽象クラスとインタフェース</h3>
+<h3 id="61-a-name-1a抽象クラスとインタフェース">6.1. <a name='-1'></a>抽象クラスとインタフェース</h3>
 <p>抽象クラスとインタフェースの違いは以下の 2 点。</p>
 <ul>
 <li>実装を<code>含めれる</code>か<code>否</code>か</li>
 <li>継承が<code>1:1</code>か<code>1:多</code>か</li>
 </ul>
-<h4 id="611-a-name-1a">6.1.1. <a name='-1'></a>抽象クラス</h4>
+<h4 id="611-a-name-1a抽象クラス">6.1.1. <a name='-1'></a>抽象クラス</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -899,20 +899,20 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractClass</span> <span class="o">{</span>
-    <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">abstractMethod</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">,</span> <span class="n">String</span> <span class="n">str</span><span class="o">)</span><span class="o">;</span>
+    <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">abstractMethod</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">,</span> <span class="n">String</span> <span class="n">str</span><span class="o">);</span>
 
     <span class="c1">// 実装を含めることができる。
-</span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">nonAbstractMethod</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;非抽象メソッドより出力&#34;</span><span class="o">)</span><span class="o">;</span>
+</span><span class="c1"></span>    <span class="kt">void</span> <span class="nf">nonAbstractMethod</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;非抽象メソッドより出力&#34;</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="c1">// クラスは１つの抽象クラスしか継承できない。
 </span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="kd">extends</span> <span class="n">AbstractClass</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Main</span> <span class="n">main</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Main</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-        <span class="n">main</span><span class="o">.</span><span class="na">nonAbstractMethod</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Main</span> <span class="n">main</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Main</span><span class="o">();</span>
+        <span class="n">main</span><span class="o">.</span><span class="na">nonAbstractMethod</span><span class="o">();</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">abstractMethod</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">,</span> <span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
@@ -922,7 +922,7 @@ s.getAddCount(); // =&gt; 6。3にならない。
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="612-a-name-1a">6.1.2. <a name='-1'></a>インタフェース</h4>
+</div><h4 id="612-a-name-1aインタフェース">6.1.2. <a name='-1'></a>インタフェース</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -949,7 +949,7 @@ s.getAddCount(); // =&gt; 6。3にならない。
 <pre class="chroma"><code class="language-java" data-lang="java">
 <span class="kd">interface</span> <span class="nc">Sub</span> <span class="o">{</span>
     <span class="c1">// 実装を含めることができなかった。(過去形)
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="nf">sub</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span><span class="o">;</span>
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="nf">sub</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">);</span>
 <span class="o">}</span>
 
 <span class="kd">interface</span> <span class="nc">Add</span> <span class="o">{</span>
@@ -970,8 +970,8 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </div><blockquote>
 <p>備考：<a href="https://dzone.com/articles/interface-default-methods-java">java8 から Interface にデフォルトメソッドを定義できる</a>ようになりましたね。</p>
 </blockquote>
-<h3 id="62-a-namegoodpointa-good-point">6.2. <a name='GoodPoint'></a>インタフェースの Good Point</h3>
-<h4 id="621-a-name-1a">6.2.1. <a name='-1'></a>既存クラスに新たなインタフェースを実装しやすいこと</h4>
+<h3 id="62-a-namegoodpointaインタフェースの-good-point">6.2. <a name='GoodPoint'></a>インタフェースの Good Point</h3>
+<h4 id="621-a-name-1a既存クラスに新たなインタフェースを実装しやすいこと">6.2.1. <a name='-1'></a>既存クラスに新たなインタフェースを実装しやすいこと</h4>
 <p>インタフェースでは単に実装するだけで良いが、抽象クラスでは継承階層を意識しなければいけない。（抽象クラスが、複数の既存クラスで継承されていたら悩まされることに、、、）</p>
 <ul>
 <li>
@@ -987,7 +987,7 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </ul>
 </li>
 </ul>
-<h4 id="622-a-namemixinhttpsjawikipediaorgwikimixinamixinhttpsjawikipediaorgwikimixin">6.2.2. <a name='Mixinhttps:ja.wikipedia.orgwikiMixin'></a>インタフェースは、<a href="https://ja.wikipedia.org/wiki/Mixin"><code>Mixin</code></a>を定義するには理想的であること</h4>
+<h4 id="622-a-namemixinhttpsjawikipediaorgwikimixinaインタフェースはmixinhttpsjawikipediaorgwikimixinを定義するには理想的であること">6.2.2. <a name='Mixinhttps:ja.wikipedia.orgwikiMixin'></a>インタフェースは、<a href="https://ja.wikipedia.org/wiki/Mixin"><code>Mixin</code></a>を定義するには理想的であること</h4>
 <p>インタフェースは多重継承可能であるため、<code>Mixin</code>ができる。</p>
 <p><code>Mixin</code>とは「クラスが「本来の型」に加えて、なんらかの任意の振る舞いを提供していることを宣言するための型のこと」である。</p>
 <ul>
@@ -997,7 +997,7 @@ s.getAddCount(); // =&gt; 6。3にならない。
 </ul>
 </li>
 </ul>
-<h4 id="623-a-name-1a">6.2.3. <a name='-1'></a>階層を持たない型フレームワークを構築できること</h4>
+<h4 id="623-a-name-1a階層を持たない型フレームワークを構築できること">6.2.3. <a name='-1'></a>階層を持たない型フレームワークを構築できること</h4>
 <p>フレームワークを構築する前提で、<code>N</code>個の属性をサポートすることを考える。
 抽象クラスの場合の場合、属性ごとに階層を考慮する必要があるが、インタフェースではその必要がない。</p>
 <ul>
@@ -1037,25 +1037,25 @@ s.getAddCount(); // =&gt; 6。3にならない。
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// フレームワーク構築者が準備
 </span><span class="c1"></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Singer</span> <span class="o">{</span>
-　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">)</span><span class="o">;</span>
+　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="c1">// フレームワーク構築者が準備
 </span><span class="c1"></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Songwriter</span> <span class="o">{</span>
-　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">)</span><span class="o">;</span>
+　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="c1">// ユーザが利用する
 </span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FukuyamaMasaharu</span> <span class="kd">implements</span> <span class="n">Singer</span><span class="o">,</span> <span class="n">Songwriter</span> <span class="o">{</span>
-　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">)</span><span class="o">{</span>
-　　　　<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">){</span>
+　　　　<span class="o">...</span>
 　　<span class="o">}</span>
-　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">)</span><span class="o">{</span>
-　　　　<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">){</span>
+　　　　<span class="o">...</span>
 　　<span class="o">}</span>
-　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
-　　　　<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">(){</span>
+　　　　<span class="o">...</span>
 　　<span class="o">}</span>
-　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
-　　　　<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">(){</span>
+　　　　<span class="o">...</span>
 　　<span class="o">}</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
@@ -1104,37 +1104,37 @@ s.getAddCount(); // =&gt; 6。3にならない。
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// フレームワーク構築者が準備
 </span><span class="c1"></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Singer</span> <span class="o">{</span>
-　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">)</span><span class="o">;</span>
+　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="c1">// フレームワーク構築者が準備
 </span><span class="c1"></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Songwriter</span> <span class="o">{</span>
-　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">)</span><span class="o">;</span>
+　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="c1">// フレームワーク構築者が準備（Interfaceの場合では作らなくてもよかった。）
 </span><span class="c1"></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">SingerSongWriter</span> <span class="o">{</span>
-　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">)</span><span class="o">;</span>
-　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">)</span><span class="o">;</span>
-　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
+　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">);</span>
+　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">();</span>
+　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">();</span>
 <span class="o">}</span>
 <span class="c1">// ユーザ側が利用する
 </span><span class="c1"></span><span class="kd">class</span> <span class="nc">FukuyamaMasaharu</span> <span class="kd">extends</span> <span class="n">SingerSongWriter</span> <span class="o">{</span>
-　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">)</span><span class="o">{</span>
-　　<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">){</span>
+　　<span class="o">...</span>
 　　<span class="o">}</span>
-　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">)</span><span class="o">{</span>
-　　<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">){</span>
+　　<span class="o">...</span>
 　　<span class="o">}</span>
-　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
-　　<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">(){</span>
+　　<span class="o">...</span>
 　　<span class="o">}</span>
-　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
-　　<span class="o">.</span><span class="o">.</span><span class="o">.</span>
+　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">(){</span>
+　　<span class="o">...</span>
 　　<span class="o">}</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="624-a-name-1a">6.2.4. <a name='-1'></a>抽象クラスと組み合わせること(骨格実装クラス)で、よりユーザーにとって便利になること</h4>
+</div><h4 id="624-a-name-1a抽象クラスと組み合わせること骨格実装クラスでよりユーザーにとって便利になること">6.2.4. <a name='-1'></a>抽象クラスと組み合わせること(骨格実装クラス)で、よりユーザーにとって便利になること</h4>
 <p>骨格実装クラスにより、プログラマがインタフェースを独自実装する際の手助けになる。下記、<code>setValue(V value)</code>メソッドのコメントはありがたいですね。</p>
 <blockquote>
 <p>下記、 <em>AbstractMapEntry.java</em> の良い点は、単なる抽象クラスではなくて、インタフェースを実装しているから、型定義に関しての制約が課されることがない。</p>
@@ -1192,48 +1192,48 @@ s.getAddCount(); // =&gt; 6。3にならない。
 
 <span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractMapEntry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
 　　<span class="c1">// 基本操作
-</span><span class="c1"></span>　　<span class="kd">public</span> <span class="kd">abstract</span> <span class="n">K</span> <span class="nf">getKey</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-　　<span class="kd">public</span> <span class="kd">abstract</span> <span class="n">V</span> <span class="nf">getValue</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+</span><span class="c1"></span>　　<span class="kd">public</span> <span class="kd">abstract</span> <span class="n">K</span> <span class="nf">getKey</span><span class="o">();</span>
+　　<span class="kd">public</span> <span class="kd">abstract</span> <span class="n">V</span> <span class="nf">getValue</span><span class="o">();</span>
 
 　　<span class="c1">// 変更可能なマップでのエントリーは、このメソッドをオーバーライドしなければいけない。
 </span><span class="c1"></span>　　<span class="kd">public</span> <span class="n">V</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-　　　　<span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+　　　　<span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="o">();</span>
 　　<span class="o">}</span>
 
 　　<span class="c1">// Map.Entry.equals の一般契約を実装
 </span><span class="c1"></span>　　<span class="nd">@Override</span>
 　　<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-　　　　<span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">=</span><span class="o">=</span> <span class="k">this</span><span class="o">)</span>
+　　　　<span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="o">)</span>
 　　　　　　<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-　　　　<span class="k">if</span> <span class="o">(</span><span class="o">!</span><span class="o">(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">)</span><span class="o">)</span>
+　　　　<span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">))</span>
 　　　　　　<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-　　　　<span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="o">?</span><span class="o">,</span> <span class="o">?</span><span class="o">&gt;</span> <span class="n">arg</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
-　　　　<span class="k">return</span> <span class="n">equals</span><span class="o">(</span><span class="n">getKey</span><span class="o">(</span><span class="o">)</span><span class="o">,</span> <span class="n">arg</span><span class="o">.</span><span class="na">getKey</span><span class="o">(</span><span class="o">)</span><span class="o">)</span>
-　　　　　　　　<span class="o">&amp;</span><span class="o">&amp;</span> <span class="n">equals</span><span class="o">(</span><span class="n">getValue</span><span class="o">(</span><span class="o">)</span><span class="o">,</span> <span class="n">arg</span><span class="o">.</span><span class="na">getValue</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+　　　　<span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;?,</span> <span class="o">?&gt;</span> <span class="n">arg</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+　　　　<span class="k">return</span> <span class="n">equals</span><span class="o">(</span><span class="n">getKey</span><span class="o">(),</span> <span class="n">arg</span><span class="o">.</span><span class="na">getKey</span><span class="o">())</span>
+　　　　　　　　<span class="o">&amp;&amp;</span> <span class="n">equals</span><span class="o">(</span><span class="n">getValue</span><span class="o">(),</span> <span class="n">arg</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
 　　<span class="o">}</span>
 
 　　<span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
-　　　　<span class="k">return</span> <span class="n">o1</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">o2</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">o1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o2</span><span class="o">)</span><span class="o">;</span>
+　　　　<span class="k">return</span> <span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">o1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span>
 　　<span class="o">}</span>
 
 　　<span class="c1">// Map.Entry.hashCode の一般契約を実装
 </span><span class="c1"></span>　　<span class="nd">@Override</span>
-　　<span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-　　　　<span class="k">return</span> <span class="n">hashCode</span><span class="o">(</span><span class="n">getKey</span><span class="o">(</span><span class="o">)</span><span class="o">)</span> <span class="o">^</span> <span class="n">hashCode</span><span class="o">(</span><span class="n">getValue</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+　　<span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+　　　　<span class="k">return</span> <span class="n">hashCode</span><span class="o">(</span><span class="n">getKey</span><span class="o">())</span> <span class="o">^</span> <span class="n">hashCode</span><span class="o">(</span><span class="n">getValue</span><span class="o">());</span>
 　　<span class="o">}</span>
 
 　　<span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
-　　　　<span class="k">return</span> <span class="n">obj</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="n">obj</span><span class="o">.</span><span class="na">hashCode</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+　　　　<span class="k">return</span> <span class="n">obj</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="n">obj</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
 　　<span class="o">}</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="63-a-name-1a">6.3. <a name='-1'></a>余談(抽象クラスの利点)</h3>
+</div><h3 id="63-a-name-1a余談抽象クラスの利点">6.3. <a name='-1'></a>余談(抽象クラスの利点)</h3>
 <p>**「抽象クラス : 実装クラス = 1 : 多」**となるのであれば、インタフェースよりも抽象クラスを使いましょう。理由は、抽象クラスにメソッドを追加すれば、全ての実装クラスに反映されて容易だから。（インタフェースの場合は、反映先のクラス数が多く、大変になる。）</p>
 <blockquote>
 <p>極端な例ですが、、今から<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/List.html"><code>List&lt;E&gt;</code></a>インタフェースに新たな public メソッドを追加すると、影響範囲は大変なことになりますよね。笑</p>
 </blockquote>
-<h2 id="7-a-name21a-21-">7. <a name='21'></a>項目 21 将来のためにインタフェースを選ぶ</h2>
+<h2 id="7-a-name21a項目-21-将来のためにインタフェースを選ぶ">7. <a name='21'></a>項目 21 将来のためにインタフェースを選ぶ</h2>
 <p><a href="https://dzone.com/articles/interface-default-methods-java">Java8 ではデフォルトメソッド構文が追加された</a>が、以下のことには気をつけておきましょう。</p>
 <ul>
 <li>既存の実装クラスに新規デフォルトメソッドを反映させて、エラーや警告なしでコンパイルできるかもしれないが、実行時に失敗することがある。</li>
@@ -1245,26 +1245,26 @@ s.getAddCount(); // =&gt; 6。3にならない。
 しかし、<code>Collection</code> を <code>implements</code> している <a href="https://commons.apache.org/proper/commons-collections/apidocs/org/apache/commons/collections4/collection/SynchronizedCollection.html">Apache Commons ライブラリの SynchronizedCollection</a> でこの <code>removeIf()</code> を呼び出した際には、同期されないメソッドとして呼び出され、<code>SynchronizedCollection</code> 使用における約束事が破られてしまう。<br>
 Java ライブラリではこれと同様のことを防ぐため、<a href="https://github.com/apache/commons-collections/blob/master/src/main/java/org/apache/commons/collections4/collection/SynchronizedCollection.java#L193">Collections.synchronizedCollection において removeIf() をオーバーライド</a>して対処している。</p>
 </blockquote>
-<h2 id="8-a-name22a-22-">8. <a name='22'></a>項目 22 型を定義するためだけにインタフェースを使う</h2>
+<h2 id="8-a-name22a項目-22-型を定義するためだけにインタフェースを使う">8. <a name='22'></a>項目 22 型を定義するためだけにインタフェースを使う</h2>
 <p>インタフェースの使用方法</p>
 <ul>
 <li>型を定義するためだけに使用する。</li>
 <li>定数を提供するためには使用すべきではない。</li>
 </ul>
-<h3 id="81-a-name-1a">8.1. <a name='-1'></a>型を定義するためだけに使用する。</h3>
+<h3 id="81-a-name-1a型を定義するためだけに使用する">8.1. <a name='-1'></a>型を定義するためだけに使用する。</h3>
 <p>インタフェースは、実装したクラスのインスタンスを参照するのに使用できる型(<em>type</em>)として機能する。(<code>型(_type_) = 「何ができるのかを述べている。」</code>)</p>
 <p>「<code>何ができるのかを述べている。</code>」以外の目的のために定義するのは不適切である。</p>
-<h3 id="82-a-name-1a">8.2. <a name='-1'></a>定数を提供するためには使用すべきではない。</h3>
-<h4 id="821-a-name-1a">8.2.1. <a name='-1'></a>定数インタフェース</h4>
+<h3 id="82-a-name-1a定数を提供するためには使用すべきではない">8.2. <a name='-1'></a>定数を提供するためには使用すべきではない。</h3>
+<h4 id="821-a-name-1a定数インタフェース">8.2.1. <a name='-1'></a>定数インタフェース</h4>
 <p>定数インタフェース(例：<a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/io/ObjectStreamConstants.java"><code>java.io.ObjectStreamConstants.java</code></a>)は、「<strong>実装クラスに、この定数に関する責務を負わせることになる</strong>」ため使うべきではない。</p>
 <p>定数を利用したい場合は、<a href="https://docs.oracle.com/javase/jp/8/docs/technotes/guides/language/enums.html">Enum 型</a>や定数ユーティリティクラス(例：<a href="https://github.com/spring-projects/spring-framework/blob/master/spring-core/src/main/java/org/springframework/core/Constants.java">org.springframework.core.Constants.java</a>)を利用しましょう。</p>
-<h2 id="9-a-name23a-23-">9. <a name='23'></a>項目 23 タグ付クラスよりクラス階層を選ぶ</h2>
-<h3 id="91-a-name-1a">9.1. <a name='-1'></a>結論</h3>
+<h2 id="9-a-name23a項目-23-タグ付クラスよりクラス階層を選ぶ">9. <a name='23'></a>項目 23 タグ付クラスよりクラス階層を選ぶ</h2>
+<h3 id="91-a-name-1a結論">9.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>タグ付きクラスが適切な場合はほとんどない</li>
 <li>タグ付きクラスを作りたくなったら、またはタグ付きクラスに出くわしたら、クラス階層で置き換えられないかを検討する</li>
 </ul>
-<h3 id="92-a-name-1a">9.2. <a name='-1'></a>タグ付きクラスとは</h3>
+<h3 id="92-a-name-1aタグ付きクラスとは">9.2. <a name='-1'></a>タグ付きクラスとは</h3>
 <ul>
 <li>次のような、インスタンスが複数の特性を持っていて、その特性を示すためにタグフィールドを持つクラス</li>
 </ul>
@@ -1331,20 +1331,20 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
         <span class="k">this</span><span class="o">.</span><span class="na">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kt">double</span> <span class="nf">area</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="nf">area</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">switch</span> <span class="o">(</span><span class="n">shape</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">case</span> <span class="n">RECTANGLE</span><span class="o">:</span>
                 <span class="k">return</span> <span class="n">length</span> <span class="o">*</span> <span class="n">width</span><span class="o">;</span>
             <span class="k">case</span> <span class="n">CIRCLE</span><span class="o">:</span>
-                <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span> <span class="o">*</span> <span class="o">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="o">)</span><span class="o">;</span>
+                <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span> <span class="o">*</span> <span class="o">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="o">);</span>
             <span class="k">default</span><span class="o">:</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="o">();</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="93-a-name-1a">9.3. <a name='-1'></a>タグ付きクラスの欠点</h3>
+</div><h3 id="93-a-name-1aタグ付きクラスの欠点">9.3. <a name='-1'></a>タグ付きクラスの欠点</h3>
 <ul>
 <li>複数の実装が単一クラスに詰め込まれているので、可読性が低い</li>
 <li>他の特性に属する関係のないフィールドを含んでいるので、余分にメモリを使う</li>
@@ -1371,7 +1371,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </div><ul>
 <li>新しい特性を追加するには、ソースコードを修正しなければならない</li>
 </ul>
-<h3 id="94-a-name-1a-">9.4. <a name='-1'></a> 解決策</h3>
+<h3 id="94-a-name-1a-解決策">9.4. <a name='-1'></a> 解決策</h3>
 <ul>
 <li>クラス階層を用いる</li>
 </ul>
@@ -1411,7 +1411,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Figure</span> <span class="o">{</span>
-    <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">area</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+    <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">area</span><span class="o">();</span>
 <span class="o">}</span>
 
 <span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">extends</span> <span class="n">Figure</span> <span class="o">{</span>
@@ -1422,8 +1422,8 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kt">double</span> <span class="nf">area</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span> <span class="o">*</span> <span class="o">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="o">)</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="nf">area</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span> <span class="o">*</span> <span class="o">(</span><span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 
@@ -1437,13 +1437,13 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kt">double</span> <span class="nf">area</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="nf">area</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">length</span> <span class="o">*</span> <span class="n">width</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="95-a-name-1a">9.5. <a name='-1'></a>クラス階層の良い点</h3>
+</div><h3 id="95-a-name-1aクラス階層の良い点">9.5. <a name='-1'></a>クラス階層の良い点</h3>
 <ul>
 <li>タグ付きクラスの欠点がすべて解決できている
 <ul>
@@ -1466,7 +1466,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Square</span> <span class="kd">extends</span> <span class="n">Rectangle</span> <span class="o">{</span>
     <span class="n">Square</span><span class="o">(</span><span class="kt">double</span> <span class="n">side</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">side</span><span class="o">,</span> <span class="n">side</span><span class="o">)</span><span class="o">;</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">side</span><span class="o">,</span> <span class="n">side</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
@@ -1475,8 +1475,8 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </ul>
 </li>
 </ul>
-<h2 id="10-a-name24staticstatica-24--static--static-">10. <a name='24staticstatic'></a>項目 24 非 static のメンバークラスより static のメンバークラスを選ぶ</h2>
-<h3 id="101-a-name-1a">10.1. <a name='-1'></a>結論</h3>
+<h2 id="10-a-name24staticstatica項目-24-非-static-のメンバークラスより-static-のメンバークラスを選ぶ">10. <a name='24staticstatic'></a>項目 24 非 static のメンバークラスより static のメンバークラスを選ぶ</h2>
+<h3 id="101-a-name-1a結論">10.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>ネストしたクラスはエンクロージングクラスに対して仕える目的のためだけに存在すべき
 <ul>
@@ -1494,7 +1494,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </li>
 <li>メンバークラスやローカルクラスは、外部クラスを離れては意味のないクラスを内部に隠蔽することができるのでカプセル化の点でメリットがある。(参考：<a href="https://qiita.com/liguofeng29/items/6cafca5bf92e0381ee42">java の内部クラスおさらい</a>)</li>
 </ul>
-<h3 id="102-a-name-1a">10.2. <a name='-1'></a>ネストしたクラスの種類</h3>
+<h3 id="102-a-name-1aネストしたクラスの種類">10.2. <a name='-1'></a>ネストしたクラスの種類</h3>
 <ul>
 <li>static のメンバークラス</li>
 <li>非 static のメンバークラス</li>
@@ -1563,16 +1563,16 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
         <span class="n">outerField2</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kt">void</span> <span class="nf">hogeMethod</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">hogeMethod</span><span class="o">(){</span>
         <span class="c1">// 匿名クラス
-</span><span class="c1"></span>        <span class="n">FugaInterface</span> <span class="n">fugaInterface</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FugaInterface</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
+</span><span class="c1"></span>        <span class="n">FugaInterface</span> <span class="n">fugaInterface</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FugaInterface</span><span class="o">(){</span>
             <span class="kt">void</span> <span class="n">fugaMethod</span><span class="o">{</span>
                 <span class="c1">// 処理
 </span><span class="c1"></span>            <span class="o">}</span>
-        <span class="o">}</span><span class="o">;</span>
+        <span class="o">};</span>
 
         <span class="c1">// インターフェースだけではなくクラスでもOK。メソッドオーバーライドや抽象メソッドの実装をしないと意味ないが
-</span><span class="c1"></span>        <span class="n">FugaClass</span> <span class="n">fugaClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FugaClass</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
+</span><span class="c1"></span>        <span class="n">FugaClass</span> <span class="n">fugaClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FugaClass</span><span class="o">(){</span>
             <span class="nd">@Override</span>
             <span class="kt">void</span> <span class="n">fugaMethod</span>
             <span class="o">{</span>
@@ -1589,15 +1589,15 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="103-a-namestaticastatic-">10.3. <a name='static'></a>static のメンバークラス</h3>
-<h4 id="1031-a-name-1a">10.3.1. <a name='-1'></a>特徴</h4>
+</div><h3 id="103-a-namestaticastatic-のメンバークラス">10.3. <a name='static'></a>static のメンバークラス</h3>
+<h4 id="1031-a-name-1a特徴">10.3.1. <a name='-1'></a>特徴</h4>
 <ul>
 <li>最も単純なネストしたクラス</li>
 <li>通常の別クラスとして宣言し場合と近い感覚で利用できる</li>
 <li>通常のクラスとの違いはエンクロージングクラスの static のメンバーにアクセスできること</li>
 <li>メンバーなので private,protected が使える</li>
 </ul>
-<h4 id="1032-a-name-1a">10.3.2. <a name='-1'></a>使用例</h4>
+<h4 id="1032-a-name-1a使用例">10.3.2. <a name='-1'></a>使用例</h4>
 <ul>
 <li>その外部クラスを使用と一緒に使用すると有用な public のヘルパークラス
 <ul>
@@ -1614,8 +1614,8 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </ul>
 </li>
 </ul>
-<h3 id="104-a-namestatic-1a-static-">10.4. <a name='static-1'></a>非 static のメンバークラス</h3>
-<h4 id="1041-a-name-1a">10.4.1. <a name='-1'></a>特徴</h4>
+<h3 id="104-a-namestatic-1a非-static-のメンバークラス">10.4. <a name='static-1'></a>非 static のメンバークラス</h3>
+<h4 id="1041-a-name-1a特徴">10.4.1. <a name='-1'></a>特徴</h4>
 <ul>
 <li>エンクロージングインスタンスと関連付けられている
 <ul>
@@ -1625,7 +1625,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 <li>エンクロージングクラスのメンバーすべてにアクセスできる</li>
 <li>メンバーなので private,protected が使える</li>
 </ul>
-<h4 id="1042-a-name-1a">10.4.2. <a name='-1'></a>使用例</h4>
+<h4 id="1042-a-name-1a使用例">10.4.2. <a name='-1'></a>使用例</h4>
 <ul>
 <li>エンクロージングクラスのインスタンスを関係のないクラスのインスタンスとしてみなすことを可能にする Adapter を定義するときに使う - Adapter パターンは既存クラスを修正することなく、 異なるインタフェースを持たせることができるデザインパターン
 <div class="highlight"><div class="chroma">
@@ -1647,18 +1647,18 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MySet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MySet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;{</span>
 <span class="c1">// 省略
 </span><span class="c1"></span>
-        <span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
-            <span class="k">return</span> <span class="k">new</span> <span class="n">MyIterator</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">(){</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">MyIterator</span><span class="o">();</span>
         <span class="o">}</span>
 
-        <span class="kd">private</span> <span class="kd">class</span> <span class="nc">MyIterator</span> <span class="kd">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="o">{</span>
-            <span class="o">.</span><span class="o">.</span><span class="o">.</span>
+        <span class="kd">private</span> <span class="kd">class</span> <span class="nc">MyIterator</span> <span class="kd">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;{</span>
+            <span class="o">...</span>
         <span class="o">}</span>
     <span class="o">}</span>
-    <span class="err">`</span><span class="err">`</span><span class="err">`</span>
+    <span class="err">```</span>
 
 <span class="o">&gt;</span> <span class="kd">static</span> <span class="n">のメンバークラスと同様に何かに属していることを明示したり</span><span class="err">、</span><span class="n">ジェネリクスを合わせたりといったメリットがある</span>
 
@@ -1666,7 +1666,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </div>
 </div></li>
 </ul>
-<h4 id="1043-a-name-1a">10.4.3. <a name='-1'></a>主張</h4>
+<h4 id="1043-a-name-1a主張">10.4.3. <a name='-1'></a>主張</h4>
 <ul>
 <li>エンクロージングインスタンスへのアクセスが必要なければ、static のメンバークラスを利用するべき
 <ul>
@@ -1695,8 +1695,8 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">var</span> <span class="n">o</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Outer</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-<span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="k">new</span> <span class="n">o</span><span class="o">.</span><span class="na">Inner</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">var</span> <span class="n">o</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Outer</span><span class="o">();</span>
+<span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="k">new</span> <span class="n">o</span><span class="o">.</span><span class="na">Inner</span><span class="o">();</span>
 <span class="n">o</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">//i から o への参照は残る
 </span></code></pre></td></tr></table>
 </div>
@@ -1704,8 +1704,8 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </ul>
 </li>
 </ul>
-<h3 id="105-a-name-1a">10.5. <a name='-1'></a>無名クラス</h3>
-<h4 id="1051-a-name-1a">10.5.1. <a name='-1'></a>特徴</h4>
+<h3 id="105-a-name-1a無名クラス">10.5. <a name='-1'></a>無名クラス</h3>
+<h4 id="1051-a-name-1a特徴">10.5.1. <a name='-1'></a>特徴</h4>
 <ul>
 <li>他のネストしたクラスとは全く異なる</li>
 <li>クラス名が無い</li>
@@ -1715,9 +1715,9 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 <li>非 static の文脈内で書かれたならば、エンクロージングインスタンスを持つ</li>
 <li>static の文脈内で書かれても static のメンバーを持つことができない</li>
 <li>instanceof 検査やクラスの名前を指定する必要がある処理はできない</li>
-<li>外側で定義されているローカル変数を使う場合は、そのローカル変数に暗黙に final が付いているものと見なされる(<a href="http://www.ne.jp/asahi/hishidama/home/tech/java/class_use.html#h_effectively_final">Java クラス使用メモ(Hishidama's Java Class use Memo)</a>)</li>
+<li>外側で定義されているローカル変数を使う場合は、そのローカル変数に暗黙に final が付いているものと見なされる(<a href="http://www.ne.jp/asahi/hishidama/home/tech/java/class_use.html#h_effectively_final">Java クラス使用メモ(Hishidama&rsquo;s Java Class use Memo)</a>)</li>
 </ul>
-<h4 id="1052-a-name-1a">10.5.2. <a name='-1'></a>使用例</h4>
+<h4 id="1052-a-name-1a使用例">10.5.2. <a name='-1'></a>使用例</h4>
 <ul>
 <li>
 <p>その場で関数オブジェクトを生成</p>
@@ -1732,11 +1732,11 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Hoge</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Hoge</span><span class="o">&gt;()</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Hoge</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Hoge</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">id</span><span class="o">)</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">id</span><span class="o">);</span>
     <span class="o">}</span>
-<span class="o">}</span><span class="o">)</span><span class="o">;</span>
+<span class="o">});</span>
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1761,14 +1761,14 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">500</span><span class="o">;</span> <span class="n">i</span><span class="o">+</span><span class="o">+</span><span class="o">)</span><span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="sc">&#39;*&#39;</span><span class="o">)</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">500</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="sc">&#39;*&#39;</span><span class="o">);</span>
             <span class="o">}</span>
         <span class="o">}</span>
-    <span class="o">}</span><span class="o">)</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -1805,28 +1805,28 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">intArrayAsList</span><span class="o">(</span><span class="kd">final</span> <span class="kt">int</span><span class="o">[</span><span class="o">]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">intArrayAsList</span><span class="o">(</span><span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">();</span>
     <span class="o">}</span>
 
-    <span class="k">return</span> <span class="k">new</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span><span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(){</span>
         <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
         <span class="o">}</span>
 
         <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="o">;</span>
+            <span class="k">return</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
         <span class="o">}</span>
 
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">set</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">oldVal</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">oldVal</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
             <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
             <span class="k">return</span> <span class="n">oldVal</span><span class="o">;</span>
         <span class="o">}</span>
-    <span class="o">}</span><span class="o">;</span>
+    <span class="o">};</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -1840,9 +1840,9 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">hogeList</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="o">)</span>
-    <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">-</span><span class="o">&gt;</span> <span class="o">{</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">&#34; &#34;</span><span class="o">)</span><span class="o">;</span> <span class="o">}</span>
-    <span class="o">)</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">hogeList</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">forEach</span><span class="o">((</span><span class="n">i</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">&#34; &#34;</span><span class="o">);</span> <span class="o">}</span>
+    <span class="o">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -1859,13 +1859,13 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">hogeList</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="o">)</span>
-    <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="k">new</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">hogeList</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="k">new</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">accept</span><span class="o">(</span><span class="n">Integer</span> <span class="n">i</span><span class="o">)</span>
         <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">&#34; &#34;</span><span class="o">)</span><span class="o">;</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">&#34; &#34;</span><span class="o">);</span>
         <span class="o">}</span>
-    <span class="o">}</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">});</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -1873,25 +1873,25 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </ul>
 </li>
 </ul>
-<h3 id="106-a-name-1a">10.6. <a name='-1'></a>ローカル内部クラス</h3>
-<h4 id="1061-a-name-1a">10.6.1. <a name='-1'></a>特徴</h4>
+<h3 id="106-a-name-1aローカル内部クラス">10.6. <a name='-1'></a>ローカル内部クラス</h3>
+<h4 id="1061-a-name-1a特徴">10.6.1. <a name='-1'></a>特徴</h4>
 <ul>
 <li>private,protected が使えない</li>
 <li>外部クラスのメンバーにはアクセス可能</li>
 <li>外側で定義されているローカル変数を使う場合は、そのローカル変数に暗黙に final が付いているものと見なされる</li>
 </ul>
-<h4 id="1062-a-name-1a">10.6.2. <a name='-1'></a>主張</h4>
+<h4 id="1062-a-name-1a主張">10.6.2. <a name='-1'></a>主張</h4>
 <ul>
 <li>あまり使われない</li>
 <li>短くあるべき</li>
 <li>ローカル変数のようなもの</li>
 </ul>
-<h2 id="11-a-name25a-25-">11. <a name='25'></a>項目 25 ソースファイルを単一のトップレベルのクラスに限定する</h2>
-<h3 id="111-a-name-1a">11.1. <a name='-1'></a>結論</h3>
+<h2 id="11-a-name25a項目-25-ソースファイルを単一のトップレベルのクラスに限定する">11. <a name='25'></a>項目 25 ソースファイルを単一のトップレベルのクラスに限定する</h2>
+<h3 id="111-a-name-1a結論">11.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>単一のソースファイルに複数のトップレベルのクラスを作るべきでない</li>
 </ul>
-<h3 id="112-a-name-1a">11.2. <a name='-1'></a>理由</h3>
+<h3 id="112-a-name-1a理由">11.2. <a name='-1'></a>理由</h3>
 <ul>
 <li>コンパイルの順序によって結果が変わってしまうことがあるから
 <ul>
@@ -1916,8 +1916,8 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Utensil</span><span class="o">.</span><span class="na">NAME</span> <span class="o">+</span> <span class="n">Dessert</span><span class="o">.</span><span class="na">NAME</span><span class="o">)</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Utensil</span><span class="o">.</span><span class="na">NAME</span> <span class="o">+</span> <span class="n">Dessert</span><span class="o">.</span><span class="na">NAME</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
@@ -1964,7 +1964,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="113-a-namejavacajavac-">11.3. <a name='javac'></a>補足：javac の依存関係の解消の仕組み</h3>
+</div><h3 id="113-a-namejavaca補足javac-の依存関係の解消の仕組み">11.3. <a name='javac'></a>補足：javac の依存関係の解消の仕組み</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1986,7 +1986,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </code></pre></td></tr></table>
 </div>
 </div><p>出展：<a href="https://www.atmarkit.co.jp/fjava/onepoint/java/jv_jvc.html#ap02">Java プログラミングの前提知識</a></p>
-<h3 id="114-a-name-1a">11.4. <a name='-1'></a>解決法</h3>
+<h3 id="114-a-name-1a解決法">11.4. <a name='-1'></a>解決法</h3>
 <ul>
 <li>
 <p>１つソースファイルには 1 つだけトップレベルのクラスを作る</p>
@@ -2011,8 +2011,8 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Utensil</span><span class="o">.</span><span class="na">NAME</span> <span class="o">+</span> <span class="n">Dessert</span><span class="o">.</span><span class="na">NAME</span><span class="o">)</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Utensil</span><span class="o">.</span><span class="na">NAME</span> <span class="o">+</span> <span class="n">Dessert</span><span class="o">.</span><span class="na">NAME</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Utensil</span> <span class="o">{</span>
@@ -2027,11 +2027,11 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </div>
 </div></li>
 </ul>
-<h3 id="115-a-name-1a">11.5. <a name='-1'></a>意見</h3>
+<h3 id="115-a-name-1a意見">11.5. <a name='-1'></a>意見</h3>
 <ul>
 <li>FQCN が完全に同じクラスが２つあった時、先に読み込んだ方のクラスを使う</li>
 </ul>
-<h2 id="12-a-nameurla-url">12. <a name='URL'></a>参考 URL</h2>
+<h2 id="12-a-nameurla参考-url">12. <a name='URL'></a>参考 URL</h2>
 <ul>
 <li><a href="https://qiita.com/opengl-8080/items/93c8e0cf58654d5f73cb#fn1">モジュールシステムを学ぶ</a></li>
 <li><a href="https://www.sejuku.net/blog/22689">【納得 Java】抽象クラス(abstract)を使うメリット</a></li>
