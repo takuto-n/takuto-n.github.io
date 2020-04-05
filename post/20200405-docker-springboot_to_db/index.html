@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="SpringBoot App on the Container access MySQL DB.    Overview   1.1. Technical Elements    Coding &amp;amp; Settings of Each Technical Element   2.1. SpringBoot  2.1.1. SpringBootApplication 2.1.2. RestController 2.1.3. DTO 2.1.4. Mapper 2.1.5. Application.properties 2.1.6. build.gradle   2.2. jib-gradle-plugin  2.2.1. build.gradle      Build and Run   3.1. Build 3.2. Run 3.3. Conrainer Repository への push と pull  3.3.1. docker push 3.3.2. docker pull &amp;amp; docker run      Trouble   4.1. SpringBoot Appから外部(DB等)へのアクセスができない 4.2. GCR(Google Container Registry)にDocker Imageを登録(push)できない    参考URL    1. Overview " /><meta name="keywords" content="docker, springboot, jib" />
+<meta name="author" content="takuto_n" /><meta name="description" content="SpringBoot App on the Container access MySQL DB. " /><meta name="keywords" content="docker, springboot, jib" />
 
 
 
@@ -40,71 +40,6 @@
 
 <meta property="og:title" content="Springboot on Container" />
 <meta property="og:description" content="SpringBoot App on the Container access MySQL DB.
-
-
-
-
-Overview
-
-
-1.1. Technical Elements
-
-
-
-
-Coding &amp; Settings of Each Technical Element
-
-
-2.1. SpringBoot
-
-2.1.1. SpringBootApplication
-2.1.2. RestController
-2.1.3. DTO
-2.1.4. Mapper
-2.1.5. Application.properties
-2.1.6. build.gradle
-
-
-2.2. jib-gradle-plugin
-
-2.2.1. build.gradle
-
-
-
-
-
-
-Build and Run
-
-
-3.1. Build
-3.2. Run
-3.3. Conrainer Repository への push と pull
-
-3.3.1. docker push
-3.3.2. docker pull &amp; docker run
-
-
-
-
-
-
-Trouble
-
-
-4.1. SpringBoot Appから外部(DB等)へのアクセスができない
-4.2. GCR(Google Container Registry)にDocker Imageを登録(push)できない
-
-
-
-
-参考URL
-
-
-
-
-
-1. Overview
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20200405-docker-springboot_to_db/" />
@@ -112,146 +47,16 @@ Trouble
 <meta property="article:modified_time" content="2020-04-05T15:55:57+09:00" />
 <meta itemprop="name" content="Springboot on Container">
 <meta itemprop="description" content="SpringBoot App on the Container access MySQL DB.
-
-
-
-
-Overview
-
-
-1.1. Technical Elements
-
-
-
-
-Coding &amp; Settings of Each Technical Element
-
-
-2.1. SpringBoot
-
-2.1.1. SpringBootApplication
-2.1.2. RestController
-2.1.3. DTO
-2.1.4. Mapper
-2.1.5. Application.properties
-2.1.6. build.gradle
-
-
-2.2. jib-gradle-plugin
-
-2.2.1. build.gradle
-
-
-
-
-
-
-Build and Run
-
-
-3.1. Build
-3.2. Run
-3.3. Conrainer Repository への push と pull
-
-3.3.1. docker push
-3.3.2. docker pull &amp; docker run
-
-
-
-
-
-
-Trouble
-
-
-4.1. SpringBoot Appから外部(DB等)へのアクセスができない
-4.2. GCR(Google Container Registry)にDocker Imageを登録(push)できない
-
-
-
-
-参考URL
-
-
-
-
-
-1. Overview
 ">
 <meta itemprop="datePublished" content="2020-04-05T15:55:57&#43;09:00" />
 <meta itemprop="dateModified" content="2020-04-05T15:55:57&#43;09:00" />
-<meta itemprop="wordCount" content="1355">
+<meta itemprop="wordCount" content="1285">
 
 
 
 <meta itemprop="keywords" content="docker,springboot,jib," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Springboot on Container"/>
 <meta name="twitter:description" content="SpringBoot App on the Container access MySQL DB.
-
-
-
-
-Overview
-
-
-1.1. Technical Elements
-
-
-
-
-Coding &amp; Settings of Each Technical Element
-
-
-2.1. SpringBoot
-
-2.1.1. SpringBootApplication
-2.1.2. RestController
-2.1.3. DTO
-2.1.4. Mapper
-2.1.5. Application.properties
-2.1.6. build.gradle
-
-
-2.2. jib-gradle-plugin
-
-2.2.1. build.gradle
-
-
-
-
-
-
-Build and Run
-
-
-3.1. Build
-3.2. Run
-3.3. Conrainer Repository への push と pull
-
-3.3.1. docker push
-3.3.2. docker pull &amp; docker run
-
-
-
-
-
-
-Trouble
-
-
-4.1. SpringBoot Appから外部(DB等)へのアクセスができない
-4.2. GCR(Google Container Registry)にDocker Imageを登録(push)できない
-
-
-
-
-参考URL
-
-
-
-
-
-1. Overview
 "/>
 
 <!--[if lte IE 9]>
@@ -326,7 +131,7 @@ Trouble
         <div class="post-category">
             <a href="/categories/docker/"> docker </a>
             </div>
-          <span class="more-meta"> 1355 words </span>
+          <span class="more-meta"> 1285 words </span>
           <span class="more-meta"> 3 mins read </span>
         
       </div>
@@ -335,15 +140,13 @@ Trouble
     
     <div class="post-content">
       <h1 id="springboot-app-on-the-container-access-mysql-db">SpringBoot App on the Container access MySQL DB.</h1>
+<img src="/img/20200405/docker-springboot_db.png" width=80%>
 <!-- vscode-markdown-toc -->
 <ul>
 <li>
 <ol>
-<li><a href="#Overview">Overview</a></li>
+<li><a href="#TechnicalElements">Technical Elements</a></li>
 </ol>
-<ul>
-<li>1.1. <a href="#TechnicalElements">Technical Elements</a></li>
-</ul>
 </li>
 <li>
 <ol start="2">
@@ -387,13 +190,13 @@ Trouble
 <li><a href="#Trouble">Trouble</a></li>
 </ol>
 <ul>
-<li>4.1. <a href="#SpringBootAppDB">SpringBoot Appから外部(DB等)へのアクセスができない</a></li>
-<li>4.2. <a href="#GCRGoogleContainerRegistryDockerImagepush"><code>GCR(Google Container Registry)</code>にDocker Imageを登録(push)できない</a></li>
+<li>4.1. <a href="#SpringBootAppDB">SpringBoot App から外部(DB 等)へのアクセスができない</a></li>
+<li>4.2. <a href="#GCRGoogleContainerRegistryDockerImagepush"><code>GCR(Google Container Registry)</code>に Docker Image を登録(push)できない</a></li>
 </ul>
 </li>
 <li>
 <ol start="5">
-<li><a href="#URL">参考URL</a></li>
+<li><a href="#URL">参考 URL</a></li>
 </ol>
 </li>
 </ul>
@@ -402,18 +205,16 @@ Trouble
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-nameoverviewaoverview">1. <a name='Overview'></a>Overview</h2>
-<img src="/img/20200405/docker-springboot_db.png" width=80%>
-<h3 id="11-a-nametechnicalelementsatechnical-elements">1.1. <a name='TechnicalElements'></a>Technical Elements</h3>
+<h2 id="1-a-nametechnicalelementsatechnical-elements">1. <a name='TechnicalElements'></a>Technical Elements</h2>
 <ul>
 <li><a href="https://spring.io/projects/spring-boot">Spring Boot</a>
 <ul>
-<li>Spring Frameworkベースのアプリケーションを手軽に作成することができるフレームワーク</li>
+<li>Spring Framework ベースのアプリケーションを手軽に作成することができるフレームワーク</li>
 </ul>
 </li>
 <li><a href="https://www.docker.com/">Docker</a>
 <ul>
-<li>コンテナ仮想化を用いたOSレベルの仮想環境の構築ツール</li>
+<li>コンテナ仮想化を用いた OS レベルの仮想環境の構築ツール</li>
 </ul>
 </li>
 <li><a href="https://github.com/GoogleContainerTools/jib">GoogleContainerTools/jib: 🏗</a>
@@ -424,9 +225,9 @@ Trouble
 </li>
 <li><a href="https://cloud.google.com/docs/overview?hl=ja">GCP(Google Cloud Platform)</a>
 <ul>
-<li>Googleが提供しているクラウドコンピューティングサービス
+<li>Google が提供しているクラウドコンピューティングサービス
 <ul>
-<li>Google検索やYouTubeなどでも同じインフラストラクチャーが利用されている。</li>
+<li>Google 検索や YouTube などでも同じインフラストラクチャーが利用されている。</li>
 </ul>
 </li>
 </ul>
@@ -717,7 +518,7 @@ $ docker run -e <span class="s2">&#34;SPRING_PROFILES_ACTIVE=prod&#34;</span> -p
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="4-a-nametroubleatrouble">4. <a name='Trouble'></a>Trouble</h2>
-<h3 id="41-a-namespringbootappdbaspringboot-appから外部db等へのアクセスができない">4.1. <a name='SpringBootAppDB'></a>SpringBoot Appから外部(DB等)へのアクセスができない</h3>
+<h3 id="41-a-namespringbootappdbaspringboot-app-から外部db-等へのアクセスができない">4.1. <a name='SpringBootAppDB'></a>SpringBoot App から外部(DB 等)へのアクセスができない</h3>
 <p><code>docker run</code>実行時の以下の警告は解決しないといけない。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -728,8 +529,8 @@ $ docker run -e <span class="s2">&#34;SPRING_PROFILES_ACTIVE=prod&#34;</span> -p
 </code></pre></td></tr></table>
 </div>
 </div><p><code>sudo sysctl -w net.ipv4.ip_forward=1</code>を実行することで、<code>IPV4</code>のフォーワーディングができるようになる。</p>
-<p>これを実施することで、コンテナ内から外部(DB等)へのアクセスができるようになる。</p>
-<h3 id="42-a-namegcrgooglecontainerregistrydockerimagepushagcrgoogle-container-registryにdocker-imageを登録pushできない">4.2. <a name='GCRGoogleContainerRegistryDockerImagepush'></a><code>GCR(Google Container Registry)</code>にDocker Imageを登録(push)できない</h3>
+<p>これを実施することで、コンテナ内から外部(DB 等)へのアクセスができるようになる。</p>
+<h3 id="42-a-namegcrgooglecontainerregistrydockerimagepushagcrgoogle-container-registryに-docker-image-を登録pushできない">4.2. <a name='GCRGoogleContainerRegistryDockerImagepush'></a><code>GCR(Google Container Registry)</code>に Docker Image を登録(push)できない</h3>
 <p><code>docker-credential-gcr</code>コマンドによるリポジトリの認証が必要だった。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -743,15 +544,15 @@ $ docker run -e <span class="s2">&#34;SPRING_PROFILES_ACTIVE=prod&#34;</span> -p
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell">$ gcloud auth configure-docker
 $ wget https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v2.0.1/docker-credential-gcr_linux_amd64-2.0.1.tar.gz
-$ tar -zxvf ./docker-credential-gcr_linux_amd64-2.0.1.tar.gz 
+$ tar -zxvf ./docker-credential-gcr_linux_amd64-2.0.1.tar.gz
 $ mv ./docker-credential-gcr /usr/bin/
 $ chmod +x /usr/bin/docker-credential-gcr
 $ docker-credential-gcr configure-docker
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="5-a-nameurla参考url">5. <a name='URL'></a>参考URL</h2>
+</div><h2 id="5-a-nameurla参考-url">5. <a name='URL'></a>参考 URL</h2>
 <ul>
-<li><a href="https://sioyaki.com/entry/2017/02/19/154412">Dockerビルド時のIPv4 forwarding is disabledエラーの解決方法 – 塩焼きブログ</a></li>
+<li><a href="https://sioyaki.com/entry/2017/02/19/154412">Docker ビルド時の IPv4 forwarding is disabled エラーの解決方法 – 塩焼きブログ</a></li>
 <li><a href="https://cloud.google.com/container-registry/docs/advanced-authentication?hl=ja">認証方法  |  Container Registry のドキュメント  |  Google Cloud</a></li>
 </ul>
     </div>
