@@ -48,7 +48,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-04-07T16:16:55&#43;09:00" />
 <meta itemprop="dateModified" content="2020-04-07T16:16:55&#43;09:00" />
-<meta itemprop="wordCount" content="1118">
+<meta itemprop="wordCount" content="1324">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories//">  </a>
             </div>
-          <span class="more-meta"> 1118 words </span>
+          <span class="more-meta"> 1324 words </span>
           <span class="more-meta"> 3 mins read </span>
         
       </div>
@@ -431,18 +431,52 @@
 <p>コンテナの中を実際に見てみましょう。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">$</span> <span class="n">docker</span> <span class="n">container</span> <span class="n">ls</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">$</span> <span class="n">mkdir</span> <span class="n">tmp</span>
+<span class="n">$</span> <span class="n">docker</span> <span class="n">container</span> <span class="n">ls</span>
 <span class="n">CONTAINER</span> <span class="n">ID</span>        <span class="n">IMAGE</span>                                <span class="n">COMMAND</span>                  <span class="n">CREATED</span>             <span class="n">STATUS</span>              <span class="n">PORTS</span>                    <span class="n">NAMES</span>
 <span class="n">d48bfc8bfad8</span>        <span class="n">springio</span><span class="o">/</span><span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span>   <span class="s">&#34;java -cp /app/resou…&#34;</span>   <span class="n">3</span> <span class="n">minutes</span> <span class="n">ago</span>       <span class="n">Up</span> <span class="n">3</span> <span class="n">minutes</span>        <span class="n">0</span><span class="o">.</span><span class="na">0</span><span class="o">.</span><span class="na">0</span><span class="o">.</span><span class="na">0</span><span class="o">:</span><span class="n">8080</span><span class="o">-&gt;</span><span class="n">8080</span><span class="o">/</span><span class="n">tcp</span>   <span class="n">loving_morse</span>
-<span class="n">$</span> <span class="n">docker</span> <span class="n">export</span> <span class="n">d48bfc8bfad8</span>  <span class="o">&gt;</span> <span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span><span class="o">.</span><span class="na">tar</span>
-<span class="n">$</span> <span class="n">tar</span> <span class="o">-</span><span class="n">xvf</span> <span class="o">./</span><span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span><span class="o">.</span><span class="na">tar</span> 
+<span class="n">$</span> <span class="n">docker</span> <span class="n">export</span> <span class="n">d48bfc8bfad8</span>  <span class="o">&gt;</span> <span class="n">tmp</span><span class="o">/</span><span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span><span class="o">.</span><span class="na">tar</span>
+<span class="n">$</span> <span class="n">tar</span> <span class="o">-</span><span class="n">xvf</span> <span class="o">./</span><span class="n">tmp</span><span class="o">/</span><span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span><span class="o">.</span><span class="na">tar</span> 
+<span class="n">$</span> <span class="n">ll</span>
+<span class="n">total</span> <span class="n">217372</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">5</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>        <span class="n">50</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">app</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">bin</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">boot</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">4</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>        <span class="n">43</span> <span class="n">Apr</span>  <span class="n">7</span> <span class="n">08</span><span class="o">:</span><span class="n">24</span> <span class="n">dev</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span> <span class="nf">12</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>      <span class="n">4096</span> <span class="n">Apr</span>  <span class="n">7</span> <span class="n">08</span><span class="o">:</span><span class="n">24</span> <span class="n">etc</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--.</span>  <span class="n">1</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span> <span class="n">222581248</span> <span class="n">Apr</span>  <span class="n">7</span> <span class="n">08</span><span class="o">:</span><span class="n">41</span> <span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span><span class="o">.</span><span class="na">tar</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">3</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>        <span class="n">21</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">home</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">3</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>       <span class="n">172</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">jnr</span><span class="o">-</span><span class="kd">native</span><span class="o">-</span><span class="n">side_release</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">3</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>        <span class="n">30</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">lib</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>        <span class="n">34</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">lib64</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">proc</span>
+<span class="n">drwx</span><span class="o">------.</span>  <span class="n">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">root</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">run</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">sbin</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="5-a-nameexecutionresultaexecution-result">5. <a name='ExecutionResult'></a>Execution Result</h2>
