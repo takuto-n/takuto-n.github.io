@@ -48,7 +48,7 @@
 <meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2020-04-05T15:55:57&#43;09:00" />
 <meta itemprop="dateModified" content="2020-04-05T15:55:57&#43;09:00" />
-<meta itemprop="wordCount" content="1285">
+<meta itemprop="wordCount" content="1654">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
             <a href="/categories/docker/"> docker </a>
             </div>
-          <span class="more-meta"> 1285 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 1654 words </span>
+          <span class="more-meta"> 4 mins read </span>
         
       </div>
     </header>
@@ -193,7 +193,12 @@
 </li>
 <li>
 <ol start="5">
-<li><a href="#URL">参考 URL</a></li>
+<li><a href="#ExecutionResult">Execution Result</a></li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li><a href="#ReferenceURL">Reference URL</a></li>
 </ol>
 </li>
 </ul>
@@ -547,7 +552,70 @@ $ chmod +x /usr/bin/docker-credential-gcr
 $ docker-credential-gcr configure-docker
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="5-a-nameurla参考-url">5. <a name='URL'></a>参考 URL</h2>
+</div><h2 id="5-a-nameexecutionresultaexecution-result">5. <a name='ExecutionResult'></a>Execution Result</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ docker run -p 8080:8080 -t springio/gs-spring-boot-docker
+Picked up JAVA_TOOL_OPTIONS: -Djava.library.path<span class="o">=</span>/jnr-native-side_release/0.0.1
+  .   ____          _            __ _ _
+ /<span class="se">\\</span> / ___<span class="s1">&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
+</span><span class="s1">( ( )\___ | &#39;</span>_ <span class="p">|</span> <span class="s1">&#39;_| | &#39;</span>_ <span class="se">\/</span> _<span class="sb">`</span> <span class="p">|</span> <span class="se">\ \ \ \
+</span><span class="se"></span> <span class="se">\\</span>/  ___<span class="o">)</span><span class="p">|</span> <span class="p">|</span>_<span class="o">)</span><span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">||</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span>  <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span>
+  <span class="s1">&#39;  |____| .__|_| |_|_| |_\__, | / / / /
+</span><span class="s1"> =========|_|==============|___/=/_/_/_/
+</span><span class="s1"> :: Spring Boot ::        (v2.2.2.RELEASE)
+</span><span class="s1">2020-04-07 08:24:47.061  INFO 1 --- [           main] c.e.s.SpringbootHelloworldApplication    : Starting SpringbootHelloworldApplication on 1375be00459c with PID 1 (/app/clas
+</span><span class="s1">ses started by root in /)
+</span><span class="s1">2020-04-07 08:24:47.072  INFO 1 --- [           main] c.e.s.SpringbootHelloworldApplication    : No active profile set, falling back to default profiles: default
+</span><span class="s1">2020-04-07 08:24:50.487  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+</span><span class="s1">2020-04-07 08:24:50.521  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+</span><span class="s1">2020-04-07 08:24:50.522  INFO 1 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+</span><span class="s1">2020-04-07 08:24:50.765  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+</span><span class="s1">2020-04-07 08:24:50.765  INFO 1 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3551 ms
+</span><span class="s1">2020-04-07 08:24:52.650  INFO 1 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService &#39;</span>applicationTaskExecutor<span class="s1">&#39;
+</span><span class="s1">2020-04-07 08:24:53.353  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path &#39;&#39;
+</span><span class="s1">2020-04-07 08:24:53.367  INFO 1 --- [           main] c.e.s.SpringbootHelloworldApplication    : Started SpringbootHelloworldApplication in 7.334 seconds (JVM running for 8.212)
+</span><span class="s1">2020-04-07 08:24:57.947  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet &#39;</span>dispatcherServlet<span class="s1">&#39;
+</span><span class="s1">2020-04-07 08:24:57.947  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet &#39;</span>dispatcherServlet<span class="err">&#39;</span>
+2020-04-07 08:24:57.964  INFO <span class="m">1</span> --- <span class="o">[</span>nio-8080-exec-1<span class="o">]</span> o.s.web.servlet.DispatcherServlet        : Completed initialization in <span class="m">17</span> ms
+2020-04-07 08:24:58.061  INFO <span class="m">1</span> --- <span class="o">[</span>nio-8080-exec-1<span class="o">]</span> com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-04-07 08:24:59.210  INFO <span class="m">1</span> --- <span class="o">[</span>nio-8080-exec-1<span class="o">]</span> com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-04-07 08:24:59.320  INFO <span class="m">1</span> --- <span class="o">[</span>nio-8080-exec-1<span class="o">]</span> c.e.springboothelloworld.RestController  : <span class="nv">id</span> <span class="o">=</span> 1, <span class="nv">name</span> <span class="o">=</span> user01
+2020-04-07 08:24:59.320  INFO <span class="m">1</span> --- <span class="o">[</span>nio-8080-exec-1<span class="o">]</span> c.e.springboothelloworld.RestController  : <span class="nv">id</span> <span class="o">=</span> 2, <span class="nv">name</span> <span class="o">=</span> user02
+2020-04-07 08:24:59.320  INFO <span class="m">1</span> --- <span class="o">[</span>nio-8080-exec-1<span class="o">]</span> c.e.springboothelloworld.RestController  : <span class="nv">id</span> <span class="o">=</span> 3, <span class="nv">name</span> <span class="o">=</span> user03
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="6-a-namereferenceurlareference-url">6. <a name='ReferenceURL'></a>Reference URL</h2>
 <ul>
 <li><a href="https://sioyaki.com/entry/2017/02/19/154412">Docker ビルド時の IPv4 forwarding is disabled エラーの解決方法 – 塩焼きブログ</a></li>
 <li><a href="https://cloud.google.com/container-registry/docs/advanced-authentication?hl=ja">認証方法  |  Container Registry のドキュメント  |  Google Cloud</a></li>
@@ -562,7 +630,11 @@ $ docker-credential-gcr configure-docker
           <a href="/tags/jib/">jib</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/20200407-jnr-on-docker/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Using JNR on Docker</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/20191109-effective-java-3rd-12/">
             <span class="next-text nav-default">Effective Java 3rd [Chapter 12]</span>
             <span class="next-text nav-mobile">Next</span>
