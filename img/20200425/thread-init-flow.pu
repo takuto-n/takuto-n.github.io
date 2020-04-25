@@ -1,0 +1,53 @@
+@startuml
+
+hide footbox
+
+participant "main thread" as main_thread
+participant "child pool thread 1" as child_thread_1
+participant "child pool thread 2" as child_thread_2
+participant "child pool thread N" as child_thread_N
+participant "tomcat thread 1" as tomcat_thread_1
+participant "tomcat thread 2" as tomcat_thread_2
+participant "tomcat thread N" as tomcat_thread_N
+
+activate main_thread #LightYellow
+
+main_thread -> main_thread : ApplicationContext Initialization
+
+main_thread ->> child_thread_1 : Asynchronous Execution
+activate child_thread_1 #LightYellow
+main_thread ->> child_thread_2 : Asynchronous Execution
+activate child_thread_2 #LightYellow
+main_thread ->> child_thread_N : Asynchronous Execution
+activate child_thread_N #LightYellow
+
+main_thread -> main_thread : Start SpringBoot Application
+
+child_thread_1 -> child_thread_1 : Wait a few seconds
+child_thread_1 -> tomcat_thread_1 : curl localhost:8080/threadInit
+activate tomcat_thread_1 #LightYellow
+child_thread_2 -> child_thread_2 : Wait a few seconds
+child_thread_2 -> tomcat_thread_2 : curl localhost:8080/threadInit
+activate tomcat_thread_2 #LightYellow
+child_thread_N -> child_thread_N : Wait a few seconds
+child_thread_N -> tomcat_thread_N : curl localhost:8080/threadInit
+activate tomcat_thread_N #LightYellow
+
+tomcat_thread_1 -> tomcat_thread_1 : Thread Initialization
+child_thread_1 <-- tomcat_thread_1
+deactivate tomcat_thread_1
+deactivate child_thread_1
+
+tomcat_thread_2 -> tomcat_thread_2 : Thread Initialization
+child_thread_2 <-- tomcat_thread_2
+deactivate tomcat_thread_2
+deactivate child_thread_2
+
+tomcat_thread_N -> tomcat_thread_N : Thread Initialization
+child_thread_N <-- tomcat_thread_N
+deactivate tomcat_thread_N
+deactivate child_thread_N
+
+deactivate main_thread
+
+@enduml
