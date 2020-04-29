@@ -23,6 +23,13 @@
   </url>
   
   <url>
+    <loc>https://takuto-n.github.io/categories/poc/</loc>
+    <lastmod>2020-04-25T17:11:21+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://takuto-n.github.io/post/</loc>
     <lastmod>2020-04-25T17:11:21+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -31,13 +38,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/tags/springboot/</loc>
-    <lastmod>2020-04-25T17:11:21+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/categories/springboot/</loc>
     <lastmod>2020-04-25T17:11:21+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -479,13 +479,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/tags/cors/</loc>
-    <lastmod>2019-03-16T23:09:42+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/categories/poc/</loc>
     <lastmod>2019-03-16T23:09:42+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
