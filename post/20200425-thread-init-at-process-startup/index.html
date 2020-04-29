@@ -52,7 +52,7 @@
 ">
 <meta itemprop="datePublished" content="2020-04-25T17:11:21&#43;09:00" />
 <meta itemprop="dateModified" content="2020-04-25T17:11:21&#43;09:00" />
-<meta itemprop="wordCount" content="1418">
+<meta itemprop="wordCount" content="1434">
 
 
 
@@ -134,34 +134,49 @@
         <div class="post-category">
             <a href="/categories/poc/"> poc </a>
             </div>
-          <span class="more-meta"> 1418 words </span>
+          <span class="more-meta"> 1434 words </span>
           <span class="more-meta"> 3 mins read </span>
         
       </div>
     </header>
 
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Contents</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#1-a-namethreadinitializerathreadinitializer">1. <a name='ThreadInitializer'></a>ThreadInitializer</a></li>
-    <li><a href="#2-a-nameaccesspointforthreadinitializationaaccess-point-for-thread-initialization">2. <a name='Accesspointforthreadinitialization'></a>Access point for thread initialization</a></li>
-    <li><a href="#3-a-nameexecutionresultaexecution-result">3. <a name='Executionresult'></a>Execution result</a></li>
-    <li><a href="#4-a-nameconsideredpointaconsidered-point">4. <a name='ConsideredPoint'></a>Considered Point</a>
-      <ul>
-        <li><a href="#41-a-namefirstchallengea1st-challenge">4.1. <a name='FirstChallenge'></a>1st Challenge</a></li>
-        <li><a href="#42-a-namesecondchallengea2nd-challenge">4.2. <a name='SecondChallenge'></a>2nd Challenge</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-  </div>
-</div>
+    
     <div class="post-content">
       <h1 id="overview">Overview</h1>
 <legend>スレッド初期化のシーケンス図</legend>
 <img src="/img/20200425/thread-init-flow.png" width=100%>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#ThreadInitializer">ThreadInitializer</a></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><a href="#Accesspointforthreadinitialization">Access point for thread initialization</a></li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li><a href="#Executionresult">Execution result</a></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li><a href="#ConsideredPoint">Considered Point</a></li>
+</ol>
+<ul>
+<li>4.1. <a href="#stChallenge">1st Challenge</a></li>
+<li>4.2. <a href="#ndChallenge">2nd Challenge</a></li>
+</ul>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
 <h1 id="explanation">Explanation</h1>
 <p>SpringBootアプリケーション起動直後に、Tomcatのスレッドを初期化する方法について記載します。</p>
 <p>処理フローは概要の「スレッド初期化のシーケンス図」の通りです。</p>
@@ -355,13 +370,13 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="4-a-nameconsideredpointaconsidered-point">4. <a name='ConsideredPoint'></a>Considered Point</h2>
-<h3 id="41-a-namefirstchallengea1st-challenge">4.1. <a name='FirstChallenge'></a>1st Challenge</h3>
+<h3 id="41-a-namestchallengea1st-challenge">4.1. <a name='stChallenge'></a>1st Challenge</h3>
 <p><code>Tomcat</code> の<code>ThreadPool</code> はどこで管理されているのかを確認して、そこでスレッド初期化を実施すればいいんじゃないか？と思い、<code>Tomcat</code> のソースコードを追った。</p>
 <ul>
 <li><a href="https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/web/embedded/tomcat/TomcatEmbeddedContext.java">spring-boot/TomcatEmbeddedContext.java at master · spring-projects/spring-boot</a></li>
 <li>どこだったか残せていないが、、結果、内部で<code>ThreadPool</code>が管理されていて、よく考えるとそこにアクセスするのは、「しんどくないか？」ということで断念。</li>
 </ul>
-<h3 id="42-a-namesecondchallengea2nd-challenge">4.2. <a name='SecondChallenge'></a>2nd Challenge</h3>
+<h3 id="42-a-namendchallengea2nd-challenge">4.2. <a name='ndChallenge'></a>2nd Challenge</h3>
 <p>色々試行錯誤し、「<code>java how to get tomcat thread pool</code>」のような単語で、ググってみた。</p>
 <ul>
 <li>「<a href="https://blog.dreamarts.co.jp/creator/cr20180927/">TomcatのJMXにWebアプリの中からアクセスしたい | DA BLOG</a>」のブログを発見。</li>
