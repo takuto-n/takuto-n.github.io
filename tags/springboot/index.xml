@@ -20,7 +20,7 @@
       <guid>https://takuto-n.github.io/post/20200425-thread-init-at-process-startup/</guid>
       <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
 &lt;legend&gt;スレッド初期化のシーケンス図&lt;/legend&gt;
-&lt;img src=&#34;https://takuto-n.github.io/img/20200425/thread-init-flow.png&#34; width=100%&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200425/thread-init-flow.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,7 +29,7 @@
       <pubDate>Sun, 05 Apr 2020 15:55:57 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20200405-docker-springboot_to_db/</guid>
-      <description>&lt;img src=&#34;https://takuto-n.github.io/img/20200405/docker-springboot_db.png&#34; width=100%&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200405/docker-springboot_db.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

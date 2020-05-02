@@ -230,7 +230,7 @@
 <li>Github</li>
 <li>AWS CodeCommit</li>
 </ul>
-<img src="/img/20191224/AWS_CodeGuru_Repository.PNG" width=80%>
+<p><img src="/img/20191224/AWS_CodeGuru_Repository.PNG" alt=""></p>
 <p>参考URL : <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html">https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html</a></p>
 <h3 id="22-a-name-1a解析単価">2.2. <a name='-1'></a>解析単価</h3>
 <p>まぁまぁ高いので、使う際は気をつけましょう。。<br>
@@ -273,8 +273,10 @@
 <h3 id="31-a-name-1aセットアップについて">3.1. <a name='-1'></a>セットアップについて</h3>
 <p>参考URLに記載の通りであるが、以下の手順で、10分ほどあれば完了するので簡単。</p>
 <ol>
-<li>CodeCommit の初期設定（リポジトリ作成画面に<code>AWS CodeGuru</code>との連携オプションあり。）
-<img src="/img/20191224/AWS_CodeCommit_作成画面.PNG" width=80%></li>
+<li>CodeCommit の初期設定（リポジトリ作成画面に<code>AWS CodeGuru</code>との連携オプションあり。）</li>
+</ol>
+<p><img src="/img/20191224/AWS_CodeCommit_%E4%BD%9C%E6%88%90%E7%94%BB%E9%9D%A2.PNG" alt=""></p>
+<ol start="2">
 <li>Git をインストールする</li>
 <li>CodeCommit への HTTPS 接続用の Git 認証情報を作成する</li>
 <li>CodeCommit コンソールに接続し、リポジトリを複製する</li>
@@ -285,7 +287,7 @@
 <blockquote>
 <p>指摘場所は、<code>AWS CodeCommit</code>のアクティビティ画面</p>
 </blockquote>
-<img src="/img/20191224/CodeGuruによる指摘.png" width=80%>
+<p><img src="/img/20191224/CodeGuru%E3%81%AB%E3%82%88%E3%82%8B%E6%8C%87%E6%91%98.png" alt=""></p>
 <h2 id="4-a-name-1a指摘結果">4. <a name='-1'></a>指摘結果</h2>
 <h3 id="41-a-name-1a指摘されなかったコード">4.1. <a name='-1'></a>指摘されなかったコード</h3>
 <p>下のコードはいずれも他の静的解析ツールで指摘されるのですが、、<code>AWS CodeGuru</code>では指摘されなかったです。</p>
