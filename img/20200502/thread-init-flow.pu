@@ -1,0 +1,35 @@
+@startuml
+
+hide footbox
+
+participant "main thread" as main_thread
+participant "tomcat thread 1" as tomcat_thread_1
+participant "tomcat thread 2" as tomcat_thread_2
+participant "tomcat thread N" as tomcat_thread_N
+
+activate main_thread #LightYellow
+
+main_thread -> main_thread : ApplicationContext Initialization
+
+main_thread ->> tomcat_thread_1 : Asynchronous Execution
+activate tomcat_thread_1 #LightYellow
+main_thread ->> tomcat_thread_2 : Asynchronous Execution
+activate tomcat_thread_2 #LightYellow
+main_thread ->> tomcat_thread_N : Asynchronous Execution
+activate tomcat_thread_N #LightYellow
+
+tomcat_thread_1 -> tomcat_thread_1 : Thread Initilization
+main_thread <-- tomcat_thread_1 : Completion Notification
+deactivate tomcat_thread_1
+tomcat_thread_2 -> tomcat_thread_2 : Thread Initilization
+main_thread <-- tomcat_thread_2 : Completion Notification
+deactivate tomcat_thread_2
+tomcat_thread_N -> tomcat_thread_N : Thread Initilization
+main_thread <-- tomcat_thread_N : Completion Notification
+deactivate tomcat_thread_N
+
+main_thread -> main_thread : Start SpringBoot Application
+
+deactivate main_thread
+
+@enduml
