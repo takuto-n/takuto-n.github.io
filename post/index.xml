@@ -51,7 +51,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 12]</title>
+      <title>Effective Java 3rd [Chapter 12] - シリアライズ</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-12/</link>
       <pubDate>Sat, 07 Mar 2020 00:49:15 +0900</pubDate>
       
@@ -60,7 +60,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 11]</title>
+      <title>Effective Java 3rd [Chapter 11] - 並行性</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-11/</link>
       <pubDate>Sat, 22 Feb 2020 00:49:04 +0900</pubDate>
       
@@ -69,7 +69,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 10]</title>
+      <title>Effective Java 3rd [Chapter 10] - 例外</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-10/</link>
       <pubDate>Sat, 25 Jan 2020 00:49:01 +0900</pubDate>
       
@@ -87,7 +87,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 9]</title>
+      <title>Effective Java 3rd [Chapter 9] - プログラミング一般</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</link>
       <pubDate>Tue, 24 Dec 2019 00:48:59 +0900</pubDate>
       
@@ -96,7 +96,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 8]</title>
+      <title>Effective Java 3rd [Chapter 8] - メソッド</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-8/</link>
       <pubDate>Mon, 09 Dec 2019 00:48:57 +0900</pubDate>
       
@@ -105,7 +105,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 7]</title>
+      <title>Effective Java 3rd [Chapter 7] - ラムダ式とストリーム</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-7/</link>
       <pubDate>Mon, 25 Nov 2019 00:37:53 +0900</pubDate>
       
@@ -114,7 +114,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 6]</title>
+      <title>Effective Java 3rd [Chapter 6] - enum とアノテーション</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-6/</link>
       <pubDate>Sat, 09 Nov 2019 00:36:53 +0900</pubDate>
       
@@ -123,7 +123,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 5]</title>
+      <title>Effective Java 3rd [Chapter 5] - ジェネリクス</title>
       <link>https://takuto-n.github.io/post/20191103-effective-java-3rd-5/</link>
       <pubDate>Sun, 03 Nov 2019 00:07:19 +0900</pubDate>
       
@@ -132,7 +132,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 4]</title>
+      <title>Effective Java 3rd [Chapter 4] - クラスとインタフェース</title>
       <link>https://takuto-n.github.io/post/20191006-effective-java-3rd-4/</link>
       <pubDate>Sun, 06 Oct 2019 15:27:10 +0900</pubDate>
       
@@ -150,7 +150,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 3]</title>
+      <title>Effective Java 3rd [Chapter 3] - すべてのオブジェクトに共通のメソッド</title>
       <link>https://takuto-n.github.io/post/20190921-effective-java-3rd-3/</link>
       <pubDate>Sat, 21 Sep 2019 19:17:52 +0900</pubDate>
       
@@ -159,7 +159,7 @@
     </item>
     
     <item>
-      <title>Effective Java 3rd [Chapter 2]</title>
+      <title>Effective Java 3rd [Chapter 2] - オブジェクトの生成と消滅</title>
       <link>https://takuto-n.github.io/post/20190921-effective-java-3rd-2/</link>
       <pubDate>Sat, 21 Sep 2019 01:49:02 +0900</pubDate>
       
