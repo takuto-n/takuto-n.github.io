@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 02 May 2020 15:08:30 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2020 20:25:08 +0900</lastBuildDate>
     
 	<atom:link href="https://takuto-n.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>jmeter</title>
+      <link>https://takuto-n.github.io/tags/jmeter/</link>
+      <pubDate>Sun, 14 Jun 2020 20:25:08 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/tags/jmeter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>master</title>
+      <link>https://takuto-n.github.io/tags/master/</link>
+      <pubDate>Sun, 14 Jun 2020 20:25:08 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/tags/master/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>slave</title>
+      <link>https://takuto-n.github.io/tags/slave/</link>
+      <pubDate>Sun, 14 Jun 2020 20:25:08 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/tags/slave/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>java</title>
