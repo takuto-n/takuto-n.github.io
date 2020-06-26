@@ -9,13 +9,6 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/post/20200614-jmeter-master-slave/</loc>
-    <lastmod>2020-06-14T20:25:08+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/categories/</loc>
     <lastmod>2020-06-14T20:25:08+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -24,6 +17,13 @@
   
   <url>
     <loc>https://takuto-n.github.io/tags/jmeter/</loc>
+    <lastmod>2020-06-14T20:25:08+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20200614-jmeter-master-slave/</loc>
     <lastmod>2020-06-14T20:25:08+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
