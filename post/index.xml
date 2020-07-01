@@ -18,7 +18,8 @@
       <pubDate>Wed, 01 Jul 2020 20:49:28 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/post/20200701-dockerfile-and-manifest/</guid>
-      <description></description>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;Dockerfile&lt;/code&gt; と &lt;code&gt;Manifest File ( kind: Deployment )&lt;/code&gt; を書く機会があったのでまとめておきます。&lt;/p&gt;</description>
     </item>
     
     <item>

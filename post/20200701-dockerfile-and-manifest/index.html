@@ -16,7 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstract Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったのでまとめておきます。
+" /><meta name="keywords" content="docker, kubernetes, container" />
 
 
 
@@ -39,22 +40,25 @@
 
 
 <meta property="og:title" content="Dockerfile and Manifest(Deployment)" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="Abstract
+Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったのでまとめておきます。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20200701-dockerfile-and-manifest/" />
 <meta property="article:published_time" content="2020-07-01T20:49:28+09:00" />
 <meta property="article:modified_time" content="2020-07-01T20:49:28+09:00" />
 <meta itemprop="name" content="Dockerfile and Manifest(Deployment)">
-<meta itemprop="description" content="">
+<meta itemprop="description" content="Abstract
+Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったのでまとめておきます。">
 <meta itemprop="datePublished" content="2020-07-01T20:49:28&#43;09:00" />
 <meta itemprop="dateModified" content="2020-07-01T20:49:28&#43;09:00" />
-<meta itemprop="wordCount" content="699">
+<meta itemprop="wordCount" content="1792">
 
 
 
-<meta itemprop="keywords" content=",,," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="docker,kubernetes,container," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Dockerfile and Manifest(Deployment)"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="Abstract
+Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったのでまとめておきます。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -126,10 +130,10 @@
       <div class="post-meta">
         <span class="post-time"> 2020-07-01 </span>
         <div class="post-category">
-            <a href="/categories//">  </a>
+            <a href="/categories/docker/"> docker </a>
             </div>
-          <span class="more-meta"> 699 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 1792 words </span>
+          <span class="more-meta"> 4 mins read </span>
         
       </div>
     </header>
@@ -137,9 +141,42 @@
     
     <div class="post-content">
       <h1 id="abstract">Abstract</h1>
-<p><code>Dockerfile</code> と <code>Manifest ( kind: Deployment )</code> を書く機会があったのでまとめておきます。</p>
-<h2 id="dockerfile">Dockerfile</h2>
-<h3 id="sample---execute-springboot-jar">Sample - Execute SpringBoot Jar</h3>
+<p><code>Dockerfile</code> と <code>Manifest File ( kind: Deployment )</code> を書く機会があったのでまとめておきます。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Dockerfile">Dockerfile</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#Sample-ExecuteSpringBootJar">Sample - Execute SpringBoot Jar</a></li>
+<li>1.2. <a href="#Sample-CopyFile">Sample - Copy File</a></li>
+<li>1.3. <a href="#Sample-Multi-stageBuilds">Sample - Multi-stage Builds</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#ManifestFilekind:Deployment">Manifest File ( kind: Deployment )</a></li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li><a href="#Inaddition-ExecutionResult-SampleMulti-StageBuilds">In addition - Execution Result - Sample Multi-Stage Builds</a></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li><a href="#Refference">Refference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namedockerfileadockerfile">1. <a name='Dockerfile'></a>Dockerfile</h2>
+<h3 id="11-a-namesample-executespringbootjarasample---execute-springboot-jar">1.1. <a name='Sample-ExecuteSpringBootJar'></a>Sample - Execute SpringBoot Jar</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -154,7 +191,7 @@ COPY <span class="si">${</span><span class="nv">JAR_FILE</span><span class="si">
 ENTRYPOINT <span class="o">[</span><span class="s2">&#34;java&#34;</span>, <span class="s2">&#34;-jar&#34;</span>, <span class="s2">&#34;./app.jar&#34;</span><span class="o">]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="sample---copy-file">Sample - Copy File</h3>
+</div><h3 id="12-a-namesample-copyfileasample---copy-file">1.2. <a name='Sample-CopyFile'></a>Sample - Copy File</h3>
 <ul>
 <li>フォルダ構成
 <div class="highlight"><div class="chroma">
@@ -265,7 +302,7 @@ java <span class="si">${</span><span class="nv">JAVA_OPTIONS</span><span class="
 </div>
 </div></li>
 </ul>
-<h3 id="sample---multi-stage-builds">Sample - Multi-stage builds</h3>
+<h3 id="13-a-namesample-multi-stagebuildsasample---multi-stage-builds">1.3. <a name='Sample-Multi-stageBuilds'></a>Sample - Multi-stage Builds</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -304,7 +341,7 @@ COPY --from<span class="o">=</span>builder /work/simple-restcontroller/build/lib
 ENTRYPOINT <span class="o">[</span><span class="s2">&#34;java&#34;</span>, <span class="s2">&#34;-jar&#34;</span>, <span class="s2">&#34;./simple-restcontroller-0.0.1-SNAPSHOT.jar&#34;</span><span class="o">]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="manifest--kind-deployment-">Manifest ( kind: Deployment )</h2>
+</div><h2 id="2-a-namemanifestfilekinddeploymentamanifest-file--kind-deployment-">2. <a name='ManifestFilekind:Deployment'></a>Manifest File ( kind: Deployment )</h2>
 <ul>
 <li>
 <p>Command</p>
@@ -465,7 +502,305 @@ kubectl delete deployment poc1-app
 </div>
 </div></li>
 </ul>
-<h2 id="refference">Refference</h2>
+<h2 id="3-a-nameinaddition-executionresult-samplemulti-stagebuildsain-addition---execution-result---sample-multi-stage-builds">3. <a name='Inaddition-ExecutionResult-SampleMulti-StageBuilds'></a>In addition - Execution Result - Sample Multi-Stage Builds</h2>
+<p>Multi-Stage Buildsにより、約80秒ほどビルドが早くなりました。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>username@instance-1 work<span class="o">]</span>$ sudo <span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span><span class="m">1</span> docker build  --no-cache -t demo .
+<span class="o">[</span>+<span class="o">]</span> Building 238.2s <span class="o">(</span>15/15<span class="o">)</span> <span class="nv">FINISHED</span>
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                  0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 509B                                                                                  0.0s
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                     0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                       0.0s
+ <span class="o">=</span>&gt; resolve image config <span class="k">for</span> docker.io/docker/dockerfile:experimental                                                 1.0s
+ <span class="o">=</span>&gt; docker-image://docker.io/docker/dockerfile:experimental@sha256:de85b2f3a3e8a2f7fe48e8e84a65f6fdd5cd5183afa6412ff  1.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; resolve docker.io/docker/dockerfile:experimental@sha256:de85b2f3a3e8a2f7fe48e8e84a65f6fdd5cd5183afa6412fff9ca  0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:de85b2f3a3e8a2f7fe48e8e84a65f6fdd5cd5183afa6412fff9caa6871649c44 1.69kB / 1.69kB                        0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:8c69d118cfcd040a222bea7f7d57c6156faa938cb61b47657cd65343babc3664 521B / 521B                            0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:08fb2b2ca3d58e19d791e73dea16126df37608115532e748d63525688df457a5 897B / 897B                            0.0s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:61261561661960014533790f5d6c42f5b88362db7e005f35248c20f075900a61 8.88MB / 8.88MB                        0.3s
+ <span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:61261561661960014533790f5d6c42f5b88362db7e005f35248c20f075900a61                             0.6s
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jre                                                     0.4s
+ <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jdk
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build context                                                                                    71.9s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 1.88GB                                                                                  71.7s
+<span class="o">=</span>&gt; <span class="o">[</span>runner 1/3<span class="o">]</span> FROM docker.io/library/openjdk:11-jre@sha256:e76cbcd78500cb019f25af60bac7e85d9b2108467379129a22445  22.6s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; resolve docker.io/library/openjdk:11-jre@sha256:e76cbcd78500cb019f25af60bac7e85d9b2108467379129a22445d77011cd  0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:8c7c4070295266d562c41ebe5379eaba7d76a4d9f47bf48d067aaa73cbc0ad35 8.65kB / 8.65kB                        0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:989e6b19a265d6b8b7934e7ddd7dc07f6e2fc945b3a28dda9b8aecb12cdb30e0 7.81MB / 7.81MB                        0.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:e76cbcd78500cb019f25af60bac7e85d9b2108467379129a22445d77011cdaa0 1.04kB / 1.04kB                        0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:7c462965a1cd98938b2956c1878a297f2edbd73323b3575699711e0685c377d3 1.58kB / 1.58kB                        0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:e9afc4f90ab09248d75c8081b6dfba749a7f7efdac704ced7e0ceb506e02fa4a 50.39MB / 50.39MB                      1.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:af14b6c2f8785723bceb5964c5dec1f0489b7750e9d4ec671e49bfba15d80a39 10.00MB / 10.00MB                      0.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:68a79816c3e1e5cdd064948818bbd2dbf38783031aeca1474a9a9b50c2d8e5e8 5.53MB / 5.53MB                        2.2s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:e440f69a0a762646d5aed47652c8a122f43b415f52b87a90eb14690e1426fd0f 210B / 210B                            2.2s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:e9afc4f90ab09248d75c8081b6dfba749a7f7efdac704ced7e0ceb506e02fa4a                           233.8s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:837b533a935df78a47a09e44fd06c8ec7af6624ef1eec0d69e8d7d208efe2434 41.94MB / 41.94MB                      3.5s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:af14b6c2f8785723bceb5964c5dec1f0489b7750e9d4ec671e49bfba15d80a39                           224.6s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:68a79816c3e1e5cdd064948818bbd2dbf38783031aeca1474a9a9b50c2d8e5e8                             1.6s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:e440f69a0a762646d5aed47652c8a122f43b415f52b87a90eb14690e1426fd0f                             0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:837b533a935df78a47a09e44fd06c8ec7af6624ef1eec0d69e8d7d208efe2434                             6.9s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 1/4<span class="o">]</span> FROM docker.io/library/openjdk:11-jdk@sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e343234050  44.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; resolve docker.io/library/openjdk:11-jdk@sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e3432340500a5ec233c  0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:29fc9543dead0f8c1b25afa026e4a3ddafa38c5c353ee407edcea62a95f1f2e4 1.79kB / 1.79kB                        0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:e9afc4f90ab09248d75c8081b6dfba749a7f7efdac704ced7e0ceb506e02fa4a 50.39MB / 50.39MB                    235.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e3432340500a5ec233cc7c 1.04kB / 1.04kB                        0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:fcfdce4526dfd3cd24f4922025a010c01d9cc4345dd8521cf03b92a98df19bc3 7.01kB / 7.01kB                        0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:989e6b19a265d6b8b7934e7ddd7dc07f6e2fc945b3a28dda9b8aecb12cdb30e0 7.81MB / 7.81MB                      235.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:af14b6c2f8785723bceb5964c5dec1f0489b7750e9d4ec671e49bfba15d80a39 10.00MB / 10.00MB                    235.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:5573c4b3094956931fd68c310ae92c9eb1a787f0c77ac2730be9d16cce172d5e 51.83MB / 51.83MB                      2.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:fb1a405f128d35ffb78464f5ac9f15e721e0d205b94360e151d60f32f9b38111 5.28MB / 5.28MB                        1.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:e9afc4f90ab09248d75c8081b6dfba749a7f7efdac704ced7e0ceb506e02fa4a                             7.6s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:cf63ebed11424864a6f71681347d31876110d84dfb087460179f9b66a658df0a 196.21MB / 196.21MB                    6.9s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:612a9f566fdc082f9d43f642791723e34bab94c243b34a965b4602d416ee7a72 211B / 211B                            2.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:989e6b19a265d6b8b7934e7ddd7dc07f6e2fc945b3a28dda9b8aecb12cdb30e0                             1.3s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:af14b6c2f8785723bceb5964c5dec1f0489b7750e9d4ec671e49bfba15d80a39                             0.7s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:5573c4b3094956931fd68c310ae92c9eb1a787f0c77ac2730be9d16cce172d5e                             9.8s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:fb1a405f128d35ffb78464f5ac9f15e721e0d205b94360e151d60f32f9b38111                             0.6s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:612a9f566fdc082f9d43f642791723e34bab94c243b34a965b4602d416ee7a72                             0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:cf63ebed11424864a6f71681347d31876110d84dfb087460179f9b66a658df0a                             8.8s
+<span class="o">=</span>&gt; <span class="o">[</span>runner 2/3<span class="o">]</span> WORKDIR /home/app                                                                                   12.8s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 2/4<span class="o">]</span> ADD . /work                                                                                        45.6s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 3/4<span class="o">]</span> WORKDIR /work/simple-restcontroller                                                                 0.0s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 4/4<span class="o">]</span> RUN --mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.gradle     ./gradlew clean build                             117.0s
+<span class="o">=</span>&gt; <span class="o">[</span>runner 3/3<span class="o">]</span> COPY --from<span class="o">=</span>builder /work/simple-restcontroller/build/libs/simple-restcontroller-0.0.1-SNAPSHOT.jar  0.3s
+<span class="o">=</span>&gt; exporting to image                                                                                                0.1s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                               0.1s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:e19d9e89988f5ebed7aa0e99933ca117243f766ec1aa96aa23c21a67bc3ee84a                          0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/demo                                                                               0.0s
+<span class="o">[</span>username@instance-1 work<span class="o">]</span>$ sudo <span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span><span class="m">1</span> docker build  --no-cache -t demo .
+<span class="o">[</span>+<span class="o">]</span> Building 158.9s <span class="o">(</span>15/15<span class="o">)</span> <span class="nv">FINISHED</span>
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                  0.1s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 97B                                                                                   0.0s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                     0.1s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                       0.0s
+<span class="o">=</span>&gt; resolve image config <span class="k">for</span> docker.io/docker/dockerfile:experimental                                                 0.5s
+<span class="o">=</span>&gt; CACHED docker-image://docker.io/docker/dockerfile:experimental@sha256:de85b2f3a3e8a2f7fe48e8e84a65f6fdd5cd5183af  0.0s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jre                                                     0.2s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jdk                                                     0.2s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build context                                                                                     5.1s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2.34MB                                                                                   5.0s
+<span class="o">=</span>&gt; <span class="o">[</span>runner 1/3<span class="o">]</span> FROM docker.io/library/openjdk:11-jre@sha256:e76cbcd78500cb019f25af60bac7e85d9b2108467379129a22445d  0.0s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span>builder 1/4<span class="o">]</span> FROM docker.io/library/openjdk:11-jdk@sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e343  0.0s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span>runner 2/3<span class="o">]</span> WORKDIR /home/app                                                                             0.0s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 2/4<span class="o">]</span> ADD . /work                                                                                        45.3s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 3/4<span class="o">]</span> WORKDIR /work/simple-restcontroller                                                                 0.0s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 4/4<span class="o">]</span> RUN --mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.gradle     ./gradlew clean build                             106.4s
+<span class="o">=</span>&gt; <span class="o">[</span>runner 3/3<span class="o">]</span> COPY --from<span class="o">=</span>builder /work/simple-restcontroller/build/libs/simple-restcontroller-0.0.1-SNAPSHOT.jar  0.3s
+<span class="o">=</span>&gt; exporting to image                                                                                              0.2s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                               0.1s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:04cc41f59890b6ea317181a516c2257efc78b0e127534bcb29b49ec530a68a8e                          0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/demo                                                                               0.0s
+<span class="o">[</span>username@instance-1 work<span class="o">]</span>$  docker builder prune
+WARNING! This will remove all dangling build cache. Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N<span class="o">]</span> u
+Total reclaimed space: 0B
+<span class="o">[</span>username@instance-1 work<span class="o">]</span>$  docker builder prune
+WARNING! This will remove all dangling build cache. Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N<span class="o">]</span> y
+Got permission denied <span class="k">while</span> trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.40/build/prune?filters<span class="o">=</span><span class="p">&amp;</span>keep-storage<span class="o">=</span>0: dial unix /var/run/docker.sock: connect: permission denied
+<span class="o">[</span>username@instance-1 work<span class="o">]</span>$ sudo  docker builder prune
+WARNING! This will remove all dangling build cache. Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N<span class="o">]</span> y
+Deleted build cache objects:
+yxrjv1y47b3y0hm3x6owx189g
+qu1o8wc8j1bv1nnjgzeae2zgj
+aya90ygi62mlj07avq15squq6
+jsyugg6rs20g7jffgtcfjecke
+f5tujft67zgtyuox9c26ik7iu
+r88y39mqt5wsebtfuy5ar6div
+3vumssfvndd90oyvilyxp4qnu
+imvymyhj17q2sqsllth0qndor
+q6pedljpsshcspdq2fsyt6ocq
+0yk4ab9ls61d50f4gtokykg6y
+sha256:c9ef80d5f34210a78113974f64ce32386f5c28a6cf538c398daf76052d2abf99
+sha256:e313f84ea12ee09cf103147b76bf2fb372d40ccfed273e2389e96a56fb31e11e
+sha256:15239410c554dafb7f891f0d51def4992ead6d7307b4f224241d1c685b7ce493
+sha256:f863ffb247f4c239aeccf155b7c0d92e35403aed0c825690f6739a89a5901a7c
+
+Total reclaimed space: 6.424GB
+<span class="o">[</span>username@instance-1 work<span class="o">]</span>$ sudo <span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span><span class="m">1</span> docker build  --no-cache -t demo .
+<span class="o">[</span>+<span class="o">]</span> Building 221.4s <span class="o">(</span>15/15<span class="o">)</span> <span class="nv">FINISHED</span>
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                  0.1s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 509B                                                                                  0.0s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                     0.1s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                       0.0s
+<span class="o">=</span>&gt; resolve image config <span class="k">for</span> docker.io/docker/dockerfile:experimental                                                 0.4s
+<span class="o">=</span>&gt; CACHED docker-image://docker.io/docker/dockerfile:experimental@sha256:de85b2f3a3e8a2f7fe48e8e84a65f6fdd5cd5183af  0.0s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jre                                                     0.2s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jdk                                                     0.2s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build context                                                                                    61.5s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 1.88GB                                                                                  61.4s
+<span class="o">=</span>&gt; <span class="o">[</span>runner 1/3<span class="o">]</span> FROM docker.io/library/openjdk:11-jre@sha256:e76cbcd78500cb019f25af60bac7e85d9b2108467379129a22445d  0.0s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 1/4<span class="o">]</span> FROM docker.io/library/openjdk:11-jdk@sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e343234050  29.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; resolve docker.io/library/openjdk:11-jdk@sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e3432340500a5ec233c  0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e3432340500a5ec233cc7c 1.04kB / 1.04kB                        0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:29fc9543dead0f8c1b25afa026e4a3ddafa38c5c353ee407edcea62a95f1f2e4 1.79kB / 1.79kB                        0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:fcfdce4526dfd3cd24f4922025a010c01d9cc4345dd8521cf03b92a98df19bc3 7.01kB / 7.01kB                        0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:612a9f566fdc082f9d43f642791723e34bab94c243b34a965b4602d416ee7a72 211B / 211B                            0.3s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:5573c4b3094956931fd68c310ae92c9eb1a787f0c77ac2730be9d16cce172d5e 51.83MB / 51.83MB                      1.7s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:fb1a405f128d35ffb78464f5ac9f15e721e0d205b94360e151d60f32f9b38111 5.28MB / 5.28MB                        0.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:cf63ebed11424864a6f71681347d31876110d84dfb087460179f9b66a658df0a 196.21MB / 196.21MB                    4.5s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:5573c4b3094956931fd68c310ae92c9eb1a787f0c77ac2730be9d16cce172d5e                             4.4s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:fb1a405f128d35ffb78464f5ac9f15e721e0d205b94360e151d60f32f9b38111                             0.6s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:612a9f566fdc082f9d43f642791723e34bab94c243b34a965b4602d416ee7a72                             0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:cf63ebed11424864a6f71681347d31876110d84dfb087460179f9b66a658df0a                             7.1s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span>runner 2/3<span class="o">]</span> WORKDIR /home/app                                                                             0.0s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 2/4<span class="o">]</span> ADD . /work                                                                                        50.3s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 3/4<span class="o">]</span> WORKDIR /work/simple-restcontroller                                                                 0.0s
+<span class="o">=</span>&gt; <span class="o">[</span>builder 4/4<span class="o">]</span> RUN --mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.gradle     ./gradlew clean build                             107.6s
+<span class="o">=</span>&gt; <span class="o">[</span>runner 3/3<span class="o">]</span> COPY --from<span class="o">=</span>builder /work/simple-restcontroller/build/libs/simple-restcontroller-0.0.1-SNAPSHOT.jar  0.3s
+<span class="o">=</span>&gt; exporting to image                                                                                                0.2s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                               0.1s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:d9e6b95edf00e2fcd24792461a08f1964c3bfc2f433f9d518ca9645c3cb886f8                          0.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/demo
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-a-namerefferencearefference">4. <a name='Refference'></a>Refference</h2>
 <ul>
 <li><a href="https://qiita.com/cyberblack28/items/0b0ec02bce67a16e2f17">Docker &amp; Docker Compose on CentOS8 - Qiita</a></li>
 <li><a href="https://qiita.com/os1ma/items/f4ce2bb947680be8fdd9">Buildkitを使ってMulti-stage BuildでMavenのキャッシュを効かせる - Qiita</a></li>
@@ -484,9 +819,9 @@ kubectl delete deployment poc1-app
     
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags//"></a>
-          <a href="/tags//"></a>
-          <a href="/tags//"></a>
+          <a href="/tags/docker/">docker</a>
+          <a href="/tags/kubernetes/">kubernetes</a>
+          <a href="/tags/container/">container</a>
           </div>
       <nav class="post-nav">
         
