@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Dockerfile and Manifest(Deployment) - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.71.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20200701-dockerfile-and-manifest/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Dockerfile and Manifest(Deployment)" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20200701-dockerfile-and-manifest/" />
+<meta property="article:published_time" content="2020-07-01T20:49:28+09:00" />
+<meta property="article:modified_time" content="2020-07-01T20:49:28+09:00" />
+<meta itemprop="name" content="Dockerfile and Manifest(Deployment)">
+<meta itemprop="description" content="">
+<meta itemprop="datePublished" content="2020-07-01T20:49:28&#43;09:00" />
+<meta itemprop="dateModified" content="2020-07-01T20:49:28&#43;09:00" />
+<meta itemprop="wordCount" content="699">
+
+
+
+<meta itemprop="keywords" content=",,," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Dockerfile and Manifest(Deployment)"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Dockerfile and Manifest(Deployment)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-01 </span>
+        <div class="post-category">
+            <a href="/categories//">  </a>
+            </div>
+          <span class="more-meta"> 699 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstract">Abstract</h1>
+<p><code>Dockerfile</code> と <code>Manifest ( kind: Deployment )</code> を書く機会があったのでまとめておきます。</p>
+<h2 id="dockerfile">Dockerfile</h2>
+<h3 id="sample---execute-springboot-jar">Sample - Execute SpringBoot Jar</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">FROM openjdk:11-jre
+ARG <span class="nv">JAR_FILE</span><span class="o">=</span>./build/libs/simple-restcontroller-0.0.1-SNAPSHOT.jar
+COPY <span class="si">${</span><span class="nv">JAR_FILE</span><span class="si">}</span> app.jar
+ENTRYPOINT <span class="o">[</span><span class="s2">&#34;java&#34;</span>, <span class="s2">&#34;-jar&#34;</span>, <span class="s2">&#34;./app.jar&#34;</span><span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="sample---copy-file">Sample - Copy File</h3>
+<ul>
+<li>フォルダ構成
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="o">[</span>username@instance-1 work<span class="o">]</span>$ tree -L <span class="m">3</span>
+.
+├── Dockerfile
+├── home
+│   ├── boot
+│   │   └── init_run.sh
+│   │   └── sample.jar
+│   ├── env
+│   │   └── env.conf
+│   └── lib
+│       └── hoge.jar
+└── root
+    └── opt
+        └── oracle
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>Dockerfile
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">FROM centos:7
+ENV TEST_HOME /usr/test/home
+
+<span class="c1"># mkdir</span>
+RUN mkdir -p <span class="si">${</span><span class="nv">TEST_HOME</span><span class="si">}</span>
+
+<span class="c1"># copy</span>
+COPY root/opt /opt
+COPY home <span class="si">${</span><span class="nv">TEST_HOME</span><span class="si">}</span>
+
+<span class="c1"># init settings and run boot app</span>
+ENTRYPOINT sh <span class="si">${</span><span class="nv">TEST_HOME</span><span class="si">}</span>/boot/init_run.sh
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>init_run.sh
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># initialize processing</span>
+
+<span class="c1">## do something</span>
+
+<span class="c1"># run boot app</span>
+<span class="nv">JAR_NAME</span><span class="o">=</span><span class="s2">&#34;sample.jar&#34;</span>
+
+<span class="nv">JAVA_OPTIONS</span><span class="o">=(</span>
+  <span class="s2">&#34;&#34;</span>
+<span class="o">)</span>
+
+<span class="nv">SPRING_OPTIONS</span><span class="o">=(</span>
+  <span class="s2">&#34;&#34;</span>
+<span class="o">)</span>
+
+java <span class="si">${</span><span class="nv">JAVA_OPTIONS</span><span class="si">}</span> -jar <span class="si">${</span><span class="nv">JAR_NAME</span><span class="si">}</span> <span class="si">${</span><span class="nv">SPRING_OPTIONS</span><span class="si">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="sample---multi-stage-builds">Sample - Multi-stage builds</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># syntax=docker/dockerfile:experimental</span>
+FROM openjdk:11-jdk AS builder
+
+ADD . /work
+WORKDIR /work/simple-restcontroller
+
+RUN --mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.gradle <span class="se">\
+</span><span class="se"></span>    ./gradlew clean build
+
+FROM openjdk:11-jre AS runner
+
+WORKDIR /home/app
+
+COPY --from<span class="o">=</span>builder /work/simple-restcontroller/build/libs/simple-restcontroller-0.0.1-SNAPSHOT.jar /home/app/
+
+ENTRYPOINT <span class="o">[</span><span class="s2">&#34;java&#34;</span>, <span class="s2">&#34;-jar&#34;</span>, <span class="s2">&#34;./simple-restcontroller-0.0.1-SNAPSHOT.jar&#34;</span><span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="manifest--kind-deployment-">Manifest ( kind: Deployment )</h2>
+<ul>
+<li>
+<p>Command</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># 生成する場合</span>
+kubectl apply -f deployment.yaml
+kubectl expose deployment simple-restcontroller --type<span class="o">=</span>LoadBalancer --name<span class="o">=</span>my-service
+  
+<span class="c1"># deployment と service の内容確認</span>
+  
+<span class="c1">## deployment</span>
+<span class="c1">### 概要</span>
+kubectl get deployments simple-restcontroller
+<span class="c1">### 詳細</span>
+kubectl describe deployments simple-restcontroller
+
+<span class="c1">## service</span>
+<span class="c1">### 概要</span>
+kubectl get services my-service
+<span class="c1">### 詳細</span>
+kubectl describe services my-service
+
+<span class="c1"># スケールする場合</span>
+kubectl scale --replicas<span class="o">=</span><span class="m">3</span> -f deployment.yaml
+
+<span class="c1"># 削除する場合</span>
+kubectl delete services my-service
+kubectl delete deployment poc1-app
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>deployment.yaml</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>apps/v1<span class="w">
+</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>Deployment<span class="w">
+</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>simple-restcontroller<span class="w">
+</span><span class="w"></span><span class="k">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="w">  </span><span class="k">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">matchLabels</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>simple-restcontroller<span class="w">
+</span><span class="w">  </span><span class="k">template</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>simple-restcontroller<span class="w">
+</span><span class="w">        </span><span class="k">track</span><span class="p">:</span><span class="w"> </span>stable<span class="w">
+</span><span class="w">        </span><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="m">1.0.0</span><span class="w">
+</span><span class="w">    </span><span class="k">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>nginx<span class="w">
+</span><span class="w">          </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>nginx<span class="p">:</span><span class="m">1.14.2</span><span class="w">
+</span><span class="w">          </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="k">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>simple-restcontroller<span class="w">
+</span><span class="w">          </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>testImage<span class="p">:</span>latest<span class="w">
+</span><span class="w">          </span><span class="k">imagePullPolicy</span><span class="p">:</span><span class="w"> </span>IfNotPresent<span class="w">
+</span><span class="w">          </span><span class="k">resources</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="k">limits</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="k">cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;1&#34;</span><span class="w">
+</span><span class="w">              </span><span class="k">memory</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;1Gi&#34;</span><span class="w">
+</span><span class="w">          </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>http<span class="w">
+</span><span class="w">              </span><span class="k">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
+</span><span class="w">          </span><span class="k">readinessProbe</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="k">httpGet</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>/readiness<span class="w">
+</span><span class="w">              </span><span class="k">port</span><span class="p">:</span><span class="w"> </span><span class="m">81</span><span class="w">
+</span><span class="w">              </span><span class="k">scheme</span><span class="p">:</span><span class="w"> </span>HTTP<span class="w">
+</span><span class="w">            </span><span class="k">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="w">            </span><span class="k">timeoutSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="w">          </span><span class="k">livenessProbe</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="k">httpGet</span><span class="p">:</span><span class="w">
+</span><span class="w">              </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>/healthz<span class="w">
+</span><span class="w">              </span><span class="k">port</span><span class="p">:</span><span class="w"> </span><span class="m">81</span><span class="w">
+</span><span class="w">              </span><span class="k">scheme</span><span class="p">:</span><span class="w"> </span>HTTP<span class="w">
+</span><span class="w">            </span><span class="k">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span><span class="w">            </span><span class="k">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">15</span><span class="w">
+</span><span class="w">            </span><span class="k">timeoutSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="refference">Refference</h2>
+<ul>
+<li><a href="https://qiita.com/cyberblack28/items/0b0ec02bce67a16e2f17">Docker &amp; Docker Compose on CentOS8 - Qiita</a></li>
+<li><a href="https://qiita.com/os1ma/items/f4ce2bb947680be8fdd9">Buildkitを使ってMulti-stage BuildでMavenのキャッシュを効かせる - Qiita</a></li>
+<li><a href="https://pete-woods.com/2019/02/production-grade-spring-boot-docker-images/">Production-grade Spring Boot Docker images</a></li>
+<li><a href="https://stackoverflow.com/questions/55153089/error-response-from-daemon-dockerfile-parse-error-unknown-flag-mount">docker - Error response from daemon: Dockerfile parse error Unknown flag: mount - Stack Overflow</a></li>
+<li><a href="https://docs.docker.com/develop/develop-images/multistage-build/">Use multi-stage builds | Docker Documentation</a></li>
+<li><a href="https://kubernetes.io/ja/docs/tutorials/stateless-application/expose-external-ip-address/">クラスター内のアプリケーションにアクセスするために外部IPアドレスを公開する | Kubernetes</a></li>
+<li><a href="https://kubernetes.io/ja/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">Liveness Probe、Readiness ProbeおよびStartup Probeを使用する | Kubernetes</a></li>
+<li><a href="https://kubernetes.io/ja/docs/concepts/configuration/overview/">設定のベストプラクティス | Kubernetes</a></li>
+<li><a href="https://qiita.com/minodisk/items/547741b73763f2bab6b8#pullimageerror">Kubernetesのポッドが起動しない原因と対策 - Qiita</a></li>
+<li><a href="https://kubernetes.io/ja/docs/tasks/debug-application-cluster/debug-pod-replication-controller/">PodとReplicationControllerのデバッグ | Kubernetes</a></li>
+<li><a href="https://kubernetes.io/ja/docs/concepts/overview/working-with-objects/kubernetes-objects/">Kubernetesオブジェクトを理解する | Kubernetes</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags//"></a>
+          <a href="/tags//"></a>
+          <a href="/tags//"></a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/20200614-jmeter-master-slave/">
+            <span class="next-text nav-default">Jmeter Master-Slave構成</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
