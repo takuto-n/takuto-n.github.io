@@ -51,7 +51,7 @@ Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったの
 Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったのでまとめておきます。">
 <meta itemprop="datePublished" content="2020-07-01T20:49:28&#43;09:00" />
 <meta itemprop="dateModified" content="2020-07-01T20:49:28&#43;09:00" />
-<meta itemprop="wordCount" content="1792">
+<meta itemprop="wordCount" content="1883">
 
 
 
@@ -132,7 +132,7 @@ Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったの
         <div class="post-category">
             <a href="/categories/docker/"> docker </a>
             </div>
-          <span class="more-meta"> 1792 words </span>
+          <span class="more-meta"> 1883 words </span>
           <span class="more-meta"> 4 mins read </span>
         
       </div>
@@ -176,6 +176,27 @@ Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったの
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 <h2 id="1-a-namedockerfileadockerfile">1. <a name='Dockerfile'></a>Dockerfile</h2>
+<ul>
+<li>Command</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">docker build -t test-image .
+docker images
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>imageの一括削除の参考は以下</p>
+<ul>
+<li><a href="https://qiita.com/fist0/items/2fb1c7f894b5bdff79f4">docker images を全削除する - Qiita</a></li>
+<li><a href="https://qiita.com/boiyama/items/9972601ffc240553e1f3">Docker一括削除コマンドまとめ - Qiita</a></li>
+<li><a href="https://qiita.com/shisama/items/48e2eaf1dc356568b0d7">一発ですべてのDockerコンテナを停止・削除、イメージの削除をする - Qiita</a></li>
+</ul>
+</blockquote>
 <h3 id="11-a-namesample-executespringbootjarasample---execute-springboot-jar">1.1. <a name='Sample-ExecuteSpringBootJar'></a>Sample - Execute SpringBoot Jar</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -474,7 +495,7 @@ kubectl delete deployment poc1-app
 </span><span class="w">          </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="k">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
 </span><span class="w">        </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>simple-restcontroller<span class="w">
-</span><span class="w">          </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>testImage<span class="p">:</span>latest<span class="w">
+</span><span class="w">          </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>test-image<span class="p">:</span>latest<span class="w">
 </span><span class="w">          </span><span class="k">imagePullPolicy</span><span class="p">:</span><span class="w"> </span>IfNotPresent<span class="w">
 </span><span class="w">          </span><span class="k">resources</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span><span class="k">limits</span><span class="p">:</span><span class="w">
