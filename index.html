@@ -122,7 +122,7 @@
       <div class="post-category">
           <a href="/categories/poc/"> poc </a>
           </div>
-        <span class="more-meta"> 1693 words </span>
+        <span class="more-meta"> 1717 words </span>
         <span class="more-meta"> 4 mins read </span>
     </div>
   </header>
@@ -131,17 +131,18 @@
     <div class="post-summary">
       <h1 id="abstract">Abstract</h1>
 <p>半年ほど前に <a href="https://github.com/OpenAPITools/openapi-generator">OpenAPI Generator</a> を使う機会があったので、思い出しながらまとめておきます。</p>
-<p>まず、OpenAPIというのは、スキーマ駆動開発のための一つのツールです。<br>
+<p>まず、OpenAPIとは、RESTful APIを記述するためのフォーマットのことです。</p>
+<p>スキーマ駆動開発で使われたりします。<br>
 スキーマ駆動開発は、「先にスキーマを定義し、フロントエンドの開発着手を早めることで、全体的な開発速度向上の効果が期待できる開発手法」のことです。<br>
-そのため、もう少し言うと、OpenAPIは、そのスキーマを定義するための一つのツールです。</p>
+<code>OpenAPI Generator</code> はそのスキーマを定義して、ソースを自動生成するためのツールです。</p>
 <blockquote>
 <p>スキーマ駆動開発(SDD)は、2015年7月に掲載された論文<a href="https://www.researchgate.net/publication/280105467_Schema-Driven_Development_of_Semantic_MediaWikis">Schema-Driven Development of Semantic MediaWikis</a>が元ネタで、現在では、DeNAやFreeeなどが採用しているようです。</p>
 </blockquote>
-<p>また、<a href="https://github.com/OpenAPITools">Open API</a> と <a href="https://github.com/swagger-api">Swagger</a> は、よく混同されるのですが、別プロジェクトです。
+<p>また、<a href="https://github.com/OpenAPITools">Open API</a> と <a href="https://github.com/swagger-api">Swagger</a> は基本的には同じなのですが、別のプロジェクトとして開発されています。
 経緯がややこしいのですが、SpeakerDeckの<a href="https://speakerdeck.com/akihito_nakano/gunmaweb34?slide=37">平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜</a>で、詳しく説明されているので、気になる方はそちらを参考にしてください。</p>
 <p>本記事では、Spring Frameworkを使う前提で、<code>Open API ver3.0</code> について触れます。</p>
 <blockquote>
-<p>備考：OpenAPI で使える言語やフレームワークは、<a href="https://github.com/OpenAPITools/openapi-generator#overview">公式サイト</a>に記載されています。</p>
+<p>備考：OpenAPI Generator で使える言語やフレームワークは、<a href="https://github.com/OpenAPITools/openapi-generator#overview">公式サイト</a>に記載されています。</p>
 </blockquote>
     </div>
     <div class="read-more">
