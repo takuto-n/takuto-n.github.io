@@ -21,7 +21,10 @@
 OpenAPIは、そのスキーマを定義するためのツールです。&lt;/p&gt;
 &lt;p&gt;また、&lt;a href=&#34;https://github.com/OpenAPITools&#34;&gt;Open API&lt;/a&gt; と &lt;a href=&#34;https://github.com/swagger-api&#34;&gt;Swagger&lt;/a&gt; は、よく混同されるのですが、別プロジェクトです。
 経緯がややこしいのですが、SpeakerDeckの&lt;a href=&#34;https://speakerdeck.com/akihito_nakano/gunmaweb34?slide=37&#34;&gt;平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜&lt;/a&gt;で、詳しく説明されているので、気になる方はそちらを参考にしてください。&lt;/p&gt;
-&lt;p&gt;本記事では、Spring Frameworkを使う前提で、&lt;code&gt;Open API ver3.0&lt;/code&gt; について触れます。&lt;/p&gt;</description>
+&lt;p&gt;本記事では、Spring Frameworkを使う前提で、&lt;code&gt;Open API ver3.0&lt;/code&gt; について触れます。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;備考：OpenAPI で使える言語やフレームワークは、&lt;a href=&#34;https://github.com/OpenAPITools/openapi-generator#overview&#34;&gt;公式サイト&lt;/a&gt;に記載されています。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
   </channel>
