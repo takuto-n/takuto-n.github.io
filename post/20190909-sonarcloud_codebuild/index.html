@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.71.0 with theme even" />
+<meta name="generator" content="Hugo 0.76.5 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190909-sonarcloud_codebuild/" />
@@ -46,13 +46,14 @@
 <meta property="article:modified_time" content="2019-09-09T02:37:45+09:00" />
 <meta itemprop="name" content="AWS CodeBuildとSonarCloudの連携方法">
 <meta itemprop="description" content="AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 SonarCloudAccessToken に SonarCloud のアクセストークンを保持しておきます">
-<meta itemprop="datePublished" content="2019-09-09T02:37:45&#43;09:00" />
-<meta itemprop="dateModified" content="2019-09-09T02:37:45&#43;09:00" />
-<meta itemprop="wordCount" content="393">
+<meta itemprop="datePublished" content="2019-09-09T02:37:45+09:00" />
+<meta itemprop="dateModified" content="2019-09-09T02:37:45+09:00" />
+<meta itemprop="wordCount" content="398">
 
 
 
-<meta itemprop="keywords" content="CodeBuild,CI,SonarCloud," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="CodeBuild,CI,SonarCloud," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AWS CodeBuildとSonarCloudの連携方法"/>
 <meta name="twitter:description" content="AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 SonarCloudAccessToken に SonarCloud のアクセストークンを保持しておきます"/>
 
@@ -128,7 +129,7 @@
         <div class="post-category">
             <a href="/categories/cicd/"> cicd </a>
             </div>
-          <span class="more-meta"> 393 words </span>
+          <span class="more-meta"> 398 words </span>
           <span class="more-meta"> 1 min read </span>
         
       </div>
@@ -232,16 +233,16 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="m">0.2</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">0.2</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="k">phases</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">install</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">runtime-versions</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">java</span><span class="p">:</span><span class="w"> </span>corretto11<span class="w">
-</span><span class="w">  </span><span class="k">build</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">commands</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- chmod<span class="w"> </span>+x<span class="w"> </span>./gradlew<span class="w">
-</span><span class="w">      </span>- ./gradlew<span class="w"> </span>build<span class="w"> </span>sonarqube<span class="w"> </span>-PSonarCloudAccessToken=${SonarCloudAccessToken}<span class="w">
+</span><span class="w"></span><span class="nt">phases</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">install</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runtime-versions</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">java</span><span class="p">:</span><span class="w"> </span><span class="l">corretto11</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">chmod +x ./gradlew</span><span class="w">
+</span><span class="w">      </span>- <span class="l">./gradlew build sonarqube -PSonarCloudAccessToken=${SonarCloudAccessToken}</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div>

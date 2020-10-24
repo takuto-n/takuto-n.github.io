@@ -10,7 +10,56 @@
   
   <url>
     <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2020-07-01T20:49:28+09:00</lastmod>
+    <lastmod>2020-10-24T15:20:11+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/java/</loc>
+    <lastmod>2020-10-24T15:20:11+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2020-10-24T15:20:11+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/openapi/</loc>
+    <lastmod>2020-10-24T15:20:11+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20201024-openapi-java/</loc>
+    <lastmod>2020-10-24T15:20:11+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/poc/</loc>
+    <lastmod>2020-10-24T15:20:11+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2020-10-24T15:20:11+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2020-10-24T15:20:11+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -51,27 +100,6 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2020-07-01T20:49:28+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2020-07-01T20:49:28+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
-    <lastmod>2020-07-01T20:49:28+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/tags/jmeter/</loc>
     <lastmod>2020-06-14T20:25:08+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -93,22 +121,8 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/poc/</loc>
-    <lastmod>2020-06-14T20:25:08+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/tags/slave/</loc>
     <lastmod>2020-06-14T20:25:08+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/java/</loc>
-    <lastmod>2020-05-02T15:08:30+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

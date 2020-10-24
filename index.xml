@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 01 Jul 2020 20:49:28 +0900</lastBuildDate>
-    
-	<atom:link href="https://takuto-n.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 24 Oct 2020 15:20:11 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About takuto_n</title>
       <link>https://takuto-n.github.io/about/about/</link>
@@ -19,6 +15,22 @@
       
       <guid>https://takuto-n.github.io/about/about/</guid>
       <description>テニス・スノーボード、一眼レフが好きです。 写真はInstagramにアップロードしています。</description>
+    </item>
+    
+    <item>
+      <title>OpenAPI Generatorを使ってみた</title>
+      <link>https://takuto-n.github.io/post/20201024-openapi-java/</link>
+      <pubDate>Sat, 24 Oct 2020 15:20:11 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20201024-openapi-java/</guid>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
+&lt;p&gt;半年ほど前に &lt;a href=&#34;https://github.com/OpenAPITools/openapi-generator&#34;&gt;OpenAPI Generator&lt;/a&gt; を使う機会があったので、思い出しながらまとめておきます。&lt;/p&gt;
+&lt;p&gt;まず、OpenAPIというのは、スキーマ駆動開発のためのツールです。&lt;br&gt;
+スキーマ駆動開発は、「サーバー側の開発者とクライアント側の開発者で、WebAPIの認識齟齬がないように、スキーマをまずは定義してから、開発していこう。」という開発手法のことです。&lt;br&gt;
+OpenAPIは、そのスキーマを定義するためのツールです。&lt;/p&gt;
+&lt;p&gt;また、&lt;a href=&#34;https://github.com/OpenAPITools&#34;&gt;Open API&lt;/a&gt; と &lt;a href=&#34;https://github.com/swagger-api&#34;&gt;Swagger&lt;/a&gt; は、よく混同されるのですが、別プロジェクトです。
+経緯がややこしいのですが、SpeakerDeckの&lt;a href=&#34;https://speakerdeck.com/akihito_nakano/gunmaweb34?slide=37&#34;&gt;平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜&lt;/a&gt;で、詳しく説明されているので、気になる方はそちらを参考にしてください。&lt;/p&gt;
+&lt;p&gt;本記事では、Spring Frameworkを使う前提で、&lt;code&gt;Open API ver3.0&lt;/code&gt; について触れます。&lt;/p&gt;</description>
     </item>
     
     <item>
