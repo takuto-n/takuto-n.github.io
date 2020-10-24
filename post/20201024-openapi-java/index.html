@@ -17,10 +17,11 @@
 
 
 <meta name="author" content="takuto_n" /><meta name="description" content="Abstract 半年ほど前に OpenAPI Generator を使う機会があったので、思い出しながらまとめておきます。
-まず、OpenAPIというのは、スキーマ駆動開発のためのツールです。
-スキーマ駆動開発は、「サーバー側の開発者とクライアント側の開発者で、WebAPIの認識齟齬がないように、スキーマをまずは定義してから、開発していこう。」という開発手法のことです。
-OpenAPIは、そのスキーマを定義するためのツールです。
-また、Open API と Swagger は、よく混同されるのですが、別プロジェクトです。 経緯がややこしいのですが、SpeakerDeckの平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜で、詳しく説明されているので、気になる方はそちらを参考にしてください。
+まず、OpenAPIというのは、スキーマ駆動開発のための一つのツールです。
+スキーマ駆動開発は、「先にスキーマを定義し、フロントエンドの開発着手を早めることで、全体的な開発速度向上の効果が期待できる開発手法」のことです。
+そのため、もう少し言うと、OpenAPIは、そのスキーマを定義するための一つのツールです。
+ スキーマ駆動開発(SDD)は、2015年7月に掲載された論文Schema-Driven Development of Semantic MediaWikisが元ネタで、現在では、DeNAやFreeeなどが採用しているようです。
+ また、Open API と Swagger は、よく混同されるのですが、別プロジェクトです。 経緯がややこしいのですが、SpeakerDeckの平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜で、詳しく説明されているので、気になる方はそちらを参考にしてください。
 本記事では、Spring Frameworkを使う前提で、Open API ver3.0 について触れます。
  備考：OpenAPI で使える言語やフレームワークは、公式サイトに記載されています。
 " /><meta name="keywords" content="java, openapi" />
@@ -48,9 +49,12 @@ OpenAPIは、そのスキーマを定義するためのツールです。
 <meta property="og:title" content="OpenAPI Generatorを使ってみた" />
 <meta property="og:description" content="Abstract
 半年ほど前に OpenAPI Generator を使う機会があったので、思い出しながらまとめておきます。
-まず、OpenAPIというのは、スキーマ駆動開発のためのツールです。
-スキーマ駆動開発は、「サーバー側の開発者とクライアント側の開発者で、WebAPIの認識齟齬がないように、スキーマをまずは定義してから、開発していこう。」という開発手法のことです。
-OpenAPIは、そのスキーマを定義するためのツールです。
+まず、OpenAPIというのは、スキーマ駆動開発のための一つのツールです。
+スキーマ駆動開発は、「先にスキーマを定義し、フロントエンドの開発着手を早めることで、全体的な開発速度向上の効果が期待できる開発手法」のことです。
+そのため、もう少し言うと、OpenAPIは、そのスキーマを定義するための一つのツールです。
+
+スキーマ駆動開発(SDD)は、2015年7月に掲載された論文Schema-Driven Development of Semantic MediaWikisが元ネタで、現在では、DeNAやFreeeなどが採用しているようです。
+
 また、Open API と Swagger は、よく混同されるのですが、別プロジェクトです。
 経緯がややこしいのですが、SpeakerDeckの平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜で、詳しく説明されているので、気になる方はそちらを参考にしてください。
 本記事では、Spring Frameworkを使う前提で、Open API ver3.0 について触れます。
@@ -64,9 +68,12 @@ OpenAPIは、そのスキーマを定義するためのツールです。
 <meta itemprop="name" content="OpenAPI Generatorを使ってみた">
 <meta itemprop="description" content="Abstract
 半年ほど前に OpenAPI Generator を使う機会があったので、思い出しながらまとめておきます。
-まず、OpenAPIというのは、スキーマ駆動開発のためのツールです。
-スキーマ駆動開発は、「サーバー側の開発者とクライアント側の開発者で、WebAPIの認識齟齬がないように、スキーマをまずは定義してから、開発していこう。」という開発手法のことです。
-OpenAPIは、そのスキーマを定義するためのツールです。
+まず、OpenAPIというのは、スキーマ駆動開発のための一つのツールです。
+スキーマ駆動開発は、「先にスキーマを定義し、フロントエンドの開発着手を早めることで、全体的な開発速度向上の効果が期待できる開発手法」のことです。
+そのため、もう少し言うと、OpenAPIは、そのスキーマを定義するための一つのツールです。
+
+スキーマ駆動開発(SDD)は、2015年7月に掲載された論文Schema-Driven Development of Semantic MediaWikisが元ネタで、現在では、DeNAやFreeeなどが採用しているようです。
+
 また、Open API と Swagger は、よく混同されるのですが、別プロジェクトです。
 経緯がややこしいのですが、SpeakerDeckの平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜で、詳しく説明されているので、気になる方はそちらを参考にしてください。
 本記事では、Spring Frameworkを使う前提で、Open API ver3.0 について触れます。
@@ -75,7 +82,7 @@ OpenAPIは、そのスキーマを定義するためのツールです。
 ">
 <meta itemprop="datePublished" content="2020-10-24T15:20:11+09:00" />
 <meta itemprop="dateModified" content="2020-10-24T15:20:11+09:00" />
-<meta itemprop="wordCount" content="1572">
+<meta itemprop="wordCount" content="1693">
 
 
 
@@ -84,9 +91,12 @@ OpenAPIは、そのスキーマを定義するためのツールです。
 <meta name="twitter:title" content="OpenAPI Generatorを使ってみた"/>
 <meta name="twitter:description" content="Abstract
 半年ほど前に OpenAPI Generator を使う機会があったので、思い出しながらまとめておきます。
-まず、OpenAPIというのは、スキーマ駆動開発のためのツールです。
-スキーマ駆動開発は、「サーバー側の開発者とクライアント側の開発者で、WebAPIの認識齟齬がないように、スキーマをまずは定義してから、開発していこう。」という開発手法のことです。
-OpenAPIは、そのスキーマを定義するためのツールです。
+まず、OpenAPIというのは、スキーマ駆動開発のための一つのツールです。
+スキーマ駆動開発は、「先にスキーマを定義し、フロントエンドの開発着手を早めることで、全体的な開発速度向上の効果が期待できる開発手法」のことです。
+そのため、もう少し言うと、OpenAPIは、そのスキーマを定義するための一つのツールです。
+
+スキーマ駆動開発(SDD)は、2015年7月に掲載された論文Schema-Driven Development of Semantic MediaWikisが元ネタで、現在では、DeNAやFreeeなどが採用しているようです。
+
 また、Open API と Swagger は、よく混同されるのですが、別プロジェクトです。
 経緯がややこしいのですが、SpeakerDeckの平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜で、詳しく説明されているので、気になる方はそちらを参考にしてください。
 本記事では、Spring Frameworkを使う前提で、Open API ver3.0 について触れます。
@@ -166,7 +176,7 @@ OpenAPIは、そのスキーマを定義するためのツールです。
         <div class="post-category">
             <a href="/categories/poc/"> poc </a>
             </div>
-          <span class="more-meta"> 1572 words </span>
+          <span class="more-meta"> 1693 words </span>
           <span class="more-meta"> 4 mins read </span>
         
       </div>
@@ -176,9 +186,12 @@ OpenAPIは、そのスキーマを定義するためのツールです。
     <div class="post-content">
       <h1 id="abstract">Abstract</h1>
 <p>半年ほど前に <a href="https://github.com/OpenAPITools/openapi-generator">OpenAPI Generator</a> を使う機会があったので、思い出しながらまとめておきます。</p>
-<p>まず、OpenAPIというのは、スキーマ駆動開発のためのツールです。<br>
-スキーマ駆動開発は、「サーバー側の開発者とクライアント側の開発者で、WebAPIの認識齟齬がないように、スキーマをまずは定義してから、開発していこう。」という開発手法のことです。<br>
-OpenAPIは、そのスキーマを定義するためのツールです。</p>
+<p>まず、OpenAPIというのは、スキーマ駆動開発のための一つのツールです。<br>
+スキーマ駆動開発は、「先にスキーマを定義し、フロントエンドの開発着手を早めることで、全体的な開発速度向上の効果が期待できる開発手法」のことです。<br>
+そのため、もう少し言うと、OpenAPIは、そのスキーマを定義するための一つのツールです。</p>
+<blockquote>
+<p>スキーマ駆動開発(SDD)は、2015年7月に掲載された論文<a href="https://www.researchgate.net/publication/280105467_Schema-Driven_Development_of_Semantic_MediaWikis">Schema-Driven Development of Semantic MediaWikis</a>が元ネタで、現在では、DeNAやFreeeなどが採用しているようです。</p>
+</blockquote>
 <p>また、<a href="https://github.com/OpenAPITools">Open API</a> と <a href="https://github.com/swagger-api">Swagger</a> は、よく混同されるのですが、別プロジェクトです。
 経緯がややこしいのですが、SpeakerDeckの<a href="https://speakerdeck.com/akihito_nakano/gunmaweb34?slide=37">平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜</a>で、詳しく説明されているので、気になる方はそちらを参考にしてください。</p>
 <p>本記事では、Spring Frameworkを使う前提で、<code>Open API ver3.0</code> について触れます。</p>
@@ -730,6 +743,7 @@ sampleStoreService=userstore
 <img src="/img/20201024/openapi-generated-html.png" alt=""></p>
 <h2 id="3-a-namerefferencearefference">3. <a name='Refference'></a>Refference</h2>
 <ul>
+<li><a href="https://blog.spacemarket.com/code/schema-driven/">スキーマ駆動でAPI開発を行う | スペースマーケットブログ</a></li>
 <li><a href="https://github.com/OpenAPITools/openapi-generator">OpenAPITools/openapi-generator: OpenAPI Generator allows generation of API client libraries (SDK generation), server stubs, documentation and configuration automatically given an OpenAPI Spec (v2, v3)</a></li>
 <li><a href="https://www.slideshare.net/techblogyahoo/swagger-openapi-specification-30-api">Swagger ではない OpenAPI Specification 3.0 による API サーバー開発</a></li>
 <li><a href="https://speakerdeck.com/akihito_nakano/gunmaweb34">平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜 / gunmaweb34 - Speaker Deck</a></li>
