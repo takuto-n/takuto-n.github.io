@@ -19,13 +19,14 @@
 &lt;p&gt;まず、OpenAPIとは、RESTful APIを記述するためのフォーマットのことです。&lt;/p&gt;
 &lt;p&gt;スキーマ駆動開発で使われたりします。&lt;br&gt;
 スキーマ駆動開発は、「先にスキーマを定義し、フロントエンドの開発着手を早めることで、全体的な開発速度向上の効果が期待できる開発手法」のことです。&lt;br&gt;
-&lt;code&gt;OpenAPI Generator&lt;/code&gt; はそのスキーマを定義して、ソースを自動生成するためのツールです。&lt;/p&gt;
+&lt;code&gt;OpenAPI Generator&lt;/code&gt; はそのスキーマを定義して、ソースを自動生成するための一つのツールです。&lt;br&gt;
+&lt;code&gt;OpenAPI&lt;/code&gt;と比較されるものとして他には、&lt;code&gt;gRPC&lt;/code&gt; や &lt;code&gt;GraphQL&lt;/code&gt; などがあります。それらについては、&lt;a href=&#34;https://employment.en-japan.com/engineerhub/entry/2019/08/22/103000&#34;&gt;こちらの記事&lt;/a&gt;で比較されています。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;スキーマ駆動開発(SDD)は、2015年7月に掲載された論文&lt;a href=&#34;https://www.researchgate.net/publication/280105467_Schema-Driven_Development_of_Semantic_MediaWikis&#34;&gt;Schema-Driven Development of Semantic MediaWikis&lt;/a&gt;が元ネタで、現在では、DeNAやFreeeなどが採用しているようです。&lt;/p&gt;
+&lt;p&gt;備考：スキーマ駆動開発(SDD)は、2015年7月に掲載された論文&lt;a href=&#34;https://www.researchgate.net/publication/280105467_Schema-Driven_Development_of_Semantic_MediaWikis&#34;&gt;Schema-Driven Development of Semantic MediaWikis&lt;/a&gt;が元ネタで、現在では、DeNAやFreeeなどが採用しているようです。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;また、&lt;a href=&#34;https://github.com/OpenAPITools&#34;&gt;Open API&lt;/a&gt; と &lt;a href=&#34;https://github.com/swagger-api&#34;&gt;Swagger&lt;/a&gt; は基本的には同じなのですが、別のプロジェクトとして開発されています。
 経緯がややこしいのですが、SpeakerDeckの&lt;a href=&#34;https://speakerdeck.com/akihito_nakano/gunmaweb34?slide=37&#34;&gt;平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜&lt;/a&gt;で、詳しく説明されているので、気になる方はそちらを参考にしてください。&lt;/p&gt;
-&lt;p&gt;本記事では、Spring Frameworkを使う前提で、&lt;code&gt;Open API ver3.0&lt;/code&gt; について触れます。&lt;/p&gt;
+&lt;p&gt;前置きが長くなってしまいましたが、本記事では、Spring Frameworkを使う前提で、&lt;code&gt;Open API ver3.0&lt;/code&gt; について触れます。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;備考：OpenAPI Generator で使える言語やフレームワークは、&lt;a href=&#34;https://github.com/OpenAPITools/openapi-generator#overview&#34;&gt;公式サイト&lt;/a&gt;に記載されています。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
