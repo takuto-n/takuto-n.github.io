@@ -9,8 +9,64 @@
   </url>
   
   <url>
+    <loc>https://takuto-n.github.io/tags/appmesh/</loc>
+    <lastmod>2020-11-03T15:10:12+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/aws/</loc>
+    <lastmod>2020-11-03T15:10:12+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/aws/</loc>
+    <lastmod>2020-11-03T15:10:12+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20201103-aws-app-mesh/</loc>
+    <lastmod>2020-11-03T15:10:12+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/blackbelt/</loc>
+    <lastmod>2020-11-03T15:10:12+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2020-10-24T18:36:47+09:00</lastmod>
+    <lastmod>2020-11-03T15:10:12+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2020-11-03T15:10:12+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2020-11-03T15:10:12+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2020-11-03T15:10:12+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -37,13 +93,6 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2020-10-24T18:36:47+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/categories/poc/</loc>
     <lastmod>2020-10-24T18:36:47+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -51,21 +100,7 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2020-10-24T18:36:47+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/tags/springboot/</loc>
-    <lastmod>2020-10-24T18:36:47+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2020-10-24T18:36:47+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -298,13 +333,6 @@
   <url>
     <loc>https://takuto-n.github.io/tags/%E4%BE%8B%E5%A4%96/</loc>
     <lastmod>2020-01-25T00:49:01+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/aws/</loc>
-    <lastmod>2019-12-24T23:36:29+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
