@@ -51,7 +51,7 @@
 半年ほど前に OpenAPI Generator を使う機会があったので、思い出しながらまとめておきます。">
 <meta itemprop="datePublished" content="2020-10-24T15:20:11+09:00" />
 <meta itemprop="dateModified" content="2020-10-24T15:20:11+09:00" />
-<meta itemprop="wordCount" content="1873">
+<meta itemprop="wordCount" content="1917">
 
 
 
@@ -133,7 +133,7 @@
         <div class="post-category">
             <a href="/categories/poc/"> poc </a>
             </div>
-          <span class="more-meta"> 1873 words </span>
+          <span class="more-meta"> 1917 words </span>
           <span class="more-meta"> 4 mins read </span>
         
       </div>
@@ -530,8 +530,12 @@ sampleStoreService=userstore
 </div><h4 id="121-a-namegenerateserversidefileagenerate-server-side-file">1.2.1. <a name='GenerateServerSideFile'></a>Generate Server Side File</h4>
 <p><code>ConfigOptions</code> の設定により、生成されるソースが変更されます。<br>
 <a href="https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/spring.md">openapi-generator/spring.md</a> にSpringの場合の全オプションについて記載されています。</p>
-<p>また、<code>.openapi-generator-ignore</code> の設定により、出力されるソースを制限することができます。<br>
-参考：<a href="https://openapi-generator.tech/docs/customization/#ignore-file-format">OpenAPI-Generator Customization</a></p>
+<p>また、<code>supportingFiles</code> の設定により、出力されるソースを制限することができます。</p>
+<blockquote>
+<p>備考：<br>
+後から分かったのですが、<code>.openapi-generator-ignore</code> の設定により、出力対象を制限することができるようです。<br>
+参考URL : <a href="https://openapi-generator.tech/docs/customization/#ignore-file-format">OpenAPI-Generator Customization</a></p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
