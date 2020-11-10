@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>useful tools on Little by little and bit by bit - マイペースにこつこつと</title>
-    <link>https://takuto-n.github.io/categories/useful-tools/</link>
-    <description>Recent content in useful tools on Little by little and bit by bit - マイペースにこつこつと</description>
+    <title>windows on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/tags/windows/</link>
+    <description>Recent content in windows on Little by little and bit by bit - マイペースにこつこつと</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 10 Nov 2020 19:37:47 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/useful-tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Nov 2020 19:37:47 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windowsでファイルリストを取得する方法</title>
       <link>https://takuto-n.github.io/post/20201110-windows-file-list/</link>
@@ -91,15 +91,6 @@ C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&
 &lt;li&gt;&lt;a href=&#34;https://win.just4fun.biz/?PowerShell/%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E3%81%BF%E3%80%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%81%BF%E3%81%AE%E4%B8%80%E8%A6%A7%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95&#34;&gt;PowerShell/ディレクトリのみ、ファイルのみの一覧を表示する方法 - Windowsと暮らす&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://proengineer.internous.co.jp/content/columnfeature/5043&#34;&gt;コマンドプロンプトでファイル一覧をテキスト出力！結果の便利な活用法も | サービス | プロエンジニア&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>Useful tools</title>
-      <link>https://takuto-n.github.io/post/20190923-useful-tools/</link>
-      <pubDate>Mon, 23 Sep 2019 15:55:16 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/post/20190923-useful-tools/</guid>
-      <description>少しずつ便利だなぁと思ったものを追記していきます。 複数人でのドキュメント管理 結論 複数人でのドキュメント管理になると、このご時世 Git を使うのが基</description>
     </item>
     
   </channel>
