@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 10 Nov 2020 19:37:47 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Dec 2020 18:39:39 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>poc</title>
+      <link>https://takuto-n.github.io/categories/poc/</link>
+      <pubDate>Wed, 16 Dec 2020 18:39:39 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/poc/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>useful tools</title>
       <link>https://takuto-n.github.io/categories/useful-tools/</link>
@@ -23,15 +32,6 @@
       <pubDate>Tue, 03 Nov 2020 15:10:12 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/categories/aws/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>poc</title>
-      <link>https://takuto-n.github.io/categories/poc/</link>
-      <pubDate>Sat, 24 Oct 2020 18:36:47 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/categories/poc/</guid>
       <description></description>
     </item>
     
