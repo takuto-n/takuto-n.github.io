@@ -18,8 +18,7 @@
 
 <meta name="author" content="takuto_n" /><meta name="description" content="Abstruct あるディレクトリ配下のファイルリストを取得する際に、
 Linuxだとtreeコマンドで可能です。 Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。
-   コマンド   1.1. 説明 1.2. 実行結果    Refference    1. コマンド WindowsのPowerShellで以下のコマンドを実行する。
-1  Get-ChildItem ./ -Recurse | ? { !$_.PSIsContainer } | % { $_.FullName }   1.1. 説明  Get-ChildItem ./ -Recurse  カレントディレクト配下から、再帰的にフォルダを探索する。   ? { !$_.PSIsContainer }  ? { $_.PSIsContainer } は「ディレクトリであること」という意味です。 ? は Where-Object と同義です。 ! で否定して、「ファイルであること」にしています。   { $_.FullName }  該当したファイルをフルパスで出力する。    1.2. 実行結果 1 2 3 4  C:\Users\username\test\d.txt C:\Users\username\test\a\a.txt C:\Users\username\test\b-c\b.txt C:\Users\username\test\b-c\c.txt   2. Refference  Get-ChildItem (Microsoft.PowerShell.Management) - PowerShell | Microsoft Docs PowerShell/ディレクトリのみ、ファイルのみの一覧を表示する方法 - Windowsと暮らす コマンドプロンプトでファイル一覧をテキスト出力！結果の便利な活用法も | サービス | プロエンジニア " /><meta name="keywords" content="windows, powershell, filelist" />
+" /><meta name="keywords" content="windows, powershell, filelist" />
 
 
 
@@ -45,77 +44,7 @@ Linuxだとtreeコマンドで可能です。 Windowsだとどうしたら良い
 <meta property="og:description" content="Abstruct
 あるディレクトリ配下のファイルリストを取得する際に、
 Linuxだとtreeコマンドで可能です。
-Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。
-
-
-
-
-コマンド
-
-
-1.1. 説明
-1.2. 実行結果
-
-
-
-
-Refference
-
-
-
-
-
-1. コマンド
-WindowsのPowerShellで以下のコマンドを実行する。
-
-
-1
-
-
-Get-ChildItem ./ -Recurse | ? { !$_.PSIsContainer } | % { $_.FullName }
-
-
-1.1. 説明
-
-Get-ChildItem ./ -Recurse
-
-カレントディレクト配下から、再帰的にフォルダを探索する。
-
-
-? { !$_.PSIsContainer }
-
-? { $_.PSIsContainer } は「ディレクトリであること」という意味です。
-? は Where-Object と同義です。
-! で否定して、「ファイルであること」にしています。
-
-
-{ $_.FullName }
-
-該当したファイルをフルパスで出力する。
-
-
-
-1.2. 実行結果
-
-
-1
-2
-3
-4
-
-
-C:\Users\username\test\d.txt
-C:\Users\username\test\a\a.txt
-C:\Users\username\test\b-c\b.txt
-C:\Users\username\test\b-c\c.txt
-
-
-2. Refference
-
-Get-ChildItem (Microsoft.PowerShell.Management) - PowerShell | Microsoft Docs
-PowerShell/ディレクトリのみ、ファイルのみの一覧を表示する方法 - Windowsと暮らす
-コマンドプロンプトでファイル一覧をテキスト出力！結果の便利な活用法も | サービス | プロエンジニア
-" />
+Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20201110-windows-file-list/" />
 <meta property="article:published_time" content="2020-11-10T19:37:47+09:00" />
@@ -124,77 +53,7 @@ PowerShell/ディレクトリのみ、ファイルのみの一覧を表示する
 <meta itemprop="description" content="Abstruct
 あるディレクトリ配下のファイルリストを取得する際に、
 Linuxだとtreeコマンドで可能です。
-Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。
-
-
-
-
-コマンド
-
-
-1.1. 説明
-1.2. 実行結果
-
-
-
-
-Refference
-
-
-
-
-
-1. コマンド
-WindowsのPowerShellで以下のコマンドを実行する。
-
-
-1
-
-
-Get-ChildItem ./ -Recurse | ? { !$_.PSIsContainer } | % { $_.FullName }
-
-
-1.1. 説明
-
-Get-ChildItem ./ -Recurse
-
-カレントディレクト配下から、再帰的にフォルダを探索する。
-
-
-? { !$_.PSIsContainer }
-
-? { $_.PSIsContainer } は「ディレクトリであること」という意味です。
-? は Where-Object と同義です。
-! で否定して、「ファイルであること」にしています。
-
-
-{ $_.FullName }
-
-該当したファイルをフルパスで出力する。
-
-
-
-1.2. 実行結果
-
-
-1
-2
-3
-4
-
-
-C:\Users\username\test\d.txt
-C:\Users\username\test\a\a.txt
-C:\Users\username\test\b-c\b.txt
-C:\Users\username\test\b-c\c.txt
-
-
-2. Refference
-
-Get-ChildItem (Microsoft.PowerShell.Management) - PowerShell | Microsoft Docs
-PowerShell/ディレクトリのみ、ファイルのみの一覧を表示する方法 - Windowsと暮らす
-コマンドプロンプトでファイル一覧をテキスト出力！結果の便利な活用法も | サービス | プロエンジニア
-">
+Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。">
 <meta itemprop="datePublished" content="2020-11-10T19:37:47+09:00" />
 <meta itemprop="dateModified" content="2020-11-10T19:37:47+09:00" />
 <meta itemprop="wordCount" content="388">
@@ -207,77 +66,7 @@ PowerShell/ディレクトリのみ、ファイルのみの一覧を表示する
 <meta name="twitter:description" content="Abstruct
 あるディレクトリ配下のファイルリストを取得する際に、
 Linuxだとtreeコマンドで可能です。
-Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。
-
-
-
-
-コマンド
-
-
-1.1. 説明
-1.2. 実行結果
-
-
-
-
-Refference
-
-
-
-
-
-1. コマンド
-WindowsのPowerShellで以下のコマンドを実行する。
-
-
-1
-
-
-Get-ChildItem ./ -Recurse | ? { !$_.PSIsContainer } | % { $_.FullName }
-
-
-1.1. 説明
-
-Get-ChildItem ./ -Recurse
-
-カレントディレクト配下から、再帰的にフォルダを探索する。
-
-
-? { !$_.PSIsContainer }
-
-? { $_.PSIsContainer } は「ディレクトリであること」という意味です。
-? は Where-Object と同義です。
-! で否定して、「ファイルであること」にしています。
-
-
-{ $_.FullName }
-
-該当したファイルをフルパスで出力する。
-
-
-
-1.2. 実行結果
-
-
-1
-2
-3
-4
-
-
-C:\Users\username\test\d.txt
-C:\Users\username\test\a\a.txt
-C:\Users\username\test\b-c\b.txt
-C:\Users\username\test\b-c\c.txt
-
-
-2. Refference
-
-Get-ChildItem (Microsoft.PowerShell.Management) - PowerShell | Microsoft Docs
-PowerShell/ディレクトリのみ、ファイルのみの一覧を表示する方法 - Windowsと暮らす
-コマンドプロンプトでファイル一覧をテキスト出力！結果の便利な活用法も | サービス | プロエンジニア
-"/>
+Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -436,6 +225,7 @@ C:<span class="se">\U</span>sers<span class="se">\u</span>sername<span class="se
 <li><a href="https://win.just4fun.biz/?PowerShell/%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E3%81%BF%E3%80%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%81%BF%E3%81%AE%E4%B8%80%E8%A6%A7%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">PowerShell/ディレクトリのみ、ファイルのみの一覧を表示する方法 - Windowsと暮らす</a></li>
 <li><a href="https://proengineer.internous.co.jp/content/columnfeature/5043">コマンドプロンプトでファイル一覧をテキスト出力！結果の便利な活用法も | サービス | プロエンジニア</a></li>
 </ul>
+<!--more-->
     </div>
 
     
