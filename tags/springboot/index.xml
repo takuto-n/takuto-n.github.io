@@ -7,7 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 16 Dec 2020 18:39:39 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/springboot/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Dec 2020 20:07:15 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/springboot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exception Handling on SpringBoot</title>
+      <link>https://takuto-n.github.io/post/20201222-spring-boot-exception-handler/</link>
+      <pubDate>Tue, 22 Dec 2020 20:07:15 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20201222-spring-boot-exception-handler/</guid>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
+&lt;p&gt;The three methods of exception handling in SpringBoot are described below.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How to handle exceptions for each Controller&lt;/li&gt;
+&lt;li&gt;How to handle exceptions across all Controllers&lt;/li&gt;
+&lt;li&gt;How to handle exceptions by implementing ErrorController&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
     <item>
       <title>動的プロパティの管理 on SpringBoot</title>
       <link>https://takuto-n.github.io/post/20201216-springboot-manage-property/</link>
