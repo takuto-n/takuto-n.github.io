@@ -61,7 +61,7 @@ How to handle exceptions by implementing ErrorController
 ">
 <meta itemprop="datePublished" content="2020-12-22T20:07:15+09:00" />
 <meta itemprop="dateModified" content="2020-12-22T20:07:15+09:00" />
-<meta itemprop="wordCount" content="770">
+<meta itemprop="wordCount" content="825">
 
 
 
@@ -148,7 +148,7 @@ How to handle exceptions by implementing ErrorController
         <div class="post-category">
             <a href="/categories/poc/"> poc </a>
             </div>
-          <span class="more-meta"> 770 words </span>
+          <span class="more-meta"> 825 words </span>
           <span class="more-meta"> 2 mins read </span>
         
       </div>
@@ -163,9 +163,57 @@ How to handle exceptions by implementing ErrorController
 <li>How to handle exceptions across all Controllers</li>
 <li>How to handle exceptions by implementing ErrorController</li>
 </ul>
-<h2 id="how-to-handle-exceptions-for-each-controller">How to handle exceptions for each Controller</h2>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#HowtohandleexceptionsforeachController">How to handle exceptions for each Controller</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#Pattern1Exception">Pattern1Exception</a></li>
+<li>1.2. <a href="#Pattern1RestController">Pattern1RestController</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#HowtohandleexceptionsacrossallControllers">How to handle exceptions across all Controllers</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#Pattern2ControllerAdvice">Pattern2ControllerAdvice</a></li>
+<li>2.2. <a href="#Pattern2Exception">Pattern2Exception</a></li>
+<li>2.3. <a href="#Pattern2RestController1">Pattern2RestController1</a></li>
+<li>2.4. <a href="#Pattern2RestController2">Pattern2RestController2</a></li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#HowtohandleexceptionsbyimplementingErrorController">How to handle exceptions by implementing ErrorController</a></li>
+</ol>
+<ul>
+<li>3.1. <a href="#MyBasicErrorController">MyBasicErrorController</a></li>
+<li>3.2. <a href="#Pattern3Exception">Pattern3Exception</a></li>
+<li>3.3. <a href="#Pattern3RestController">Pattern3RestController</a></li>
+</ul>
+</li>
+<li>
+<ol start="4">
+<li><a href="#build.gradle">build.gradle</a></li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li><a href="#Reference">Reference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namehowtohandleexceptionsforeachcontrollerahow-to-handle-exceptions-for-each-controller">1. <a name='HowtohandleexceptionsforeachController'></a>How to handle exceptions for each Controller</h2>
 <p>The Point is <code>@ExceptionHandler(Pattern1Exception.class)</code>.</p>
-<h3 id="pattern1exception">Pattern1Exception</h3>
+<h3 id="11-a-namepattern1exceptionapattern1exception">1.1. <a name='Pattern1Exception'></a>Pattern1Exception</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -182,7 +230,7 @@ How to handle exceptions by implementing ErrorController
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="pattern1restcontroller">Pattern1RestController</h3>
+</div><h3 id="12-a-namepattern1restcontrollerapattern1restcontroller">1.2. <a name='Pattern1RestController'></a>Pattern1RestController</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -239,9 +287,9 @@ How to handle exceptions by implementing ErrorController
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="how-to-handle-exceptions-across-all-controllers">How to handle exceptions across all Controllers</h2>
+</div><h2 id="2-a-namehowtohandleexceptionsacrossallcontrollersahow-to-handle-exceptions-across-all-controllers">2. <a name='HowtohandleexceptionsacrossallControllers'></a>How to handle exceptions across all Controllers</h2>
 <p>The Point is <code>@RestControllerAdvice</code> and <code>@ExceptionHandler(Pattern2Exception.class)</code>.</p>
-<h3 id="pattern2controlleradvice">Pattern2ControllerAdvice</h3>
+<h3 id="21-a-namepattern2controlleradviceapattern2controlleradvice">2.1. <a name='Pattern2ControllerAdvice'></a>Pattern2ControllerAdvice</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -274,7 +322,7 @@ How to handle exceptions by implementing ErrorController
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="pattern2exception">Pattern2Exception</h3>
+</div><h3 id="22-a-namepattern2exceptionapattern2exception">2.2. <a name='Pattern2Exception'></a>Pattern2Exception</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -291,7 +339,7 @@ How to handle exceptions by implementing ErrorController
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="pattern2restcontroller1">Pattern2RestController1</h3>
+</div><h3 id="23-a-namepattern2restcontroller1apattern2restcontroller1">2.3. <a name='Pattern2RestController1'></a>Pattern2RestController1</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -332,7 +380,7 @@ How to handle exceptions by implementing ErrorController
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="pattern2restcontroller2">Pattern2RestController2</h3>
+</div><h3 id="24-a-namepattern2restcontroller2apattern2restcontroller2">2.4. <a name='Pattern2RestController2'></a>Pattern2RestController2</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -373,7 +421,7 @@ How to handle exceptions by implementing ErrorController
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="how-to-handle-exceptions-by-implementing-errorcontroller">How to handle exceptions by implementing ErrorController</h2>
+</div><h2 id="3-a-namehowtohandleexceptionsbyimplementingerrorcontrollerahow-to-handle-exceptions-by-implementing-errorcontroller">3. <a name='HowtohandleexceptionsbyimplementingErrorController'></a>How to handle exceptions by implementing ErrorController</h2>
 <p><a href="https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/web/servlet/error/BasicErrorController.java">BasicErrorController.java</a> was used as a reference.</p>
 <p>The points are as follows.</p>
 <ul>
@@ -389,7 +437,7 @@ How to handle exceptions by implementing ErrorController
 </ul>
 </li>
 </ul>
-<h3 id="mybasicerrorcontroller">MyBasicErrorController</h3>
+<h3 id="31-a-namemybasicerrorcontrolleramybasicerrorcontroller">3.1. <a name='MyBasicErrorController'></a>MyBasicErrorController</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -500,7 +548,7 @@ How to handle exceptions by implementing ErrorController
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="pattern3exception">Pattern3Exception</h3>
+</div><h3 id="32-a-namepattern3exceptionapattern3exception">3.2. <a name='Pattern3Exception'></a>Pattern3Exception</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -517,7 +565,7 @@ How to handle exceptions by implementing ErrorController
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="pattern3restcontroller">Pattern3RestController</h3>
+</div><h3 id="33-a-namepattern3restcontrollerapattern3restcontroller">3.3. <a name='Pattern3RestController'></a>Pattern3RestController</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -558,7 +606,7 @@ How to handle exceptions by implementing ErrorController
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="buildgradle">build.gradle</h2>
+</div><h2 id="4-a-namebuildgradleabuildgradle">4. <a name='build.gradle'></a>build.gradle</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -631,7 +679,7 @@ How to handle exceptions by implementing ErrorController
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="reference">Reference</h2>
+</div><h2 id="5-a-namereferenceareference">5. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="http://terasolunaorg.github.io/guideline/5.6.0.RELEASE/ja/ArchitectureInDetail/WebApplicationDetail/ExceptionHandling.html#exception-handling-pattern-label">4.2. 例外ハンドリング — TERASOLUNA Server Framework for Java (5.x) Development Guideline 5.6.0.RELEASE documentation</a></li>
 <li><a href="https://qiita.com/NagaokaKenichi/items/2f199134a881a776b717">Springで例外ハンドリング - Qiita</a></li>
