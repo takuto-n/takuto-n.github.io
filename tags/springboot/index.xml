@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 22 Dec 2020 20:07:15 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/springboot/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Jan 2021 18:00:01 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/springboot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Springboot-App can pulll the Configmap information.</title>
+      <link>https://takuto-n.github.io/post/20210107-springboot-app-read-configmap/</link>
+      <pubDate>Thu, 07 Jan 2021 18:00:01 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20210107-springboot-app-read-configmap/</guid>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
+&lt;p&gt;KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを取得しに行くことができたので、その方法をまとめておきます。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Exception Handling on SpringBoot</title>
       <link>https://takuto-n.github.io/post/20201222-spring-boot-exception-handler/</link>

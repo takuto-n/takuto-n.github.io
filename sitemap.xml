@@ -10,7 +10,63 @@
   
   <url>
     <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2020-12-22T20:07:15+09:00</lastmod>
+    <lastmod>2021-01-07T18:00:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/configmap/</loc>
+    <lastmod>2021-01-07T18:00:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/kubernetes-api/</loc>
+    <lastmod>2021-01-07T18:00:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2021-01-07T18:00:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/poc/</loc>
+    <lastmod>2021-01-07T18:00:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2021-01-07T18:00:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/springboot/</loc>
+    <lastmod>2021-01-07T18:00:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20210107-springboot-app-read-configmap/</loc>
+    <lastmod>2021-01-07T18:00:01+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2021-01-07T18:00:01+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -31,41 +87,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/post/20201222-spring-boot-exception-handler/</loc>
-    <lastmod>2020-12-22T20:07:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2020-12-22T20:07:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/categories/poc/</loc>
-    <lastmod>2020-12-22T20:07:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2020-12-22T20:07:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/springboot/</loc>
-    <lastmod>2020-12-22T20:07:15+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2020-12-22T20:07:15+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
