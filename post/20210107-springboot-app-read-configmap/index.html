@@ -51,7 +51,7 @@ KubernetesのPod上で動作するSpringBootアプリケーションからConfig
 KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを取得しに行くことができたので、その方法をまとめておきます。">
 <meta itemprop="datePublished" content="2021-01-07T18:00:01+09:00" />
 <meta itemprop="dateModified" content="2021-01-07T18:00:01+09:00" />
-<meta itemprop="wordCount" content="2133">
+<meta itemprop="wordCount" content="2252">
 
 
 
@@ -133,7 +133,7 @@ KubernetesのPod上で動作するSpringBootアプリケーションからConfig
         <div class="post-category">
             <a href="/categories/poc/"> poc </a>
             </div>
-          <span class="more-meta"> 2133 words </span>
+          <span class="more-meta"> 2252 words </span>
           <span class="more-meta"> 5 mins read </span>
         
       </div>
@@ -145,6 +145,10 @@ KubernetesのPod上で動作するSpringBootアプリケーションからConfig
 <p>KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを取得しに行くことができたので、その方法をまとめておきます。</p>
 <blockquote>
 <p>Pod上にマウントされたConfigMapが更新されるのを待つのではなく、直接取得しに行く方法です。</p>
+</blockquote>
+<blockquote>
+<p>追記：fabric8io/kubernetes-client を使用した方がConfigMapの変更イベントをトリガーにできるため、より簡単に実現できます。<br>
+参考：<a href="https://github.com/fabric8io/kubernetes-client/blob/master/kubernetes-examples/src/main/java/io/fabric8/kubernetes/examples/WatchExample.java">kubernetes-client/WatchExample.java at master · fabric8io/kubernetes-client</a></p>
 </blockquote>
 <h2 id="environment">Environment</h2>
 <ul>
@@ -921,7 +925,11 @@ player.maximum-lives: <span class="m">5</span>
           <a href="/tags/kubernetes-api/">kubernetes api</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/20210113-springboot-app-create-configmap/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Springboot-App can create/replace Configmap.</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/20201222-spring-boot-exception-handler/">
             <span class="next-text nav-default">Exception Handling on SpringBoot</span>
             <span class="next-text nav-mobile">Next</span>
