@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="takuto_n" /><meta name="description" content="Abstruct 第一回 アルゴリズム実技検定 過去問 - AtCoder の問題AからHまでをJavaで解いてみました。（問題はAからOまでありますが。。。）
-より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。
+また、より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。(少し冗長なところはありますが、ご了承ください。)
 " /><meta name="keywords" content="atcoder, competitive-programming, java" />
 
 
@@ -43,7 +43,7 @@
 <meta property="og:title" content="第一回 アルゴリズム実技検定(AtCoder)" />
 <meta property="og:description" content="Abstruct
 第一回 アルゴリズム実技検定 過去問 - AtCoder の問題AからHまでをJavaで解いてみました。（問題はAからOまでありますが。。。）
-より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。" />
+また、より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。(少し冗長なところはありますが、ご了承ください。)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://takuto-n.github.io/post/20210315-at-coder/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-03-17T22:00:01&#43;09:00" />
@@ -52,14 +52,14 @@
 <meta itemprop="name" content="第一回 アルゴリズム実技検定(AtCoder)">
 <meta itemprop="description" content="Abstruct
 第一回 アルゴリズム実技検定 過去問 - AtCoder の問題AからHまでをJavaで解いてみました。（問題はAからOまでありますが。。。）
-より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。"><meta itemprop="datePublished" content="2021-03-17T22:00:01&#43;09:00" />
+また、より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。(少し冗長なところはありますが、ご了承ください。)"><meta itemprop="datePublished" content="2021-03-17T22:00:01&#43;09:00" />
 <meta itemprop="dateModified" content="2021-03-17T22:00:01&#43;09:00" />
-<meta itemprop="wordCount" content="3971">
+<meta itemprop="wordCount" content="4242">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="第一回 アルゴリズム実技検定(AtCoder)"/>
 <meta name="twitter:description" content="Abstruct
 第一回 アルゴリズム実技検定 過去問 - AtCoder の問題AからHまでをJavaで解いてみました。（問題はAからOまでありますが。。。）
-より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。"/>
+また、より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。(少し冗長なところはありますが、ご了承ください。)"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -133,8 +133,8 @@
         <div class="post-category">
             <a href="/categories/competitive-programming/"> competitive-programming </a>
             </div>
-          <span class="more-meta"> 3971 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 4242 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
@@ -143,10 +143,82 @@
     <div class="post-content">
       <h1 id="abstruct">Abstruct</h1>
 <p><a href="https://atcoder.jp/contests/past201912-open">第一回 アルゴリズム実技検定 過去問 - AtCoder</a> の問題AからHまでをJavaで解いてみました。（問題はAからOまでありますが。。。）</p>
-<p>より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。</p>
-<h2 id="a2倍チェック">A	2倍チェック</h2>
+<p>また、より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。(少し冗長なところはありますが、ご了承ください。)</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#A2">A	2倍チェック</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#A2-1">A 2倍チェックの解答のソースコード</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#B">B 増減管理</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#B-1">B 増減管理の解答のソースコード</a></li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#C3">C 3番目</a></li>
+</ol>
+<ul>
+<li>3.1. <a href="#C3-1">C 3番目の解答のソースコード</a></li>
+</ul>
+</li>
+<li>
+<ol start="4">
+<li><a href="#D">D 重複検査</a></li>
+</ol>
+<ul>
+<li>4.1. <a href="#D-1">D 重複検査の解答のソースコード</a></li>
+</ul>
+</li>
+<li>
+<ol start="5">
+<li><a href="#ESNS">E SNSのログ</a></li>
+</ol>
+<ul>
+<li>5.1. <a href="#ESNS-1">E SNSのログの解答のソースコード</a></li>
+</ul>
+</li>
+<li>
+<ol start="6">
+<li><a href="#FDoubleCamelCaseSort">F DoubleCamelCase Sort</a></li>
+</ol>
+<ul>
+<li>6.1. <a href="#FDoubleCamelCaseSort-1">F DoubleCamelCase Sortの解答のソースコード</a></li>
+</ul>
+</li>
+<li>
+<ol start="7">
+<li><a href="#G">G 組分け</a></li>
+</ol>
+<ul>
+<li>7.1. <a href="#G-1">G 組分けの解答のソースコード</a></li>
+</ul>
+</li>
+<li>
+<ol start="8">
+<li><a href="#H">H まとめ売り</a></li>
+</ol>
+<ul>
+<li>8.1. <a href="#H-1">H まとめ売りの解答のソースコード</a></li>
+</ul>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namea2aa2倍チェック">1. <a name='A2'></a>A	2倍チェック</h2>
 <p>問題のURL : <a href="https://atcoder.jp/contests/past201912-open/tasks/past201912_a">https://atcoder.jp/contests/past201912-open/tasks/past201912_a</a></p>
-<h3 id="解答のソースコード">解答のソースコード</h3>
+<h3 id="11-a-namea2-1aa-2倍チェックの解答のソースコード">1.1. <a name='A2-1'></a>A 2倍チェックの解答のソースコード</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -243,9 +315,9 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="b増減管理">B	増減管理</h2>
+</div><h2 id="2-a-namebab-増減管理">2. <a name='B'></a>B 増減管理</h2>
 <p>問題のURL : <a href="https://atcoder.jp/contests/past201912-open/tasks/past201912_b">https://atcoder.jp/contests/past201912-open/tasks/past201912_b</a></p>
-<h3 id="解答のソースコード-1">解答のソースコード</h3>
+<h3 id="21-a-nameb-1ab-増減管理の解答のソースコード">2.1. <a name='B-1'></a>B 増減管理の解答のソースコード</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -354,9 +426,9 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="c3番目">C	3番目</h2>
+</div><h2 id="3-a-namec3ac-3番目">3. <a name='C3'></a>C 3番目</h2>
 <p>問題のURL : <a href="https://atcoder.jp/contests/past201912-open/tasks/past201912_c">https://atcoder.jp/contests/past201912-open/tasks/past201912_c</a></p>
-<h3 id="解答のソースコード-2">解答のソースコード</h3>
+<h3 id="31-a-namec3-1ac-3番目の解答のソースコード">3.1. <a name='C3-1'></a>C 3番目の解答のソースコード</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -449,9 +521,9 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="d重複検査">D	重複検査</h2>
+</div><h2 id="4-a-namedad-重複検査">4. <a name='D'></a>D 重複検査</h2>
 <p>問題のURL : <a href="https://atcoder.jp/contests/past201912-open/tasks/past201912_d">https://atcoder.jp/contests/past201912-open/tasks/past201912_d</a></p>
-<h3 id="解答のソースコード-3">解答のソースコード</h3>
+<h3 id="41-a-named-1ad-重複検査の解答のソースコード">4.1. <a name='D-1'></a>D 重複検査の解答のソースコード</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -584,9 +656,9 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="esns-のログ">E	SNS のログ</h2>
+</div><h2 id="5-a-nameesnsae-snsのログ">5. <a name='ESNS'></a>E SNSのログ</h2>
 <p>問題のURL : <a href="https://atcoder.jp/contests/past201912-open/tasks/past201912_e">https://atcoder.jp/contests/past201912-open/tasks/past201912_e</a></p>
-<h3 id="解答のソースコード-4">解答のソースコード</h3>
+<h3 id="51-a-nameesns-1ae-snsのログの解答のソースコード">5.1. <a name='ESNS-1'></a>E SNSのログの解答のソースコード</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">  1
@@ -859,9 +931,9 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="fdoublecamelcase-sort">F	DoubleCamelCase Sort</h2>
+</div><h2 id="6-a-namefdoublecamelcasesortaf-doublecamelcase-sort">6. <a name='FDoubleCamelCaseSort'></a>F DoubleCamelCase Sort</h2>
 <p>問題のURL : <a href="https://atcoder.jp/contests/past201912-open/tasks/past201912_f">https://atcoder.jp/contests/past201912-open/tasks/past201912_f</a></p>
-<h3 id="解答のソースコード-5">解答のソースコード</h3>
+<h3 id="61-a-namefdoublecamelcasesort-1af-doublecamelcase-sortの解答のソースコード">6.1. <a name='FDoubleCamelCaseSort-1'></a>F DoubleCamelCase Sortの解答のソースコード</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1000,9 +1072,9 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="g組分け">G	組分け</h2>
+</div><h2 id="7-a-namegag-組分け">7. <a name='G'></a>G 組分け</h2>
 <p>問題のURL : <a href="https://atcoder.jp/contests/past201912-open/tasks/past201912_g">https://atcoder.jp/contests/past201912-open/tasks/past201912_g</a></p>
-<h3 id="解答のソースコード-6">解答のソースコード</h3>
+<h3 id="71-a-nameg-1ag-組分けの解答のソースコード">7.1. <a name='G-1'></a>G 組分けの解答のソースコード</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">  1
@@ -1237,9 +1309,9 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="hまとめ売り">H	まとめ売り</h2>
+</div><h2 id="8-a-namehah-まとめ売り">8. <a name='H'></a>H まとめ売り</h2>
 <p>問題のURL : <a href="https://atcoder.jp/contests/past201912-open/tasks/past201912_h">https://atcoder.jp/contests/past201912-open/tasks/past201912_h</a></p>
-<h3 id="解答のソースコード-7">解答のソースコード</h3>
+<h3 id="81-a-nameh-1ah-まとめ売りの解答のソースコード">8.1. <a name='H-1'></a>H まとめ売りの解答のソースコード</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">  1
