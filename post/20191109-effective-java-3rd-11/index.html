@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.80.0 with theme even" />
+<meta name="generator" content="Hugo 0.81.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-11/" />
@@ -41,19 +41,15 @@
 <meta property="og:title" content="Effective Java 3rd [Chapter 11] - 並行性" />
 <meta property="og:description" content="並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-11/" />
-<meta property="article:published_time" content="2020-02-22T00:49:04+09:00" />
-<meta property="article:modified_time" content="2020-02-22T00:49:04+09:00" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-11/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-02-22T00:49:04&#43;09:00" />
+<meta property="article:modified_time" content="2020-02-22T00:49:04&#43;09:00" />
+
 <meta itemprop="name" content="Effective Java 3rd [Chapter 11] - 並行性">
-<meta itemprop="description" content="並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス">
-<meta itemprop="datePublished" content="2020-02-22T00:49:04+09:00" />
-<meta itemprop="dateModified" content="2020-02-22T00:49:04+09:00" />
+<meta itemprop="description" content="並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス"><meta itemprop="datePublished" content="2020-02-22T00:49:04&#43;09:00" />
+<meta itemprop="dateModified" content="2020-02-22T00:49:04&#43;09:00" />
 <meta itemprop="wordCount" content="9161">
-
-
-
-<meta itemprop="keywords" content="java,並行性,個人的メモ," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="java,並行性,個人的メモ," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Effective Java 3rd [Chapter 11] - 並行性"/>
 <meta name="twitter:description" content="並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス"/>
 
@@ -467,47 +463,47 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ObservableSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">ForwardingSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nf">ObservableSet</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">set</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nf">ObservableSet</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">set</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">super</span><span class="o">(</span><span class="n">set</span><span class="o">);</span>
-    <span class="o">}</span>
+	<span class="o">}</span>
 
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">SetObserver</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="n">observers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">SetObserver</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span> <span class="n">observers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addObserver</span><span class="o">(</span><span class="n">SetObserver</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">observer</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addObserver</span><span class="o">(</span><span class="n">SetObserver</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">observer</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">synchronized</span> <span class="o">(</span><span class="n">observers</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">observers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>
         <span class="o">}</span>
-    <span class="o">}</span>
+	<span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">removeObserver</span><span class="o">(</span><span class="n">SetObserver</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">observer</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">removeObserver</span><span class="o">(</span><span class="n">SetObserver</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">observer</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">synchronized</span> <span class="o">(</span><span class="n">observers</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">observers</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>
         <span class="o">}</span>
-    <span class="o">}</span>
+	<span class="o">}</span>
 
-    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">notifyElementAdded</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">notifyElementAdded</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">synchronized</span> <span class="o">(</span><span class="n">observers</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">for</span> <span class="o">(</span><span class="n">SetObserver</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">observer</span> <span class="o">:</span> <span class="n">observers</span><span class="o">)</span>
                 <span class="n">observer</span><span class="o">.</span><span class="na">added</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">element</span><span class="o">);</span>
         <span class="o">}</span>
-    <span class="o">}</span>
+	<span class="o">}</span>
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
         <span class="kt">boolean</span> <span class="n">added</span> <span class="o">=</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">added</span><span class="o">)</span>
             <span class="n">notifyElementAdded</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
         <span class="k">return</span> <span class="n">added</span><span class="o">;</span>
-    <span class="o">}</span>
+	<span class="o">}</span>
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
         <span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
         <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">element</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span>
             <span class="n">result</span> <span class="o">|=</span> <span class="n">add</span><span class="o">(</span><span class="n">element</span><span class="o">);</span> <span class="c1">// notifyElementAddedを呼ぶ 
 </span><span class="c1"></span>        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
         <span class="o">}</span>
-    <span class="o">}</span>
+	<span class="o">}</span>
   <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">SetObserver</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
       <span class="kt">void</span> <span class="nf">added</span><span class="o">(</span><span class="n">ObservableSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">set</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">);</span>
   <span class="o">}</span>
