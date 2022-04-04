@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Javaプロセスのメモリチェック方法 - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="概要 Javaプロセスのメモリ使用量をいろいろな方法で調査する機会あったので、まとめておきます。（内容としてはそれぞれあっさりです。）
+" /><meta name="keywords" content="java, process, memory" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20200502-memory-check-methods/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Javaプロセスのメモリチェック方法" />
+<meta property="og:description" content="概要
+Javaプロセスのメモリ使用量をいろいろな方法で調査する機会あったので、まとめておきます。（内容としてはそれぞれあっさりです。）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20200502-memory-check-methods/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-05-02T15:08:30+09:00" />
+<meta property="article:modified_time" content="2020-05-02T15:08:30+09:00" />
+
+<meta itemprop="name" content="Javaプロセスのメモリチェック方法">
+<meta itemprop="description" content="概要
+Javaプロセスのメモリ使用量をいろいろな方法で調査する機会あったので、まとめておきます。（内容としてはそれぞれあっさりです。）"><meta itemprop="datePublished" content="2020-05-02T15:08:30+09:00" />
+<meta itemprop="dateModified" content="2020-05-02T15:08:30+09:00" />
+<meta itemprop="wordCount" content="1073">
+<meta itemprop="keywords" content="java,process,memory," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Javaプロセスのメモリチェック方法"/>
+<meta name="twitter:description" content="概要
+Javaプロセスのメモリ使用量をいろいろな方法で調査する機会あったので、まとめておきます。（内容としてはそれぞれあっさりです。）"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Javaプロセスのメモリチェック方法</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-02 </span>
+        <div class="post-category">
+            <a href="/categories/poc/"> poc </a>
+            </div>
+          <span class="more-meta"> 1073 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="概要">概要</h1>
+<p>Javaプロセスのメモリ使用量をいろいろな方法で調査する機会あったので、まとめておきます。（内容としてはそれぞれあっさりです。）</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#GCViewer">GCViewer</a></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><a href="#JMCJDKMissionControl">JMC(JDK Mission Control)</a></li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li><a href="#jstat">jstat</a></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li><a href="#jcmd">jcmd</a></li>
+</ol>
+<ul>
+<li>4.1. <a href="#PerfCounter.print">PerfCounter.print</a></li>
+<li>4.2. <a href="#VM.native_memory">VM.native_memory</a></li>
+</ul>
+</li>
+<li>
+<ol start="5">
+<li><a href="#gcore">gcore</a></li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li><a href="#pmap">pmap</a></li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li><a href="#PSSproportionalsetsize">PSS (proportional set size)</a></li>
+</ol>
+</li>
+<li>
+<ol start="8">
+<li><a href="#Reference">Reference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namegcvieweragcviewer">1. <a name='GCViewer'></a>GCViewer</h2>
+<p><a href="https://github.com/chewiebug/GCViewer/wiki/Changelog">Changelog · chewiebug/GCViewer Wiki</a>からダウンロードする。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">1. java -verbose:gc <span class="c1"># GCログを取得する。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>GCViewer</code>で確認する。</p>
+<p><img src="/img/20200502/gcviewer.png" alt=""></p>
+<ul>
+<li>GCログの取得方法はこちらを参照
+<ul>
+<li><a href="https://www.ibm.com/support/knowledgecenter/ja/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/mm_gc_pd_mgc_verbose.html">verbose:gc 情報の使用 (AIX、Linux のみ)</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-a-namejmcjdkmissioncontrolajmcjdk-mission-control">2. <a name='JMCJDKMissionControl'></a>JMC(JDK Mission Control)</h2>
+<p><a href="http://jdk.java.net/jmc/">JMC 7 GA Release</a>からダウンロードする。</p>
+<p>JMC起動して、メモリを確認したいJavaプロセスを選択する。</p>
+<p><img src="/img/20200502/jmc.png" alt=""></p>
+<ul>
+<li>詳しくはこちらを参照。
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/technotes/guides/troubleshoot/toc.html">Java Platform, Standard Editionトラブルシューティング・ガイド, リリース8</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-a-namejstatajstat">3. <a name='jstat'></a>jstat</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">1. tasklist <span class="p">|</span> grep java <span class="c1"># (linuxの場合はps)</span>
+</span></span><span class="line"><span class="cl">2. jstat -gc &lt;プロセス番号&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT    CGC    CGCT     GCT   
+</span></span><span class="line"><span class="cl"> 0.0   2048.0  0.0   2048.0 55296.0  18432.0   37888.0    13596.4   45868.0 44628.5 5504.0 5063.0     12    0.127   0      0.000   4      0.012    0.139
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>各列の説明はこちらを参照。
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/1.5.0/tooldocs/share/jstat.html">jstat - Java 仮想マシン統計データ監視ツール</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="4-a-namejcmdajcmd">4. <a name='jcmd'></a>jcmd</h2>
+<p>いろんなオプションがありますが、今回は<code>PerfCounter.print</code>と<code>VM.native_memory</code>を見てみました。</p>
+<ul>
+<li>
+<p><code>jcmd</code> : 引数なしなら<code>jps</code>と同じ</p>
+</li>
+<li>
+<p><code>jcmd VM.uptime</code> : Javaプロセスの起動後の経過時間</p>
+</li>
+<li>
+<p><code>jcmd Thread.print</code> : スレッドダンプ。<code>jstack</code>と同じ。</p>
+</li>
+<li>
+<p><code>jcmd GC.heap_dump</code> : ヒープダンプ。<code>jmap</code>と同じ。</p>
+</li>
+<li>
+<p><code>jcmd -gcnew 1s</code> : 毎秒のGC領域のサイズを見る</p>
+</li>
+<li>
+<p><code>jcmd PerfCounter.print</code> : JVM内部で保持している様々なカウンタを取得</p>
+</li>
+<li>
+<p>詳しくはこちらを参照。</p>
+<ul>
+<li>
+<ul>
+<li><a href="https://docs.oracle.com/en/java/javase/11/tools/jcmd.html#GUID-59153599-875E-447D-8D98-0078A5778F05">jcmd</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="41-a-nameperfcounterprintaperfcounterprint">4.1. <a name='PerfCounter.print'></a>PerfCounter.print</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">1. tasklist <span class="p">|</span> grep java <span class="c1"># (linuxの場合はps)</span>
+</span></span><span class="line"><span class="cl">2. jcmd &lt;プロセス番号&gt; PerfCounter.print
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src="/data/20200502/jcmd-perf-counter-print.html" scrolling="yes" width="100%" height="300"></iframe>
+<h3 id="42-a-namevmnative_memoryavmnative_memory">4.2. <a name='VM.native_memory'></a>VM.native_memory</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">1. java -XX:+UnlockDiagnosticVMOptions -XX:NativeMemoryTracking<span class="o">=</span>summary
+</span></span><span class="line"><span class="cl">2. tasklist <span class="p">|</span> grep java <span class="c1"># (linuxの場合はps)</span>
+</span></span><span class="line"><span class="cl">3. jcmd &lt;プロセス番号&gt; VM.native_memory baseline
+</span></span><span class="line"><span class="cl">4. jcmd &lt;プロセス番号&gt; VM.native_memory summary.diff
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src="/data/20200502/jcmd-vm-native-memory.html" scrolling="yes" width="100%" height="300"></iframe>
+<h2 id="5-a-namegcoreagcore">5. <a name='gcore'></a>gcore</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">1. ps -aux <span class="p">|</span> grep <span class="s1">&#39;java&#39;</span>
+</span></span><span class="line"><span class="cl">2. gcore &lt;プロセス番号&gt;
+</span></span><span class="line"><span class="cl">3. strings -a core.13386 &gt; raw.txt
+</span></span><span class="line"><span class="cl">4. sort raw.txt <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> less &gt; data.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src="/data/20200502/gcore.html" scrolling="yes" width="100%" height="300"></iframe>
+<ul>
+<li>詳しくはこちらを参照。
+<ul>
+<li><a href="http://man7.org/linux/man-pages/man1/gcore.1.html">gcore(1) - Linux manual page</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="6-a-namepmapapmap">6. <a name='pmap'></a>pmap</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">1. ps -aux <span class="p">|</span> grep <span class="s1">&#39;java&#39;</span>
+</span></span><span class="line"><span class="cl">2. pmap -x &lt;プロセス番号&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><iframe src="/data/20200502/pmap.html" scrolling="yes" width="100%" height="300"></iframe>
+<ul>
+<li>詳しくはこちらを参照。
+<ul>
+<li><a href="http://man7.org/linux/man-pages/man1/pmap.1.html">pmap(1) - Linux manual page</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="7-a-namepssproportionalsetsizeapss-proportional-set-size">7. <a name='PSSproportionalsetsize'></a>PSS (proportional set size)</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">1. ps -aux <span class="p">|</span> grep <span class="s1">&#39;java&#39;</span>
+</span></span><span class="line"><span class="cl">2. cat /proc/&lt;プロセス番号&gt;/smaps <span class="p">|</span> awk <span class="s1">&#39;/^Pss/{sum += $2}END{print pss sum}&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">pss <span class="m">143978</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>詳しくはこちらを参照。
+<ul>
+<li><a href="https://linuxjm.osdn.jp/html/LDP_man-pages/man5/proc.5.html">Man page of PROC</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="8-a-namereferenceareference">8. <a name='Reference'></a>Reference</h2>
+<ul>
+<li><a href="http://chronosdeveloper.hatenablog.com/entry/2016/10/03/001032">Java Virtual Machine調査方法 - クロノスの技術系ブログ</a></li>
+<li><a href="https://www.slideshare.net/YaSuenag/metaspace">Metaspace</a></li>
+<li><a href="https://blog.cybozu.io/entry/8218">恐怖の JVM 大量メモリ消費！メモリリークの謎を追え！！ - Cybozu Inside Out | サイボウズエンジニアのブログ</a></li>
+<li><a href="https://stackoverflow.com/questions/9216815/valgrind-and-java">memory leaks - Valgrind and Java - Stack Overflow</a></li>
+<li><a href="https://tanakakns.hatenablog.com/entry/20120508/1336467306">JavaVMのメモリ管理に関するまとめ（Javaヒープ、GC、ダンプ等） - ぺーぺーSEのブログ</a></li>
+<li><a href="https://www.slideshare.net/ChihiroIto1/java-16802525">Javaはどのように動くのか～スライドでわかるJVMの仕組み</a></li>
+<li><a href="https://qiita.com/white_aspara25/items/cfc835006ae356189df3">プロセス毎のメモリ消費量を調べたい時に使えるコマンド - Qiita</a></li>
+<li><a href="https://cero-t.hatenadiary.jp/entry/20130930/1380474985">俺様とJavaOne 2013（中編） - 谷本 心 in せろ部屋</a></li>
+<li><a href="https://qiita.com/ito-koichi/items/cacb815409dcaf958833">GCViewerの使い方メモ - Qiita</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          <a href="/tags/process/">process</a>
+          <a href="/tags/memory/">memory</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20200614-jmeter-master-slave/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Jmeter Master-Slave構成</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20200502-thread-init-at-process-startup2/">
+            <span class="next-text nav-default">SpringBootアプリケーション起動直後にスレッドを初期化する方法②</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

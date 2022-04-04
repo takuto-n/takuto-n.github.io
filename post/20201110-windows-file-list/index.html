@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Windowsでファイルリストを取得する方法 - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstruct あるディレクトリ配下のファイルリストを取得する際に、
+Linuxだとtreeコマンドで可能です。 Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。
+ 2022/4/1 追記
+フォルダリストの場合、コマンドプロンプトで tree コマンドを使えばOK.
+ファイルリストの場合は、以下のpowershellでも可だが、tree /f でもOK.
+参考：tree | Microsoft Docs
+" /><meta name="keywords" content="windows, powershell, filelist" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20201110-windows-file-list/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Windowsでファイルリストを取得する方法" />
+<meta property="og:description" content="Abstruct
+あるディレクトリ配下のファイルリストを取得する際に、
+Linuxだとtreeコマンドで可能です。
+Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。
+
+2022/4/1 追記
+フォルダリストの場合、コマンドプロンプトで tree コマンドを使えばOK.
+ファイルリストの場合は、以下のpowershellでも可だが、tree /f でもOK.
+参考：tree | Microsoft Docs
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20201110-windows-file-list/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-11-10T19:37:47+09:00" />
+<meta property="article:modified_time" content="2020-11-10T19:37:47+09:00" />
+
+<meta itemprop="name" content="Windowsでファイルリストを取得する方法">
+<meta itemprop="description" content="Abstruct
+あるディレクトリ配下のファイルリストを取得する際に、
+Linuxだとtreeコマンドで可能です。
+Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。
+
+2022/4/1 追記
+フォルダリストの場合、コマンドプロンプトで tree コマンドを使えばOK.
+ファイルリストの場合は、以下のpowershellでも可だが、tree /f でもOK.
+参考：tree | Microsoft Docs
+"><meta itemprop="datePublished" content="2020-11-10T19:37:47+09:00" />
+<meta itemprop="dateModified" content="2020-11-10T19:37:47+09:00" />
+<meta itemprop="wordCount" content="463">
+<meta itemprop="keywords" content="windows,powershell,filelist," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Windowsでファイルリストを取得する方法"/>
+<meta name="twitter:description" content="Abstruct
+あるディレクトリ配下のファイルリストを取得する際に、
+Linuxだとtreeコマンドで可能です。
+Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。
+
+2022/4/1 追記
+フォルダリストの場合、コマンドプロンプトで tree コマンドを使えばOK.
+ファイルリストの場合は、以下のpowershellでも可だが、tree /f でもOK.
+参考：tree | Microsoft Docs
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Windowsでファイルリストを取得する方法</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-10 </span>
+        <div class="post-category">
+            <a href="/categories/useful-tools/"> useful-tools </a>
+            </div>
+          <span class="more-meta"> 463 words </span>
+          <span class="more-meta"> 1 min read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstruct">Abstruct</h1>
+<p>あるディレクトリ配下のファイルリストを取得する際に、<br>
+Linuxだと<a href="https://linux.die.net/man/1/tree">tree</a>コマンドで可能です。
+Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。</p>
+<blockquote>
+<p>2022/4/1 追記<br>
+フォルダリストの場合、コマンドプロンプトで <code>tree</code> コマンドを使えばOK.<br>
+ファイルリストの場合は、以下のpowershellでも可だが、<code>tree /f</code> でもOK.<br>
+参考：<a href="https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/tree">tree | Microsoft Docs</a></p>
+</blockquote>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Command">Command</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#Explanation">Explanation</a></li>
+<li>1.2. <a href="#ExecutionResult">Execution Result</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#Refference">Refference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namecommandacommand">1. <a name='Command'></a>Command</h2>
+<p>Windowsの<a href="https://docs.microsoft.com/ja-jp/powershell/">PowerShell</a>で以下のコマンドを実行する。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-ChildItem ./ -Recurse | ? { !$_.PSIsContainer } | % { $_.FullName }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="11-a-nameexplanationaexplanation">1.1. <a name='Explanation'></a>Explanation</h3>
+<ul>
+<li><code>Get-ChildItem ./ -Recurse</code>
+<ul>
+<li>カレントディレクト配下から、再帰的にフォルダを探索する。</li>
+</ul>
+</li>
+<li><code>? { !$_.PSIsContainer }</code>
+<ul>
+<li><code>? { $_.PSIsContainer }</code> は「ディレクトリであること」という意味です。</li>
+<li><code>?</code> は <code>Where-Object</code> と同義です。</li>
+<li><code>!</code> で否定して、「ファイルであること」にしています。</li>
+</ul>
+</li>
+<li><code>{ $_.FullName }</code>
+<ul>
+<li>該当したファイルをフルパスで出力する。</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-a-nameexecutionresultaexecution-result">1.2. <a name='ExecutionResult'></a>Execution Result</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">C:<span class="se">\U</span>sers<span class="se">\u</span>sername<span class="se">\t</span>est<span class="se">\d</span>.txt
+</span></span><span class="line"><span class="cl">C:<span class="se">\U</span>sers<span class="se">\u</span>sername<span class="se">\t</span>est<span class="se">\a\a</span>.txt
+</span></span><span class="line"><span class="cl">C:<span class="se">\U</span>sers<span class="se">\u</span>sername<span class="se">\t</span>est<span class="se">\b</span>-c<span class="se">\b</span>.txt
+</span></span><span class="line"><span class="cl">C:<span class="se">\U</span>sers<span class="se">\u</span>sername<span class="se">\t</span>est<span class="se">\b</span>-c<span class="se">\c</span>.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-a-namerefferencearefference">2. <a name='Refference'></a>Refference</h2>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-childitem?view=powershell-7">Get-ChildItem (Microsoft.PowerShell.Management) - PowerShell | Microsoft Docs</a></li>
+<li><a href="https://win.just4fun.biz/?PowerShell/%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E3%81%BF%E3%80%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%81%BF%E3%81%AE%E4%B8%80%E8%A6%A7%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">PowerShell/ディレクトリのみ、ファイルのみの一覧を表示する方法 - Windowsと暮らす</a></li>
+<li><a href="https://proengineer.internous.co.jp/content/columnfeature/5043">コマンドプロンプトでファイル一覧をテキスト出力！結果の便利な活用法も | サービス | プロエンジニア</a></li>
+</ul>
+<!--more-->
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/windows/">windows</a>
+          <a href="/tags/powershell/">powershell</a>
+          <a href="/tags/filelist/">filelist</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20201216-springboot-manage-property/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">動的プロパティの管理 on SpringBoot</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20201103-aws-app-mesh/">
+            <span class="next-text nav-default">AWS App Meshについて調べてみた</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

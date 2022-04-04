@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Using Kubernetes on GCP - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="" /><meta name="keywords" content="docker, kubernetes, gcp" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20200408-use-kubernetes-on-gcp/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Using Kubernetes on GCP" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20200408-use-kubernetes-on-gcp/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-04-07T20:56:51+09:00" />
+<meta property="article:modified_time" content="2020-04-07T20:56:51+09:00" />
+
+<meta itemprop="name" content="Using Kubernetes on GCP">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2020-04-07T20:56:51+09:00" />
+<meta itemprop="dateModified" content="2020-04-07T20:56:51+09:00" />
+<meta itemprop="wordCount" content="882">
+<meta itemprop="keywords" content="docker,kubernetes,gcp," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Using Kubernetes on GCP"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Using Kubernetes on GCP</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-07 </span>
+        <div class="post-category">
+            <a href="/categories/docker/"> docker </a>
+            </div>
+          <span class="more-meta"> 882 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <p><img src="/img/20200408/user-k8s-on-gcp.png" alt=""></p>
+<h1 id="use-kubernetes-on-gcp">Use Kubernetes on GCP</h1>
+<p><a href="https://takuto-n.github.io/post/20200405-docker-springboot_to_db/">Springboot on Container</a>と<a href="https://takuto-n.github.io/post/20200407-jnr-on-docker/">Using JNR on Container</a>の続きの内容です。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#TechnicalElements">Technical Elements</a></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><a href="#SettingsofEachTechnicalElement">Settings of Each Technical Element</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#Cluster">Cluster</a></li>
+<li>2.2. <a href="#Workload">Workload</a></li>
+<li>2.3. <a href="#Ingress">Ingress</a></li>
+<li>2.4. <a href="#Logging">Logging</a></li>
+</ul>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<p>構成図の通り、<code>GCP</code>の<code>GKE(Google Kubernetes Engine</code>)を使ってみようと思います。</p>
+<p>今回はGUIでボタンを押していくだけで出来ました。</p>
+<h2 id="1-a-nametechnicalelementsatechnical-elements">1. <a name='TechnicalElements'></a>Technical Elements</h2>
+<ul>
+<li><a href="https://spring.io/projects/spring-boot">Spring Boot</a>
+<ul>
+<li>Spring Framework ベースのアプリケーションを手軽に作成することができるフレームワーク</li>
+</ul>
+</li>
+<li><a href="https://www.docker.com/">Docker</a>
+<ul>
+<li>コンテナ仮想化を用いた OS レベルの仮想環境の構築ツール</li>
+</ul>
+</li>
+<li><a href="https://github.com/GoogleContainerTools/jib">GoogleContainerTools/jib: 🏗</a>
+<ul>
+<li><a href="https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin">jib-gradle-plugin</a></li>
+<li>Java アプリケーションを実行する Docker コンテナイメージを簡単に作成するためのツール</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/docs/overview?hl=ja">GCP(Google Cloud Platform)</a>
+<ul>
+<li>Google が提供しているクラウドコンピューティングサービス
+<ul>
+<li>Google 検索や YouTube などでも同じインフラストラクチャーが利用されている。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/kubernetes-engine?hl=ja">GKE(Google Kubernetes Engine)</a>
+<ul>
+<li>Google が開発した、現在オープンソース化されている Kubernetes をベースとしたコンテナ環境です。</li>
+</ul>
+</li>
+<li><a href="https://github.com/jnr/jnr-ffi">jnr/jnr-ffi</a>
+<ul>
+<li>Javaから簡単にCのライブラリを呼び出せるフレームワーク</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-a-namesettingsofeachtechnicalelementasettings-of-each-technical-element">2. <a name='SettingsofEachTechnicalElement'></a>Settings of Each Technical Element</h2>
+<h3 id="21-a-nameclusteracluster">2.1. <a name='Cluster'></a>Cluster</h3>
+<p><img src="/img/20200408/cluster.png" alt=""></p>
+<p>以下のような事項を決めていきます。</p>
+<p>（参考：<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster?hl=ja">クラスタの作成  |  Kubernetes Engine のドキュメント  |  Google Cloud</a>）</p>
+<ul>
+<li>名前</li>
+<li>ロケーション タイプ</li>
+<li>ノードのマシンタイプ</li>
+<li>ブートディスクの種類/サイズ</li>
+<li>スケーリングの設定
+<ul>
+<li>最低ノード数/最大ノード数</li>
+<li>垂直ポッド自動スケーリングの可否</li>
+</ul>
+</li>
+<li>各GCPのAPIに対してのアクセス権限の設定
+<ul>
+<li>Compute Engine</li>
+<li>ストレージ</li>
+<li>タスクキュー</li>
+<li>BigQuery</li>
+<li>Cloud SQL</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-a-nameworkloadaworkload">2.2. <a name='Workload'></a>Workload</h3>
+<p><img src="/img/20200408/workload.png" alt=""></p>
+<p>以下のような事項を決めていきます。</p>
+<p>（参考：<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/deploying-workloads-overview?hl=ja">ワークロードのデプロイの概要  |  Kubernetes Engine のドキュメント  |  Google Cloud</a>）</p>
+<ul>
+<li>コンテナイメージの選択
+<ul>
+<li><code>Google Container Registry</code>にimageを登録してあれば、そこから選択できる。</li>
+<li>今回は、<code>SpringBoot/JNR/Cライブラリ(.so)/JDBC(MySQL)</code>を含むイメージを選択した。</li>
+</ul>
+</li>
+<li>環境変数の設定</li>
+<li>アプリケーション名の設定</li>
+</ul>
+<h3 id="23-a-nameingressaingress">2.3. <a name='Ingress'></a>Ingress</h3>
+<p><img src="/img/20200408/ingress.png" alt=""></p>
+<p>以下のような事項を決めていきます。</p>
+<p>（参考：<a href="https://cloud.google.com/kubernetes-engine/docs/concepts/ingress?hl=ja">Ingress を使用した HTTP(S) 負荷分散  |  Kubernetes Engine のドキュメント  |  Google Cloud</a>）</p>
+<ul>
+<li>Ingressタイプの設定</li>
+<li>ホストとパスルールの構成の設定</li>
+</ul>
+<h3 id="24-a-nameloggingalogging">2.4. <a name='Logging'></a>Logging</h3>
+<p><img src="/img/20200408/logging.png" alt=""></p>
+<p>AWSの<a href="https://aws.amazon.com/jp/cloudwatch/">CloudWatch</a>やAzureの<a href="https://azure.microsoft.com/ja-jp/services/monitor/">Azure Monitor</a>と同じように、
+各サービスや、K8Sの各podのログをかき集めてくれる。</p>
+<p>（参考：<a href="https://cloud.google.com/logging/docs">Cloud Logging のドキュメント  |  Google Cloud</a>）</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/docker/">docker</a>
+          <a href="/tags/kubernetes/">kubernetes</a>
+          <a href="/tags/gcp/">gcp</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20200425-thread-init-at-process-startup/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">SpringBootアプリケーション起動直後にスレッドを初期化する方法</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20200407-jnr-on-docker/">
+            <span class="next-text nav-default">Using JNR on Container</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

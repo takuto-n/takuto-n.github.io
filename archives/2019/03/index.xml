@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2019/03 on Little by little and bit by bit</title>
+    <link>https://takuto-n.github.io/archives/2019/03/</link>
+    <description>Recent content in 2019/03 on Little by little and bit by bit</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/takuto-n/takuto-n.github.io&#34;&gt;takuto-n&lt;/a&gt; 2019</copyright>
+    <lastBuildDate>Sat, 16 Mar 2019 23:09:42 +0900</lastBuildDate>
+    
+	<atom:link href="https://takuto-n.github.io/archives/2019/03/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>クロスドメイン制約とBASIC認証について</title>
+      <link>https://takuto-n.github.io/posts/20190316-cors-basic_auth/</link>
+      <pubDate>Sat, 16 Mar 2019 23:09:42 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/posts/20190316-cors-basic_auth/</guid>
+      <description>初めての技術系ブログです。
+ご不明な点がありましたら、お気軽にコメント欄へ記入ください。
+初回は「ドメインXのサイトから、異なるドメインYのBASIC認証つきのサイトにアクセスできるのか 」について検証した結果を書きたいと思います。 検証結果としては、
+* ブラウザのセキュリティ設定をOnにしていればアクセスできません。 * ブラウザのセキュリティ設定をOffにしていればアクセス出来ます。  以下でその理由について下記の流れで説明していきます。
+ BASIC認証について クロスドメイン制約について CORS(Cross Origin Resource Sharing)について BASIC認証つきCORSについて  
+BASIC認証について まずBASIC認証とは、HTTPで定義される認証方式の一つです。
+認証の仕方としてはブラウザ側で「ユーザ名:パスワード」をBase64でエンコードして、サーバー側へ送信します。
+サーバー側では受信したBase64のデータをデコードし、ユーザー名とパスワードを取得して、認証を行う処理方式のことを指します。
+
+クロスドメイン制約について 2つ目にクロスドメイン制約とは、「ブラウザ上で実行されるJavaScriptは同じドメインにしかリクエストの送信やクッキーの編集を行えない」という制限のことです。
+この制限がある理由は、あるサイトから悪意のあるサイトに勝手にアクセスできないようにするためです。 もし、あるサイトから異なるドメインのサイトへアクセスしたい場合は、次の２つの方法があります。
+ HTTPのリクエストヘッダに許可する外部ドメインを設定する方法 JSONP(JSON with padding)  1つ目の方法は、HTTPのリクエストヘッダ「Access-Control-Allow-Origin」に、外部ドメインを設定する方法です。
+2つ目の方法は、あるドメインXのサイトにJavaScriptを置き、その場所をドメインYのサイトにあらかじめ教えておきます。ドメインYからドメインXのJavaScriptを取得・実行すると、結果としてドメインYからドメインXのサイト内のデータにアクセスできるという方法です。
+今回は方法1で実現できる方法について検証します。
+ 方法2のJSONPは、ここでは詳しく説明しませんが、JSONPインジェクションという攻撃を受ける可能性があるため、方法1を採用します。
+ 
+CORS(Cross Origin Resource Sharing)について CORS(Cross Origin Resource Sharing)は、JavaScriptでクロスドメインにアクセスする方法です。さきほど述べていたドメインとオリジンはほぼ同義です。 クロスしている(異なる)オリジン（≒ドメイン）とリソースをシェアする方法です。
+CORSでは、JavaScriptで異なるドメインにアクセスする際に、シンプルなリクエストでない場合、preflightリクエストと呼ばれる通信がなされます。 preflightリクエストとは、アクセスの許可設定を確認するための通信です。 preflightリクエストが送られる条件についてはCORS(Cross-Origin Resource Sharing)について整理してみた ｜ DevelopersIOをご覧ください。
+CORSの動作の流れは主に２パターンあり、以下で説明します。
+【操作・設定の前提】 * ブラウザは現在aaa.comに接続している。 * サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。 * bbb.comでは、aaa.comからのアクセス許可設定をしている。   preflightリクエストなしの場合  ブラウザがbbb.</description>
+    </item>
+    
+  </channel>
+</rss>

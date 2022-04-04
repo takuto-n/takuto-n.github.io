@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Dockerfile と マニフェストファイル(Deployment) - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstract Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったのでまとめておきます。
+" /><meta name="keywords" content="docker, kubernetes, container" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20200701-dockerfile-and-manifest/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Dockerfile と マニフェストファイル(Deployment)" />
+<meta property="og:description" content="Abstract
+Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったのでまとめておきます。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20200701-dockerfile-and-manifest/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-07-01T20:49:28+09:00" />
+<meta property="article:modified_time" content="2020-07-01T20:49:28+09:00" />
+
+<meta itemprop="name" content="Dockerfile と マニフェストファイル(Deployment)">
+<meta itemprop="description" content="Abstract
+Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったのでまとめておきます。"><meta itemprop="datePublished" content="2020-07-01T20:49:28+09:00" />
+<meta itemprop="dateModified" content="2020-07-01T20:49:28+09:00" />
+<meta itemprop="wordCount" content="1883">
+<meta itemprop="keywords" content="docker,kubernetes,container," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Dockerfile と マニフェストファイル(Deployment)"/>
+<meta name="twitter:description" content="Abstract
+Dockerfile と Manifest File ( kind: Deployment ) を書く機会があったのでまとめておきます。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Dockerfile と マニフェストファイル(Deployment)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-01 </span>
+        <div class="post-category">
+            <a href="/categories/docker/"> docker </a>
+            </div>
+          <span class="more-meta"> 1883 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstract">Abstract</h1>
+<p><code>Dockerfile</code> と <code>Manifest File ( kind: Deployment )</code> を書く機会があったのでまとめておきます。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Dockerfile">Dockerfile</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#Sample-ExecuteSpringBootJar">Sample - Execute SpringBoot Jar</a></li>
+<li>1.2. <a href="#Sample-CopyFile">Sample - Copy File</a></li>
+<li>1.3. <a href="#Sample-Multi-stageBuilds">Sample - Multi-stage Builds</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#ManifestFilekind:Deployment">Manifest File ( kind: Deployment )</a></li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li><a href="#Inaddition-ExecutionResult-SampleMulti-StageBuilds">In addition - Execution Result - Sample Multi-Stage Builds</a></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li><a href="#Refference">Refference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namedockerfileadockerfile">1. <a name='Dockerfile'></a>Dockerfile</h2>
+<ul>
+<li>Command
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker build -t test-image .
+</span></span><span class="line"><span class="cl">docker images
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<blockquote>
+<p>imageの一括削除の参考は以下</p>
+<ul>
+<li><a href="https://qiita.com/fist0/items/2fb1c7f894b5bdff79f4">docker images を全削除する - Qiita</a></li>
+<li><a href="https://qiita.com/boiyama/items/9972601ffc240553e1f3">Docker一括削除コマンドまとめ - Qiita</a></li>
+<li><a href="https://qiita.com/shisama/items/48e2eaf1dc356568b0d7">一発ですべてのDockerコンテナを停止・削除、イメージの削除をする - Qiita</a></li>
+</ul>
+</blockquote>
+<h3 id="11-a-namesample-executespringbootjarasample---execute-springboot-jar">1.1. <a name='Sample-ExecuteSpringBootJar'></a>Sample - Execute SpringBoot Jar</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">FROM openjdk:11-jre
+</span></span><span class="line"><span class="cl">ARG <span class="nv">JAR_FILE</span><span class="o">=</span>./build/libs/simple-restcontroller-0.0.1-SNAPSHOT.jar
+</span></span><span class="line"><span class="cl">COPY <span class="si">${</span><span class="nv">JAR_FILE</span><span class="si">}</span> app.jar
+</span></span><span class="line"><span class="cl">ENTRYPOINT <span class="o">[</span><span class="s2">&#34;java&#34;</span>, <span class="s2">&#34;-jar&#34;</span>, <span class="s2">&#34;./app.jar&#34;</span><span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="12-a-namesample-copyfileasample---copy-file">1.2. <a name='Sample-CopyFile'></a>Sample - Copy File</h3>
+<ul>
+<li>フォルダ構成
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>username@instance-1 work<span class="o">]</span>$ tree -L <span class="m">3</span>
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── Dockerfile
+</span></span><span class="line"><span class="cl">├── home
+</span></span><span class="line"><span class="cl">│   ├── boot
+</span></span><span class="line"><span class="cl">│   │   └── init_run.sh
+</span></span><span class="line"><span class="cl">│   │   └── sample.jar
+</span></span><span class="line"><span class="cl">│   ├── env
+</span></span><span class="line"><span class="cl">│   │   └── env.conf
+</span></span><span class="line"><span class="cl">│   └── lib
+</span></span><span class="line"><span class="cl">│       └── hoge.jar
+</span></span><span class="line"><span class="cl">└── root
+</span></span><span class="line"><span class="cl">    └── opt
+</span></span><span class="line"><span class="cl">        └── oracle
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>Dockerfile
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">FROM centos:7
+</span></span><span class="line"><span class="cl">ENV TEST_HOME /usr/test/home
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># mkdir</span>
+</span></span><span class="line"><span class="cl">RUN mkdir -p <span class="si">${</span><span class="nv">TEST_HOME</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># copy</span>
+</span></span><span class="line"><span class="cl">COPY root/opt /opt
+</span></span><span class="line"><span class="cl">COPY home <span class="si">${</span><span class="nv">TEST_HOME</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># init settings and run boot app</span>
+</span></span><span class="line"><span class="cl">ENTRYPOINT sh <span class="si">${</span><span class="nv">TEST_HOME</span><span class="si">}</span>/boot/init_run.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>init_run.sh
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># initialize processing</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## do something</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># run boot app</span>
+</span></span><span class="line"><span class="cl"><span class="nv">JAR_NAME</span><span class="o">=</span><span class="s2">&#34;sample.jar&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">JAVA_OPTIONS</span><span class="o">=(</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">SPRING_OPTIONS</span><span class="o">=(</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">java <span class="si">${</span><span class="nv">JAVA_OPTIONS</span><span class="si">}</span> -jar <span class="si">${</span><span class="nv">JAR_NAME</span><span class="si">}</span> <span class="si">${</span><span class="nv">SPRING_OPTIONS</span><span class="si">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="13-a-namesample-multi-stagebuildsasample---multi-stage-builds">1.3. <a name='Sample-Multi-stageBuilds'></a>Sample - Multi-stage Builds</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># syntax=docker/dockerfile:experimental</span>
+</span></span><span class="line"><span class="cl">FROM openjdk:11-jdk AS builder
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ADD . /work
+</span></span><span class="line"><span class="cl">WORKDIR /work/simple-restcontroller
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN --mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.gradle <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    ./gradlew clean build
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">FROM openjdk:11-jre AS runner
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">WORKDIR /home/app
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COPY --from<span class="o">=</span>builder /work/simple-restcontroller/build/libs/simple-restcontroller-0.0.1-SNAPSHOT.jar /home/app/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ENTRYPOINT <span class="o">[</span><span class="s2">&#34;java&#34;</span>, <span class="s2">&#34;-jar&#34;</span>, <span class="s2">&#34;./simple-restcontroller-0.0.1-SNAPSHOT.jar&#34;</span><span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-a-namemanifestfilekinddeploymentamanifest-file--kind-deployment-">2. <a name='ManifestFilekind:Deployment'></a>Manifest File ( kind: Deployment )</h2>
+<ul>
+<li>
+<p>Command</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 生成する場合</span>
+</span></span><span class="line"><span class="cl">kubectl apply -f deployment.yaml
+</span></span><span class="line"><span class="cl">kubectl expose deployment simple-restcontroller --type<span class="o">=</span>LoadBalancer --name<span class="o">=</span>my-service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># deployment と service の内容確認</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## deployment</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 概要</span>
+</span></span><span class="line"><span class="cl">kubectl get deployments simple-restcontroller
+</span></span><span class="line"><span class="cl"><span class="c1">### 詳細</span>
+</span></span><span class="line"><span class="cl">kubectl describe deployments simple-restcontroller
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## service</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 概要</span>
+</span></span><span class="line"><span class="cl">kubectl get services my-service
+</span></span><span class="line"><span class="cl"><span class="c1">### 詳細</span>
+</span></span><span class="line"><span class="cl">kubectl describe services my-service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># スケールする場合</span>
+</span></span><span class="line"><span class="cl">kubectl scale --replicas<span class="o">=</span><span class="m">3</span> -f deployment.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 削除する場合</span>
+</span></span><span class="line"><span class="cl">kubectl delete services my-service
+</span></span><span class="line"><span class="cl">kubectl delete deployment poc1-app
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>deployment.yaml</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">simple-restcontroller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">simple-restcontroller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">simple-restcontroller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">track</span><span class="p">:</span><span class="w"> </span><span class="l">stable</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">1.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:1.14.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">simple-restcontroller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">test-image:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;1Gi&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">readinessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/readiness</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">81</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">scheme</span><span class="p">:</span><span class="w"> </span><span class="l">HTTP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">timeoutSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">livenessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">httpGet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/healthz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">81</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">scheme</span><span class="p">:</span><span class="w"> </span><span class="l">HTTP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">15</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">timeoutSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="3-a-nameinaddition-executionresult-samplemulti-stagebuildsain-addition---execution-result---sample-multi-stage-builds">3. <a name='Inaddition-ExecutionResult-SampleMulti-StageBuilds'></a>In addition - Execution Result - Sample Multi-Stage Builds</h2>
+<p>Multi-Stage Buildsにより、約80秒ほどビルドが早くなりました。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>username@instance-1 work<span class="o">]</span>$ sudo <span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span><span class="m">1</span> docker build  --no-cache -t demo .
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Building 238.2s <span class="o">(</span>15/15<span class="o">)</span> <span class="nv">FINISHED</span>
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                  0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 509B                                                                                  0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                     0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                       0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; resolve image config <span class="k">for</span> docker.io/docker/dockerfile:experimental                                                 1.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; docker-image://docker.io/docker/dockerfile:experimental@sha256:de85b2f3a3e8a2f7fe48e8e84a65f6fdd5cd5183afa6412ff  1.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; resolve docker.io/docker/dockerfile:experimental@sha256:de85b2f3a3e8a2f7fe48e8e84a65f6fdd5cd5183afa6412fff9ca  0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:de85b2f3a3e8a2f7fe48e8e84a65f6fdd5cd5183afa6412fff9caa6871649c44 1.69kB / 1.69kB                        0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:8c69d118cfcd040a222bea7f7d57c6156faa938cb61b47657cd65343babc3664 521B / 521B                            0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:08fb2b2ca3d58e19d791e73dea16126df37608115532e748d63525688df457a5 897B / 897B                            0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:61261561661960014533790f5d6c42f5b88362db7e005f35248c20f075900a61 8.88MB / 8.88MB                        0.3s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:61261561661960014533790f5d6c42f5b88362db7e005f35248c20f075900a61                             0.6s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jre                                                     0.4s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jdk
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build context                                                                                    71.9s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 1.88GB                                                                                  71.7s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>runner 1/3<span class="o">]</span> FROM docker.io/library/openjdk:11-jre@sha256:e76cbcd78500cb019f25af60bac7e85d9b2108467379129a22445  22.6s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; resolve docker.io/library/openjdk:11-jre@sha256:e76cbcd78500cb019f25af60bac7e85d9b2108467379129a22445d77011cd  0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:8c7c4070295266d562c41ebe5379eaba7d76a4d9f47bf48d067aaa73cbc0ad35 8.65kB / 8.65kB                        0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:989e6b19a265d6b8b7934e7ddd7dc07f6e2fc945b3a28dda9b8aecb12cdb30e0 7.81MB / 7.81MB                        0.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:e76cbcd78500cb019f25af60bac7e85d9b2108467379129a22445d77011cdaa0 1.04kB / 1.04kB                        0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:7c462965a1cd98938b2956c1878a297f2edbd73323b3575699711e0685c377d3 1.58kB / 1.58kB                        0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:e9afc4f90ab09248d75c8081b6dfba749a7f7efdac704ced7e0ceb506e02fa4a 50.39MB / 50.39MB                      1.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:af14b6c2f8785723bceb5964c5dec1f0489b7750e9d4ec671e49bfba15d80a39 10.00MB / 10.00MB                      0.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:68a79816c3e1e5cdd064948818bbd2dbf38783031aeca1474a9a9b50c2d8e5e8 5.53MB / 5.53MB                        2.2s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:e440f69a0a762646d5aed47652c8a122f43b415f52b87a90eb14690e1426fd0f 210B / 210B                            2.2s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:e9afc4f90ab09248d75c8081b6dfba749a7f7efdac704ced7e0ceb506e02fa4a                           233.8s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:837b533a935df78a47a09e44fd06c8ec7af6624ef1eec0d69e8d7d208efe2434 41.94MB / 41.94MB                      3.5s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:af14b6c2f8785723bceb5964c5dec1f0489b7750e9d4ec671e49bfba15d80a39                           224.6s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:68a79816c3e1e5cdd064948818bbd2dbf38783031aeca1474a9a9b50c2d8e5e8                             1.6s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:e440f69a0a762646d5aed47652c8a122f43b415f52b87a90eb14690e1426fd0f                             0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:837b533a935df78a47a09e44fd06c8ec7af6624ef1eec0d69e8d7d208efe2434                             6.9s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 1/4<span class="o">]</span> FROM docker.io/library/openjdk:11-jdk@sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e343234050  44.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; resolve docker.io/library/openjdk:11-jdk@sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e3432340500a5ec233c  0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:29fc9543dead0f8c1b25afa026e4a3ddafa38c5c353ee407edcea62a95f1f2e4 1.79kB / 1.79kB                        0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:e9afc4f90ab09248d75c8081b6dfba749a7f7efdac704ced7e0ceb506e02fa4a 50.39MB / 50.39MB                    235.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e3432340500a5ec233cc7c 1.04kB / 1.04kB                        0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:fcfdce4526dfd3cd24f4922025a010c01d9cc4345dd8521cf03b92a98df19bc3 7.01kB / 7.01kB                        0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:989e6b19a265d6b8b7934e7ddd7dc07f6e2fc945b3a28dda9b8aecb12cdb30e0 7.81MB / 7.81MB                      235.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:af14b6c2f8785723bceb5964c5dec1f0489b7750e9d4ec671e49bfba15d80a39 10.00MB / 10.00MB                    235.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:5573c4b3094956931fd68c310ae92c9eb1a787f0c77ac2730be9d16cce172d5e 51.83MB / 51.83MB                      2.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:fb1a405f128d35ffb78464f5ac9f15e721e0d205b94360e151d60f32f9b38111 5.28MB / 5.28MB                        1.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:e9afc4f90ab09248d75c8081b6dfba749a7f7efdac704ced7e0ceb506e02fa4a                             7.6s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:cf63ebed11424864a6f71681347d31876110d84dfb087460179f9b66a658df0a 196.21MB / 196.21MB                    6.9s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:612a9f566fdc082f9d43f642791723e34bab94c243b34a965b4602d416ee7a72 211B / 211B                            2.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:989e6b19a265d6b8b7934e7ddd7dc07f6e2fc945b3a28dda9b8aecb12cdb30e0                             1.3s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:af14b6c2f8785723bceb5964c5dec1f0489b7750e9d4ec671e49bfba15d80a39                             0.7s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:5573c4b3094956931fd68c310ae92c9eb1a787f0c77ac2730be9d16cce172d5e                             9.8s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:fb1a405f128d35ffb78464f5ac9f15e721e0d205b94360e151d60f32f9b38111                             0.6s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:612a9f566fdc082f9d43f642791723e34bab94c243b34a965b4602d416ee7a72                             0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:cf63ebed11424864a6f71681347d31876110d84dfb087460179f9b66a658df0a                             8.8s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>runner 2/3<span class="o">]</span> WORKDIR /home/app                                                                                   12.8s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 2/4<span class="o">]</span> ADD . /work                                                                                        45.6s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 3/4<span class="o">]</span> WORKDIR /work/simple-restcontroller                                                                 0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 4/4<span class="o">]</span> RUN --mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.gradle     ./gradlew clean build                             117.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>runner 3/3<span class="o">]</span> COPY --from<span class="o">=</span>builder /work/simple-restcontroller/build/libs/simple-restcontroller-0.0.1-SNAPSHOT.jar  0.3s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; exporting to image                                                                                                0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                               0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:e19d9e89988f5ebed7aa0e99933ca117243f766ec1aa96aa23c21a67bc3ee84a                          0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/demo                                                                               0.0s
+</span></span><span class="line"><span class="cl"><span class="o">[</span>username@instance-1 work<span class="o">]</span>$ sudo <span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span><span class="m">1</span> docker build  --no-cache -t demo .
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Building 158.9s <span class="o">(</span>15/15<span class="o">)</span> <span class="nv">FINISHED</span>
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                  0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 97B                                                                                   0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                     0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                       0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; resolve image config <span class="k">for</span> docker.io/docker/dockerfile:experimental                                                 0.5s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; CACHED docker-image://docker.io/docker/dockerfile:experimental@sha256:de85b2f3a3e8a2f7fe48e8e84a65f6fdd5cd5183af  0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jre                                                     0.2s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jdk                                                     0.2s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build context                                                                                     5.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2.34MB                                                                                   5.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>runner 1/3<span class="o">]</span> FROM docker.io/library/openjdk:11-jre@sha256:e76cbcd78500cb019f25af60bac7e85d9b2108467379129a22445d  0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; CACHED <span class="o">[</span>builder 1/4<span class="o">]</span> FROM docker.io/library/openjdk:11-jdk@sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e343  0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; CACHED <span class="o">[</span>runner 2/3<span class="o">]</span> WORKDIR /home/app                                                                             0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 2/4<span class="o">]</span> ADD . /work                                                                                        45.3s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 3/4<span class="o">]</span> WORKDIR /work/simple-restcontroller                                                                 0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 4/4<span class="o">]</span> RUN --mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.gradle     ./gradlew clean build                             106.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>runner 3/3<span class="o">]</span> COPY --from<span class="o">=</span>builder /work/simple-restcontroller/build/libs/simple-restcontroller-0.0.1-SNAPSHOT.jar  0.3s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; exporting to image                                                                                              0.2s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                               0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:04cc41f59890b6ea317181a516c2257efc78b0e127534bcb29b49ec530a68a8e                          0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/demo                                                                               0.0s
+</span></span><span class="line"><span class="cl"><span class="o">[</span>username@instance-1 work<span class="o">]</span>$  docker builder prune
+</span></span><span class="line"><span class="cl">WARNING! This will remove all dangling build cache. Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N<span class="o">]</span> u
+</span></span><span class="line"><span class="cl">Total reclaimed space: 0B
+</span></span><span class="line"><span class="cl"><span class="o">[</span>username@instance-1 work<span class="o">]</span>$  docker builder prune
+</span></span><span class="line"><span class="cl">WARNING! This will remove all dangling build cache. Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N<span class="o">]</span> y
+</span></span><span class="line"><span class="cl">Got permission denied <span class="k">while</span> trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.40/build/prune?filters<span class="o">=</span><span class="p">&amp;</span>keep-storage<span class="o">=</span>0: dial unix /var/run/docker.sock: connect: permission denied
+</span></span><span class="line"><span class="cl"><span class="o">[</span>username@instance-1 work<span class="o">]</span>$ sudo  docker builder prune
+</span></span><span class="line"><span class="cl">WARNING! This will remove all dangling build cache. Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N<span class="o">]</span> y
+</span></span><span class="line"><span class="cl">Deleted build cache objects:
+</span></span><span class="line"><span class="cl">yxrjv1y47b3y0hm3x6owx189g
+</span></span><span class="line"><span class="cl">qu1o8wc8j1bv1nnjgzeae2zgj
+</span></span><span class="line"><span class="cl">aya90ygi62mlj07avq15squq6
+</span></span><span class="line"><span class="cl">jsyugg6rs20g7jffgtcfjecke
+</span></span><span class="line"><span class="cl">f5tujft67zgtyuox9c26ik7iu
+</span></span><span class="line"><span class="cl">r88y39mqt5wsebtfuy5ar6div
+</span></span><span class="line"><span class="cl">3vumssfvndd90oyvilyxp4qnu
+</span></span><span class="line"><span class="cl">imvymyhj17q2sqsllth0qndor
+</span></span><span class="line"><span class="cl">q6pedljpsshcspdq2fsyt6ocq
+</span></span><span class="line"><span class="cl">0yk4ab9ls61d50f4gtokykg6y
+</span></span><span class="line"><span class="cl">sha256:c9ef80d5f34210a78113974f64ce32386f5c28a6cf538c398daf76052d2abf99
+</span></span><span class="line"><span class="cl">sha256:e313f84ea12ee09cf103147b76bf2fb372d40ccfed273e2389e96a56fb31e11e
+</span></span><span class="line"><span class="cl">sha256:15239410c554dafb7f891f0d51def4992ead6d7307b4f224241d1c685b7ce493
+</span></span><span class="line"><span class="cl">sha256:f863ffb247f4c239aeccf155b7c0d92e35403aed0c825690f6739a89a5901a7c
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Total reclaimed space: 6.424GB
+</span></span><span class="line"><span class="cl"><span class="o">[</span>username@instance-1 work<span class="o">]</span>$ sudo <span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span><span class="m">1</span> docker build  --no-cache -t demo .
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Building 221.4s <span class="o">(</span>15/15<span class="o">)</span> <span class="nv">FINISHED</span>
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                  0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 509B                                                                                  0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                     0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                       0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; resolve image config <span class="k">for</span> docker.io/docker/dockerfile:experimental                                                 0.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; CACHED docker-image://docker.io/docker/dockerfile:experimental@sha256:de85b2f3a3e8a2f7fe48e8e84a65f6fdd5cd5183af  0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jre                                                     0.2s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/openjdk:11-jdk                                                     0.2s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build context                                                                                    61.5s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 1.88GB                                                                                  61.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>runner 1/3<span class="o">]</span> FROM docker.io/library/openjdk:11-jre@sha256:e76cbcd78500cb019f25af60bac7e85d9b2108467379129a22445d  0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 1/4<span class="o">]</span> FROM docker.io/library/openjdk:11-jdk@sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e343234050  29.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; resolve docker.io/library/openjdk:11-jdk@sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e3432340500a5ec233c  0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:43b4a74e4c7698e71ab00cfbbbbafffadc0d49f2c1e3432340500a5ec233cc7c 1.04kB / 1.04kB                        0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:29fc9543dead0f8c1b25afa026e4a3ddafa38c5c353ee407edcea62a95f1f2e4 1.79kB / 1.79kB                        0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:fcfdce4526dfd3cd24f4922025a010c01d9cc4345dd8521cf03b92a98df19bc3 7.01kB / 7.01kB                        0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:612a9f566fdc082f9d43f642791723e34bab94c243b34a965b4602d416ee7a72 211B / 211B                            0.3s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:5573c4b3094956931fd68c310ae92c9eb1a787f0c77ac2730be9d16cce172d5e 51.83MB / 51.83MB                      1.7s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:fb1a405f128d35ffb78464f5ac9f15e721e0d205b94360e151d60f32f9b38111 5.28MB / 5.28MB                        0.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; sha256:cf63ebed11424864a6f71681347d31876110d84dfb087460179f9b66a658df0a 196.21MB / 196.21MB                    4.5s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:5573c4b3094956931fd68c310ae92c9eb1a787f0c77ac2730be9d16cce172d5e                             4.4s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:fb1a405f128d35ffb78464f5ac9f15e721e0d205b94360e151d60f32f9b38111                             0.6s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:612a9f566fdc082f9d43f642791723e34bab94c243b34a965b4602d416ee7a72                             0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; extracting sha256:cf63ebed11424864a6f71681347d31876110d84dfb087460179f9b66a658df0a                             7.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; CACHED <span class="o">[</span>runner 2/3<span class="o">]</span> WORKDIR /home/app                                                                             0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 2/4<span class="o">]</span> ADD . /work                                                                                        50.3s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 3/4<span class="o">]</span> WORKDIR /work/simple-restcontroller                                                                 0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>builder 4/4<span class="o">]</span> RUN --mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.gradle     ./gradlew clean build                             107.6s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">[</span>runner 3/3<span class="o">]</span> COPY --from<span class="o">=</span>builder /work/simple-restcontroller/build/libs/simple-restcontroller-0.0.1-SNAPSHOT.jar  0.3s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; exporting to image                                                                                                0.2s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                               0.1s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:d9e6b95edf00e2fcd24792461a08f1964c3bfc2f433f9d518ca9645c3cb886f8                          0.0s
+</span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/demo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-a-namerefferencearefference">4. <a name='Refference'></a>Refference</h2>
+<ul>
+<li><a href="https://qiita.com/cyberblack28/items/0b0ec02bce67a16e2f17">Docker &amp; Docker Compose on CentOS8 - Qiita</a></li>
+<li><a href="https://qiita.com/os1ma/items/f4ce2bb947680be8fdd9">Buildkitを使ってMulti-stage BuildでMavenのキャッシュを効かせる - Qiita</a></li>
+<li><a href="https://pete-woods.com/2019/02/production-grade-spring-boot-docker-images/">Production-grade Spring Boot Docker images</a></li>
+<li><a href="https://stackoverflow.com/questions/55153089/error-response-from-daemon-dockerfile-parse-error-unknown-flag-mount">docker - Error response from daemon: Dockerfile parse error Unknown flag: mount - Stack Overflow</a></li>
+<li><a href="https://docs.docker.com/develop/develop-images/multistage-build/">Use multi-stage builds | Docker Documentation</a></li>
+<li><a href="https://kubernetes.io/ja/docs/tutorials/stateless-application/expose-external-ip-address/">クラスター内のアプリケーションにアクセスするために外部IPアドレスを公開する | Kubernetes</a></li>
+<li><a href="https://kubernetes.io/ja/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">Liveness Probe、Readiness ProbeおよびStartup Probeを使用する | Kubernetes</a></li>
+<li><a href="https://kubernetes.io/ja/docs/concepts/configuration/overview/">設定のベストプラクティス | Kubernetes</a></li>
+<li><a href="https://qiita.com/minodisk/items/547741b73763f2bab6b8#pullimageerror">Kubernetesのポッドが起動しない原因と対策 - Qiita</a></li>
+<li><a href="https://kubernetes.io/ja/docs/tasks/debug-application-cluster/debug-pod-replication-controller/">PodとReplicationControllerのデバッグ | Kubernetes</a></li>
+<li><a href="https://kubernetes.io/ja/docs/concepts/overview/working-with-objects/kubernetes-objects/">Kubernetesオブジェクトを理解する | Kubernetes</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/docker/">docker</a>
+          <a href="/tags/kubernetes/">kubernetes</a>
+          <a href="/tags/container/">container</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20201024-openapi-java/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">OpenAPI Generatorを使ってみた</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20200614-jmeter-master-slave/">
+            <span class="next-text nav-default">Jmeter Master-Slave構成</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

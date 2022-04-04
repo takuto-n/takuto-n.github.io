@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>AWS CodeBuildとSonarCloudの連携方法 - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 SonarCloudAccessToken に SonarCloud のアクセストークンを保持しておきます" /><meta name="keywords" content="CodeBuild, CI, SonarCloud" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20190909-sonarcloud_codebuild/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="AWS CodeBuildとSonarCloudの連携方法" />
+<meta property="og:description" content="AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 SonarCloudAccessToken に SonarCloud のアクセストークンを保持しておきます" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20190909-sonarcloud_codebuild/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-09-09T02:37:45+09:00" />
+<meta property="article:modified_time" content="2019-09-09T02:37:45+09:00" />
+
+<meta itemprop="name" content="AWS CodeBuildとSonarCloudの連携方法">
+<meta itemprop="description" content="AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 SonarCloudAccessToken に SonarCloud のアクセストークンを保持しておきます"><meta itemprop="datePublished" content="2019-09-09T02:37:45+09:00" />
+<meta itemprop="dateModified" content="2019-09-09T02:37:45+09:00" />
+<meta itemprop="wordCount" content="398">
+<meta itemprop="keywords" content="CodeBuild,CI,SonarCloud," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AWS CodeBuildとSonarCloudの連携方法"/>
+<meta name="twitter:description" content="AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 SonarCloudAccessToken に SonarCloud のアクセストークンを保持しておきます"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">AWS CodeBuildとSonarCloudの連携方法</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-09 </span>
+        <div class="post-category">
+            <a href="/categories/cicd/"> cicd </a>
+            </div>
+          <span class="more-meta"> 398 words </span>
+          <span class="more-meta"> 1 min read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <p>AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。</p>
+<p>AWS CodeBuild の環境変数 <code>SonarCloudAccessToken</code> に SonarCloud のアクセストークンを保持しておきます。</p>
+<p>SonarCloud のアクセストークンの発行は、SonarCloud のサイトで <code>ユーザーアイコン &gt; Settings &gt; Personal access token</code> から出来ます。</p>
+<blockquote>
+<p>AWS CodeBuild で環境変数を保持しておくことにより、開発者が間違えてローカル環境で <code>./gradlew clean build sonarqube</code> を打ってしまったとしても、ローカル環境には環境変数 <code>SonarCloudAccessToken</code> がないため失敗にできます。</p>
+</blockquote>
+<p>下記ファイルが、実際の設定内容です。
+<code>[~]</code> 部分は、適宜変更してください。</p>
+<p><em>build.gradle</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy"><span class="line"><span class="cl"><span class="n">buildscript</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">repositories</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">maven</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">url</span> <span class="s2">&#34;http://repo1.maven.org/maven2/&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">}</span>
+</span></span><span class="line"><span class="cl">      <span class="n">maven</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">url</span> <span class="s2">&#34;https://plugins.gradle.org/m2/&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">}</span>
+</span></span><span class="line"><span class="cl">      <span class="n">mavenLocal</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dependencies</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">classpath</span> <span class="s2">&#34;org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">plugins</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span> <span class="s2">&#34;org.sonarqube&#34;</span> <span class="n">version</span> <span class="s2">&#34;2.7.1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;java&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;org.sonarqube&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;jacoco&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sonarqube</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">properties</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">property</span> <span class="s2">&#34;sonar.login&#34;</span><span class="o">,</span> <span class="n">SonarCloudAccessToken</span>
+</span></span><span class="line"><span class="cl">        <span class="n">property</span> <span class="s2">&#34;sonar.host.url&#34;</span><span class="o">,</span> <span class="s2">&#34;https://sonarcloud.io/&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">property</span> <span class="s2">&#34;sonar.projectKey&#34;</span><span class="o">,</span> <span class="o">[</span><span class="n">SonarCloudで解析する対象のプロジェクトキー</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">property</span> <span class="s2">&#34;sonar.organization&#34;</span><span class="o">,</span> <span class="o">[&lt;</span><span class="err">あなたの</span><span class="n">organization</span><span class="o">&gt;]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">property</span> <span class="s2">&#34;sonar.jacoco.reportPaths&#34;</span><span class="o">,</span> <span class="s2">&#34;target/jacoco/test.exec&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>buildspec.yml</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">0.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">phases</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">install</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runtime-versions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">java</span><span class="p">:</span><span class="w"> </span><span class="l">corretto11</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">commands</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">chmod +x ./gradlew</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./gradlew build sonarqube -PSonarCloudAccessToken=${SonarCloudAccessToken}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/codebuild/">CodeBuild</a>
+          <a href="/tags/ci/">CI</a>
+          <a href="/tags/sonarcloud/">SonarCloud</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20190914-codebuild_mattermost/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">AWS CodebuildからMattermostへの通知</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20190809-architectiong-on-aws_memo/">
+            <span class="next-text nav-default">Architecting on AWSの参加メモ</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

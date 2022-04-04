@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>OAuth2.0について - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstruct OAuth2.0について学んだことをまとめておきます。
+" /><meta name="keywords" content="oauth2.0, authorization" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20220118-oauth2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="OAuth2.0について" />
+<meta property="og:description" content="Abstruct
+OAuth2.0について学んだことをまとめておきます。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20220118-oauth2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-18T21:38:05+09:00" />
+<meta property="article:modified_time" content="2022-01-18T21:38:05+09:00" />
+
+<meta itemprop="name" content="OAuth2.0について">
+<meta itemprop="description" content="Abstruct
+OAuth2.0について学んだことをまとめておきます。"><meta itemprop="datePublished" content="2022-01-18T21:38:05+09:00" />
+<meta itemprop="dateModified" content="2022-01-18T21:38:05+09:00" />
+<meta itemprop="wordCount" content="1865">
+<meta itemprop="keywords" content="oauth2.0,authorization," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OAuth2.0について"/>
+<meta name="twitter:description" content="Abstruct
+OAuth2.0について学んだことをまとめておきます。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">OAuth2.0について</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-18 </span>
+        <div class="post-category">
+            <a href="/categories/auth/"> auth </a>
+            </div>
+          <span class="more-meta"> 1865 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstruct">Abstruct</h1>
+<p>OAuth2.0について学んだことをまとめておきます。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Introduction">Introduction</a></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><a href="#OAuthroles">OAuth roles</a></li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li><a href="#OAuthtokens">OAuth tokens</a></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li><a href="#OAuthendpoints">OAuth endpoints</a></li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li><a href="#Other-importantkeywords">Other - important keywords</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-nameintroductionaintroduction">1. <a name='Introduction'></a>Introduction</h2>
+<ul>
+<li>
+<p>定義</p>
+<ul>
+<li>「OAuth2.0はサードパーティアプリケーションによるHTTPサービスへの限定的なアクセスを可能にする認可フレームワークである。」</li>
+<li>言い換えると
+<ul>
+<li>「OAuth2.0は「画像編集アプリによるGoogle Photoへの限定的なアクセス（Aさんの領域へのアップロードのみ）」を可能にするための「アクセストークンの発行方法のルール」である。」</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>必要性</p>
+<ul>
+<li>OAuth2.0によりサードパーティにID/Passwordを提供しなくても済むため。</li>
+<li>もしID/Passwordを提供すると以下の問題がある。
+<ul>
+<li>サードパーティに自由にHTTPサービスにアクセスされてしまう。
+<ul>
+<li>しかしOAuth2.0だったら、「もし悪意のある挙動をしたとしても、ユーザーが許可したアクションしか取れない。」</li>
+</ul>
+</li>
+<li>悪用された場合、ID/Passwordを変更するしかない。
+<ul>
+<li>しかしOAuth2.0だったら、「サードパーティへのOAuth2.0の設定を変更するだけで済む。」</li>
+</ul>
+</li>
+<li>サードパーティアプリが攻撃を受けた際に、サードパーティアプリからID/Passwordが漏洩する可能性がある。
+<ul>
+<li>しかしOAuth2.0だったら、「サードパーティアプリはID/Passwordを保持していないので、漏洩の心配がない。」</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-a-nameoauthrolesaoauth-roles">2. <a name='OAuthroles'></a>OAuth roles</h2>
+<ul>
+<li>リソースオーナー
+<ul>
+<li>リソースの所有者であるため、あらゆる操作が可能。</li>
+<li>サードパーティにアクセス権限を移譲することも可能。</li>
+</ul>
+</li>
+<li>クライアント
+<ul>
+<li>HTTPサービスに対してのクライアント。リソースにアクセスするアプリケーションのこと。</li>
+</ul>
+</li>
+<li>リソースサーバー
+<ul>
+<li>HTTPサービスのこと。データや機能を提供するサーバーのこと。</li>
+<li>リソースオーナーが許可したアクセスのみを受け入れる。
+<ul>
+<li>その受け入れ可否の確認手段がアクセストークン。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>認可サーバー
+<ul>
+<li>認可サーバーの機能は以下の３つ。
+<ul>
+<li>リソースオーナーを認証する</li>
+<li>クライアントのリソースへのアクセスについてリソースオーナーの同意を得る</li>
+<li>アクセストークンを発行する</li>
+</ul>
+</li>
+<li>具体的には以下の流れとなる。
+<ul>
+<li>リソースオーナーがGoogleアカウントにログインする。</li>
+<li>リソースオーナーは「画像編集アプリがGoogle Photoにアクセスすること」について同意する。</li>
+<li>認可サーバー(GoogleのOAuthサービス)は「画像編集アプリにアクセス権の証として、アクセストークンを発行する」</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-a-nameoauthtokensaoauth-tokens">3. <a name='OAuthtokens'></a>OAuth tokens</h2>
+<p>認可サーバーからクライアントに向けて発行される。</p>
+<ul>
+<li>
+<p>アクセストークン</p>
+<ul>
+<li>以下の属性がある。
+<ul>
+<li>スコープ：誰がどのリソースにどのような操作を許可しているのか。</li>
+<li>有効期限：このトークンの有効期限はいつまでか。</li>
+</ul>
+</li>
+<li>OAuthの場合は、Bearerトークン。標準仕様は、RFC6750</li>
+</ul>
+</li>
+<li>
+<p>スコープ</p>
+<ul>
+<li>クライアントから認可サーバーへのリクエストの際に、スコープが指定される。</li>
+<li>読み込み権限、書き込み権限、シェア権限などの権限は必要最小限にとどめておくべき。
+<ul>
+<li>悪用された際に、不正アクセスのスコープを狭めれるため。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>有効期限</p>
+<ul>
+<li><code>「アクセストークンの有効期限」&lt;「リフレッシュトークンの有効期限」</code> の関係性になっている。</li>
+</ul>
+</li>
+<li>
+<p>リフレッシュトークン</p>
+<ul>
+<li>クライアントから認可サーバーに対してアクセストークンの再発行要求に利用される。</li>
+<li>注意：アクセストークンは、クライアントからリソースサーバに送られる。</li>
+</ul>
+</li>
+<li>
+<p>認可コード</p>
+<ul>
+<li>「リソースオーナーがクライアントへの権限移譲に同意した証」として発行される。</li>
+<li>クライアントから認可サーバーに対してアクセストークンを要求する際に利用される。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-a-nameoauthendpointsaoauth-endpoints">4. <a name='OAuthendpoints'></a>OAuth endpoints</h2>
+<ul>
+<li>
+<p>認可サーバーが提供するURI</p>
+<ul>
+<li>認可エンドポイント</li>
+<li>トークンエンドポイント</li>
+</ul>
+</li>
+<li>
+<p>クライアントが提供するURI</p>
+<ul>
+<li>リダイレクトエンドポイント</li>
+</ul>
+</li>
+<li>
+<p>認可エンドポイント</p>
+<ul>
+<li>認可サーバーのエンドポイントで、認可コードを発行するためのエンドポイント。</li>
+<li>クランアントがアクセスして、認可コードが発行されると、クライアントのリダイレクトエンドポイントに送られる。</li>
+</ul>
+</li>
+<li>
+<p>トークンエンドポイント</p>
+<ul>
+<li>認可サーバーのエンドポイント。</li>
+<li>クライアントが認可コードともにトークンエンドポイントに送信することで、アクセストークンを取得できる。</li>
+</ul>
+</li>
+<li>
+<p>リダイレクトエンドポイント</p>
+<ul>
+<li>クライアントのエンドポイント。</li>
+<li>認可サーバが、レスポンスを返却すると、リダイレクトURIに認可コードをクエリパラメータとしてリダイレクトする。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-a-nameother-importantkeywordsaother---important-keywords">5. <a name='Other-importantkeywords'></a>Other - important keywords</h2>
+<ul>
+<li>認可コードグラント
+<ul>
+<li>一般的によく使われる手法。</li>
+<li><a href="https://developer.amazon.com/ja/docs/login-with-amazon/authorization-code-grant.html">https://developer.amazon.com/ja/docs/login-with-amazon/authorization-code-grant.html</a></li>
+</ul>
+</li>
+<li>認可コードグラント + PKCE(Proof Key for Code Exchange)
+<ul>
+<li>認可コードグラントをよりセキュリティ的に安全にするために、 <code>+ PKCE</code> をつける。</li>
+<li><a href="https://zenn.dev/zaki_yama/articles/oauth2-authorization-code-grant-and-pkce">https://zenn.dev/zaki_yama/articles/oauth2-authorization-code-grant-and-pkce</a></li>
+</ul>
+</li>
+<li>インプリシットグラント
+<ul>
+<li>非推奨。</li>
+<li><a href="https://ritou.hatenablog.com/entry/2018/11/12/110613">https://ritou.hatenablog.com/entry/2018/11/12/110613</a></li>
+</ul>
+</li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/oauth2.0/">oauth2.0</a>
+          <a href="/tags/authorization/">authorization</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20220203-react-learning/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">React Learning</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20211227-react-hooks/">
+            <span class="next-text nav-default">React Hooks</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

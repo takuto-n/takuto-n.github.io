@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gcp on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/tags/gcp/</link>
+    <description>Recent content in gcp on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 07 Apr 2020 20:56:51 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/gcp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using Kubernetes on GCP</title>
+      <link>https://takuto-n.github.io/post/20200408-use-kubernetes-on-gcp/</link>
+      <pubDate>Tue, 07 Apr 2020 20:56:51 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20200408-use-kubernetes-on-gcp/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200408/user-k8s-on-gcp.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

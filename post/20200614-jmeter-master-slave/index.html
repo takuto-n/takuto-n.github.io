@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Jmeter Master-Slave構成 - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Overview Jmeter Master-Slave Overview " /><meta name="keywords" content="jmeter, master, slave" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20200614-jmeter-master-slave/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Jmeter Master-Slave構成" />
+<meta property="og:description" content="Overview
+Jmeter Master-Slave Overview
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20200614-jmeter-master-slave/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-06-14T20:25:08+09:00" />
+<meta property="article:modified_time" content="2020-06-14T20:25:08+09:00" />
+
+<meta itemprop="name" content="Jmeter Master-Slave構成">
+<meta itemprop="description" content="Overview
+Jmeter Master-Slave Overview
+"><meta itemprop="datePublished" content="2020-06-14T20:25:08+09:00" />
+<meta itemprop="dateModified" content="2020-06-14T20:25:08+09:00" />
+<meta itemprop="wordCount" content="3861">
+<meta itemprop="keywords" content="jmeter,master,slave," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Jmeter Master-Slave構成"/>
+<meta name="twitter:description" content="Overview
+Jmeter Master-Slave Overview
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Jmeter Master-Slave構成</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-14 </span>
+        <div class="post-category">
+            <a href="/categories/poc/"> poc </a>
+            </div>
+          <span class="more-meta"> 3861 words </span>
+          <span class="more-meta"> 8 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="overview">Overview</h1>
+<legend>Jmeter Master-Slave Overview</legend>
+<p><img src="/img/20200614/jmeter-master-slave-on-aws.png" alt=""></p>
+<p>まずJmeterとは何ですか？については以下のとおりです。</p>
+<blockquote>
+<p>JMeter はJakarta プロジェクト で開発が進められている、パフォーマンス計測用のJavaアプリケーションです。元々はWebアプリケーションのテストのために作成されたもので、さまざまなWebアプリケーションをテストする機能を持っています。<br>
+参考：<a href="https://www.techscore.com/tech/Java/ApacheJakarta/JMeter/1/">1. JMeterの基本 | TECHSCORE(テックスコア)</a></p>
+</blockquote>
+<p>軽い負荷をかけて、ちょっと動作を見てみたいなレベルであれば、<a href="https://httpd.apache.org/docs/2.4/programs/ab.html">Apache Bench</a> で良いかと思います。参考：<a href="https://qiita.com/flexfirm/items/ac5a2f53cfa933a37192">Apache Benchでサクッと性能テスト - Qiita</a></p>
+<p>強い負荷をかけて、動作をちゃんと確認したいなレベルであれば、<a href="https://jmeter.apache.org/usermanual/get-started.html">Apache JMeter</a> が選択肢に挙がってきます。</p>
+<blockquote>
+<p>参考までに、他の手段としては、単に複数マシンに <code>ssh</code> で入って、一斉に負荷掛けツールを実行っていうのも選択肢に挙がるかなとは思います。</p>
+</blockquote>
+<p>では、以下のような目次で説明しておこうと思います。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#JmeterSettingex..howtomakejmx">Jmeter Setting(ex.. how to make jmx)</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#HowtomakeJMX">How to make JMX</a>
+<ul>
+<li>1.1.1. <a href="#AdvancedSetting">Advanced Setting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#Master-SlaveSetting">Master-Slave Setting</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#JmeterMasterSlavesSettings">Jmeter Master &amp; Slave&rsquo;s Settings</a>
+<ul>
+<li>2.1.1. <a href="#FilePlacement">File Placement</a></li>
+<li>2.1.2. <a href="#HeapMemorySetting">Heap Memory Setting</a></li>
+<li>2.1.3. <a href="#TimeStampFormatSetting">TimeStamp Format Setting</a></li>
+<li>2.1.4. <a href="#GenerateKeyStore">Generate KeyStore</a></li>
+</ul>
+</li>
+<li>2.2. <a href="#JmeterMastersSettings">Jmeter Master&rsquo;s Settings</a>
+<ul>
+<li>2.2.1. <a href="#RemoteHostSettings">Remote Host Settings</a></li>
+</ul>
+</li>
+<li>2.3. <a href="#JmeterSlavesSettings">Jmeter Slave&rsquo;s Settings</a>
+<ul>
+<li>2.3.1. <a href="#jmeter-serverAutomaticStartSetting">jmeter-server Automatic Start Setting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#N.B1SpringBootSimpleRestController">N.B 1 SpringBoot Simple RestController</a></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li><a href="#ExecutionResult">Execution Result</a></li>
+</ol>
+<ul>
+<li>4.1. <a href="#Jmeter">Jmeter</a></li>
+<li>4.2. <a href="#RestController">RestController</a></li>
+</ul>
+</li>
+<li>
+<ol start="5">
+<li><a href="#FYIJmeterCustomize">FYI Jmeter Customize</a></li>
+</ol>
+<ul>
+<li>5.1. <a href="#GradleSetting">Gradle Setting</a></li>
+<li>5.2. <a href="#PreProcessorImplandGUISetting">PreProcessor Impl and GUI Setting</a>
+<ul>
+<li>5.2.1. <a href="#PreProcessorImpl">PreProcessor Impl</a></li>
+<li>5.2.2. <a href="#GUISetting">GUI Setting</a></li>
+</ul>
+</li>
+<li>5.3. <a href="#SamplerImplandGUISetting">Sampler Impl and GUI Setting</a>
+<ul>
+<li>5.3.1. <a href="#SamplerImpl">Sampler Impl</a></li>
+<li>5.3.2. <a href="#GUISetting-1">GUI Setting</a></li>
+</ul>
+</li>
+<li>5.4. <a href="#FilePlacement-1">File Placement</a></li>
+</ul>
+</li>
+<li>
+<ol start="6">
+<li><a href="#Reference">Reference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namejmetersettingexhowtomakejmxajmeter-settingex-how-to-make-jmx">1. <a name='JmeterSettingex..howtomakejmx'></a>Jmeter Setting(ex.. how to make jmx)</h2>
+<p>まず、JMXの作成方法、そして、Jmeterの設定（Master&amp;Slave側の設定 と Master側だけの設定 と Slave側だけの設定）について説明します。</p>
+<h3 id="11-a-namehowtomakejmxahow-to-make-jmx">1.1. <a name='HowtomakeJMX'></a>How to make JMX</h3>
+<p>以下の図のようにJmeter上で設定し、<code>Save Test Plan as</code> 等で保存すると、JMXファイルができる。</p>
+<p><img src="/img/20200614/jmeter_settings.png" alt=""></p>
+<h4 id="111-a-nameadvancedsettingaadvanced-setting">1.1.1. <a name='AdvancedSetting'></a>Advanced Setting</h4>
+<p>実行時に動的にスレッド数やRamp-Up期間(秒)、ループ回数、HTTPのリクエスト先等を設定したくなるかと思います。</p>
+<p>その場合は以下のような手順で出来ます。</p>
+<ol>
+<li>JMX作成時に、各項目欄に <code>${__P(thread_num)}</code> や <code>$__P{ramp_up}</code> 等のように値を設定しておきます。</li>
+<li>Jmeterの実行時に、<code>~/jmeter/bin/jmeter -n -t test.jmx -r -Jthread_num=10 -Jramp_up=60</code> などのようにすればOKです。</li>
+</ol>
+<blockquote>
+<p>NOTE: CLIモードのJmeterのオプションについては、<a href="https://jmeter.apache.org/usermanual/get-started.html#non_gui">Apache JMeter - User&rsquo;s Manual: Getting Started</a> を参考にしてください。</p>
+</blockquote>
+<h2 id="2-a-namemaster-slavesettingamaster-slave-setting">2. <a name='Master-SlaveSetting'></a>Master-Slave Setting</h2>
+<h3 id="21-a-namejmetermasterslavessettingsajmeter-master--slaves-settings">2.1. <a name='JmeterMasterSlavesSettings'></a>Jmeter Master &amp; Slave&rsquo;s Settings</h3>
+<h4 id="211-a-namefileplacementafile-placement">2.1.1. <a name='FilePlacement'></a>File Placement</h4>
+<p>Master側マシンとSlave側マシンで、<br>
+Jmeterで利用するファイルは、<strong>同じフォルダ構成</strong> にして配置する必要があります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>centos@ip-xx-xx-xx-xx ~<span class="o">]</span>$ <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl">/home/centos
+</span></span><span class="line"><span class="cl"><span class="o">[</span>centos@ip-xx-xx-xx-xx ~<span class="o">]</span>$ tree -L <span class="m">2</span>
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── test.jmx
+</span></span><span class="line"><span class="cl">├── apache-jmeter-5.1.1.tgz
+</span></span><span class="line"><span class="cl">├── jmeter
+</span></span><span class="line"><span class="cl">│   ├── LICENSE
+</span></span><span class="line"><span class="cl">│   ├── NOTICE
+</span></span><span class="line"><span class="cl">│   ├── README.md
+</span></span><span class="line"><span class="cl">│   ├── bin
+</span></span><span class="line"><span class="cl">│   ├── docs
+</span></span><span class="line"><span class="cl">│   ├── extras
+</span></span><span class="line"><span class="cl">│   ├── lib
+</span></span><span class="line"><span class="cl">│   ├── licenses
+</span></span><span class="line"><span class="cl">│   └── printable_docs
+</span></span><span class="line"><span class="cl">├── jmeter.log
+</span></span><span class="line"><span class="cl">└── rmi_keystore.jks
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="212-a-nameheapmemorysettingaheap-memory-setting">2.1.2. <a name='HeapMemorySetting'></a>Heap Memory Setting</h4>
+<p>以下のファイルの159行目あたりの <code>: &quot;${HEAP:=&quot;-Xms1g -Xmx1g -XX:MaxMetaspaceSize=256m&quot;}&quot;</code> を設定する。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vi ~/jmeter/bin/jmeter
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="213-a-nametimestampformatsettingatimestamp-format-setting">2.1.3. <a name='TimeStampFormatSetting'></a>TimeStamp Format Setting</h4>
+<p>以下のファイルの531行目あたりの <code>#jmeter.save.saveservice.timestamp_format=yyyy/MM/dd HH:mm:ss.SSS</code> のコメントアウトを外す。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">vi ~/jmeter/bin/jmeter.properties
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="214-a-namegeneratekeystoreagenerate-keystore">2.1.4. <a name='GenerateKeyStore'></a>Generate KeyStore</h4>
+<p>jmeter-serverとの通信がSSLであるため、
+SSL通信で使用するキーおよび証明書（keystore）の作成が必要です。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ <span class="nv">LANG</span><span class="o">=</span>C ~/jmeter/bin/create-rmi-keystore.sh
+</span></span><span class="line"><span class="cl">What is your first and last name?
+</span></span><span class="line"><span class="cl">  <span class="o">[</span>Unknown<span class="o">]</span>:  <span class="c1"># rmi と入力</span>
+</span></span><span class="line"><span class="cl">What is the name of your organizational unit?
+</span></span><span class="line"><span class="cl">  <span class="o">[</span>Unknown<span class="o">]</span>:  <span class="c1"># My unit name と入力</span>
+</span></span><span class="line"><span class="cl">What is the name of your organization?
+</span></span><span class="line"><span class="cl">  <span class="o">[</span>Unknown<span class="o">]</span>:  <span class="c1"># My organisation name と入力</span>
+</span></span><span class="line"><span class="cl">What is the name of your City or Locality?
+</span></span><span class="line"><span class="cl">  <span class="o">[</span>Unknown<span class="o">]</span>:  <span class="c1"># Your City と入力</span>
+</span></span><span class="line"><span class="cl">What is the name of your State or Province?
+</span></span><span class="line"><span class="cl">  <span class="o">[</span>Unknown<span class="o">]</span>:  <span class="c1"># Your State と入力</span>
+</span></span><span class="line"><span class="cl">What is the two-letter country code <span class="k">for</span> this unit?
+</span></span><span class="line"><span class="cl">  <span class="o">[</span>Unknown<span class="o">]</span>:  <span class="c1"># XY と入力</span>
+</span></span><span class="line"><span class="cl">Is <span class="nv">CN</span><span class="o">=</span>rmi, <span class="nv">OU</span><span class="o">=</span>My unit name, <span class="nv">O</span><span class="o">=</span>My organisation name, <span class="nv">L</span><span class="o">=</span>Your City, <span class="nv">ST</span><span class="o">=</span>Your State, <span class="nv">C</span><span class="o">=</span>XY correct?
+</span></span><span class="line"><span class="cl">  <span class="o">[</span>no<span class="o">]</span>:  <span class="c1"># yes と入力</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Enter key password <span class="k">for</span> &lt;rmi&gt;
+</span></span><span class="line"><span class="cl">    <span class="o">(</span>RETURN <span class="k">if</span> same as keystore password<span class="o">)</span>: <span class="c1"># 未入力のままEnter</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Warning:
+</span></span><span class="line"><span class="cl">The JKS keystore uses a proprietary format. It is recommended to migrate to PKCS12 which is an industry standard format using <span class="s2">&#34;keytool -importkeystore -srckeystore rmi_keystore.jks -destkeystore rmi_keystore.jks -deststoretype pkcs12&#34;</span>.
+</span></span><span class="line"><span class="cl">Copy the generated rmi_keystore.jks to jmeter/bin folder or reference it in property <span class="s1">&#39;server.rmi.ssl.keystore.file&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="22-a-namejmetermasterssettingsajmeter-masters-settings">2.2. <a name='JmeterMastersSettings'></a>Jmeter Master&rsquo;s Settings</h3>
+<h4 id="221-a-nameremotehostsettingsaremote-host-settings">2.2.1. <a name='RemoteHostSettings'></a>Remote Host Settings</h4>
+<p>Master側のマシンに、Slaveのマシンはこれだよ！って教えるための設定です。<br>
+以下のファイルの259行目あたりを <code>remote_hosts=aa.aa.aa.aa:1099,bb.bb.bb.bb:1099</code> 等のように、Slaveで利用するマシンのURLを設定する。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">vi ~/jmeter/bin/jmeter.properties
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="23-a-namejmeterslavessettingsajmeter-slaves-settings">2.3. <a name='JmeterSlavesSettings'></a>Jmeter Slave&rsquo;s Settings</h3>
+<h4 id="231-a-namejmeter-serverautomaticstartsettingajmeter-server-automatic-start-setting">2.3.1. <a name='jmeter-serverAutomaticStartSetting'></a>jmeter-server Automatic Start Setting</h4>
+<p>Slaveのマシンが再起動してしまったとしても、jmeter-serverが自動起動されるようにする設定です。<br>
+以下のファイルの末尾に、<code>/home/centos/jmeter/bin/jmeter-server &amp;</code> を追加する。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sudo vi /etc/rc.d/rc.local
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-a-namenb1springbootsimplerestcontrolleranb-1-springboot-simple-restcontroller">3. <a name='N.B1SpringBootSimpleRestController'></a>N.B 1 SpringBoot Simple RestController</h2>
+<p>すごく単純ですが、、、JmeterのSlaveマシンからアクセスを受けるためのSpringBootのRestControllerは以下のようにしました。</p>
+<p><code>host:port/test</code> で受けて、リクエストの累計回数をログに出力し、HTTP STATUS OKを返却するだけのコントローラーです。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Slf4j</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@RestController</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleRestController</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">AtomicLong</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicLong</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&#34;/test&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">method1</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">count</span><span class="o">.</span><span class="na">addAndGet</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;request count = {}&#34;</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ResponseEntity</span><span class="o">.</span><span class="na">status</span><span class="o">(</span><span class="n">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">).</span><span class="na">body</span><span class="o">(</span><span class="s">&#34;ok&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-a-nameexecutionresultaexecution-result">4. <a name='ExecutionResult'></a>Execution Result</h2>
+<h3 id="41-a-namejmeterajmeter">4.1. <a name='Jmeter'></a>Jmeter</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>centos@ip-xx-xx-xx-xx ~<span class="o">]</span>$ ~/jmeter/bin/jmeter -n -t ./test.jmx -r
+</span></span><span class="line"><span class="cl">OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase from one, <span class="k">then</span> you should configure the number of parallel GC threads appropriately using -XX:ParallelGCThreads<span class="o">=</span>N
+</span></span><span class="line"><span class="cl">Creating summariser &lt;summary&gt;
+</span></span><span class="line"><span class="cl">Created the tree successfully using ./Test Plan.jmx
+</span></span><span class="line"><span class="cl">Configuring remote engine: ec2-aa-aa-aa-aa.compute-1.amazonaws.com:1099
+</span></span><span class="line"><span class="cl">Configuring remote engine: ec2-bb-bb-bb-bb.compute-1.amazonaws.com:1099
+</span></span><span class="line"><span class="cl">Configuring remote engine: ec2-cc-cc-cc-cc.compute-1.amazonaws.com:1099
+</span></span><span class="line"><span class="cl">Starting remote engines
+</span></span><span class="line"><span class="cl">Starting the <span class="nb">test</span> @ Sat Jun <span class="m">13</span> 14:10:47 UTC <span class="m">2020</span> <span class="o">(</span>1592057447006<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">summary</span> <span class="o">=</span>      <span class="m">1</span> in 00:00:01 <span class="o">=</span>    2.0/s Avg:   <span class="m">344</span> Min:   <span class="m">344</span> Max:   <span class="m">344</span> Err:     <span class="m">0</span> <span class="o">(</span>0.00%<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Tidying up remote @ Sat Jun <span class="m">13</span> 14:10:49 UTC <span class="m">2020</span> <span class="o">(</span>1592057449322<span class="o">)</span>
+</span></span><span class="line"><span class="cl">summary +      <span class="m">1</span> in 00:00:00 <span class="o">=</span>    4.8/s Avg:    <span class="m">22</span> Min:    <span class="m">22</span> Max:    <span class="m">22</span> Err:     <span class="m">0</span> <span class="o">(</span>0.00%<span class="o">)</span> Active: <span class="m">0</span> Started: <span class="m">1</span> Finished: <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="nv">summary</span> <span class="o">=</span>      <span class="m">2</span> in 00:00:01 <span class="o">=</span>    2.8/s Avg:   <span class="m">183</span> Min:    <span class="m">22</span> Max:   <span class="m">344</span> Err:     <span class="m">0</span> <span class="o">(</span>0.00%<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Tidying up remote @ Sat Jun <span class="m">13</span> 14:10:49 UTC <span class="m">2020</span> <span class="o">(</span>1592057449514<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Remote engines have been started
+</span></span><span class="line"><span class="cl">Waiting <span class="k">for</span> possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port <span class="m">4445</span>
+</span></span><span class="line"><span class="cl">summary +      <span class="m">1</span> in 00:00:00 <span class="o">=</span>    4.3/s Avg:    <span class="m">13</span> Min:    <span class="m">13</span> Max:    <span class="m">13</span> Err:     <span class="m">0</span> <span class="o">(</span>0.00%<span class="o">)</span> Active: <span class="m">0</span> Started: <span class="m">2</span> Finished: <span class="m">3</span>
+</span></span><span class="line"><span class="cl"><span class="nv">summary</span> <span class="o">=</span>      <span class="m">3</span> in 00:00:01 <span class="o">=</span>    3.2/s Avg:   <span class="m">126</span> Min:    <span class="m">13</span> Max:   <span class="m">344</span> Err:     <span class="m">0</span> <span class="o">(</span>0.00%<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Tidying up remote @ Sat Jun <span class="m">13</span> 14:10:49 UTC <span class="m">2020</span> <span class="o">(</span>1592057449728<span class="o">)</span>
+</span></span><span class="line"><span class="cl">... end of run
+</span></span><span class="line"><span class="cl">... end of run
+</span></span><span class="line"><span class="cl">... end of run
+</span></span><span class="line"><span class="cl"><span class="o">[</span>centos@ip-xx-xx-xx-xx ~<span class="o">]</span>$ client_loop: send disconnect: Broken pipe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="42-a-namerestcontrollerarestcontroller">4.2. <a name='RestController'></a>RestController</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nl">20:</span><span class="n">49</span><span class="o">:</span><span class="n">30</span><span class="o">:</span> <span class="n">Executing</span> <span class="n">task</span> <span class="err">&#39;</span><span class="n">SimpleRestcontrollerApplication</span><span class="o">.</span><span class="na">main</span><span class="o">()</span><span class="err">&#39;</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">Task</span> <span class="o">:</span><span class="n">compileJava</span> <span class="n">UP</span><span class="o">-</span><span class="n">TO</span><span class="o">-</span><span class="n">DATE</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">Task</span> <span class="o">:</span><span class="n">processResources</span> <span class="n">UP</span><span class="o">-</span><span class="n">TO</span><span class="o">-</span><span class="n">DATE</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">Task</span> <span class="o">:</span><span class="n">classes</span> <span class="n">UP</span><span class="o">-</span><span class="n">TO</span><span class="o">-</span><span class="n">DATE</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">Task</span> <span class="o">:</span><span class="n">SimpleRestcontrollerApplication</span><span class="o">.</span><span class="na">main</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="o">.</span>   <span class="n">____</span>          <span class="n">_</span>            <span class="n">__</span> <span class="n">_</span> <span class="n">_</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="err">\\</span> <span class="o">/</span> <span class="n">___</span><span class="err">&#39;</span><span class="n">_</span> <span class="n">__</span> <span class="n">_</span> <span class="nf">_</span><span class="o">(</span><span class="n">_</span><span class="o">)</span><span class="n">_</span> <span class="n">__</span>  <span class="n">__</span> <span class="n">_</span> <span class="err">\</span> <span class="err">\</span> <span class="err">\</span> <span class="err">\</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span> <span class="o">(</span> <span class="o">)</span><span class="err">\</span><span class="n">___</span> <span class="o">|</span> <span class="err">&#39;</span><span class="n">_</span> <span class="o">|</span> <span class="err">&#39;</span><span class="n">_</span><span class="o">|</span> <span class="o">|</span> <span class="err">&#39;</span><span class="n">_</span> <span class="err">\</span><span class="o">/</span> <span class="n">_</span><span class="err">`</span> <span class="o">|</span> <span class="err">\</span> <span class="err">\</span> <span class="err">\</span> <span class="err">\</span>
+</span></span><span class="line"><span class="cl"> <span class="err">\\</span><span class="o">/</span>  <span class="n">___</span><span class="o">)|</span> <span class="o">|</span><span class="n">_</span><span class="o">)|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">||</span> <span class="o">(</span><span class="n">_</span><span class="o">|</span> <span class="o">|</span>  <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="err">&#39;</span>  <span class="o">|</span><span class="n">____</span><span class="o">|</span> <span class="o">.</span><span class="na">__</span><span class="o">|</span><span class="n">_</span><span class="o">|</span> <span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="n">_</span><span class="o">|</span> <span class="o">|</span><span class="n">_</span><span class="err">\</span><span class="n">__</span><span class="o">,</span> <span class="o">|</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span>
+</span></span><span class="line"><span class="cl"> <span class="o">=========|</span><span class="n">_</span><span class="o">|==============|</span><span class="n">___</span><span class="o">/=/</span><span class="n">_</span><span class="o">/</span><span class="n">_</span><span class="o">/</span><span class="n">_</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl"> <span class="o">::</span> <span class="n">Spring</span> <span class="n">Boot</span> <span class="o">::</span>        <span class="o">(</span><span class="n">v2</span><span class="o">.</span><span class="na">3</span><span class="o">.</span><span class="na">0</span><span class="o">.</span><span class="na">RELEASE</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">34</span><span class="o">.</span><span class="na">580</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">c</span><span class="o">.</span><span class="na">e</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">SimpleRestcontrollerApplication</span>    <span class="o">:</span> <span class="n">Starting</span> <span class="n">SimpleRestcontrollerApplication</span> <span class="n">on</span> <span class="n">MacBook</span><span class="o">-</span><span class="n">Air</span><span class="o">.</span><span class="na">local</span> <span class="n">with</span> <span class="n">PID</span> <span class="nf">43952</span> <span class="o">(/</span><span class="n">Users</span><span class="o">/</span><span class="n">takuto</span><span class="o">-</span><span class="n">n</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">Basic_study</span><span class="o">/</span><span class="n">private_repo</span><span class="o">/</span><span class="n">ctrl</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">6bit</span><span class="o">-</span><span class="n">mask</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">simple</span><span class="o">-</span><span class="n">restcontroller</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">classes</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">main</span> <span class="n">started</span> <span class="n">by</span> <span class="n">takuto</span><span class="o">-</span><span class="n">n</span> <span class="n">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">takuto</span><span class="o">-</span><span class="n">n</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">Basic_study</span><span class="o">/</span><span class="n">private_repo</span><span class="o">/</span><span class="n">ctrl</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">6bit</span><span class="o">-</span><span class="n">mask</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">simple</span><span class="o">-</span><span class="n">restcontroller</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">34</span><span class="o">.</span><span class="na">584</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">c</span><span class="o">.</span><span class="na">e</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">SimpleRestcontrollerApplication</span>    <span class="o">:</span> <span class="n">No</span> <span class="n">active</span> <span class="n">profile</span> <span class="n">set</span><span class="o">,</span> <span class="n">falling</span> <span class="n">back</span> <span class="n">to</span> <span class="k">default</span> <span class="n">profiles</span><span class="o">:</span> <span class="k">default</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">36</span><span class="o">.</span><span class="na">489</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">w</span><span class="o">.</span><span class="na">embedded</span><span class="o">.</span><span class="na">tomcat</span><span class="o">.</span><span class="na">TomcatWebServer</span>  <span class="o">:</span> <span class="n">Tomcat</span> <span class="n">initialized</span> <span class="n">with</span> <span class="nf">port</span><span class="o">(</span><span class="n">s</span><span class="o">):</span> <span class="n">8080</span> <span class="o">(</span><span class="n">http</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">36</span><span class="o">.</span><span class="na">518</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">StandardService</span>   <span class="o">:</span> <span class="n">Starting</span> <span class="n">service</span> <span class="o">[</span><span class="n">Tomcat</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">36</span><span class="o">.</span><span class="na">518</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">catalina</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">StandardEngine</span>  <span class="o">:</span> <span class="n">Starting</span> <span class="n">Servlet</span> <span class="n">engine</span><span class="o">:</span> <span class="o">[</span><span class="n">Apache</span> <span class="n">Tomcat</span><span class="o">/</span><span class="n">9</span><span class="o">.</span><span class="na">0</span><span class="o">.</span><span class="na">35</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">36</span><span class="o">.</span><span class="na">666</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">a</span><span class="o">.</span><span class="na">c</span><span class="o">.</span><span class="na">c</span><span class="o">.</span><span class="na">C</span><span class="o">.[</span><span class="n">Tomcat</span><span class="o">].[</span><span class="n">localhost</span><span class="o">].[/]</span>       <span class="o">:</span> <span class="n">Initializing</span> <span class="n">Spring</span> <span class="n">embedded</span> <span class="n">WebApplicationContext</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">36</span><span class="o">.</span><span class="na">666</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">context</span><span class="o">.</span><span class="na">ContextLoader</span>            <span class="o">:</span> <span class="n">Root</span> <span class="n">WebApplicationContext</span><span class="o">:</span> <span class="n">initialization</span> <span class="n">completed</span> <span class="n">in</span> <span class="n">1971</span> <span class="n">ms</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">36</span><span class="o">.</span><span class="na">945</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">concurrent</span><span class="o">.</span><span class="na">ThreadPoolTaskExecutor</span>  <span class="o">:</span> <span class="n">Initializing</span> <span class="n">ExecutorService</span> <span class="err">&#39;</span><span class="n">applicationTaskExecutor</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">37</span><span class="o">.</span><span class="na">385</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">w</span><span class="o">.</span><span class="na">embedded</span><span class="o">.</span><span class="na">tomcat</span><span class="o">.</span><span class="na">TomcatWebServer</span>  <span class="o">:</span> <span class="n">Tomcat</span> <span class="n">started</span> <span class="n">on</span> <span class="nf">port</span><span class="o">(</span><span class="n">s</span><span class="o">):</span> <span class="n">8080</span> <span class="o">(</span><span class="n">http</span><span class="o">)</span> <span class="n">with</span> <span class="n">context</span> <span class="n">path</span> <span class="err">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">37</span><span class="o">.</span><span class="na">405</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span>           <span class="n">main</span><span class="o">]</span> <span class="n">c</span><span class="o">.</span><span class="na">e</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">SimpleRestcontrollerApplication</span>    <span class="o">:</span> <span class="n">Started</span> <span class="n">SimpleRestcontrollerApplication</span> <span class="n">in</span> <span class="n">3</span><span class="o">.</span><span class="na">904</span> <span class="nf">seconds</span> <span class="o">(</span><span class="n">JVM</span> <span class="n">running</span> <span class="k">for</span> <span class="n">4</span><span class="o">.</span><span class="na">914</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">49</span><span class="o">.</span><span class="na">705</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span><span class="n">nio</span><span class="o">-</span><span class="n">8080</span><span class="o">-</span><span class="n">exec</span><span class="o">-</span><span class="n">1</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">a</span><span class="o">.</span><span class="na">c</span><span class="o">.</span><span class="na">c</span><span class="o">.</span><span class="na">C</span><span class="o">.[</span><span class="n">Tomcat</span><span class="o">].[</span><span class="n">localhost</span><span class="o">].[/]</span>       <span class="o">:</span> <span class="n">Initializing</span> <span class="n">Spring</span> <span class="n">DispatcherServlet</span> <span class="err">&#39;</span><span class="n">dispatcherServlet</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">49</span><span class="o">.</span><span class="na">707</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span><span class="n">nio</span><span class="o">-</span><span class="n">8080</span><span class="o">-</span><span class="n">exec</span><span class="o">-</span><span class="n">1</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">DispatcherServlet</span>        <span class="o">:</span> <span class="n">Initializing</span> <span class="n">Servlet</span> <span class="err">&#39;</span><span class="n">dispatcherServlet</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">2020</span><span class="o">-</span><span class="n">06</span><span class="o">-</span><span class="n">14</span> <span class="n">20</span><span class="o">:</span><span class="n">49</span><span class="o">:</span><span class="n">49</span><span class="o">.</span><span class="na">722</span>  <span class="n">INFO</span> <span class="n">43952</span> <span class="o">---</span> <span class="o">[</span><span class="n">nio</span><span class="o">-</span><span class="n">8080</span><span class="o">-</span><span class="n">exec</span><span class="o">-</span><span class="n">1</span><span class="o">]</span> <span class="n">o</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">DispatcherServlet</span>        <span class="o">:</span> <span class="n">Completed</span> <span class="n">initialization</span> <span class="n">in</span> <span class="n">15</span> <span class="n">ms</span>
+</span></span><span class="line"><span class="cl"><span class="n">request</span> <span class="n">count</span> <span class="o">=</span> <span class="n">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">request</span> <span class="n">count</span> <span class="o">=</span> <span class="n">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">request</span> <span class="n">count</span> <span class="o">=</span> <span class="n">3</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-a-namefyijmetercustomizeafyi-jmeter-customize">5. <a name='FYIJmeterCustomize'></a>FYI Jmeter Customize</h2>
+<p>こちらは参考までにですが、Jmeterのカスタマイズをする方法も調査してみたので記載しておきます。</p>
+<p>どんな場合にするのかですが、単純なHTTPリクエストじゃなくて、以下のような場合にカスタマイズが必要なのかなと思います。</p>
+<ul>
+<li>動的にある業務データを作成して投げたい場合</li>
+<li>kinesisやmq など特定のソフトウェアに対してデータを投入したい場合</li>
+</ul>
+<h3 id="51-a-namegradlesettingagradle-setting">5.1. <a name='GradleSetting'></a>Gradle Setting</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">plugins</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">id</span> <span class="err">&#39;</span><span class="n">java</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">group</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">version</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">0</span><span class="o">.</span><span class="na">0</span><span class="o">.</span><span class="na">1</span><span class="o">-</span><span class="n">SNAPSHOT</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sourceCompatibility</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">1</span><span class="o">.</span><span class="na">8</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">configurations</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">compileOnly</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">extendsFrom</span> <span class="n">annotationProcessor</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">repositories</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">mavenCentral</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// Jmeter
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">compile</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">.</span><span class="na">apache</span><span class="o">.</span><span class="na">jmeter</span><span class="o">:</span><span class="n">ApacheJMeter_core</span><span class="o">:</span><span class="n">4</span><span class="o">.</span><span class="na">0</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Jackson
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">compile</span> <span class="err">&#39;</span><span class="n">com</span><span class="o">.</span><span class="na">fasterxml</span><span class="o">.</span><span class="na">jackson</span><span class="o">.</span><span class="na">core</span><span class="o">:</span><span class="n">jackson</span><span class="o">-</span><span class="n">databind</span><span class="o">:</span><span class="n">2</span><span class="o">.</span><span class="na">11</span><span class="o">.</span><span class="na">0</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// lombok
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">compileOnly</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="o">:</span><span class="n">1</span><span class="o">.</span><span class="na">18</span><span class="o">.</span><span class="na">12</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">annotationProcessor</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="o">:</span><span class="n">1</span><span class="o">.</span><span class="na">18</span><span class="o">.</span><span class="na">12</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">test</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">useJUnitPlatform</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="52-a-namepreprocessorimplandguisettingapreprocessor-impl-and-gui-setting">5.2. <a name='PreProcessorImplandGUISetting'></a>PreProcessor Impl and GUI Setting</h3>
+<h4 id="521-a-namepreprocessorimplapreprocessor-impl">5.2.1. <a name='PreProcessorImpl'></a>PreProcessor Impl</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.example.jmeter.gui</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.processor.PreProcessor</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.testelement.AbstractTestElement</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RsyncPreProcessor</span> <span class="kd">extends</span> <span class="n">AbstractTestElement</span> <span class="kd">implements</span> <span class="n">PreProcessor</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">process</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 前処理が必要であれば実施する。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// getProperty(&#34;dataSize&#34;), // GUIで入力したデータサイズ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="522-a-nameguisettingagui-setting">5.2.2. <a name='GUISetting'></a>GUI Setting</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.example.jmeter.gui</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.gui.util.VerticalPanel</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.processor.gui.AbstractPreProcessorGui</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.testelement.TestElement</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jorphan.gui.JLabeledTextField</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.awt.*</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RsyncPreProcessorGui</span> <span class="kd">extends</span> <span class="n">AbstractPreProcessorGui</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">JLabeledTextField</span> <span class="n">dataSize</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">RsyncPreProcessorGui</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// データサイズを設定するためのテキストフィールド
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">dataSize</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JLabeledTextField</span><span class="o">(</span><span class="s">&#34;data size(KiB): &#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// コンポーネントの配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">5</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setBorder</span><span class="o">(</span><span class="n">makeBorder</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="o">(</span><span class="n">makeTitlePanel</span><span class="o">(),</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">NORTH</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">VerticalPanel</span> <span class="n">mainPanel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">VerticalPanel</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mainPanel</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">dataSize</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="o">(</span><span class="n">mainPanel</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">CENTER</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getLabelResource</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getStaticLabel</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;Rsync PreProcessor&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// JMeter上でこの前処理が追加された時に呼び出される。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">TestElement</span> <span class="nf">createTestElement</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 前処理クラスのオブジェクトを生成
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">RsyncPreProcessor</span> <span class="n">preProcessor</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RsyncPreProcessor</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">modifyTestElement</span><span class="o">(</span><span class="n">preProcessor</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">preProcessor</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// GUIの入力値が更新された時に呼び出される。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">modifyTestElement</span><span class="o">(</span><span class="n">TestElement</span> <span class="n">testElement</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">testElement</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">configureTestElement</span><span class="o">(</span><span class="n">testElement</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// フィールドに入力されているデータサイズを前処理で使用できるようにする。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">testElement</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">&#34;dataSize&#34;</span><span class="o">,</span> <span class="n">dataSize</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 必須ではないがこのメソッドを実装しておくと再起動時に
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 保存している設定ファイルから設定値を引き継げる。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="n">TestElement</span> <span class="n">testElement</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dataSize</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">testElement</span><span class="o">.</span><span class="na">getPropertyAsString</span><span class="o">(</span><span class="s">&#34;dataSize&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">testElement</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="53-a-namesamplerimplandguisettingasampler-impl-and-gui-setting">5.3. <a name='SamplerImplandGUISetting'></a>Sampler Impl and GUI Setting</h3>
+<h4 id="531-a-namesamplerimplasampler-impl">5.3.1. <a name='SamplerImpl'></a>Sampler Impl</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.example.jmeter.gui</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">com.example.jmeter.resource.RequestResource</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonProcessingException</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">lombok.SneakyThrows</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.samplers.AbstractSampler</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.samplers.Entry</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.samplers.SampleResult</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RsyncSampler</span> <span class="kd">extends</span> <span class="n">AbstractSampler</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// GUIで指定したURLを取得する。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">getProperty</span><span class="o">(</span><span class="s">&#34;destinationUrl&#34;</span><span class="o">).</span><span class="na">getStringValue</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// コマンドを作成
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="n">String</span> <span class="nf">createCommand</span><span class="o">(</span><span class="n">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;curl &#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">          <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@SneakyThrows</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">SampleResult</span> <span class="nf">sample</span><span class="o">(</span><span class="n">Entry</span> <span class="n">entry</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SampleResult</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SampleResult</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 送信コマンドを生成する。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">String</span> <span class="n">command</span> <span class="o">=</span> <span class="n">createCommand</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">result</span><span class="o">.</span><span class="na">sampleStart</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// サンプラー処理を実施する。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// コマンドを実行する。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">Runtime</span> <span class="n">runtime</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Process</span> <span class="n">process</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">process</span> <span class="o">=</span> <span class="n">runtime</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="n">command</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">process</span><span class="o">.</span><span class="na">waitFor</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">result</span><span class="o">.</span><span class="na">setSuccessful</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span><span class="o">.</span><span class="na">setSuccessful</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span><span class="o">.</span><span class="na">sampleEnd</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="532-a-nameguisetting-1agui-setting">5.3.2. <a name='GUISetting-1'></a>GUI Setting</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.example.jmeter.gui</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.gui.util.VerticalPanel</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.samplers.gui.AbstractSamplerGui</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jmeter.testelement.TestElement</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.jorphan.gui.JLabeledTextField</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javax.swing.*</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.awt.*</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RsyncSamplerGui</span> <span class="kd">extends</span> <span class="n">AbstractSamplerGui</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="n">1L</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">JLabeledTextField</span> <span class="n">destinationUrl</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">RsyncSamplerGui</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// コンポーネントの配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">5</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setBorder</span><span class="o">(</span><span class="n">makeBorder</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="o">(</span><span class="n">makeTitlePanel</span><span class="o">(),</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">NORTH</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">VerticalPanel</span> <span class="n">mainPanel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">VerticalPanel</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mainPanel</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">createDestinationPanel</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">add</span><span class="o">(</span><span class="n">mainPanel</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">CENTER</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Component</span> <span class="nf">createDestinationPanel</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 負荷掛け対象である送信先のURL
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">destinationUrl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JLabeledTextField</span><span class="o">(</span><span class="s">&#34;url: &#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">JPanel</span> <span class="n">dataPanel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">VerticalPanel</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dataPanel</span><span class="o">.</span><span class="na">setBorder</span><span class="o">(</span><span class="n">BorderFactory</span><span class="o">.</span><span class="na">createTitledBorder</span><span class="o">(</span><span class="s">&#34;destination&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dataPanel</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">destinationUrl</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dataPanel</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getLabelResource</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getStaticLabel</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;Rsync Sampler&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// JMeter上でこのサンプラーが追加された時に呼び出される。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">TestElement</span> <span class="nf">createTestElement</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// サンプラークラスのオブジェクトを生成
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">RsyncSampler</span> <span class="n">sampler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RsyncSampler</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">modifyTestElement</span><span class="o">(</span><span class="n">sampler</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sampler</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// GUIの入力値が更新された時に呼び出される。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">modifyTestElement</span><span class="o">(</span><span class="n">TestElement</span> <span class="n">testElement</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">testElement</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">configureTestElement</span><span class="o">(</span><span class="n">testElement</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 入力されている値をサンプラーで使用できるようにする。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">testElement</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">&#34;destinationUrl&#34;</span><span class="o">,</span> <span class="n">destinationUrl</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 必須ではないがこのメソッドを実装しておくと再起動時に
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 保存している設定ファイルから設定値を引き継げる。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="n">TestElement</span> <span class="n">testElement</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">destinationUrl</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">testElement</span><span class="o">.</span><span class="na">getPropertyAsString</span><span class="o">(</span><span class="s">&#34;destinationUrl&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">testElement</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="54-a-namefileplacement-1afile-placement">5.4. <a name='FilePlacement-1'></a>File Placement</h3>
+<p>上の設定で出来たソースコードを、<code>gradle jar</code> でビルドし、Jarファイルを作成します。</p>
+<p>Jmeterの <code>/lib/ext</code> フォルダに格納することで、カスタマイズされたJarファイルが <code>Jmeter</code> に読み込まれて利用することが出来ます。</p>
+<blockquote>
+<p>Macの場合は、こちらのファイルパスです。<br>
+<code>/usr/local/Cellar/jmeter/5.3/libexec/lib/ext</code></p>
+</blockquote>
+<h2 id="6-a-namereferenceareference">6. <a name='Reference'></a>Reference</h2>
+<ul>
+<li><a href="https://qiita.com/marumaru/items/1c79b9fef5bbeb1adb42">AWSでJMeterのMaster/Slave環境を構築（CentOS 7） - Qiita</a></li>
+<li><a href="https://doruby.jp/users/hello_rails/entries/%E8%B5%B0%E3%82%8CJMeter-1">走れJMeter | その他 | DoRuby</a></li>
+<li><a href="https://linuxize.com/post/how-to-install-gradle-on-centos-7/">How to Install Gradle on CentOS 7 | Linuxize</a></li>
+<li><a href="https://www.nttpc.co.jp/technology/jmeter.html">低コストかつ汎用的な負荷試験手法（JMeterを機能拡張してみる）｜【技業LOG】技術者が紹介するNTTPCのテクノロジー｜【公式】NTTPC</a></li>
+<li><a href="https://jmeter.apache.org/usermanual/get-started.html#non_gui">Apache JMeter - User&rsquo;s Manual: Getting Started</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/jmeter/">jmeter</a>
+          <a href="/tags/master/">master</a>
+          <a href="/tags/slave/">slave</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20200701-dockerfile-and-manifest/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Dockerfile と マニフェストファイル(Deployment)</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20200502-memory-check-methods/">
+            <span class="next-text nav-default">Javaプロセスのメモリチェック方法</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

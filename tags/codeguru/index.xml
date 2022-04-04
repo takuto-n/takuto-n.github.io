@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>codeguru on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/tags/codeguru/</link>
+    <description>Recent content in codeguru on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 24 Dec 2019 23:36:29 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/codeguru/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS CodeGuru</title>
+      <link>https://takuto-n.github.io/post/20191224-awscodeguru/</link>
+      <pubDate>Tue, 24 Dec 2019 23:36:29 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20191224-awscodeguru/</guid>
+      <description>AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使</description>
+    </item>
+    
+  </channel>
+</rss>

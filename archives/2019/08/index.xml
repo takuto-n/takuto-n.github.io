@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2019/08 on Little by little and bit by bit</title>
+    <link>https://takuto-n.github.io/archives/2019/08/</link>
+    <description>Recent content in 2019/08 on Little by little and bit by bit</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/takuto-n/takuto-n.github.io&#34;&gt;takuto-n&lt;/a&gt; 2019</copyright>
+    <lastBuildDate>Fri, 09 Aug 2019 00:01:44 +0900</lastBuildDate>
+    
+	<atom:link href="https://takuto-n.github.io/archives/2019/08/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Architecting on AWSの参加メモ</title>
+      <link>https://takuto-n.github.io/posts/20190809-architectiong-on-aws_memomo/</link>
+      <pubDate>Fri, 09 Aug 2019 00:01:44 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/posts/20190809-architectiong-on-aws_memomo/</guid>
+      <description>先日、Architecting on AWSに参加したので、参加メモを載せておきます。</description>
+    </item>
+    
+  </channel>
+</rss>

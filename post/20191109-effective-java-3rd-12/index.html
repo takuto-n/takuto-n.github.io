@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Effective Java 3rd [Chapter 12] - シリアライズ - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="シリアライズ Effective Java 第 3 版の個人的メモ 項目 85 Java のシリアライズよりも代替手段を選ぶ 項目 86 Serializable を細心の注意を払って実装する 項目 87 カスタムシリアライズ形" /><meta name="keywords" content="java, シリアライズ, 個人的メモ" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-12/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Effective Java 3rd [Chapter 12] - シリアライズ" />
+<meta property="og:description" content="シリアライズ Effective Java 第 3 版の個人的メモ 項目 85 Java のシリアライズよりも代替手段を選ぶ 項目 86 Serializable を細心の注意を払って実装する 項目 87 カスタムシリアライズ形" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-12/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-03-07T00:49:15+09:00" />
+<meta property="article:modified_time" content="2020-03-07T00:49:15+09:00" />
+
+<meta itemprop="name" content="Effective Java 3rd [Chapter 12] - シリアライズ">
+<meta itemprop="description" content="シリアライズ Effective Java 第 3 版の個人的メモ 項目 85 Java のシリアライズよりも代替手段を選ぶ 項目 86 Serializable を細心の注意を払って実装する 項目 87 カスタムシリアライズ形"><meta itemprop="datePublished" content="2020-03-07T00:49:15+09:00" />
+<meta itemprop="dateModified" content="2020-03-07T00:49:15+09:00" />
+<meta itemprop="wordCount" content="7378">
+<meta itemprop="keywords" content="java,シリアライズ,個人的メモ," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Effective Java 3rd [Chapter 12] - シリアライズ"/>
+<meta name="twitter:description" content="シリアライズ Effective Java 第 3 版の個人的メモ 項目 85 Java のシリアライズよりも代替手段を選ぶ 項目 86 Serializable を細心の注意を払って実装する 項目 87 カスタムシリアライズ形"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Effective Java 3rd [Chapter 12] - シリアライズ</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-03-07 </span>
+        <div class="post-category">
+            <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+            </div>
+          <span class="more-meta"> 7378 words </span>
+          <span class="more-meta"> 15 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="シリアライズ">シリアライズ</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#85Java">項目 85 Java のシリアライズよりも代替手段を選ぶ</a></li>
+<li><a href="#86Serializable">項目 86 Serializable を細心の注意を払って実装する</a></li>
+<li><a href="#87">項目 87 カスタムシリアライズ形式の使用を検討する</a></li>
+<li><a href="#88readObject">項目 88 防御的に readObject メソッドを書く</a></li>
+<li><a href="#89readResolveenum">項目 89 インスタンス制御に対しては、readResolve より enum 型を選ぶ</a></li>
+<li><a href="#90">項目 90 シリアライズされたインスタンスの代わりに、シリアライズ・プロキシを検討する</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name85javaa項目-85-java-のシリアライズよりも代替手段を選ぶ">1. <a name='85Java'></a>項目 85 Java のシリアライズよりも代替手段を選ぶ</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<ul>
+<li>シリアライズは使うべきでない
+<ul>
+<li>シリアライズは脆弱でリモートコード実行(RCE)やDoS攻撃などの攻撃の弱点となってしまうから</li>
+</ul>
+</li>
+<li>代替手段としてはJSONやProtobufなどのような他の手段を使うべし
+<ul>
+<li>データフォーマットが定まっていてシリアライズよりましだから？
+<ul>
+<li>XML bombもある。Jsonハイジャックもある。</li>
+<li>ユーザコードを叩くかどうかの違い？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>シリアライズが避けられない場合でも、信頼できないデータはデシリアライズするべきでない
+<ul>
+<li>信頼できないデータは攻撃対象となっている可能性があるから</li>
+</ul>
+</li>
+<li>シリアライズが避けられないかつ信頼できないデータをデシリアライズしなければならない場合は、フィルタリングをするべし</li>
+</ul>
+<h3 id="12-a-name-1aシリアライズの脆弱性">1.2. <a name='-1'></a>シリアライズの脆弱性</h3>
+<ul>
+<li>シリアライズは脆弱である
+<ul>
+<li>理由
+<ul>
+<li><a href="https://codezine.jp/article/detail/9150">Apache Commons Collectionsの脆弱性解説 (1/3)：CodeZine（コードジン）</a></li>
+<li><a href="https://blog.tokumaru.org/2017/09/introduction-to-object-injection.html">安全でないデシリアライゼーション(Insecure Deserialization)入門 | 徳丸浩の日記</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ガジェット、ガジェットチェーンによって任意のネイティブコードが実行できてしまうことがある
+<ul>
+<li>Javaのシリアライズ可能な型を持つメソッドをガジェット、ガジェットの組み合わせをガジェットチェーンとよぶ</li>
+<li>実際にガジェットチェーンを用いて任意のネイティブコードが実行する実証実験された
+<ul>
+<li><a href="https://blog.trendmicro.co.jp/archives/12577">主要Javaアプリケーションサーバに影響するJavaライブラリの脆弱性を正しく理解する | トレンドマイクロ セキュリティブログ</a></li>
+<li><a href="https://github.com/frohoff/ysoserial">GitHub - frohoff/ysoserial: A proof-of-concept tool for generating payloads that exploit unsafe Java object deserialization.</a>
+<ul>
+<li>Spring 4.1.4でも実証実験された</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>デシリアライゼーションボムによってDoS攻撃ができてしまうことがある
+<ul>
+<li>デシリアライゼーションボムは、インスタンスのディシリアライズをする場合に、そのフィールドや要素のハッシュコードを計算する必要があることを悪用して、例えば深い入れ子構造になっているHashSetインスタンスなどを作成してデシリアライズさせることで、莫大な計算時間を掛けさせる攻撃手法</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-a-name-1aデシリアライズ時のフィルタリング">1.3. <a name='-1'></a>デシリアライズ時のフィルタリング</h3>
+<ul>
+<li>デシリアライズ時のフィルタリングには<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/ObjectInputFilter.html">ObjectInputFilter (Java SE 11 &amp; JDK 11 )</a>を使うべし
+<ul>
+<li>ホワイトリスト</li>
+<li>Java 9から導入されたが、6,7,8にもバックポートされている
+<ul>
+<li><a href="https://www.infoq.com/jp/news/2017/03/deserialise-filter-backport/">オブジェクトのデシリアライゼーションフィルタがJava 9からバックポートされる</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="14-a-name-1a余談">1.4. <a name='-1'></a>余談</h3>
+<ul>
+<li>シリアライズの扱いずらさ
+<ul>
+<li>送信元と送信先が同じオブジェクトを持たなければならない</li>
+</ul>
+</li>
+<li>どういう局面でシリアライズを使うでしょうか
+<ul>
+<li>セッション</li>
+<li>システム内通信
+<ul>
+<li>EJB(Enterprise Java Bean)
+<ul>
+<li>EJBとは？という方は<a href="https://www.atmarkit.co.jp/fjava/keyword/jkey/jkey03.html">こちら</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-a-name86serializablea項目-86-serializable-を細心の注意を払って実装する">2. <a name='86Serializable'></a>項目 86 Serializable を細心の注意を払って実装する</h2>
+<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>Serializableインターフェースは軽く考えて実装するべきではない
+<ul>
+<li>以下の3つのコストがかかってしまうから
+<ul>
+<li>リリース後のクラスの実装の変更に対する柔軟性の低下</li>
+<li>バグやセキュリティホールの可能性の増大</li>
+<li>テストの負荷の増大</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>継承するために設計されたクラスとインタフェースではSerializableを実装・拡張するべきでない
+<ul>
+<li>サブクラスの実装に手間がかかるから</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-a-nameserializable3aserializable実装に伴う3つのコスト">2.2. <a name='Serializable3'></a>Serializable実装に伴う3つのコスト</h3>
+<h4 id="221-a-name-1aリリース後のクラスの実装の変更に対する柔軟性の低下">2.2.1. <a name='-1'></a>リリース後のクラスの実装の変更に対する柔軟性の低下</h4>
+<ul>
+<li>Serializableを実装したクラスを一旦リリースしてしまうと、その実装を変更することは容易ではない
+<ul>
+<li>クラスをシリアライズ可能にすると、そのシリアライズ形式がクラスの公開APIの一部となり、シリアライズ形式を永久にサポートし続ける必要があるから
+<ul>
+<li>デフォルトのシリアライズ形式の場合は、 privateフィールドも公開されてしまう</li>
+</ul>
+</li>
+<li>serialVersionUIDを明示的に指定しない場合は、コンパイラはクラス名やクラスが実装しているインタフェース名、publicとprotectedのメンバからserialVersionUIDを生成されるするので、メソッドを一つ追加しただけでserialVersionUIDが変更され、互換性が失われるから。
+<ul>
+<li>javaバージョンによって生成されるserialVersionUIDが違う可能性あり。だから指定しましょう</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="222-a-name-1aバグやセキュリティホールの可能性の増大">2.2.2. <a name='-1'></a>バグやセキュリティホールの可能性の増大</h4>
+<ul>
+<li>バグの可能性が増大する理由は、デシリアライズ時のオブジェクトは通常のコンストラクタを使わずに生成されるため、コンストラクタで保証される不変式が保証されないから。</li>
+<li>セキュリティホールについては、項目85参照</li>
+</ul>
+<h4 id="223-a-name-1aテストの負荷の増大">2.2.3. <a name='-1'></a>テストの負荷の増大</h4>
+<ul>
+<li>新たなリリースのインスタンスをシリアライズし、古いリリースのデシリアライズ処理でインスタンスが復元できるを確認する必要がある。 また逆に、古いリリースのインスタンスをシリアライズし、新しいリリースのデシリアライズ処理で復元できるかも確認する必要がある</li>
+<li>これらのテストは、新旧のインスタンス間でシリアライズ/デシリアライズできるかというバイナリ互換性に加えて、 動作が意図しているものかどうかというセマンティクス互換性も検査する必要がある
+<ul>
+<li>互換の一覧
+<ul>
+<li>ソース互換
+<ul>
+<li>ソースをコンパイルできる</li>
+</ul>
+</li>
+<li>バイナリ互換
+<ul>
+<li>バイナリを実行できる</li>
+</ul>
+</li>
+<li>動作の互換性（≒セマンティクス互換性）
+<ul>
+<li>動作が同じ</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="224-a-nameserializablea継承するために設計されたクラスインターフェースに対するserializable実装">2.2.4. <a name='Serializable'></a>継承するために設計されたクラス・インターフェースに対するSerializable実装</h4>
+<ul>
+<li>継承するために設計されたクラスとインタフェースではSerializableを実装・拡張するべきでない
+<ul>
+<li>サブクラスの実装に手間がかかるから</li>
+</ul>
+</li>
+<li>ただし上記には例外があり、「例えば、全ての参加者がSerializableを実装しなければならない何らかのフレームワークに参加するためにクラスやインターフェースが主に存在している場合」は破ってもいい
+<ul>
+<li>例えば、ThrowableはSerializableを実装しているので、リモートメソッド呼び出し(RMI)からの例外を、クライアントに渡せる</li>
+<li>Component、HttpServletもSerializableを実装している</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-a-name87a項目-87-カスタムシリアライズ形式の使用を検討する">3. <a name='87'></a>項目 87 カスタムシリアライズ形式の使用を検討する</h2>
+<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+<p>Javaにおけるシリアライズの実装方法は2通りある。</p>
+<ul>
+<li>デフォルトシリアライズ形式</li>
+<li>カスタムシリアライズ形式</li>
+</ul>
+<p>基本的に、カスタムを選ぶこと(=後述する、<code>#readObject</code>, <code>#writeObject</code> を実装すること)。</p>
+<h3 id="32-a-name-1aデフォルトシリアライズ形式とは">3.2. <a name='-1'></a>デフォルトシリアライズ形式とは</h3>
+<p>単に <code>Implements Serializable</code> しただけの状態。これで、Javaは内部表現をそのままバイナリにする(なにもしないと全部のプロパティが対象になる)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.ByteArrayInputStream</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.ByteArrayOutputStream</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.ObjectInputStream</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.ObjectOutputStream</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">lombok.ToString</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">lombok.extern.slf4j.Slf4j</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@Slf4j</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@ToString</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 名前。非 null。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @serial
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 年齢。0以上。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @serial
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;constructor is called&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">name</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;name = null&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">age</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;age: &#34;</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span> <span class="s">&#34; &lt; 0&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;start serialize !!!&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">bas</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">oos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="n">bas</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">targetParson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;kuramotoki&#34;</span><span class="o">,</span> <span class="n">36</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">oos</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">targetParson</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">oos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">oos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;serialized value=[{}]&#34;</span><span class="o">,</span> <span class="n">bas</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;start deserialize !!!&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">ois</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">bas</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Person</span> <span class="n">serializedPerson</span> <span class="o">=</span> <span class="o">(</span><span class="n">Person</span><span class="o">)</span><span class="n">ois</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ois</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;serialized person=[{}]&#34;</span><span class="o">,</span> <span class="n">serializedPerson</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">// 得られる出力
+</span></span><span class="line"><span class="cl">18:25:09.951 <span class="o">[</span>main<span class="o">]</span> INFO Person - start serialize !!!
+</span></span><span class="line"><span class="cl">18:25:09.964 <span class="o">[</span>main<span class="o">]</span> INFO Person - constructor is called
+</span></span><span class="line"><span class="cl">18:25:10.051 <span class="o">[</span>main<span class="o">]</span> INFO Person - serialized <span class="nv">value</span><span class="o">=[</span>�� sr Person<span class="p">&amp;</span>����� I ageL namet Ljava/lang/String<span class="p">;</span>xp   <span class="nv">$t</span> 
+</span></span><span class="line"><span class="cl">kuramotoki<span class="o">]</span> // バイナリには、クラスの情報とその値がベタで入っている
+</span></span><span class="line"><span class="cl">18:25:10.053 <span class="o">[</span>main<span class="o">]</span> INFO Person - start deserialize !!!
+</span></span><span class="line"><span class="cl">// ここでコンストラクタが呼ばれそうだけど呼ばれない
+</span></span><span class="line"><span class="cl">18:25:10.059 <span class="o">[</span>main<span class="o">]</span> INFO Person - serialized <span class="nv">person</span><span class="o">=[</span>Person<span class="o">(</span><span class="nv">name</span><span class="o">=</span>kuramotoki, <span class="nv">age</span><span class="o">=</span>36<span class="o">)]</span> // ちゃんと復元できている
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>@serial</code> タグ
+<ul>
+<li>このタグを使うと、javadocで明記される模様。</li>
+</ul>
+</li>
+<li><code>readObject</code> メソッド
+<ul>
+<li>シリアライズ機構を通るときは、実装すること(前述の例では実装していない)。</li>
+<li>デシリアライズ時は、オブジェクトはコンストラクタを使わずに生成されるので、状態に条件が必要ならば、readObjectで実現する必要がある。</li>
+</ul>
+</li>
+</ul>
+<h3 id="33-a-name-1aカスタムシリアライズ形式-とは">3.3. <a name='-1'></a>カスタムシリアライズ形式 とは</h3>
+<p><code>implements Serializable</code> と、 <code>readObject</code> メソッド と <code>writeObject</code> メソッドを実装した状態。デフォルトで問題ないと思うかもしれないが、オブジェクトの構造次第では不適切になる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">StringList</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Entry</span> <span class="n">head</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">data</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Entry</span> <span class="n">previous</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Entry</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>このクラスは実装を晒している。</p>
+<ul>
+<li>論理的には「文字列のリスト」</li>
+<li>実装は「文字列の双方向リンクリスト」</li>
+</ul>
+<p>デフォルトシリアライズを用いると「文字列の双方リンクリスト」としてシリアライズされる。
+結果、複数のデメリットが生まれる。</p>
+<ul>
+<li>物理表現（実装）が公開 API となり、永久にサポートする必要がある
+<ul>
+<li>シリアライズが将来も有効とするには、内部構造を変えられない</li>
+</ul>
+</li>
+<li>スタックオーバーフローを起こす可能性がある
+<ul>
+<li>再帰的な構造になっているので、そのままダンプするとエライことになる。リングバッファとかも不適切。</li>
+</ul>
+</li>
+<li>多くの空間を消費する可能性がある / 多くの時間を消費する可能性がある
+<ul>
+<li>↑を理解すると自明</li>
+</ul>
+</li>
+</ul>
+<p>以下は、デフォルトで問題ありそうな実装を試し打ち。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.ByteArrayOutputStream</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.ObjectOutputStream</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">lombok.extern.slf4j.Slf4j</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@Slf4j</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">StringList</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Entry</span> <span class="n">head</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">StringList</span><span class="o">(</span><span class="n">Entry</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">data</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Entry</span> <span class="n">previous</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Entry</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">mid1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">mid2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">tail</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">head</span><span class="o">.</span><span class="na">previous</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">mid1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">head</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="s">&#34;head&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">mid1</span><span class="o">.</span><span class="na">previous</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mid1</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="s">&#34;mid1&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mid1</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">mid2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">mid2</span><span class="o">.</span><span class="na">previous</span> <span class="o">=</span> <span class="n">mid1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mid2</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="s">&#34;mid2&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mid2</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">tail</span><span class="o">.</span><span class="na">previous</span> <span class="o">=</span> <span class="n">mid2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tail</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="s">&#34;tail&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;start serialize !!!&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">bas</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">oos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="n">bas</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">oos</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="k">new</span> <span class="n">StringList</span><span class="o">(</span><span class="n">head</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">oos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">oos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">bas</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>問題は発生しなかったが、無駄なデータになっていそう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">18:57:52.870 <span class="o">[</span>main<span class="o">]</span> INFO StringList - start serialize !!!
+</span></span><span class="line"><span class="cl">18:57:52.941 <span class="o">[</span>main<span class="o">]</span> INFO StringList - �� sr 
+</span></span><span class="line"><span class="cl">.h I sizeL headt LStringList<span class="nv">$Entry</span><span class="p">;</span>xp    sr StringList<span class="nv">$Entry</span>����I L datat Ljava/lang/String<span class="p">;</span>L nextq ~ Lpreviousq ~ xpt headsq ~ t mid1sq ~ t mid2sq ~ t tailq ~ q ~     q ~ q ~ p
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下は改良版。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">StringList2</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">transient</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">transient</span> <span class="n">Entry</span> <span class="n">head</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// No longer Serializable
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">data</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Entry</span> <span class="n">previous</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Entry</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// listに文字列を加える
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">writeObject</span><span class="o">(</span><span class="n">ObjectOutputStream</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="o">.</span><span class="na">defaultWriteObject</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">size</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span> <span class="n">e</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">data</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">readObject</span><span class="o">(</span><span class="n">ObjectInputStream</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="o">.</span><span class="na">defaultReadObject</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">numElements</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numElements</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">add</span><span class="o">((</span><span class="n">String</span><span class="o">)</span> <span class="n">s</span><span class="o">.</span><span class="na">readObject</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>ここでは、いくつか新しい要素がある。</p>
+<ul>
+<li><code>transient</code>
+<ul>
+<li>これが指定されていると <code>シリアライズ対象外</code> となる。</li>
+<li>初期値はその型のデフォルトになる。それだとまずければ<code> readObject</code> で設定する。</li>
+</ul>
+</li>
+<li><code>defaultWriteObject/defaultReadObject</code>
+<ul>
+<li>とりあえず叩く。transient 指定されたフィールド以外のフィールドはすべてシリアライズされる。</li>
+<li>今の時点で <code>transient</code> なフィールドしかなかったとしても、将来はわからないので、いいから叩く。 将来、<code>transient</code> 付きのフィールドが入ったときのため。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-a-name88readobjecta項目-88-防御的に-readobject-メソッドを書く">4. <a name='88readObject'></a>項目 88 防御的に readObject メソッドを書く</h2>
+<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+<p>何が入ってきても大丈夫なように、readObjectは防御的プログラミングをすべし。</p>
+<ul>
+<li>以前の、防御的コピーのテクニックなどが使える。</li>
+<li>readObjectは、第二のコンストラクタと言える。</li>
+<li>引数のバイトストリームは悪意あるものかもしれないし、実際にシリアライズされたインスタンスである保証もない。</li>
+</ul>
+<h3 id="42-a-name-1aなぜ防御的な必要があるか">4.2. <a name='-1'></a>なぜ防御的な必要があるか</h3>
+<p>項目87でみたように、デシリアライズはバイト配列をもとにオブジェクトを再現する。
+ということは、「不正なバイナリを食わせられる」とか「改ざんされる」といったことが起き得る。</p>
+<p>なので、以下に従うこと。</p>
+<ul>
+<li>オブジェクト参照を持つフィールドはprivateにし、防御的コピーを取る。
+<ul>
+<li>immutableなクラスのmutableなコンポーネントは必須</li>
+</ul>
+</li>
+<li>不変条件をチェックし、破られた場合はInvalidObjectExceptionをなげる。</li>
+<li>デシリアライズされた後に、オブジェクトグラフ全体にバリデーションをかける必要があるならば、ObjectInputValidationインターフェースを使う。</li>
+<li>オーバーライドされうるメソッドは直接的にも間接的にも呼ばない。
+<ul>
+<li>悪意あるコードが呼ばれる可能性を防ぐ。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-a-name89readresolveenuma項目-89-インスタンス制御に対してはreadresolve-より-enum-型を選ぶ">5. <a name='89readResolveenum'></a>項目 89 インスタンス制御に対しては、readResolve より enum 型を選ぶ</h2>
+<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>インスタンス制御(シングルトン等)を強制したい場合は、<code>readResolve</code>よりも<code>enum</code>型を選びましょう。
+<ul>
+<li><code>readResolve</code>が使えるということは、別のインスタンスを生成可能ということだから。</li>
+</ul>
+</li>
+<li>インスタンス制御されたクラス(実行時にXMLファイルから読み込みインスタンスを生成する場合など)を使用したくて、シリアライズもしたい場合は、<code>readResolve</code>メソッドを提供して、全てのフィールドに<code>transient</code>を付けましょう。
+<ul>
+<li>悪意のある攻撃者に付け入る隙を与えないようにするため。（項目87 参照。）</li>
+</ul>
+</li>
+</ul>
+<h3 id="52-a-name-1aサンプル">5.2. <a name='-1'></a>サンプル</h3>
+<p><code>Serializable</code>を継承したEnum型で、<code>readResolve</code>でも対応しているサンプル。</p>
+<ul>
+<li>「非 transient なプロパティ」を含んでいるので不完全。
+<ul>
+<li>手作りバイトストリームで攻撃して、ディシリアライズすれば別インスタンスの生成が可能。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 非 transient プロパティを含む不完全なシングルトン実装
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Elvis</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Elvis</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Elvis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="nf">Elvis</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">　
+</span></span><span class="line"><span class="cl">    <span class="c1">// 非 transient なプロパティ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="n">favoriteSongs</span> <span class="o">=</span> <span class="o">{</span><span class="s">&#34;Hound Dog&#34;</span><span class="o">,</span> <span class="s">&#34;Heartbreak Hotel&#34;</span><span class="o">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printFavorites</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">favoriteSongs</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 偽のインスタンスを作らせないために、INSTANCEを返却
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="n">Object</span> <span class="nf">readResolve</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上記のクラスでは不完全なので、以下のように対応しましょう。
+JVMによって、宣言されたもの以外のインスタンスはあり得ないということが保証される。</p>
+<ul>
+<li><code>Enum</code>型の場合、Javaの仕様でフィールド値はシリアライズの対象外となる。
+<ul>
+<li>参考：<a href="https://docs.oracle.com/javase/jp/12/docs/specs/serialization/serial-arch.html#serialization-of-enum-constants">Javaオブジェクト直列化仕様: 1 - システム・アーキテクチャ</a>
+<ul>
+<li><strong>1.12 Enum定数の直列化</strong>
+<ul>
+<li><code>enum定数の直列化された形式を構成するのは、その名前のみです。定数のフィールド値は形式内に存在しません。</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// enumシングルトン - 好ましい方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Elvis</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">INSTANCE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="n">favoriteSongs</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="o">{</span><span class="s">&#34;Hound Dog&#34;</span><span class="o">,</span> <span class="s">&#34;Heartbreak Hotel&#34;</span><span class="o">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printFavorites</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">favoriteSongs</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Enum型でもシリアライズ/デシリアライズは可能です。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">try</span> <span class="o">(</span><span class="n">ByteArrayOutputStream</span> <span class="n">baos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">				<span class="n">ObjectOutputStream</span> <span class="n">oos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="n">baos</span><span class="o">);)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">oos</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">Elvis</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="n">data</span> <span class="o">=</span> <span class="n">baos</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">			<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;byte data = {}&#34;</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">		<span class="o">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">try</span> <span class="o">(</span>
+</span></span><span class="line"><span class="cl">				<span class="n">ByteArrayInputStream</span> <span class="n">bais</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">ObjectInputStream</span> <span class="n">ois</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectInputStream</span><span class="o">(</span><span class="n">bais</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="n">Elvis</span> <span class="n">elvis</span> <span class="o">=</span> <span class="o">(</span><span class="n">Elvis</span><span class="o">)</span> <span class="n">ois</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;elvis data = {}&#34;</span><span class="o">,</span> <span class="n">elvis</span><span class="o">.</span><span class="na">returnFavorites</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="o">|</span> <span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">		<span class="o">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="53-a-name-1a余談">5.3. <a name='-1'></a>余談</h3>
+<ul>
+<li>以下の悪意あるバイトストリームの攻撃を、<code>openjdk version &quot;13.0.2&quot; 2020-01-14</code>で実行してみた。
+もし以下のエラーが出ている方は、デフォルトパッケージにクラスを格納すると、ちゃんと？バイトストリーム攻撃が成功すると思います。
+<ul>
+<li>最近のJavaでは、このような攻撃に対応していて、エラーになるようになっているの？
+<ul>
+<li><a href="https://github.com/nannany/reading_memo/blob/master/effective_java_3rd/effective_java_3rd.md">reading_memo/effective_java_3rd.md at master · nannany/reading_memo · GitHub</a></li>
+<li><a href="https://qiita.com/nannany/items/1785894a5112a3f880ef">Item 89: For instance control, prefer enum types to readResolve - Qiita</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">serializedForm</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[]</span> <span class="o">{</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="n">0xac</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="n">0xed</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x05</span><span class="o">,</span> <span class="n">0x73</span><span class="o">,</span> <span class="n">0x72</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x05</span><span class="o">,</span> <span class="n">0x45</span><span class="o">,</span> <span class="n">0x6c</span><span class="o">,</span> <span class="n">0x76</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">0x69</span><span class="o">,</span> <span class="n">0x73</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="n">0x84</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="n">0xe6</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="n">0x93</span><span class="o">,</span> <span class="n">0x33</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="n">0xc3</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="n">0xf4</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="n">0x8b</span><span class="o">,</span> <span class="n">0x32</span><span class="o">,</span> <span class="n">0x02</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x01</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">0x4c</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x0d</span><span class="o">,</span> <span class="n">0x66</span><span class="o">,</span> <span class="n">0x61</span><span class="o">,</span> <span class="n">0x76</span><span class="o">,</span> <span class="n">0x6f</span><span class="o">,</span> <span class="n">0x72</span><span class="o">,</span> <span class="n">0x69</span><span class="o">,</span> <span class="n">0x74</span><span class="o">,</span> <span class="n">0x65</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">0x53</span><span class="o">,</span> <span class="n">0x6f</span><span class="o">,</span> <span class="n">0x6e</span><span class="o">,</span> <span class="n">0x67</span><span class="o">,</span> <span class="n">0x73</span><span class="o">,</span> <span class="n">0x74</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x12</span><span class="o">,</span> <span class="n">0x4c</span><span class="o">,</span> <span class="n">0x6a</span><span class="o">,</span> <span class="n">0x61</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">0x76</span><span class="o">,</span> <span class="n">0x61</span><span class="o">,</span> <span class="n">0x2f</span><span class="o">,</span> <span class="n">0x6c</span><span class="o">,</span> <span class="n">0x61</span><span class="o">,</span> <span class="n">0x6e</span><span class="o">,</span> <span class="n">0x67</span><span class="o">,</span> <span class="n">0x2f</span><span class="o">,</span> <span class="n">0x4f</span><span class="o">,</span> <span class="n">0x62</span><span class="o">,</span> <span class="n">0x6a</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">0x65</span><span class="o">,</span> <span class="n">0x63</span><span class="o">,</span> <span class="n">0x74</span><span class="o">,</span> <span class="n">0x3b</span><span class="o">,</span> <span class="n">0x78</span><span class="o">,</span> <span class="n">0x70</span><span class="o">,</span> <span class="n">0x73</span><span class="o">,</span> <span class="n">0x72</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x0c</span><span class="o">,</span> <span class="n">0x45</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">0x6c</span><span class="o">,</span> <span class="n">0x76</span><span class="o">,</span> <span class="n">0x69</span><span class="o">,</span> <span class="n">0x73</span><span class="o">,</span> <span class="n">0x53</span><span class="o">,</span> <span class="n">0x74</span><span class="o">,</span> <span class="n">0x65</span><span class="o">,</span> <span class="n">0x61</span><span class="o">,</span> <span class="n">0x6c</span><span class="o">,</span> <span class="n">0x65</span><span class="o">,</span> <span class="n">0x72</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">0x00</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x02</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x01</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">0x4c</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x07</span><span class="o">,</span> <span class="n">0x70</span><span class="o">,</span> <span class="n">0x61</span><span class="o">,</span> <span class="n">0x79</span><span class="o">,</span> <span class="n">0x6c</span><span class="o">,</span> <span class="n">0x6f</span><span class="o">,</span> <span class="n">0x61</span><span class="o">,</span> <span class="n">0x64</span><span class="o">,</span> <span class="n">0x74</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">0x00</span><span class="o">,</span> <span class="n">0x07</span><span class="o">,</span> <span class="n">0x4c</span><span class="o">,</span> <span class="n">0x45</span><span class="o">,</span> <span class="n">0x6c</span><span class="o">,</span> <span class="n">0x76</span><span class="o">,</span> <span class="n">0x69</span><span class="o">,</span> <span class="n">0x73</span><span class="o">,</span> <span class="n">0x3b</span><span class="o">,</span> <span class="n">0x78</span><span class="o">,</span> <span class="n">0x70</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">			<span class="n">0x71</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x7e</span><span class="o">,</span> <span class="n">0x00</span><span class="o">,</span> <span class="n">0x02</span> <span class="o">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// Initializes ElvisStealer.impersonator and returns
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// the real Elvis (which is Elvis.INSTANCE)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">Elvis</span> <span class="n">elvis</span> <span class="o">=</span> <span class="o">(</span><span class="n">Elvis</span><span class="o">)</span> <span class="n">deserialize</span><span class="o">(</span><span class="n">serializedForm</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">Elvis</span> <span class="n">impersonator</span> <span class="o">=</span> <span class="n">ElvisStealer</span><span class="o">.</span><span class="na">impersonator</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="n">elvis</span><span class="o">.</span><span class="na">printFavorites</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">		<span class="n">impersonator</span><span class="o">.</span><span class="na">printFavorites</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1">### デフォルトパッケージ「jp.tokyo.takuto_no.effective_java.chapter11.bad」ではない場合</span>
+</span></span><span class="line"><span class="cl">Exception in thread <span class="s2">&#34;main&#34;</span> java.lang.IllegalArgumentException: java.lang.ClassNotFoundException: Elvis
+</span></span><span class="line"><span class="cl">	at jp.tokyo.takuto_no.effective_java.chapter11.bad.ElvisImpersonator.deserialize<span class="o">(</span>ElvisImpersonator.java:40<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at jp.tokyo.takuto_no.effective_java.chapter11.bad.ElvisImpersonator.main<span class="o">(</span>ElvisImpersonator.java:26<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Caused by: java.lang.ClassNotFoundException: Elvis
+</span></span><span class="line"><span class="cl">	at java.net.URLClassLoader.findClass<span class="o">(</span>URLClassLoader.java:382<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at java.lang.ClassLoader.loadClass<span class="o">(</span>ClassLoader.java:424<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at sun.misc.Launcher<span class="nv">$AppClassLoader</span>.loadClass<span class="o">(</span>Launcher.java:349<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at java.lang.ClassLoader.loadClass<span class="o">(</span>ClassLoader.java:357<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at java.lang.Class.forName0<span class="o">(</span>Native Method<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at java.lang.Class.forName<span class="o">(</span>Class.java:348<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at java.io.ObjectInputStream.resolveClass<span class="o">(</span>ObjectInputStream.java:686<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at java.io.ObjectInputStream.readNonProxyDesc<span class="o">(</span>ObjectInputStream.java:1868<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at java.io.ObjectInputStream.readClassDesc<span class="o">(</span>ObjectInputStream.java:1751<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at java.io.ObjectInputStream.readOrdinaryObject<span class="o">(</span>ObjectInputStream.java:2042<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at java.io.ObjectInputStream.readObject0<span class="o">(</span>ObjectInputStream.java:1573<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at java.io.ObjectInputStream.readObject<span class="o">(</span>ObjectInputStream.java:431<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	at jp.tokyo.takuto_no.effective_java.chapter11.bad.ElvisImpersonator.deserialize<span class="o">(</span>ElvisImpersonator.java:38<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	... <span class="m">1</span> more
+</span></span><span class="line"><span class="cl"><span class="c1">### デフォルトパッケージの場合</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Hound Dog, Heartbreak Hotel<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>A Fool Such as I<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="54-a-name-1aポイント">5.4. <a name='-1'></a>ポイント</h3>
+<ul>
+<li>インスタンス制御(シングルトン等)を強制したい場合は、<code>Serializable</code>などは使わず、単に<code>enum</code>型を選びましょう。</li>
+<li>実行時にしかどのようなインスタンスなのかわからない場合は、項目88を参考に。
+<ul>
+<li><code>readResolve</code>メソッドの提供</li>
+<li>各フィールドは<code>transient</code>(シリアライズ対象外に。)で。</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-a-name90a項目-90-シリアライズされたインスタンスの代わりにシリアライズプロキシを検討する">6. <a name='90'></a>項目 90 シリアライズされたインスタンスの代わりに、シリアライズ・プロキシを検討する</h2>
+<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+<ul>
+<li><code>Serializable</code>を使わなければいけない時は、シリアライズ・プロキシパターンを使いましょう。
+<ul>
+<li><code>Serializable</code>を実装すると、バグとセキュリティの問題の可能性が増大するが、シリアライズ・プロキシパターンを使うと、リスクが大幅に減るため。</li>
+</ul>
+</li>
+</ul>
+<h3 id="62-a-name-1aシリアライズプロキシパターンのサンプル">6.2. <a name='-1'></a>シリアライズ・プロキシパターンのサンプル</h3>
+<p>このパターンを使用すると、防御的コピーによる方法（項目50）と同様に、以下を防げる。</p>
+<ul>
+<li>偽りのバイトストリームによる攻撃</li>
+<li>内部フィールドの窃盗攻撃</li>
+</ul>
+<p>このパターンを利用すれば、どのフィールドが不正なシリアライズ攻撃で信用できなくなるとかを考える必要がなくなる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Period</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Date</span> <span class="n">start</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Date</span> <span class="n">end</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="nf">Period</span><span class="o">(</span><span class="n">Date</span> <span class="n">start</span><span class="o">,</span> <span class="n">Date</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">this</span><span class="o">.</span><span class="na">start</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">		<span class="k">this</span><span class="o">.</span><span class="na">end</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">end</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">start</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">end</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="n">start</span> <span class="o">+</span> <span class="s">&#34; after &#34;</span> <span class="o">+</span> <span class="n">end</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="n">Date</span> <span class="nf">start</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="n">Date</span> <span class="nf">end</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">end</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">start</span> <span class="o">+</span> <span class="s">&#34; - &#34;</span> <span class="o">+</span> <span class="n">end</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Periodに対するシリアライズ・プロキシ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">SerializationProxy</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">private</span> <span class="kd">final</span> <span class="n">Date</span> <span class="n">start</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">private</span> <span class="kd">final</span> <span class="n">Date</span> <span class="n">end</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="n">SerializationProxy</span><span class="o">(</span><span class="n">Period</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">this</span><span class="o">.</span><span class="na">start</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">start</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">this</span><span class="o">.</span><span class="na">end</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">end</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">		<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="n">234098243823485285L</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// シリアライズ・プロキシパターンのためのreadResolve
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="kd">private</span> <span class="n">Object</span> <span class="nf">readResolve</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;readResolve&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="k">new</span> <span class="n">Period</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span><span class="o">);</span> <span class="c1">// public のコンストラクタを使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="o">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// シリアライズ・プロキシパターンのためのwriteReplace
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">private</span> <span class="n">Object</span> <span class="nf">writeReplace</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;writeReplace&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="k">new</span> <span class="n">SerializationProxy</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// シリアライズ・プロキシパターンのためのreadObject
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">readObject</span><span class="o">(</span><span class="n">ObjectInputStream</span> <span class="n">stream</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">			<span class="kd">throws</span> <span class="n">InvalidObjectException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">throw</span> <span class="k">new</span> <span class="n">InvalidObjectException</span><span class="o">(</span><span class="s">&#34;Proxy required&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Period<span class="o">(</span>Date start, Date end<span class="o">)</span>
+</span></span><span class="line"><span class="cl">writeReplace
+</span></span><span class="line"><span class="cl">16:34:30.242 <span class="o">[</span>main<span class="o">]</span> INFO jp.tokyo.takuto_no.effective_java.chapter11.serialize_proxy.Main - byte <span class="nv">data</span> <span class="o">=</span> <span class="o">[(</span>省略<span class="o">)]</span>
+</span></span><span class="line"><span class="cl">readResolve
+</span></span><span class="line"><span class="cl">Period<span class="o">(</span>Date start, Date end<span class="o">)</span>  <span class="c1"># ← [ポイント:ディシリアライズ時にコンストラクタが呼ばれる。]</span>
+</span></span><span class="line"><span class="cl">16:34:30.368 <span class="o">[</span>main<span class="o">]</span> INFO jp.tokyo.takuto_no.effective_java.chapter11.serialize_proxy.Main - period <span class="nv">data</span> <span class="o">=</span> Sat Mar <span class="m">07</span> 16:34:30 JST <span class="m">2020</span> - Sat Mar <span class="m">07</span> 16:34:30 JST <span class="m">2020</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>補足：<code>Period</code> → <code>SerializationProxy</code> → <code>バイトデータ</code> → <code>SerializationProxy</code> → <code>Period</code>となる。<code>Period</code>の前に<code>SerializationProxy</code>を介し、<code>new Period()</code>が実行されるため、攻撃を防ぐ余地が生まれる。</p>
+</blockquote>
+<h3 id="63-a-name-1aポイント">6.3. <a name='-1'></a>ポイント</h3>
+<p><code>Serializable</code>の実装は、様々な問題があり、極力しようは避けるべきであるが、使う際はシリアライズ・プロキシパターンの利用を検討しましょう。</p>
+<ul>
+<li><code>serialVersionUID</code>の管理</li>
+<li>偽りのバイトストリームによる攻撃</li>
+<li>内部フィールド窃盗攻撃</li>
+</ul>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          <a href="/tags/%E3%82%B7%E3%83%AA%E3%82%A2%E3%83%A9%E3%82%A4%E3%82%BA/">シリアライズ</a>
+          <a href="/tags/%E5%80%8B%E4%BA%BA%E7%9A%84%E3%83%A1%E3%83%A2/">個人的メモ</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20200405-docker-springboot_to_db/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Springboot on Container with jib</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20191109-effective-java-3rd-11/">
+            <span class="next-text nav-default">Effective Java 3rd [Chapter 11] - 並行性</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

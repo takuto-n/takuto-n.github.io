@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>GraphQL Language Specifications - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstruct GraphQLの学習にて、基本的な言語仕様をまとめたので載せておきます。
+" /><meta name="keywords" content="graphql, Query Language" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20211204-graphql-basic/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="GraphQL Language Specifications" />
+<meta property="og:description" content="Abstruct
+GraphQLの学習にて、基本的な言語仕様をまとめたので載せておきます。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20211204-graphql-basic/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-04T00:56:49+09:00" />
+<meta property="article:modified_time" content="2021-12-04T00:56:49+09:00" />
+
+<meta itemprop="name" content="GraphQL Language Specifications">
+<meta itemprop="description" content="Abstruct
+GraphQLの学習にて、基本的な言語仕様をまとめたので載せておきます。"><meta itemprop="datePublished" content="2021-12-04T00:56:49+09:00" />
+<meta itemprop="dateModified" content="2021-12-04T00:56:49+09:00" />
+<meta itemprop="wordCount" content="887">
+<meta itemprop="keywords" content="graphql,Query Language," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GraphQL Language Specifications"/>
+<meta name="twitter:description" content="Abstruct
+GraphQLの学習にて、基本的な言語仕様をまとめたので載せておきます。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">GraphQL Language Specifications</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-04 </span>
+        <div class="post-category">
+            <a href="/categories/graphql/"> graphql </a>
+            </div>
+          <span class="more-meta"> 887 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstruct">Abstruct</h1>
+<p>GraphQLの学習にて、基本的な言語仕様をまとめたので載せておきます。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Alias">Alias</a></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><a href="#Fragment">Fragment</a></li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li><a href="#OperationName">Operation Name</a></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li><a href="#Variables">Variables</a></li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li><a href="#Mutations">Mutations</a></li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li><a href="#InlineFragmentsTypename">Inline Fragments &amp; Typename</a></li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li><a href="#TypeSystemScalerSystemObjectTypesSchemas">Type System(Scaler System, Object Types, Schemas)</a></li>
+</ol>
+</li>
+<li>
+<ol start="8">
+<li><a href="#Pagination">Pagination</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<p>本ページで載せているクエリの動作確認用のサイト：https://docs.github.com/ja/graphql/overview/explorer</p>
+<h2 id="1-a-namealiasaalias">1. <a name='Alias'></a>Alias</h2>
+<ul>
+<li><code>user1</code>, <code>user2</code> がエイリアス。
+<ul>
+<li>同じフィールドをエイリアスを使うことで列挙できる。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">user1</span><span class="o">:</span> <span class="nx">user</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span> <span class="s2">&#34;takuto-n&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">bio</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">login</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">user2</span><span class="o">:</span> <span class="nx">user</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span> <span class="s2">&#34;satou&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">bio</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">login</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-a-namefragmentafragment">2. <a name='Fragment'></a>Fragment</h2>
+<ul>
+<li>fragmentで指定フィールドを定義できる。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">user1</span><span class="o">:</span> <span class="nx">user</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span> <span class="s2">&#34;takuto-n&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span><span class="nx">commonFields</span> <span class="c1">// fragment spead
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">user2</span><span class="o">:</span> <span class="nx">user</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span> <span class="s2">&#34;satou&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span><span class="nx">commonFields</span> <span class="c1">// fragment spead
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fragment</span> <span class="nx">commonFields</span> <span class="nx">on</span> <span class="nx">User</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">bio</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">login</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">avatarUrl</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">bioHTML</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">company</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">companyHTML</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">createdAt</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-a-nameoperationnameaoperation-name">3. <a name='OperationName'></a>Operation Name</h2>
+<ul>
+<li>Queryに操作名をつけれる。
+<ul>
+<li><code>getUser1</code>, <code>getUser2</code> が操作名。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">query</span> <span class="nx">getUser1</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">user</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span> <span class="s2">&#34;takuto-n&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">bio</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">query</span> <span class="nx">getUser2</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">user</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span> <span class="s2">&#34;satou&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">bio</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-a-namevariablesavariables">4. <a name='Variables'></a>Variables</h2>
+<ul>
+<li>変数を定義したら、<code>$変数名</code> で使える。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// Query
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">query</span><span class="p">(</span><span class="nx">$login</span><span class="o">:</span> <span class="nb">String</span><span class="o">!</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">user</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span> <span class="nx">$login</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">bio</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//query variables
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;login&#34;</span><span class="o">:</span> <span class="s2">&#34;takuto-n&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-a-namemutationsamutations">5. <a name='Mutations'></a>Mutations</h2>
+<ul>
+<li>Mutation経由で、状態を変更できる。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">query</span> <span class="nx">repository</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">repository</span><span class="p">(</span><span class="nx">owner</span><span class="o">:</span> <span class="s2">&#34;takuto-n&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;takuto-n.github.io&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">id</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">mutation</span> <span class="nx">addStar</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">addStar</span><span class="p">(</span><span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">starrableId</span><span class="o">:</span> <span class="s2">&#34;MDEwOlJlcG9zaXRvcnkyMDc4MzgyNDk=&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">starrable</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">id</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">viewerHasStarred</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">mutation</span> <span class="nx">removeStar</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">removeStar</span><span class="p">(</span><span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">starrableId</span><span class="o">:</span> <span class="s2">&#34;MDEwOlJlcG9zaXRvcnkyMDc4MzgyNDk=&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">starrable</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">id</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">viewerHasStarred</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6-a-nameinlinefragmentstypenameainline-fragments--typename">6. <a name='InlineFragmentsTypename'></a>Inline Fragments &amp; Typename</h2>
+<ul>
+<li>Inline Fragments
+<ul>
+<li><code>... on [型名]</code> で展開できる。</li>
+</ul>
+</li>
+<li>Typename
+<ul>
+<li><code>__typename</code> で型名を取れる。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">query</span> <span class="nx">search</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">search</span><span class="p">(</span><span class="nx">query</span><span class="o">:</span> <span class="s2">&#34;We work hard&#34;</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">USER</span><span class="p">,</span> <span class="nx">first</span><span class="o">:</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">nodes</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">__typename</span>
+</span></span><span class="line"><span class="cl">      <span class="p">...</span> <span class="nx">on</span> <span class="nx">User</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">id</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">name</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">url</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">...</span> <span class="nx">on</span> <span class="nx">Organization</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">id</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">name</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">url</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">projectsUrl</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="7-a-nametypesystemscalersystemobjecttypesschemasatype-systemscaler-system-object-types-schemas">7. <a name='TypeSystemScalerSystemObjectTypesSchemas'></a>Type System(Scaler System, Object Types, Schemas)</h2>
+<ul>
+<li>Scaler Types
+<ul>
+<li>Int, String, Booleanなど</li>
+</ul>
+</li>
+<li>Object Types
+<ul>
+<li>自前で定義した型</li>
+</ul>
+</li>
+<li>Schemas
+<ul>
+<li>スキーマは、各タイプの操作、クエリ、およびミューテーション（オプション）のルートタイプを提供することによって作成されます。</li>
+</ul>
+</li>
+</ul>
+<p>参考：https://www.tutorialspoint.com/graphql/graphql_type_system.htm</p>
+<h2 id="8-a-namepaginationapagination">8. <a name='Pagination'></a>Pagination</h2>
+<ul>
+<li>Relay-Style Cursor Paginationが有名。
+<ul>
+<li><a href="https://www.apollographql.com/docs/react/pagination/cursor-based/#relay-style-cursor-pagination">https://www.apollographql.com/docs/react/pagination/cursor-based/#relay-style-cursor-pagination</a></li>
+<li>Facebookが考案した方式。</li>
+<li>各ページ情報は、以下の要素を持っている。
+<ul>
+<li>startCursor</li>
+<li>endCursor</li>
+<li>hasPreviousCursor</li>
+<li>hasNextPage</li>
+</ul>
+</li>
+<li>この記事がわかりやすい。
+<ul>
+<li><a href="https://qiita.com/gipcompany/items/ffee8cf0b1522a741e12">https://qiita.com/gipcompany/items/ffee8cf0b1522a741e12</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// Query
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">query</span> <span class="nx">searchRepositories</span><span class="p">(</span><span class="nx">$first</span><span class="o">:</span> <span class="nx">Int</span><span class="p">,</span> <span class="nx">$after</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">$last</span><span class="o">:</span> <span class="nx">Int</span><span class="p">,</span> <span class="nx">$before</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">$query</span><span class="o">:</span> <span class="nb">String</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">search</span><span class="p">(</span><span class="nx">first</span><span class="o">:</span> <span class="nx">$first</span><span class="p">,</span> <span class="nx">after</span><span class="o">:</span> <span class="nx">$after</span><span class="p">,</span> <span class="nx">last</span><span class="o">:</span> <span class="nx">$last</span><span class="p">,</span> <span class="nx">before</span><span class="o">:</span> <span class="nx">$before</span><span class="p">,</span> <span class="nx">query</span><span class="o">:</span> <span class="nx">$query</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">REPOSITORY</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">repositoryCount</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pageInfo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">endCursor</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">hasNextPage</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">hasPreviousPage</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">startCursor</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">edges</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">cursor</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span> <span class="nx">on</span> <span class="nx">Repository</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">id</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">name</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">url</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Query Variables
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;first&#34;</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;after&#34;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;last&#34;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;before&#34;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;query&#34;</span><span class="o">:</span> <span class="s2">&#34;フロントエンドエンジニア&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/graphql/">graphql</a>
+          <a href="/tags/query-language/">Query Language</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20211227-react-hooks/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">React Hooks</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20210907-google-cloud-storage-and-compute/">
+            <span class="next-text nav-default">Storage and Compute Options on Google Cloud</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

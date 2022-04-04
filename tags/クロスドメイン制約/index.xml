@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>クロスドメイン制約 on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/tags/%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E5%88%B6%E7%B4%84/</link>
+    <description>Recent content in クロスドメイン制約 on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 16 Mar 2019 23:09:42 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E5%88%B6%E7%B4%84/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>クロスドメイン制約とBASIC認証</title>
+      <link>https://takuto-n.github.io/post/20190316-cors-basic_auth/</link>
+      <pubDate>Sat, 16 Mar 2019 23:09:42 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20190316-cors-basic_auth/</guid>
+      <description>初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認</description>
+    </item>
+    
+  </channel>
+</rss>

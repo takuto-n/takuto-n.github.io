@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>AWS CodeGuru - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使" /><meta name="keywords" content="codeguru, 静的解析, aws" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20191224-awscodeguru/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="AWS CodeGuru" />
+<meta property="og:description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20191224-awscodeguru/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-12-24T23:36:29+09:00" />
+<meta property="article:modified_time" content="2019-12-24T23:36:29+09:00" />
+
+<meta itemprop="name" content="AWS CodeGuru">
+<meta itemprop="description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使"><meta itemprop="datePublished" content="2019-12-24T23:36:29+09:00" />
+<meta itemprop="dateModified" content="2019-12-24T23:36:29+09:00" />
+<meta itemprop="wordCount" content="2247">
+<meta itemprop="keywords" content="codeguru,静的解析,aws," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AWS CodeGuru"/>
+<meta name="twitter:description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">AWS CodeGuru</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-24 </span>
+        <div class="post-category">
+            <a href="/categories/cicd/"> cicd </a>
+            </div>
+          <span class="more-meta"> 2247 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="aws-codeguruを使ってみた">AWS CodeGuruを使ってみた</h1>
+<p>AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツール<a href="https://aws.amazon.com/jp/codeguru/">AWS CodeGuru</a>を使ってみました。
+その使用感や解析結果をまとめたいと思います。</p>
+<blockquote>
+<p>参考：使用したのは<code>CodeGuru Reviewer </code>のみで<code>CodeGuru Profiler</code>は使っていません。</p>
+</blockquote>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#">結論</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#-1">使用感</a></li>
+<li>1.2. <a href="#-1">解析結果</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#-1">前提</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#-1">連携できるバージョン管理システム</a></li>
+<li>2.2. <a href="#-1">解析単価</a></li>
+<li>2.3. <a href="#-1">指摘の観点</a></li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#-1">使用感</a></li>
+</ol>
+<ul>
+<li>3.1. <a href="#-1">セットアップについて</a></li>
+<li>3.2. <a href="#-1">運用性について</a></li>
+</ul>
+</li>
+<li>
+<ol start="4">
+<li><a href="#-1">指摘結果</a></li>
+</ol>
+<ul>
+<li>4.1. <a href="#-1">指摘されなかったコード</a></li>
+<li>4.2. <a href="#-1">指摘されたコード</a></li>
+</ul>
+</li>
+<li>
+<ol start="5">
+<li><a href="#-1">余談</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namea結論">1. <a name=''></a>結論</h2>
+<p>利用者は以下のような方かなと。</p>
+<ul>
+<li>他の静的解析ツールも使っている
+<ul>
+<li>(AWS CodeGuru一本化は厳しそう)</li>
+</ul>
+</li>
+<li>AWSのAPIの使用方法が合っているかよくわからないので確認したい</li>
+<li>お金に余裕がある</li>
+</ul>
+<h3 id="11-a-name-1a使用感">1.1. <a name='-1'></a>使用感</h3>
+<ul>
+<li><code>AWS CodeCommit</code>や<code>Github</code>との連携は簡単</li>
+<li>解析結果はプルリクエストに対して、レビューア(AWS CodeGuru Bot)の指摘として表示される</li>
+</ul>
+<h3 id="12-a-name-1a解析結果">1.2. <a name='-1'></a>解析結果</h3>
+<ul>
+<li>一般的な静的解析ツール（<code>FindBugs</code>や<code>SonarQube</code>、<code>Coverity</code>、<code>IDEによる指摘</code>など）で発見されるバグは、ほとんど指摘されない</li>
+<li>AWSのAPIの使い方に関する指摘は鋭い</li>
+</ul>
+<h2 id="2-a-name-1a前提">2. <a name='-1'></a>前提</h2>
+<p><code>Amazon CodeGuru</code> は、「自動化されたコードレビュー」と「アプリケーションパフォーマンスの推奨事項を提供する」機械学習サービスです。（引用元：https://aws.amazon.com/jp/codeguru/）</p>
+<p>以下のような静的解析ツールの仲間ですね。</p>
+<ul>
+<li><a href="https://www.sonarqube.org/">SonarQube</a></li>
+<li><a href="http://findbugs.sourceforge.net/">FindBugs</a></li>
+<li><a href="https://www.synopsys.com/ja-jp/software-integrity/security-testing/static-analysis-sast.html">Coverity</a></li>
+</ul>
+<blockquote>
+<p>現状(2019/12時点)では、Amazon CodeGuruはJava言語のみ対応。</p>
+</blockquote>
+<h3 id="21-a-name-1a連携できるバージョン管理システム">2.1. <a name='-1'></a>連携できるバージョン管理システム</h3>
+<p>以下の２つに対応（今回はAWS CodeCommitを使用した）</p>
+<ul>
+<li>Github</li>
+<li>AWS CodeCommit</li>
+</ul>
+<p><img src="/img/20191224/AWS_CodeGuru_Repository.PNG" alt=""></p>
+<p>参考URL : <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html">https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html</a></p>
+<h3 id="22-a-name-1a解析単価">2.2. <a name='-1'></a>解析単価</h3>
+<p>まぁまぁ高いので、使う際は気をつけましょう。。<br>
+今後、巨大なMR作って事故る人出るかもしれないですね、、、</p>
+<blockquote>
+<p>コード 100 行あたり 0.75 USD<br>
+例：10,000行のコードだったら、75USD(2019/12時点で約8200円)</p>
+</blockquote>
+<p>引用元：https://aws.amazon.com/jp/codeguru/pricing/</p>
+<h3 id="23-a-name-1a指摘の観点">2.3. <a name='-1'></a>指摘の観点</h3>
+<ul>
+<li>AWS Best Practices
+<ul>
+<li>AWS APIの使い方について</li>
+</ul>
+</li>
+<li>Concurrency
+<ul>
+<li>並行性の実装について(原子性違反を見てくれる)</li>
+</ul>
+</li>
+<li>Resource Leak Prevention
+<ul>
+<li>リソース漏れについて</li>
+</ul>
+</li>
+<li>Sensitive Information Leak Prevention
+<ul>
+<li>機密情報の漏洩について</li>
+</ul>
+</li>
+<li>Common Coding Best Practices
+<ul>
+<li>一般的なコーティングについて</li>
+</ul>
+</li>
+</ul>
+<p>引用元：https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html</p>
+<h2 id="3-a-name-1a使用感">3. <a name='-1'></a>使用感</h2>
+<h3 id="31-a-name-1aセットアップについて">3.1. <a name='-1'></a>セットアップについて</h3>
+<p>参考URLに記載の通りであるが、以下の手順で、10分ほどあれば完了するので簡単。</p>
+<ol>
+<li>CodeCommit の初期設定（リポジトリ作成画面に<code>AWS CodeGuru</code>との連携オプションあり。）</li>
+</ol>
+<p><img src="/img/20191224/AWS_CodeCommit_%E4%BD%9C%E6%88%90%E7%94%BB%E9%9D%A2.PNG" alt=""></p>
+<ol start="2">
+<li>Git をインストールする</li>
+<li>CodeCommit への HTTPS 接続用の Git 認証情報を作成する</li>
+<li>CodeCommit コンソールに接続し、リポジトリを複製する</li>
+</ol>
+<p>参考URL : <a href="https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html">https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html</a></p>
+<h3 id="32-a-name-1a運用性について">3.2. <a name='-1'></a>運用性について</h3>
+<p>マージリクエストに対して、レビュアーのような立場でソースコードに指摘をしてくれるので、運用上指摘を見逃すことがない。</p>
+<blockquote>
+<p>指摘場所は、<code>AWS CodeCommit</code>のアクティビティ画面</p>
+</blockquote>
+<p><img src="/img/20191224/CodeGuru%E3%81%AB%E3%82%88%E3%82%8B%E6%8C%87%E6%91%98.png" alt=""></p>
+<h2 id="4-a-name-1a指摘結果">4. <a name='-1'></a>指摘結果</h2>
+<h3 id="41-a-name-1a指摘されなかったコード">4.1. <a name='-1'></a>指摘されなかったコード</h3>
+<p>下のコードはいずれも他の静的解析ツールで指摘されるのですが、、<code>AWS CodeGuru</code>では指摘されなかったです。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// ひどいコード1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">var</span> <span class="n">test1</span> <span class="o">=</span> <span class="s">&#34;test1&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">test2</span> <span class="o">=</span> <span class="s">&#34;test2&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">test3</span> <span class="o">=</span> <span class="s">&#34;test3&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">test4</span> <span class="o">=</span> <span class="s">&#34;test4&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">do</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span><span class="k">while</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード4
+</span></span></span><span class="line"><span class="cl"><span class="c1">// リソースのcloseなし
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">src</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">dst</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード5
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 引用元：https://qiita.com/negi111111/items/510daace637b7c57c2da
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassSample</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">proc</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">0</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 正常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">1</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">// 正常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">2</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">                                <span class="c1">// 正常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                                    <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">3</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">                                        <span class="c1">// 正常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                                            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">4</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">                                                <span class="c1">// 正常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">5</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">                                                    <span class="c1">// 正常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                    <span class="c1">// まだまだ続くよ！
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                                                    <span class="c1">// 異常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                                            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                                                <span class="c1">// 異常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                                        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                                            <span class="c1">// 例外処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                                        <span class="c1">// 異常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                                <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                                    <span class="c1">// 例外処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="c1">// 異常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="c1">// 例外処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">// 異常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 例外処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 異常処理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 握りつぶす
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Hello! World!&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="42-a-name-1a指摘されたコード">4.2. <a name='-1'></a>指摘されたコード</h3>
+<p>一般的なコーディングに対する指摘ですね。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span> <span class="n">dateString</span> <span class="o">=</span> <span class="s">&#34;2016/01/01 00:00:00&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">&#34;yyyy/MM/dd HH:mm:ss&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">Long</span> <span class="n">epochTime</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">dateString</span><span class="o">).</span><span class="na">getTime</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">epochTime</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 指摘内容
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 「タイムゾーンの指定がない」
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下はAWSのAPIについての指摘です。結構詳しく記載されていて「流石です」という所感です。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">new</span> <span class="n">BasicAWSCredentials</span><span class="o">(</span><span class="n">EnvProp</span><span class="o">.</span><span class="na">getAccesskey</span><span class="o">(),</span> <span class="n">EnvProp</span><span class="o">.</span><span class="na">getSecretkey</span><span class="o">())));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 指摘内容
+</span></span></span><span class="line"><span class="cl"><span class="c1">// If possible, use temporary security credentials (IAM roles) instead of long-term access keys. Long-term access keys, such as those associated with IAM users and AWS account root users, remain valid until you manually revoke them. However, temporary security credentials obtained through IAM roles and other features of the AWS Security Token Service expire after a short period of time. Use temporary security credentials to help reduce your risk in case credentials are accidentally exposed. Learn more about best practices for managing AWS access keys.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">getQueryResultsResult</span> <span class="o">=</span> <span class="n">amazonAthena</span><span class="o">.</span><span class="na">getQueryResults</span><span class="o">(</span><span class="n">getQueryResultsRequest</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 指摘内容
+</span></span></span><span class="line"><span class="cl"><span class="c1">// This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-a-name-1a余談">5. <a name='-1'></a>余談</h2>
+<p>某約20KStepのJavaプロジェクトに対して、<code>AWS CodeGuru</code>をかけたのですが、ヒットしたのは「指摘されたコード」に記載のAWSのAPIに関する2種類の指摘のみでした。。</p>
+<p>これからユーザからのフィードバックを受けてどんどん賢くなっていくとのことなので、今後に期待しましょう！</p>
+<blockquote>
+<p>「某約20KStepのJavaプロジェクト」は、SonarQubeによるバグ指摘はない状態となっています。</p>
+</blockquote>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/codeguru/">codeguru</a>
+          <a href="/tags/%E9%9D%99%E7%9A%84%E8%A7%A3%E6%9E%90/">静的解析</a>
+          <a href="/tags/aws/">aws</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20191109-effective-java-3rd-10/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Effective Java 3rd [Chapter 10] - 例外</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20191109-effective-java-3rd-9/">
+            <span class="next-text nav-default">Effective Java 3rd [Chapter 9] - プログラミング一般</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>React Learning - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstruct Reactの初学者として、2ヶ月ほど学習したので、学習を振り返って、どのコンテンツで学べばよかったのかをまとめておきます。(随時更新予定)
+" /><meta name="keywords" content="react, learning, beginner" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20220203-react-learning/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="React Learning" />
+<meta property="og:description" content="Abstruct
+Reactの初学者として、2ヶ月ほど学習したので、学習を振り返って、どのコンテンツで学べばよかったのかをまとめておきます。(随時更新予定)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20220203-react-learning/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-02-03T20:10:04+09:00" />
+<meta property="article:modified_time" content="2022-02-03T20:10:04+09:00" />
+
+<meta itemprop="name" content="React Learning">
+<meta itemprop="description" content="Abstruct
+Reactの初学者として、2ヶ月ほど学習したので、学習を振り返って、どのコンテンツで学べばよかったのかをまとめておきます。(随時更新予定)"><meta itemprop="datePublished" content="2022-02-03T20:10:04+09:00" />
+<meta itemprop="dateModified" content="2022-02-03T20:10:04+09:00" />
+<meta itemprop="wordCount" content="726">
+<meta itemprop="keywords" content="react,learning,beginner," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="React Learning"/>
+<meta name="twitter:description" content="Abstruct
+Reactの初学者として、2ヶ月ほど学習したので、学習を振り返って、どのコンテンツで学べばよかったのかをまとめておきます。(随時更新予定)"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">React Learning</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-02-03 </span>
+        <div class="post-category">
+            <a href="/categories/react/"> react </a>
+            </div>
+          <span class="more-meta"> 726 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstruct">Abstruct</h1>
+<p>Reactの初学者として、2ヶ月ほど学習したので、学習を振り返って、どのコンテンツで学べばよかったのかをまとめておきます。(随時更新予定)</p>
+<h2 id="learning-flow">Learning Flow</h2>
+<ul>
+<li><a href="https://ja.reactjs.org/tutorial/tutorial.html">チュートリアル：React の導入 – React</a>
+<ul>
+<li>Reactの雰囲気を掴むためにやってみた。</li>
+</ul>
+</li>
+<li><a href="https://amzn.to/3AYvBtc">React.js&amp;Next.js超入門 第2版 | 掌田津耶乃 |本 | 通販 | Amazon</a>
+<ul>
+<li>チュートリアルでやったことを体系的に学べた。</li>
+<li>「クラスコンポーネント」よりも「関数コンポーネント」のほうがよりシンプルにかけることがわかった。hooksを知った。</li>
+</ul>
+</li>
+<li><a href="https://nttdatajp.udemy.com/course/2020-react-react-hooks/learn/lecture/17641832?start=525#overview">最短・最速で学ぶ React Hooks 完全ガイド！ 現場で使えるReact開発+ステート管理をマスターしよう！</a>
+<ul>
+<li>Udemyでhooksについて詳しく理解する。</li>
+</ul>
+</li>
+<li><a href="https://blog.spacemarket.com/code/atomic-design%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6react%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%82%92%E5%86%8D%E8%A8%AD%E8%A8%88%E3%81%97%E3%81%9F%E8%A9%B1/">Atomic Designを使ってReactコンポーネントを再設計した話 | スペースマーケットブログ</a>
+<ul>
+<li>Reactでシステム開発する際には、ディレクトリ構成などを理解する必要がある。</li>
+<li>↑の記事で、アトミックデザインでの思想について学んだ。</li>
+</ul>
+</li>
+<li><a href="https://storybook.js.org/tutorials/intro-to-storybook/react/ja/get-started/">React 向け Storybook のチュートリアル | Storybook Tutorials</a>
+<ul>
+<li>デザイナーとエンジニアとのコミュニケーションツールである、Storybook。</li>
+</ul>
+</li>
+<li><a href="https://github.com/YTommy109/rekeel">GitHub - YTommy109/rekeel: Base components for React</a>
+<ul>
+<li>アトミックデザイン×Storybook の構成のサンプル。</li>
+</ul>
+</li>
+<li><a href="https://typescript-jp.gitbook.io/deep-dive/">TypeScript Deep Dive 日本語版 - TypeScript Deep Dive 日本語版</a>
+<ul>
+<li>TypeScriptへの理解を深めれる。</li>
+</ul>
+</li>
+</ul>
+<h3 id="学習途中で気になったこと">学習途中で気になったこと</h3>
+<ul>
+<li>yarnとnpmについて
+<ul>
+<li><a href="https://qiita.com/Hai-dozo/items/90b852ac29b79a7ea02b">npmとは　yarnとは - Qiita</a></li>
+</ul>
+</li>
+<li>ESLintとPrettierについて
+<ul>
+<li><a href="https://zenn.dev/t28_tatsuya/articles/integration-of-eslint-and-prettier">ESLintとPrettierを組み合わせて使う (長いものを整理してから巻かれる 2021春)</a></li>
+</ul>
+</li>
+<li>Material-uiの <code>TextField</code> をそのまま使わないで、<code>React Hook Form</code> を利用する。
+<ul>
+<li>理由は、バリデーションをかけやすくするため。</li>
+<li><a href="https://dev.classmethod.jp/articles/mui-v5-rhf-v7/">MUI v5とReact Hook Form v7でサクッとフォームバリデーションを作る | DevelopersIO</a></li>
+</ul>
+</li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/react/">react</a>
+          <a href="/tags/learning/">learning</a>
+          <a href="/tags/beginner/">beginner</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20220204-node-import-absolute_path/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Node.js Import AbsolutePath</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20220118-oauth2/">
+            <span class="next-text nav-default">OAuth2.0について</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>クロスドメイン制約とBASIC認証 - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認" /><meta name="keywords" content="CORS, クロスドメイン制約, BASIC認証" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20190316-cors-basic_auth/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="クロスドメイン制約とBASIC認証" />
+<meta property="og:description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20190316-cors-basic_auth/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-03-16T23:09:42+09:00" />
+<meta property="article:modified_time" content="2019-03-16T23:09:42+09:00" />
+
+<meta itemprop="name" content="クロスドメイン制約とBASIC認証">
+<meta itemprop="description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認"><meta itemprop="datePublished" content="2019-03-16T23:09:42+09:00" />
+<meta itemprop="dateModified" content="2019-03-16T23:09:42+09:00" />
+<meta itemprop="wordCount" content="2536">
+<meta itemprop="keywords" content="CORS,クロスドメイン制約,BASIC認証," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="クロスドメイン制約とBASIC認証"/>
+<meta name="twitter:description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">クロスドメイン制約とBASIC認証</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-03-16 </span>
+        <div class="post-category">
+            <a href="/categories/poc/"> poc </a>
+            </div>
+          <span class="more-meta"> 2536 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <p>初めての技術系ブログです。</p>
+<p>ご不明な点がありましたら、お気軽にコメント欄へ記入ください。</p>
+<p>初回は「<strong>ドメイン X のサイトから、異なるドメイン Y の BASIC 認証つきのサイトにアクセスできるのか</strong> 」について検証した結果を書きたいと思います。
+検証結果としては、</p>
+<blockquote>
+<ul>
+<li>ブラウザのセキュリティ設定を On にしていればアクセスできません。</li>
+<li>ブラウザのセキュリティ設定を Off にしていればアクセス出来ます。</li>
+</ul>
+</blockquote>
+<p>以下でその理由について下記の流れで説明していきます。</p>
+<!-- TOC -->
+<ul>
+<li><a href="#basic%E8%AA%8D%E8%A8%BC%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">BASIC 認証について</a></li>
+<li><a href="#%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E5%88%B6%E7%B4%84%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">クロスドメイン制約について</a></li>
+<li><a href="#corscross-origin-resource-sharing%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">CORS(Cross Origin Resource Sharing)について</a></li>
+<li><a href="#basic%E8%AA%8D%E8%A8%BC%E3%81%A4%E3%81%8Dcors%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">BASIC 認証つき CORS について</a></li>
+</ul>
+<!-- /TOC -->
+<p><a id="markdown-basic認証について" name="basic認証について"></a></p>
+<h2 id="basic-認証について">BASIC 認証について</h2>
+<p>まず BASIC 認証とは、HTTP で定義される認証方式の一つです。</p>
+<p>認証の仕方としてはブラウザ側で「ユーザ名:パスワード」を Base64 でエンコードして、サーバー側へ送信します。</p>
+<p>サーバー側では受信した Base64 のデータをデコードし、ユーザー名とパスワードを取得して、認証を行う処理方式のことを指します。</p>
+<p><a id="markdown-クロスドメイン制約について" name="クロスドメイン制約について"></a></p>
+<h2 id="クロスドメイン制約について">クロスドメイン制約について</h2>
+<p>2 つ目にクロスドメイン制約とは、「<strong>ブラウザ上で実行される JavaScript は同じドメインにしかリクエストの送信やクッキーの編集を行えない</strong>」という制限のことです。</p>
+<p>この制限がある理由は、<strong>あるサイトから悪意のあるサイトに勝手にアクセスできないようにするため</strong>です。
+もし、あるサイトから異なるドメインのサイトへアクセスしたい場合は、次の２つの方法があります。</p>
+<ol>
+<li>HTTP のリクエストヘッダに許可する外部ドメインを設定する方法</li>
+<li>JSONP(JSON with padding)</li>
+</ol>
+<p>1 つ目の方法は、HTTP のリクエストヘッダ「Access-Control-Allow-Origin」に、外部ドメインを設定する方法です。</p>
+<p>2 つ目の方法は、あるドメイン X のサイトに JavaScript を置き、その場所をドメイン Y のサイトにあらかじめ教えておきます。ドメイン Y からドメイン X の JavaScript を取得・実行すると、結果としてドメイン Y からドメイン X のサイト内のデータにアクセスできるという方法です。</p>
+<p>今回は方法 1 で実現できる方法について検証します。</p>
+<blockquote>
+<p>方法 2 の JSONP は、ここでは詳しく説明しませんが、JSONP インジェクションという攻撃を受ける可能性があるため、方法 1 を採用します。</p>
+</blockquote>
+<p><a id="markdown-corscross-origin-resource-sharingについて" name="corscross-origin-resource-sharingについて"></a></p>
+<h2 id="corscross-origin-resource-sharingについて">CORS(Cross Origin Resource Sharing)について</h2>
+<p>CORS(Cross Origin Resource Sharing)は、JavaScript でクロスドメインにアクセスする方法です。さきほど述べていたドメインとオリジンはほぼ同義です。
+クロスしている(異なる)オリジン（≒ ドメイン）とリソースをシェアする方法です。</p>
+<p>CORS では、JavaScript で異なるドメインにアクセスする際に、シンプルなリクエストでない場合、preflight リクエストと呼ばれる通信がなされます。
+preflight リクエストとは、アクセスの許可設定を確認するための通信です。
+preflight リクエストが送られる条件については<a href="https://dev.classmethod.jp/etc/about-cors/">CORS(Cross-Origin Resource Sharing)について整理してみた ｜ DevelopersIO</a>をご覧ください。</p>
+<p>CORS の動作の流れは主に２パターンあり、以下で説明します。</p>
+<blockquote>
+<p>【操作・設定の前提】</p>
+<ul>
+<li>ブラウザは現在 aaa.com に接続している。</li>
+<li>サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。</li>
+<li>bbb.com では、aaa.com からのアクセス許可設定をしている。</li>
+</ul>
+</blockquote>
+<ol>
+<li>preflight リクエストなしの場合
+<ol>
+<li>ブラウザが bbb.com にリクエストを送信する。</li>
+<li>aaa.com が bbb.com へのアクセスを許可しているため、ブラウザは欲しかった情報を bbb.com から取得できる。</li>
+</ol>
+</li>
+<li>preflight リクエストありの場合
+<ol>
+<li>ブラウザから bbb.com に prefight リクエストを送信する。</li>
+<li>bbb.com が aaa.com からのアクセス許可設定を確認し、確認結果をブラウザに送信する。</li>
+<li>確認結果が良ければ、ブラウザは bbb.com にリクエストを送信する。</li>
+<li>bbb.com はブラウザにレスポンスを送信する。</li>
+</ol>
+</li>
+</ol>
+<p><strong>パターン ① の場合は 1 往復で済むのに対し、パターン ② の場合は確認作業があるため、2 往復必要ということになります。</strong></p>
+<blockquote>
+<p>ただし、ブラウザのセキュリティ設定が Off であれば preflight リクエストで確認しないため、いずれの場合も必ず 1 往復になります。（preflight リクエストは安全を担保するための確認処理であるため、セキュリティ設定を Off にすれば発生しない。）</p>
+</blockquote>
+<p><a id="markdown-basic認証つきcorsについて" name="basic認証つきcorsについて"></a></p>
+<h2 id="basic-認証つき-cors-について">BASIC 認証つき CORS について</h2>
+<p>最後に本記事の目的である BASIC 認証つき CORS について説明します。</p>
+<p>先ほどの環境の前提に、1 つ条件を加えます。</p>
+<blockquote>
+<p>【操作・設定の前提】</p>
+<ul>
+<li>ブラウザは現在 aaa.com に接続している。</li>
+<li>サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。</li>
+<li>bbb.com では、aaa.com からのアクセス許可設定をしている。</li>
+<li>【追加条件】: アクセス先の bbb.com に BASIC 認証をかけている。</li>
+</ul>
+</blockquote>
+<p>この状態の時に、CORS が可能かどうかについて述べます。</p>
+<ol>
+<li>BASIC 認証情報付きの CORS(Authorization ヘッダ付き)
+<ol>
+<li>ブラウザから bbb.com へのアクセスは、Authorization ヘッダつきであるため、まず preflight リクエストを送信します。</li>
+<li>preflight リクエストには Authorization ヘッダは付いていないため、bbb.com 側では BASIC 認証が解除できず、認証エラーをブラウザに返します。</li>
+<li>ブラウザは bbb.com へアクセス出来ずに通信終了となる。</li>
+</ol>
+</li>
+<li>BASIC 認証情報なしの CORS(Authorization ヘッダなし)
+<ol>
+<li>ブラウザから bbb.com へアクセスします。</li>
+<li>bbb.com で BASIC 認証が解除できず、認証エラーとなりブラウザへ返します。</li>
+<li>ブラウザは bbb.com へアクセス出来ずに処理終了となる。</li>
+</ol>
+</li>
+</ol>
+<p>上記理由で、通常であればいずれの場合であっても Basic 認証付き CORS はできません。</p>
+<p><strong>しかし、ブラウザのセキュリティ設定が Off であれば、パターン ① は以下のように変わり、Basic 認証付き CORS ができるようになる。</strong></p>
+<blockquote>
+<p>※ブラウザのセキュリティ設定が Off であれば preflight が発生しない。</p>
+</blockquote>
+<ol>
+<li>BASIC 認証情報付きの CORS(Authorization ヘッダ付き)
+<ol>
+<li>ブラウザは aaa.com から JavaScript を取得し、bbb.com へ XMLHttpRequest が実行される。[Authorization ヘッダつきであるが、preflight リクエストは発生しない。]</li>
+<li>ブラウザから Authorization ヘッダ付きリクエストが bbb.com へ送られる。</li>
+<li>Authorization ヘッダにユーザーとパスワードの情報があるため、bbb.com で BASIC 認証が解除され、ブラウザに正常時のレスポンスを返します。</li>
+<li>ブラウザは bbb.com からレスポンスを受け取り、正常終了となる。</li>
+</ol>
+</li>
+</ol>
+<p>以上より、冒頭でも記載しましたが、以下のような結果となります。</p>
+<blockquote>
+<ul>
+<li>ブラウザのセキュリティ設定を On にしていればアクセスできません。</li>
+<li>ブラウザのセキュリティ設定を Off にしていればアクセス出来ます。</li>
+</ul>
+</blockquote>
+<p>ここまで読んで下さりありがとうございました。</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/cors/">CORS</a>
+          <a href="/tags/%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E5%88%B6%E7%B4%84/">クロスドメイン制約</a>
+          <a href="/tags/basic%E8%AA%8D%E8%A8%BC/">BASIC認証</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20190809-architectiong-on-aws_memo/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Architecting on AWSの参加メモ</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

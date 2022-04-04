@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Effective Java 3rd [Chapter 10] - 例外 - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を" /><meta name="keywords" content="java, 例外, 個人的メモ" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-10/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Effective Java 3rd [Chapter 10] - 例外" />
+<meta property="og:description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-10/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-01-25T00:49:01+09:00" />
+<meta property="article:modified_time" content="2020-01-25T00:49:01+09:00" />
+
+<meta itemprop="name" content="Effective Java 3rd [Chapter 10] - 例外">
+<meta itemprop="description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を"><meta itemprop="datePublished" content="2020-01-25T00:49:01+09:00" />
+<meta itemprop="dateModified" content="2020-01-25T00:49:01+09:00" />
+<meta itemprop="wordCount" content="4333">
+<meta itemprop="keywords" content="java,例外,個人的メモ," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Effective Java 3rd [Chapter 10] - 例外"/>
+<meta name="twitter:description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Effective Java 3rd [Chapter 10] - 例外</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-25 </span>
+        <div class="post-category">
+            <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+            </div>
+          <span class="more-meta"> 4333 words </span>
+          <span class="more-meta"> 9 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="例外">例外</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#69">項目 69 例外的状態にだけ例外を使う</a></li>
+<li><a href="#70">項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を使う</a></li>
+<li><a href="#71">項目 71 チェックされる例外を不必要に使うのを避ける</a></li>
+<li><a href="#72">項目 72 標準的な例外を使う</a></li>
+<li><a href="#73">項目 73 抽象概念に適した例外をスローする</a></li>
+<li><a href="#74">項目 74 各メソッドがスローするすべての例外を文書化する</a></li>
+<li><a href="#75">項目 75 詳細メッセージにエラー記録情報を含める</a></li>
+<li><a href="#76">項目 76 エラーアトミック性に努める</a></li>
+<li><a href="#77">項目 77 例外を無視しない</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name69a項目-69-例外的状態にだけ例外を使う">1. <a name='69'></a>項目 69 例外的状態にだけ例外を使う</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<p>例外をGOTO文のように、フロー制御に使ってはいけない。</p>
+<h3 id="12-a-name-1a理由">1.2. <a name='-1'></a>理由</h3>
+<p>例外は基本的に、プログラムの実行状況をキャプチャするのでコストが高い。</p>
+<p>まれに、性能上メリットがあると考える開発者がいるが、それは誤りで、コスト高になることがほとんど。</p>
+<p>以下のようなコードはNG.</p>
+<ul>
+<li>可読性が悪い</li>
+<li>実行速度も遅い。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">range</span><span class="o">[</span><span class="n">i</span><span class="o">++].</span><span class="na">climb</span><span class="o">();</span> <span class="c1">// 配列を全部処理する
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ArrayIndexOutOfBoundsException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">// 正常系
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-a-name70a項目-70-回復可能な状態にはチェックされる例外をプログラミングエラーには実行時例外を使う">2. <a name='70'></a>項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を使う</h2>
+<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>呼び出し側が復帰できるとき＝検査例外</li>
+<li>復帰できないとき＝非検査例外</li>
+</ul>
+<h3 id="22-a-name-1a例外の種類">2.2. <a name='-1'></a>例外の種類</h3>
+<ul>
+<li>
+<p>検査例外</p>
+<ul>
+<li>java.lang.Exceptionとその拡張クラス<br>
+これが発生した場合、<code>try-catch</code> で処理するか、<code>throws</code> で伝搬させることが必要になる。<br>
+ex)
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/nio/file/Files.html#copy-java.io.InputStream-java.nio.file.Path-java.nio.file.CopyOption...-">copyOption</a> における IOException - 読み取りまたは書込み中に入出力エラーが発生した場合。</li>
+<li>ユーザ側で、無視して続ける or プログラムを停止する or &hellip; といった選択肢がある。</li>
+<li>よく 業務例外 として扱われる。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>非検査例外</p>
+<ul>
+<li>java.lang.RuntimeExceptionとその拡張クラス</li>
+<li>これが発生した場合、catchして処理する必要はない。処理しなかった場合処理スレッドが停止して、最終的にJVMがハンドリングし異常停止する。<br>
+ex)
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/11/docs/api/java.base/java/nio/file/Files.html#createFile(java.nio.file.Path,java.nio.file.attribute.FileAttribute...)">FileAttribute</a>のUnsupportedOperationException - ファイルの作成時に原子的に設定できない属性が配列に含まれる場合</li>
+<li>ユーザ側はこれ以上処理をすすめることが出来ない。</li>
+<li>よく システム例外 として扱われる。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>エラー</p>
+<ul>
+<li><code>java.lang.Error</code> は例外とは区別して扱われる。</li>
+<li>JVMがこれ以上処理を継続できないような、異常な状態を示す。</li>
+</ul>
+</li>
+<li>
+<p>Throwable</p>
+<ul>
+<li>ExceptionやErrorのrootクラス</li>
+</ul>
+</li>
+</ul>
+<h3 id="23-a-name-1a検査例外不要説">2.3. <a name='-1'></a>検査例外不要説</h3>
+<ul>
+<li>Javaの検査例外は失敗(=非検査例外だけでよい)だと主張する人がいる。</li>
+<li>実際、OOPの他の言語 C#, Python, Ruby, &hellip;には存在しない(Goには例外すら無い)。</li>
+<li>実際、検査例外/非検査例外を区別して正しく扱うのは相当難しい。</li>
+</ul>
+<h2 id="3-a-name71a項目-71-チェックされる例外を不必要に使うのを避ける">3. <a name='71'></a>項目 71 チェックされる例外を不必要に使うのを避ける</h2>
+<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+<p>タイトルは換言すると、「検査例外は必要な時のみ使いましょう。」</p>
+<p>チェックされる例外＝検査例外は、基本的に制約を生む。なので、以下の場合のみ、検査例外を定義する。</p>
+<ul>
+<li>API を適切に利用したとしても例外の発生を防ぐことができない場合</li>
+<li>例外の補足を強制をすることで有益な回復処理が行える場合
+<ul>
+<li>ファイルをつくれなかったら(IOException)</li>
+</ul>
+</li>
+</ul>
+<h3 id="32-a-name-1a代替手段">3.2. <a name='-1'></a>代替手段</h3>
+<ul>
+<li>検査例外をスローする代わりに空のOptionalを返す</li>
+<li>状態を確かめる boolean を返すメソッドと、非検査例外を返すメソッドに分ける
+<ul>
+<li>常に有用ではない</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">actionPermitted</span><span class="o">(</span><span class="n">args</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">obj</span><span class="o">.</span><span class="na">action</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span> <span class="k">else</span> <span class="o">{</span> 
+</span></span><span class="line"><span class="cl">  <span class="o">...</span> <span class="c1">// Handle exceptional condition
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-a-name72a項目-72-標準的な例外を使う">4. <a name='72'></a>項目 72 標準的な例外を使う</h2>
+<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+<p>Javaライブラリが提供している標準例外をできる限り使う。慣習に従っているので理解しやすい。</p>
+<ul>
+<li>IllegalArgumentException</li>
+<li>IllegalStateException</li>
+<li>NullPointerException</li>
+<li>IndexOutOfBoundsException</li>
+<li>ConcurrentModificationExcetpion</li>
+<li>UnsupportedOperationException</li>
+</ul>
+<p>いずれの例外も活用する際はメッセージを設定すること。空だと標準ライブラリ内で発生したように錯覚する。</p>
+<h3 id="42-a-name-1aその他">4.2. <a name='-1'></a>その他</h3>
+<p>Spring Framework を利用する際は、Springが提供する例外も同様のことが言える。</p>
+<ul>
+<li>例えば、Spring データアクセス周り の <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/dao/package-tree.html">Exception Translation 機構</a>はよく出来ている。</li>
+</ul>
+<p><code>spring-core</code>, <code>spring-web</code>, <code>spring-batch</code> などなど アプリケーションの役割やドメインごとにしっかり作られているので、新しく例外クラスを作るかどうかはその都度検討するべき。</p>
+<h2 id="5-a-name73a項目-73-抽象概念に適した例外をスローする">5. <a name='73'></a>項目 73 抽象概念に適した例外をスローする</h2>
+<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
+<p>以下、最善な順の対策方法です。</p>
+<h4 id="511-a-name-1a上位レイヤで下位レイヤからの例外を完全に防ぐ">5.1.1. <a name='-1'></a>上位レイヤで、下位レイヤからの例外を完全に防ぐ</h4>
+<ul>
+<li>（可能だったら）下位レイヤからの例外に対処する最善の方法は、上位レイヤのメソッドは、下位レイヤのメソッドが必ず成功することを保証する。
+<ul>
+<li>使い手は、例外の発生を意識しなくて良いから。</li>
+</ul>
+</li>
+</ul>
+<h4 id="512-a-name-1a上位レイヤの呼び出し元と下位レベルの問題を隔離して良い場合">5.1.2. <a name='-1'></a>上位レイヤの呼び出し元と、下位レベルの問題を隔離して良い場合</h4>
+<ul>
+<li>上位レイヤのメソッドで、下位レイヤの例外をログとして出力する。
+<ul>
+<li>管理者が問題を調査でき、かつ、下位レイヤの問題と上位レイヤの呼び出し元（クライアントのコード）を隔離できる。</li>
+</ul>
+</li>
+</ul>
+<p>例：</p>
+<ul>
+<li>DBアクセス時に2, 3回リトライして、1回目失敗時にログとして出して、2回目成功時に呼び出し元に正常として返却する場合。</li>
+<li>アプリケーション終了時、コネクションのクローズミスが発生した場合。</li>
+</ul>
+<h4 id="513-a-name-1a上位レイヤで下位レイヤの例外を再スローする">5.1.3. <a name='-1'></a>上位レイヤで下位レイヤの例外を再スローする</h4>
+<ul>
+<li>上位レイヤは下位レベルの例外をキャッチして、上位レイヤの抽象概念の観点から説明可能な例外をスローすべき。
+<ul>
+<li>上位レイヤのレベルで行っている処理と明らかに関係のない例外をスローすると、使い手が混乱するから。
+<ul>
+<li>もし関係のない例外をスローするAPIをリリースしてしまうと、修正するのが難しい。
+<ul>
+<li>既存のクライアントのコードが動作しなくなる可能性があるから。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="52-a-name-1aサンプル">5.2. <a name='-1'></a>サンプル</h3>
+<p>「上位レイヤで下位レイヤの例外を再スローする」のサンプル</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 例外翻訳
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 処理するために下位レベルのメソッドを使用する。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">doLowerLevelMethod</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">LowerLevelException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="k">new</span> <span class="n">HigherLevelException</span><span class="o">(...);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/AbstractSequentialList.java#L86">AbstractSequentialList</a>の場合は以下のように例外翻訳をしている。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * このリストの指定された位置の要素を返す。
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @throws IndexOutOfBoundsException index が範囲外
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *         {@code index &lt; 0 || size() &lt;= index }.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">listIterator</span><span class="o">(</span><span class="n">index</span><span class="o">).</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchElementException</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">IndexOutOfBoundsException</span><span class="o">(</span><span class="s">&#34;Index: &#34;</span><span class="o">+</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6-a-name74a項目-74-各メソッドがスローするすべての例外を文書化する">6. <a name='74'></a>項目 74 各メソッドがスローするすべての例外を文書化する</h2>
+<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+<p>具象メソッド/抽象メソッドのJavadoc に <code>@throws</code> タグを付けて、検査例外/非検査例外ともにスローされる条件を正確に書きましょう。</p>
+<ul>
+<li>使い手が、クラスを効果的に利用するのが困難だったり、不可能だったりするため。</li>
+</ul>
+<h3 id="62-a-name-1aコメント">6.2. <a name='-1'></a>コメント</h3>
+<p>例外がスローされる条件があると、以下の面で良さそう。</p>
+<ul>
+<li>例外で落ちてしまったときに対処しやすい。</li>
+</ul>
+<p>その他</p>
+<ul>
+<li>OSS開発の場合は除いて、全ての非検査例外についても記載するのは現実的には厳しそうなので、重要なもの/発生しそうなものについてのみ記載するで良いのでは。</li>
+<li>人によって記載レベルが変わってしまうので、JavaDoc記載ルールのようなものを作成する。</li>
+<li>以下の点でしんどいので、どこまで記載すると労力に見合った効果を発揮するのかを考える。(例外に限った話ではなく、仕様関連の話。)
+<ul>
+<li>メソッドコールの層が厚い場合に、全部Javadocを記載するのがしんどい。</li>
+<li>JavaDocを記載する時、使い手の立場に立って考えないといけないのがしんどい。</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-a-name75a項目-75-詳細メッセージにエラー記録情報を含める">7. <a name='75'></a>項目 75 詳細メッセージにエラー記録情報を含める</h2>
+<h3 id="71-a-name-1a結論">7.1. <a name='-1'></a>結論</h3>
+<p>スタックトレースの詳細メッセージに、 <strong>その例外の原因となった全てのパラメータとフィールドの値</strong> を含めましょう。</p>
+<ul>
+<li>エラーメッセージは、ソフトウェアエラーの解析時に、プログラマが頼らなければならない唯一の情報であることが多いため。</li>
+</ul>
+<p>プログラミングによるアクセスのため、エラー情報をフィールド値に保存しましょう。</p>
+<ul>
+<li>例外の詳細にプログラマが、プログラミングによりアクセスしたいと思うかもしれないため。</li>
+</ul>
+<h3 id="72-a-name-1aサンプル">7.2. <a name='-1'></a>サンプル</h3>
+<p><code>IndexOutOfBoundsException</code> の場合のサンプル</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * IndexOutOfBoundsException を生成する。
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param lowerBound もっとも小さな正当なインデックス値
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param upperBound もっとも大きな正当なインデックス値に1を足した値
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param index 実際のインデックス値
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"> <span class="kd">public</span> <span class="nf">IndexOutOfBoundsException</span><span class="o">(</span><span class="kt">int</span> <span class="n">lowerBound</span><span class="o">,</span> <span class="kt">int</span> <span class="n">upperBound</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">     <span class="c1">// エラーを記録する詳細メッセージを生成する
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="kd">super</span><span class="o">(</span> <span class="s">&#34;Lower bound: &#34;</span> <span class="o">+</span> <span class="n">lowerBound</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">          <span class="s">&#34;, Upper bound: &#34;</span> <span class="o">+</span> <span class="n">upperBound</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">          <span class="s">&#34;, Index : &#34;</span> <span class="o">+</span> <span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     <span class="c1">// プログラミングによるアクセスのためにエラー情報を保存する
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="k">this</span><span class="o">.</span><span class="na">lowerBound</span> <span class="o">=</span> <span class="n">lowerBound</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">     <span class="k">this</span><span class="o">.</span><span class="na">upperBound</span> <span class="o">=</span> <span class="n">upperBound</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">     <span class="k">this</span><span class="o">.</span><span class="na">index</span> <span class="o">=</span> <span class="n">index</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"> <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="8-a-name76a項目-76-エラーアトミック性に努める">8. <a name='76'></a>項目 76 エラーアトミック性に努める</h2>
+<h3 id="81-a-name-1a結論">8.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>一般的に、オブジェクトに対してメソッド呼び出しをして、エラーを出力した後でも、そのオブジェクトがメソッド呼び出し前と同じ状態である(エラーアトミック性)ようにするべき
+<ul>
+<li>エラーアトミック性が保たれていれば、そのオブジェクトをまた使うことができるから</li>
+</ul>
+</li>
+<li>不変オブジェクトはエラーアトミック性を持つ
+<ul>
+<li>不変だから</li>
+</ul>
+</li>
+<li>可変オブジェクトがエラーアトミック性を保つためには4つの方法がある
+<ul>
+<li>理由は後述。</li>
+</ul>
+</li>
+<li>エラーアトミック性は一般的に望ましいが、達成可能とは限らない
+<ul>
+<li>例えば、2つのスレッドが適切な同期なしに同一オブジェクトを同時に変更しようとしら不整合な状態のままになるかもしれないから。</li>
+<li>実行の前提となる状態が壊された時。</li>
+</ul>
+</li>
+<li>エラーアトミック性が可能な場合であっても必ずしも望ましいとは限らない。
+<ul>
+<li>複雑性、コストが増大することがあるから</li>
+</ul>
+</li>
+<li>エラーアトミック性が保たれない場合は、ドキュメント化すべき
+<ul>
+<li>API使用者が、エラー時の挙動を把握することができるから</li>
+</ul>
+</li>
+</ul>
+<h3 id="82-a-name4a可変オブジェクトがエラーアトミック性を保つための4つの方法">8.2. <a name='4'></a>可変オブジェクトがエラーアトミック性を保つための4つの方法</h3>
+<p>1.2.3.は変更前にチェックして保つ方法。4.は変更後に戻して保つ方法</p>
+<ul>
+<li>1.バリデーションチェック
+<ul>
+<li>オブジェクトを変更する前にエラーを検出できるから</li>
+</ul>
+</li>
+<li>2.状態変更前の事前計算</li>
+<li>3.一時的なコピーに対して操作を行い、操作が完了したらオブジェクトを置き換える
+<ul>
+<li>例えば、<code>Collection#sort</code>
+<ul>
+<li>性能のために行われているが、付加的なメリットとしてエラーアトミック性も保たれている</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>4.回復コードを書く
+<ul>
+<li>例えば、永続的なデータ構造に対して使用される</li>
+<li>変更前の状態に戻すための手段は2パターンある
+<ul>
+<li>変更履歴を残しておく</li>
+<li>変更前の状態をそのまま保存しておく</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="83-a-name-1a余談">8.3. <a name='-1'></a>余談</h3>
+<p>分散システムだとこの話はついてまわることが多い。</p>
+<ul>
+<li>分散トランザクション
+<ul>
+<li>2フェーズコミット</li>
+</ul>
+</li>
+<li>分散システムのトランザクション
+<ul>
+<li>例：メルペイの銀行の振替　詳細は<a href="https://tech.mercari.com/entry/2019/06/07/155849">こちら</a>
+<ul>
+<li>A : 口座の残高を減らす</li>
+<li>B : 口座の残高を増やす</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-a-name77a項目-77-例外を無視しない">9. <a name='77'></a>項目 77 例外を無視しない</h2>
+<h3 id="91-a-name-1a結論">9.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>空のcatchブロックを使って例外を無視してはならない
+<ul>
+<li>例外の目的「例外的状態を処理させることを強制すること」が達成されないから</li>
+<li>例外の目的
+<ul>
+<li>検査例外はユーザに処理させるのを強制するのが目的。</li>
+<li>非検査例外はJVMに知らせることが目的。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最低でもcatchブロックに、例外を無視する理由を記載すべき
+<ul>
+<li>意図して例外を無視しているのか分からないから</li>
+<li>例：例外を無視するのが適切かもしれない状況に、<code>FileInputStream</code> のクローズ時例外がある。
+<ul>
+<li>すでにファイルから必要な情報を読みだしていれば、行っている処理を中断する必要がないから</li>
+<li>例外が頻繁に発生した際に、後から調査できるので、中断はせずともログは出すべき</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          <a href="/tags/%E4%BE%8B%E5%A4%96/">例外</a>
+          <a href="/tags/%E5%80%8B%E4%BA%BA%E7%9A%84%E3%83%A1%E3%83%A2/">個人的メモ</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20191109-effective-java-3rd-11/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Effective Java 3rd [Chapter 11] - 並行性</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20191224-awscodeguru/">
+            <span class="next-text nav-default">AWS CodeGuru</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

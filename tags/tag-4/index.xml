@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tag-4 on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/tags/tag-4/</link>
+    <description>Recent content in tag-4 on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>takuto_n</copyright>
+    <lastBuildDate>Sat, 14 Sep 2019 02:37:45 +0900</lastBuildDate>
+    
+	<atom:link href="https://takuto-n.github.io/tags/tag-4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>20190909 AWS CodeBuildとSonarCloudの連携方法について</title>
+      <link>https://takuto-n.github.io/posts/20190909-sonarcloud_codebuild/</link>
+      <pubDate>Sat, 14 Sep 2019 02:37:45 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/posts/20190909-sonarcloud_codebuild/</guid>
+      <description>AWS CodeBuildとSonarCloudを連携させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuildの</description>
+    </item>
+    
+    <item>
+      <title>Architecting on AWSの参加メモ</title>
+      <link>https://takuto-n.github.io/posts/20190809-architectiong-on-aws_memo/</link>
+      <pubDate>Fri, 09 Aug 2019 00:01:44 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/posts/20190809-architectiong-on-aws_memo/</guid>
+      <description>先日、Architecting on AWSに参加したので、参加メモを載せておきます。 クラウド繋がりということで、Cloud Native Tokyo 2019で紹介され</description>
+    </item>
+    
+  </channel>
+</rss>

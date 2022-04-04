@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Effective Java 3rd [Chapter 9] - プログラミング一般 - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="プログラミング一般 Effective Java 第 3 版の個人的メモ 項目 57 ローカル変数のスコープを最小限にする 項目 58 従来の for ループより for-each ループを選ぶ 項目 59 ライブラリを知" /><meta name="keywords" content="java, プログラミング一般, 個人的メモ" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-9/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Effective Java 3rd [Chapter 9] - プログラミング一般" />
+<meta property="og:description" content="プログラミング一般 Effective Java 第 3 版の個人的メモ 項目 57 ローカル変数のスコープを最小限にする 項目 58 従来の for ループより for-each ループを選ぶ 項目 59 ライブラリを知" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-9/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-12-24T00:48:59+09:00" />
+<meta property="article:modified_time" content="2019-12-24T00:48:59+09:00" />
+
+<meta itemprop="name" content="Effective Java 3rd [Chapter 9] - プログラミング一般">
+<meta itemprop="description" content="プログラミング一般 Effective Java 第 3 版の個人的メモ 項目 57 ローカル変数のスコープを最小限にする 項目 58 従来の for ループより for-each ループを選ぶ 項目 59 ライブラリを知"><meta itemprop="datePublished" content="2019-12-24T00:48:59+09:00" />
+<meta itemprop="dateModified" content="2019-12-24T00:48:59+09:00" />
+<meta itemprop="wordCount" content="9276">
+<meta itemprop="keywords" content="java,プログラミング一般,個人的メモ," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Effective Java 3rd [Chapter 9] - プログラミング一般"/>
+<meta name="twitter:description" content="プログラミング一般 Effective Java 第 3 版の個人的メモ 項目 57 ローカル変数のスコープを最小限にする 項目 58 従来の for ループより for-each ループを選ぶ 項目 59 ライブラリを知"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Effective Java 3rd [Chapter 9] - プログラミング一般</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-24 </span>
+        <div class="post-category">
+            <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+            </div>
+          <span class="more-meta"> 9276 words </span>
+          <span class="more-meta"> 19 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="プログラミング一般">プログラミング一般</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#57">項目 57 ローカル変数のスコープを最小限にする</a></li>
+<li><a href="#58forfor-each">項目 58 従来の for ループより for-each ループを選ぶ</a></li>
+<li><a href="#59">項目 59 ライブラリを知り、ライブラリを使う</a></li>
+<li><a href="#60floatdouble">項目 60 正確な答えが必要ならば、float と double を避ける</a></li>
+<li><a href="#61boxedprimitiveprimitive">項目 61 ボクシングされたプリミティブ型（boxed primitive）より、プリミティブ型（primitive）を選択すべし</a></li>
+<li><a href="#62">項目 62 他の型が適切な場所では、文字列を避ける</a></li>
+<li><a href="#63">項目 63 文字列結合のパフォーマンスに用心する</a></li>
+<li><a href="#64">項目 64 インタフェースでオブジェクトを参照する</a></li>
+<li><a href="#65">項目 65 リフレクションよりもインタフェースを選ぶ</a></li>
+<li><a href="#66">項目 66 ネイティブメソッドを注意して使う</a></li>
+<li><a href="#67">項目 67 注意して最適化する</a></li>
+<li><a href="#68">項目 68 一般的に受け入れられている命名規約を守る</a></li>
+<li><a href="#URL">参考URL</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name57a項目-57-ローカル変数のスコープを最小限にする">1. <a name='57'></a>項目 57 ローカル変数のスコープを最小限にする</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<ul>
+<li>ローカル変数は初めて使用される時に宣言しましょう
+<ul>
+<li>かなり前段階で宣言されていると、その時点から変更されているかを確認する必要があるから</li>
+</ul>
+</li>
+<li>（ほとんど）全てのローカル変数の宣言時には初期化しましょう
+<ul>
+<li>初期化するための情報がない段階で、宣言すべきではないから</li>
+</ul>
+</li>
+<li>メソッドを小さくして焦点をはっきりさせましょう
+<ul>
+<li>1つのメソッド内で2つの処理があれば、1つ目の処理用のローカル変数が2つ目の処理にも使われているかもしれないので、これを防ぐために <code>1メソッド:1処理</code> としましょう。</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-a-name-1aサンプル">1.2. <a name='-1'></a>サンプル</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 良い例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="n">Element</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">doSomething</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 悪い例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">While</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">doSomething</span><span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">While</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span> <span class="c1">// バグ(iではなく、i2が正しい。)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">doSomething</span><span class="o">(</span><span class="n">i2</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="13-a-name-1aポイント">1.3. <a name='-1'></a>ポイント</h3>
+<ul>
+<li>使用される直前に、ローカル変数を初期化して宣言しましょう</li>
+<li><code>1メソッド:1処理</code>としましょう</li>
+</ul>
+<blockquote>
+<p>備考：<code>while</code>文ではなく<code>for</code>文を好んで使いましょう。</p>
+</blockquote>
+<h2 id="2-a-name58forfor-eacha項目-58-従来の-for-ループより-for-each-ループを選ぶ">2. <a name='58forfor-each'></a>項目 58 従来の for ループより for-each ループを選ぶ</h2>
+<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<p>「簡潔」&amp;「バグ予防」にもなるので、<br>
+以下の場合を除いて、<code>for</code>文ではなく<code>for-each</code>文を使いましょう</p>
+<ul>
+<li>フィルタリング（要素の削除）
+<ul>
+<li>ある要素だけ削除したい場合は、明示的なイテレータを使用する必要がある。(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Iterator.html">Iterator#remove()</a>を使用するため。)</li>
+</ul>
+</li>
+<li>変換（値の置換）
+<ul>
+<li>ある要素の値を変更するために、リストイテレータや配列インデックスが必要であるため。</li>
+</ul>
+</li>
+<li>並列イテレーション
+<ul>
+<li>複数のコレクションを並列にイテレートするためには、イテレータやインデックス変数を明示的に(自分で)制御する必要があるため。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Collectionに対して変更できるが、フェイルファストには気を付けましょう。<br>
+Collectionによっては、iteratorおよびlistIteratorメソッドによって返されるイテレータは、フェイルファストです。イテレータの作成後に、イテレータ自体のremoveまたはaddメソッド以外の方法でリストが構造的に変更されると、イテレータはConcurrentModificationExceptionをスローします。
+<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/ArrayList.html">https://docs.oracle.com/javase/jp/8/docs/api/java/util/ArrayList.html</a></p>
+</blockquote>
+<h3 id="22-a-name-1aサンプル">2.2. <a name='-1'></a>サンプル</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 良くも悪くもない例 1
+</span></span></span><span class="line"><span class="cl"><span class="c1">// イテレータ変数が散らかっている
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">doSomething</span><span class="o">((</span><span class="n">Element</span><span class="o">)</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 良くも悪くもない例 2
+</span></span></span><span class="line"><span class="cl"><span class="c1">// インデックス変数が散らかっている
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++&gt;</span> <span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">doSomething</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 良い例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="n">Element</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">doSomething</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>ネストしたイテレータを使った問題コード</p>
+<p><em>BadIterator.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">enum</span> <span class="n">Suit</span> <span class="o">{</span> <span class="n">CLUB</span><span class="o">,</span> <span class="n">DIAMOND</span><span class="o">,</span> <span class="n">HEART</span><span class="o">,</span> <span class="n">SPADE</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">enum</span> <span class="n">Rank</span> <span class="o">{</span> <span class="n">ACE</span><span class="o">,</span> <span class="n">DEUCE</span><span class="o">,</span> <span class="n">THREE</span><span class="o">,</span> <span class="n">FOUR</span><span class="o">,</span> <span class="n">FIVE</span><span class="o">,</span> <span class="n">SIX</span><span class="o">,</span> <span class="n">SEVEN</span><span class="o">,</span> <span class="n">EIGHT</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl"> <span class="n">NINE</span><span class="o">,</span> <span class="n">TEN</span><span class="o">,</span> <span class="n">JACK</span><span class="o">,</span> <span class="n">QUEEN</span><span class="o">,</span> <span class="n">KING</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">Collection</span> <span class="n">suits</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">Suit</span><span class="o">.</span><span class="na">values</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">Collection</span> <span class="n">ranks</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">Rank</span><span class="o">.</span><span class="na">values</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">List</span> <span class="n">deck</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">suits</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">j</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">		<span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Card</span><span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">(),</span> <span class="n">j</span><span class="o">.</span><span class="na">next</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>外側のコレクション(<code>suits</code>)のイテレータに対して<code>next()</code>が過剰に呼び出されて、<code>NoSuchElementException</code>がスローされるため。</p>
+</blockquote>
+<p><em>GoodIterator.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">enum</span> <span class="n">Suit</span> <span class="o">{</span> <span class="n">CLUB</span><span class="o">,</span> <span class="n">DIAMOND</span><span class="o">,</span> <span class="n">HEART</span><span class="o">,</span> <span class="n">SPADE</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">enum</span> <span class="n">Rank</span> <span class="o">{</span> <span class="n">ACE</span><span class="o">,</span> <span class="n">DEUCE</span><span class="o">,</span> <span class="n">THREE</span><span class="o">,</span> <span class="n">FOUR</span><span class="o">,</span> <span class="n">FIVE</span><span class="o">,</span> <span class="n">SIX</span><span class="o">,</span> <span class="n">SEVEN</span><span class="o">,</span> <span class="n">EIGHT</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl"> <span class="n">NINE</span><span class="o">,</span> <span class="n">TEN</span><span class="o">,</span> <span class="n">JACK</span><span class="o">,</span> <span class="n">QUEEN</span><span class="o">,</span> <span class="n">KING</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">Collection</span> <span class="n">suits</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">Suit</span><span class="o">.</span><span class="na">values</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">Collection</span> <span class="n">ranks</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">Rank</span><span class="o">.</span><span class="na">values</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">List</span> <span class="n">deck</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="n">Suit</span> <span class="n">suit</span> <span class="o">:</span> <span class="n">suits</span> <span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="o">(</span><span class="n">Rank</span> <span class="n">rank</span> <span class="o">:</span> <span class="n">ranks</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">deck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Card</span><span class="o">(</span><span class="n">suit</span><span class="o">,</span> <span class="n">rank</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="23-a-name-1aポイント">2.3. <a name='-1'></a>ポイント</h3>
+<p>以下の場合を除いて、<code>for</code>文ではなく<code>for-each</code>文を使いましょう</p>
+<ul>
+<li>フィルタリング（要素の削除）</li>
+<li>変換（値の置換）</li>
+<li>並列イテレーション</li>
+</ul>
+<blockquote>
+<p><code>for-each</code>文を使えるようにするため、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Iterable.html">Iterable</a>を実装しましょう。</p>
+</blockquote>
+<h3 id="24-a-nameiterablea付録--iterableの実装-">2.4. <a name='Iterable'></a>付録 ( Iterableの実装 )</h3>
+<p><em>Main.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.example.demo</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">optPrimeNumbers</span> <span class="o">=</span> <span class="n">PrimeNumbers</span><span class="o">.</span><span class="na">createPrimeNumbers</span><span class="o">(</span><span class="n">500</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="o">(</span><span class="n">optPrimeNumbers</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">primeNumbers</span> <span class="o">=</span> <span class="n">optPrimeNumbers</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="n">primeNumber</span> <span class="o">:</span> <span class="n">primeNumbers</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">primeNumber</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下の3つのメソッドをオーバーライドすれば良い。</p>
+<ul>
+<li>java.lang.Iterable#iterator()</li>
+<li>java.util.Iterator#hasNext()</li>
+<li>java.util.Iterator#next()</li>
+</ul>
+<p><em>PrimeNumbers.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.example.demo</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.NoSuchElementException</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 素数を計算するクラス
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrimeNumbers</span> <span class="kd">implements</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 与えられた整数
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">myNumber</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 現在の算出素数
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">curPrimeNumber</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * {@link PrimeNumbers}作成メソッド
+</span></span></span><span class="line"><span class="cl"><span class="cm">     *
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param myNumber 与えられた整数
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">PrimeNumbers</span><span class="o">&gt;</span> <span class="nf">createPrimeNumbers</span><span class="o">(</span><span class="kt">int</span> <span class="n">myNumber</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">myNumber</span> <span class="o">&lt;=</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">primeNumbers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrimeNumbers</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">primeNumbers</span><span class="o">.</span><span class="na">myNumber</span> <span class="o">=</span> <span class="n">myNumber</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">primeNumbers</span><span class="o">.</span><span class="na">curPrimeNumber</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">primeNumbers</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 要素のイテレータを返す。
+</span></span></span><span class="line"><span class="cl"><span class="cm">     *
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @see java.lang.Iterable#iterator()
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Iteratorインターフェースの実装
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="k">new</span> <span class="n">Iterator</span><span class="o">&lt;&gt;()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">             * 反復処理でさらに要素がある場合にtrueを返す。
+</span></span></span><span class="line"><span class="cl"><span class="cm">             *
+</span></span></span><span class="line"><span class="cl"><span class="cm">             * @see java.util.Iterator#hasNext()
+</span></span></span><span class="line"><span class="cl"><span class="cm">             *
+</span></span></span><span class="line"><span class="cl"><span class="cm">             * return 次の要素があるか否か
+</span></span></span><span class="line"><span class="cl"><span class="cm">             **/</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 現在の算出素数が与えられた整数に達していれば終了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">myNumber</span> <span class="o">&lt;=</span> <span class="n">curPrimeNumber</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1">// 開始値から順に素数であるかをチェックする
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">for</span> <span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">curPrimeNumber</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">myNumber</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 割り切れる値がチェック対象の整数しかなければ素数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">if</span> <span class="o">(</span><span class="n">isPrime</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">curPrimeNumber</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">             * 反復処理で次の要素を返す。
+</span></span></span><span class="line"><span class="cl"><span class="cm">             *
+</span></span></span><span class="line"><span class="cl"><span class="cm">             * @see java.util.Iterator#next()
+</span></span></span><span class="line"><span class="cl"><span class="cm">             * @return 現在の算出素数
+</span></span></span><span class="line"><span class="cl"><span class="cm">             */</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">next</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 現在の算出素数が与えられた整数に達していれば終了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">myNumber</span> <span class="o">&lt;=</span> <span class="n">curPrimeNumber</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">throw</span> <span class="k">new</span> <span class="n">NoSuchElementException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">curPrimeNumber</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">};</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 素数であるかどうかを判定す
+</span></span></span><span class="line"><span class="cl"><span class="cm">     *
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param number 判定対象の数値
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return 素数判定結果
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isPrime</span><span class="o">(</span><span class="kt">int</span> <span class="n">number</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 入力チェック
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">number</span> <span class="o">&lt;=</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 素数判定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">number</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 2から順番に割っていって、割り切れれば抜ける
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">((</span><span class="n">number</span> <span class="o">%</span> <span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-a-name59a項目-59-ライブラリを知りライブラリを使う">3. <a name='59'></a>項目 59 ライブラリを知り、ライブラリを使う</h2>
+<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>標準ライブラリを使いましょう
+<ul>
+<li>時間を無駄にすることなく、他の有意義な箇所(実装)に時間を割り当てられる</li>
+<li>専門家の知識が活かせる</li>
+<li>他に同じライブラリを使った人達の経験が活かせる
+<ul>
+<li>詰まった際の解決方法がネット上にある</li>
+<li>パフォーマンスが良い</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>標準ライブラリ（<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/package-summary.html">java.lang</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/package-summary.html">java.util</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/io/package-summary.html">java.io</a>）の内容は知っておきましょう</li>
+</ul>
+<h3 id="32-a-name-1aサンプル">3.2. <a name='-1'></a>サンプル</h3>
+<p>便利なライブラリとして以下の2つは知っておきましょう</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/technotes/guides/collections/index.html">Collections Framework</a>
+<ul>
+<li>関連のないAPI間での相互運用ができる</li>
+</ul>
+</li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/package-summary.html">Concurrency Utilities</a>
+<ul>
+<li>マルチスレッドプログラムの処理を単純化するためのユーティリティがある</li>
+<li>java.util.concurrent.atomic</li>
+<li>java.util.concurrent.locks</li>
+</ul>
+</li>
+</ul>
+<h3 id="33-a-name-1aポイント">3.3. <a name='-1'></a>ポイント</h3>
+<ul>
+<li>無駄な努力はしないでください</li>
+<li>ライブラリが存在するのかを知らなかったら調べてください
+<ul>
+<li>apache, spring, guavaあたりはよく利用しますね。</li>
+</ul>
+</li>
+<li>あなたのコードよりもライブラリの方が優れています</li>
+</ul>
+<h2 id="4-a-name60floatdoublea項目-60-正確な答えが必要ならばfloat-と-double-を避ける">4. <a name='60floatdouble'></a>項目 60 正確な答えが必要ならば、float と double を避ける</h2>
+<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>金銭計算など正確な計算が必要な場合は、<code>float</code> と <code>double</code> を使わないでおきましょう
+<ul>
+<li>9桁以内であれば、<code>int</code></li>
+<li>18桁以内であれば、<code>long</code></li>
+<li>正確な計算が必要もしくは、18桁以上であれば、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigDecimal.html">BigDecimal</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="42-a-name-1a理由">4.2. <a name='-1'></a>理由</h3>
+<p>丸めの誤差が発生するから。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">1</span><span class="o">.</span><span class="na">00</span> <span class="o">-</span> <span class="n">9</span><span class="o">*.</span><span class="na">10</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 実行結果
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 0.09999999999999998
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>BigDecimal</code>には2つの欠点があるので、最後の手段。</p>
+<ul>
+<li>計算式が不便（<code>+, -, *, /, %</code>が使えない。）
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">BigDecimal</span> <span class="n">price</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">price</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">100</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>処理が遅い
+<ul>
+<li><code>BigDecimal</code> を使わない方が速いですね。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="n">StopWatch</span> <span class="n">stopWatch</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// long を利用した場合[1135(ms)]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">long</span> <span class="n">sumLong</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">sumLong</span> <span class="o">+=</span> <span class="n">i</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stopWatch</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// BigDecimal を利用した場合[3969(ms)]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">BigDecimal</span> <span class="n">sumBigDecimal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">&#34;0&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">sumBigDecimal</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stopWatch</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 実行結果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * StopWatch &#39;&#39;: running time (millis) = 1135
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * -----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * ms     %     Task name
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * -----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * 01135  100%
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * StopWatch &#39;&#39;: running time (millis) = 3969
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * -----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * ms     %     Task name
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * -----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * 03969  100%
+</span></span></span><span class="line"><span class="cl"><span class="cm">  */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="43-a-name-1a-備考">4.3. <a name='-1'></a> 備考</h3>
+<p>正確に計算できなければ、<code>ArithmeticException</code>がスローされる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">BigDecimal</span> <span class="n">bigDecimal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bigDecimal</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">3</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bigDecimal</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 実行結果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">        * Exception in thread &#34;main&#34; java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.
+</span></span></span><span class="line"><span class="cl"><span class="cm">        * 	at java.base/java.math.BigDecimal.divide(BigDecimal.java:1722)
+</span></span></span><span class="line"><span class="cl"><span class="cm">        * 	at effectivejava.EJ60.main(EJ60.java:8)
+</span></span></span><span class="line"><span class="cl"><span class="cm">        */</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-a-name61boxedprimitiveprimitivea項目-61-ボクシングされたプリミティブ型boxed-primitiveよりプリミティブ型primitiveを選択すべし">5. <a name='61boxedprimitiveprimitive'></a>項目 61 ボクシングされたプリミティブ型（boxed primitive）より、プリミティブ型（primitive）を選択すべし</h2>
+<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
+<p>基本データ型の方が演算が速く、処理の危険性がないため、<br>
+以下の場合を除いて、ボクシングされたプリミティブ型(<code>Integer</code>や<code>Double</code>, <code>Boolean</code>など)よりもプリミティブ型(<code>int</code>や<code>double</code>, <code>boolean</code>など)を使いましょう。</p>
+<ul>
+<li><code>Collection</code>の要素、キー、値として使う場合</li>
+<li><code>ThreadLocal&lt;T&gt;</code>を利用する場合</li>
+<li>リフレクションによりメソッドを呼び出す必要がある場合</li>
+</ul>
+<h3 id="52-a-name-1aサンプル">5.2. <a name='-1'></a>サンプル</h3>
+<h4 id="521-a-name-1a演算速度">5.2.1. <a name='-1'></a>演算速度</h4>
+<p>プリミティブ型の方が10倍ほど速いですね。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">StopWatch</span> <span class="n">stopWatch</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ボクシングされたプリミティブ型(Long) の場合[11092(ms)]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Long</span> <span class="n">sumLong</span> <span class="o">=</span> <span class="n">0L</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumLong</span> <span class="o">+=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stopWatch</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// プリミティブ型(long) の場合[1171(ms)]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">0L</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum</span> <span class="o">+=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stopWatch</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 実行結果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">* StopWatch &#39;&#39;: running time (millis) = 11092
+</span></span></span><span class="line"><span class="cl"><span class="cm">* -----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm">* ms     %     Task name
+</span></span></span><span class="line"><span class="cl"><span class="cm">* -----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 11092  100%
+</span></span></span><span class="line"><span class="cl"><span class="cm">*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* StopWatch &#39;&#39;: running time (millis) = 1171
+</span></span></span><span class="line"><span class="cl"><span class="cm">* -----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm">* ms     %     Task name
+</span></span></span><span class="line"><span class="cl"><span class="cm">* -----------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 01171  100%
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="522-a-name-1a処理の危険性">5.2.2. <a name='-1'></a>処理の危険性</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 以下を実行すると期待した結果が得られない
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">naturalOrder</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">1</span><span class="o">),</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 不完全なコンパレータ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">naturalOrder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Integer</span> <span class="n">first</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">second</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">first</span> <span class="o">&lt;</span> <span class="n">second</span> <span class="o">?</span> <span class="o">-</span><span class="n">1</span> <span class="o">:</span> <span class="o">(</span><span class="n">first</span> <span class="o">==</span> <span class="n">second</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li><code>first &lt; second</code>の際は、自動アンボクシングが実行されて、ちゃんと比較される。</li>
+<li><code>first == second</code>の際は、同一性比較が行われ、異なるインスタンスであるため、<code>false</code>が返却される。</li>
+</ol>
+<blockquote>
+<p>備考：<code>naturalOrder.compare(new Integer(1), null);</code>とすると、<code>NullPointerException</code>がスローされる。<br>
+ボクシングされたプリミティブ型では、<code>null</code>が入る可能性があることにも注意。</p>
+</blockquote>
+<h3 id="53-a-name-1aポイント">5.3. <a name='-1'></a>ポイント</h3>
+<p>ボクシングされたプリミティブ型の使用を強いられない限り、プリミティブ型を使いましょう。</p>
+<h2 id="6-a-name62a項目-62-他の型が適切な場所では文字列を避ける">6. <a name='62'></a>項目 62 他の型が適切な場所では、文字列を避ける</h2>
+<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+<p>以下の場合、文字列を使うべきではないです。</p>
+<ul>
+<li>他の値型に対する代替
+<ul>
+<li>「<code>はい</code>/<code>いいえ</code>」よりも、<code>boolean</code>での「<code>true</code>/<code>false</code>」の方が優れている。</li>
+</ul>
+</li>
+<li>列挙型に対する代替
+<ul>
+<li>文字列型よりも、<code>Enum</code>型の方が優れている。(比較なども<code>Enum</code>型の方が速かったですよね。)</li>
+</ul>
+</li>
+<li>集合型に対する代替
+<ul>
+<li>集合型として「<code>String compoundKey = className + &quot;#&quot; + methodName</code>」とするよりも、単に集合を表すクラスを作成しましょう。
+<ul>
+<li>文字列で集合を表すと、文字列解析が必要になるので。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>偽造不可能なキー(<em>capability</em>)に対する代替
+<ul>
+<li>あるAPIへのアクセスを与えるために文字列を使う(<code>set(String key, Object value)</code>)よりも、<br>
+<code>java.lang.ThreadLocal&lt;T&gt;</code>を使いましょう。
+<ul>
+<li>文字列に基づくAPIが抱える問題を解決でき、かつ、速いので。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="62-a-name-1aサンプル">6.2. <a name='-1'></a>サンプル</h3>
+<p><strong>偽造不可能なキー(<em>capability</em>)に対する代替</strong> について例を示します。</p>
+<p>以下は、2つの独立したクライアントが、それぞれのスレッドローカル変数に同じ名前のキーを使用すると、共有することになるため不完全。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 不完全
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadLocal</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// インスタンス化不可能
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="nf">ThreadLocal</span><span class="o">()</span> <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span> <span class="n">Object</span> <span class="n">value</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="nf">get</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>キーとして、文字列を使うのはやめましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 完全
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">ThreadLocal</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">ThreadLocal</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">(</span><span class="n">T</span> <span class="n">value</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">T</span> <span class="nf">get</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>実際の<a href="https://github.com/frohoff/jdk8u-jdk/blob/master/src/share/classes/java/lang/ThreadLocal.java#L74">ThreadLocal</a>も同じような構成となっています。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ThreadLocalインスタンスは、状態をスレッドに関連付けてくれるので、スレッドセーフとなる。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>備考：<code>ThreadLocal</code>は副作用が強いので、使用する際は気を付けた方が良いですね。</p>
+</blockquote>
+<h2 id="7-a-name63a項目-63-文字列結合のパフォーマンスに用心する">7. <a name='63'></a>項目 63 文字列結合のパフォーマンスに用心する</h2>
+<h3 id="71-a-name-1a結論">7.1. <a name='-1'></a>結論</h3>
+<p>簡単な文字列結合でなく、<br>
+<code>n</code>個の文字列を結合する場合は<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a>を使いましょう。<br>
+<code>String</code>は不変(<em>immutable</em>)なので、2つの文字列が結合される場合、両方の内容がコピーされるので。</p>
+<h3 id="72-a-name-1aサンプル">7.2. <a name='-1'></a>サンプル</h3>
+<p>80文字の固定長の文字列連結の場合、<br>
+<em>Fast.java</em> は <em>Slow.java</em> と比べて、85倍速い。<br>
+<code>StringBuilder b = new StringBuilder();</code>とした場合は、50倍速い。by <code>Joshua Bloch</code></p>
+<p><em>Slow.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 遅い
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">statement</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numItems</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">+=</span> <span class="n">lineForItem</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>  <span class="c1">// 文字列結合
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>Fast.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 速い
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">statement</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">StringBuilder</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">(</span><span class="n">numItems</span><span class="o">()</span> <span class="o">*</span> <span class="n">LINE_WIDTH</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numItems</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">b</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">lineForItem</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>  <span class="c1">// StringBuilderを使った結合
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>備考：定数の文字列連結の場合は、<code>+</code>による連結だとコンパイル時に行われるので、実行時のコストは0になる。</p>
+</blockquote>
+<h2 id="8-a-name64a項目-64-インタフェースでオブジェクトを参照する">8. <a name='64'></a>項目 64 インタフェースでオブジェクトを参照する</h2>
+<h3 id="81-a-name-1a結論">8.1. <a name='-1'></a>結論</h3>
+<p>実装を切り替える際に、宣言の1行を変更するだけで済むので、<br>
+オブジェクト参照には、</p>
+<ul>
+<li>実装クラスではなく、インタフェースを使いましょう。</li>
+<li>インタフェースがなければ、必要な機能を提供しているクラス階層中の最も上位のクラスを使用しましょう。</li>
+</ul>
+<p>ただし、以下の場合を除く。</p>
+<ul>
+<li>適切なインタフェースが存在しない場合
+<ul>
+<li>値クラス
+<ul>
+<li>例：<code>String</code>, <code>BigInteger</code>など</li>
+</ul>
+</li>
+<li>オブジェクトがクラスに基づくフレームワークに属している。
+<ul>
+<li>例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TimerTask.html">java.util.TimerTask</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>インタフェースはあるが、そのインタフェースにない特別なメソッドをクラスが提供している場合
+<ul>
+<li>例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/PriorityQueue.html">PriorityQueue#iterator()</a>など。<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Queue.html">Queue</a>にすると<code>iterator()</code>はない。</li>
+</ul>
+</li>
+</ul>
+<h3 id="82-a-name-1aポイント">8.2. <a name='-1'></a>ポイント</h3>
+<p>プログラムを柔軟にするために、APIの場合はインタフェースを使うようにしましょう。</p>
+<h2 id="9-a-name65a項目-65-リフレクションよりもインタフェースを選ぶ">9. <a name='65'></a>項目 65 リフレクションよりもインタフェースを選ぶ</h2>
+<h3 id="91-a-name-1a結論">9.1. <a name='-1'></a>結論</h3>
+<p>リフレクションは、ある種の洗練されたシステムプログラミング処理では強力ですが、<br>
+以下の欠点があるので、インタフェース(もしくは、スーパークラス)を使いましょう</p>
+<ul>
+<li>コンパイル時の型検査の恩恵を全て失う
+<ul>
+<li>実行時に、呼び出すクラス名、メソッド名、フィールド名を確認するため。</li>
+</ul>
+</li>
+<li>コードが冗長になり読みづらくなる
+<ul>
+<li>サンプル参照</li>
+</ul>
+</li>
+<li>パフォーマンスが悪くなる
+<ul>
+<li>2-50倍遅くなる。by <code>Joshua Bloch</code></li>
+<li>1ns が 50nsになったところで、、なことが多い。機械学習とか計算量が多いと問題になるかもしれないですね。</li>
+</ul>
+</li>
+</ul>
+<h3 id="92-a-name-1aサンプル">9.2. <a name='-1'></a>サンプル</h3>
+<p>基本的にリフレクションは使わないのですが、強力な機構であるので紹介します。</p>
+<p>以下のように<code>Set</code>インタフェースにアクセスすることができる。<br>
+使用例としては以下。</p>
+<ul>
+<li><code>Set</code>契約に従っているのかを調べる汎用的な検査プログラム</li>
+<li>汎用的な<code>Set</code>のパフォーマンス解析ツール</li>
+</ul>
+<blockquote>
+<p>某プロジェクトでは、<code>Athena</code>からの取得結果を<code>varchar/integer/double</code>のいずれかに変換するために利用している。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 想定引数
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &#34;java.util.HashSet a c b&#34; / &#34;java.util.TreeSet a c b&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// クラス名をClassオブジェクトへ変換する
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">cl</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cl</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="n">0</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class not found: &#34;</span> <span class="o">+</span> <span class="n">args</span><span class="o">[</span><span class="n">0</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 以下はJVM全体を終了させるので、一般的には使われない。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// コマンドラインユーティリティの異常終了の場合は、適切。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// インスタンスの生成はリフレクションで行う
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">set</span> <span class="o">=</span> <span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;)</span> <span class="n">cl</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">().</span><span class="na">newInstance</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// java 9から、java.lang.Class#newInstance は deprecated。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class not accessible&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InstantiationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class not instantiable&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class does not have such method&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InvocationTargetException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class not invocatable&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// インスタンスへのアクセスはインタフェース経由で行う
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">set</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">args</span><span class="o">).</span><span class="na">subList</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">set</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="93-a-name-1aポイント">9.3. <a name='-1'></a>ポイント</h3>
+<p>どの型が来ても良い場合にリフレクションは使えるが、<br>
+そうではない限りインタフェースを使いましょう。</p>
+<h2 id="10-a-name66a項目-66-ネイティブメソッドを注意して使う">10. <a name='66'></a>項目 66 ネイティブメソッドを注意して使う</h2>
+<h3 id="101-a-name-1a結論">10.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>低レベルのリソースや古いライブラリへアクセスするためのネイティブメソッドの使用は正当であるが、できるだけ局所的にし、徹底的にテストするべき</li>
+<li>パフォーマンス改善のためにネイティブメソッドを使用するべきでない</li>
+</ul>
+<h3 id="102-a-name-1aネイティブメソッドとは">10.2. <a name='-1'></a>ネイティブメソッドとは</h3>
+<ul>
+<li>
+<p>ネイティブメソッドとは、CやC++などのネイティブのプログラミング言語で書かれた特別なメソッド</p>
+</li>
+<li>
+<p>ネイティブメソッドはJava Native Interface(JNI)を利用することで、Javaアプリケーションから呼び出せる</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/technotes/guides/jni/spec/jniTOC.html">Java Native Interface仕様の目次</a></li>
+</ul>
+</li>
+<li>
+<p>ネイティブメソッドの用途</p>
+<ul>
+<li>プラットフォーム特有の機能へアクセスのため
+<ul>
+<li>ただし、たいていの機能はライブラリとしてある</li>
+</ul>
+</li>
+<li>古いデータへのアクセスを提供している古いコードのライブラリへのアクセスのため</li>
+<li>(パフォーマンス向上のため)
+<ul>
+<li>現在のJVM実装はかなり速く、ネイティブメソッドと遜色ないので使用するべきでない</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ネイティブメソッドの欠点</p>
+<ul>
+<li>ネイティブメソッドを使用しているアプリケーションは、Javaアプリケーションであってもメモリ破壊エラーの影響を受けるようになる
+<ul>
+<li>ネイティブメソッドは安全ではないから</li>
+</ul>
+</li>
+<li>移植性がかなり低くなる
+<ul>
+<li>ネイティブメソッドはプラットフォームに依存するから</li>
+</ul>
+</li>
+<li>性能劣化することもある
+<ul>
+<li>ネイティブコードへの出入りでコストがかかるから</li>
+</ul>
+</li>
+<li>可読性が低くなる
+<ul>
+<li>グルーコードが必要となるから</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>グルーコード：もともと互換性がない部分同士を結合するためだけに働くコード</p>
+</blockquote>
+<h3 id="103-a-name-1aまとめ">10.3. <a name='-1'></a>まとめ</h3>
+<p>以下のネイティブメソッドの使い方は正当</p>
+<ul>
+<li>低レベルのリソースや古いライブラリへアクセスするための使用は正当である</li>
+</ul>
+<p>ただし、多くの欠点があるため、できるだけ局所的にし、徹底的にテストするようにする。</p>
+<h3 id="104-a-name-1a余談">10.4. <a name='-1'></a>余談</h3>
+<p>現在(2020年1月)、Project PanamaでJNR(Java Native Runtime)がJEP(JDK Enhancement Proposals)として要望されている</p>
+<h2 id="11-a-name67a項目-67-注意して最適化する">11. <a name='67'></a>項目 67 注意して最適化する</h2>
+<h3 id="111-a-name-1a結論">11.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>
+<p>実装時には、速いプログラムよりも良いプログラムを目指すべし</p>
+<ul>
+<li>健全なアーキテクチャを破壊すると、疎結合を保てなくなるから</li>
+</ul>
+</li>
+<li>
+<p>性能を制限してしまう設計は避けるべし</p>
+<ul>
+<li>APIや通信レベルのプロトコル、永続データ形式を後から変更するのは困難だから</li>
+</ul>
+</li>
+<li>
+<p>API設計において性能について考えるべし</p>
+<ul>
+<li>API設計によって性能に影響が出るから</li>
+</ul>
+</li>
+<li>
+<p>最適化前後で性能測定をするべし</p>
+<ul>
+<li>性能測定なしで、プログラムがどの部分で時間を費やしているかを推測するのは困難だから</li>
+<li>最適化前後で性能測定をしないと、最適化によってどれくらいの効果があったか分からないから</li>
+</ul>
+</li>
+<li>
+<p>アーキテクチャの設計の段階で性能について考えるべき</p>
+<ul>
+<li>実装上の問題はのちの最適化で修正可能だが、終盤でアーキテクチャの欠陥をシステムを書き直すことなく修正することはほとんど不可能だから</li>
+</ul>
+</li>
+<li>
+<p>API設計において性能について考えるべし</p>
+<ul>
+<li>publicの型を可変にすると不必要に多くの防御的コピーが必要になるかもしれない(項目50)</li>
+<li>APIにおいて、インターフェースではなく実装型を使用することで、後でより速い実装が書かれたとしても、特定の実装に拘束されてしまう(項目64)</li>
+</ul>
+</li>
+</ul>
+<h3 id="112-a-name-1a余談">11.2. <a name='-1'></a>余談</h3>
+<p>性能試験はどうなったらゴールなのかはやる前に決めておく必要がある</p>
+<ul>
+<li>性能試験をするということは性能目標があるはずなのでそれを満たしたら終わり</li>
+<li>良いプログラムの計測方法は？
+<ul>
+<li>結合度、凝集度
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E7%B5%90%E5%90%88%E5%BA%A6">結合度 - Wikipedia</a></li>
+<li>結合にもたくさん種類がある
+<ul>
+<li>できればスタンプ結合までにしたい</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://docs.sonarqube.org/latest/user-guide/metric-definitions/">SonarQubeのメトリクス</a>を参考にする
+<ul>
+<li>複雑度</li>
+<li>コード重複率</li>
+<li>etc</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="12-a-name68a項目-68-一般的に受け入れられている命名規約を守る">12. <a name='68'></a>項目 68 一般的に受け入れられている命名規約を守る</h2>
+<h3 id="121-a-name-1a結論">12.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>一般的に受け入れられている命名規約を守るべき
+<ul>
+<li>API利用者やそのコードで作業する他の開発者が、誤解なくAPIやコードを理解できるようにするため</li>
+</ul>
+</li>
+</ul>
+<h3 id="122-a-name-1a命名規約の種類">12.2. <a name='-1'></a>命名規約の種類</h3>
+<p>命名規約の種類は以下の2つに分けられる</p>
+<ul>
+<li>活字的命名規約</li>
+<li>文法的命名規約</li>
+</ul>
+<h4 id="1221-a-name-1a活字的命名規約">12.2.1. <a name='-1'></a>活字的命名規約</h4>
+<ul>
+<li>
+<p>ピリオドで区切られた要素を持ち、階層的であるべき</p>
+</li>
+<li>
+<p>区切られた要素はアルファベットの小文字とまれに数字から構成されるべき</p>
+</li>
+<li>
+<p>組織外で使用されるパッケージには、組織のインターネットドメイン名を逆さにしたものから始める</p>
+<ul>
+<li>(例えば、edu.cmu、com.sun)</li>
+</ul>
+</li>
+<li>
+<p>パッケージ名の残りは、1つ以上の要素から構成され、8文字以下であるべき。</p>
+</li>
+<li>
+<p>意味を持った省略形も使うべき(例えば、util、awt)</p>
+</li>
+<li>
+<p>クラス名、インターフェース名、アノテーション名</p>
+<ul>
+<li>各単語の先頭一文字を大文字に</li>
+</ul>
+</li>
+<li>
+<p>メソッド名、フィールド名</p>
+<ul>
+<li>最初の一文字を小文字に</li>
+</ul>
+</li>
+<li>
+<p>定数フィールドでは大文字の単語をアンダースコアで区切る(例えばNEGATIVE_INFINITY)</p>
+</li>
+<li>
+<p>ローカル変数名</p>
+</li>
+<li>
+<p>フィールド名と同じだが、省略形も認められる(例えばi,xref)</p>
+</li>
+<li>
+<p>型パラメータ名</p>
+<ul>
+<li>Tは任意の型、Eはコレクションの要素の型、KとVはmapのキーと値の型、Xは例外の型など</li>
+</ul>
+</li>
+</ul>
+<h4 id="1222-a-name-1a文法的命名規約">12.2.2. <a name='-1'></a>文法的命名規約</h4>
+<p>文法的命名規約は活字的命名規約よりも柔軟で議論の余地がある</p>
+<ul>
+<li>パッケージ名
+<ul>
+<li>特になし</li>
+</ul>
+</li>
+<li>クラス名
+<ul>
+<li>インスタンス化可能なクラスは、単数名詞、名詞句で命名される(Timer、BufferedWriter)</li>
+<li>インスタンス化しないクラスは、名詞の複数形で命名されることが多い(Collectors、Collections)</li>
+</ul>
+</li>
+<li>インターフェース名
+<ul>
+<li>クラスと同じであったり、形容詞で命名される(Iterable、Runnable)</li>
+</ul>
+</li>
+<li>アノテーション名
+<ul>
+<li>名詞、動詞、前置詞、形容詞すべてよく使われる</li>
+<li>様々な意味でアノテーションが使われるから</li>
+</ul>
+</li>
+<li>メソッド名
+<ul>
+<li>処理をするメソッドは動詞や目的語を含む動詞句で命名される(append、drawImage)</li>
+<li>booleanを返すメソッドはisまたはhasで始まり、名詞、名詞句が続いて、形容詞として機能するように命名される(isEmpty、hasSibiling)</li>
+<li>booleanでない機能や属性を返すメソッドは、名詞、名詞句、getで始まる動詞句で命名される
+<ul>
+<li>getで始まる動詞句だけを認める声もあるが、下の例のように名詞、名詞句を使ったほうがたいていは可読性が上がる</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="n">car</span><span class="o">.</span><span class="na">speed</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">2</span> <span class="o">*</span> <span class="n">SPEED_LIMIT</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">generateAudibleAlert</span><span class="o">(</span><span class="s">&#34;Watch out for cops!&#34;</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>getで始まる動詞句はBeanクラスならば必須。また、クラスが同じ属性を設定するメソッドを持っているならば使う(getAttributeとsetAttribueなど)</li>
+</ul>
+<p>いくつかのメソッドは特別な命名がされている</p>
+<ul>
+<li>toTypeメソッド
+<ul>
+<li>インスタンスの型を変換し、独立したオブジェクトとして返すメソッド(toString)</li>
+</ul>
+</li>
+<li>asTypeメソッド
+<ul>
+<li>受け取ったオブジェクトと異なる型のオブジェクトを返すメソッド(asList)</li>
+</ul>
+</li>
+<li>typeValueメソッド
+<ul>
+<li>呼び出されるオブジェクトと同じ値のプリミティブな値を返すメソッド(Integer#intValue)</li>
+</ul>
+</li>
+<li>staticファクトリーメソッド
+<ul>
+<li>valueOf, of, getInstance, newInstance, getType, newTypeなど</li>
+</ul>
+</li>
+<li>フィールド名、ローカル変数名
+<ul>
+<li>フィールド名の文法規則はそあまり確立されていないし、それほど重要ではない</li>
+</ul>
+</li>
+<li>うまく設計されたAPIではフィールドはほとんど公開されないから
+名詞や名詞句が多い
+<ul>
+<li>boolean型のフィールドはアクセサメソッドの最初の文字列だけ消えたものが採用されることが多い</li>
+<li>ローカル変数名はもっと緩い</li>
+</ul>
+</li>
+</ul>
+<h3 id="123-a-name-1a余談">12.3. <a name='-1'></a>余談</h3>
+<ul>
+<li><a href="https://www.oreilly.co.jp/books/9784873115658/">Readable Code</a> を読むと良さそう</li>
+<li>フィールド名も他の人が見るから気を付けた方が良さそう。</li>
+</ul>
+<h2 id="13-a-nameurla参考url">13. <a name='URL'></a>参考URL</h2>
+<ul>
+<li><a href="http://mindalign.sblo.jp/article/183499180.html">Java Iterableインターフェース/Iteratorインターフェースの実装例</a></li>
+</ul>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E4%B8%80%E8%88%AC/">プログラミング一般</a>
+          <a href="/tags/%E5%80%8B%E4%BA%BA%E7%9A%84%E3%83%A1%E3%83%A2/">個人的メモ</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20191224-awscodeguru/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">AWS CodeGuru</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20191109-effective-java-3rd-8/">
+            <span class="next-text nav-default">Effective Java 3rd [Chapter 8] - メソッド</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

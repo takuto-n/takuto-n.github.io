@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aws on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/categories/aws/</link>
+    <description>Recent content in aws on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 03 Nov 2020 15:10:12 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS App Meshについて調べてみた</title>
+      <link>https://takuto-n.github.io/post/20201103-aws-app-mesh/</link>
+      <pubDate>Tue, 03 Nov 2020 15:10:12 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20201103-aws-app-mesh/</guid>
+      <description>&lt;h1 id=&#34;aws-app-mesh&#34;&gt;AWS App Mesh&lt;/h1&gt;
+&lt;p&gt;AWS App Meshについて概要をまとめて講義する場があったので、&lt;br&gt;
+簡単にAWS Black Beltを参考にまとめました。&lt;/p&gt;
+&lt;p&gt;AWS App Meshのリリース日：2019/3/27&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

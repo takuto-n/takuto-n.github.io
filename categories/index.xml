@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/categories/</link>
+    <description>Recent content in Categories on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 01 Apr 2022 16:17:44 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>typescript</title>
+      <link>https://takuto-n.github.io/categories/typescript/</link>
+      <pubDate>Fri, 01 Apr 2022 16:17:44 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/typescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node.js</title>
+      <link>https://takuto-n.github.io/categories/node.js/</link>
+      <pubDate>Fri, 01 Apr 2022 15:32:23 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>react</title>
+      <link>https://takuto-n.github.io/categories/react/</link>
+      <pubDate>Thu, 03 Feb 2022 20:10:04 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/react/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>auth</title>
+      <link>https://takuto-n.github.io/categories/auth/</link>
+      <pubDate>Tue, 18 Jan 2022 21:38:05 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/auth/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>graphql</title>
+      <link>https://takuto-n.github.io/categories/graphql/</link>
+      <pubDate>Sat, 04 Dec 2021 00:56:49 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/graphql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gcp</title>
+      <link>https://takuto-n.github.io/categories/gcp/</link>
+      <pubDate>Tue, 07 Sep 2021 20:03:30 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/gcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>competitive-programming</title>
+      <link>https://takuto-n.github.io/categories/competitive-programming/</link>
+      <pubDate>Mon, 15 Mar 2021 22:00:01 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/competitive-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>poc</title>
+      <link>https://takuto-n.github.io/categories/poc/</link>
+      <pubDate>Wed, 13 Jan 2021 19:35:35 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/poc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>useful tools</title>
+      <link>https://takuto-n.github.io/categories/useful-tools/</link>
+      <pubDate>Tue, 10 Nov 2020 19:37:47 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/useful-tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws</title>
+      <link>https://takuto-n.github.io/categories/aws/</link>
+      <pubDate>Tue, 03 Nov 2020 15:10:12 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://takuto-n.github.io/categories/docker/</link>
+      <pubDate>Wed, 01 Jul 2020 20:49:28 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>effective-java-3rd</title>
+      <link>https://takuto-n.github.io/categories/effective-java-3rd/</link>
+      <pubDate>Sat, 07 Mar 2020 00:49:15 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/effective-java-3rd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cicd</title>
+      <link>https://takuto-n.github.io/categories/cicd/</link>
+      <pubDate>Tue, 24 Dec 2019 23:36:29 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/cicd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>seminar</title>
+      <link>https://takuto-n.github.io/categories/seminar/</link>
+      <pubDate>Fri, 09 Aug 2019 00:01:44 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/seminar/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

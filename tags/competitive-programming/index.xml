@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>competitive-programming on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/tags/competitive-programming/</link>
+    <description>Recent content in competitive-programming on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
+    <lastBuildDate>Mon, 15 Mar 2021 22:00:01 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/competitive-programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第一回 アルゴリズム実技検定(AtCoder)</title>
+      <link>https://takuto-n.github.io/post/20210315-at-coder/</link>
+      <pubDate>Mon, 15 Mar 2021 22:00:01 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20210315-at-coder/</guid>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://atcoder.jp/contests/past201912-open&#34;&gt;第一回 アルゴリズム実技検定 過去問 - AtCoder&lt;/a&gt; の問題AからHまでをJavaで解いてみました。（問題はAからOまでありますが。。。）&lt;/p&gt;
+&lt;p&gt;また、より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。(少し冗長なところはありますが、ご了承ください。)&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

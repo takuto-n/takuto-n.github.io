@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>AWS CodebuildからMattermostへの通知 - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi" /><meta name="keywords" content="codebuild, mattermost, aws" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20190914-codebuild_mattermost/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="AWS CodebuildからMattermostへの通知" />
+<meta property="og:description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20190914-codebuild_mattermost/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-09-14T12:09:20+09:00" />
+<meta property="article:modified_time" content="2019-09-14T12:09:20+09:00" />
+
+<meta itemprop="name" content="AWS CodebuildからMattermostへの通知">
+<meta itemprop="description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi"><meta itemprop="datePublished" content="2019-09-14T12:09:20+09:00" />
+<meta itemprop="dateModified" content="2019-09-14T12:09:20+09:00" />
+<meta itemprop="wordCount" content="989">
+<meta itemprop="keywords" content="codebuild,mattermost,notification," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AWS CodebuildからMattermostへの通知"/>
+<meta name="twitter:description" content="AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">AWS CodebuildからMattermostへの通知</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-14 </span>
+        <div class="post-category">
+            <a href="/categories/cicd/"> cicd </a>
+            </div>
+          <span class="more-meta"> 989 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <p>AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。</p>
+<p>AWS CodeBuild の環境変数 <code>MattermostWebhookURL</code> に<code>Mattermost</code>の<code>Incomming Webhook URL</code>を保持しておきます。また、IAM から CodeBuild のロールに <code>AmazonSSMReadOnlyAccess</code>の権限を与えてください。</p>
+<p><code>Mattermost</code>の<code>Incomming Webhook URL</code>の発行は、Mattermost 上で <code>Account Settings → Integrations → Incoming Webhooks</code> から出来ます。</p>
+<p>下記ファイルが、実際の設定内容です。<code>[~]</code> 部分は、適宜変更してください。</p>
+<p><em>codebuild-to-mattermost.sh</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用例</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># chmod +x codebuild-to-mattermost.sh</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># gradle clean build &amp;&gt; build-message.txt</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ./codebuild-to-mattermost.sh build-message.txt [Mattermostへ通知するためのWEBHOOK_URL]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 設定項目---------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 通知するチャンネル</span>
+</span></span><span class="line"><span class="cl"><span class="nv">CHANNEL</span><span class="o">=</span><span class="s2">&#34;[#通知するチャンネル]&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 対象のリポジトリ</span>
+</span></span><span class="line"><span class="cl"><span class="nv">SRC_DIR</span><span class="o">=</span><span class="s2">&#34;[ビルド対象のリポジトリ]&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># build結果が入ったテキストファイルを第1引数から受け取る。</span>
+</span></span><span class="line"><span class="cl"><span class="nv">BUILD_RESULT_FILE</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Mattermostに通知するためのWebHookのURLを第2引数から受け取る。</span>
+</span></span><span class="line"><span class="cl"><span class="nv">WEBHOOK_URL</span><span class="o">=</span><span class="si">${</span><span class="nv">2</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Pushしたユーザ（gitのコミット履歴から取得する。）</span>
+</span></span><span class="line"><span class="cl"><span class="nv">USERNAME</span><span class="o">=</span><span class="sb">`</span>git log <span class="p">|</span> head -3 <span class="p">|</span> grep <span class="s2">&#34;Author:&#34;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># CodeBuildのAmazon Resource Name（どのビルドなのかを特定する情報）</span>
+</span></span><span class="line"><span class="cl"><span class="nv">BUILD_ARN</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="si">${</span><span class="nv">CODEBUILD_BUILD_ARN</span><span class="si">}</span> <span class="p">|</span> awk -F <span class="s2">&#34;:&#34;</span> <span class="s1">&#39;{print $NF}&#39;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># CodeBuildのビルド履歴ページのURLを参考にしてください。</span>
+</span></span><span class="line"><span class="cl"><span class="nv">BUILD_ARN_URL</span><span class="o">=</span><span class="s1">&#39;https://console.aws.amazon.com/codesuite/codebuild/projects/[Codebuildのプロジェクト名]]/build/[CodeBuildのプロジェクト名]%3A&#39;</span><span class="si">${</span><span class="nv">BUILD_ARN</span><span class="si">}</span><span class="s1">&#39;/log?region=[CodeBuildプロジェクトのリージョン]&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Pushされたブランチ</span>
+</span></span><span class="line"><span class="cl"><span class="nv">BRANCH</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="si">${</span><span class="nv">CODEBUILD_WEBHOOK_TRIGGER</span><span class="si">}</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ビルド結果を${BUILD_RESULT_FILE}から取得する</span>
+</span></span><span class="line"><span class="cl"><span class="nv">BUILD_RESULT</span><span class="o">=</span><span class="sb">`</span>cat <span class="si">${</span><span class="nv">BUILD_RESULT_FILE</span><span class="si">}</span> <span class="p">|</span> grep -e <span class="s2">&#34;BUILD FAILED&#34;</span> -e <span class="s2">&#34;BUILD SUCCESSFUL&#34;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Mattermostへ通知するための文字列を組み立てる。</span>
+</span></span><span class="line"><span class="cl"><span class="nv">MESSAGE</span><span class="o">=</span><span class="si">${</span><span class="nv">SRC_DIR</span><span class="si">}</span><span class="s1">&#39; [#BUILD_ARN](&#39;</span><span class="si">${</span><span class="nv">BUILD_ARN_URL</span><span class="si">}</span><span class="s1">&#39;) of &#39;</span><span class="si">${</span><span class="nv">BRANCH</span><span class="si">}</span><span class="s1">&#39; by &#39;</span><span class="si">${</span><span class="nv">USERNAME</span><span class="si">}</span><span class="s1">&#39;\n```\n&#39;</span><span class="si">${</span><span class="nv">BUILD_RESULT</span><span class="si">}</span><span class="s1">&#39;\n```&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 上記設定値に基づき、mattermostへ通知する。</span>
+</span></span><span class="line"><span class="cl">curl -X POST --data-urlencode <span class="s1">&#39;payload={&#34;channel&#34;: &#34;&#39;</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">CHANNEL</span><span class="si">}</span><span class="s2">&#34;</span><span class="s1">&#39;&#34;, &#34;username&#34;: &#34;&#39;</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">USERNAME</span><span class="si">}</span><span class="s2">&#34;</span><span class="s1">&#39;&#34;, &#34;text&#34;: &#34;&#39;</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">MESSAGE</span><span class="si">}</span><span class="s2">&#34;</span><span class="s1">&#39;&#34;}&#39;</span> <span class="nv">$WEBHOOK_URL</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>buildspec.yml</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">0.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">phases</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">install</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runtime-versions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">java</span><span class="p">:</span><span class="w"> </span><span class="l">corretto11</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pre_build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">commands</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">chmod +x ./gradlew</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">chmod +x ./codebuild-to-mattermost.sh</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">commands</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./gradlew clean build &amp;&gt; build-message.txt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">post_build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">commands</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./codebuild-to-mattermost.sh build-message.txt ${MattermostWebhookURL}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>Mattermost への通知 Sample</em></p>
+<blockquote>
+<p>sample_repo <a>#BUILD_ARN</a> of branch/master by takuto_n <br>
+BUILD SUCCESSFUL in 18 secs</p>
+</blockquote>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/codebuild/">codebuild</a>
+          <a href="/tags/mattermost/">mattermost</a>
+          <a href="/tags/notification/">notification</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20190921-effective-java-3rd-2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Effective Java 3rd [Chapter 2] - オブジェクトの生成と消滅</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20190909-sonarcloud_codebuild/">
+            <span class="next-text nav-default">AWS CodeBuildとSonarCloudの連携方法</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

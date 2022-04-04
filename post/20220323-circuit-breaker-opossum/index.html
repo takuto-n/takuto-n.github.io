@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Circuit Breaker Opossum - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstruct Circuit Breaker( opossum ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。
+" /><meta name="keywords" content="circuit breaker, opossum, node.js" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20220323-circuit-breaker-opossum/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Circuit Breaker Opossum" />
+<meta property="og:description" content="Abstruct
+Circuit Breaker( opossum ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20220323-circuit-breaker-opossum/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-23T22:29:20+09:00" />
+<meta property="article:modified_time" content="2022-03-23T22:29:20+09:00" />
+
+<meta itemprop="name" content="Circuit Breaker Opossum">
+<meta itemprop="description" content="Abstruct
+Circuit Breaker( opossum ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。"><meta itemprop="datePublished" content="2022-03-23T22:29:20+09:00" />
+<meta itemprop="dateModified" content="2022-03-23T22:29:20+09:00" />
+<meta itemprop="wordCount" content="3768">
+<meta itemprop="keywords" content="circuit breaker,opossum,node.js," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Circuit Breaker Opossum"/>
+<meta name="twitter:description" content="Abstruct
+Circuit Breaker( opossum ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Circuit Breaker Opossum</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-23 </span>
+        <div class="post-category">
+            <a href="/categories/node.js/"> node.js </a>
+            </div>
+          <span class="more-meta"> 3768 words </span>
+          <span class="more-meta"> 8 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstruct">Abstruct</h1>
+<p>Circuit Breaker( <a href="https://www.npmjs.com/package/opossum">opossum</a> ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#AboutCircuitBreaker">About Circuit Breaker</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#StateTransitionDiagram">State Transition Diagram</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#SampleApplication">Sample Application</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#ExecutionResult">Execution Result</a></li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#Statistics">Statistics</a></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li><a href="#Codingprecautions">Coding precautions</a></li>
+</ol>
+<ul>
+<li>4.1. <a href="#stPoint">1st Point</a></li>
+<li>4.2. <a href="#ndPoint">2nd Point</a>
+<ul>
+<li>4.2.1. <a href="#BadExample">Bad Example</a></li>
+<li>4.2.2. <a href="#GoodExample">Good Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ol start="5">
+<li><a href="#Reference">Reference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-nameaboutcircuitbreakeraabout-circuit-breaker">1. <a name='AboutCircuitBreaker'></a>About Circuit Breaker</h2>
+<p>サーキットブレーカーとは、あるサービスの障害を検知した場合には通信を遮断、その後サービスの復旧を検知すると通信を復旧させる仕組みのことです。</p>
+<p>複数のマイクロサービスが連動するサービスの場合、一部のマイクロサービスの障害が連鎖的な障害に繋がるカスケード障害を発生させる可能性があります。</p>
+<p>要するに、以下のような事態に陥ってしまうのを防ぐためのものです。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Service A -&gt; Service B -&gt; Service C(障害発生)
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">↓（Service Bでタイムアウトが多発）
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">Service A -&gt; Service B(障害発生) -&gt; Service C(障害発生)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>サーキットブレーカーの元ネタ<br>
+電気回路のブレーカーのことで、事故や故障で大きな電流が流れたときに自動的に遮断して配線を保護する機構のことを指すらしいです。</p>
+</blockquote>
+<p>今回は、Node.js のCircuit Breakerライブラリの中でも一番よく使われている <a href="https://www.npmjs.com/package/opossum">opossum</a> を使います。</p>
+<p>参考：<a href="https://www.npmtrends.com/brakes-vs-circuit-breaker-js-vs-circuitbreaker-vs-levee-vs-opossum">brakes vs circuit-breaker-js vs circuitbreaker vs levee vs opossum | npm trends</a></p>
+<h3 id="11-a-namestatetransitiondiagramastate-transition-diagram">1.1. <a name='StateTransitionDiagram'></a>State Transition Diagram</h3>
+<p>サーキットブレーカーはステートマシンとして表現されます。</p>
+<p>というのも、サーキットブレーカーには以下の状態(ステート)があり、その状態によって要求された処理を実行をする/しないが決定されるからです。</p>
+<ul>
+<li><code>closed</code></li>
+<li><code>open</code></li>
+<li><code>half open</code></li>
+</ul>
+<p><img src="/img/20220323/circuit_breaker_state_transition_diagram.png" alt="状態遷移図"></p>
+<ul>
+<li>
+<p><code>closed</code></p>
+<ul>
+<li>サーキットブレーカーの初期状態</li>
+<li>この状態の場合、要求された処理が実行される</li>
+<li>実行した結果、エラー回数が閾値を超えると <code>open</code> 状態に遷移する</li>
+</ul>
+</li>
+<li>
+<p><code>open</code></p>
+<ul>
+<li>この状態の場合、要求された処理を実行せず <code>fallback</code> 処理が実行される</li>
+<li>指定した時間(<code>reset time</code>)が経過すると <code>half open</code> 状態に遷移する</li>
+</ul>
+</li>
+<li>
+<p><code>half open</code></p>
+<ul>
+<li>この状態の場合、要求された処理が実行される。</li>
+<li>実行した結果、成功回数が閾値を超えると 正常な状態に回復したとみなして <code>closed</code> に遷移する</li>
+<li>実行した結果、エラー回数が閾値を超えると <code>open</code> 状態に遷移する</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-a-namesampleapplicationasample-application">2. <a name='SampleApplication'></a>Sample Application</h2>
+<p>ここまでで説明した Circuit Breakerライブラリ <a href="https://www.npmjs.com/package/opossum">opossum</a> の実装サンプルを以下に載せます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">CircuitBreaker</span> <span class="nx">from</span> <span class="s1">&#39;opossum&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">log</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@/utils/log&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">wait</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@/utils/wait&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">OpenBreakerError</span><span class="p">,</span> <span class="nx">SemaphoreError</span><span class="p">,</span> <span class="nx">ShutdownError</span><span class="p">,</span> <span class="nx">TimeoutError</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@/error/Error&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// サーキットブレーカーから返却されるエラーコード
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">ErrorCode</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">OPEN</span><span class="o">:</span> <span class="s1">&#39;EOPENBREAKER&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">SHUTDOWN</span><span class="o">:</span> <span class="s1">&#39;ESHUTDOWN&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">TIMEOUT</span><span class="o">:</span> <span class="s1">&#39;ETIMEDOUT&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">SEMAPHORE</span><span class="o">:</span> <span class="s1">&#39;ESEMLOCKED&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="nx">as</span> <span class="kr">const</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// サーキットブレーカーの対象となる非同期関数を実装
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">async</span> <span class="kd">function</span> <span class="nx">slowEcho</span><span class="p">(</span><span class="nx">message</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">waitSecond</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">await</span> <span class="nx">wait</span><span class="p">(</span><span class="nx">waitSecond</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">message</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">timeout</span><span class="o">:</span> <span class="mi">3000</span><span class="p">,</span> <span class="c1">// If our function takes longer than 3 seconds, trigger a failure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">errorThresholdPercentage</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span> <span class="c1">// When 50% of requests fail, trip the circuit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">resetTimeout</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span> <span class="c1">// After 30 seconds, try again.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">capacity</span><span class="o">:</span> <span class="mi">10</span> <span class="c1">// The number of concurrent executions is 10
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// CircuitBreakerに引数で実装した非同期関数を渡す
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">breaker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CircuitBreaker</span><span class="p">(</span><span class="nx">slowEcho</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">breaker</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">breaker</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">breaker</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;halfOpen&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;halfOpen&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">breaker</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">breaker</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;semaphoreLocked&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">logWithTime</span><span class="p">(</span><span class="s1">&#39;semaphoreLocked&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//&#39;Breaker is at capacity and cannot execute the request&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// fallbackで非同期関数でエラーが発生した場合の処理を実装
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 引数の最後に、`error` が渡されることは、公式ドキュメントに明記されていないため、
+</span></span></span><span class="line"><span class="cl"><span class="c1">// opossum のソースコードを読んで、仕様を理解した。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">breaker</span><span class="p">.</span><span class="nx">fallback</span><span class="p">((</span><span class="nx">message</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">waitSecond</span><span class="o">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="p">{</span> <span class="nx">code</span><span class="o">:</span> <span class="nx">string</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">msg</span> <span class="o">=</span> <span class="sb">`Sorry, out of service right now. But your parameters are: </span><span class="si">${</span><span class="nx">message</span><span class="si">}</span><span class="sb">, </span><span class="si">${</span><span class="nx">waitSecond</span><span class="si">}</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">  <span class="k">switch</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">ErrorCode</span><span class="p">.</span><span class="nx">OPEN</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nx">OpenBreakerError</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">ErrorCode</span><span class="p">.</span><span class="nx">SHUTDOWN</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nx">ShutdownError</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">ErrorCode</span><span class="p">.</span><span class="nx">TIMEOUT</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nx">TimeoutError</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">ErrorCode</span><span class="p">.</span><span class="nx">SEMAPHORE</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="k">new</span> <span class="nx">SemaphoreError</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">      <span class="k">throw</span> <span class="nx">error</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// [0, 1, 2, ...]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">waitSeconds</span> <span class="o">=</span> <span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">keys</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">;(</span><span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 失敗率が 50% を超えると、openになり、全てのリクエストを拒否するようになる。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">waitSeconds</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">waitSecond</span> <span class="o">=</span> <span class="nx">waitSeconds</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">(</span><span class="sb">`waitSecond = </span><span class="si">${</span><span class="nx">waitSecond</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">breaker</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;hello.&#39;</span><span class="p">,</span> <span class="nx">waitSecond</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">log</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// しばらく時間が経つと、half open になる。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">log</span><span class="p">(</span><span class="sb">`waitSecond = 10`</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">await</span> <span class="nx">wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// half openの間に成功するリクエストがあると、close になる。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">log</span><span class="p">(</span><span class="sb">`sucess request`</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">await</span> <span class="nx">breaker</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;hello.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">log</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// capacityで設定した 10 を超える並列数で実行すると、
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// semaphoreLocked 状態となる。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// この状態になると、11個目のリクエストが来た際、fallbackの処理が実行されるようになる。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">parallelNum</span> <span class="o">=</span> <span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="mi">11</span><span class="p">).</span><span class="nx">keys</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">ret</span> <span class="o">=</span> <span class="kr">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">parallelNum</span><span class="p">.</span><span class="nx">map</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">breaker</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;hello.&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">log</span><span class="p">(</span><span class="nx">ret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="21-a-nameexecutionresultaexecution-result">2.1. <a name='ExecutionResult'></a>Execution Result</h3>
+<p>実行結果に簡易なメモを付けておきます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">takuto-n@MacBook-Air opossum % yarn start                                                                   master
+</span></span><span class="line"><span class="cl">yarn run v1.22.18
+</span></span><span class="line"><span class="cl">$ node .dist/index.js
+</span></span><span class="line"><span class="cl"><span class="c1"># timeout で設定している3秒未満の実行時間であるため、</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 処理が正常に完了している。</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:22 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:22 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> hello.
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:22 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:23 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> hello.
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:23 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:25 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> hello.
+</span></span><span class="line"><span class="cl"><span class="c1"># timeout を 3秒に設定しているので、3秒以上の場合はタイムアウトとなる。</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:25 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:28 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> timeout
+</span></span><span class="line"><span class="cl"><span class="c1"># timeout や semaphoreLocked など circuit breaker によって、</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 処理が中断される場合、fallback 処理が実行される。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 今回は、fallback処理の中で、TimeoutError をスローしており、</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># circuit-breaker.fire() から例外がスローされるので、catch()やtry-catch文によってキャッチ可能。</span>
+</span></span><span class="line"><span class="cl">TimeoutError: Sorry, out of service right now. But your parameters are: hello., <span class="m">3</span>
+</span></span><span class="line"><span class="cl">    at Function.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/.dist/index.js:50:19<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at fallback <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:756:10<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at handleError <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:744:16<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at Timeout.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:600:15<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at listOnTimeout <span class="o">(</span>node:internal/timers:559:17<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at processTimers <span class="o">(</span>node:internal/timers:502:7<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:28 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">4</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:31 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> timeout
+</span></span><span class="line"><span class="cl">TimeoutError: Sorry, out of service right now. But your parameters are: hello., <span class="m">4</span>
+</span></span><span class="line"><span class="cl">    at Function.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/.dist/index.js:50:19<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at fallback <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:756:10<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at handleError <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:744:16<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at Timeout.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:600:15<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at listOnTimeout <span class="o">(</span>node:internal/timers:559:17<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at processTimers <span class="o">(</span>node:internal/timers:502:7<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:31 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">5</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:34 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> timeout
+</span></span><span class="line"><span class="cl"><span class="c1"># 0, 1, 2秒で成功し、3, 4, 5秒で失敗したため、失敗率が50%を超えた。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># そのため、Circuit Breaker が open した。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># これ以降は、resetTimeout として設定した10秒が経過するまで Circuit Breakerは open のままで、処理を受け付けない。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># (処理を受け付けないので、以降waitSecond 6-9では、実行時間の秒数が変わっていない。)</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:34 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> open
+</span></span><span class="line"><span class="cl">TimeoutError: Sorry, out of service right now. But your parameters are: hello., <span class="m">5</span>
+</span></span><span class="line"><span class="cl">    at Function.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/.dist/index.js:50:19<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at fallback <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:756:10<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at handleError <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:744:16<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at Timeout.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:600:15<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at listOnTimeout <span class="o">(</span>node:internal/timers:559:17<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at processTimers <span class="o">(</span>node:internal/timers:502:7<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:34 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">6</span>
+</span></span><span class="line"><span class="cl">OpenBreakerError: Sorry, out of service right now. But your parameters are: hello., <span class="m">6</span>
+</span></span><span class="line"><span class="cl">    at Function.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/.dist/index.js:46:19<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at fallback <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:756:10<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at CircuitBreaker.call <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:574:14<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at CircuitBreaker.fire <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:499:22<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at /takuto-n/javascript/opossum/.dist/index.js:62:23
+</span></span><span class="line"><span class="cl">    at processTicksAndRejections <span class="o">(</span>node:internal/process/task_queues:96:5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:34 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">7</span>
+</span></span><span class="line"><span class="cl">OpenBreakerError: Sorry, out of service right now. But your parameters are: hello., <span class="m">7</span>
+</span></span><span class="line"><span class="cl">    at Function.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/.dist/index.js:46:19<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at fallback <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:756:10<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at CircuitBreaker.call <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:574:14<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at CircuitBreaker.fire <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:499:22<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at /takuto-n/javascript/opossum/.dist/index.js:62:23
+</span></span><span class="line"><span class="cl">    at processTicksAndRejections <span class="o">(</span>node:internal/process/task_queues:96:5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:34 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">8</span>
+</span></span><span class="line"><span class="cl">OpenBreakerError: Sorry, out of service right now. But your parameters are: hello., <span class="m">8</span>
+</span></span><span class="line"><span class="cl">    at Function.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/.dist/index.js:46:19<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at fallback <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:756:10<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at CircuitBreaker.call <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:574:14<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at CircuitBreaker.fire <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:499:22<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at /takuto-n/javascript/opossum/.dist/index.js:62:23
+</span></span><span class="line"><span class="cl">    at processTicksAndRejections <span class="o">(</span>node:internal/process/task_queues:96:5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:34 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">9</span>
+</span></span><span class="line"><span class="cl">OpenBreakerError: Sorry, out of service right now. But your parameters are: hello., <span class="m">9</span>
+</span></span><span class="line"><span class="cl">    at Function.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/.dist/index.js:46:19<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at fallback <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:756:10<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at CircuitBreaker.call <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:574:14<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at CircuitBreaker.fire <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:499:22<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at /takuto-n/javascript/opossum/.dist/index.js:62:23
+</span></span><span class="line"><span class="cl">    at processTicksAndRejections <span class="o">(</span>node:internal/process/task_queues:96:5<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ここで単に10秒待つ処理を実行する。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># resetTimeout が 10秒なので、これでCircuitBreakerの状態が halfopen に遷移する。</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:34 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> <span class="nv">waitSecond</span> <span class="o">=</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:44 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> halfOpen
+</span></span><span class="line"><span class="cl"><span class="c1"># ここで成功する処理を実行する。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># halfopen 時に処理が成功したので、CircuitBreakerの状態が close に遷移する。</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:44 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> sucess request
+</span></span><span class="line"><span class="cl"><span class="c1"># CircuitBreakerの状態が close に遷移したので、無事処理が実行された。</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:45 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> close
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:45 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> hello.
+</span></span><span class="line"><span class="cl"><span class="c1"># capacity で設定した10を超えた並列度(11)で実行したので、</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 最後の1リクエスト分が失敗している。</span>
+</span></span><span class="line"><span class="cl">Mon Mar <span class="m">28</span> <span class="m">2022</span> 15:29:45 GMT+0900 <span class="o">(</span>日本標準時<span class="o">)</span> semaphoreLocked
+</span></span><span class="line"><span class="cl">SemaphoreError: Sorry, out of service right now. But your parameters are: hello., <span class="m">2</span>
+</span></span><span class="line"><span class="cl">    at Function.&lt;anonymous&gt; <span class="o">(</span>/takuto-n/javascript/opossum/.dist/index.js:52:19<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at fallback <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:756:10<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at handleError <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:744:16<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at /takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:649:9
+</span></span><span class="line"><span class="cl">    at new Promise <span class="o">(</span>&lt;anonymous&gt;<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at CircuitBreaker.call <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:581:12<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at CircuitBreaker.fire <span class="o">(</span>/takuto-n/javascript/opossum/node_modules/opossum/lib/circuit.js:499:22<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at /takuto-n/javascript/opossum/.dist/index.js:69:65
+</span></span><span class="line"><span class="cl">    at Array.map <span class="o">(</span>&lt;anonymous&gt;<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    at /takuto-n/javascript/opossum/.dist/index.js:69:47
+</span></span><span class="line"><span class="cl"><span class="o">[</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;hello.&#39;</span>,  <span class="s1">&#39;hello.&#39;</span>,
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;hello.&#39;</span>,  <span class="s1">&#39;hello.&#39;</span>,
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;hello.&#39;</span>,  <span class="s1">&#39;hello.&#39;</span>,
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;hello.&#39;</span>,  <span class="s1">&#39;hello.&#39;</span>,
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;hello.&#39;</span>,  <span class="s1">&#39;hello.&#39;</span>,
+</span></span><span class="line"><span class="cl">  undefined <span class="c1"># semaphoreLocked の状態になっているときに、最後に実行された1リクエスト分は実行されていないため、undefined になっている。</span>
+</span></span><span class="line"><span class="cl"><span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-a-namestatisticsastatistics">3. <a name='Statistics'></a>Statistics</h2>
+<p><code>opossum</code> ライブラリでは、Circuit Breakerで実行された処理の統計情報を出力することができる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  failures: 1,
+</span></span><span class="line"><span class="cl">  fallbacks: 0,
+</span></span><span class="line"><span class="cl">  successes: 11,
+</span></span><span class="line"><span class="cl">  rejects: 0,
+</span></span><span class="line"><span class="cl">  fires: 12,
+</span></span><span class="line"><span class="cl">  timeouts: 0,
+</span></span><span class="line"><span class="cl">  cacheHits: 0,
+</span></span><span class="line"><span class="cl">  cacheMisses: 0,
+</span></span><span class="line"><span class="cl">  semaphoreRejections: 1,
+</span></span><span class="line"><span class="cl">  percentiles: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;0&#39;</span>: 0,
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;1&#39;</span>: 2010,
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;0.25&#39;</span>: 2000,
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;0.5&#39;</span>: 2000,
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;0.75&#39;</span>: 2001,
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;0.9&#39;</span>: 2001,
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;0.95&#39;</span>: 2010,
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;0.99&#39;</span>: 2010,
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;0.995&#39;</span>: <span class="m">2010</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">  latencyTimes: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">       0, 1005, 2000,
+</span></span><span class="line"><span class="cl">    2000, 2000, 2000,
+</span></span><span class="line"><span class="cl">    2000, 2000, 2001,
+</span></span><span class="line"><span class="cl">    2001, 2001, <span class="m">2010</span>
+</span></span><span class="line"><span class="cl">  <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">  latencyMean: 1751.5
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-a-namecodingprecautionsacoding-precautions">4. <a name='Codingprecautions'></a>Coding precautions</h2>
+<h3 id="41-a-namestpointa1st-point">4.1. <a name='stPoint'></a>1st Point</h3>
+<p>以下のようなイベントハンドラ内で例外をスローせず、エラーハンドングは <code>fallback()</code> 内で実装すること。</p>
+<ul>
+<li>timeout</li>
+<li>semaphoreLocked</li>
+<li>open</li>
+<li>halfOpen</li>
+<li>close</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">breaker</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">logWithTime</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span> <span class="c1">// ← ここで例外はスローしないこと
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>理由
+<ul>
+<li>各イベント(<code>timeout</code> や <code>semaphoreLocked</code> など)の発火は <code>try-catch</code> で囲われていないため、自前の処理ロジック内で適切なハンドリングができないから。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">OutOfServiceError</span><span class="o">:</span> <span class="nx">timeout</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">at</span> <span class="nx">CircuitBreaker</span><span class="p">.</span><span class="o">&lt;</span><span class="nx">anonymous</span><span class="o">&gt;</span> <span class="p">(</span><span class="err">/takuto-n/javascript/.dist/index.js:23:11)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">at</span> <span class="nx">CircuitBreaker</span><span class="p">.</span><span class="nx">emit</span> <span class="p">(</span><span class="nx">node</span><span class="o">:</span><span class="nx">events</span><span class="o">:</span><span class="mi">402</span><span class="o">:</span><span class="mi">35</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">at</span> <span class="nx">Timeout</span><span class="p">.</span><span class="nx">_onTimeout</span> <span class="p">(</span><span class="err">/takuto-n/javascript/node_modules/opossum/lib/circuit.js:599:20)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">at</span> <span class="nx">listOnTimeout</span> <span class="p">(</span><span class="nx">node</span><span class="o">:</span><span class="nx">internal</span><span class="o">/</span><span class="nx">timers</span><span class="o">:</span><span class="mi">557</span><span class="o">:</span><span class="mi">17</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">at</span> <span class="nx">processTimers</span> <span class="p">(</span><span class="nx">node</span><span class="o">:</span><span class="nx">internal</span><span class="o">/</span><span class="nx">timers</span><span class="o">:</span><span class="mi">500</span><span class="o">:</span><span class="mi">7</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="42-a-namendpointa2nd-point">4.2. <a name='ndPoint'></a>2nd Point</h3>
+<p>接続先単位で CircuitBreaker を作成すること</p>
+<h4 id="421-a-namebadexampleabad-example">4.2.1. <a name='BadExample'></a>Bad Example</h4>
+<p>以下のように、どの接続先にでも対応可能なメソッドを 1つの CircuitBreaker で作成すること。</p>
+<ul>
+<li>理由
+<ul>
+<li>ある接続先が落ちてしまった際に、ほかの接続先にもつながらなくなってしまうため、このような実装は避けるべき。</li>
+<li>たとえば、
+<ul>
+<li>ServiceA が落ちてしまったことによって、Circuit Breaker が <code>open</code> になってしまい、ServiceB にも接続できなくなってしまうからです。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">axiosBackendCall</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CircuitBreaker</span><span class="p">(</span><span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">,</span> <span class="nx">circuitBreakerOptions</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">axiosBackendCall</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;serviceA:8080/check&#39;</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">axiosBackendCall</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;serviceB:8081/register&#39;</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="422-a-namegoodexampleagood-example">4.2.2. <a name='GoodExample'></a>Good Example</h4>
+<p>以下のように接続先ごとに、CircuitBreaker を作るようにすると良いです。</p>
+<ul>
+<li>理由
+<ul>
+<li>ある接続先が落ちてしまっても、ほかの接続先には影響なく接続できるため。</li>
+<li>たとえば、
+<ul>
+<li>ServiceA が落ちてしまった場合、ServiceA 用の Circuit Breakerが open になってしまうが、</li>
+<li>ServiceB 用の Circuit Breaker は別モノであるため、継続して ServiceB に接続できるからです。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">axiosServiceAWrapper</span><span class="p">(</span><span class="nx">contextPath</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="o">:</span> <span class="nx">object</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">AuthResult</span> <span class="p">}</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">SERVICE_A_URL</span> <span class="o">+</span> <span class="nx">contextPath</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">axiosServiceBWrapper</span><span class="p">(</span><span class="nx">contextPath</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">args</span><span class="o">:</span> <span class="nx">object</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">AuthResult</span> <span class="p">}</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">SERVICE_B_URL</span> <span class="o">+</span> <span class="nx">contextPath</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">axiosServiceACall</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;check&#39;</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">axiosServiceBCall</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;register&#39;</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-a-namereferenceareference">5. <a name='Reference'></a>Reference</h2>
+<ul>
+<li><a href="https://github.com/nodeshift/opossum">nodeshift/opossum: Node.js circuit breaker - fails fast ⚡️</a></li>
+<li><a href="https://martinfowler.com/bliki/CircuitBreaker.html">CircuitBreaker</a></li>
+<li><a href="https://qiita.com/seikoudoku2000/items/01450d9c413a0c487b8f">&ldquo;Building Fault Tolerant Microservices&rdquo; というプレゼンがとても良かった話 - Qiita</a></li>
+<li><a href="https://engineering.linecorp.com/ja/blog/circuit-breakers-for-distributed-services/">分散サービス環境へのCircuit Breakerの適用 - LINE ENGINEERING</a></li>
+<li><a href="https://shinkufencer.hateblo.jp/entry/2018/10/26/000000">マイクロサービスにおけるサーキットブレーカーとは（簡易まとめ） - コード日進月歩</a></li>
+<li><a href="https://techblog.zozo.com/entry/zozotown-istio-circuit-breaker">Istioサーキットブレーカーで備えるマイクロサービスの連鎖障害 - ZOZO TECH BLOG</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/circuit-breaker/">circuit breaker</a>
+          <a href="/tags/opossum/">opossum</a>
+          <a href="/tags/node.js/">node.js</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20220401-apollo-server-settings/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Apollo Server Settings</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20220204-node-import-absolute_path/">
+            <span class="next-text nav-default">Node.js Import AbsolutePath</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

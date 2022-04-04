@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Effective Java 3rd [Chapter 7] - ラムダ式とストリーム - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ" /><meta name="keywords" content="java, ラムダ式とストリーム, 個人的メモ" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-7/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Effective Java 3rd [Chapter 7] - ラムダ式とストリーム" />
+<meta property="og:description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-7/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-11-25T00:37:53+09:00" />
+<meta property="article:modified_time" content="2019-11-25T00:37:53+09:00" />
+
+<meta itemprop="name" content="Effective Java 3rd [Chapter 7] - ラムダ式とストリーム">
+<meta itemprop="description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ"><meta itemprop="datePublished" content="2019-11-25T00:37:53+09:00" />
+<meta itemprop="dateModified" content="2019-11-25T00:37:53+09:00" />
+<meta itemprop="wordCount" content="7365">
+<meta itemprop="keywords" content="java,ラムダ式とストリーム,個人的メモ," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Effective Java 3rd [Chapter 7] - ラムダ式とストリーム"/>
+<meta name="twitter:description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Effective Java 3rd [Chapter 7] - ラムダ式とストリーム</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-25 </span>
+        <div class="post-category">
+            <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+            </div>
+          <span class="more-meta"> 7365 words </span>
+          <span class="more-meta"> 15 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="ラムダ式とストリーム">ラムダ式とストリーム</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#42">項目 42 匿名クラスよりもラムダ式を選ぶ</a></li>
+<li><a href="#43">項目 43 ラムダよりもメソッド参照を選ぶ</a></li>
+<li><a href="#44">項目 44 標準の関数型インタフェースを使う</a></li>
+<li><a href="#45">項目 45 ストリームを注意して使う</a></li>
+<li><a href="#46">項目 46 ストリームで副作用のない関数を選ぶ</a></li>
+<li><a href="#47StreamCollection">項目 47 戻り値型として Stream よりも Collection を選ぶ</a></li>
+<li><a href="#48">項目 48 ストリームを並列化するときは注意を払う</a></li>
+<li><a href="#URL">参考 URL</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h1 id="effective-java-3rd-勉強会1129">Effective Java 3rd 勉強会(11/29)</h1>
+<p>日時: 2019/11/29 14:00-14:45
+参加者(敬称略): 則兼、岩崎、倉元<br>
+以下、内容。</p>
+<h2 id="1-a-name42a項目-42-匿名クラスよりもラムダ式を選ぶ">1. <a name='42'></a>項目 42 匿名クラスよりもラムダ式を選ぶ</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<p>以下の場合は、ラムダ式を使いましょう。</p>
+<ul>
+<li>数行のコードで済む</li>
+<li>自分への参照が必要</li>
+<li>関数型インターフェースの型しか使用しない</li>
+</ul>
+<p>それ以外の場合は、匿名クラスを使いましょう。</p>
+<h3 id="12-a-name-1a匿名クラスでの実装">1.2. <a name='-1'></a>匿名クラスでの実装</h3>
+<p><em>Anonymous.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;apple&#34;</span><span class="o">,</span> <span class="s">&#34;pen&#34;</span><span class="o">,</span> <span class="s">&#34;pineapple&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 匿名クラスで書く。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>1 行で済んでおり、自分への参照は不要なので、ラムダ式の方が良いですね。</p>
+<blockquote>
+<p>そもそも匿名クラスとは、、<br>
+以下のように記述される処理のことですね。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">変数の型</span> <span class="n">変数</span> <span class="o">=</span> <span class="k">new</span> <span class="n">クラス名</span><span class="o">/</span><span class="n">インターフェース名</span><span class="o">(</span> <span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="n">メソッドの処理を記述</span>
+</span></span><span class="line"><span class="cl"><span class="o">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="13-a-name-1aラムダ式での実装">1.3. <a name='-1'></a>ラムダ式での実装</h3>
+<p><em>Anonymous.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;apple&#34;</span><span class="o">,</span> <span class="s">&#34;pen&#34;</span><span class="o">,</span> <span class="s">&#34;pineapple&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// ラムダ式で書く。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">words</span><span class="o">,</span> <span class="o">(</span><span class="n">s1</span><span class="o">,</span> <span class="n">s2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">s1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Collection.sortの第二引数が<code>Comparator</code>であると認識するのはなぜなのか？</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html#sort-java.util.List-java.util.Comparator-">Collection.sort</a>の仕様は、引数「List<T> list, Comparator&lt;? super T&gt; c」となっていて、<code>Comparator</code>が関数型インタフェースだからラムダ式で表現できる。
+<ul>
+<li>似たような話で、<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html">org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor#submit()</a>の引数が、<code>Runnable</code>と<code>Callable</code>の識別方法がある。これは、引数の戻り値があるか否かで判断している。</li>
+<li>戻り値があれば、<code>Callable</code></li>
+<li>戻り値がないと、<code>Runnable</code></li>
+</ul>
+</li>
+</ul>
+<p>数行で済んでおり、自分への参照はしておらず、<code>Collections.sort</code>の第 2 引数が関数型インターフェース(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Comparator.html">Comparator</a>)なので、ラムダ式が向いていますね。</p>
+<blockquote>
+<p>関数型インタフェースとは、、<br>
+関数型インターフェースの条件は、大雑把に言って、定義されている抽象メソッドが 1 つだけあるインターフェース。(static メソッドや Object クラスにあるデフォルトメソッドはカウントしない。）</p>
+</blockquote>
+<p>Java8 での関数型インタフェース一覧は<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">Oracle Java SE 8 (Uses of Class
+java.lang.FunctionalInterface)</a>にあります。
+3rd party 製のライブラリで<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/FunctionalInterface.html">@FunctionalInterface</a>が付いているインタフェースも、関数型インタフェースですね。</p>
+<p><code>@FunctionalInterface</code>を付けることで以下のメリットがある。</p>
+<ul>
+<li>コンパイルエラーにしてくれる。</li>
+<li>IDEがもっとよい書き方を提案してくれる。</li>
+</ul>
+<h2 id="2-a-name43a項目-43-ラムダよりもメソッド参照を選ぶ">2. <a name='43'></a>項目 43 ラムダよりもメソッド参照を選ぶ</h2>
+<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>メソッド参照の利点：ラムダ式よりも簡潔に書ける。</li>
+<li>ただし、同クラスにあるメソッドを用いる場合は、ラムダ式の方が簡潔に書ける場合がある。</li>
+</ul>
+<h3 id="22-a-name-1aメソッド参照">2.2. <a name='-1'></a>メソッド参照</h3>
+<blockquote>
+<p>メソッド参照とは、、<br>
+関数型インターフェース（抽象メソッドが 1 つだけ定義されているインターフェース）の変数にメソッドそのものを代入することが出来る。これを「メソッド参照」と呼ぶ。</p>
+</blockquote>
+<p><em>MethodRefAndLambdaExpression.java</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">var</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span> <span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// メソッド参照
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">list</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">print</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ラムダ式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">list</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>メソッド参照の方が、簡潔に記載できていますね。</p>
+<h3 id="23-a-name-1aメソッド参照について深掘り">2.3. <a name='-1'></a>メソッド参照について深掘り</h3>
+<p>メソッド参照には、下記 5 種類がある。</p>
+<p>上記の例は、<code>System</code>クラスの<code>static</code>フィールド<code>out</code>の<code>println</code>メソッドなので、静的メソッド参照だったんですね。</p>
+<table>
+<thead>
+<tr>
+<th>メソッド参照形式</th>
+<th>コード</th>
+<th>等価ラムダ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静的メソッド</td>
+<td><code>TypeName::method</code></td>
+<td><code>(args) -&gt; TypeName.method(args)</code></td>
+</tr>
+<tr>
+<td>非静的メソッド（インスタンス#1 の場合）</td>
+<td><code>instance::method</code></td>
+<td><code>(args) -&gt; instance.method(args)</code></td>
+</tr>
+<tr>
+<td>非静的メソッド（インスタンスなし）</td>
+<td><code>TypeName::method</code></td>
+<td><code>(instance, args) -&gt; instance.method(args)</code></td>
+</tr>
+<tr>
+<td>コンストラクタ#2</td>
+<td><code>TypeName::new</code></td>
+<td><code>(args) -&gt; new TypeName(args)</code></td>
+</tr>
+<tr>
+<td>配列コンストラクタ</td>
+<td><code>TypeName[]::new</code></td>
+<td><code>(int size) -&gt; new TypeName[size]</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>#1 :
+<code>instance</code>は、インスタンスへの参照を評価する任意の式です。例えば、<code>getInstance()::method</code> 、<code>this::method</code>のように書けます。</p>
+</blockquote>
+<blockquote>
+<p>#2 :
+<code>TypeName</code>が非静的な内部クラスである場合、コンストラクタ参照は外部クラスインスタンスのスコープ内でのみ有効です。（つまり、外からコンストラクタが見れる場合使えますよ。という内容です。）</p>
+</blockquote>
+<h2 id="3-a-name44a項目-44-標準の関数型インタフェースを使う">3. <a name='44'></a>項目 44 標準の関数型インタフェースを使う</h2>
+<p>基本的には、標準の関数型インタフェースで事足りる。
+しかし、特定の場合に限っては独自の関数インタフェースを定義する必要がある。</p>
+<h3 id="31-a-name-1a標準の関数型インタフェース">3.1. <a name='-1'></a>標準の関数型インタフェース</h3>
+<ul>
+<li>
+<p>使いやすく、すでに組み込まれている様々なメソッドの恩恵にあずかれる。</p>
+</li>
+<li>
+<p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">標準の関数型インタフェース</a>には、43 個あり、主な 6 つは以下である。</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Function.html">Function<T></a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Consumer.html">Consumer<T></a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Supplier.html">Supplier<T></a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Predicate.html">Predicate<T></a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/UnaryOperator.html">UnaryOperator<T></a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/BinaryOperator.html">BinaryOperator<T></a></li>
+</ul>
+</li>
+<li>
+<p>性能の観点から、プリミティブ型に対応していない関数型インターフェースには、プリミティブ型をボクシングしたオブジェクトは使わないでおきましょう。</p>
+</li>
+</ul>
+<h3 id="32-a-name-1a独自の関数型インタフェース">3.2. <a name='-1'></a>独自の関数型インタフェース</h3>
+<p>以下の場合、独自の関数型インタフェースを作成しましょう。</p>
+<ul>
+<li>広く使われ、説明的な名前によってメリットがある場合</li>
+<li>強く関係する契約がある場合
+<ul>
+<li>引数に制約がある場合
+<ul>
+<li>型の制約</li>
+<li>2つではなく3つの引数が必要な場合</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>独自のデフォルトメソッドによるメリットがある場合</li>
+</ul>
+<p>作成するときは、<code>@FunctionalInterface</code>を使いましょう。書き方に誤りがある場合、コンパイルエラーにしてくれます。</p>
+<blockquote>
+<p>同じ名前のメソッドで、異なる関数型インタフェースを引数に持つのは、ユーザーにとって曖昧となるのでやめましょう。<br>
+例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ExecutorService.html"><code>ExecutorService.submit()</code></a>は、異なる関数インタフェース「<code>Runnable</code>」と「<code>Callable&lt;T&gt;</code>」を引数に持っているのでよくありません。</p>
+</blockquote>
+<h3 id="33-a-name-1a標準の関数型インタフェースについての余談">3.3. <a name='-1'></a>標準の関数型インタフェースについての余談</h3>
+<p>各標準の関数型インタフェースについて以下の観点でまとめておきます。</p>
+<ul>
+<li>従来の書き方</li>
+<li>匿名クラスでの書き方</li>
+<li>lambda 式を使った書き方</li>
+<li>呼び出し方</li>
+</ul>
+<h4 id="331-a-namefunctiontafunctiont">3.3.1. <a name='FunctionT'></a>Function<T></h4>
+<ul>
+<li>従来の書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">R</span> <span class="nf">functionName</span><span class="o">(</span><span class="n">T</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">R</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>匿名クラスでの書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="n">functionalInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">R</span><span class="o">&gt;()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">R</span> <span class="nf">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">R</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>lambda 式を使った書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="n">functionalInstance</span> <span class="o">=</span> <span class="n">arg</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">R</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>呼び出し方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">R</span> <span class="n">returnValue</span> <span class="o">=</span> <span class="n">functionalInstance</span><span class="o">.</span><span class="na">apply</span><span class="o">((</span><span class="n">T</span><span class="o">)</span> <span class="n">argument</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="332-a-nameconsumertaconsumert">3.3.2. <a name='ConsumerT'></a>Consumer<T></h4>
+<ul>
+<li>従来の書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">consumer</span><span class="o">(</span><span class="n">T</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">something</span><span class="o">(</span><span class="n">arg</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>匿名クラスでの書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">consumer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">accept</span><span class="o">(</span><span class="n">T</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">something</span><span class="o">(</span><span class="n">arg</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>lambda 式を使った書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">consumer</span> <span class="o">=</span> <span class="n">arg</span> <span class="o">-&gt;</span> <span class="n">something</span><span class="o">(</span><span class="n">arg</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>呼び出し方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">consumer</span><span class="o">.</span><span class="na">accept</span><span class="o">((</span><span class="n">T</span><span class="o">)</span> <span class="n">argument</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="333-a-namesuppliertasuppliert">3.3.3. <a name='SupplierT'></a>Supplier<T></h4>
+<ul>
+<li>従来の書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">T</span> <span class="nf">supplier</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">T</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>匿名クラスでの書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">supplier</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">T</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">T</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>lambda 式を使った書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">supplier</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">T</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>呼び出し方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">T</span> <span class="n">value</span> <span class="o">=</span> <span class="n">supplier</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="334-a-namepredicatetapredicatet">3.3.4. <a name='PredicateT'></a>Predicate<T></h4>
+<p>偶奇判定を例に記載します。</p>
+<ul>
+<li>従来の書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">boolean</span> <span class="nf">predicate</span><span class="o">(</span><span class="n">Integer</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">　　<span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>匿名クラスでの書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">boolean</span> <span class="n">predicate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Predicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">test</span><span class="o">(</span><span class="n">Integer</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>lambda 式を使った書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">checker</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span><span class="o">)-&gt;</span> <span class="o">{</span> <span class="k">return</span> <span class="n">i</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span><span class="o">;</span> <span class="o">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>呼び出し方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="n">checker</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="335-a-nameunaryoperatortaunaryoperatort">3.3.5. <a name='UnaryOperatorT'></a>UnaryOperator<T></h4>
+<p>String を強調させるメソッドを例に記載します。</p>
+<ul>
+<li>従来の書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">String</span> <span class="nf">apply</span><span class="o">(</span><span class="n">String</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;** &#34;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&#34; **&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>匿名クラスでの書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UnaryOperator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(){</span>
+</span></span><span class="line"><span class="cl">	<span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="n">String</span> <span class="nf">apply</span><span class="o">(</span><span class="n">String</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	    <span class="k">return</span> <span class="s">&#34;** &#34;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&#34; **&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>lambda 式を使った書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">UnaryOperator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">operator</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span> <span class="k">return</span> <span class="s">&#34;**&#34;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s">&#34;**&#34;</span><span class="o">;</span> <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>呼び出し方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"> <span class="n">String</span> <span class="n">newText</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="336-a-namebinaryoperatortabinaryoperatort">3.3.6. <a name='BinaryOperatorT'></a>BinaryOperator<T></h4>
+<p>足し算メソッドを例に記載します。</p>
+<ul>
+<li>従来の書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">Integer</span> <span class="nf">binaryOperator</span><span class="o">(</span><span class="n">Integer</span> <span class="n">i1</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">i2</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>匿名クラスでの書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">binaryOperator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">apply</span><span class="o">(</span><span class="n">Integer</span> <span class="n">i1</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">i2</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>lambda 式を使った書き方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">BinaryOperator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">binaryOperator</span> <span class="o">=</span> <span class="o">(</span><span class="n">Integer</span> <span class="n">i1</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">i2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>呼び出し方</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">actual</span> <span class="o">=</span> <span class="n">binaryOperator</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-a-name45a項目-45-ストリームを注意して使う">4. <a name='45'></a>項目 45 ストリームを注意して使う</h2>
+<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+<p>Stream 処理により簡単になる場合は、主に以下である。<br>
+いつ<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a>を使うべきかという、かっちりとしたルールはない。</p>
+<ul>
+<li>単純な要素の変換</li>
+<li>要素のフィルタリング処理</li>
+<li>単純なオペレーションで要素を結びつける処理</li>
+<li>要素を<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collection.html"><code>Collection</code></a>に集約する処理</li>
+<li>特定の基準を満たす要素を探す処理</li>
+</ul>
+<p>次のようなことになるのであれば、使わないでおきましょう。</p>
+<ul>
+<li>Stream 処理ばかりで、複雑になる場合</li>
+<li>char 型の値の Stream 処理</li>
+<li>コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream 処理にしない。</li>
+</ul>
+<h3 id="42-a-namestreamastream-処理ばかりで複雑になる場合">4.2. <a name='Stream'></a>Stream 処理ばかりで、複雑になる場合</h3>
+<h4 id="421-a-name-1a改善前">4.2.1. <a name='-1'></a>改善前</h4>
+<p>ファイル内の単語(行単位)を、アナグラムごとにまとめて、指定数以上含まれている場合は出力するプログラム。</p>
+<blockquote>
+<p>アナグラム（anagram）とは、言葉遊びの一つで、単語または文の中の文字をいくつか入れ替えることによって、全く別の意味にさせる遊びである。<a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%8A%E3%82%B0%E3%83%A9%E3%83%A0">Wikipedia</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">var</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;hoge.txt&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">minGroupSize</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">groups</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="o">(</span><span class="n">var</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Files</span><span class="o">.</span><span class="na">lines</span><span class="o">(</span><span class="n">dictionary</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">words</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">groupingBy</span><span class="o">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="n">word</span><span class="o">.</span><span class="na">chars</span><span class="o">().</span><span class="na">sorted</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">StringBuilder</span><span class="o">::</span><span class="k">new</span><span class="o">,</span> <span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="n">c</span><span class="o">),</span> <span class="n">StringBuilder</span><span class="o">::</span><span class="n">append</span><span class="o">).</span><span class="na">toString</span><span class="o">()))</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;:&#34;</span> <span class="o">+</span> <span class="n">group</span><span class="o">).</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解説が必要なほど、複雑だと思うので、以下に記載します。。。（なんでもかんでも<code>Stream</code>処理が良いという訳ではないということですね。）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 行ごとの単語をソートする。（アナグラムとして捉えるため。）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">word</span><span class="o">.</span><span class="na">chars</span><span class="o">().</span><span class="na">sorted</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// StringBuilderでソートした文字列を組み立てる。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">StringBuilder</span><span class="o">::</span><span class="k">new</span><span class="o">,</span> <span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="n">c</span><span class="o">),</span> <span class="n">StringBuilder</span><span class="o">::</span><span class="n">append</span><span class="o">).</span><span class="na">toString</span><span class="o">()))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 指定数以上かどうかでフィルターをかける。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 表示形式を指定して、出力する。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;:&#34;</span> <span class="o">+</span> <span class="n">group</span><span class="o">).</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="422-a-name-1a改善後">4.2.2. <a name='-1'></a>改善後</h4>
+<p>ファイル内の単語(行単位)を、アナグラムごとにまとめて、指定数以上含まれている場合は出力するプログラム。</p>
+<p>悪い例でややこしかった、文字列ソートの部分を<code>alphabetize</code>メソッドに切り出しているので、わかりやすくなっていますね。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">var</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;hoge.txt&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">minGroupSize</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">groups</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="o">(</span><span class="n">var</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Files</span><span class="o">.</span><span class="na">lines</span><span class="o">(</span><span class="n">dictionary</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">words</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">groupingBy</span><span class="o">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="n">alphabetize</span><span class="o">(</span><span class="n">word</span><span class="o">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">group</span> <span class="o">-&gt;</span> <span class="n">group</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">minGroupSize</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">g</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">g</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;:&#34;</span> <span class="o">+</span> <span class="n">g</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">alphabetize</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">var</span> <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="43-a-namecharstreamachar-型の値の-stream-処理">4.3. <a name='charStream'></a>char 型の値の Stream 処理</h3>
+<p><code>char</code>型の<code>Stream</code>処理は直感的でない動きをしうるので、原則として<code>char</code>型の値を<code>Stream</code>処理で扱うべきでない。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"> <span class="s">&#34;Hello, world!&#34;</span><span class="o">.</span><span class="na">chars</span><span class="o">().</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">print</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 実行結果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="c1">// 72101108108111443211911111410810033
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// (char)にキャストしてあげる。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="s">&#34;Hello, world!&#34;</span><span class="o">.</span><span class="na">chars</span><span class="o">().</span><span class="na">forEach</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="n">x</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 実行結果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="c1">// &#34;Hello, world!&#34;が表示
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="44-a-namestreamaコードブロック内で出来ることを捨ててまでstream-処理にしない">4.4. <a name='...Stream'></a>コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream 処理にしない。</h3>
+<p>関数型オブジェクトを使用した<code>Stream</code>処理で出来ず、コードブロック内(<code>{...}</code>)で出来ること。</p>
+<ul>
+<li>ローカル変数の使用(ラムダ式では<code>final</code>でないと使用できない。)</li>
+<li>内部メソッドの<code>return</code>, ループ内での<code>break</code>/<code>continue</code>, 例外スロー（ラムダ式では出来ない。）</li>
+</ul>
+<h2 id="5-a-name46a項目-46-ストリームで副作用のない関数を選ぶ">5. <a name='46'></a>項目 46 ストリームで副作用のない関数を選ぶ</h2>
+<h3 id="51-a-name-1a前提">5.1. <a name='-1'></a>前提</h3>
+<p><code>Stream</code>の最も重要なところは、<strong>純粋関数のみによる演算</strong> であること。</p>
+<blockquote>
+<p>純粋関数とは、副作用を持たない関数のことである。副作用とは、変数の再代入や入出力などによってプログラムの状態が変化することを指します。</p>
+</blockquote>
+<blockquote>
+<p>副作用があることによるデメリット<br>
+・全体の流れが分かりづらくなる可能性がある。<br>
+・速度が落ち、並列処理時の問題が出る可能性がある。</p>
+</blockquote>
+<h3 id="52-a-name-1a結論">5.2. <a name='-1'></a>結論</h3>
+<p>副作用を持たないようにするため、ストリーム処理は以下のようにする。</p>
+<ul>
+<li><code>forEach</code>は、ストリームの演算の結果を示すためだけに利用する。</li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html"><code>Collectors</code></a>を利用する。</li>
+</ul>
+<h3 id="53-a-nameforeachaforeachはストリームの演算の結果を示すためだけに利用する">5.3. <a name='forEach'></a><code>forEach</code>は、ストリームの演算の結果を示すためだけに利用する。</h3>
+<p>ファイルに含まれる単語の頻度を求めるプログラム。</p>
+<p>以下は、ストリーム内で、外部の状態（<code>freq</code>変数）を変更しているため(副作用を持つため)、良くない。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// Uses the streams API but not the paradigm--Don&#39;t do this!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">var</span> <span class="n">freq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;();</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="o">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">file</span><span class="o">).</span><span class="na">tokens</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">words</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">word</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">freq</span><span class="o">.</span><span class="na">merge</span><span class="o">(</span><span class="n">word</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">(),</span> <span class="n">1L</span><span class="o">,</span> <span class="n">Long</span><span class="o">::</span><span class="n">sum</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">});</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下が改善例。
+ストリーム内で、外部の状態（<code>freq</code>変数）を変更しておらず、戻り値を代入している。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// Proper use of streams to initialize a frequency table
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">freq</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="o">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">file</span><span class="o">).</span><span class="na">tokens</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">freq</span> <span class="o">=</span> <span class="n">words</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">groupingBy</span><span class="o">(</span><span class="n">String</span><span class="o">::</span><span class="n">toLowerCase</span><span class="o">,</span> <span class="n">counting</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="54-a-namecollectorshttpsdocsoraclecomjavasejp8docsapijavautilstreamcollectorshtmlacollectorshttpsdocsoraclecomjavasejp8docsapijavautilstreamcollectorshtmlを利用する">5.4. <a name='Collectorshttps:docs.oracle.comjavasejp8docsapijavautilstreamCollectors.html'></a><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html"><code>Collectors</code></a>を利用する。</h3>
+<p>ストリームパイプラインの可読性のために、Collectors のメンバーは static インポートしておくべき。</p>
+<h4 id="541-a-nametosettocollectiontolistatoset-tocollection-tolist">5.4.1. <a name='toSettoCollectiontoList'></a>toSet(), toCollection(), toList()</h4>
+<p><code>toSet(), toCollection(), toList()</code>を利用した例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">topTen</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="n">comparing</span><span class="o">(</span><span class="n">freq</span><span class="o">::</span><span class="n">get</span><span class="o">).</span><span class="na">reversed</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="n">10</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">());</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="542-a-nametomapatomap">5.4.2. <a name='toMap'></a>toMap()</h4>
+<p><code>toSet(), toCollection(), toList()</code>以外は、ストリームを Map にするためのものがほとんどである。</p>
+<p><code>toMap()</code>を使ったサンプルを載せる。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// e.ordinal()は、列挙定数の序数を返す。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">ENUM</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">ENUM</span><span class="o">.</span><span class="na">values</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// key
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">    <span class="o">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">ENUM</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">map</span><span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">ENUM</span><span class="o">.</span><span class="na">values</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// key
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">,</span><span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 同一キーの値が複数あった場合、最初の要素を優先する
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 最後の要素を優先する場合は`(e1, e2) -&gt; e2`とする
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">,(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">e1</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// HashMap型を指定する。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">,</span><span class="n">HashMap</span><span class="o">::</span><span class="k">new</span>
+</span></span><span class="line"><span class="cl">    <span class="o">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="543-a-namegroupingbyagroupingby">5.4.3. <a name='groupingBy'></a>groupingBy()</h4>
+<p><code>groupingBy()</code>は、<code>classifier</code>をもとに要素をカテゴリー分けした Map を生成する。</p>
+<p><code>classifier</code>には、以下のサンプルの<code>t -&gt; t.length()</code> や 「項目 45 ストリームを注意して使う」で紹介した<code>alphabetize(word)</code>が該当する。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">,</span> <span class="s">&#34;bar&#34;</span><span class="o">,</span> <span class="s">&#34;c&#34;</span><span class="o">,</span> <span class="s">&#34;foo&#34;</span><span class="o">,</span> <span class="s">&#34;zzz&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">groupingBy</span><span class="o">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 実行結果：
+</span></span></span><span class="line"><span class="cl"><span class="c1">// {1=[a, c], 3=[bar, foo, zzz]}
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>groupingBy()</code>の 2 つ引数を取るシンプルな例としては以下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import static</span> <span class="nn">java.util.stream.Collectors.*</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">,</span> <span class="s">&#34;Bar&#34;</span><span class="o">,</span> <span class="s">&#34;C&#34;</span><span class="o">,</span> <span class="s">&#34;fOO&#34;</span><span class="o">,</span> <span class="s">&#34;zZz&#34;</span><span class="o">,</span> <span class="s">&#34;A&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">words</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">groupingBy</span><span class="o">(</span><span class="n">String</span><span class="o">::</span><span class="n">toLowerCase</span><span class="o">,</span> <span class="n">counting</span><span class="o">()));</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">freq</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 実行結果
+</span></span></span><span class="line"><span class="cl"><span class="c1">// {a=2, bar=1, c=1, foo=1, zzz=1}
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="544-a-name-1aその他のメソッド">5.4.4. <a name='-1'></a>その他のメソッド</h4>
+<p><code>downstream collector</code>としての利用に特化した以下のメソッドは、<code>collect(counting())</code>のように利用してはいけない。
+<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a>に同様の機能があるため。</p>
+<ul>
+<li>counting()
+<ul>
+<li>要素数を取得する。</li>
+</ul>
+</li>
+<li>summing*()
+<ul>
+<li>入力値を型変換して、合算する。</li>
+</ul>
+</li>
+<li>averaging*()
+<ul>
+<li>入力値を型変換して、平均値を算出する。
+空ストリームの場合は 0 を返す。</li>
+</ul>
+</li>
+<li>summarizing*()
+<ul>
+<li>入力値を型変換して、各種集計値を算出する。</li>
+</ul>
+</li>
+<li>reducing()
+<ul>
+<li>値を集約する。</li>
+</ul>
+</li>
+<li>filtering()
+<ul>
+<li>条件を満たす値だけ他のコレクターに渡す。</li>
+</ul>
+</li>
+<li>mapping()
+<ul>
+<li>値を変換して他のコレクターを呼び出す。</li>
+</ul>
+</li>
+<li>flatMapping()
+<ul>
+<li>値を Stream に変換して他のコレクターを呼び出す。</li>
+</ul>
+</li>
+<li>collectingAndThen()
+<ul>
+<li>他のコレクターを呼び出した結果を変換する。</li>
+</ul>
+</li>
+<li>minBy()
+<ul>
+<li>最小値を取得する。</li>
+</ul>
+</li>
+<li>maxBy()
+<ul>
+<li>最大値を取得する。</li>
+</ul>
+</li>
+<li>joining()
+<ul>
+<li>結合して String にする。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html">Collectors</a>や<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html">Stream</a>の利用方法については、こちらのブログ(<a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a>, <a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a>)が入門として(大まかに把握するのに)良さそうである。</p>
+</blockquote>
+<h2 id="6-a-name47streamcollectiona項目-47-戻り値型として-stream-よりも-collection-を選ぶ">6. <a name='47StreamCollection'></a>項目 47 戻り値型として Stream よりも Collection を選ぶ</h2>
+<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+<p>連続した要素をどの型で返すべきか？については、Collection一択</p>
+<h3 id="62-a-name-1a選択肢にはなにがあるか">6.2. <a name='-1'></a>選択肢にはなにがあるか</h3>
+<p>以下4択。</p>
+<ul>
+<li>ストリーム</li>
+<li>Iterable</li>
+<li>collectionインターフェース</li>
+<li>配列</li>
+</ul>
+<h3 id="63-a-name-1aストリームで返す">6.3. <a name='-1'></a>ストリームで返す</h3>
+<p>StreamはIterableを継承していない。
+ストリームを処理する場合には、さらに加工が必要。</p>
+<p>for-eachの場合は、Streamのiteratorメソッドを使うしかない。</p>
+<p>以下のようにするとコンパイルできないので…</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">var</span> <span class="n">list</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;1&#34;</span><span class="o">,</span><span class="s">&#34;2&#34;</span><span class="o">,</span><span class="s">&#34;3&#34;</span><span class="o">).</span><span class="na">stream</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="n">Object</span> <span class="n">o</span> <span class="o">:</span> <span class="n">list</span><span class="o">.</span><span class="na">iterator</span><span class="o">())</span> <span class="o">{</span>  <span class="c1">// cannot compile
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下のような対処が必要。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">var</span> <span class="n">list</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;1&#34;</span><span class="o">,</span><span class="s">&#34;2&#34;</span><span class="o">,</span><span class="s">&#34;3&#34;</span><span class="o">).</span><span class="na">stream</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">it</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span> <span class="c1">// just workaround 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Object</span> <span class="n">o</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>これを簡素にするクラスをつくってもいいが、このようにユーザコード側が煩雑になることを理解する。</p>
+<h3 id="64-a-nameiterableaiterable-で返す">6.4. <a name='Iterable'></a>Iterable で返す</h3>
+<p>ストリームと同じなので割愛</p>
+<h3 id="65-a-namecollectionacollection-で返す">6.5. <a name='collection'></a>collection で返す</h3>
+<p>CollectionインターフェースはIterableのサブタイプであり、ストリームのメソッドも持っているので、イテレーション処理でもストリーム処理でも対応できる。
+そのため、連続した要素を返すメソッドの最適な戻り値型は、たいていの場合、Collectionとなる。</p>
+<p>もし返却する連続要素が十分小さければ、ArrayListやHashSetなどのCollectionを実装したものを返せばいいのだが、Collectionとして返却するために、大きな連続要素をメモリに蓄えることはすべきでない(このときは、StreamやIteratorも可。JDBCのResultSetと同じといっても良い。)。</p>
+<p>返却する連続要素が、大きいけれど簡潔に表現できるものであれば、特別にcollectionを実装してやることを考える。</p>
+<h3 id="66-a-name-1a先輩からいただいたありがたいお言葉">6.6. <a name='-1'></a>先輩からいただいたありがたいお言葉</h3>
+<p>そもそも、複数の値を返却するAPIが、Streamを返却するということに違和感があります。
+たいていのAPIは、「XXXという条件のものを全部くれ」という言い方になるので、集合であることが普通です。<br>
+Streamだと、その名の通り「流れ」になるので、継続的に流れてくる(なので、前の要素には戻らない)、という意味がでてきます。
+集合とは違う概念が混ざってくる認識です。<br>
+<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html">https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html</a>
+を読んでみると違いが書いています。</p>
+<h2 id="7-a-name48a項目-48-ストリームを並列化するときは注意を払う">7. <a name='48'></a>項目 48 ストリームを並列化するときは注意を払う</h2>
+<h3 id="71-a-name-1a結論">7.1. <a name='-1'></a>結論</h3>
+<p>気軽に並列化できる点は素晴らしいのですが、その裏の仕組みが変わるわけでは有りません。
+並列処理独特の考慮点がなくなるわけではないので、慎重に使いましょう。</p>
+<h3 id="72-a-name-1a得意不得意">7.2. <a name='-1'></a>得意/不得意</h3>
+<h4 id="721-a-name-1a得意">7.2.1. <a name='-1'></a>得意</h4>
+<p>要素1つで独立した操作ができるとき</p>
+<ul>
+<li>Collectionに対して処理する
+<ul>
+<li>ArrayList、HashMap、HashSet、ConcurrentHashMap</li>
+<li>intやlongのrangeも同等</li>
+</ul>
+</li>
+<li>リダクション操作
+<ul>
+<li>min、max、count、sum</li>
+</ul>
+</li>
+<li>短絡評価
+<ul>
+<li>anyMatch、allMatch、noneMatch</li>
+<li>filterも同等</li>
+</ul>
+</li>
+</ul>
+<h4 id="722-a-name-1a不得意">7.2.2. <a name='-1'></a>不得意</h4>
+<p>他の要素と関係を踏まえた操作のとき</p>
+<ul>
+<li>limit</li>
+<li>collectメソッドによって行われる可変リダクション操作(と書いてあるが、ケースバイケース)</li>
+</ul>
+<h4 id="723-a-name-1a一例">7.2.3. <a name='-1'></a>一例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">var</span> <span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//      .parallel()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="n">value</span> <span class="o">%</span> <span class="n">10000</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">boxed</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toSet</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stopWatch</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">());</span><span class="err">`</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>paralellの有りなしで、↑のような話だと恩恵を受けやすい。</p>
+<p>paralellなしだと3秒、paralellありだと1秒くらい(環境によって差がある)</p>
+<h4 id="724-a-name-1a並列化すると起きる問題">7.2.4. <a name='-1'></a>並列化すると起きる問題</h4>
+<p>ストリームだから起きるというわけではなくが、ストリームだから手軽にかけてしまい、ついつい起こしてしまいやすい、ことになる。</p>
+<p>一言で言えば、副作用がない処理をする、なのだが、StreamのJavadocには重要なことが書いてある。</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html#Associativity">結合的</a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html#NonInterference">非干渉</a></li>
+<li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html#Statelessness">ステートレス</a></li>
+</ul>
+<h2 id="8-a-nameurla参考-url">8. <a name='URL'></a>参考 URL</h2>
+<ul>
+<li><a href="https://qiita.com/nannany/items/7fa3bf6c3e7d69af8efd">effective java 3rd まとめ</a></li>
+<li><a href="https://qiita.com/minebreaker/items/de3b264093fd7c9639af">Effective Java Third Edition 2 版からの更新点 個人的メモ</a></li>
+<li><a href="http://appresso.hatenablog.com/entry/2018/01/31/183452">Effective Java 第三版、ゲットだぜ！</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/functionalinterface.html">Java 関数型インターフェース</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/methodreference.html">Java メソッド参照・コンストラクター参照</a></li>
+<li><a href="https://www.sejuku.net/blog/22592#i">【楽チン Java】メソッド参照での呼び出し方</a></li>
+<li><a href="https://riptutorial.com/ja/java/example/5080/%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%8F%82%E7%85%A7">RIP Tutorial メソッド参照</a></li>
+<li><a href="https://qiita.com/subaru44k/items/c55d9b9fc419f0d09c64">Java8 の Function, Consumer, Supplier, Predicate の調査</a></li>
+<li><a href="http://www.dcom-web.co.jp/lab/java/functional_interface">[Java]メソッドの引数にメソッドを渡す方法[関数型インターフェース]</a></li>
+<li><a href="https://qiita.com/sano1202/items/64593e8e981e8d6439d3">Java8 のラムダ式を理解する</a></li>
+<li><a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/An-example-of-UnaryOperator-in-functional-Lambda-expressions">An example of UnaryOperator in functional Lambda expressions</a></li>
+<li><a href="http://pppurple.hatenablog.com/entry/2016/08/28/213734">Java8 Project Lambda (ラムダ式)</a></li>
+<li><a href="https://qiita.com/shintaness/items/f4c0a446ac168c730b89">Collectors.toMap で任意の Map クラスを返す</a></li>
+<li><a href="https://fits.hatenablog.com/entry/2015/04/20/205940">Java 8 でグルーピング処理 - List<V> を Map&lt;K, V&gt; へ変換</a></li>
+<li><a href="https://www.geeksforgeeks.org/java-8-collectors-counting-with-examples/">Java 8 | Collectors counting() with Examples</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a></li>
+<li><a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a></li>
+<li><a href="https://www.geeksforgeeks.org/power-set/">GeeksforGeeks</a></li>
+<li><a href="https://qiita.com/frost_star/items/a36e66dff419e7c07151">Java8 Stream のリダクション操作について</a></li>
+<li><a href="https://qiita.com/heatflat1021/items/fd09761df434f99cb829">短絡評価って本当に処理が速いの？ Java における&amp;&amp;と&amp;の違い</a></li>
+<li><a href="http://mathworld.wolfram.com/PrimeCountingFunction.html">Prime Counting Function</a></li>
+<li><a href="https://www.atmarkit.co.jp/ait/articles/1405/20/news032_3.html">Stream API の主なメソッドと処理結果の Optional クラスの使い方 (3/4)</a></li>
+</ul>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          <a href="/tags/%E3%83%A9%E3%83%A0%E3%83%80%E5%BC%8F%E3%81%A8%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0/">ラムダ式とストリーム</a>
+          <a href="/tags/%E5%80%8B%E4%BA%BA%E7%9A%84%E3%83%A1%E3%83%A2/">個人的メモ</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20191109-effective-java-3rd-8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Effective Java 3rd [Chapter 8] - メソッド</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20191109-effective-java-3rd-6/">
+            <span class="next-text nav-default">Effective Java 3rd [Chapter 6] - enum とアノテーション</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

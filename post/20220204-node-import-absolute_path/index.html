@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Node.js Import AbsolutePath - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstruct Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。
+" /><meta name="keywords" content="node.js, typescript, import, absolute-path" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20220204-node-import-absolute_path/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Node.js Import AbsolutePath" />
+<meta property="og:description" content="Abstruct
+Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20220204-node-import-absolute_path/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-02-04T20:20:20+09:00" />
+<meta property="article:modified_time" content="2022-02-04T20:20:20+09:00" />
+
+<meta itemprop="name" content="Node.js Import AbsolutePath">
+<meta itemprop="description" content="Abstruct
+Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。"><meta itemprop="datePublished" content="2022-02-04T20:20:20+09:00" />
+<meta itemprop="dateModified" content="2022-02-04T20:20:20+09:00" />
+<meta itemprop="wordCount" content="490">
+<meta itemprop="keywords" content="node.js,typescript,import,absolute-path," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Node.js Import AbsolutePath"/>
+<meta name="twitter:description" content="Abstruct
+Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Node.js Import AbsolutePath</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-02-04 </span>
+        <div class="post-category">
+            <a href="/categories/node.js/"> node.js </a>
+            </div>
+          <span class="more-meta"> 490 words </span>
+          <span class="more-meta"> 1 min read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstruct">Abstruct</h1>
+<p>Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Settings">Settings</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#tools">tools</a></li>
+<li>1.2. <a href="#tsconfig.json">tsconfig.json</a></li>
+<li>1.3. <a href="#package.json">package.json</a></li>
+<li>1.4. <a href="#Howtorun">How to run</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#Appendix">Appendix</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#tsconfig.json-1">tsconfig.json</a></li>
+<li>2.2. <a href="#package.json-1">package.json</a></li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#Reference">Reference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namesettingsasettings">1. <a name='Settings'></a>Settings</h2>
+<p>Typescriptでpath aliasを使うと、絶対パスでimport文が使えて可読性があがるため、以下の設定を入れる。</p>
+<p>設定を入れると、以下のように import できるようになる。</p>
+<ul>
+<li>ライブラリパス
+<ul>
+<li><code>src/util/A</code></li>
+</ul>
+</li>
+<li>import方法
+<ul>
+<li><code>import {A} from '@/util/A'</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="11-a-nametoolsatools">1.1. <a name='tools'></a>tools</h3>
+<p>以下のツールが必要。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">npm install --save tsconfig-paths
+</span></span><span class="line"><span class="cl">npm install --save tsc-alias
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="12-a-nametsconfigjsonatsconfigjson">1.2. <a name='tsconfig.json'></a>tsconfig.json</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;compilerOptions&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">...(略)</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;rootDir&#34;</span><span class="p">:</span> <span class="s2">&#34;src&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;outDir&#34;</span><span class="p">:</span> <span class="s2">&#34;.dist&#34;</span><span class="p">,</span>    
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;baseUrl&#34;</span><span class="p">:</span> <span class="s2">&#34;./&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;paths&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;@/*&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;src/*&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="13-a-namepackagejsonapackagejson">1.3. <a name='package.json'></a>package.json</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">&#34;scripts&#34;</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 開発用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;start:dev&#34;</span><span class="p">:</span> <span class="s2">&#34;ts-node --files -r tsconfig-paths/register src/server.ts&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 本番用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;start&#34;</span><span class="p">:</span> <span class="s2">&#34;node .dist/server.js&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;build&#34;</span><span class="p">:</span> <span class="s2">&#34;run-s build:clean build:tsc&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;build:clean&#34;</span><span class="p">:</span> <span class="s2">&#34;rimraf .dist&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;build:tsc&#34;</span><span class="p">:</span> <span class="s2">&#34;tsc -p tsconfig.build.json &amp;&amp; tsc-alias -p tsconfig.json&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span><span class="err">,</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="14-a-namehowtorunahow-to-run">1.4. <a name='Howtorun'></a>How to run</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 開発用</span>
+</span></span><span class="line"><span class="cl">yarn start:dev
+</span></span><span class="line"><span class="cl"><span class="c1"># 本番用</span>
+</span></span><span class="line"><span class="cl">yarn build
+</span></span><span class="line"><span class="cl">yarn start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-a-nameappendixaappendix">2. <a name='Appendix'></a>Appendix</h2>
+<p>Reactでのフロントエンドアプリの場合は以下の設定でOK.</p>
+<h3 id="21-a-nametsconfigjson-1atsconfigjson">2.1. <a name='tsconfig.json-1'></a>tsconfig.json</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;compilerOptions&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;rootDir&#34;</span><span class="p">:</span><span class="s2">&#34;./src&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;baseUrl&#34;</span><span class="p">:</span> <span class="s2">&#34;./&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;include&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;src/**/*&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="22-a-namepackagejson-1apackagejson">2.2. <a name='package.json-1'></a>package.json</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">&#34;scripts&#34;</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 開発用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;start:dev&#34;</span><span class="p">:</span> <span class="s2">&#34;react-scripts start&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 本番用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;start&#34;</span><span class="p">:</span> <span class="s2">&#34;npx serve -s build&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;build&#34;</span><span class="p">:</span> <span class="s2">&#34;react-scripts build&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span><span class="err">,</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-a-namereferenceareference">3. <a name='Reference'></a>Reference</h2>
+<ul>
+<li><a href="https://sunday-morning.app/posts/2020-11-13-path-alias-typescript-tsc">path aliasを使ったTypescriptファイルをtscでコンパイルする</a></li>
+<li><a href="https://qiita.com/mangano-ito/items/75e65071c9c482ddc335">ts-node で TypeScript + node をサクッと実行する - Qiita</a></li>
+<li><a href="https://qiita.com/Nekonecode/items/09b26deec21a5f83adb1">tsconfig.jsonのrootDirとbaseUrlに関するメモ [TypeScript] - Qiita</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/node.js/">node.js</a>
+          <a href="/tags/typescript/">typescript</a>
+          <a href="/tags/import/">import</a>
+          <a href="/tags/absolute-path/">absolute-path</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20220323-circuit-breaker-opossum/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Circuit Breaker Opossum</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20220203-react-learning/">
+            <span class="next-text nav-default">React Learning</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

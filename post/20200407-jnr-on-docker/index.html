@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Using JNR on Container - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="" /><meta name="keywords" content="docker, jnr, jib" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20200407-jnr-on-docker/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Using JNR on Container" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20200407-jnr-on-docker/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-04-07T16:16:55+09:00" />
+<meta property="article:modified_time" content="2020-04-07T16:16:55+09:00" />
+
+<meta itemprop="name" content="Using JNR on Container">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2020-04-07T16:16:55+09:00" />
+<meta itemprop="dateModified" content="2020-04-07T16:16:55+09:00" />
+<meta itemprop="wordCount" content="1321">
+<meta itemprop="keywords" content="docker,jnr,jib," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Using JNR on Container"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Using JNR on Container</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-07 </span>
+        <div class="post-category">
+            <a href="/categories/docker/"> docker </a>
+            </div>
+          <span class="more-meta"> 1321 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <p><img src="/img/20200407/using-jnr-on-docker.png" alt=""></p>
+<h1 id="springboot-use-jnr-on-container">SpringBoot use JNR on Container</h1>
+<p><a href="https://takuto-n.github.io/post/20200405-docker-springboot_to_db/">Springboot on Container</a>の続きの内容です。</p>
+<p>構成図の通り、SpringBoot上でJNRを使用し、Cライブラリ(<code>.so</code>)を使ってみようと思います。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#TechnicalElements">Technical Elements</a></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><a href="#CodingSettingsofEachTechnicalElement">Coding &amp; Settings of Each Technical Element</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#SpringBootandJNR">SpringBoot and JNR</a>
+<ul>
+<li>2.1.1. <a href="#RestController.java">RestController.java</a></li>
+<li>2.1.2. <a href="#NativeCaller.java">NativeCaller.java</a></li>
+<li>2.1.3. <a href="#euclid.cpp">euclid.cpp</a></li>
+</ul>
+</li>
+<li>2.2. <a href="#jib-gradle-plugin">jib-gradle-plugin</a>
+<ul>
+<li>2.2.1. <a href="#build.gradle">build.gradle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#BuildandRun">Build and Run</a></li>
+</ol>
+<ul>
+<li>3.1. <a href="#Build">Build</a></li>
+<li>3.2. <a href="#Run">Run</a></li>
+</ul>
+</li>
+<li>
+<ol start="4">
+<li><a href="#Trouble">Trouble</a></li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li><a href="#ExecutionResult">Execution Result</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-nametechnicalelementsatechnical-elements">1. <a name='TechnicalElements'></a>Technical Elements</h2>
+<ul>
+<li><a href="https://spring.io/projects/spring-boot">Spring Boot</a>
+<ul>
+<li>Spring Framework ベースのアプリケーションを手軽に作成することができるフレームワーク</li>
+</ul>
+</li>
+<li><a href="https://www.docker.com/">Docker</a>
+<ul>
+<li>コンテナ仮想化を用いた OS レベルの仮想環境の構築ツール</li>
+</ul>
+</li>
+<li><a href="https://github.com/GoogleContainerTools/jib">GoogleContainerTools/jib: 🏗</a>
+<ul>
+<li><a href="https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin">jib-gradle-plugin</a></li>
+<li>Java アプリケーションを実行する Docker コンテナイメージを簡単に作成するためのツール</li>
+</ul>
+</li>
+<li><a href="https://cloud.google.com/docs/overview?hl=ja">GCP(Google Cloud Platform)</a>
+<ul>
+<li>Google が提供しているクラウドコンピューティングサービス
+<ul>
+<li>Google 検索や YouTube などでも同じインフラストラクチャーが利用されている。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/jnr/jnr-ffi">jnr/jnr-ffi</a>
+<ul>
+<li>Javaから簡単にCのライブラリを呼び出せるフレームワーク</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-a-namecodingsettingsofeachtechnicalelementacoding--settings-of-each-technical-element">2. <a name='CodingSettingsofEachTechnicalElement'></a>Coding &amp; Settings of Each Technical Element</h2>
+<h3 id="21-a-namespringbootandjnraspringboot-and-jnr">2.1. <a name='SpringBootandJNR'></a>SpringBoot and JNR</h3>
+<h4 id="211-a-namerestcontrollerjavaarestcontrollerjava">2.1.1. <a name='RestController.java'></a>RestController.java</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@RestController</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Slf4j</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RestController</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">&#34;/jnr&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">jnr</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="s">&#34;load&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">nativeCaller</span> <span class="o">=</span> <span class="n">LibraryLoader</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">NativeCaller</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">load</span><span class="o">(</span><span class="s">&#34;jnr-native-side_release-0.0.1&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="s">&#34;exec&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">10000</span><span class="o">).</span><span class="na">forEach</span><span class="o">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">var</span> <span class="n">result</span> <span class="o">=</span> <span class="n">nativeCaller</span><span class="o">.</span><span class="na">euclid</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">value</span> <span class="o">*</span> <span class="n">2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">%</span> <span class="n">1000</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;result : &#34;</span> <span class="o">+</span> <span class="n">result</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">stopWatch</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Environment variable reading test
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;hoge value = {}&#34;</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="na">getenv</span><span class="o">(</span><span class="s">&#34;hoge&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="212-a-namenativecallerjavaanativecallerjava">2.1.2. <a name='NativeCaller.java'></a>NativeCaller.java</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">NativeCaller</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">euclid</span><span class="o">(</span><span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="213-a-nameeuclidcppaeuclidcpp">2.1.3. <a name='euclid.cpp'></a>euclid.cpp</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;euclid.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="kt">int</span> <span class="n">euclid</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">euclid</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">r</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tmp</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">m</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">=</span> <span class="n">m</span> <span class="o">%</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">euclid</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="22-a-namejib-gradle-pluginajib-gradle-plugin">2.2. <a name='jib-gradle-plugin'></a>jib-gradle-plugin</h3>
+<h4 id="221-a-namebuildgradleabuildgradle">2.2.1. <a name='build.gradle'></a>build.gradle</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">plugins</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// for docker
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">id</span> <span class="s">&#34;com.google.cloud.tools.jib&#34;</span> <span class="n">version</span> <span class="s">&#34;2.1.0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// jnr
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">implementation</span> <span class="err">&#39;</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">jnr</span><span class="o">:</span><span class="n">jnr</span><span class="o">-</span><span class="n">ffi</span><span class="o">:</span><span class="n">2</span><span class="o">.</span><span class="na">1</span><span class="o">.</span><span class="na">11</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">.</span><span class="na">ow2</span><span class="o">.</span><span class="na">asm</span><span class="o">:</span><span class="n">asm</span><span class="o">:</span><span class="n">7</span><span class="o">.</span><span class="na">3</span><span class="o">.</span><span class="na">1</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">.</span><span class="na">ow2</span><span class="o">.</span><span class="na">asm</span><span class="o">:</span><span class="n">asm</span><span class="o">-</span><span class="n">commons</span><span class="o">:</span><span class="n">7</span><span class="o">.</span><span class="na">3</span><span class="o">.</span><span class="na">1</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">.</span><span class="na">ow2</span><span class="o">.</span><span class="na">asm</span><span class="o">:</span><span class="n">asm</span><span class="o">-</span><span class="n">analysis</span><span class="o">:</span><span class="n">7</span><span class="o">.</span><span class="na">3</span><span class="o">.</span><span class="na">1</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">.</span><span class="na">ow2</span><span class="o">.</span><span class="na">asm</span><span class="o">:</span><span class="n">asm</span><span class="o">-</span><span class="n">tree</span><span class="o">:</span><span class="n">7</span><span class="o">.</span><span class="na">3</span><span class="o">.</span><span class="na">1</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">implementation</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">.</span><span class="na">ow2</span><span class="o">.</span><span class="na">asm</span><span class="o">:</span><span class="n">asm</span><span class="o">-</span><span class="n">util</span><span class="o">:</span><span class="n">7</span><span class="o">.</span><span class="na">3</span><span class="o">.</span><span class="na">1</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 省略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">jib</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Copies files from &#39;src/main/clib&#39; to &#39;/&#39;(default)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// from : src/main/clib/jnr-native-side_release/0.0.1/*.so
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// to   : /jnr-native-side_release/0.0.1/*.so
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">extraDirectories</span><span class="o">.</span><span class="na">paths</span> <span class="o">=</span> <span class="o">[</span><span class="err">&#39;</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">clib</span><span class="err">&#39;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Set docker image name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">to</span><span class="o">.</span><span class="na">image</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">springio</span><span class="o">/</span><span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">container</span><span class="o">.</span><span class="na">environment</span> <span class="o">=</span> <span class="o">[</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// Set jvm option
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="n">JAVA_TOOL_OPTIONS</span><span class="o">:</span><span class="s">&#34;-Djava.library.path=/jnr-native-side_release/0.0.1&#34;</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// Set test environment value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="n">hoge</span><span class="o">:</span><span class="s">&#34;test&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-a-namebuildandrunabuild-and-run">3. <a name='BuildandRun'></a>Build and Run</h2>
+<h3 id="31-a-namebuildabuild">3.1. <a name='Build'></a>Build</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ gradle jibDockerBuild
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="32-a-namerunarun">3.2. <a name='Run'></a>Run</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ docker run -p 8080:8080 -t springio/gs-spring-boot-docker-jnr
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-a-nametroubleatrouble">4. <a name='Trouble'></a>Trouble</h2>
+<p><code>jib.extraDirectories.paths</code>で指定したファイルが、コンテナ上のどこにあるのか分からない。</p>
+<p>コンテナの中を実際に見てみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">$</span> <span class="n">mkdir</span> <span class="n">tmp</span>
+</span></span><span class="line"><span class="cl"><span class="n">$</span> <span class="n">docker</span> <span class="n">container</span> <span class="n">ls</span>
+</span></span><span class="line"><span class="cl"><span class="n">CONTAINER</span> <span class="n">ID</span>        <span class="n">IMAGE</span>                                <span class="n">COMMAND</span>                  <span class="n">CREATED</span>             <span class="n">STATUS</span>              <span class="n">PORTS</span>                    <span class="n">NAMES</span>
+</span></span><span class="line"><span class="cl"><span class="n">d48bfc8bfad8</span>        <span class="n">springio</span><span class="o">/</span><span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span>   <span class="s">&#34;java -cp /app/resou…&#34;</span>   <span class="n">3</span> <span class="n">minutes</span> <span class="n">ago</span>       <span class="n">Up</span> <span class="n">3</span> <span class="n">minutes</span>        <span class="n">0</span><span class="o">.</span><span class="na">0</span><span class="o">.</span><span class="na">0</span><span class="o">.</span><span class="na">0</span><span class="o">:</span><span class="n">8080</span><span class="o">-&gt;</span><span class="n">8080</span><span class="o">/</span><span class="n">tcp</span>   <span class="n">loving_morse</span>
+</span></span><span class="line"><span class="cl"><span class="n">$</span> <span class="n">docker</span> <span class="n">export</span> <span class="n">d48bfc8bfad8</span>  <span class="o">&gt;</span> <span class="o">./</span><span class="n">tmp</span><span class="o">/</span><span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span><span class="o">.</span><span class="na">tar</span>
+</span></span><span class="line"><span class="cl"><span class="n">$</span> <span class="n">tar</span> <span class="o">-</span><span class="n">xvf</span> <span class="o">./</span><span class="n">tmp</span><span class="o">/</span><span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span><span class="o">.</span><span class="na">tar</span> 
+</span></span><span class="line"><span class="cl"><span class="n">$</span> <span class="n">ll</span>
+</span></span><span class="line"><span class="cl"><span class="n">total</span> <span class="n">217372</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">5</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>        <span class="n">50</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">app</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">bin</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">boot</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">4</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>        <span class="n">43</span> <span class="n">Apr</span>  <span class="n">7</span> <span class="n">08</span><span class="o">:</span><span class="n">24</span> <span class="n">dev</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span> <span class="nf">12</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>      <span class="n">4096</span> <span class="n">Apr</span>  <span class="n">7</span> <span class="n">08</span><span class="o">:</span><span class="n">24</span> <span class="n">etc</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--.</span>  <span class="n">1</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span> <span class="n">222581248</span> <span class="n">Apr</span>  <span class="n">7</span> <span class="n">08</span><span class="o">:</span><span class="n">41</span> <span class="n">gs</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">jnr</span><span class="o">.</span><span class="na">tar</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">3</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>        <span class="n">21</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">home</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">3</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>       <span class="n">172</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">jnr</span><span class="o">-</span><span class="kd">native</span><span class="o">-</span><span class="n">side_release</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">3</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>        <span class="n">30</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">lib</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>        <span class="n">34</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">lib64</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">proc</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwx</span><span class="o">------.</span>  <span class="n">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">root</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">run</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">.</span>  <span class="nf">2</span>   <span class="o">(</span><span class="n">ユーザ名</span><span class="o">)</span>         <span class="n">6</span> <span class="n">Jan</span>  <span class="n">1</span>  <span class="n">1970</span> <span class="n">sbin</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-a-nameexecutionresultaexecution-result">5. <a name='ExecutionResult'></a>Execution Result</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ docker run -p 8080:8080 -t springio/gs-spring-boot-docker-jnr
+</span></span><span class="line"><span class="cl">Picked up JAVA_TOOL_OPTIONS: -Djava.library.path<span class="o">=</span>/jnr-native-side_release/0.0.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  .   ____          _            __ _ _
+</span></span><span class="line"><span class="cl"> /<span class="se">\\</span> / ___<span class="s1">&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
+</span></span></span><span class="line"><span class="cl"><span class="s1">( ( )\___ | &#39;</span>_ <span class="p">|</span> <span class="s1">&#39;_| | &#39;</span>_ <span class="se">\/</span> _<span class="sb">`</span> <span class="p">|</span> <span class="se">\ \ \ \
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> <span class="se">\\</span>/  ___<span class="o">)</span><span class="p">|</span> <span class="p">|</span>_<span class="o">)</span><span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">||</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span>  <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;  |____| .__|_| |_|_| |_\__, | / / / /
+</span></span></span><span class="line"><span class="cl"><span class="s1"> =========|_|==============|___/=/_/_/_/
+</span></span></span><span class="line"><span class="cl"><span class="s1"> :: Spring Boot ::        (v2.2.2.RELEASE)
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:14:42.569  INFO 1 --- [           main] c.e.s.SpringbootHelloworldApplication    : Starting SpringbootHelloworldApplication on d48bfc8bfad8 with PID 1 (/app/clas
+</span></span></span><span class="line"><span class="cl"><span class="s1">ses started by root in /)
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:14:42.579  INFO 1 --- [           main] c.e.s.SpringbootHelloworldApplication    : No active profile set, falling back to default profiles: default
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:14:45.920  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:14:45.957  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:14:45.957  INFO 1 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.184  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet &#39;</span>dispatcherServlet<span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.187  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet &#39;</span>dispatcherServlet<span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.220  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 32 ms
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.680  INFO 1 --- [nio-8080-exec-1] c.e.springboothelloworld.RestController  : result : 1000
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.680  INFO 1 --- [nio-8080-exec-1] c.e.springboothelloworld.RestController  : result : 2000
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.680  INFO 1 --- [nio-8080-exec-1] c.e.springboothelloworld.RestController  : result : 3000
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.681  INFO 1 --- [nio-8080-exec-1] c.e.springboothelloworld.RestController  : result : 4000
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.681  INFO 1 --- [nio-8080-exec-1] c.e.springboothelloworld.RestController  : result : 5000
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.681  INFO 1 --- [nio-8080-exec-1] c.e.springboothelloworld.RestController  : result : 6000
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.681  INFO 1 --- [nio-8080-exec-1] c.e.springboothelloworld.RestController  : result : 7000
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.681  INFO 1 --- [nio-8080-exec-1] c.e.springboothelloworld.RestController  : result : 8000
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.681  INFO 1 --- [nio-8080-exec-1] c.e.springboothelloworld.RestController  : result : 9000
+</span></span></span><span class="line"><span class="cl"><span class="s1">2020-04-07 08:21:33.682  INFO 1 --- [nio-8080-exec-1] c.e.springboothelloworld.RestController  : StopWatch &#39;</span><span class="err">&#39;</span>: running <span class="nb">time</span> <span class="o">=</span> <span class="m">387303705</span> ns
+</span></span><span class="line"><span class="cl">---------------------------------------------
+</span></span><span class="line"><span class="cl">ns         %     Task name
+</span></span><span class="line"><span class="cl">---------------------------------------------
+</span></span><span class="line"><span class="cl"><span class="m">366506118</span>  095%  load
+</span></span><span class="line"><span class="cl"><span class="m">020797587</span>  005%  <span class="nb">exec</span>
+</span></span><span class="line"><span class="cl">2020-04-07 08:21:33.682  INFO <span class="m">1</span> --- <span class="o">[</span>nio-8080-exec-1<span class="o">]</span> c.e.springboothelloworld.RestController  : hoge <span class="nv">value</span> <span class="o">=</span> <span class="nb">test</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/docker/">docker</a>
+          <a href="/tags/jnr/">jnr</a>
+          <a href="/tags/jib/">jib</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20200408-use-kubernetes-on-gcp/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Using Kubernetes on GCP</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20200405-docker-springboot_to_db/">
+            <span class="next-text nav-default">Springboot on Container with jib</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

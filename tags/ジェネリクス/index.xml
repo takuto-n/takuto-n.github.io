@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ジェネリクス on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/tags/%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AA%E3%82%AF%E3%82%B9/</link>
+    <description>Recent content in ジェネリクス on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 03 Nov 2019 00:07:19 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AA%E3%82%AF%E3%82%B9/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Effective Java 3rd [Chapter 5] - ジェネリクス</title>
+      <link>https://takuto-n.github.io/post/20191103-effective-java-3rd-5/</link>
+      <pubDate>Sun, 03 Nov 2019 00:07:19 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20191103-effective-java-3rd-5/</guid>
+      <description>ジェネリクス Effective Java 第 3 版の個人的メモ 項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジ</description>
+    </item>
+    
+  </channel>
+</rss>

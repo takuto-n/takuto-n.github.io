@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>threadinit on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/tags/threadinit/</link>
+    <description>Recent content in threadinit on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 02 May 2020 14:35:29 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/threadinit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SpringBootアプリケーション起動直後にスレッドを初期化する方法②</title>
+      <link>https://takuto-n.github.io/post/20200502-thread-init-at-process-startup2/</link>
+      <pubDate>Sat, 02 May 2020 14:35:29 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20200502-thread-init-at-process-startup2/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;legend&gt;スレッド初期化のシーケンス図&lt;/legend&gt;
+&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200502/thread-init-flow.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SpringBootアプリケーション起動直後にスレッドを初期化する方法</title>
+      <link>https://takuto-n.github.io/post/20200425-thread-init-at-process-startup/</link>
+      <pubDate>Sat, 25 Apr 2020 17:11:21 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20200425-thread-init-at-process-startup/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;legend&gt;スレッド初期化のシーケンス図&lt;/legend&gt;
+&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200425/thread-init-flow.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

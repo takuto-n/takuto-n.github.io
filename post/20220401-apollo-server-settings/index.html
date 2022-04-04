@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Apollo Server Settings - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstruct Apollo Server Express ( apollo-server-express - npm ) を使ったサンプルアプリを作ってみました。
+以下のことを考慮しながら作ると少し躓いたので、この記事にまとめておきます。
+ チュートリアル Get started with Apollo Server - Apollo GraphQL Docs そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。 どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。 " /><meta name="keywords" content="apollo server, graphql, node.js" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20220401-apollo-server-settings/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Apollo Server Settings" />
+<meta property="og:description" content="Abstruct
+Apollo Server Express ( apollo-server-express - npm ) を使ったサンプルアプリを作ってみました。
+以下のことを考慮しながら作ると少し躓いたので、この記事にまとめておきます。
+
+チュートリアル Get started with Apollo Server - Apollo GraphQL Docs そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。
+どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20220401-apollo-server-settings/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-01T15:32:23+09:00" />
+<meta property="article:modified_time" content="2022-04-01T15:32:23+09:00" />
+
+<meta itemprop="name" content="Apollo Server Settings">
+<meta itemprop="description" content="Abstruct
+Apollo Server Express ( apollo-server-express - npm ) を使ったサンプルアプリを作ってみました。
+以下のことを考慮しながら作ると少し躓いたので、この記事にまとめておきます。
+
+チュートリアル Get started with Apollo Server - Apollo GraphQL Docs そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。
+どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。
+"><meta itemprop="datePublished" content="2022-04-01T15:32:23+09:00" />
+<meta itemprop="dateModified" content="2022-04-01T15:32:23+09:00" />
+<meta itemprop="wordCount" content="1330">
+<meta itemprop="keywords" content="apollo server,graphql,node.js," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Apollo Server Settings"/>
+<meta name="twitter:description" content="Abstruct
+Apollo Server Express ( apollo-server-express - npm ) を使ったサンプルアプリを作ってみました。
+以下のことを考慮しながら作ると少し躓いたので、この記事にまとめておきます。
+
+チュートリアル Get started with Apollo Server - Apollo GraphQL Docs そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。
+どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Apollo Server Settings</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-04-01 </span>
+        <div class="post-category">
+            <a href="/categories/node.js/"> node.js </a>
+            </div>
+          <span class="more-meta"> 1330 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstruct">Abstruct</h1>
+<p>Apollo Server Express ( <a href="https://www.npmjs.com/package/apollo-server-express">apollo-server-express - npm</a> ) を使ったサンプルアプリを作ってみました。</p>
+<p>以下のことを考慮しながら作ると少し躓いたので、この記事にまとめておきます。</p>
+<ul>
+<li>チュートリアル <a href="https://www.apollographql.com/docs/apollo-server/getting-started">Get started with Apollo Server - Apollo GraphQL Docs</a> そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。</li>
+<li>どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。</li>
+</ul>
+<hr>
+<p>目次</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Folderstructure">Folder structure</a></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><a href="#SourceCode">Source Code</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#server.ts">server.ts</a></li>
+<li>2.2. <a href="#interfaceindex.ts">interface/index.ts</a></li>
+<li>2.3. <a href="#interfaceerrorHandler.ts">interface/errorHandler.ts</a></li>
+<li>2.4. <a href="#interfacesample1sample1Resolver.ts">interface/sample1/sample1Resolver.ts</a></li>
+<li>2.5. <a href="#domainsample1sample1.ts">domain/sample1/sample1.ts</a></li>
+<li>2.6. <a href="#domainmodelSample1Result.ts">domain/model/Sample1Result.ts</a></li>
+<li>2.7. <a href="#interfacesample2sample2Resolver.ts">interface/sample2/sample2Resolver.ts</a></li>
+<li>2.8. <a href="#domainsample2sample2.ts">domain/sample2/sample2.ts</a></li>
+<li>2.9. <a href="#domainmodelSample2Result.ts">domain/model/Sample2Result.ts</a></li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#Reference">Reference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<hr>
+<h2 id="1-a-namefolderstructureafolder-structure">1. <a name='Folderstructure'></a>Folder structure</h2>
+<p>今回、紹介するコードのフォルダ構成を載せます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">src
+</span></span><span class="line"><span class="cl">├── domain <span class="c1"># 業務ロジック</span>
+</span></span><span class="line"><span class="cl">│   ├── model
+</span></span><span class="line"><span class="cl">│   │   ├── Sample1Result.ts
+</span></span><span class="line"><span class="cl">│   │   └── Sample2Result.ts
+</span></span><span class="line"><span class="cl">│   ├── sample1
+</span></span><span class="line"><span class="cl">│   │   └── sample1.ts
+</span></span><span class="line"><span class="cl">│   ├── sample2
+</span></span><span class="line"><span class="cl">│   │   └── sample2.ts
+</span></span><span class="line"><span class="cl">├── interface <span class="c1"># Apollo Serverと業務ロジックの関連付け</span>
+</span></span><span class="line"><span class="cl">│   ├── errorHandler.ts
+</span></span><span class="line"><span class="cl">│   ├── index.ts
+</span></span><span class="line"><span class="cl">│   ├── sample1
+</span></span><span class="line"><span class="cl">│   │   └── sample1Resolver.ts
+</span></span><span class="line"><span class="cl">│   └── sample2
+</span></span><span class="line"><span class="cl">│       └── sample2Resolver.ts
+</span></span><span class="line"><span class="cl">├── server.ts
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-a-namesourcecodeasource-code">2. <a name='SourceCode'></a>Source Code</h2>
+<p>以下、単にソースコードを貼り付けておきます。<br>
+大事なポイントはインラインコメントで記載しておきます。</p>
+<h3 id="21-a-nameservertsaserverts">2.1. <a name='server.ts'></a>server.ts</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ApolloServer</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;apollo-server-express&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">ApolloServerPluginInlineTraceDisabled</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">ApolloServerPluginLandingPageProductionDefault</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;apollo-server-core&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">express</span> <span class="kr">from</span> <span class="s1">&#39;express&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">http</span> <span class="kr">from</span> <span class="s1">&#39;http&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ApolloServerPluginDrainHttpServer</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;apollo-server-core/dist/plugin/drainHttpServer&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">formatError</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/interface/errorHandler&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">schema</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/interface&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">listen</span><span class="p">(</span><span class="nx">port</span>: <span class="kt">number</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="p">&lt;</span><span class="nt">void</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">httpServer</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ApolloServer</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">schema</span><span class="p">,</span> <span class="c1">// ★ポイント1 スキーマの設定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">formatError</span><span class="p">,</span> <span class="c1">// ★ポイント2 エラーハンドラーの設定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">ApolloServerPluginLandingPageProductionDefault</span><span class="p">({</span> <span class="nx">footer</span>: <span class="kt">false</span> <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">ApolloServerPluginDrainHttpServer</span><span class="p">({</span> <span class="nx">httpServer</span> <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">ApolloServerPluginInlineTraceDisabled</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="k">await</span> <span class="nx">server</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">server</span><span class="p">.</span><span class="nx">applyMiddleware</span><span class="p">({</span> <span class="nx">app</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">httpServer</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">).</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;listening&#39;</span><span class="p">,</span> <span class="nx">resolve</span><span class="p">).</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">listen</span><span class="p">(</span><span class="mi">4000</span><span class="p">).</span><span class="nx">then</span><span class="p">(()</span><span class="o">:</span> <span class="k">void</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;🚀 Server is ready at localhost:4000&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="22-a-nameinterfaceindextsainterfaceindexts">2.2. <a name='interfaceindex.ts'></a>interface/index.ts</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">checkAuthSettingsDef</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">sample1Resolver</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/interface/sample1/sample1Resolver&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">sample2Def</span><span class="p">,</span> <span class="nx">sample2Resolver</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/interface/sample2/sample2Resolver&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">makeExecutableSchema</span><span class="p">,</span> <span class="nx">mergeSchemas</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@graphql-tools/schema&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">constraintDirective</span><span class="p">,</span> <span class="nx">constraintDirectiveTypeDefs</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;graphql-constraint-directive&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">schema</span> <span class="o">=</span> <span class="nx">mergeSchemas</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">schemas</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">constraintDirective</span><span class="p">()(</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// ポイント1 スキーマ定義とリゾルバーの関連付け
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// ポイント2 constraintDirectiveTypeDefs によって、graphql-constraint-directive で設定したバリデーションルールが適用される。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">makeExecutableSchema</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">resolvers</span>: <span class="kt">sample1Resolver</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">typeDefs</span><span class="o">:</span> <span class="p">[</span><span class="nx">constraintDirectiveTypeDefs</span><span class="p">,</span> <span class="nx">checkAuthSettingsDef</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">constraintDirective</span><span class="p">()(</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">makeExecutableSchema</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">resolvers</span>: <span class="kt">sample2Resolver</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">typeDefs</span><span class="o">:</span> <span class="p">[</span><span class="nx">constraintDirectiveTypeDefs</span><span class="p">,</span> <span class="nx">sample2Def</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="23-a-nameinterfaceerrorhandlertsainterfaceerrorhandlerts">2.3. <a name='interfaceerrorHandler.ts'></a>interface/errorHandler.ts</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">ValidationError</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;apollo-server-core&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">GraphQLError</span><span class="p">,</span> <span class="nx">GraphQLFormattedError</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;graphql&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">formatError</span> <span class="o">=</span> <span class="p">(</span><span class="nx">error</span>: <span class="kt">GraphQLError</span><span class="p">)</span><span class="o">:</span> <span class="nx">GraphQLFormattedError</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">code</span> <span class="o">=</span> <span class="nx">error</span><span class="o">?</span><span class="p">.</span><span class="nx">extensions</span><span class="p">.</span><span class="nx">code</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">===</span> <span class="s1">&#39;GRAPHQL_VALIDATION_FAILED&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// return a custom object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="k">new</span> <span class="nx">ValidationError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">error</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="24-a-nameinterfacesample1sample1resolvertsainterfacesample1sample1resolverts">2.4. <a name='interfacesample1sample1Resolver.ts'></a>interface/sample1/sample1Resolver.ts</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">sample1</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/domain/sample1/sample1&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">GraphQLResolverMap</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@apollographql/apollo-tools&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Sample1Result</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/domain/model/Sample1Result&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">checkAuthSettingsDef</span> <span class="o">=</span> <span class="sb">`
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  サンプル1結果
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  type Sample1Result {
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    結果
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    result: Boolean
+</span></span></span><span class="line"><span class="cl"><span class="sb">  }
+</span></span></span><span class="line"><span class="cl"><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  サンプル1
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  type Query {
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    サンプル1
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    sample1(input: Sample1Input!): Sample1Result!
+</span></span></span><span class="line"><span class="cl"><span class="sb">  }
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  サンプル1インプット
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  input Sample1Input {
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    ID
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    id: String! @constraint(minLength: 5)
+</span></span></span><span class="line"><span class="cl"><span class="sb">  }
+</span></span></span><span class="line"><span class="cl"><span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// ポイント1 ↑のschema定義にて、`@constraint(minLength: 5)` というバリデーションルールを定義している。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">sample1Resolver</span> <span class="o">=</span> <span class="p">()</span><span class="o">:</span> <span class="nx">GraphQLResolverMap</span><span class="p">&lt;</span><span class="nt">object</span><span class="p">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Query</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">sample1</span><span class="o">:</span> <span class="p">(</span><span class="nx">_parent</span>: <span class="kt">object</span><span class="p">,</span> <span class="nx">args</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span>: <span class="kt">string</span> <span class="p">})</span><span class="o">:</span> <span class="nx">Sample1Result</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">sample1</span><span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="25-a-namedomainsample1sample1tsadomainsample1sample1ts">2.5. <a name='domainsample1sample1.ts'></a>domain/sample1/sample1.ts</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Sample1Result</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/domain/model/Sample1Result&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">sample1</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Sample1Result</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;sample1: &#39;</span> <span class="o">+</span> <span class="nx">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">{</span> <span class="nx">result</span>: <span class="kt">true</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="26-a-namedomainmodelsample1resulttsadomainmodelsample1resultts">2.6. <a name='domainmodelSample1Result.ts'></a>domain/model/Sample1Result.ts</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">Sample1Result</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">result</span>: <span class="kt">boolean</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="27-a-nameinterfacesample2sample2resolvertsainterfacesample2sample2resolverts">2.7. <a name='interfacesample2sample2Resolver.ts'></a>interface/sample2/sample2Resolver.ts</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">sample2</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/domain/sample2/sample2&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">GraphQLResolverMap</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@apollographql/apollo-tools&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Sample2Result</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/domain/model/Sample2Result&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">sample2Def</span> <span class="o">=</span> <span class="sb">`
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  サンプル2結果
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  type Sample2Result {
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    結果
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    result: Boolean
+</span></span></span><span class="line"><span class="cl"><span class="sb">  }
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  サンプル2
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  type Mutation {
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    サンプル2
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    sample2(input: Sample2Input!): Sample2Result!
+</span></span></span><span class="line"><span class="cl"><span class="sb">  }
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  サンプル2インプット
+</span></span></span><span class="line"><span class="cl"><span class="sb">  &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">  input IdCheckInput {
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    ID
+</span></span></span><span class="line"><span class="cl"><span class="sb">    &#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sb">    id: String! @constraint(minLength: 5)
+</span></span></span><span class="line"><span class="cl"><span class="sb">  }
+</span></span></span><span class="line"><span class="cl"><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">sample2Resolver</span> <span class="o">=</span> <span class="p">()</span><span class="o">:</span> <span class="nx">GraphQLResolverMap</span><span class="p">&lt;</span><span class="nt">object</span><span class="p">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Mutation</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">sample2</span><span class="o">:</span> <span class="p">(</span><span class="nx">_parent</span>: <span class="kt">object</span><span class="p">,</span> <span class="nx">args</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span>: <span class="kt">string</span> <span class="p">})</span><span class="o">:</span> <span class="nx">Sample2Result</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">sample2</span><span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="28-a-namedomainsample2sample2tsadomainsample2sample2ts">2.8. <a name='domainsample2sample2.ts'></a>domain/sample2/sample2.ts</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Sample2Result</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/domain/model/Sample2Result&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ID存在チェック
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kd">function</span> <span class="nx">sample2</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Sample2Result</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;sample2: &#39;</span> <span class="o">+</span> <span class="nx">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">{</span> <span class="nx">result</span>: <span class="kt">true</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="29-a-namedomainmodelsample2resulttsadomainmodelsample2resultts">2.9. <a name='domainmodelSample2Result.ts'></a>domain/model/Sample2Result.ts</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">Sample2Result</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">result</span>: <span class="kt">boolean</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-a-namereferenceareference">3. <a name='Reference'></a>Reference</h2>
+<ul>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/errors/#for-client-responses">Error handling - Apollo GraphQL Docs</a></li>
+<li><a href="https://github.com/confuser/graphql-constraint-directive/blob/master/README.md">graphql-constraint-directive/README.md at master · confuser/graphql-constraint-directive · GitHub</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/apollo-server/">apollo server</a>
+          <a href="/tags/graphql/">graphql</a>
+          <a href="/tags/node.js/">node.js</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/20220401-decision-table-typescript/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Decision Table - Typescript version</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/20220323-circuit-breaker-opossum/">
+            <span class="next-text nav-default">Circuit Breaker Opossum</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
