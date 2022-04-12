@@ -10,7 +10,77 @@
   
   <url>
     <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2022-04-01T16:17:44+09:00</lastmod>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/certificate/</loc>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/gradle/</loc>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/gradle/</loc>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/node.js/</loc>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/npm/</loc>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/proxy/</loc>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20220412-set-proxy-and-cert/</loc>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2022-04-12T09:12:02+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,27 +94,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/post/20220401-decision-table-typescript/</loc>
-    <lastmod>2022-04-01T16:17:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2022-04-01T16:17:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2022-04-01T16:17:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2022-04-01T16:17:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -94,13 +143,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/tags/node.js/</loc>
-    <lastmod>2022-04-01T15:32:23+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/categories/node.js/</loc>
     <lastmod>2022-04-01T15:32:23+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

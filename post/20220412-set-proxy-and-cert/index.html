@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Proxy and certificate settings in NPM and Gradle - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstruct インターネット接続に、証明書が必要な環境であったり、プロキシ設定が必要な環境の場合の NPMやGradleの設定を載せておきます。
+" /><meta name="keywords" content="proxy, certificate, npm, gradle" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.96.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20220412-set-proxy-and-cert/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Proxy and certificate settings in NPM and Gradle" />
+<meta property="og:description" content="Abstruct
+インターネット接続に、証明書が必要な環境であったり、プロキシ設定が必要な環境の場合の
+NPMやGradleの設定を載せておきます。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://takuto-n.github.io/post/20220412-set-proxy-and-cert/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-12T09:12:02+09:00" />
+<meta property="article:modified_time" content="2022-04-12T09:12:02+09:00" />
+
+<meta itemprop="name" content="Proxy and certificate settings in NPM and Gradle">
+<meta itemprop="description" content="Abstruct
+インターネット接続に、証明書が必要な環境であったり、プロキシ設定が必要な環境の場合の
+NPMやGradleの設定を載せておきます。"><meta itemprop="datePublished" content="2022-04-12T09:12:02+09:00" />
+<meta itemprop="dateModified" content="2022-04-12T09:12:02+09:00" />
+<meta itemprop="wordCount" content="591">
+<meta itemprop="keywords" content="proxy,certificate,npm,gradle," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Proxy and certificate settings in NPM and Gradle"/>
+<meta name="twitter:description" content="Abstruct
+インターネット接続に、証明書が必要な環境であったり、プロキシ設定が必要な環境の場合の
+NPMやGradleの設定を載せておきます。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Proxy and certificate settings in NPM and Gradle</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-04-12 </span>
+        <div class="post-category">
+            <a href="/categories/node.js/"> node.js </a>
+            <a href="/categories/gradle/"> gradle </a>
+            </div>
+          <span class="more-meta"> 591 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstruct">Abstruct</h1>
+<p>インターネット接続に、証明書が必要な環境であったり、プロキシ設定が必要な環境の場合の
+NPMやGradleの設定を載せておきます。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#NPM">NPM</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#Proxy">Proxy</a></li>
+<li>1.2. <a href="#Certificate">Certificate</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#Gradle">Gradle</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#Proxy-1">Proxy</a></li>
+<li>2.2. <a href="#Certificate-1">Certificate</a></li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#Reference">Reference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namenpmanpm">1. <a name='NPM'></a>NPM</h2>
+<h3 id="11-a-nameproxyaproxy">1.1. <a name='Proxy'></a>Proxy</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ npm <span class="nb">set</span> strict-ssl <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">$ npm config <span class="nb">set</span> proxy <span class="o">[</span>プロキシ<span class="o">]</span>
+</span></span><span class="line"><span class="cl">$ npm config <span class="nb">set</span> https-proxy <span class="o">[</span>プロキシ<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="12-a-namecertificateacertificate">1.2. <a name='Certificate'></a>Certificate</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ npm config <span class="nb">set</span> cafile <span class="o">[</span>証明書<span class="o">]</span>
+</span></span><span class="line"><span class="cl">$ yarn config <span class="nb">set</span> cafile <span class="o">[</span>証明書<span class="o">]</span>
+</span></span><span class="line"><span class="cl">$ <span class="nb">export</span> <span class="nv">NODE_EXTRA_CA_CERTS</span><span class="o">=[</span>証明書<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-a-namegradleagradle">2. <a name='Gradle'></a>Gradle</h2>
+<h3 id="21-a-nameproxy-1aproxy">2.1. <a name='Proxy-1'></a>Proxy</h3>
+<p><code>[ユーザーディレクトリ]/.gradle/gradle.properties</code> を作って、以下を設定する。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemProp.http.proxyHost<span class="o">=[</span>プロキシのホスト名<span class="o">]</span>
+</span></span><span class="line"><span class="cl">systemProp.http.proxyPort<span class="o">=[</span>プロキシのポート番号<span class="o">]</span>
+</span></span><span class="line"><span class="cl">systemProp.http.proxyUser<span class="o">=[</span>ユーザー名<span class="o">]</span>
+</span></span><span class="line"><span class="cl">systemProp.http.proxyPassword<span class="o">=[</span>パスワード<span class="o">]</span>
+</span></span><span class="line"><span class="cl">systemProp.https.proxyHost<span class="o">=[</span>プロキシのホスト名<span class="o">]</span>
+</span></span><span class="line"><span class="cl">systemProp.https.proxyPort<span class="o">=[</span>プロキシのポート番号<span class="o">]</span>
+</span></span><span class="line"><span class="cl">systemProp.https.proxyUser<span class="o">=[</span>ユーザー名<span class="o">]</span>
+</span></span><span class="line"><span class="cl">systemProp.https.proxyPassword<span class="o">=[</span>プロキシのポート番号<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="22-a-namecertificate-1acertificate">2.2. <a name='Certificate-1'></a>Certificate</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ keytool -import -alias <span class="o">[</span>証明書名<span class="o">]</span> -keystore  <span class="s2">&#34;C:\tools\[JDK]\lib\security\cacerts&#34;</span> -file <span class="o">[</span>証明書のパス<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># default password: changeit </span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-a-namereferenceareference">3. <a name='Reference'></a>Reference</h2>
+<ul>
+<li><a href="https://www.ibm.com/docs/ja/urbancode-deploy/6.2.1?topic=configuration-changing-passwords-server-keystore">サーバーの鍵ストアのパスワード変更 - IBM Documentation</a></li>
+<li><a href="https://qiita.com/hishida/items/9479fb64a016032c0938">Gradleでのプロキシ設定 - Qiita</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/proxy/">proxy</a>
+          <a href="/tags/certificate/">certificate</a>
+          <a href="/tags/npm/">npm</a>
+          <a href="/tags/gradle/">gradle</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/20220401-decision-table-typescript/">
+            <span class="next-text nav-default">Decision Table - Typescript version</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-147275961-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
