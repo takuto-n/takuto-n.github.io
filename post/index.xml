@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 12 Apr 2022 14:46:25 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Apr 2022 15:05:00 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>20220401</title>
+      <link>https://takuto-n.github.io/post/20220401/</link>
+      <pubDate>Tue, 19 Apr 2022 15:05:00 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20220401/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Cookies from frontend to backend via BFF</title>
       <link>https://takuto-n.github.io/post/20220412-cookie-apollo-server/</link>
