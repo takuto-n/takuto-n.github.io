@@ -9,27 +9,6 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/post/20220401/</loc>
-    <lastmod>2022-04-19T15:05:00+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2022-04-19T15:05:00+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2022-04-19T15:05:00+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/tags/apollo-server/</loc>
     <lastmod>2022-04-12T14:46:25+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -58,6 +37,13 @@
   </url>
   
   <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2022-04-12T14:46:25+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://takuto-n.github.io/tags/node.js/</loc>
     <lastmod>2022-04-12T14:46:25+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -66,6 +52,13 @@
   
   <url>
     <loc>https://takuto-n.github.io/categories/node.js/</loc>
+    <lastmod>2022-04-12T14:46:25+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
     <lastmod>2022-04-12T14:46:25+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
