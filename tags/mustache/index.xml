@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>openapi on Little by little and bit by bit - マイペースにこつこつと</title>
-    <link>https://takuto-n.github.io/tags/openapi/</link>
-    <description>Recent content in openapi on Little by little and bit by bit - マイペースにこつこつと</description>
+    <title>mustache on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/tags/mustache/</link>
+    <description>Recent content in mustache on Little by little and bit by bit - マイペースにこつこつと</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 22 Apr 2022 22:17:54 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/openapi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Apr 2022 22:17:54 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/mustache/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mustache Option List</title>
       <link>https://takuto-n.github.io/post/20220422-mustache-option-list/</link>
@@ -16,16 +16,6 @@
       <guid>https://takuto-n.github.io/post/20220422-mustache-option-list/</guid>
       <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://openapi-generator.tech/docs/installation/&#34;&gt;OpenAPI Generator&lt;/a&gt; のコード生成をカスタマイズする際に、mustache構文で苦戦（どんなオプションを使えるのかがわからなかった。）したので、そのときに助かった方法をメモしておきます。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>OpenAPI Generatorを使ってみた</title>
-      <link>https://takuto-n.github.io/post/20201024-openapi-java/</link>
-      <pubDate>Sat, 24 Oct 2020 15:20:11 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/post/20201024-openapi-java/</guid>
-      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
-&lt;p&gt;半年ほど前に &lt;a href=&#34;https://github.com/OpenAPITools/openapi-generator&#34;&gt;OpenAPI Generator&lt;/a&gt; を使う機会があったので、思い出しながらまとめておきます。&lt;/p&gt;</description>
     </item>
     
   </channel>
