@@ -9,14 +9,77 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/tags/apollo-server/</loc>
-    <lastmod>2022-04-12T14:46:25+09:00</lastmod>
+    <loc>https://takuto-n.github.io/categories/</loc>
+    <lastmod>2022-04-22T22:09:24+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/</loc>
+    <loc>https://takuto-n.github.io/tags/import/</loc>
+    <lastmod>2022-04-22T22:09:24+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2022-04-22T22:09:24+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/order/</loc>
+    <lastmod>2022-04-22T22:09:24+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2022-04-22T22:09:24+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/sort/</loc>
+    <lastmod>2022-04-22T22:09:24+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2022-04-22T22:09:24+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/typescript/</loc>
+    <lastmod>2022-04-22T22:09:24+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/typescript/</loc>
+    <lastmod>2022-04-22T22:09:24+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20220422-typescript-import-order/</loc>
+    <lastmod>2022-04-22T22:09:24+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/apollo-server/</loc>
     <lastmod>2022-04-12T14:46:25+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -37,13 +100,6 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2022-04-12T14:46:25+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/tags/node.js/</loc>
     <lastmod>2022-04-12T14:46:25+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -52,20 +108,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/categories/node.js/</loc>
-    <lastmod>2022-04-12T14:46:25+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2022-04-12T14:46:25+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2022-04-12T14:46:25+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -128,20 +170,6 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/tags/typescript/</loc>
-    <lastmod>2022-04-01T16:17:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/categories/typescript/</loc>
-    <lastmod>2022-04-01T16:17:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/tags/utility/</loc>
     <lastmod>2022-04-01T16:17:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -185,13 +213,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/tags/absolute-path/</loc>
-    <lastmod>2022-02-04T20:20:20+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/import/</loc>
     <lastmod>2022-02-04T20:20:20+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
