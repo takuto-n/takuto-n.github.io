@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.97.3 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191006-effective-java-3rd-4/" />
@@ -44,7 +44,6 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191006-effective-java-3rd-4/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-10-06T15:27:10+09:00" />
 <meta property="article:modified_time" content="2019-10-06T15:27:10+09:00" />
-
 <meta itemprop="name" content="Effective Java 3rd [Chapter 4] - クラスとインタフェース">
 <meta itemprop="description" content="クラスとインタフェース Effective Java 第 3 版の個人的メモ 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィー"><meta itemprop="datePublished" content="2019-10-06T15:27:10+09:00" />
 <meta itemprop="dateModified" content="2019-10-06T15:27:10+09:00" />
@@ -226,7 +225,7 @@
 </span></span><span class="line"><span class="cl">  <span class="o">.</span>
 </span></span><span class="line"><span class="cl">  <span class="o">.</span>
 </span></span><span class="line"><span class="cl">  <span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="n">VALUES</span><span class="o">[</span><span class="n">0</span><span class="o">]=</span><span class="n">1</span><span class="o">;</span> <span class="c1">//のように配列内のデータを変更できてしまう。
+</span></span><span class="line"><span class="cl"><span class="n">VALUES</span><span class="o">[</span><span class="mi">0</span><span class="o">]=</span><span class="mi">1</span><span class="o">;</span> <span class="c1">//のように配列内のデータを変更できてしまう。
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="141-a-name-1a実装方法">1.4.1. <a name='-1'></a>実装方法</h4>
@@ -314,7 +313,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">for</span><span class="o">(</span><span class="n">Integer</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">for</span><span class="o">(</span><span class="n">Integer</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
 </span></span><span class="line"><span class="cl">    <span class="o">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -377,7 +376,7 @@
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">str</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&#34;null&#34;</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">count</span> <span class="o">+</span> <span class="n">len</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">str</span><span class="o">.</span><span class="na">getChars</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">len</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">str</span><span class="o">.</span><span class="na">getChars</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">count</span> <span class="o">+=</span> <span class="n">len</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -385,11 +384,11 @@
 </span></span><span class="line"><span class="cl"><span class="o">.</span>
 </span></span><span class="line"><span class="cl"><span class="o">.</span>
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">expandCapacity</span><span class="o">(</span><span class="kt">int</span> <span class="n">minimumCapacity</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span> <span class="o">*</span> <span class="n">2</span> <span class="o">+</span> <span class="n">2</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">minimumCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">length</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">minimumCapacity</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">minimumCapacity</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">minimumCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="c1">// overflow
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">minimumCapacity</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="c1">// overflow
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">OutOfMemoryError</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">        <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -461,7 +460,7 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstrumentedHashSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">InstrumentedHashSet</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -691,7 +690,7 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstrumentedHashSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">ForwardingSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">InstrumentedHashSet</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
@@ -1032,26 +1031,26 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// フレームワーク構築者が準備
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Singer</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// フレームワーク構築者が準備
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Songwriter</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// ユーザが利用する
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FukuyamaMasaharu</span> <span class="kd">implements</span> <span class="n">Singer</span><span class="o">,</span> <span class="n">Songwriter</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="o">...</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="o">...</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">(){</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="o">...</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
-</span></span><span class="line"><span class="cl">　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">(){</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="o">...</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1099,33 +1098,33 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// フレームワーク構築者が準備
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Singer</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// フレームワーク構築者が準備
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Songwriter</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// フレームワーク構築者が準備（Interfaceの場合では作らなくてもよかった。）
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">SingerSongWriter</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// ユーザ側が利用する
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">class</span> <span class="nc">FukuyamaMasaharu</span> <span class="kd">extends</span> <span class="n">SingerSongWriter</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">...</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">...</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
-</span></span><span class="line"><span class="cl">　　<span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">(){</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">...</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
-</span></span><span class="line"><span class="cl">　　<span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">(){</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">...</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">AudioClip</span> <span class="nf">sing</span><span class="o">(</span><span class="n">Song</span> <span class="n">s</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">Song</span> <span class="nf">compose</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">hit</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="n">AudioClip</span> <span class="nf">strum</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="kt">void</span> <span class="nf">actSensitive</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1186,40 +1185,40 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractMapEntry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　<span class="c1">// 基本操作
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>　　<span class="kd">public</span> <span class="kd">abstract</span> <span class="n">K</span> <span class="nf">getKey</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">　　<span class="kd">public</span> <span class="kd">abstract</span> <span class="n">V</span> <span class="nf">getValue</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="c1">// 基本操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">　　</span><span class="kd">public</span> <span class="kd">abstract</span> <span class="n">K</span> <span class="nf">getKey</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="kd">public</span> <span class="kd">abstract</span> <span class="n">V</span> <span class="nf">getValue</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">　　<span class="c1">// 変更可能なマップでのエントリーは、このメソッドをオーバーライドしなければいけない。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>　　<span class="kd">public</span> <span class="n">V</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="c1">// 変更可能なマップでのエントリーは、このメソッドをオーバーライドしなければいけない。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">　　</span><span class="kd">public</span> <span class="n">V</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">　　<span class="c1">// Map.Entry.equals の一般契約を実装
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>　　<span class="nd">@Override</span>
-</span></span><span class="line"><span class="cl">　　<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">　　　　　　<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">))</span>
-</span></span><span class="line"><span class="cl">　　　　　　<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;?,</span> <span class="o">?&gt;</span> <span class="n">arg</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="k">return</span> <span class="n">equals</span><span class="o">(</span><span class="n">getKey</span><span class="o">(),</span> <span class="n">arg</span><span class="o">.</span><span class="na">getKey</span><span class="o">())</span>
-</span></span><span class="line"><span class="cl">　　　　　　　　<span class="o">&amp;&amp;</span> <span class="n">equals</span><span class="o">(</span><span class="n">getValue</span><span class="o">(),</span> <span class="n">arg</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="c1">// Map.Entry.equals の一般契約を実装
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">　　</span><span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　　　</span><span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　　　</span><span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;?,</span> <span class="o">?&gt;</span> <span class="n">arg</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="k">return</span> <span class="n">equals</span><span class="o">(</span><span class="n">getKey</span><span class="o">(),</span> <span class="n">arg</span><span class="o">.</span><span class="na">getKey</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　　　　　</span><span class="o">&amp;&amp;</span> <span class="n">equals</span><span class="o">(</span><span class="n">getValue</span><span class="o">(),</span> <span class="n">arg</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">　　<span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="k">return</span> <span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">o1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="k">return</span> <span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">o1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">　　<span class="c1">// Map.Entry.hashCode の一般契約を実装
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>　　<span class="nd">@Override</span>
-</span></span><span class="line"><span class="cl">　　<span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="k">return</span> <span class="n">hashCode</span><span class="o">(</span><span class="n">getKey</span><span class="o">())</span> <span class="o">^</span> <span class="n">hashCode</span><span class="o">(</span><span class="n">getValue</span><span class="o">());</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="c1">// Map.Entry.hashCode の一般契約を実装
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">　　</span><span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="k">return</span> <span class="n">hashCode</span><span class="o">(</span><span class="n">getKey</span><span class="o">())</span> <span class="o">^</span> <span class="n">hashCode</span><span class="o">(</span><span class="n">getValue</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">　　<span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">　　　　<span class="k">return</span> <span class="n">obj</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="n">obj</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">　　<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　　　</span><span class="k">return</span> <span class="n">obj</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">obj</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">　　</span><span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1654,7 +1653,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="err">```</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="kd">static</span> <span class="n">のメンバークラスと同様に何かに属していることを明示したり</span><span class="err">、</span><span class="n">ジェネリクスを合わせたりといったメリットがある</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="kd">static</span> <span class="err">のメンバークラスと同様に何かに属していることを明示したり、ジェネリクスを合わせたりといったメリットがある</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1757,7 +1756,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">500</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
 </span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="sc">&#39;*&#39;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
@@ -2092,7 +2091,7 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       
       ★

@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.97.3 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20210107-springboot-app-read-configmap/" />
@@ -46,12 +46,11 @@ KubernetesのPod上で動作するSpringBootアプリケーションからConfig
 <meta property="og:url" content="https://takuto-n.github.io/post/20210107-springboot-app-read-configmap/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-01-07T18:00:01+09:00" />
 <meta property="article:modified_time" content="2021-01-07T18:00:01+09:00" />
-
 <meta itemprop="name" content="Springboot-App can pulll the Configmap information.">
 <meta itemprop="description" content="Abstruct
 KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを取得しに行くことができたので、その方法をまとめておきます。"><meta itemprop="datePublished" content="2021-01-07T18:00:01+09:00" />
 <meta itemprop="dateModified" content="2021-01-07T18:00:01+09:00" />
-<meta itemprop="wordCount" content="2252">
+<meta itemprop="wordCount" content="2355">
 <meta itemprop="keywords" content="springboot,configmap,kubernetes api," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Springboot-App can pulll the Configmap information."/>
 <meta name="twitter:description" content="Abstruct
@@ -129,7 +128,7 @@ KubernetesのPod上で動作するSpringBootアプリケーションからConfig
         <div class="post-category">
             <a href="/categories/poc/"> poc </a>
             </div>
-          <span class="more-meta"> 2252 words </span>
+          <span class="more-meta"> 2355 words </span>
           <span class="more-meta"> 5 mins read </span>
         
       </div>
@@ -743,7 +742,7 @@ KubernetesのPod上で動作するSpringBootアプリケーションからConfig
 </span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// coreV1Apiの準備
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">var</span> <span class="n">apiClient</span> <span class="o">=</span> <span class="n">ClientBuilder</span><span class="o">.</span><span class="na">cluster</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">httpClient</span> <span class="o">=</span> <span class="n">apiClient</span><span class="o">.</span><span class="na">getHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">().</span><span class="na">readTimeout</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">httpClient</span> <span class="o">=</span> <span class="n">apiClient</span><span class="o">.</span><span class="na">getHttpClient</span><span class="o">().</span><span class="na">newBuilder</span><span class="o">().</span><span class="na">readTimeout</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">        <span class="n">apiClient</span><span class="o">.</span><span class="na">setHttpClient</span><span class="o">(</span><span class="n">httpClient</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">coreV1Api</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CoreV1Api</span><span class="o">(</span><span class="n">apiClient</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">
@@ -970,7 +969,7 @@ KubernetesのPod上で動作するSpringBootアプリケーションからConfig
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       
       ★

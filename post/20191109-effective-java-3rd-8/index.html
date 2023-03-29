@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.97.3 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-8/" />
@@ -44,7 +44,6 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-8/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-12-09T00:48:57+09:00" />
 <meta property="article:modified_time" content="2019-12-09T00:48:57+09:00" />
-
 <meta itemprop="name" content="Effective Java 3rd [Chapter 8] - メソッド">
 <meta itemprop="description" content="メソッド Effective Java 第 3 版の個人的メモ 項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計"><meta itemprop="datePublished" content="2019-12-09T00:48:57+09:00" />
 <meta itemprop="dateModified" content="2019-12-09T00:48:57+09:00" />
@@ -188,7 +187,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">	 * @throws ArithmetricException m &lt;= 0の場合.
 </span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
 </span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="n">BigInteger</span> <span class="nf">mod</span><span class="o">(</span><span class="n">BigInteger</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">signum</span><span class="o">()</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">signum</span><span class="o">()</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">			<span class="k">throw</span> <span class="k">new</span> <span class="n">ArithmeticException</span><span class="o">(</span><span class="s">&#34;Modulus &lt;= 0: &#34;</span> <span class="o">+</span> <span class="n">m</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">		<span class="o">}</span>
 </span></span><span class="line"><span class="cl">		<span class="c1">// 計算を行う
@@ -229,10 +228,10 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">price</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="n">0</span><span class="o">]);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="n">1</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">price</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">price</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">||</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">price</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span><span class="o">(</span><span class="n">price</span><span class="o">,</span> <span class="n">num</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&#34;%d + %d = %d%n&#34;</span><span class="o">,</span> <span class="n">price</span><span class="o">,</span> <span class="n">num</span><span class="o">,</span> <span class="n">sum</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
@@ -241,8 +240,8 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">sum</span><span class="o">(</span><span class="kt">int</span> <span class="n">price</span><span class="o">,</span> <span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">:</span> <span class="s">&#34;price: &#34;</span> <span class="o">+</span> <span class="n">price</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">:</span> <span class="s">&#34;num: &#34;</span> <span class="o">+</span> <span class="n">num</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">:</span> <span class="s">&#34;price: &#34;</span> <span class="o">+</span> <span class="n">price</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">:</span> <span class="s">&#34;num: &#34;</span> <span class="o">+</span> <span class="n">num</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">price</span> <span class="o">*</span> <span class="n">num</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -261,7 +260,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 第1引数は0より大きな数である必要がある
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">java</span> <span class="o">-</span><span class="n">ea</span> <span class="n">EJ38</span> <span class="n">0</span> <span class="n">3</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">java</span> <span class="o">-</span><span class="n">ea</span> <span class="n">EJ38</span> <span class="mi">0</span> <span class="mi">3</span>
 </span></span><span class="line"><span class="cl"><span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm">* 実行結果
 </span></span></span><span class="line"><span class="cl"><span class="cm">* Exception in thread &#34;main&#34; java.lang.AssertionError: price: 0
@@ -322,7 +321,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">	 * @throws NullPointerException startかendがnullの場合
 </span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
 </span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="nf">Period</span><span class="o">(</span><span class="n">Date</span> <span class="n">start</span><span class="o">,</span> <span class="n">Date</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">end</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">end</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">			<span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="n">start</span> <span class="o">+</span> <span class="s">&#34; after &#34;</span> <span class="o">+</span> <span class="n">end</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">		<span class="k">this</span><span class="o">.</span><span class="na">start</span> <span class="o">=</span> <span class="n">start</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">		<span class="k">this</span><span class="o">.</span><span class="na">end</span> <span class="o">=</span> <span class="n">end</span><span class="o">;</span>
@@ -357,11 +356,11 @@
 </span></span><span class="line"><span class="cl"><span class="n">Period</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Period</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// Attack 1
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Period内部のendと、endが同じアドレスを指しているため、これで、Period内部を変更できてしまう。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">end</span><span class="o">.</span><span class="na">setYear</span><span class="o">(</span><span class="n">78</span><span class="o">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">end</span><span class="o">.</span><span class="na">setYear</span><span class="o">(</span><span class="mi">78</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Attack 2
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Period#end()で、periodのendを取得できるため、Period内部を変更できてしまう。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">p</span><span class="o">.</span><span class="na">end</span><span class="o">().</span><span class="na">setYear</span><span class="o">(</span><span class="n">78</span><span class="o">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">p</span><span class="o">.</span><span class="na">end</span><span class="o">().</span><span class="na">setYear</span><span class="o">(</span><span class="mi">78</span><span class="o">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="222-a-name-1a良い例">2.2.2. <a name='-1'></a>良い例</h4>
@@ -416,7 +415,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">this</span><span class="o">.</span><span class="na">start</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
 </span></span><span class="line"><span class="cl">		<span class="k">this</span><span class="o">.</span><span class="na">end</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">end</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">end</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">end</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">			<span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="n">start</span> <span class="o">+</span> <span class="s">&#34; after &#34;</span> <span class="o">+</span> <span class="n">end</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">	<span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -552,9 +551,9 @@
 </span></span><span class="line"><span class="cl">	<span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">classify</span><span class="o">(</span><span class="n">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">classify</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">classify</span><span class="o">(</span><span class="sc">&#39;a&#39;</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">classify</span><span class="o">(</span><span class="n">1</span><span class="o">.</span><span class="na">0</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">classify</span><span class="o">(</span><span class="mf">1.0</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">		<span class="c1">// 実行結果
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="cm">/*
 </span></span></span><span class="line"><span class="cl"><span class="cm">		   int
@@ -786,17 +785,17 @@
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Varargs</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">min1</span><span class="o">(</span><span class="n">99</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">min2</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">min1</span><span class="o">(</span><span class="mi">99</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">min2</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// ugly
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">static</span> <span class="kt">int</span> <span class="nf">min1</span><span class="o">(</span><span class="kt">int</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Too few arguments&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">min</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">                <span class="n">min</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">min</span><span class="o">;</span>
@@ -981,7 +980,7 @@ etc&hellip;</li>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       
       ★

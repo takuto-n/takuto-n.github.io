@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.97.3 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191224-awscodeguru/" />
@@ -44,7 +44,6 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191224-awscodeguru/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-12-24T23:36:29+09:00" />
 <meta property="article:modified_time" content="2019-12-24T23:36:29+09:00" />
-
 <meta itemprop="name" content="AWS CodeGuru">
 <meta itemprop="description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使"><meta itemprop="datePublished" content="2019-12-24T23:36:29+09:00" />
 <meta itemprop="dateModified" content="2019-12-24T23:36:29+09:00" />
@@ -404,23 +403,23 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 引用元：https://qiita.com/negi111111/items/510daace637b7c57c2da
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassSample</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">proc</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">proc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">0</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">){</span>
 </span></span><span class="line"><span class="cl">                <span class="c1">// 正常処理
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">1</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">){</span>
 </span></span><span class="line"><span class="cl">                        <span class="c1">// 正常処理
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">2</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">                            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">){</span>
 </span></span><span class="line"><span class="cl">                                <span class="c1">// 正常処理
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                                    <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">3</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">                                    <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">){</span>
 </span></span><span class="line"><span class="cl">                                        <span class="c1">// 正常処理
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                        <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                                            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">4</span> <span class="o">){</span>
+</span></span><span class="line"><span class="cl">                                            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">){</span>
 </span></span><span class="line"><span class="cl">                                                <span class="c1">// 正常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">5</span> <span class="o">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">5</span> <span class="o">){</span>
 </span></span><span class="line"><span class="cl">                                                    <span class="c1">// 正常処理
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                    <span class="c1">// まだまだ続くよ！
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
@@ -579,7 +578,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       
       ★

@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.97.3 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20201024-grpc-java/" />
@@ -46,7 +46,6 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20201024-grpc-java/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-10-24T18:36:47+09:00" />
 <meta property="article:modified_time" content="2020-10-24T18:36:47+09:00" />
-
 <meta itemprop="name" content="gRPC を使ってみた">
 <meta itemprop="description" content="Abstract
 半年ほど前に Spring boot starter for gRPC framework を使う機会があったので、思い出しながらまとめておきます。"><meta itemprop="datePublished" content="2020-10-24T18:36:47+09:00" />
@@ -319,11 +318,11 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">message</span> <span class="n">HelloRequest</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">message</span> <span class="n">HelloReply</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">message</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">message</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -360,7 +359,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">protobuf</span><span class="o">.</span><span class="na">GeneratedMessageV3</span> <span class="kd">implements</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// @@protoc_insertion_point(message_implements:helloworld.HelloReply)
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">HelloReplyOrBuilder</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="n">0L</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">0</span><span class="n">L</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Use HelloReply.newBuilder() to construct.
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">private</span> <span class="nf">HelloReply</span><span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">protobuf</span><span class="o">.</span><span class="na">GeneratedMessageV3</span><span class="o">.</span><span class="na">Builder</span><span class="o">&lt;?&gt;</span> <span class="n">builder</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">super</span><span class="o">(</span><span class="n">builder</span><span class="o">);</span>
@@ -675,8 +674,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 正常系
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">test_正常系</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">sampleGrpcClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SampleGrpcClient</span><span class="o">(</span><span class="s">&#34;localhost&#34;</span><span class="o">,</span> <span class="n">6565</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">test_</span><span class="err">正常系</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">sampleGrpcClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SampleGrpcClient</span><span class="o">(</span><span class="s">&#34;localhost&#34;</span><span class="o">,</span> <span class="mi">6565</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">actualReply</span> <span class="o">=</span> <span class="n">sampleGrpcClient</span><span class="o">.</span><span class="na">access</span><span class="o">(</span><span class="s">&#34;Tom&#34;</span><span class="o">).</span><span class="na">getMessage</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">expectedReply</span> <span class="o">=</span> <span class="s">&#34;Hello Tom&#34;</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
@@ -687,8 +686,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 異常系_送信データがnullの場合
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">test_異常系_送信データnull</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">sampleGrpcClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SampleGrpcClient</span><span class="o">(</span><span class="s">&#34;localhost&#34;</span><span class="o">,</span> <span class="n">6565</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">test_</span><span class="err">異常系</span><span class="n">_</span><span class="err">送信データ</span><span class="kc">null</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">sampleGrpcClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SampleGrpcClient</span><span class="o">(</span><span class="s">&#34;localhost&#34;</span><span class="o">,</span> <span class="mi">6565</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">sampleGrpcClient</span><span class="o">.</span><span class="na">access</span><span class="o">(</span><span class="kc">null</span><span class="o">).</span><span class="na">getMessage</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">            <span class="n">fail</span><span class="o">();</span>
@@ -701,8 +700,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 異常系_クライアントからサーバーに接続できない場合
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">test_異常系_クライアントから接続不可</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">sampleGrpcClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SampleGrpcClient</span><span class="o">(</span><span class="s">&#34;99.99.99.99&#34;</span><span class="o">,</span> <span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">test_</span><span class="err">異常系</span><span class="n">_</span><span class="err">クライアントから接続不可</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">sampleGrpcClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SampleGrpcClient</span><span class="o">(</span><span class="s">&#34;99.99.99.99&#34;</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">sampleGrpcClient</span><span class="o">.</span><span class="na">access</span><span class="o">(</span><span class="s">&#34;Tom&#34;</span><span class="o">).</span><span class="na">getMessage</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">            <span class="n">fail</span><span class="o">();</span>
@@ -715,8 +714,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * 異常系_サーバー側でエラーが発生した場合
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">test_異常系_サーバー側エラー</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">sampleGrpcClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SampleGrpcClient</span><span class="o">(</span><span class="s">&#34;localhost&#34;</span><span class="o">,</span> <span class="n">6565</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">test_</span><span class="err">異常系</span><span class="n">_</span><span class="err">サーバー側エラー</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">sampleGrpcClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SampleGrpcClient</span><span class="o">(</span><span class="s">&#34;localhost&#34;</span><span class="o">,</span> <span class="mi">6565</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">sampleGrpcClient</span><span class="o">.</span><span class="na">access</span><span class="o">(</span><span class="s">&#34;error data&#34;</span><span class="o">).</span><span class="na">getMessage</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">            <span class="n">fail</span><span class="o">();</span>
@@ -821,7 +820,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       
       ★

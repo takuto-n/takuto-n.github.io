@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.97.3 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-9/" />
@@ -44,7 +44,6 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-9/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-12-24T00:48:59+09:00" />
 <meta property="article:modified_time" content="2019-12-24T00:48:59+09:00" />
-
 <meta itemprop="name" content="Effective Java 3rd [Chapter 9] - プログラミング一般">
 <meta itemprop="description" content="プログラミング一般 Effective Java 第 3 版の個人的メモ 項目 57 ローカル変数のスコープを最小限にする 項目 58 従来の for ループより for-each ループを選ぶ 項目 59 ライブラリを知"><meta itemprop="datePublished" content="2019-12-24T00:48:59+09:00" />
 <meta itemprop="dateModified" content="2019-12-24T00:48:59+09:00" />
@@ -275,7 +274,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 良くも悪くもない例 2
 </span></span></span><span class="line"><span class="cl"><span class="c1">// インデックス変数が散らかっている
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++&gt;</span> <span class="o">)</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++&gt;</span> <span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">doSomething</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -385,7 +384,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">optPrimeNumbers</span> <span class="o">=</span> <span class="n">PrimeNumbers</span><span class="o">.</span><span class="na">createPrimeNumbers</span><span class="o">(</span><span class="n">500</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">optPrimeNumbers</span> <span class="o">=</span> <span class="n">PrimeNumbers</span><span class="o">.</span><span class="na">createPrimeNumbers</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="o">(</span><span class="n">optPrimeNumbers</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
@@ -543,12 +542,12 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></span><span class="line"><span class="cl"><span class="cm">     * @param myNumber 与えられた整数
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">PrimeNumbers</span><span class="o">&gt;</span> <span class="nf">createPrimeNumbers</span><span class="o">(</span><span class="kt">int</span> <span class="n">myNumber</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">myNumber</span> <span class="o">&lt;=</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">myNumber</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">primeNumbers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrimeNumbers</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">        <span class="n">primeNumbers</span><span class="o">.</span><span class="na">myNumber</span> <span class="o">=</span> <span class="n">myNumber</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">primeNumbers</span><span class="o">.</span><span class="na">curPrimeNumber</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">primeNumbers</span><span class="o">.</span><span class="na">curPrimeNumber</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">primeNumbers</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -576,7 +575,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span><span class="line"><span class="cl">                <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">                <span class="c1">// 開始値から順に素数であるかをチェックする
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">for</span> <span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">curPrimeNumber</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">myNumber</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">for</span> <span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">curPrimeNumber</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">myNumber</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// 割り切れる値がチェック対象の整数しかなければ素数
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">if</span> <span class="o">(</span><span class="n">isPrime</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                        <span class="n">curPrimeNumber</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
@@ -611,13 +610,13 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isPrime</span><span class="o">(</span><span class="kt">int</span> <span class="n">number</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 入力チェック
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">number</span> <span class="o">&lt;=</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">number</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 素数判定
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">number</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">number</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// 2から順番に割っていって、割り切れれば抜ける
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">((</span><span class="n">number</span> <span class="o">%</span> <span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">((</span><span class="n">number</span> <span class="o">%</span> <span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">            <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
@@ -689,7 +688,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">1</span><span class="o">.</span><span class="na">00</span> <span class="o">-</span> <span class="n">9</span><span class="o">*.</span><span class="na">10</span><span class="o">);</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mf">1.00</span> <span class="o">-</span> <span class="mi">9</span><span class="o">*</span><span class="mf">.10</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 実行結果
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 0.09999999999999998
 </span></span></span></code></pre></td></tr></table>
@@ -704,7 +703,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">BigDecimal</span> <span class="n">price</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">price</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">100</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">price</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -757,8 +756,8 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span><span class="line"><span class="cl">  <span class="c1">// long を利用した場合[1135(ms)]
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">  <span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">long</span> <span class="n">sumLong</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">long</span> <span class="n">sumLong</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
 </span></span><span class="line"><span class="cl">      <span class="n">sumLong</span> <span class="o">+=</span> <span class="n">i</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">  <span class="o">}</span>
 </span></span><span class="line"><span class="cl">  <span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
@@ -768,7 +767,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">  <span class="n">BigDecimal</span> <span class="n">sumBigDecimal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">&#34;0&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
 </span></span><span class="line"><span class="cl">      <span class="n">sumBigDecimal</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">  <span class="o">}</span>
 </span></span><span class="line"><span class="cl">  <span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
@@ -810,8 +809,8 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BigDecimal</span> <span class="n">bigDecimal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">bigDecimal</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">3</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">BigDecimal</span> <span class="n">bigDecimal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bigDecimal</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="mi">3</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bigDecimal</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 実行結果
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cm">/**
@@ -880,24 +879,24 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">StopWatch</span> <span class="n">stopWatch</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// ボクシングされたプリミティブ型(Long) の場合[11092(ms)]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Long</span> <span class="n">sumLong</span> <span class="o">=</span> <span class="n">0L</span><span class="o">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Long</span> <span class="n">sumLong</span> <span class="o">=</span> <span class="mi">0</span><span class="n">L</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sumLong</span> <span class="o">+=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumLong</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stopWatch</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">());</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// プリミティブ型(long) の場合[1171(ms)]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">0L</span><span class="o">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="n">L</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sum</span> <span class="o">+=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stopWatch</span><span class="o">.</span><span class="na">prettyPrint</span><span class="o">());</span>
@@ -933,12 +932,12 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 以下を実行すると期待した結果が得られない
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">naturalOrder</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">1</span><span class="o">),</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">1</span><span class="o">));</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">naturalOrder</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 不完全なコンパレータ
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">naturalOrder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Integer</span> <span class="n">first</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">second</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">first</span> <span class="o">&lt;</span> <span class="n">second</span> <span class="o">?</span> <span class="o">-</span><span class="n">1</span> <span class="o">:</span> <span class="o">(</span><span class="n">first</span> <span class="o">==</span> <span class="n">second</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">first</span> <span class="o">&lt;</span> <span class="n">second</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="o">(</span><span class="n">first</span> <span class="o">==</span> <span class="n">second</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1073,7 +1072,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 遅い
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">statement</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numItems</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numItems</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">+=</span> <span class="n">lineForItem</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>  <span class="c1">// 文字列結合
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -1094,7 +1093,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 速い
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">statement</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">StringBuilder</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">(</span><span class="n">numItems</span><span class="o">()</span> <span class="o">*</span> <span class="n">LINE_WIDTH</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numItems</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numItems</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">b</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">lineForItem</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>  <span class="c1">// StringBuilderを使った結合
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -1215,12 +1214,12 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span><span class="line"><span class="cl">    <span class="c1">// クラス名をClassオブジェクトへ変換する
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">cl</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cl</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="n">0</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cl</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class not found: &#34;</span> <span class="o">+</span> <span class="n">args</span><span class="o">[</span><span class="n">0</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class not found: &#34;</span> <span class="o">+</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 以下はJVM全体を終了させるので、一般的には使われない。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// コマンドラインユーティリティの異常終了の場合は、適切。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// インスタンスの生成はリフレクションで行う
@@ -1230,20 +1229,20 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span><span class="line"><span class="cl">        <span class="c1">// java 9から、java.lang.Class#newInstance は deprecated。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class not accessible&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InstantiationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class not instantiable&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchMethodException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class does not have such method&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InvocationTargetException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Class not invocatable&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// インスタンスへのアクセスはインタフェース経由で行う
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">set</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">args</span><span class="o">).</span><span class="na">subList</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">set</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">args</span><span class="o">).</span><span class="na">subList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">set</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1495,7 +1494,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="n">car</span><span class="o">.</span><span class="na">speed</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">2</span> <span class="o">*</span> <span class="n">SPEED_LIMIT</span><span class="o">)</span>
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="n">car</span><span class="o">.</span><span class="na">speed</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">SPEED_LIMIT</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">generateAudibleAlert</span><span class="o">(</span><span class="s">&#34;Watch out for cops!&#34;</span><span class="o">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1606,7 +1605,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       
       ★

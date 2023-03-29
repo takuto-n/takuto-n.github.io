@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.97.3 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/" />
@@ -44,7 +44,6 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-09-21T19:17:52+09:00" />
 <meta property="article:modified_time" content="2019-09-29T19:17:52+09:00" />
-
 <meta itemprop="name" content="Effective Java 3rd [Chapter 3] - すべてのオブジェクトに共通のメソッド">
 <meta itemprop="description" content="すべてのオブジェクトに共通のメソッド Effective Java 第 3 版の個人的メモ 項目 10 equals の override は一般契約（general contracts）に従うべし 項目 11 equals をオー"><meta itemprop="datePublished" content="2019-09-21T19:17:52+09:00" />
 <meta itemprop="dateModified" content="2019-09-29T19:17:52+09:00" />
@@ -222,11 +221,11 @@
 </span></span><span class="line"><span class="cl">        <span class="o">.</span>
 </span></span><span class="line"><span class="cl">        <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">17</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">17</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// Hash関数については研究が進んでいるが、当分は以下が良いコードらしいです。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">areaCode</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">prefix</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="o">=</span> <span class="n">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">lineNumber</span><span class="o">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">result</span> <span class="o">=</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">areaCode</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="o">=</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">prefix</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="o">=</span> <span class="mi">31</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="n">lineNumber</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -415,24 +414,24 @@
 </span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">CompareTo</span><span class="o">(</span><span class="n">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">		<span class="c1">// 市外局番を比較する
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="o">(</span><span class="n">areaCode</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">areaCode</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">		<span class="c1">// 市外局番は等しく、市内局番の前半を比較する
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="o">(</span><span class="n">prefix</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">prefix</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">		<span class="c1">// 市外局番と市内局番の前半は等しく、市内局番の後半を比較する
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="o">(</span><span class="n">lineNumber</span> <span class="o">&lt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNumber</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">lineNumber</span> <span class="o">&gt;</span> <span class="n">pn</span><span class="o">.</span><span class="na">lineNumber</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">		<span class="c1">// 全てのフィールドが等しい
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">return</span> <span class="n">0</span><span class="o">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">	<span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
@@ -474,13 +473,13 @@
 </span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="n">PhoneNumber</span> <span class="n">pn</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">		<span class="c1">// 市外局番を比較する
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="kt">int</span> <span class="n">areaCodeDiff</span> <span class="o">=</span> <span class="n">areaCode</span> <span class="o">-</span> <span class="n">pn</span><span class="o">.</span><span class="na">areaCode</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">areaCodeDiff</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">areaCodeDiff</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="n">areaCodeDiff</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">		<span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">		<span class="c1">// 市外局番は等しく、市内局番の前半を比較する
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="kt">int</span> <span class="n">prefixDiff</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">-</span> <span class="n">pn</span><span class="o">.</span><span class="na">prefix</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">prefixDiff</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="o">(</span><span class="n">prefixDiff</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="n">prefixDiff</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">		<span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -562,7 +561,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       
       ★

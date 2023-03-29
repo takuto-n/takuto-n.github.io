@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 22 Apr 2022 22:09:24 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Apr 2022 22:56:30 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Typescript Object Extractor</title>
+      <link>https://takuto-n.github.io/post/20220422-typescript-object-extractor/</link>
+      <pubDate>Fri, 22 Apr 2022 22:56:30 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/post/20220422-typescript-object-extractor/</guid>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
+&lt;p&gt;Typescriptで JSONオブジェクト から key-value 形式に変換するコードが必要で作ったので、載せておきます。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Typescript Import順のソート</title>
       <link>https://takuto-n.github.io/post/20220422-typescript-import-order/</link>

@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.97.3 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-10/" />
@@ -44,7 +44,6 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-10/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-01-25T00:49:01+09:00" />
 <meta property="article:modified_time" content="2020-01-25T00:49:01+09:00" />
-
 <meta itemprop="name" content="Effective Java 3rd [Chapter 10] - 例外">
 <meta itemprop="description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を"><meta itemprop="datePublished" content="2020-01-25T00:49:01+09:00" />
 <meta itemprop="dateModified" content="2020-01-25T00:49:01+09:00" />
@@ -175,7 +174,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> 
 </span></span><span class="line"><span class="cl">    <span class="n">range</span><span class="o">[</span><span class="n">i</span><span class="o">++].</span><span class="na">climb</span><span class="o">();</span> <span class="c1">// 配列を全部処理する
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ArrayIndexOutOfBoundsException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
@@ -633,7 +632,7 @@ ex)
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       
       ★

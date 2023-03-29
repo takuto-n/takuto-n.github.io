@@ -17,9 +17,9 @@
 
 
 <meta name="author" content="takuto_n" /><meta name="description" content="Abstruct AP基盤/業務ロジック上で使用する静的プロパティを管理する方法としては、以下があるかと思います。
- applicaiton.properties にプロパティを記載する。 @ConfigurationProperties を使って、オブジェクトにプロパティ値を読み込ませる。   参考：Spring Bootでプロパティファイルとのバインディング方法 - Qiita
- この記事では、AP基盤/業務ロジック上で使用する動的プロパティをMap&amp;lt;String, Object&amp;gt;として管理する方法について記載したいと思います。
- 参考：Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita
+applicaiton.properties にプロパティを記載する。 @ConfigurationProperties を使って、オブジェクトにプロパティ値を読み込ませる。 参考：Spring Bootでプロパティファイルとのバインディング方法 - Qiita
+この記事では、AP基盤/業務ロジック上で使用する動的プロパティをMap&amp;lt;String, Object&amp;gt;として管理する方法について記載したいと思います。
+参考：Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita
 " /><meta name="keywords" content="springboot, dynamic property, property source" />
 
 
@@ -27,7 +27,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.97.3 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20201216-springboot-manage-property/" />
@@ -60,7 +60,6 @@ applicaiton.properties にプロパティを記載する。
 <meta property="og:url" content="https://takuto-n.github.io/post/20201216-springboot-manage-property/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-12-16T18:39:39+09:00" />
 <meta property="article:modified_time" content="2020-12-16T18:39:39+09:00" />
-
 <meta itemprop="name" content="動的プロパティの管理 on SpringBoot">
 <meta itemprop="description" content="Abstruct
 AP基盤/業務ロジック上で使用する静的プロパティを管理する方法としては、以下があるかと思います。
@@ -76,7 +75,7 @@ applicaiton.properties にプロパティを記載する。
 参考：Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita
 "><meta itemprop="datePublished" content="2020-12-16T18:39:39+09:00" />
 <meta itemprop="dateModified" content="2020-12-16T18:39:39+09:00" />
-<meta itemprop="wordCount" content="3499">
+<meta itemprop="wordCount" content="3530">
 <meta itemprop="keywords" content="springboot,dynamic property,property source," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="動的プロパティの管理 on SpringBoot"/>
 <meta name="twitter:description" content="Abstruct
@@ -165,8 +164,8 @@ applicaiton.properties にプロパティを記載する。
         <div class="post-category">
             <a href="/categories/poc/"> poc </a>
             </div>
-          <span class="more-meta"> 3499 words </span>
-          <span class="more-meta"> 7 mins read </span>
+          <span class="more-meta"> 3530 words </span>
+          <span class="more-meta"> 8 mins read </span>
         
       </div>
     </header>
@@ -581,12 +580,12 @@ applicaiton.properties にプロパティを記載する。
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 処理中にプロパティが更新されたとしても、
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 一貫して同じプロパティを参照できるかを確認するため、1秒 * 10回の読み込み処理を実施する。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="o">(</span><span class="n">var</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
 </span></span><span class="line"><span class="cl">            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">simpleService</span><span class="o">.</span><span class="na">service1</span><span class="o">(</span><span class="s">&#34;1&#34;</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">simpleService</span><span class="o">.</span><span class="na">service1</span><span class="o">(</span><span class="s">&#34;2&#34;</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">simpleService</span><span class="o">.</span><span class="na">service1</span><span class="o">(</span><span class="s">&#34;3&#34;</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1</span> <span class="o">*</span> <span class="n">1000</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(</span><span class="s">&#34;ok&#34;</span><span class="o">,</span> <span class="n">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
@@ -598,9 +597,9 @@ applicaiton.properties にプロパティを記載する。
 </span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">var</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;1&#34;</span><span class="o">,</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">100</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;2&#34;</span><span class="o">,</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">100</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;3&#34;</span><span class="o">,</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">100</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;1&#34;</span><span class="o">,</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">100</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;2&#34;</span><span class="o">,</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">100</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;3&#34;</span><span class="o">,</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">100</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;(</span><span class="n">propertyManager</span><span class="o">.</span><span class="na">updateProperty</span><span class="o">(</span><span class="n">map</span><span class="o">),</span> <span class="n">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -826,11 +825,11 @@ applicaiton.properties にプロパティを記載する。
 </span></span><span class="line"><span class="cl"><span class="nd">@Slf4j</span>
 </span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyMapPropertySource</span> <span class="kd">extends</span> <span class="n">EnumerablePropertySource</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="kd">implements</span> <span class="n">InitializingBean</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">latestIndex</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">latestIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">ThreadLocal</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">currentIndex</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;[]</span> <span class="n">propertyList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">[</span><span class="n">2</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;[]</span> <span class="n">propertyList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">MyMapPropertySource</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">source</span><span class="o">);</span>
@@ -838,7 +837,7 @@ applicaiton.properties にプロパティを記載する。
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getPropertyNames</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">propertyList</span><span class="o">[</span><span class="k">this</span><span class="o">.</span><span class="na">currentIndex</span><span class="o">.</span><span class="na">get</span><span class="o">()].</span><span class="na">keySet</span><span class="o">().</span><span class="na">toArray</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="n">0</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">propertyList</span><span class="o">[</span><span class="k">this</span><span class="o">.</span><span class="na">currentIndex</span><span class="o">.</span><span class="na">get</span><span class="o">()].</span><span class="na">keySet</span><span class="o">().</span><span class="na">toArray</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">txStart</span><span class="o">()</span> <span class="o">{</span>
@@ -863,13 +862,13 @@ applicaiton.properties にプロパティを記載する。
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kt">boolean</span> <span class="nf">update</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">propertyMap</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">currentIndex</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">propertyList</span><span class="o">[</span><span class="n">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">propertyMap</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">latestIndex</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">currentIndex</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">propertyList</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">propertyMap</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">latestIndex</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">propertyList</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">propertyMap</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">latestIndex</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">propertyList</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">propertyMap</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">latestIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -1204,12 +1203,12 @@ applicaiton.properties にプロパティを記載する。
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">JdbcPropertySource</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">DataSource</span> <span class="n">dataSource</span><span class="o">,</span> <span class="n">String</span><span class="o">...</span> <span class="n">tableNames</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">dataSource</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">jdbcTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JdbcTemplate</span><span class="o">(</span><span class="n">dataSource</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">tableNames</span> <span class="o">=</span> <span class="n">tableNames</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span> <span class="o">?</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]{</span><span class="s">&#34;t_properties&#34;</span><span class="o">}</span> <span class="o">:</span> <span class="n">tableNames</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">tableNames</span> <span class="o">=</span> <span class="n">tableNames</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]{</span><span class="s">&#34;t_properties&#34;</span><span class="o">}</span> <span class="o">:</span> <span class="n">tableNames</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getPropertyNames</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">properties</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">toArray</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="n">0</span><span class="o">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">properties</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">toArray</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
@@ -1367,21 +1366,21 @@ applicaiton.properties にプロパティを記載する。
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">services.user.url=http://user.service.com/{id}
-</span></span><span class="line"><span class="cl">services.company.url=http://company.service.com/{id}
+<pre tabindex="0" class="chroma"><code class="language-properties" data-lang="properties"><span class="line"><span class="cl"><span class="na">services.user.url</span><span class="o">=</span><span class="s">http://user.service.com/{id}</span>
+</span></span><span class="line"><span class="cl"><span class="na">services.company.url</span><span class="o">=</span><span class="s">http://company.service.com/{id}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># datasource
-</span></span><span class="line"><span class="cl">spring.datasource.driver-class-name=org.h2.Driver
-</span></span><span class="line"><span class="cl">spring.datasource.url=jdbc:h2:./h2db/demo
-</span></span><span class="line"><span class="cl">spring.datasource.username=username
-</span></span><span class="line"><span class="cl">spring.datasource.password=password
+</span></span><span class="line"><span class="cl"><span class="c1"># datasource</span>
+</span></span><span class="line"><span class="cl"><span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.h2.Driver</span>
+</span></span><span class="line"><span class="cl"><span class="na">spring.datasource.url</span><span class="o">=</span><span class="s">jdbc:h2:./h2db/demo</span>
+</span></span><span class="line"><span class="cl"><span class="na">spring.datasource.username</span><span class="o">=</span><span class="s">username</span>
+</span></span><span class="line"><span class="cl"><span class="na">spring.datasource.password</span><span class="o">=</span><span class="s">password</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># connection pool use tomcat
-</span></span><span class="line"><span class="cl">spring.datasource.tomcat.maxActive=10
-</span></span><span class="line"><span class="cl">spring.datasource.tomcat.maxIdle=10
-</span></span><span class="line"><span class="cl">spring.datasource.tomcat.minIdle=10
-</span></span><span class="line"><span class="cl">spring.datasource.tomcat.initialSize=10
-</span></span><span class="line"><span class="cl">spring.datasource.tomcat.defaultAutoCommit=false
+</span></span><span class="line"><span class="cl"><span class="c1"># connection pool use tomcat</span>
+</span></span><span class="line"><span class="cl"><span class="na">spring.datasource.tomcat.maxActive</span><span class="o">=</span><span class="s">10</span>
+</span></span><span class="line"><span class="cl"><span class="na">spring.datasource.tomcat.maxIdle</span><span class="o">=</span><span class="s">10</span>
+</span></span><span class="line"><span class="cl"><span class="na">spring.datasource.tomcat.minIdle</span><span class="o">=</span><span class="s">10</span>
+</span></span><span class="line"><span class="cl"><span class="na">spring.datasource.tomcat.initialSize</span><span class="o">=</span><span class="s">10</span>
+</span></span><span class="line"><span class="cl"><span class="na">spring.datasource.tomcat.defaultAutoCommit</span><span class="o">=</span><span class="s">false</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="37-a-nameinit-dbsqldigressionainit-dbsqldigression">3.7. <a name='init-db.sqlDigression'></a>init-db.sql(Digression)</h3>
@@ -1548,7 +1547,7 @@ applicaiton.properties にプロパティを記載する。
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       
       ★

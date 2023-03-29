@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.97.3 with theme even" />
+<meta name="generator" content="Hugo 0.111.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-11/" />
@@ -44,7 +44,6 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-11/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-02-22T00:49:04+09:00" />
 <meta property="article:modified_time" content="2020-02-22T00:49:04+09:00" />
-
 <meta itemprop="name" content="Effective Java 3rd [Chapter 11] - 並行性">
 <meta itemprop="description" content="並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス"><meta itemprop="datePublished" content="2020-02-22T00:49:04+09:00" />
 <meta itemprop="dateModified" content="2020-02-22T00:49:04+09:00" />
@@ -217,13 +216,13 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Thread</span> <span class="n">backgroundThead</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">      <span class="k">while</span> <span class="o">(!</span><span class="n">stopRequested</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">i</span><span class="o">++;</span>
 </span></span><span class="line"><span class="cl">      <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">});</span>
 </span></span><span class="line"><span class="cl">    <span class="n">backgroundThead</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">stopRequested</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">  <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -277,13 +276,13 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Thread</span> <span class="n">backgroundThead</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">      <span class="k">while</span> <span class="o">(!</span><span class="n">stopRequested</span><span class="o">())</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">i</span><span class="o">++;</span>
 </span></span><span class="line"><span class="cl">      <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">});</span>
 </span></span><span class="line"><span class="cl">    <span class="n">backgroundThead</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">requestStop</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">  <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -329,13 +328,13 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Thread</span> <span class="n">backgroundThead</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">      <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">      <span class="k">while</span> <span class="o">(!</span><span class="n">stopRequested</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">i</span><span class="o">++;</span>
 </span></span><span class="line"><span class="cl">      <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">});</span>
 </span></span><span class="line"><span class="cl">    <span class="n">backgroundThead</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">stopRequested</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">  <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -356,7 +355,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">nextSerialNumber</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">nextSerialNumber</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">generateSerialNumber</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">nextSerialNumber</span><span class="o">++;</span>
@@ -533,12 +532,12 @@
 </span></span><span class="line"><span class="cl">  <span class="n">set</span><span class="o">.</span><span class="na">addObserver</span><span class="o">(</span><span class="k">new</span> <span class="n">SetObserver</span><span class="o">&lt;&gt;()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">added</span><span class="o">(</span><span class="n">ObservableSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">==</span> <span class="n">23</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">==</span> <span class="mi">23</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="o">.</span><span class="na">removeObserver</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">      <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">  <span class="o">});</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">  <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -643,7 +642,7 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">だめな例1</span> <span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="err">だめな例1 {</span>
 </span></span><span class="line"><span class="cl">   <span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">     <span class="n">Collections</span><span class="o">.</span><span class="na">synchronizedList</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;());</span>
 </span></span><span class="line"><span class="cl">
@@ -654,7 +653,7 @@
 </span></span><span class="line"><span class="cl">   <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">だめな例2</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="err">だめな例2 {</span>
 </span></span><span class="line"><span class="cl">   <span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CopyOnWriteArrayList</span><span class="o">&lt;&gt;();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addFromMultipleThreads</span><span class="o">(</span><span class="n">String</span> <span class="n">item</span><span class="o">)</span> <span class="o">{</span>
@@ -686,7 +685,7 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">いい例1</span> <span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="err">いい例1 {</span>
 </span></span><span class="line"><span class="cl">   <span class="kd">private</span> <span class="kd">final</span> <span class="n">CopyOnWriteArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CopyOnWriteArrayList</span><span class="o">&lt;&gt;();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addFromMultipleThreads</span><span class="o">(</span><span class="n">String</span> <span class="n">item</span><span class="o">)</span> <span class="o">{</span>
@@ -694,7 +693,7 @@
 </span></span><span class="line"><span class="cl">   <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">いい例2</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="err">いい例2 {</span>
 </span></span><span class="line"><span class="cl">   <span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">   <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">addFromMultipleThreads</span><span class="o">(</span><span class="n">String</span> <span class="n">item</span><span class="o">)</span> <span class="o">{</span>
@@ -792,7 +791,7 @@
 </span></span><span class="line"><span class="cl">		<span class="n">worker</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">		<span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">			<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;wait...&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">			<span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1000L</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000L</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">			<span class="n">worker</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
@@ -809,10 +808,10 @@
 </span></span><span class="line"><span class="cl">		<span class="n">es</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">		<span class="c1">// Java 7
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">ForkJoinPool</span> <span class="n">forkJoinPool</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ForkJoinPool</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">		<span class="kt">long</span> <span class="n">result</span> <span class="o">=</span> <span class="n">forkJoinPool</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="k">new</span> <span class="n">Sigma</span><span class="o">(</span><span class="n">100</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">long</span> <span class="n">result</span> <span class="o">=</span> <span class="n">forkJoinPool</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="k">new</span> <span class="n">Sigma</span><span class="o">(</span><span class="mi">100</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">		<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;result={}&#34;</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">		<span class="c1">// Java 8 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="kt">long</span> <span class="n">lambdaResult</span> <span class="o">=</span> <span class="n">LongStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">10000</span><span class="o">).</span><span class="na">parallel</span><span class="o">().</span><span class="na">sum</span><span class="o">();</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="kt">long</span> <span class="n">lambdaResult</span> <span class="o">=</span> <span class="n">LongStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10000</span><span class="o">).</span><span class="na">parallel</span><span class="o">().</span><span class="na">sum</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">		<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;lambdaResult={}&#34;</span><span class="o">,</span> <span class="n">lambdaResult</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">	<span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -825,10 +824,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">		<span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">		<span class="kd">protected</span> <span class="n">Long</span> <span class="nf">compute</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="n">1L</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">1L</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="n">value</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">			<span class="o">}</span>
-</span></span><span class="line"><span class="cl">			<span class="n">Sigma</span> <span class="n">sigma1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sigma</span><span class="o">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">Sigma</span> <span class="n">sigma1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sigma</span><span class="o">(</span><span class="n">value</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">			<span class="n">sigma1</span><span class="o">.</span><span class="na">fork</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="n">value</span> <span class="o">+</span> <span class="n">sigma1</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">		<span class="o">}</span>
@@ -903,15 +902,15 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">multiplicity</span> <span class="o">=</span> <span class="n">3</span><span class="o">;</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">CountDownLatch</span> <span class="n">LATCH</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CountDownLatch</span><span class="o">(</span><span class="n">multiplicity</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">	<span class="c1">// 省略
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">SecureRandom</span> <span class="n">random</span> <span class="o">=</span> <span class="n">SecureRandom</span><span class="o">.</span><span class="na">getInstanceStrong</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">	<span class="n">var</span> <span class="n">es</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="n">multiplicity</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">	<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">multiplicity</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">multiplicity</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
 </span></span><span class="line"><span class="cl">		<span class="n">es</span><span class="o">.</span><span class="na">submit</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">			<span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">				<span class="n">var</span> <span class="n">sleepTime</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">10</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">var</span> <span class="n">sleepTime</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">				<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;{} sec sleep...&#34;</span><span class="o">,</span> <span class="n">sleepTime</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">				<span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">sleepTime</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">				<span class="n">LATCH</span><span class="o">.</span><span class="na">countDown</span><span class="o">();</span>
@@ -987,7 +986,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// wait を利用するための標準イディオム
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">synchronized</span> <span class="o">(</span><span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="o">(&lt;</span><span class="n">条件が満たされていない</span><span class="o">&gt;)</span> <span class="o">{</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="o">(&lt;</span><span class="err">条件が満たされていない</span><span class="o">&gt;)</span> <span class="o">{</span> 
 </span></span><span class="line"><span class="cl">    <span class="n">obj</span><span class="o">.</span><span class="na">wait</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">  <span class="o">}</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 満たされた条件に対して適切な処理を行う
@@ -1387,7 +1386,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">count</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">SlowCountDownLatch</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="n">count</span> <span class="o">+</span> <span class="s">&#34; &lt; 0&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">count</span> <span class="o">=</span> <span class="n">count</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -1399,14 +1398,14 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">await</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">                    <span class="k">return</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">            <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">countDown</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">            <span class="n">count</span><span class="o">--;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -1428,7 +1427,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </span></span></span><span class="line"><span class="cl"><span class="cm">  スレッドで割り込みが発生しないかぎり、ラッチのカウント・ダウンがゼロになるまで現在のスレッドを待機させます。
 </span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
 </span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">await</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sync</span><span class="o">.</span><span class="na">acquireSharedInterruptibly</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sync</span><span class="o">.</span><span class="na">acquireSharedInterruptibly</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1499,7 +1498,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       
       ★
