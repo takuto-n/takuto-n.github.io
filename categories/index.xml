@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 22 Apr 2022 22:56:30 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Apr 2023 18:39:05 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>useful tools</title>
+      <link>https://takuto-n.github.io/categories/useful-tools/</link>
+      <pubDate>Tue, 18 Apr 2023 18:39:05 +0900</pubDate>
+      
+      <guid>https://takuto-n.github.io/categories/useful-tools/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>typescript</title>
       <link>https://takuto-n.github.io/categories/typescript/</link>
@@ -95,15 +104,6 @@
       <pubDate>Wed, 13 Jan 2021 19:35:35 +0900</pubDate>
       
       <guid>https://takuto-n.github.io/categories/poc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>useful tools</title>
-      <link>https://takuto-n.github.io/categories/useful-tools/</link>
-      <pubDate>Tue, 10 Nov 2020 19:37:47 +0900</pubDate>
-      
-      <guid>https://takuto-n.github.io/categories/useful-tools/</guid>
       <description></description>
     </item>
     

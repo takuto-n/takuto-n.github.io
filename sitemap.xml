@@ -10,7 +10,63 @@
   
   <url>
     <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2022-04-22T22:56:30+09:00</lastmod>
+    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/mac/</loc>
+    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/peco/</loc>
+    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/terminal/</loc>
+    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/useful-tools/</loc>
+    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20230418-mac-peco-history-selection/</loc>
+    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -23,28 +79,7 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2022-04-22T22:56:30+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/tags/object/</loc>
-    <lastmod>2022-04-22T22:56:30+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2022-04-22T22:56:30+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2022-04-22T22:56:30+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -542,13 +577,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/tags/powershell/</loc>
-    <lastmod>2020-11-10T19:37:47+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/categories/useful-tools/</loc>
     <lastmod>2020-11-10T19:37:47+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
