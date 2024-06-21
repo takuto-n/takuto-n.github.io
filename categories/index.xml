@@ -4,153 +4,122 @@
     <title>Categories on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/categories/</link>
     <description>Recent content in Categories on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 18 Apr 2023 18:39:05 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Apr 2023 18:39:05 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>useful tools</title>
+      <title>Useful Tools</title>
       <link>https://takuto-n.github.io/categories/useful-tools/</link>
-      <pubDate>Tue, 18 Apr 2023 18:39:05 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/useful-tools/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>typescript</title>
+      <title>Typescript</title>
       <link>https://takuto-n.github.io/categories/typescript/</link>
-      <pubDate>Fri, 22 Apr 2022 22:56:30 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/typescript/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>openapi</title>
+      <title>Openapi</title>
       <link>https://takuto-n.github.io/categories/openapi/</link>
-      <pubDate>Fri, 22 Apr 2022 22:17:54 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/openapi/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>node.js</title>
+      <title>Node.js</title>
       <link>https://takuto-n.github.io/categories/node.js/</link>
-      <pubDate>Tue, 12 Apr 2022 14:46:25 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/node.js/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>gradle</title>
+      <title>Gradle</title>
       <link>https://takuto-n.github.io/categories/gradle/</link>
-      <pubDate>Tue, 12 Apr 2022 09:12:02 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/gradle/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>react</title>
+      <title>React</title>
       <link>https://takuto-n.github.io/categories/react/</link>
-      <pubDate>Thu, 03 Feb 2022 20:10:04 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/react/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>auth</title>
+      <title>Auth</title>
       <link>https://takuto-n.github.io/categories/auth/</link>
-      <pubDate>Tue, 18 Jan 2022 21:38:05 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/auth/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>graphql</title>
+      <title>Graphql</title>
       <link>https://takuto-n.github.io/categories/graphql/</link>
-      <pubDate>Sat, 04 Dec 2021 00:56:49 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/graphql/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>gcp</title>
+      <title>Gcp</title>
       <link>https://takuto-n.github.io/categories/gcp/</link>
-      <pubDate>Tue, 07 Sep 2021 20:03:30 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/gcp/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>competitive-programming</title>
+      <title>Competitive-Programming</title>
       <link>https://takuto-n.github.io/categories/competitive-programming/</link>
-      <pubDate>Mon, 15 Mar 2021 22:00:01 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/competitive-programming/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>poc</title>
+      <title>Poc</title>
       <link>https://takuto-n.github.io/categories/poc/</link>
-      <pubDate>Wed, 13 Jan 2021 19:35:35 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/poc/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>aws</title>
+      <title>Aws</title>
       <link>https://takuto-n.github.io/categories/aws/</link>
-      <pubDate>Tue, 03 Nov 2020 15:10:12 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/aws/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>docker</title>
+      <title>Docker</title>
       <link>https://takuto-n.github.io/categories/docker/</link>
-      <pubDate>Wed, 01 Jul 2020 20:49:28 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/docker/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>effective-java-3rd</title>
+      <title>Effective-Java-3rd</title>
       <link>https://takuto-n.github.io/categories/effective-java-3rd/</link>
-      <pubDate>Sat, 07 Mar 2020 00:49:15 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/effective-java-3rd/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>cicd</title>
+      <title>Cicd</title>
       <link>https://takuto-n.github.io/categories/cicd/</link>
-      <pubDate>Tue, 24 Dec 2019 23:36:29 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/cicd/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>seminar</title>
+      <title>Seminar</title>
       <link>https://takuto-n.github.io/categories/seminar/</link>
-      <pubDate>Fri, 09 Aug 2019 00:01:44 +0900</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://takuto-n.github.io/categories/seminar/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

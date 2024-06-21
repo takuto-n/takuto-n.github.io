@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mattermost on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Mattermost on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/mattermost/</link>
-    <description>Recent content in mattermost on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Mattermost on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 14 Sep 2019 12:09:20 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/mattermost/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Sep 2019 12:09:20 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/mattermost/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AWS CodebuildからMattermostへの通知</title>
       <link>https://takuto-n.github.io/post/20190914-codebuild_mattermost/</link>
       <pubDate>Sat, 14 Sep 2019 12:09:20 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20190914-codebuild_mattermost/</guid>
       <description>AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi</description>
     </item>
-    
   </channel>
 </rss>

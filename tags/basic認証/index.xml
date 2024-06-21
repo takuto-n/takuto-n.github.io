@@ -4,18 +4,17 @@
     <title>BASIC認証 on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/basic%E8%AA%8D%E8%A8%BC/</link>
     <description>Recent content in BASIC認証 on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 16 Mar 2019 23:09:42 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/basic%E8%AA%8D%E8%A8%BC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Mar 2019 23:09:42 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/basic%E8%AA%8D%E8%A8%BC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>クロスドメイン制約とBASIC認証</title>
       <link>https://takuto-n.github.io/post/20190316-cors-basic_auth/</link>
       <pubDate>Sat, 16 Mar 2019 23:09:42 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20190316-cors-basic_auth/</guid>
       <description>初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>decision table on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Decision Table on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/decision-table/</link>
-    <description>Recent content in decision table on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Decision Table on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 01 Apr 2022 16:17:44 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/decision-table/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Apr 2022 16:17:44 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/decision-table/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Decision Table - Typescript version</title>
       <link>https://takuto-n.github.io/post/20220401-decision-table-typescript/</link>
       <pubDate>Fri, 01 Apr 2022 16:17:44 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20220401-decision-table-typescript/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
-&lt;p&gt;TypescriptでDecision Table(決定表) を作ってみたので、載せておきます。&lt;/p&gt;
-&lt;p&gt;決定表は、「条件」と「その条件のときの値」を関連付けて定義できるユーティリティとして便利なのですが、なかなかライブラリとして世の中に転がっておらず、、今回自作してみました。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;TypescriptでDecision Table(決定表) を作ってみたので、載せておきます。&lt;/p&gt;&#xA;&lt;p&gt;決定表は、「条件」と「その条件のときの値」を関連付けて定義できるユーティリティとして便利なのですが、なかなかライブラリとして世の中に転がっておらず、、今回自作してみました。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

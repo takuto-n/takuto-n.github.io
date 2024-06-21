@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>graphql on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Graphql on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/categories/graphql/</link>
-    <description>Recent content in graphql on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Graphql on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 04 Dec 2021 00:56:49 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/graphql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Dec 2021 00:56:49 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/categories/graphql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GraphQL Language Specifications</title>
       <link>https://takuto-n.github.io/post/20211204-graphql-basic/</link>
       <pubDate>Sat, 04 Dec 2021 00:56:49 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20211204-graphql-basic/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
-&lt;p&gt;GraphQLの学習にて、基本的な言語仕様をまとめたので載せておきます。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;GraphQLの学習にて、基本的な言語仕様をまとめたので載せておきます。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

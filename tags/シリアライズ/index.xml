@@ -4,18 +4,17 @@
     <title>シリアライズ on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/%E3%82%B7%E3%83%AA%E3%82%A2%E3%83%A9%E3%82%A4%E3%82%BA/</link>
     <description>Recent content in シリアライズ on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 07 Mar 2020 00:49:15 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/%E3%82%B7%E3%83%AA%E3%82%A2%E3%83%A9%E3%82%A4%E3%82%BA/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Mar 2020 00:49:15 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/%E3%82%B7%E3%83%AA%E3%82%A2%E3%83%A9%E3%82%A4%E3%82%BA/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Effective Java 3rd [Chapter 12] - シリアライズ</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-12/</link>
       <pubDate>Sat, 07 Mar 2020 00:49:15 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-12/</guid>
       <description>シリアライズ Effective Java 第 3 版の個人的メモ 項目 85 Java のシリアライズよりも代替手段を選ぶ 項目 86 Serializable を細心の注意を払って実装する 項目 87 カスタムシリアライズ形</description>
     </item>
-    
   </channel>
 </rss>

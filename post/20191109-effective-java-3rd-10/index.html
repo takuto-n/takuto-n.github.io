@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.111.3 with theme even" />
+<meta name="generator" content="Hugo 0.127.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-10/" />
@@ -38,19 +38,28 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="Effective Java 3rd [Chapter 10] - 例外" />
-<meta property="og:description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-10/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-01-25T00:49:01+09:00" />
-<meta property="article:modified_time" content="2020-01-25T00:49:01+09:00" />
-<meta itemprop="name" content="Effective Java 3rd [Chapter 10] - 例外">
-<meta itemprop="description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を"><meta itemprop="datePublished" content="2020-01-25T00:49:01+09:00" />
-<meta itemprop="dateModified" content="2020-01-25T00:49:01+09:00" />
-<meta itemprop="wordCount" content="4333">
-<meta itemprop="keywords" content="java,例外,個人的メモ," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Effective Java 3rd [Chapter 10] - 例外"/>
-<meta name="twitter:description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を"/>
+<meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-10/">
+  <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
+  <meta property="og:title" content="Effective Java 3rd [Chapter 10] - 例外">
+  <meta property="og:description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を">
+  <meta property="og:locale" content="ja_jp">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2020-01-25T00:49:01+09:00">
+    <meta property="article:modified_time" content="2020-01-25T00:49:01+09:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="例外">
+    <meta property="article:tag" content="個人的メモ">
+
+  <meta itemprop="name" content="Effective Java 3rd [Chapter 10] - 例外">
+  <meta itemprop="description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を">
+  <meta itemprop="datePublished" content="2020-01-25T00:49:01+09:00">
+  <meta itemprop="dateModified" content="2020-01-25T00:49:01+09:00">
+  <meta itemprop="wordCount" content="4333">
+  <meta itemprop="keywords" content="java,例外,個人的メモ">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Effective Java 3rd [Chapter 10] - 例外">
+  <meta name="twitter:description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -173,14 +182,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> 
-</span></span><span class="line"><span class="cl">    <span class="n">range</span><span class="o">[</span><span class="n">i</span><span class="o">++].</span><span class="na">climb</span><span class="o">();</span> <span class="c1">// 配列を全部処理する
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ArrayIndexOutOfBoundsException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">   <span class="c1">// 正常系
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">range</span><span class="o">[</span><span class="n">i</span><span class="o">++]</span><span class="p">.</span><span class="na">climb</span><span class="p">();</span><span class="w"> </span><span class="c1">// 配列を全部処理する</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ArrayIndexOutOfBoundsException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="c1">// 正常系</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="2-a-name70a項目-70-回復可能な状態にはチェックされる例外をプログラミングエラーには実行時例外を使う">2. <a name='70'></a>項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を使う</h2>
 <h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
@@ -268,12 +277,12 @@ ex)
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">actionPermitted</span><span class="o">(</span><span class="n">args</span><span class="o">))</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">obj</span><span class="o">.</span><span class="na">action</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span> <span class="k">else</span> <span class="o">{</span> 
-</span></span><span class="line"><span class="cl">  <span class="o">...</span> <span class="c1">// Handle exceptional condition
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="na">actionPermitted</span><span class="p">(</span><span class="n">args</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">obj</span><span class="p">.</span><span class="na">action</span><span class="p">(</span><span class="n">args</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">...</span><span class="w"> </span><span class="c1">// Handle exceptional condition</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="4-a-name72a項目-72-標準的な例外を使う">4. <a name='72'></a>項目 72 標準的な例外を使う</h2>
 <h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
@@ -346,14 +355,14 @@ ex)
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 例外翻訳
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 処理するために下位レベルのメソッドを使用する。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">doLowerLevelMethod</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">LowerLevelException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="k">new</span> <span class="n">HigherLevelException</span><span class="o">(...);</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 例外翻訳</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 処理するために下位レベルのメソッドを使用する。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">doLowerLevelMethod</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">LowerLevelException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HigherLevelException</span><span class="p">(...);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/AbstractSequentialList.java#L86">AbstractSequentialList</a>の場合は以下のように例外翻訳をしている。</p>
 <div class="highlight"><div class="chroma">
@@ -376,15 +385,15 @@ ex)
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * このリストの指定された位置の要素を返す。
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * @throws IndexOutOfBoundsException index が範囲外
 </span></span></span><span class="line"><span class="cl"><span class="cm"> *         {@code index &lt; 0 || size() &lt;= index }.
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">listIterator</span><span class="o">(</span><span class="n">index</span><span class="o">).</span><span class="na">next</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchElementException</span> <span class="n">exc</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">IndexOutOfBoundsException</span><span class="o">(</span><span class="s">&#34;Index: &#34;</span><span class="o">+</span><span class="n">index</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">listIterator</span><span class="p">(</span><span class="n">index</span><span class="p">).</span><span class="na">next</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">NoSuchElementException</span><span class="w"> </span><span class="n">exc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IndexOutOfBoundsException</span><span class="p">(</span><span class="s">&#34;Index: &#34;</span><span class="o">+</span><span class="n">index</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="6-a-name74a項目-74-各メソッドがスローするすべての例外を文書化する">6. <a name='74'></a>項目 74 各メソッドがスローするすべての例外を文書化する</h2>
 <h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
@@ -448,19 +457,19 @@ ex)
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * @param lowerBound もっとも小さな正当なインデックス値
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * @param upperBound もっとも大きな正当なインデックス値に1を足した値
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * @param index 実際のインデックス値
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
-</span></span><span class="line"><span class="cl"> <span class="kd">public</span> <span class="nf">IndexOutOfBoundsException</span><span class="o">(</span><span class="kt">int</span> <span class="n">lowerBound</span><span class="o">,</span> <span class="kt">int</span> <span class="n">upperBound</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">     <span class="c1">// エラーを記録する詳細メッセージを生成する
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="kd">super</span><span class="o">(</span> <span class="s">&#34;Lower bound: &#34;</span> <span class="o">+</span> <span class="n">lowerBound</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">          <span class="s">&#34;, Upper bound: &#34;</span> <span class="o">+</span> <span class="n">upperBound</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">          <span class="s">&#34;, Index : &#34;</span> <span class="o">+</span> <span class="n">index</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">     <span class="c1">// プログラミングによるアクセスのためにエラー情報を保存する
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="k">this</span><span class="o">.</span><span class="na">lowerBound</span> <span class="o">=</span> <span class="n">lowerBound</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">     <span class="k">this</span><span class="o">.</span><span class="na">upperBound</span> <span class="o">=</span> <span class="n">upperBound</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">     <span class="k">this</span><span class="o">.</span><span class="na">index</span> <span class="o">=</span> <span class="n">index</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"> <span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="nf">IndexOutOfBoundsException</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">lowerBound</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">upperBound</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="c1">// エラーを記録する詳細メッセージを生成する</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="kd">super</span><span class="p">(</span><span class="w"> </span><span class="s">&#34;Lower bound: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lowerBound</span><span class="w"> </span><span class="o">+</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="s">&#34;, Upper bound: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">upperBound</span><span class="w"> </span><span class="o">+</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="s">&#34;, Index : &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">index</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="c1">// プログラミングによるアクセスのためにエラー情報を保存する</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="k">this</span><span class="p">.</span><span class="na">lowerBound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lowerBound</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="k">this</span><span class="p">.</span><span class="na">upperBound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upperBound</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="k">this</span><span class="p">.</span><span class="na">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="8-a-name76a項目-76-エラーアトミック性に努める">8. <a name='76'></a>項目 76 エラーアトミック性に努める</h2>
 <h3 id="81-a-name-1a結論">8.1. <a name='-1'></a>結論</h3>
@@ -614,7 +623,7 @@ ex)
       <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
       <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
       <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
-  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="/post/20191109-effective-java-3rd-10/" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -632,7 +641,7 @@ ex)
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2023
+    2024
     <span class="heart">
       
       ★
@@ -652,16 +661,12 @@ ex)
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-147275961-2', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+    
+      
+    
+  
+
 
 
 

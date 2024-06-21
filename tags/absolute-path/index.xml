@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>absolute-path on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Absolute-Path on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/absolute-path/</link>
-    <description>Recent content in absolute-path on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Absolute-Path on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 04 Feb 2022 20:20:20 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/absolute-path/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Feb 2022 20:20:20 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/absolute-path/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Node.js Import AbsolutePath</title>
       <link>https://takuto-n.github.io/post/20220204-node-import-absolute_path/</link>
       <pubDate>Fri, 04 Feb 2022 20:20:20 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20220204-node-import-absolute_path/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
-&lt;p&gt;Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -4,18 +4,17 @@
     <title>プログラミング一般 on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E4%B8%80%E8%88%AC/</link>
     <description>Recent content in プログラミング一般 on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 24 Dec 2019 00:48:59 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E4%B8%80%E8%88%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Dec 2019 00:48:59 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E4%B8%80%E8%88%AC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Effective Java 3rd [Chapter 9] - プログラミング一般</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</link>
       <pubDate>Tue, 24 Dec 2019 00:48:59 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</guid>
       <description>プログラミング一般 Effective Java 第 3 版の個人的メモ 項目 57 ローカル変数のスコープを最小限にする 項目 58 従来の for ループより for-each ループを選ぶ 項目 59 ライブラリを知</description>
     </item>
-    
   </channel>
 </rss>

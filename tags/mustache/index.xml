@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mustache on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Mustache on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/mustache/</link>
-    <description>Recent content in mustache on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Mustache on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 22 Apr 2022 22:17:54 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/mustache/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Apr 2022 22:17:54 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/mustache/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mustache Option List</title>
       <link>https://takuto-n.github.io/post/20220422-mustache-option-list/</link>
       <pubDate>Fri, 22 Apr 2022 22:17:54 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20220422-mustache-option-list/</guid>
-      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://openapi-generator.tech/docs/installation/&#34;&gt;OpenAPI Generator&lt;/a&gt; のコード生成をカスタマイズする際に、mustache構文で苦戦（どんなオプションを使えるのかがわからなかった。）したので、そのときに助かった方法をメモしておきます。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://openapi-generator.tech/docs/installation/&#34;&gt;OpenAPI Generator&lt;/a&gt; のコード生成をカスタマイズする際に、mustache構文で苦戦（どんなオプションを使えるのかがわからなかった。）したので、そのときに助かった方法をメモしておきます。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

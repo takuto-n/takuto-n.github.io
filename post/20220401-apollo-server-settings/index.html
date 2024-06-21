@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.111.3 with theme even" />
+<meta name="generator" content="Hugo 0.127.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220401-apollo-server-settings/" />
@@ -40,37 +40,34 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="Apollo Server Settings" />
-<meta property="og:description" content="Abstruct
-Apollo Server Express ( apollo-server-express - npm ) を使ったサンプルアプリを作ってみました。
+<meta property="og:url" content="https://takuto-n.github.io/post/20220401-apollo-server-settings/">
+  <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
+  <meta property="og:title" content="Apollo Server Settings">
+  <meta property="og:description" content="Abstruct Apollo Server Express ( apollo-server-express - npm ) を使ったサンプルアプリを作ってみました。
 以下のことを考慮しながら作ると少し躓いたので、この記事にまとめておきます。
+チュートリアル Get started with Apollo Server - Apollo GraphQL Docs そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。 どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。 ">
+  <meta property="og:locale" content="ja_jp">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-04-01T15:32:23+09:00">
+    <meta property="article:modified_time" content="2022-04-01T15:32:23+09:00">
+    <meta property="article:tag" content="Apollo Server">
+    <meta property="article:tag" content="Graphql">
+    <meta property="article:tag" content="Node.js">
 
-チュートリアル Get started with Apollo Server - Apollo GraphQL Docs そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。
-どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。
-" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://takuto-n.github.io/post/20220401-apollo-server-settings/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-04-01T15:32:23+09:00" />
-<meta property="article:modified_time" content="2022-04-01T15:32:23+09:00" />
-<meta itemprop="name" content="Apollo Server Settings">
-<meta itemprop="description" content="Abstruct
-Apollo Server Express ( apollo-server-express - npm ) を使ったサンプルアプリを作ってみました。
+  <meta itemprop="name" content="Apollo Server Settings">
+  <meta itemprop="description" content="Abstruct Apollo Server Express ( apollo-server-express - npm ) を使ったサンプルアプリを作ってみました。
 以下のことを考慮しながら作ると少し躓いたので、この記事にまとめておきます。
-
-チュートリアル Get started with Apollo Server - Apollo GraphQL Docs そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。
-どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。
-"><meta itemprop="datePublished" content="2022-04-01T15:32:23+09:00" />
-<meta itemprop="dateModified" content="2022-04-01T15:32:23+09:00" />
-<meta itemprop="wordCount" content="1330">
-<meta itemprop="keywords" content="apollo server,graphql,node.js," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Apollo Server Settings"/>
-<meta name="twitter:description" content="Abstruct
-Apollo Server Express ( apollo-server-express - npm ) を使ったサンプルアプリを作ってみました。
+チュートリアル Get started with Apollo Server - Apollo GraphQL Docs そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。 どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。 ">
+  <meta itemprop="datePublished" content="2022-04-01T15:32:23+09:00">
+  <meta itemprop="dateModified" content="2022-04-01T15:32:23+09:00">
+  <meta itemprop="wordCount" content="1330">
+  <meta itemprop="keywords" content="apollo server,graphql,node.js">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Apollo Server Settings">
+  <meta name="twitter:description" content="Abstruct Apollo Server Express ( apollo-server-express - npm ) を使ったサンプルアプリを作ってみました。
 以下のことを考慮しながら作ると少し躓いたので、この記事にまとめておきます。
-
-チュートリアル Get started with Apollo Server - Apollo GraphQL Docs そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。
-どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。
-"/>
+チュートリアル Get started with Apollo Server - Apollo GraphQL Docs そのままに利用するだけだと、GraphQLのschema定義やresolverを1ファイルに記述することになり少し煩雑になってしまうので、きれいに分けたい。 どうせならスキーマ定義と一緒にバリデーション定義も盛り込みたい。 ">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -708,7 +705,7 @@ Apollo Server Express ( apollo-server-express - npm ) を使ったサンプル�
       <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
       <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
       <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
-  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="/post/20220401-apollo-server-settings/" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -726,7 +723,7 @@ Apollo Server Express ( apollo-server-express - npm ) を使ったサンプル�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2023
+    2024
     <span class="heart">
       
       ★
@@ -746,16 +743,12 @@ Apollo Server Express ( apollo-server-express - npm ) を使ったサンプル�
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-147275961-2', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+    
+      
+    
+  
+
 
 
 

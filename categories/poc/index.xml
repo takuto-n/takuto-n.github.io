@@ -1,140 +1,90 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>poc on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Poc on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/categories/poc/</link>
-    <description>Recent content in poc on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Poc on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 13 Jan 2021 19:35:35 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/poc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Jan 2021 19:35:35 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/categories/poc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Springboot-App can create/replace Configmap.</title>
       <link>https://takuto-n.github.io/post/20210113-springboot-app-create-configmap/</link>
       <pubDate>Wed, 13 Jan 2021 19:35:35 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20210113-springboot-app-create-configmap/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
-&lt;p&gt;KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを変更することができたので、その方法をまとめておきます。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを変更することができたので、その方法をまとめておきます。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Springboot-App can pulll the Configmap information.</title>
       <link>https://takuto-n.github.io/post/20210107-springboot-app-read-configmap/</link>
       <pubDate>Thu, 07 Jan 2021 18:00:01 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20210107-springboot-app-read-configmap/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
-&lt;p&gt;KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを取得しに行くことができたので、その方法をまとめておきます。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを取得しに行くことができたので、その方法をまとめておきます。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Exception Handling on SpringBoot</title>
       <link>https://takuto-n.github.io/post/20201222-spring-boot-exception-handler/</link>
       <pubDate>Tue, 22 Dec 2020 20:07:15 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20201222-spring-boot-exception-handler/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
-&lt;p&gt;The three methods of exception handling in SpringBoot are described below.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;How to handle exceptions for each Controller&lt;/li&gt;
-&lt;li&gt;How to handle exceptions across all Controllers&lt;/li&gt;
-&lt;li&gt;How to handle exceptions by implementing ErrorController&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;The three methods of exception handling in SpringBoot are described below.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How to handle exceptions for each Controller&lt;/li&gt;&#xA;&lt;li&gt;How to handle exceptions across all Controllers&lt;/li&gt;&#xA;&lt;li&gt;How to handle exceptions by implementing ErrorController&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>動的プロパティの管理 on SpringBoot</title>
       <link>https://takuto-n.github.io/post/20201216-springboot-manage-property/</link>
       <pubDate>Wed, 16 Dec 2020 18:39:39 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20201216-springboot-manage-property/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
-&lt;p&gt;AP基盤/業務ロジック上で使用する静的プロパティを管理する方法としては、以下があるかと思います。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;applicaiton.properties にプロパティを記載する。&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/context/properties/ConfigurationProperties.html&#34;&gt;@ConfigurationProperties&lt;/a&gt; を使って、オブジェクトにプロパティ値を読み込ませる。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;参考：&lt;a href=&#34;https://qiita.com/KevinFQ/items/bc5c3b7796bb72fa049c&#34;&gt;Spring Bootでプロパティファイルとのバインディング方法 - Qiita&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;この記事では、AP基盤/業務ロジック上で使用する&lt;strong&gt;動的プロパティ&lt;/strong&gt;を&lt;code&gt;Map&amp;lt;String, Object&amp;gt;&lt;/code&gt;として管理する方法について記載したいと思います。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;参考：&lt;a href=&#34;https://qiita.com/kazuki43zoo/items/b9e07dc6c6d8a45485de&#34;&gt;Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;AP基盤/業務ロジック上で使用する静的プロパティを管理する方法としては、以下があるかと思います。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;applicaiton.properties にプロパティを記載する。&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/context/properties/ConfigurationProperties.html&#34;&gt;@ConfigurationProperties&lt;/a&gt; を使って、オブジェクトにプロパティ値を読み込ませる。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;参考：&lt;a href=&#34;https://qiita.com/KevinFQ/items/bc5c3b7796bb72fa049c&#34;&gt;Spring Bootでプロパティファイルとのバインディング方法 - Qiita&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;この記事では、AP基盤/業務ロジック上で使用する&lt;strong&gt;動的プロパティ&lt;/strong&gt;を&lt;code&gt;Map&amp;lt;String, Object&amp;gt;&lt;/code&gt;として管理する方法について記載したいと思います。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;参考：&lt;a href=&#34;https://qiita.com/kazuki43zoo/items/b9e07dc6c6d8a45485de&#34;&gt;Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
-    
     <item>
       <title>gRPC を使ってみた</title>
       <link>https://takuto-n.github.io/post/20201024-grpc-java/</link>
       <pubDate>Sat, 24 Oct 2020 18:36:47 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20201024-grpc-java/</guid>
-      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
-&lt;p&gt;半年ほど前に &lt;a href=&#34;https://github.com/LogNet/grpc-spring-boot-starter&#34;&gt;Spring boot starter for gRPC framework&lt;/a&gt; を使う機会があったので、思い出しながらまとめておきます。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;&#xA;&lt;p&gt;半年ほど前に &lt;a href=&#34;https://github.com/LogNet/grpc-spring-boot-starter&#34;&gt;Spring boot starter for gRPC framework&lt;/a&gt; を使う機会があったので、思い出しながらまとめておきます。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>OpenAPI Generatorを使ってみた</title>
       <link>https://takuto-n.github.io/post/20201024-openapi-java/</link>
       <pubDate>Sat, 24 Oct 2020 15:20:11 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20201024-openapi-java/</guid>
-      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
-&lt;p&gt;半年ほど前に &lt;a href=&#34;https://github.com/OpenAPITools/openapi-generator&#34;&gt;OpenAPI Generator&lt;/a&gt; を使う機会があったので、思い出しながらまとめておきます。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;&#xA;&lt;p&gt;半年ほど前に &lt;a href=&#34;https://github.com/OpenAPITools/openapi-generator&#34;&gt;OpenAPI Generator&lt;/a&gt; を使う機会があったので、思い出しながらまとめておきます。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Jmeter Master-Slave構成</title>
       <link>https://takuto-n.github.io/post/20200614-jmeter-master-slave/</link>
       <pubDate>Sun, 14 Jun 2020 20:25:08 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20200614-jmeter-master-slave/</guid>
-      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
-&lt;legend&gt;Jmeter Master-Slave Overview&lt;/legend&gt;
-&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200614/jmeter-master-slave-on-aws.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;&#xA;&lt;legend&gt;Jmeter Master-Slave Overview&lt;/legend&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200614/jmeter-master-slave-on-aws.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Javaプロセスのメモリチェック方法</title>
       <link>https://takuto-n.github.io/post/20200502-memory-check-methods/</link>
       <pubDate>Sat, 02 May 2020 15:08:30 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20200502-memory-check-methods/</guid>
-      <description>&lt;h1 id=&#34;概要&#34;&gt;概要&lt;/h1&gt;
-&lt;p&gt;Javaプロセスのメモリ使用量をいろいろな方法で調査する機会あったので、まとめておきます。（内容としてはそれぞれあっさりです。）&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;概要&#34;&gt;概要&lt;/h1&gt;&#xA;&lt;p&gt;Javaプロセスのメモリ使用量をいろいろな方法で調査する機会あったので、まとめておきます。（内容としてはそれぞれあっさりです。）&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>SpringBootアプリケーション起動直後にスレッドを初期化する方法②</title>
       <link>https://takuto-n.github.io/post/20200502-thread-init-at-process-startup2/</link>
       <pubDate>Sat, 02 May 2020 14:35:29 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20200502-thread-init-at-process-startup2/</guid>
-      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
-&lt;legend&gt;スレッド初期化のシーケンス図&lt;/legend&gt;
-&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200502/thread-init-flow.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;&#xA;&lt;legend&gt;スレッド初期化のシーケンス図&lt;/legend&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200502/thread-init-flow.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>SpringBootアプリケーション起動直後にスレッドを初期化する方法</title>
       <link>https://takuto-n.github.io/post/20200425-thread-init-at-process-startup/</link>
       <pubDate>Sat, 25 Apr 2020 17:11:21 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20200425-thread-init-at-process-startup/</guid>
-      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
-&lt;legend&gt;スレッド初期化のシーケンス図&lt;/legend&gt;
-&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200425/thread-init-flow.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;&#xA;&lt;legend&gt;スレッド初期化のシーケンス図&lt;/legend&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200425/thread-init-flow.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>クロスドメイン制約とBASIC認証</title>
       <link>https://takuto-n.github.io/post/20190316-cors-basic_auth/</link>
       <pubDate>Sat, 16 Mar 2019 23:09:42 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20190316-cors-basic_auth/</guid>
       <description>初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認</description>
     </item>
-    
   </channel>
 </rss>

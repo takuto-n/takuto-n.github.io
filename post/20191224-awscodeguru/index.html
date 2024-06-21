@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.111.3 with theme even" />
+<meta name="generator" content="Hugo 0.127.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191224-awscodeguru/" />
@@ -38,19 +38,28 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="AWS CodeGuru" />
-<meta property="og:description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://takuto-n.github.io/post/20191224-awscodeguru/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-12-24T23:36:29+09:00" />
-<meta property="article:modified_time" content="2019-12-24T23:36:29+09:00" />
-<meta itemprop="name" content="AWS CodeGuru">
-<meta itemprop="description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使"><meta itemprop="datePublished" content="2019-12-24T23:36:29+09:00" />
-<meta itemprop="dateModified" content="2019-12-24T23:36:29+09:00" />
-<meta itemprop="wordCount" content="2247">
-<meta itemprop="keywords" content="codeguru,静的解析,aws," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="AWS CodeGuru"/>
-<meta name="twitter:description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使"/>
+<meta property="og:url" content="https://takuto-n.github.io/post/20191224-awscodeguru/">
+  <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
+  <meta property="og:title" content="AWS CodeGuru">
+  <meta property="og:description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使">
+  <meta property="og:locale" content="ja_jp">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2019-12-24T23:36:29+09:00">
+    <meta property="article:modified_time" content="2019-12-24T23:36:29+09:00">
+    <meta property="article:tag" content="Codeguru">
+    <meta property="article:tag" content="静的解析">
+    <meta property="article:tag" content="Aws">
+
+  <meta itemprop="name" content="AWS CodeGuru">
+  <meta itemprop="description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使">
+  <meta itemprop="datePublished" content="2019-12-24T23:36:29+09:00">
+  <meta itemprop="dateModified" content="2019-12-24T23:36:29+09:00">
+  <meta itemprop="wordCount" content="2247">
+  <meta itemprop="keywords" content="codeguru,静的解析,aws">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AWS CodeGuru">
+  <meta name="twitter:description" content="AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -375,91 +384,91 @@
 </span><span class="lnt">84
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// ひどいコード1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">var</span> <span class="n">test1</span> <span class="o">=</span> <span class="s">&#34;test1&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">test2</span> <span class="o">=</span> <span class="s">&#34;test2&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">test3</span> <span class="o">=</span> <span class="s">&#34;test3&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">var</span> <span class="n">test4</span> <span class="o">=</span> <span class="s">&#34;test4&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード2
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">do</span><span class="o">{</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">//処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span><span class="k">while</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード4
-</span></span></span><span class="line"><span class="cl"><span class="c1">// リソースのcloseなし
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">src</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">dst</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード5
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 引用元：https://qiita.com/negi111111/items/510daace637b7c57c2da
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassSample</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">proc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">){</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 正常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">){</span>
-</span></span><span class="line"><span class="cl">                        <span class="c1">// 正常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">){</span>
-</span></span><span class="line"><span class="cl">                                <span class="c1">// 正常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                                    <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">){</span>
-</span></span><span class="line"><span class="cl">                                        <span class="c1">// 正常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                        <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                                            <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">){</span>
-</span></span><span class="line"><span class="cl">                                                <span class="c1">// 正常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="k">if</span> <span class="o">(</span> <span class="n">proc</span> <span class="o">==</span> <span class="mi">5</span> <span class="o">){</span>
-</span></span><span class="line"><span class="cl">                                                    <span class="c1">// 正常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                    <span class="c1">// まだまだ続くよ！
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                                                    <span class="c1">// 異常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="o">}</span>
-</span></span><span class="line"><span class="cl">                                            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                                                <span class="c1">// 異常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                            <span class="o">}</span>
-</span></span><span class="line"><span class="cl">                                        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                                            <span class="c1">// 例外処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">                                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                                        <span class="c1">// 異常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">                                <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                                    <span class="c1">// 例外処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                <span class="o">}</span>
-</span></span><span class="line"><span class="cl">                            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                                <span class="c1">// 異常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                            <span class="o">}</span>
-</span></span><span class="line"><span class="cl">                        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                            <span class="c1">// 例外処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                        <span class="c1">// 異常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">                <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="c1">// 例外処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">}</span>
-</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// 異常処理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="o">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 握りつぶす
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Hello! World!&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// ひどいコード1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="n">test1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test1&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="n">test2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test2&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="n">test3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test3&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="n">test4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test4&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// ひどいコード2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">do</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">//処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// ひどいコード3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// ひどいコード4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// リソースのcloseなし</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="n">src</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="n">dst</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// ひどいコード5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 引用元：https://qiita.com/negi111111/items/510daace637b7c57c2da</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClassSample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">args</span><span class="o">[]</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">proc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">proc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">0</span><span class="w"> </span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 正常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">proc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">1</span><span class="w"> </span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="c1">// 正常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">proc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">2</span><span class="w"> </span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                </span><span class="c1">// 正常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">proc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">3</span><span class="w"> </span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                        </span><span class="c1">// 正常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">proc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">4</span><span class="w"> </span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                                </span><span class="c1">// 正常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">proc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">5</span><span class="w"> </span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                                    </span><span class="c1">// 正常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                                    </span><span class="c1">// まだまだ続くよ！</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                                    </span><span class="c1">// 異常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                                </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                                </span><span class="c1">// 異常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                            </span><span class="c1">// 例外処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                        </span><span class="c1">// 異常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                    </span><span class="c1">// 例外処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                </span><span class="c1">// 異常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                            </span><span class="c1">// 例外処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="c1">// 異常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="c1">// 例外処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 異常処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 握りつぶす</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello! World!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="42-a-name-1a指摘されたコード">4.2. <a name='-1'></a>指摘されたコード</h3>
 <p>一般的なコーディングに対する指摘ですね。</p>
@@ -474,13 +483,13 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span> <span class="n">dateString</span> <span class="o">=</span> <span class="s">&#34;2016/01/01 00:00:00&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">&#34;yyyy/MM/dd HH:mm:ss&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">Long</span> <span class="n">epochTime</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">dateString</span><span class="o">).</span><span class="na">getTime</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">epochTime</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 指摘内容
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 「タイムゾーンの指定がない」
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span><span class="w"> </span><span class="n">dateString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;2016/01/01 00:00:00&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SimpleDateFormat</span><span class="w"> </span><span class="n">sdf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s">&#34;yyyy/MM/dd HH:mm:ss&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Long</span><span class="w"> </span><span class="n">epochTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdf</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">dateString</span><span class="p">).</span><span class="na">getTime</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">epochTime</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 指摘内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 「タイムゾーンの指定がない」</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>以下はAWSのAPIについての指摘です。結構詳しく記載されていて「流石です」という所感です。</p>
@@ -492,10 +501,10 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">new</span> <span class="n">BasicAWSCredentials</span><span class="o">(</span><span class="n">EnvProp</span><span class="o">.</span><span class="na">getAccesskey</span><span class="o">(),</span> <span class="n">EnvProp</span><span class="o">.</span><span class="na">getSecretkey</span><span class="o">())));</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 指摘内容
-</span></span></span><span class="line"><span class="cl"><span class="c1">// If possible, use temporary security credentials (IAM roles) instead of long-term access keys. Long-term access keys, such as those associated with IAM users and AWS account root users, remain valid until you manually revoke them. However, temporary security credentials obtained through IAM roles and other features of the AWS Security Token Service expire after a short period of time. Use temporary security credentials to help reduce your risk in case credentials are accidentally exposed. Learn more about best practices for managing AWS access keys.
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">new</span><span class="w"> </span><span class="n">BasicAWSCredentials</span><span class="p">(</span><span class="n">EnvProp</span><span class="p">.</span><span class="na">getAccesskey</span><span class="p">(),</span><span class="w"> </span><span class="n">EnvProp</span><span class="p">.</span><span class="na">getSecretkey</span><span class="p">())));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 指摘内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// If possible, use temporary security credentials (IAM roles) instead of long-term access keys. Long-term access keys, such as those associated with IAM users and AWS account root users, remain valid until you manually revoke them. However, temporary security credentials obtained through IAM roles and other features of the AWS Security Token Service expire after a short period of time. Use temporary security credentials to help reduce your risk in case credentials are accidentally exposed. Learn more about best practices for managing AWS access keys.</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -506,10 +515,10 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">getQueryResultsResult</span> <span class="o">=</span> <span class="n">amazonAthena</span><span class="o">.</span><span class="na">getQueryResults</span><span class="o">(</span><span class="n">getQueryResultsRequest</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 指摘内容
-</span></span></span><span class="line"><span class="cl"><span class="c1">// This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results.
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">getQueryResultsResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">amazonAthena</span><span class="p">.</span><span class="na">getQueryResults</span><span class="p">(</span><span class="n">getQueryResultsRequest</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 指摘内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results.</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="5-a-name-1a余談">5. <a name='-1'></a>余談</h2>
@@ -560,7 +569,7 @@
       <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
       <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
       <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
-  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="/post/20191224-awscodeguru/" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -578,7 +587,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2023
+    2024
     <span class="heart">
       
       ★
@@ -598,16 +607,12 @@
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-147275961-2', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+    
+      
+    
+  
+
 
 
 

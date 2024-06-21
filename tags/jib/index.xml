@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>jib on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Jib on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/jib/</link>
-    <description>Recent content in jib on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Jib on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 07 Apr 2020 16:16:55 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/jib/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Apr 2020 16:16:55 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/jib/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Using JNR on Container</title>
       <link>https://takuto-n.github.io/post/20200407-jnr-on-docker/</link>
       <pubDate>Tue, 07 Apr 2020 16:16:55 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20200407-jnr-on-docker/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200407/using-jnr-on-docker.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Springboot on Container with jib</title>
       <link>https://takuto-n.github.io/post/20200405-docker-springboot_to_db/</link>
       <pubDate>Sun, 05 Apr 2020 15:55:57 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20200405-docker-springboot_to_db/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200405/docker-springboot_db.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

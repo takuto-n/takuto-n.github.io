@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.111.3 with theme even" />
+<meta name="generator" content="Hugo 0.127.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220204-node-import-absolute_path/" />
@@ -39,22 +39,29 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="Node.js Import AbsolutePath" />
-<meta property="og:description" content="Abstruct
-Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://takuto-n.github.io/post/20220204-node-import-absolute_path/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-02-04T20:20:20+09:00" />
-<meta property="article:modified_time" content="2022-02-04T20:20:20+09:00" />
-<meta itemprop="name" content="Node.js Import AbsolutePath">
-<meta itemprop="description" content="Abstruct
-Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。"><meta itemprop="datePublished" content="2022-02-04T20:20:20+09:00" />
-<meta itemprop="dateModified" content="2022-02-04T20:20:20+09:00" />
-<meta itemprop="wordCount" content="490">
-<meta itemprop="keywords" content="node.js,typescript,import,absolute-path," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Node.js Import AbsolutePath"/>
-<meta name="twitter:description" content="Abstruct
-Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。"/>
+<meta property="og:url" content="https://takuto-n.github.io/post/20220204-node-import-absolute_path/">
+  <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
+  <meta property="og:title" content="Node.js Import AbsolutePath">
+  <meta property="og:description" content="Abstruct Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。">
+  <meta property="og:locale" content="ja_jp">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-02-04T20:20:20+09:00">
+    <meta property="article:modified_time" content="2022-02-04T20:20:20+09:00">
+    <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="Typescript">
+    <meta property="article:tag" content="Import">
+    <meta property="article:tag" content="Absolute-Path">
+
+  <meta itemprop="name" content="Node.js Import AbsolutePath">
+  <meta itemprop="description" content="Abstruct Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。">
+  <meta itemprop="datePublished" content="2022-02-04T20:20:20+09:00">
+  <meta itemprop="dateModified" content="2022-02-04T20:20:20+09:00">
+  <meta itemprop="wordCount" content="490">
+  <meta itemprop="keywords" content="node.js,typescript,import,absolute-path">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Node.js Import AbsolutePath">
+  <meta name="twitter:description" content="Abstruct Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -359,7 +366,7 @@ Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶�
       <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
       <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
       <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
-  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="/post/20220204-node-import-absolute_path/" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -377,7 +384,7 @@ Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2023
+    2024
     <span class="heart">
       
       ★
@@ -397,16 +404,12 @@ Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶�
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-147275961-2', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+    
+      
+    
+  
+
 
 
 

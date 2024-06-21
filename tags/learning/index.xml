@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>learning on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Learning on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/learning/</link>
-    <description>Recent content in learning on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Learning on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 03 Feb 2022 20:10:04 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Feb 2022 20:10:04 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>React Learning</title>
       <link>https://takuto-n.github.io/post/20220203-react-learning/</link>
       <pubDate>Thu, 03 Feb 2022 20:10:04 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20220203-react-learning/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
-&lt;p&gt;Reactの初学者として、2ヶ月ほど学習したので、学習を振り返って、どのコンテンツで学べばよかったのかをまとめておきます。(随時更新予定)&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;Reactの初学者として、2ヶ月ほど学習したので、学習を振り返って、どのコンテンツで学べばよかったのかをまとめておきます。(随時更新予定)&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>slave on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Slave on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/slave/</link>
-    <description>Recent content in slave on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Slave on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 14 Jun 2020 20:25:08 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/slave/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Jun 2020 20:25:08 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/slave/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Jmeter Master-Slave構成</title>
       <link>https://takuto-n.github.io/post/20200614-jmeter-master-slave/</link>
       <pubDate>Sun, 14 Jun 2020 20:25:08 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20200614-jmeter-master-slave/</guid>
-      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
-&lt;legend&gt;Jmeter Master-Slave Overview&lt;/legend&gt;
-&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200614/jmeter-master-slave-on-aws.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;&#xA;&lt;legend&gt;Jmeter Master-Slave Overview&lt;/legend&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://takuto-n.github.io/img/20200614/jmeter-master-slave-on-aws.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

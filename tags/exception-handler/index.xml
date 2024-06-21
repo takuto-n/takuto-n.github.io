@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>exception handler on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Exception Handler on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/exception-handler/</link>
-    <description>Recent content in exception handler on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Exception Handler on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 22 Dec 2020 20:07:15 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/exception-handler/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Dec 2020 20:07:15 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/exception-handler/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Exception Handling on SpringBoot</title>
       <link>https://takuto-n.github.io/post/20201222-spring-boot-exception-handler/</link>
       <pubDate>Tue, 22 Dec 2020 20:07:15 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20201222-spring-boot-exception-handler/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
-&lt;p&gt;The three methods of exception handling in SpringBoot are described below.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;How to handle exceptions for each Controller&lt;/li&gt;
-&lt;li&gt;How to handle exceptions across all Controllers&lt;/li&gt;
-&lt;li&gt;How to handle exceptions by implementing ErrorController&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;The three methods of exception handling in SpringBoot are described below.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How to handle exceptions for each Controller&lt;/li&gt;&#xA;&lt;li&gt;How to handle exceptions across all Controllers&lt;/li&gt;&#xA;&lt;li&gt;How to handle exceptions by implementing ErrorController&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
   </channel>
 </rss>

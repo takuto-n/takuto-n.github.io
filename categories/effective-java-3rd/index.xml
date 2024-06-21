@@ -1,111 +1,90 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>effective-java-3rd on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Effective-Java-3rd on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/categories/effective-java-3rd/</link>
-    <description>Recent content in effective-java-3rd on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Effective-Java-3rd on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 07 Mar 2020 00:49:15 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/effective-java-3rd/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Mar 2020 00:49:15 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/categories/effective-java-3rd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Effective Java 3rd [Chapter 12] - シリアライズ</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-12/</link>
       <pubDate>Sat, 07 Mar 2020 00:49:15 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-12/</guid>
       <description>シリアライズ Effective Java 第 3 版の個人的メモ 項目 85 Java のシリアライズよりも代替手段を選ぶ 項目 86 Serializable を細心の注意を払って実装する 項目 87 カスタムシリアライズ形</description>
     </item>
-    
     <item>
       <title>Effective Java 3rd [Chapter 11] - 並行性</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-11/</link>
       <pubDate>Sat, 22 Feb 2020 00:49:04 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-11/</guid>
       <description>並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス</description>
     </item>
-    
     <item>
       <title>Effective Java 3rd [Chapter 10] - 例外</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-10/</link>
       <pubDate>Sat, 25 Jan 2020 00:49:01 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-10/</guid>
       <description>例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を</description>
     </item>
-    
     <item>
       <title>Effective Java 3rd [Chapter 9] - プログラミング一般</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</link>
       <pubDate>Tue, 24 Dec 2019 00:48:59 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-9/</guid>
       <description>プログラミング一般 Effective Java 第 3 版の個人的メモ 項目 57 ローカル変数のスコープを最小限にする 項目 58 従来の for ループより for-each ループを選ぶ 項目 59 ライブラリを知</description>
     </item>
-    
     <item>
       <title>Effective Java 3rd [Chapter 8] - メソッド</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-8/</link>
       <pubDate>Mon, 09 Dec 2019 00:48:57 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-8/</guid>
       <description>メソッド Effective Java 第 3 版の個人的メモ 項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計</description>
     </item>
-    
     <item>
       <title>Effective Java 3rd [Chapter 7] - ラムダ式とストリーム</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-7/</link>
       <pubDate>Mon, 25 Nov 2019 00:37:53 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-7/</guid>
       <description>ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ</description>
     </item>
-    
     <item>
       <title>Effective Java 3rd [Chapter 6] - enum とアノテーション</title>
       <link>https://takuto-n.github.io/post/20191109-effective-java-3rd-6/</link>
       <pubDate>Sat, 09 Nov 2019 00:36:53 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191109-effective-java-3rd-6/</guid>
       <description>enum とアノテーション Effective Java 第 3 版の個人的メモ 項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールド</description>
     </item>
-    
     <item>
       <title>Effective Java 3rd [Chapter 5] - ジェネリクス</title>
       <link>https://takuto-n.github.io/post/20191103-effective-java-3rd-5/</link>
       <pubDate>Sun, 03 Nov 2019 00:07:19 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191103-effective-java-3rd-5/</guid>
       <description>ジェネリクス Effective Java 第 3 版の個人的メモ 項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジ</description>
     </item>
-    
     <item>
       <title>Effective Java 3rd [Chapter 4] - クラスとインタフェース</title>
       <link>https://takuto-n.github.io/post/20191006-effective-java-3rd-4/</link>
       <pubDate>Sun, 06 Oct 2019 15:27:10 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20191006-effective-java-3rd-4/</guid>
       <description>クラスとインタフェース Effective Java 第 3 版の個人的メモ 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィー</description>
     </item>
-    
     <item>
       <title>Effective Java 3rd [Chapter 3] - すべてのオブジェクトに共通のメソッド</title>
       <link>https://takuto-n.github.io/post/20190921-effective-java-3rd-3/</link>
       <pubDate>Sat, 21 Sep 2019 19:17:52 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20190921-effective-java-3rd-3/</guid>
       <description>すべてのオブジェクトに共通のメソッド Effective Java 第 3 版の個人的メモ 項目 10 equals の override は一般契約（general contracts）に従うべし 項目 11 equals をオー</description>
     </item>
-    
     <item>
       <title>Effective Java 3rd [Chapter 2] - オブジェクトの生成と消滅</title>
       <link>https://takuto-n.github.io/post/20190921-effective-java-3rd-2/</link>
       <pubDate>Sat, 21 Sep 2019 01:49:02 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20190921-effective-java-3rd-2/</guid>
       <description>オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ</description>
     </item>
-    
   </channel>
 </rss>

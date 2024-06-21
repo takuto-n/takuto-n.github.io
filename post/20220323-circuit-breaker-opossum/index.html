@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.111.3 with theme even" />
+<meta name="generator" content="Hugo 0.127.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220323-circuit-breaker-opossum/" />
@@ -39,22 +39,28 @@
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="Circuit Breaker Opossum" />
-<meta property="og:description" content="Abstruct
-Circuit Breaker( opossum ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://takuto-n.github.io/post/20220323-circuit-breaker-opossum/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-03-23T22:29:20+09:00" />
-<meta property="article:modified_time" content="2022-03-23T22:29:20+09:00" />
-<meta itemprop="name" content="Circuit Breaker Opossum">
-<meta itemprop="description" content="Abstruct
-Circuit Breaker( opossum ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。"><meta itemprop="datePublished" content="2022-03-23T22:29:20+09:00" />
-<meta itemprop="dateModified" content="2022-03-23T22:29:20+09:00" />
-<meta itemprop="wordCount" content="3768">
-<meta itemprop="keywords" content="circuit breaker,opossum,node.js," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Circuit Breaker Opossum"/>
-<meta name="twitter:description" content="Abstruct
-Circuit Breaker( opossum ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。"/>
+<meta property="og:url" content="https://takuto-n.github.io/post/20220323-circuit-breaker-opossum/">
+  <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
+  <meta property="og:title" content="Circuit Breaker Opossum">
+  <meta property="og:description" content="Abstruct Circuit Breaker( opossum ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。">
+  <meta property="og:locale" content="ja_jp">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-03-23T22:29:20+09:00">
+    <meta property="article:modified_time" content="2022-03-23T22:29:20+09:00">
+    <meta property="article:tag" content="Circuit Breaker">
+    <meta property="article:tag" content="Opossum">
+    <meta property="article:tag" content="Node.js">
+
+  <meta itemprop="name" content="Circuit Breaker Opossum">
+  <meta itemprop="description" content="Abstruct Circuit Breaker( opossum ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。">
+  <meta itemprop="datePublished" content="2022-03-23T22:29:20+09:00">
+  <meta itemprop="dateModified" content="2022-03-23T22:29:20+09:00">
+  <meta itemprop="wordCount" content="3768">
+  <meta itemprop="keywords" content="circuit breaker,opossum,node.js">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Circuit Breaker Opossum">
+  <meta name="twitter:description" content="Abstruct Circuit Breaker( opossum ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -902,7 +908,7 @@ Circuit Breaker( opossum ) を使ってみたので、サーキットブレー�
       <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
       <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
       <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
-  <a href="https://takuto-n.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="/post/20220323-circuit-breaker-opossum/" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -920,7 +926,7 @@ Circuit Breaker( opossum ) を使ってみたので、サーキットブレー�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2023
+    2024
     <span class="heart">
       
       ★
@@ -940,16 +946,12 @@ Circuit Breaker( opossum ) を使ってみたので、サーキットブレー�
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-147275961-2', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+    
+      
+    
+  
+
 
 
 

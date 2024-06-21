@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>extract on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Extract on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/extract/</link>
-    <description>Recent content in extract on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Extract on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 22 Apr 2022 22:56:30 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/extract/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Apr 2022 22:56:30 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/extract/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Typescript Object Extractor</title>
       <link>https://takuto-n.github.io/post/20220422-typescript-object-extractor/</link>
       <pubDate>Fri, 22 Apr 2022 22:56:30 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20220422-typescript-object-extractor/</guid>
-      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
-&lt;p&gt;Typescriptで JSONオブジェクト から key-value 形式に変換するコードが必要で作ったので、載せておきます。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;&#xA;&lt;p&gt;Typescriptで JSONオブジェクト から key-value 形式に変換するコードが必要で作ったので、載せておきます。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

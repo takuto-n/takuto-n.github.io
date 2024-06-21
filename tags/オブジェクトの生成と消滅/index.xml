@@ -4,18 +4,17 @@
     <title>オブジェクトの生成と消滅 on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/tags/%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E7%94%9F%E6%88%90%E3%81%A8%E6%B6%88%E6%BB%85/</link>
     <description>Recent content in オブジェクトの生成と消滅 on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 21 Sep 2019 01:49:02 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/tags/%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E7%94%9F%E6%88%90%E3%81%A8%E6%B6%88%E6%BB%85/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Sep 2019 01:49:02 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E7%94%9F%E6%88%90%E3%81%A8%E6%B6%88%E6%BB%85/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Effective Java 3rd [Chapter 2] - オブジェクトの生成と消滅</title>
       <link>https://takuto-n.github.io/post/20190921-effective-java-3rd-2/</link>
       <pubDate>Sat, 21 Sep 2019 01:49:02 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20190921-effective-java-3rd-2/</guid>
       <description>オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ</description>
     </item>
-    
   </channel>
 </rss>

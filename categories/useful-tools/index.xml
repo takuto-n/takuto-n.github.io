@@ -1,50 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>useful tools on Little by little and bit by bit - マイペースにこつこつと</title>
+    <title>Useful Tools on Little by little and bit by bit - マイペースにこつこつと</title>
     <link>https://takuto-n.github.io/categories/useful-tools/</link>
-    <description>Recent content in useful tools on Little by little and bit by bit - マイペースにこつこつと</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Useful Tools on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 18 Apr 2023 18:39:05 +0900</lastBuildDate><atom:link href="https://takuto-n.github.io/categories/useful-tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Apr 2023 18:39:05 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/categories/useful-tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ターミナル上で過去に実行したコマンドを選択/実行する方法</title>
       <link>https://takuto-n.github.io/post/20230418-mac-peco-history-selection/</link>
       <pubDate>Tue, 18 Apr 2023 18:39:05 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20230418-mac-peco-history-selection/</guid>
-      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
-&lt;p&gt;Windowsだと gitbash で ctrl + r でhistoryをもとに過去に実行したコマンドを選択/実行できます。
-macでも同様に、gitbash で ctrl + rでhistoryをもとに過去に実行したコマンドを選択/実行する方法を調べたので、載せておきます。&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;&#xA;&lt;p&gt;Windowsだと gitbash で ctrl + r でhistoryをもとに過去に実行したコマンドを選択/実行できます。&#xA;macでも同様に、gitbash で ctrl + rでhistoryをもとに過去に実行したコマンドを選択/実行する方法を調べたので、載せておきます。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Windowsでファイルリストを取得する方法</title>
       <link>https://takuto-n.github.io/post/20201110-windows-file-list/</link>
       <pubDate>Tue, 10 Nov 2020 19:37:47 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20201110-windows-file-list/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;
-&lt;p&gt;あるディレクトリ配下のファイルリストを取得する際に、&lt;br&gt;
-Linuxだと&lt;a href=&#34;https://linux.die.net/man/1/tree&#34;&gt;tree&lt;/a&gt;コマンドで可能です。
-Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;2022/4/1 追記&lt;br&gt;
-フォルダリストの場合、コマンドプロンプトで &lt;code&gt;tree&lt;/code&gt; コマンドを使えばOK.&lt;br&gt;
-ファイルリストの場合は、以下のpowershellでも可だが、&lt;code&gt;tree /f&lt;/code&gt; でもOK.&lt;br&gt;
-参考：&lt;a href=&#34;https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/tree&#34;&gt;tree | Microsoft Docs&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;あるディレクトリ配下のファイルリストを取得する際に、&lt;br&gt;&#xA;Linuxだと&lt;a href=&#34;https://linux.die.net/man/1/tree&#34;&gt;tree&lt;/a&gt;コマンドで可能です。&#xA;Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;2022/4/1 追記&lt;br&gt;&#xA;フォルダリストの場合、コマンドプロンプトで &lt;code&gt;tree&lt;/code&gt; コマンドを使えばOK.&lt;br&gt;&#xA;ファイルリストの場合は、以下のpowershellでも可だが、&lt;code&gt;tree /f&lt;/code&gt; でもOK.&lt;br&gt;&#xA;参考：&lt;a href=&#34;https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/tree&#34;&gt;tree | Microsoft Docs&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
-    
     <item>
       <title>Useful tools</title>
       <link>https://takuto-n.github.io/post/20190923-useful-tools/</link>
       <pubDate>Mon, 23 Sep 2019 15:55:16 +0900</pubDate>
-      
       <guid>https://takuto-n.github.io/post/20190923-useful-tools/</guid>
       <description>少しずつ便利だなぁと思ったものを追記していきます。 複数人でのドキュメント管理 結論 複数人でのドキュメント管理になると、このご時世 Git を使うのが基</description>
     </item>
-    
   </channel>
 </rss>
