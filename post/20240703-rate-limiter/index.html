@@ -59,7 +59,7 @@
 レートリミッターは、システムの過負荷を防ぎ、安定したパフォーマンスを維持するためのツールです。一定の時間内に処理できるリクエストやタスクの数を制限することで、システムの信頼性と可用性を向上させることに寄与します。">
   <meta itemprop="datePublished" content="2024-07-03T22:39:41+09:00">
   <meta itemprop="dateModified" content="2024-07-03T22:39:41+09:00">
-  <meta itemprop="wordCount" content="3130">
+  <meta itemprop="wordCount" content="3129">
   <meta itemprop="keywords" content="rate limiter,golang,sre">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Rate Limiterについて調べてみた">
@@ -138,7 +138,7 @@
         <div class="post-category">
             <a href="/categories/sre/"> sre </a>
             </div>
-          <span class="more-meta"> 3130 words </span>
+          <span class="more-meta"> 3129 words </span>
           <span class="more-meta"> 7 mins read </span>
         
       </div>
@@ -169,13 +169,13 @@
 <li><a href="#Examplesofratelimiterusage">Examples of rate limiter usage</a></li>
 </ol>
 <ul>
-<li>3.1. <a href="#Exampleofuseinalargeserverapplication">Example of use in a large server application</a>
+<li>3.1. <a href="#Exampleofuseinaserverapplication">Example of use in a server application</a>
 <ul>
 <li>3.1.1. <a href="#HowtoimplementaratelimiterintheGolanguage">How to implement a rate limiter in the Go language</a></li>
 <li>3.1.2. <a href="#Executionresultsandtheirexplanations">Execution results and their explanations</a></li>
 </ul>
 </li>
-<li>3.2. <a href="#Exampleofuseinserverlessconfiguration">Example of use in serverless configuration</a></li>
+<li>3.2. <a href="#Exampleofuseincloudconfiguration">Example of use in cloud configuration</a></li>
 </ul>
 </li>
 <li>
@@ -259,7 +259,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="31-a-nameexampleofuseinalargeserverapplicationaexample-of-use-in-a-server-application">3.1. <a name='Exampleofuseinalargeserverapplication'></a>Example of use in a server application</h3>
+<h3 id="31-a-nameexampleofuseinaserverapplicationaexample-of-use-in-a-server-application">3.1. <a name='Exampleofuseinaserverapplication'></a>Example of use in a server application</h3>
 <h4 id="311-a-namehowtoimplementaratelimiterinthegolanguageahow-to-implement-a-rate-limiter-in-the-go-language">3.1.1. <a name='HowtoimplementaratelimiterintheGolanguage'></a>How to implement a rate limiter in the Go language</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -390,7 +390,7 @@
 </span></span><span class="line"><span class="cl"><span class="s2">&#34;The API is currently at full capacity. Please try again later.&#34;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="32-a-nameexampleofuseinserverlessconfigurationaexample-of-use-in-cloud-configuration">3.2. <a name='Exampleofuseinserverlessconfiguration'></a>Example of use in cloud configuration</h3>
+</div><h3 id="32-a-nameexampleofuseincloudconfigurationaexample-of-use-in-cloud-configuration">3.2. <a name='Exampleofuseincloudconfiguration'></a>Example of use in cloud configuration</h3>
 <p>Google CloudではCloud Tasksを利用することでレートリミッターを実現できます。</p>
 <p><img src="/img/20240703/gcp_rate_limiter.png" alt=""></p>
 <p>大まかな処理の流れは以下の通りです。</p>
