@@ -1,221 +1,223 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Golang · Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-<div class="container">
-  <!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-
-
-<title>golang | Charaka</title>
-
-<link rel="stylesheet" href="https://takuto-n.github.io/css/styles.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
-integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script src="https://takuto-n.github.io/js/highlight.js"></script>
+<meta name="author" content="" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
-<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
-<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-minima.css" />
-<script type="text/javascript" src="https://takuto-n.github.io/js/jssocials.js"></script>
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
+<meta name="generator" content="Hugo 0.128.0 with theme even" />
 
 
-  <div class="container">
-    <nav class="navbar level">
-      <div class="navbar-brand">
-          <a class="nav-item" href="https://takuto-n.github.io"><h1 class="title is-3">Charaka</h1></a>
-      </div>           
-      <div class="navbar-menu has-text-centered is-active">
-          <div class="navbar-end is-centered">
-              
-                <a href="https://takuto-n.github.io/about" rel="me">
-                  <span class="icon">
-                    <i class="fas fa-info"></i>
-                  </span>
-                </a>
-              
-                <a href="https://github.com/natarajmb/" rel="me">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                </a>
-              
-                <a href="https://www.linkedin.com/in/natarajmb/" rel="me">
-                  <span class="icon">
-                    <i class="fab fa-linkedin-in"></i>
-                  </span>
-                </a>
-              
-                <a href="https://twitter.com/natarajmb/" rel="me">
-                  <span class="icon">
-                    <i class="fab fa-twitter"></i>
-                  </span>
-                </a>
-              
-           </div>
-      </div>
-    </nav>
+<link rel="canonical" href="https://takuto-n.github.io/tags/golang/" />
+  <link href="https://takuto-n.github.io/tags/golang/index.xml" rel="alternate" type="application/rss+xml" title="Little by little and bit by bit - マイペースにこつこつと" />
+  <link href="https://takuto-n.github.io/tags/golang/index.xml" rel="feed" type="application/rss+xml" title="Little by little and bit by bit - マイペースにこつこつと" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:url" content="https://takuto-n.github.io/tags/golang/">
+  <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
+  <meta property="og:title" content="Golang">
+  <meta property="og:description" content="Hugo theme even example site.">
+  <meta property="og:locale" content="ja_jp">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Golang">
+  <meta itemprop="description" content="Hugo theme even example site.">
+  <meta itemprop="dateModified" content="2024-07-03T22:39:41+09:00">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Golang">
+  <meta name="twitter:description" content="Hugo theme even example site.">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
   </div>
-
-  <main class="container">
-      
-      
-      <h1 class="title is-3">2019</h1>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Sep 12</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://takuto-n.github.io/posts/my-first-post/">My First Post</a></h1>
-          <div class="content is-hidden-mobile">
-            Hello World ! はじめてのブログだよ。
-            
-          </div>
-      </article>
-      
-      
-      <h1 class="title is-3">2014</h1>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Sep 28</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://takuto-n.github.io/posts/creating-a-new-theme/">Creating a New Theme</a></h1>
-          <div class="content is-hidden-mobile">
-            Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&rsquo;t cover using CSS to style your theme.
-We&rsquo;ll start with creating a new …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://takuto-n.github.io/posts/creating-a-new-theme/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Apr 2</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://takuto-n.github.io/posts/hugoisforlovers/">Getting Started with Hugo</a></h1>
-          <div class="content is-hidden-mobile">
-            Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at installing hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://takuto-n.github.io/posts/hugoisforlovers/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Apr 2</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://takuto-n.github.io/posts/goisforlovers/">(Hu)go Template Primer</a></h1>
-          <div class="content is-hidden-mobile">
-            Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
-This …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://takuto-n.github.io/posts/goisforlovers/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      <article class="columns">
-        <div class="column is-2">
-          <h6 class="is-inline" style="white-space: nowrap">Mar 10</h2>
-        </div>
-        <div class="column">
-          <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://takuto-n.github.io/posts/migrate-from-jekyll/">Migrate to Hugo from Jekyll</a></h1>
-          <div class="content is-hidden-mobile">
-            Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &lt;root&gt;/ ▾ images/ logo.png  should become
-▾ &lt;root&gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&rsquo;ll want any files that …
-            
-            <br>
-            <a class="button is-marginless is-paddingless" href="https://takuto-n.github.io/posts/migrate-from-jekyll/">
-            <span class="icon-link is-small" style="line-height: 100%">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
-              <p style="padding:0 5px"></p>more</p>
-            </a>
-            
-          </div>
-      </article>
-      
-      
-      
-  </main>
-  <section class="section">
-  <div class="container">
-    <nav class="level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          
-          <a class="button is-rounded" disabled>
-            <span class="icon is-small is-marginless">
-              <i class="fa fa-angle-left"></i>
-            </span>
-            Newer
-          </a>
-          
-        </div>
-      </div>
-      <div class="level-right is-marginless">
-        <div class="level-item">
-          
-          <a class="button is-rounded" disabled>
-            Older
-            <span class="icon is-small is-marginless">
-              <i class="fa fa-angle-right"></i>
-            </span>
-          </a>
-          
-        </div>
-      </div>
-    </nav>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
-</section>
-
-  <section class="section">
-  <div class="container has-text-centered">
-    <p>&copy; <a href="https://github.com/natarajmb">Nataraj Basappa</a> 2018</p>
-  </div>
-</section>
-
-
 </div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <section id="archive" class="archive">
+  <div class="archive-title tag">
+        <h2 class="archive-name">Golang</h2>
+      </div>
+
+  <div class="archive-post">
+      <span class="archive-post-time">
+        2024-07-03
+      </span>
+      <span class="archive-post-title">
+        <a href="/post/20240703-rate-limiter/" class="archive-post-link">
+          Rate Limiterについて調べてみた
+        </a>
+      </span>
+    </div>
+</section>
+
+<nav class="pagination">
+  
+  
+</nav>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="/tags/golang/" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2024
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZTQ37GBNHR');
+        }
+      </script>
+    
+  
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -10,14 +10,63 @@
   
   <url>
     <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/golang/</loc>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/rate-limiter/</loc>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20240703-rate-limiter/</loc>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/sre/</loc>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/sre/</loc>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -31,20 +80,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/tags/peco/</loc>
-    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2023-04-18T18:39:05+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2023-04-18T18:39:05+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

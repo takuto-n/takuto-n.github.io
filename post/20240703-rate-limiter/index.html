@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Rate Limiterについて調べてみた - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="Abstract システムの安定運用に関するツールということで今回気になり調べてみました。
+レートリミッターは、システムの過負荷を防ぎ、安定したパフォーマンスを維持するためのツールです。一定の時間内に処理できるリクエストやタスクの数を制限することで、システムの信頼性と可用性を向上させることに寄与します。
+" /><meta name="keywords" content="rate limiter, golang, sre" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.128.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20240703-rate-limiter/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:url" content="https://takuto-n.github.io/post/20240703-rate-limiter/">
+  <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
+  <meta property="og:title" content="Rate Limiterについて調べてみた">
+  <meta property="og:description" content="Abstract システムの安定運用に関するツールということで今回気になり調べてみました。
+レートリミッターは、システムの過負荷を防ぎ、安定したパフォーマンスを維持するためのツールです。一定の時間内に処理できるリクエストやタスクの数を制限することで、システムの信頼性と可用性を向上させることに寄与します。">
+  <meta property="og:locale" content="ja_jp">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-07-03T22:39:41+09:00">
+    <meta property="article:modified_time" content="2024-07-03T22:39:41+09:00">
+    <meta property="article:tag" content="Rate Limiter">
+    <meta property="article:tag" content="Golang">
+    <meta property="article:tag" content="Sre">
+
+  <meta itemprop="name" content="Rate Limiterについて調べてみた">
+  <meta itemprop="description" content="Abstract システムの安定運用に関するツールということで今回気になり調べてみました。
+レートリミッターは、システムの過負荷を防ぎ、安定したパフォーマンスを維持するためのツールです。一定の時間内に処理できるリクエストやタスクの数を制限することで、システムの信頼性と可用性を向上させることに寄与します。">
+  <meta itemprop="datePublished" content="2024-07-03T22:39:41+09:00">
+  <meta itemprop="dateModified" content="2024-07-03T22:39:41+09:00">
+  <meta itemprop="wordCount" content="3129">
+  <meta itemprop="keywords" content="rate limiter,golang,sre">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Rate Limiterについて調べてみた">
+  <meta name="twitter:description" content="Abstract システムの安定運用に関するツールということで今回気になり調べてみました。
+レートリミッターは、システムの過負荷を防ぎ、安定したパフォーマンスを維持するためのツールです。一定の時間内に処理できるリクエストやタスクの数を制限することで、システムの信頼性と可用性を向上させることに寄与します。">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Rate Limiterについて調べてみた</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-07-03 </span>
+        <div class="post-category">
+            <a href="/categories/sre/"> sre </a>
+            </div>
+          <span class="more-meta"> 3129 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="abstract">Abstract</h1>
+<p>システムの安定運用に関するツールということで今回気になり調べてみました。</p>
+<p>レートリミッターは、システムの過負荷を防ぎ、安定したパフォーマンスを維持するためのツールです。一定の時間内に処理できるリクエストやタスクの数を制限することで、システムの信頼性と可用性を向上させることに寄与します。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Introduction">Introduction</a></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><a href="#Whatisaratelimiter">What is a rate limiter?</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#Howitworks">How it works</a></li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li><a href="#Examplesofratelimiterusage">Examples of rate limiter usage</a></li>
+</ol>
+<ul>
+<li>3.1. <a href="#Exampleofuseinalargeserverapplication">Example of use in a large server application</a>
+<ul>
+<li>3.1.1. <a href="#HowtoimplementaratelimiterintheGolanguage">How to implement a rate limiter in the Go language</a></li>
+<li>3.1.2. <a href="#Executionresultsandtheirexplanations">Execution results and their explanations</a></li>
+</ul>
+</li>
+<li>3.2. <a href="#Exampleofuseinserverlessconfiguration">Example of use in serverless configuration</a></li>
+</ul>
+</li>
+<li>
+<ol start="4">
+<li><a href="#Remarks">Remarks</a></li>
+</ol>
+<ul>
+<li>4.1. <a href="#BestPracticesforRateLimiters">Best Practices for Rate Limiters</a>
+<ul>
+<li>4.1.1. <a href="#Customizeerrormessagesandsetresponsecodes">Customize error messages and set response codes</a></li>
+<li>4.1.2. <a href="#Queuingandthrottlingimplementation">Queuing and throttling implementation</a></li>
+<li>4.1.3. <a href="#UseofAPIKeys">Use of API Keys</a></li>
+<li>4.1.4. <a href="#MetricsandMonitoring">Metrics and Monitoring</a></li>
+<li>4.1.5. <a href="#Appropriateuseofcache">Appropriate use of cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ol start="5">
+<li><a href="#Reference">Reference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-nameintroductionaintroduction">1. <a name='Introduction'></a>Introduction</h2>
+<p>レートリミッターは、システムのパフォーマンスと安定性を保つために欠かせないツールです。主な役割と必要性は以下の通りです。</p>
+<ul>
+<li>過負荷防止
+<ul>
+<li>システムが過剰なリクエストを処理しきれずにダウンするのを防ぎます。特定の時間内に許可されるリクエスト数を制限することで、システムリソースの負荷を軽減します。</li>
+</ul>
+</li>
+<li>公平性の確保
+<ul>
+<li>全てのユーザーに対して公平なリソース配分を保証します。特定のユーザーがリソースを独占するのを防ぎ、全てのユーザーに均等なアクセス機会を提供します。</li>
+</ul>
+</li>
+<li>セキュリティ向上
+<ul>
+<li>DDoS攻撃などの悪意あるリクエストからシステムを保護します。レートリミッターは、異常なリクエストパターンを検出して対処することで、システムの安全性を高めます。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-a-namewhatisaratelimiterawhat-is-a-rate-limiter">2. <a name='Whatisaratelimiter'></a>What is a rate limiter?</h2>
+<p>レートリミッターは、特定の時間枠内で許可されるリクエストやタスクの数を制限する仕組みです。これにより、システムの負荷を管理し、安定したパフォーマンスを維持します。</p>
+<h3 id="21-a-namehowitworksahow-it-works">2.1. <a name='Howitworks'></a>How it works</h3>
+<ul>
+<li>リクエストの計測
+<ul>
+<li>レートリミッターは、一定時間内に発生するリクエストの数をカウントします。</li>
+</ul>
+</li>
+<li>制限の適用
+<ul>
+<li>許可されたリクエスト数を超えた場合、新しいリクエストは制限され、エラーが返されるか、待機状態に置かれます。</li>
+</ul>
+</li>
+<li>バースト制限
+<ul>
+<li>短期間に多くのリクエストが集中する場合でも、一時的に許可されるリクエスト数（バースト）が設定されていることがあります。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-a-nameexamplesofratelimiterusageaexamples-of-rate-limiter-usage">3. <a name='Examplesofratelimiterusage'></a>Examples of rate limiter usage</h2>
+<ul>
+<li>大規模サーバアプリケーション
+<ul>
+<li>アプリケーションコード内でレートリミッターを実装し、リクエストのレートを制御します。これにより、特定のサービスやリソースへの負荷を管理します。</li>
+<li>例えば、Go言語のgolang.org/x/time/rateパッケージを使用して、1秒あたりのリクエスト数やバーストサイズを設定します。</li>
+</ul>
+</li>
+<li>サーバレス構成
+<ul>
+<li>クラウドサービス（例：Google Cloud Tasks）でレートリミッターを設定し、バックエンドへのタスク送信レートを制御します。これにより、リソースの効率的な使用と安定性を確保します。</li>
+<li>例えば、Cloud Tasksで1秒あたり10タスクに制限する設定を行います。</li>
+</ul>
+</li>
+</ul>
+<h3 id="31-a-nameexampleofuseinalargeserverapplicationaexample-of-use-in-a-large-server-application">3.1. <a name='Exampleofuseinalargeserverapplication'></a>Example of use in a large server application</h3>
+<h4 id="311-a-namehowtoimplementaratelimiterinthegolanguageahow-to-implement-a-rate-limiter-in-the-go-language">3.1.1. <a name='HowtoimplementaratelimiterintheGolanguage'></a>How to implement a rate limiter in the Go language</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">rateLimiterTest</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">rateLimiterTest</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">http</span><span class="p">.</span><span class="nf">Handle</span><span class="p">(</span><span class="s">&#34;/ping&#34;</span><span class="p">,</span> <span class="nf">rateLimiter</span><span class="p">(</span><span class="nx">endpointHandler</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;There was an error listening on port :8080&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">endpointHandler</span><span class="p">(</span><span class="nx">writer</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">request</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">writer</span><span class="p">.</span><span class="nf">Header</span><span class="p">().</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Content-Type&#34;</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">writer</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">message</span> <span class="o">:=</span> <span class="s">&#34;Hello! You&#39;ve reached the API. How can I assist you today?&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="nx">writer</span><span class="p">).</span><span class="nf">Encode</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ★ レートリミッターのコーディングのポイントとなる関数
+</span></span></span><span class="line"><span class="cl"><span class="c1">// limiterが許可した場合のみリクエストを処理できる
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">rateLimiter</span><span class="p">(</span><span class="nx">next</span> <span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">))</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">limiter</span> <span class="o">:=</span> <span class="nx">rate</span><span class="p">.</span><span class="nf">NewLimiter</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1">// 1秒あたり2リクエスト、バーストサイズ4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">limiter</span><span class="p">.</span><span class="nf">Allow</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">next</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">message</span> <span class="o">:=</span> <span class="s">&#34;The API is currently at full capacity. Please try again later.&#34;</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusTooManyRequests</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nf">Encode</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="312-a-nameexecutionresultsandtheirexplanationsaexecution-results-and-their-explanations">3.1.2. <a name='Executionresultsandtheirexplanations'></a>Execution results and their explanations</h4>
+<ul>
+<li>正常な応答
+<ul>
+<li>1秒あたり2リクエストまでは正常に処理されます。</li>
+</ul>
+</li>
+<li>バースト対応
+<ul>
+<li>一時的に最大4リクエストまで許可されますが、その後はレートが制限されます。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 正常な応答</span>
+</span></span><span class="line"><span class="cl">takuto-n@MacBook-Air goapp % <span class="k">for</span> i in <span class="o">{</span>1..2<span class="o">}</span><span class="p">;</span> <span class="k">do</span> curl http://localhost:8080/ping<span class="p">;</span> <span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;Hello! You&#39;ve reached the API. How can I assist you today?&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;Hello! You&#39;ve reached the API. How can I assist you today?&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># バースト対応</span>
+</span></span><span class="line"><span class="cl">takuto-n@MacBook-Air goapp % <span class="k">for</span> i in <span class="o">{</span>1..2<span class="o">}</span><span class="p">;</span> <span class="k">do</span> curl http://localhost:8080/ping<span class="p">;</span> <span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 最初の4件はバースト対応で問題なく処理できている。</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;Hello! You&#39;ve reached the API. How can I assist you today?&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;Hello! You&#39;ve reached the API. How can I assist you today?&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;Hello! You&#39;ve reached the API. How can I assist you today?&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;Hello! You&#39;ve reached the API. How can I assist you today?&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## しかし、その後の2件に関しては制限されているので処理されていない。</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;The API is currently at full capacity. Please try again later.&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;The API is currently at full capacity. Please try again later.&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="32-a-nameexampleofuseinserverlessconfigurationaexample-of-use-in-serverless-configuration">3.2. <a name='Exampleofuseinserverlessconfiguration'></a>Example of use in serverless configuration</h3>
+<p>Google CloudではCloud Tasksを利用することでレートリミッターを実現できます。</p>
+<p><img src="/img/20240703/gcp_rate_limiter.png" alt=""></p>
+<p>大まかな処理の流れは以下の通りです。</p>
+<ol>
+<li>タスク作成のアプリケーションがタスクをCloud Tasksに送る</li>
+<li>Cloud Tasksは設定されたタスクを管理して、設定に従いタスクハンドラーに配信(dispatch)する</li>
+<li>タスクハンドラーは処理を実行する</li>
+</ol>
+<ul>
+<li>
+<p>Cloud Tasksをレートリミッターの例として挙げましたが、Cloud Tasksにはレートリミッター機能だけではなく他に以下の機能もあるので紹介しておきます。（詳細は <a href="https://cloud.google.com/tasks/docs/dual-overview?hl=ja">こちら</a> を参照。）</p>
+<ul>
+<li>具体的な配信時間のスケジュール</li>
+<li>再試行動作の構成</li>
+<li>キュー内の個々のタスクへのアクセスと管理</li>
+<li>タスクの重複排除の有効化</li>
+</ul>
+</li>
+<li>
+<p>アーキテクチャ例</p>
+<ul>
+<li><a href="https://engineering.mercari.com/blog/entry/20230626-cloud-tasks-external-api-traffic-control/">Cloud Tasksで外部APIへの流量制御をするときに考えたこと | メルカリエンジニアリング</a></li>
+<li><a href="https://blog.grasys.io/post/nishino/cloud-tasks/">Webシステムのカイゼン(Cloud Tasks編)｜ grasys blog</a></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Cloud Pub/Sub vs Cloud Tasks<br>
+Cloud Pub/Sub では publisher と subscriber を分離してアーキテクチャを疎結合にすることが前提とされていることに対し、Cloud Tasks は subscriber を明示的に呼び出し、subscriber による処理を制御できることがポイントとなっています。<br>
+配信タイミング・レートを管理することも可能です。</p>
+</blockquote>
+<h2 id="4-a-nameremarksaremarks">4. <a name='Remarks'></a>Remarks</h2>
+<h3 id="41-a-namebestpracticesforratelimitersabest-practices-for-rate-limiters">4.1. <a name='BestPracticesforRateLimiters'></a>Best Practices for Rate Limiters</h3>
+<p>以下のようなプラクティスを組み合わせることで、効率的なリクエスト制御と管理、堅牢なリトライ戦略の実装、そしてモニタリングとアラート設定による運用の迅速な改善が可能となります。これにより、サービスの安定性と可用性を更に向上させることができます。</p>
+<h4 id="411-a-namecustomizeerrormessagesandsetresponsecodesacustomize-error-messages-and-set-response-codes">4.1.1. <a name='Customizeerrormessagesandsetresponsecodes'></a>Customize error messages and set response codes</h4>
+<ul>
+<li>カスタムエラーメッセージ
+<ul>
+<li>リクエスト制限が適用された際に、クライアントにわかりやすいエラーメッセージを返すことが重要です。これにより、クライアントが理解しやすく、適切な対処を行えるようになります。</li>
+</ul>
+</li>
+<li>レスポンスコードの設定
+<ul>
+<li>HTTPステータスコードを適切に設定することで、クライアントがリクエストが失敗した理由を正確に把握できるようにします。例えば、429 Too Many Requestsを使用してリクエスト制限が適用されたことを示します。</li>
+</ul>
+</li>
+</ul>
+<h4 id="412-a-namequeuingandthrottlingimplementationaqueuing-and-throttling-implementation">4.1.2. <a name='Queuingandthrottlingimplementation'></a>Queuing and throttling implementation</h4>
+<ul>
+<li>キューイング
+<ul>
+<li>リクエストをキューに入れて順番に処理することで、サーバーへの負荷を調整し、一定のレートで処理を行うことができます。</li>
+</ul>
+</li>
+<li>スロットリング
+<ul>
+<li>クライアントごとに定められたレート制限を設定することで、過剰なリクエストがサーバーに届かないようにします。これにより、サーバーの過負荷を防ぎます。</li>
+</ul>
+</li>
+</ul>
+<h4 id="413-a-nameuseofapikeysause-of-api-keys">4.1.3. <a name='UseofAPIKeys'></a>Use of API Keys</h4>
+<ul>
+<li>APIキーの発行と管理
+<ul>
+<li>APIキーを使用して、クライアントごとに異なる制限やクォータを設定することができます。これにより、異なる利用者やアプリケーションに対して個別に制御を行えます。</li>
+</ul>
+</li>
+</ul>
+<h4 id="414-a-namemetricsandmonitoringametrics-and-monitoring">4.1.4. <a name='MetricsandMonitoring'></a>Metrics and Monitoring</h4>
+<ul>
+<li>メトリクスの収集と可視化
+<ul>
+<li>リクエストの数、レスポンス時間、エラー率などのメトリクスを収集し、ダッシュボードで可視化することで、サービスのパフォーマンスや状態を把握しやすくします。</li>
+</ul>
+</li>
+<li>アラートの設定
+<ul>
+<li>メトリクスが特定のしきい値を超えた際に自動的にアラートを発行し、問題を迅速に検知して対応することができます。</li>
+</ul>
+</li>
+</ul>
+<h4 id="415-a-nameappropriateuseofcacheaappropriate-use-of-cache">4.1.5. <a name='Appropriateuseofcache'></a>Appropriate use of cache</h4>
+<ul>
+<li>レスポンスのキャッシュ
+<ul>
+<li>頻繁にリクエストされるデータやレスポンスをキャッシュすることで、サーバーの負荷を軽減し、応答時間を短縮することができます。キャッシュを使用する際は、適切な期限を設定することが重要です。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-a-namereferenceareference">5. <a name='Reference'></a>Reference</h2>
+<ul>
+<li><a href="https://pkg.go.dev/golang.org/x/time/rate">rate package - golang.org/x/time/rate - Go Packages</a></li>
+<li><a href="https://cloud.google.com/tasks/docs/dual-overview?hl=ja">Cloud Tasks について理解する  |  Cloud Tasks Documentation  |  Google Cloud</a></li>
+<li><a href="https://zenn.dev/keigo_hirohara/articles/a0bc85d8593260">SREへの道 ~ 第1章 パフォーマンスを向上させよう! ~</a></li>
+<li><a href="https://kinsta.com/jp/knowledgebase/api-rate-limit/">APIレート制限とは（徹底解説）｜Kinsta®</a></li>
+<li><a href="https://blog.engineer.adways.net/entry/2022/01/07/120000">データ基盤をサーバーレスで構築したので概要を紹介 - Adwaysエンジニアブログ</a></li>
+<li><a href="https://blog.logrocket.com/rate-limiting-go-application/">Rate limiting your Go application - LogRocket Blog</a></li>
+<li><a href="https://blog.g-gen.co.jp/entry/understanding-loosely-coupled-architecture#Cloud-PubSub-vs-Cloud-Tasks">Google Cloudで理解する疎結合アーキテクチャとメッセージングサービス - G-gen Tech Blog</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rate-limiter/">rate limiter</a>
+          <a href="/tags/golang/">golang</a>
+          <a href="/tags/sre/">sre</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/20230418-mac-peco-history-selection/">
+            <span class="next-text nav-default">ターミナル上で過去に実行したコマンドを選択/実行する方法</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="/post/20240703-rate-limiter/" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2024
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZTQ37GBNHR');
+        }
+      </script>
+    
+  
+
+
+
+
+
+
+
+
+</body>
+</html>
