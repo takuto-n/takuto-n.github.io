@@ -16,14 +16,17 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ" /><meta name="keywords" content="java, ラムダ式とストリーム, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ
+項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフェースを使う 項目 45 ストリームを注意して使う 項目 46 ストリームで副作用のない関数を選ぶ 項目 47 戻り値型として Stream よりも Collection を選ぶ 項目 48 ストリームを並列化するときは注意を払う 参考 URL Effective Java 3rd 勉強会(11/29) 日時: 2019/11/29 14:00-14:45 参加者(敬称略): 則兼、岩崎、倉元
+以下、内容。
+" /><meta name="keywords" content="java, ラムダ式とストリーム, 個人的メモ" />
 
 
 
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.128.0 with theme even" />
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-7/" />
@@ -41,7 +44,9 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-7/">
   <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta property="og:title" content="Effective Java 3rd [Chapter 7] - ラムダ式とストリーム">
-  <meta property="og:description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ">
+  <meta property="og:description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ
+項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフェースを使う 項目 45 ストリームを注意して使う 項目 46 ストリームで副作用のない関数を選ぶ 項目 47 戻り値型として Stream よりも Collection を選ぶ 項目 48 ストリームを並列化するときは注意を払う 参考 URL Effective Java 3rd 勉強会(11/29) 日時: 2019/11/29 14:00-14:45 参加者(敬称略): 則兼、岩崎、倉元
+以下、内容。">
   <meta property="og:locale" content="ja_jp">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +57,18 @@
     <meta property="article:tag" content="個人的メモ">
 
   <meta itemprop="name" content="Effective Java 3rd [Chapter 7] - ラムダ式とストリーム">
-  <meta itemprop="description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ">
+  <meta itemprop="description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ
+項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフェースを使う 項目 45 ストリームを注意して使う 項目 46 ストリームで副作用のない関数を選ぶ 項目 47 戻り値型として Stream よりも Collection を選ぶ 項目 48 ストリームを並列化するときは注意を払う 参考 URL Effective Java 3rd 勉強会(11/29) 日時: 2019/11/29 14:00-14:45 参加者(敬称略): 則兼、岩崎、倉元
+以下、内容。">
   <meta itemprop="datePublished" content="2019-11-25T00:37:53+09:00">
   <meta itemprop="dateModified" content="2019-11-25T00:37:53+09:00">
   <meta itemprop="wordCount" content="7365">
   <meta itemprop="keywords" content="java,ラムダ式とストリーム,個人的メモ">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Effective Java 3rd [Chapter 7] - ラムダ式とストリーム">
-  <meta name="twitter:description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ 項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフ">
+  <meta name="twitter:description" content="ラムダ式とストリーム Effective Java 第 3 版の個人的メモ
+項目 42 匿名クラスよりもラムダ式を選ぶ 項目 43 ラムダよりもメソッド参照を選ぶ 項目 44 標準の関数型インタフェースを使う 項目 45 ストリームを注意して使う 項目 46 ストリームで副作用のない関数を選ぶ 項目 47 戻り値型として Stream よりも Collection を選ぶ 項目 48 ストリームを並列化するときは注意を払う 参考 URL Effective Java 3rd 勉強会(11/29) 日時: 2019/11/29 14:00-14:45 参加者(敬称略): 則兼、岩崎、倉元
+以下、内容。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -293,40 +302,40 @@ java.lang.FunctionalInterface)</a>にあります。
 <p>メソッド参照には、下記 5 種類がある。</p>
 <p>上記の例は、<code>System</code>クラスの<code>static</code>フィールド<code>out</code>の<code>println</code>メソッドなので、静的メソッド参照だったんですね。</p>
 <table>
-<thead>
-<tr>
-<th>メソッド参照形式</th>
-<th>コード</th>
-<th>等価ラムダ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>静的メソッド</td>
-<td><code>TypeName::method</code></td>
-<td><code>(args) -&gt; TypeName.method(args)</code></td>
-</tr>
-<tr>
-<td>非静的メソッド（インスタンス#1 の場合）</td>
-<td><code>instance::method</code></td>
-<td><code>(args) -&gt; instance.method(args)</code></td>
-</tr>
-<tr>
-<td>非静的メソッド（インスタンスなし）</td>
-<td><code>TypeName::method</code></td>
-<td><code>(instance, args) -&gt; instance.method(args)</code></td>
-</tr>
-<tr>
-<td>コンストラクタ#2</td>
-<td><code>TypeName::new</code></td>
-<td><code>(args) -&gt; new TypeName(args)</code></td>
-</tr>
-<tr>
-<td>配列コンストラクタ</td>
-<td><code>TypeName[]::new</code></td>
-<td><code>(int size) -&gt; new TypeName[size]</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">メソッド参照形式</th>
+          <th style="text-align: left">コード</th>
+          <th style="text-align: left">等価ラムダ</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">静的メソッド</td>
+          <td style="text-align: left"><code>TypeName::method</code></td>
+          <td style="text-align: left"><code>(args) -&gt; TypeName.method(args)</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">非静的メソッド（インスタンス#1 の場合）</td>
+          <td style="text-align: left"><code>instance::method</code></td>
+          <td style="text-align: left"><code>(args) -&gt; instance.method(args)</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">非静的メソッド（インスタンスなし）</td>
+          <td style="text-align: left"><code>TypeName::method</code></td>
+          <td style="text-align: left"><code>(instance, args) -&gt; instance.method(args)</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">コンストラクタ#2</td>
+          <td style="text-align: left"><code>TypeName::new</code></td>
+          <td style="text-align: left"><code>(args) -&gt; new TypeName(args)</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">配列コンストラクタ</td>
+          <td style="text-align: left"><code>TypeName[]::new</code></td>
+          <td style="text-align: left"><code>(int size) -&gt; new TypeName[size]</code></td>
+      </tr>
+  </tbody>
 </table>
 <blockquote>
 <p>#1 :
@@ -1382,8 +1391,6 @@ Streamだと、その名の通り「流れ」になるので、継続的に流�
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
@@ -1398,10 +1405,6 @@ Streamだと、その名の通り「流れ」になるので、継続的に流�
           gtag('config', 'G-ZTQ37GBNHR');
         }
       </script>
-    
-  
-
-
 
 
 

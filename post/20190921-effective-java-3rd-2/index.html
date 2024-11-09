@@ -16,14 +16,16 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ" /><meta name="keywords" content="java, オブジェクトの生成と消滅, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ
+項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラメータに直面した時にはビルダーパターンを検討する。 項目 3 private のコンストラクタか enum 型でシングルトン特性を強制する 項目 4 private のコンストラクタでインスタンス化不可能を強制する 項目 5 資源を直接結び付けるよりも依存性注入を選ぶ 項目 6 不必要なオブジェクトの生成を避ける 項目 7 廃れたオブジェクト参照を取り除く 項目 8 finalizer と cleaner の使用は避けるべし 項目 9 try-finally よりも try-with-resources を使うべし 1. 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 1.1. 結論 コンストラクタの代わりに static ファクトリーメソッドを使用すると様々なメリットがある。 そのメリットが必要ない時はコンストラクタを使用すればよい。
+" /><meta name="keywords" content="java, オブジェクトの生成と消滅, 個人的メモ" />
 
 
 
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.128.0 with theme even" />
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190921-effective-java-3rd-2/" />
@@ -41,7 +43,8 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20190921-effective-java-3rd-2/">
   <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta property="og:title" content="Effective Java 3rd [Chapter 2] - オブジェクトの生成と消滅">
-  <meta property="og:description" content="オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ">
+  <meta property="og:description" content="オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ
+項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラメータに直面した時にはビルダーパターンを検討する。 項目 3 private のコンストラクタか enum 型でシングルトン特性を強制する 項目 4 private のコンストラクタでインスタンス化不可能を強制する 項目 5 資源を直接結び付けるよりも依存性注入を選ぶ 項目 6 不必要なオブジェクトの生成を避ける 項目 7 廃れたオブジェクト参照を取り除く 項目 8 finalizer と cleaner の使用は避けるべし 項目 9 try-finally よりも try-with-resources を使うべし 1. 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 1.1. 結論 コンストラクタの代わりに static ファクトリーメソッドを使用すると様々なメリットがある。 そのメリットが必要ない時はコンストラクタを使用すればよい。">
   <meta property="og:locale" content="ja_jp">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +55,16 @@
     <meta property="article:tag" content="個人的メモ">
 
   <meta itemprop="name" content="Effective Java 3rd [Chapter 2] - オブジェクトの生成と消滅">
-  <meta itemprop="description" content="オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ">
+  <meta itemprop="description" content="オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ
+項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラメータに直面した時にはビルダーパターンを検討する。 項目 3 private のコンストラクタか enum 型でシングルトン特性を強制する 項目 4 private のコンストラクタでインスタンス化不可能を強制する 項目 5 資源を直接結び付けるよりも依存性注入を選ぶ 項目 6 不必要なオブジェクトの生成を避ける 項目 7 廃れたオブジェクト参照を取り除く 項目 8 finalizer と cleaner の使用は避けるべし 項目 9 try-finally よりも try-with-resources を使うべし 1. 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 1.1. 結論 コンストラクタの代わりに static ファクトリーメソッドを使用すると様々なメリットがある。 そのメリットが必要ない時はコンストラクタを使用すればよい。">
   <meta itemprop="datePublished" content="2019-09-21T01:49:02+09:00">
   <meta itemprop="dateModified" content="2019-09-29T01:49:02+09:00">
   <meta itemprop="wordCount" content="4815">
   <meta itemprop="keywords" content="java,オブジェクトの生成と消滅,個人的メモ">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Effective Java 3rd [Chapter 2] - オブジェクトの生成と消滅">
-  <meta name="twitter:description" content="オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ">
+  <meta name="twitter:description" content="オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ
+項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラメータに直面した時にはビルダーパターンを検討する。 項目 3 private のコンストラクタか enum 型でシングルトン特性を強制する 項目 4 private のコンストラクタでインスタンス化不可能を強制する 項目 5 資源を直接結び付けるよりも依存性注入を選ぶ 項目 6 不必要なオブジェクトの生成を避ける 項目 7 廃れたオブジェクト参照を取り除く 項目 8 finalizer と cleaner の使用は避けるべし 項目 9 try-finally よりも try-with-resources を使うべし 1. 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 1.1. 結論 コンストラクタの代わりに static ファクトリーメソッドを使用すると様々なメリットがある。 そのメリットが必要ない時はコンストラクタを使用すればよい。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -928,8 +933,6 @@
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
@@ -944,10 +947,6 @@
           gtag('config', 'G-ZTQ37GBNHR');
         }
       </script>
-    
-  
-
-
 
 
 

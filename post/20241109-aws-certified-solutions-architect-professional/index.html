@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>20241109 Aws Certified Solutions Architect Professional - Little by little and bit by bit - マイペースにこつこつと</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="takuto_n" /><meta name="description" content="AWS Certified Solutions Architect - Professional の勉強 これから資格取得に向けて学習するため、学習途中でまとめた情報をブログでまとめていきます。
+" /><meta name="keywords" content="aws, professional, cloud" />
+
+
+
+<meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
+
+
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
+
+
+<link rel="canonical" href="https://takuto-n.github.io/post/20241109-aws-certified-solutions-architect-professional/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:url" content="https://takuto-n.github.io/post/20241109-aws-certified-solutions-architect-professional/">
+  <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
+  <meta property="og:title" content="20241109 Aws Certified Solutions Architect Professional">
+  <meta property="og:description" content="AWS Certified Solutions Architect - Professional の勉強 これから資格取得に向けて学習するため、学習途中でまとめた情報をブログでまとめていきます。">
+  <meta property="og:locale" content="ja_jp">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-11-09T11:59:23+09:00">
+    <meta property="article:modified_time" content="2024-11-09T11:59:23+09:00">
+    <meta property="article:tag" content="Aws">
+    <meta property="article:tag" content="Professional">
+    <meta property="article:tag" content="Cloud">
+
+  <meta itemprop="name" content="20241109 Aws Certified Solutions Architect Professional">
+  <meta itemprop="description" content="AWS Certified Solutions Architect - Professional の勉強 これから資格取得に向けて学習するため、学習途中でまとめた情報をブログでまとめていきます。">
+  <meta itemprop="datePublished" content="2024-11-09T11:59:23+09:00">
+  <meta itemprop="dateModified" content="2024-11-09T11:59:23+09:00">
+  <meta itemprop="wordCount" content="1174">
+  <meta itemprop="keywords" content="aws,professional,cloud">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="20241109 Aws Certified Solutions Architect Professional">
+  <meta name="twitter:description" content="AWS Certified Solutions Architect - Professional の勉強 これから資格取得に向けて学習するため、学習途中でまとめた情報をブログでまとめていきます。">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Little by little and bit by bit</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/about/">
+        <li class="mobile-menu-item">About takuto_n</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Little by little and bit by bit</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/about/">About takuto_n</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">20241109 Aws Certified Solutions Architect Professional</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2024-11-09 </span>
+        <div class="post-category">
+            <a href="/categories/cloud/"> cloud </a>
+            </div>
+          <span class="more-meta"> 1174 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h1 id="aws-certified-solutions-architect---professional-の勉強">AWS Certified Solutions Architect - Professional の勉強</h1>
+<p>これから資格取得に向けて学習するため、学習途中でまとめた情報をブログでまとめていきます。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#">2024/11/9 学習内容</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#1">ネットワーク接続戦略の設計1</a></li>
+<li>1.2. <a href="#2">ネットワークの接続戦略の設計2</a></li>
+<li>1.3. <a href="#-1">信頼性と回復力に優れたアーキテクチャの設計</a></li>
+</ul>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-namea2024119-学習内容">1. <a name=''></a>2024/11/9 学習内容</h2>
+<p>AWS Skill Builderの以下のコースで学習</p>
+<p>Exam Prep Standard Course: AWS Certified Solutions Architect - Professional (SAP-C02) (Japanese) 日本語実写</p>
+<h3 id="11-a-name1aネットワーク接続戦略の設計1">1.1. <a name='1'></a>ネットワーク接続戦略の設計1</h3>
+<p>IAMとVPCについて</p>
+<p>IAMロールとVPCは、実際にはAWSアカウント間で共有することが可能です：</p>
+<ol>
+<li>IAMロールの共有:</li>
+</ol>
+<ul>
+<li>クロスアカウントIAMロールを作成し、信頼ポリシーで別のAWSアカウントを指定できます
+<ul>
+<li>開発アカウントのIAMロールでは、直接他のアカウントと共有することはできない</li>
+</ul>
+</li>
+<li>例: アカウントAのロールをアカウントBのユーザーが引き受けることが可能</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Version&#34;</span><span class="p">:</span> <span class="s2">&#34;2012-10-17&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Principal&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;AWS&#34;</span><span class="p">:</span> <span class="s2">&#34;arn:aws:iam::ACCOUNT-B-ID:root&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="s2">&#34;sts:AssumeRole&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>VPCの共有:</li>
+</ol>
+<ul>
+<li>AWS Resource Access Manager (RAM) を使用してVPCをアカウント間で共有できます</li>
+<li>共有できるVPCリソース:
+<ul>
+<li>サブネット</li>
+<li>Transit Gateway</li>
+<li>Route53 Resolver Rules</li>
+<li>その他のVPC関連リソース</li>
+</ul>
+</li>
+</ul>
+<p>トランジットゲートウェイは、複数のVPC間やオンプレミス環境との接続に使用されますが、IAMロールやVPCの共有に必須というわけではありません。</p>
+<p>これらの機能により、組織内での柔軟なリソース共有とアクセス制御が可能になります。</p>
+<h3 id="12-a-name2aネットワークの接続戦略の設計2">1.2. <a name='2'></a>ネットワークの接続戦略の設計2</h3>
+<p>VPCフローログとAmazon Inspector、Elastic Network Interfaceについて</p>
+<ol>
+<li>トラフィックキャプチャの制限：</li>
+</ol>
+<ul>
+<li>VPCフローログ：トラフィックの統計情報のみ（送信元、送信先、ポートなど）</li>
+<li>Amazon Inspector：脆弱性スキャンが主目的で、パケットキャプチャ機能はない</li>
+</ul>
+<ol start="2">
+<li>トラフィックミラーリングの正しい方法：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">送信元 → トラフィックミラー(ENI) → モニタリング用EC2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>設定手順：</p>
+<ol>
+<li>
+<p>トラフィックミラーターゲットの作成</p>
+<ul>
+<li>モニタリング用EC2のENIを指定</li>
+</ul>
+</li>
+<li>
+<p>トラフィックミラーフィルターの作成</p>
+<ul>
+<li>プロトコル</li>
+<li>ポート</li>
+<li>IPアドレス範囲などを指定可能</li>
+</ul>
+</li>
+<li>
+<p>トラフィックミラーセッションの作成</p>
+<ul>
+<li>監視したい送信元ENIを指定</li>
+<li>作成したターゲットとフィルターを関連付け</li>
+</ul>
+</li>
+</ol>
+<p>モニタリング用EC2では：</p>
+<ul>
+<li>tcpdump</li>
+<li>Wireshark
+などのパケットキャプチャツールを使用して詳細な分析が可能</li>
+</ul>
+<p>これにより、実際のネットワークトラフィックの内容をキャプチャし分析することができます。</p>
+<h3 id="13-a-name-1a信頼性と回復力に優れたアーキテクチャの設計">1.3. <a name='-1'></a>信頼性と回復力に優れたアーキテクチャの設計</h3>
+<p>AWS Data Lifecycle Manager (DLM)：</p>
+<ul>
+<li>デフォルトで同じリージョンにバックアップ</li>
+<li>EBSスナップショットとAMIの両方をサポート</li>
+</ul>
+<p>AWS Backup：</p>
+<ul>
+<li>タグベースのバックアップ管理が可能</li>
+<li>デフォルトのバックアップ保管庫は同じリージョン</li>
+<li>以下のリソースをサポート：
+<ul>
+<li>EC2インスタンス</li>
+<li>EBSボリューム</li>
+<li>RDSデータベース</li>
+<li>Aurora クラスター</li>
+<li>DynamoDB テーブル</li>
+<li>EFSファイルシステム</li>
+<li>FSx ファイルシステム</li>
+<li>Storage Gateway ボリューム</li>
+<li>DocumentDB</li>
+<li>Neptune</li>
+</ul>
+</li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/aws/">aws</a>
+          <a href="/tags/professional/">professional</a>
+          <a href="/tags/cloud/">cloud</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/20240703-rate-limiter/">
+            <span class="next-text nav-default">Rate Limiterについて調べてみた</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <script async src="https://cse.google.com/cse.js?cx=002263091236174526879:vmgtpqxozom"></script>
+<div class="gcse-searchbox-only"></div>
+<br>
+<div class="social-links">
+      <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/home" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.linkedin.com/feed/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/github" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.instagram.com" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="/post/20241109-aws-certified-solutions-architect-professional/" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2024
+    <span class="heart">
+      
+      ★
+    </span>
+    <span class="author"><a href="https://www.instagram.com/takuto_no">takuto-n</a></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ZTQ37GBNHR');
+        }
+      </script>
+
+
+
+
+
+
+</body>
+</html>

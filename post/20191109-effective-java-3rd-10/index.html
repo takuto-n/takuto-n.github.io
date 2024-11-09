@@ -16,14 +16,16 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を" /><meta name="keywords" content="java, 例外, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="例外 Effective Java 第 3 版の個人的メモ
+項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を使う 項目 71 チェックされる例外を不必要に使うのを避ける 項目 72 標準的な例外を使う 項目 73 抽象概念に適した例外をスローする 項目 74 各メソッドがスローするすべての例外を文書化する 項目 75 詳細メッセージにエラー記録情報を含める 項目 76 エラーアトミック性に努める 項目 77 例外を無視しない 1. 項目 69 例外的状態にだけ例外を使う 1.1. 結論 例外をGOTO文のように、フロー制御に使ってはいけない。
+" /><meta name="keywords" content="java, 例外, 個人的メモ" />
 
 
 
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.128.0 with theme even" />
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-10/" />
@@ -41,7 +43,8 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-10/">
   <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta property="og:title" content="Effective Java 3rd [Chapter 10] - 例外">
-  <meta property="og:description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を">
+  <meta property="og:description" content="例外 Effective Java 第 3 版の個人的メモ
+項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を使う 項目 71 チェックされる例外を不必要に使うのを避ける 項目 72 標準的な例外を使う 項目 73 抽象概念に適した例外をスローする 項目 74 各メソッドがスローするすべての例外を文書化する 項目 75 詳細メッセージにエラー記録情報を含める 項目 76 エラーアトミック性に努める 項目 77 例外を無視しない 1. 項目 69 例外的状態にだけ例外を使う 1.1. 結論 例外をGOTO文のように、フロー制御に使ってはいけない。">
   <meta property="og:locale" content="ja_jp">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +55,16 @@
     <meta property="article:tag" content="個人的メモ">
 
   <meta itemprop="name" content="Effective Java 3rd [Chapter 10] - 例外">
-  <meta itemprop="description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を">
+  <meta itemprop="description" content="例外 Effective Java 第 3 版の個人的メモ
+項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を使う 項目 71 チェックされる例外を不必要に使うのを避ける 項目 72 標準的な例外を使う 項目 73 抽象概念に適した例外をスローする 項目 74 各メソッドがスローするすべての例外を文書化する 項目 75 詳細メッセージにエラー記録情報を含める 項目 76 エラーアトミック性に努める 項目 77 例外を無視しない 1. 項目 69 例外的状態にだけ例外を使う 1.1. 結論 例外をGOTO文のように、フロー制御に使ってはいけない。">
   <meta itemprop="datePublished" content="2020-01-25T00:49:01+09:00">
   <meta itemprop="dateModified" content="2020-01-25T00:49:01+09:00">
   <meta itemprop="wordCount" content="4333">
   <meta itemprop="keywords" content="java,例外,個人的メモ">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Effective Java 3rd [Chapter 10] - 例外">
-  <meta name="twitter:description" content="例外 Effective Java 第 3 版の個人的メモ 項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を">
+  <meta name="twitter:description" content="例外 Effective Java 第 3 版の個人的メモ
+項目 69 例外的状態にだけ例外を使う 項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を使う 項目 71 チェックされる例外を不必要に使うのを避ける 項目 72 標準的な例外を使う 項目 73 抽象概念に適した例外をスローする 項目 74 各メソッドがスローするすべての例外を文書化する 項目 75 詳細メッセージにエラー記録情報を含める 項目 76 エラーアトミック性に努める 項目 77 例外を無視しない 1. 項目 69 例外的状態にだけ例外を使う 1.1. 結論 例外をGOTO文のように、フロー制御に使ってはいけない。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -661,8 +666,6 @@ ex)
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
@@ -677,10 +680,6 @@ ex)
           gtag('config', 'G-ZTQ37GBNHR');
         }
       </script>
-    
-  
-
-
 
 
 

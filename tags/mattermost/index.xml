@@ -14,7 +14,7 @@
       <link>https://takuto-n.github.io/post/20190914-codebuild_mattermost/</link>
       <pubDate>Sat, 14 Sep 2019 12:09:20 +0900</pubDate>
       <guid>https://takuto-n.github.io/post/20190914-codebuild_mattermost/</guid>
-      <description>AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi</description>
+      <description>&lt;p&gt;AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。&lt;/p&gt;&#xA;&lt;p&gt;AWS CodeBuild の環境変数 &lt;code&gt;MattermostWebhookURL&lt;/code&gt; に&lt;code&gt;Mattermost&lt;/code&gt;の&lt;code&gt;Incomming Webhook URL&lt;/code&gt;を保持しておきます。また、IAM から CodeBuild のロールに &lt;code&gt;AmazonSSMReadOnlyAccess&lt;/code&gt;の権限を与えてください。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

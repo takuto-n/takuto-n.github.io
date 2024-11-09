@@ -14,7 +14,7 @@
       <link>https://takuto-n.github.io/post/20190923-useful-tools/</link>
       <pubDate>Mon, 23 Sep 2019 15:55:16 +0900</pubDate>
       <guid>https://takuto-n.github.io/post/20190923-useful-tools/</guid>
-      <description>少しずつ便利だなぁと思ったものを追記していきます。 複数人でのドキュメント管理 結論 複数人でのドキュメント管理になると、このご時世 Git を使うのが基</description>
+      <description>&lt;p&gt;少しずつ便利だなぁと思ったものを追記していきます。&lt;/p&gt;&#xA;&lt;h2 id=&#34;複数人でのドキュメント管理&#34;&gt;複数人でのドキュメント管理&lt;/h2&gt;&#xA;&lt;h3 id=&#34;結論&#34;&gt;結論&lt;/h3&gt;&#xA;&lt;p&gt;複数人でのドキュメント管理になると、このご時世 Git を使うのが基本かと思います。&#xA;(ファイルサーバなどは前のバージョンが管理しづらい。)&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -16,14 +16,16 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="メソッド Effective Java 第 3 版の個人的メモ 項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計" /><meta name="keywords" content="java, メソッド, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="メソッド Effective Java 第 3 版の個人的メモ
+項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計する 項目 52 オーバーロードを注意して使う 項目 53 可変長引数を注意して使う 項目 54 null ではなく、空コレクションか空配列を返す 項目 55 オプショナルを注意して返す 項目 56 すべての公開 API 要素に対してドキュメントコメントを書く 参考URL 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 入力値のチェックをしましょう Javadocに入力値の説明と例外の説明は記入しましょう 1.2. 良い例 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 /** * 値が(this mod m)であるBigIntegerを返します。 * このメソッドは、remainderメソッドとは異なり、 * 常に負でないBigIntegerを返します。 * * @param m 正でなければならない * @return this mod m. * @throws ArithmetricException m &lt;= 0の場合. */ public BigInteger mod(BigInteger m) { if(m.signum() &lt;= 0) { throw new ArithmeticException(&#34;Modulus &lt;= 0: &#34; &#43; m); } // 計算を行う } 最初に入力値チェックをすることで、以下を防げる。
+" /><meta name="keywords" content="java, メソッド, 個人的メモ" />
 
 
 
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.128.0 with theme even" />
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-8/" />
@@ -41,7 +43,8 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-8/">
   <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta property="og:title" content="Effective Java 3rd [Chapter 8] - メソッド">
-  <meta property="og:description" content="メソッド Effective Java 第 3 版の個人的メモ 項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計">
+  <meta property="og:description" content="メソッド Effective Java 第 3 版の個人的メモ
+項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計する 項目 52 オーバーロードを注意して使う 項目 53 可変長引数を注意して使う 項目 54 null ではなく、空コレクションか空配列を返す 項目 55 オプショナルを注意して返す 項目 56 すべての公開 API 要素に対してドキュメントコメントを書く 参考URL 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 入力値のチェックをしましょう Javadocに入力値の説明と例外の説明は記入しましょう 1.2. 良い例 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 /** * 値が(this mod m)であるBigIntegerを返します。 * このメソッドは、remainderメソッドとは異なり、 * 常に負でないBigIntegerを返します。 * * @param m 正でなければならない * @return this mod m. * @throws ArithmetricException m &lt;= 0の場合. */ public BigInteger mod(BigInteger m) { if(m.signum() &lt;= 0) { throw new ArithmeticException(&#34;Modulus &lt;= 0: &#34; &#43; m); } // 計算を行う } 最初に入力値チェックをすることで、以下を防げる。">
   <meta property="og:locale" content="ja_jp">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +55,16 @@
     <meta property="article:tag" content="個人的メモ">
 
   <meta itemprop="name" content="Effective Java 3rd [Chapter 8] - メソッド">
-  <meta itemprop="description" content="メソッド Effective Java 第 3 版の個人的メモ 項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計">
+  <meta itemprop="description" content="メソッド Effective Java 第 3 版の個人的メモ
+項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計する 項目 52 オーバーロードを注意して使う 項目 53 可変長引数を注意して使う 項目 54 null ではなく、空コレクションか空配列を返す 項目 55 オプショナルを注意して返す 項目 56 すべての公開 API 要素に対してドキュメントコメントを書く 参考URL 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 入力値のチェックをしましょう Javadocに入力値の説明と例外の説明は記入しましょう 1.2. 良い例 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 /** * 値が(this mod m)であるBigIntegerを返します。 * このメソッドは、remainderメソッドとは異なり、 * 常に負でないBigIntegerを返します。 * * @param m 正でなければならない * @return this mod m. * @throws ArithmetricException m &lt;= 0の場合. */ public BigInteger mod(BigInteger m) { if(m.signum() &lt;= 0) { throw new ArithmeticException(&#34;Modulus &lt;= 0: &#34; &#43; m); } // 計算を行う } 最初に入力値チェックをすることで、以下を防げる。">
   <meta itemprop="datePublished" content="2019-12-09T00:48:57+09:00">
   <meta itemprop="dateModified" content="2019-12-09T00:48:57+09:00">
   <meta itemprop="wordCount" content="5234">
   <meta itemprop="keywords" content="java,メソッド,個人的メモ">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Effective Java 3rd [Chapter 8] - メソッド">
-  <meta name="twitter:description" content="メソッド Effective Java 第 3 版の個人的メモ 項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計">
+  <meta name="twitter:description" content="メソッド Effective Java 第 3 版の個人的メモ
+項目 49 パラメータの正当性を検査する 項目 50 必要な場合、防御的にコピーする 項目 51 メソッドのシグネチャを注意深く設計する 項目 52 オーバーロードを注意して使う 項目 53 可変長引数を注意して使う 項目 54 null ではなく、空コレクションか空配列を返す 項目 55 オプショナルを注意して返す 項目 56 すべての公開 API 要素に対してドキュメントコメントを書く 参考URL 1. 項目 49 パラメータの正当性を検査する 1.1. 結論 入力値のチェックをしましょう Javadocに入力値の説明と例外の説明は記入しましょう 1.2. 良い例 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 /** * 値が(this mod m)であるBigIntegerを返します。 * このメソッドは、remainderメソッドとは異なり、 * 常に負でないBigIntegerを返します。 * * @param m 正でなければならない * @return this mod m. * @throws ArithmetricException m &lt;= 0の場合. */ public BigInteger mod(BigInteger m) { if(m.signum() &lt;= 0) { throw new ArithmeticException(&#34;Modulus &lt;= 0: &#34; &#43; m); } // 計算を行う } 最初に入力値チェックをすることで、以下を防げる。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -1009,8 +1014,6 @@ etc&hellip;</li>
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
@@ -1025,10 +1028,6 @@ etc&hellip;</li>
           gtag('config', 'G-ZTQ37GBNHR');
         }
       </script>
-    
-  
-
-
 
 
 

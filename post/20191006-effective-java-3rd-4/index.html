@@ -16,14 +16,16 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="クラスとインタフェース Effective Java 第 3 版の個人的メモ 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィー" /><meta name="keywords" content="java, クラスとインタフェース, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="クラスとインタフェース Effective Java 第 3 版の個人的メモ
+項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィールドではなく、アクセッサーメソッドを使う 項目 17 可変性を最小限にする 項目 18 継承よりコンポジションを選ぶ 項目 19 継承のために設計および文書化する、でなければ継承を禁止する 項目 20 抽象クラスよりインタフェースを選ぶ 項目 21 将来のためにインタフェースを選ぶ 項目 22 型を定義するためだけにインタフェースを使う 項目 23 タグ付クラスよりクラス階層を選ぶ 項目 24 非 static のメンバークラスより static のメンバークラスを選ぶ 項目 25 ソースファイルを単一のトップレベルのクラスに限定する 参考 URL 1. 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 1.1. 結論 常にアクセス可能性をできる限り小さくするべき public のクラスは public のフィールドを持つべきではない public static final のフィールドが配列の場合、その配列の内部も不変であることを保証するべき 1.2. 常にアクセス可能性をできる限り小さくするべき 情報秘匿(カプセル化)をすると以下の利点が得られるから。
+" /><meta name="keywords" content="java, クラスとインタフェース, 個人的メモ" />
 
 
 
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.128.0 with theme even" />
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191006-effective-java-3rd-4/" />
@@ -41,7 +43,8 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191006-effective-java-3rd-4/">
   <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta property="og:title" content="Effective Java 3rd [Chapter 4] - クラスとインタフェース">
-  <meta property="og:description" content="クラスとインタフェース Effective Java 第 3 版の個人的メモ 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィー">
+  <meta property="og:description" content="クラスとインタフェース Effective Java 第 3 版の個人的メモ
+項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィールドではなく、アクセッサーメソッドを使う 項目 17 可変性を最小限にする 項目 18 継承よりコンポジションを選ぶ 項目 19 継承のために設計および文書化する、でなければ継承を禁止する 項目 20 抽象クラスよりインタフェースを選ぶ 項目 21 将来のためにインタフェースを選ぶ 項目 22 型を定義するためだけにインタフェースを使う 項目 23 タグ付クラスよりクラス階層を選ぶ 項目 24 非 static のメンバークラスより static のメンバークラスを選ぶ 項目 25 ソースファイルを単一のトップレベルのクラスに限定する 参考 URL 1. 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 1.1. 結論 常にアクセス可能性をできる限り小さくするべき public のクラスは public のフィールドを持つべきではない public static final のフィールドが配列の場合、その配列の内部も不変であることを保証するべき 1.2. 常にアクセス可能性をできる限り小さくするべき 情報秘匿(カプセル化)をすると以下の利点が得られるから。">
   <meta property="og:locale" content="ja_jp">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +55,16 @@
     <meta property="article:tag" content="個人的メモ">
 
   <meta itemprop="name" content="Effective Java 3rd [Chapter 4] - クラスとインタフェース">
-  <meta itemprop="description" content="クラスとインタフェース Effective Java 第 3 版の個人的メモ 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィー">
+  <meta itemprop="description" content="クラスとインタフェース Effective Java 第 3 版の個人的メモ
+項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィールドではなく、アクセッサーメソッドを使う 項目 17 可変性を最小限にする 項目 18 継承よりコンポジションを選ぶ 項目 19 継承のために設計および文書化する、でなければ継承を禁止する 項目 20 抽象クラスよりインタフェースを選ぶ 項目 21 将来のためにインタフェースを選ぶ 項目 22 型を定義するためだけにインタフェースを使う 項目 23 タグ付クラスよりクラス階層を選ぶ 項目 24 非 static のメンバークラスより static のメンバークラスを選ぶ 項目 25 ソースファイルを単一のトップレベルのクラスに限定する 参考 URL 1. 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 1.1. 結論 常にアクセス可能性をできる限り小さくするべき public のクラスは public のフィールドを持つべきではない public static final のフィールドが配列の場合、その配列の内部も不変であることを保証するべき 1.2. 常にアクセス可能性をできる限り小さくするべき 情報秘匿(カプセル化)をすると以下の利点が得られるから。">
   <meta itemprop="datePublished" content="2019-10-06T15:27:10+09:00">
   <meta itemprop="dateModified" content="2019-10-06T15:27:10+09:00">
   <meta itemprop="wordCount" content="11553">
   <meta itemprop="keywords" content="java,クラスとインタフェース,個人的メモ">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Effective Java 3rd [Chapter 4] - クラスとインタフェース">
-  <meta name="twitter:description" content="クラスとインタフェース Effective Java 第 3 版の個人的メモ 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィー">
+  <meta name="twitter:description" content="クラスとインタフェース Effective Java 第 3 版の個人的メモ
+項目 15 クラスとメンバーへのアクセス可能性を最小限にする 項目 16 public のクラスでは、public のフィールドではなく、アクセッサーメソッドを使う 項目 17 可変性を最小限にする 項目 18 継承よりコンポジションを選ぶ 項目 19 継承のために設計および文書化する、でなければ継承を禁止する 項目 20 抽象クラスよりインタフェースを選ぶ 項目 21 将来のためにインタフェースを選ぶ 項目 22 型を定義するためだけにインタフェースを使う 項目 23 タグ付クラスよりクラス階層を選ぶ 項目 24 非 static のメンバークラスより static のメンバークラスを選ぶ 項目 25 ソースファイルを単一のトップレベルのクラスに限定する 参考 URL 1. 項目 15 クラスとメンバーへのアクセス可能性を最小限にする 1.1. 結論 常にアクセス可能性をできる限り小さくするべき public のクラスは public のフィールドを持つべきではない public static final のフィールドが配列の場合、その配列の内部も不変であることを保証するべき 1.2. 常にアクセス可能性をできる限り小さくするべき 情報秘匿(カプセル化)をすると以下の利点が得られるから。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -2120,8 +2125,6 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
@@ -2136,10 +2139,6 @@ Java ライブラリではこれと同様のことを防ぐため、<a href="htt
           gtag('config', 'G-ZTQ37GBNHR');
         }
       </script>
-    
-  
-
-
 
 
 

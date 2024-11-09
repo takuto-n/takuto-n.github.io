@@ -16,14 +16,16 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="ジェネリクス Effective Java 第 3 版の個人的メモ 項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジ" /><meta name="keywords" content="java, ジェネリクス, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="ジェネリクス Effective Java 第 3 版の個人的メモ
+項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジェネリックメソッドを使う 項目 31 API の柔軟性向上のために境界ワイルドカードを使う 項目 32 ジェネリックと可変長引数を注意して組み合わせる 項目 33 型安全な異種コンテナを検討する 参考 URL 1. 項目 26 原型を使わない Java 1.4 までジェネリクスがなかった。 Java 5 でジェネリクスが登場した。 1.1. 結論 ジェネリクスの型パラメータが指定できるときは必ず指定しましょう。
+" /><meta name="keywords" content="java, ジェネリクス, 個人的メモ" />
 
 
 
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.128.0 with theme even" />
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191103-effective-java-3rd-5/" />
@@ -41,7 +43,8 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191103-effective-java-3rd-5/">
   <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta property="og:title" content="Effective Java 3rd [Chapter 5] - ジェネリクス">
-  <meta property="og:description" content="ジェネリクス Effective Java 第 3 版の個人的メモ 項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジ">
+  <meta property="og:description" content="ジェネリクス Effective Java 第 3 版の個人的メモ
+項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジェネリックメソッドを使う 項目 31 API の柔軟性向上のために境界ワイルドカードを使う 項目 32 ジェネリックと可変長引数を注意して組み合わせる 項目 33 型安全な異種コンテナを検討する 参考 URL 1. 項目 26 原型を使わない Java 1.4 までジェネリクスがなかった。 Java 5 でジェネリクスが登場した。 1.1. 結論 ジェネリクスの型パラメータが指定できるときは必ず指定しましょう。">
   <meta property="og:locale" content="ja_jp">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +55,16 @@
     <meta property="article:tag" content="個人的メモ">
 
   <meta itemprop="name" content="Effective Java 3rd [Chapter 5] - ジェネリクス">
-  <meta itemprop="description" content="ジェネリクス Effective Java 第 3 版の個人的メモ 項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジ">
+  <meta itemprop="description" content="ジェネリクス Effective Java 第 3 版の個人的メモ
+項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジェネリックメソッドを使う 項目 31 API の柔軟性向上のために境界ワイルドカードを使う 項目 32 ジェネリックと可変長引数を注意して組み合わせる 項目 33 型安全な異種コンテナを検討する 参考 URL 1. 項目 26 原型を使わない Java 1.4 までジェネリクスがなかった。 Java 5 でジェネリクスが登場した。 1.1. 結論 ジェネリクスの型パラメータが指定できるときは必ず指定しましょう。">
   <meta itemprop="datePublished" content="2019-11-03T00:07:19+09:00">
   <meta itemprop="dateModified" content="2019-11-03T00:07:19+09:00">
   <meta itemprop="wordCount" content="6636">
   <meta itemprop="keywords" content="java,ジェネリクス,個人的メモ">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Effective Java 3rd [Chapter 5] - ジェネリクス">
-  <meta name="twitter:description" content="ジェネリクス Effective Java 第 3 版の個人的メモ 項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジ">
+  <meta name="twitter:description" content="ジェネリクス Effective Java 第 3 版の個人的メモ
+項目 26 原型を使わない 項目 27 無検査警告を取り除く 項目 28 配列よりリストを選ぶ 項目 29 ジェネリック型を使う 項目 30 ジェネリックメソッドを使う 項目 31 API の柔軟性向上のために境界ワイルドカードを使う 項目 32 ジェネリックと可変長引数を注意して組み合わせる 項目 33 型安全な異種コンテナを検討する 参考 URL 1. 項目 26 原型を使わない Java 1.4 までジェネリクスがなかった。 Java 5 でジェネリクスが登場した。 1.1. 結論 ジェネリクスの型パラメータが指定できるときは必ず指定しましょう。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -661,55 +666,55 @@
 <li>型パラメータの文字としてよく使われる<code>T</code>、<code>E</code>、<code>K</code>、<code>V</code>は何の略なのか</li>
 </ul>
 <table>
-<thead>
-<tr>
-<th style="text-align:left">表記</th>
-<th style="text-align:left">意味</th>
-<th style="text-align:left">説明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">T</td>
-<td style="text-align:left">Type</td>
-<td style="text-align:left">汎用的</td>
-</tr>
-<tr>
-<td style="text-align:left">E</td>
-<td style="text-align:left">Element</td>
-<td style="text-align:left">配列の要素など</td>
-</tr>
-<tr>
-<td style="text-align:left">K</td>
-<td style="text-align:left">Key</td>
-<td style="text-align:left">連想配列やマップのキーなど</td>
-</tr>
-<tr>
-<td style="text-align:left">V</td>
-<td style="text-align:left">Value</td>
-<td style="text-align:left">配列の値や結果</td>
-</tr>
-<tr>
-<td style="text-align:left">N</td>
-<td style="text-align:left">Number</td>
-<td style="text-align:left">数値を表す</td>
-</tr>
-<tr>
-<td style="text-align:left">A</td>
-<td style="text-align:left">Array</td>
-<td style="text-align:left">A[]という形式で使われる</td>
-</tr>
-<tr>
-<td style="text-align:left">Args</td>
-<td style="text-align:left">Arguments</td>
-<td style="text-align:left">C++で使われることが多い</td>
-</tr>
-<tr>
-<td style="text-align:left">F, Fn, Func</td>
-<td style="text-align:left">Function</td>
-<td style="text-align:left">コールバック関数、クロージャー、ラムダ等</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">表記</th>
+          <th style="text-align: left">意味</th>
+          <th style="text-align: left">説明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">T</td>
+          <td style="text-align: left">Type</td>
+          <td style="text-align: left">汎用的</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">E</td>
+          <td style="text-align: left">Element</td>
+          <td style="text-align: left">配列の要素など</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">K</td>
+          <td style="text-align: left">Key</td>
+          <td style="text-align: left">連想配列やマップのキーなど</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">V</td>
+          <td style="text-align: left">Value</td>
+          <td style="text-align: left">配列の値や結果</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">N</td>
+          <td style="text-align: left">Number</td>
+          <td style="text-align: left">数値を表す</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">A</td>
+          <td style="text-align: left">Array</td>
+          <td style="text-align: left">A[]という形式で使われる</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Args</td>
+          <td style="text-align: left">Arguments</td>
+          <td style="text-align: left">C++で使われることが多い</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">F, Fn, Func</td>
+          <td style="text-align: left">Function</td>
+          <td style="text-align: left">コールバック関数、クロージャー、ラムダ等</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="6-a-name31apia項目-31-api-の柔軟性向上のために境界ワイルドカードを使う">6. <a name='31API'></a>項目 31 API の柔軟性向上のために境界ワイルドカードを使う</h2>
 <h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
@@ -1369,8 +1374,6 @@ s1、s2 は値を提供しているから。</p>
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
@@ -1385,10 +1388,6 @@ s1、s2 は値を提供しているから。</p>
           gtag('config', 'G-ZTQ37GBNHR');
         }
       </script>
-    
-  
-
-
 
 
 

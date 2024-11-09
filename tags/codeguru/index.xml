@@ -14,7 +14,7 @@
       <link>https://takuto-n.github.io/post/20191224-awscodeguru/</link>
       <pubDate>Tue, 24 Dec 2019 23:36:29 +0900</pubDate>
       <guid>https://takuto-n.github.io/post/20191224-awscodeguru/</guid>
-      <description>AWS CodeGuruを使ってみた AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツールAWS CodeGuruを使ってみました。 その使</description>
+      <description>&lt;h1 id=&#34;aws-codeguruを使ってみた&#34;&gt;AWS CodeGuruを使ってみた&lt;/h1&gt;&#xA;&lt;p&gt;AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツール&lt;a href=&#34;https://aws.amazon.com/jp/codeguru/&#34;&gt;AWS CodeGuru&lt;/a&gt;を使ってみました。&#xA;その使用感や解析結果をまとめたいと思います。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

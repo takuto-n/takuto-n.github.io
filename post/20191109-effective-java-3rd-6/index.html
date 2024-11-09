@@ -16,14 +16,16 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールド" /><meta name="keywords" content="java, enum とアノテーション, 個人的メモ" />
+<meta name="author" content="takuto_n" /><meta name="description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ
+項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールドの代わりに EnumSet を使う 項目 37 序数インデックスの代わりに EnumMap を使う 項目 38 拡張可能な enum をインタフェースで模倣する 項目 39 命名パターンよりアノテーションを選ぶ 項目 40 常に Override アノテーションを使う 項目 41 型を定義するためにマーカーインタフェースを使う 1. 項目 34 int 定数の代わりに enum を使う 1.1. 結論 int enumパターン(int定数)は使わないでおきましょう。 enumを使いましょう。 単に定数として使う。 定数に対するメソッドが必要であれば、定数固有メソッド 複数の定数に対して共通のメソッドが必要であれば、戦略enumパターン 1.2. int enumパターンの欠点 以下の欠点がある。
+" /><meta name="keywords" content="java, enum とアノテーション, 個人的メモ" />
 
 
 
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.128.0 with theme even" />
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-6/" />
@@ -41,7 +43,8 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20191109-effective-java-3rd-6/">
   <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta property="og:title" content="Effective Java 3rd [Chapter 6] - enum とアノテーション">
-  <meta property="og:description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールド">
+  <meta property="og:description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ
+項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールドの代わりに EnumSet を使う 項目 37 序数インデックスの代わりに EnumMap を使う 項目 38 拡張可能な enum をインタフェースで模倣する 項目 39 命名パターンよりアノテーションを選ぶ 項目 40 常に Override アノテーションを使う 項目 41 型を定義するためにマーカーインタフェースを使う 1. 項目 34 int 定数の代わりに enum を使う 1.1. 結論 int enumパターン(int定数)は使わないでおきましょう。 enumを使いましょう。 単に定数として使う。 定数に対するメソッドが必要であれば、定数固有メソッド 複数の定数に対して共通のメソッドが必要であれば、戦略enumパターン 1.2. int enumパターンの欠点 以下の欠点がある。">
   <meta property="og:locale" content="ja_jp">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +55,16 @@
     <meta property="article:tag" content="個人的メモ">
 
   <meta itemprop="name" content="Effective Java 3rd [Chapter 6] - enum とアノテーション">
-  <meta itemprop="description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールド">
+  <meta itemprop="description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ
+項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールドの代わりに EnumSet を使う 項目 37 序数インデックスの代わりに EnumMap を使う 項目 38 拡張可能な enum をインタフェースで模倣する 項目 39 命名パターンよりアノテーションを選ぶ 項目 40 常に Override アノテーションを使う 項目 41 型を定義するためにマーカーインタフェースを使う 1. 項目 34 int 定数の代わりに enum を使う 1.1. 結論 int enumパターン(int定数)は使わないでおきましょう。 enumを使いましょう。 単に定数として使う。 定数に対するメソッドが必要であれば、定数固有メソッド 複数の定数に対して共通のメソッドが必要であれば、戦略enumパターン 1.2. int enumパターンの欠点 以下の欠点がある。">
   <meta itemprop="datePublished" content="2019-11-09T00:36:53+09:00">
   <meta itemprop="dateModified" content="2019-11-09T00:36:53+09:00">
   <meta itemprop="wordCount" content="4515">
   <meta itemprop="keywords" content="java,enum とアノテーション,個人的メモ">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Effective Java 3rd [Chapter 6] - enum とアノテーション">
-  <meta name="twitter:description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ 項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールド">
+  <meta name="twitter:description" content="enum とアノテーション Effective Java 第 3 版の個人的メモ
+項目 34 int 定数の代わりに enum を使う 項目 35 序数の代わりにインスタンスフィールドを使う 項目 36 ビットフィールドの代わりに EnumSet を使う 項目 37 序数インデックスの代わりに EnumMap を使う 項目 38 拡張可能な enum をインタフェースで模倣する 項目 39 命名パターンよりアノテーションを選ぶ 項目 40 常に Override アノテーションを使う 項目 41 型を定義するためにマーカーインタフェースを使う 1. 項目 34 int 定数の代わりに enum を使う 1.1. 結論 int enumパターン(int定数)は使わないでおきましょう。 enumを使いましょう。 単に定数として使う。 定数に対するメソッドが必要であれば、定数固有メソッド 複数の定数に対して共通のメソッドが必要であれば、戦略enumパターン 1.2. int enumパターンの欠点 以下の欠点がある。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -1130,8 +1135,6 @@
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
@@ -1146,10 +1149,6 @@
           gtag('config', 'G-ZTQ37GBNHR');
         }
       </script>
-    
-  
-
-
 
 
 

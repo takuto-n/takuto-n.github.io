@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.128.0 with theme even" />
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/" />
@@ -49,7 +49,8 @@
 
   <meta itemprop="name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta itemprop="description" content="Hugo theme even example site.">
-  <meta itemprop="dateModified" content="2024-07-03T22:39:41+09:00">
+  <meta itemprop="datePublished" content="2024-11-09T11:59:23+09:00">
+  <meta itemprop="dateModified" content="2024-11-09T11:59:23+09:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta name="twitter:description" content="Hugo theme even example site.">
@@ -119,6 +120,46 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20190921-effective-java-3rd-3/">Effective Java 3rd [Chapter 3] - すべてのオブジェクトに共通のメソッド</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-09-21 </span>
+      <div class="post-category">
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+          </div>
+        <span class="more-meta"> 3478 words </span>
+        <span class="more-meta"> 7 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="すべてのオブジェクトに共通のメソッド">すべてのオブジェクトに共通のメソッド</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#10equalsoverridegeneralcontracts">項目 10 equals の override は一般契約（general contracts）に従うべし</a></li>
+<li><a href="#11equalshashcode">項目 11 equals をオーバーライドする場合は hashcode もオーバーライドせよ</a></li>
+<li><a href="#12toString">項目 12 常に toString をオーバーライドせよ</a></li>
+<li><a href="#13clone">項目 13 clone をオーバーライドするときは注意せよ</a></li>
+<li><a href="#14Comparable">項目 14 Comparable を実装することを考慮せよ</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name10equalsoverridegeneralcontractsa項目-10-equals-の-override-は一般契約general-contractsに従うべし">1. <a name='10equalsoverridegeneralcontracts'></a>項目 10 equals の override は一般契約（general contracts）に従うべし</h2>
+<h3 id="11-a-nameaどういう時にオーバーライドする必要があるのか">1.1. <a name=''></a>どういう時にオーバーライドする必要があるのか？</h3>
+<p><em>クラスが単なるオブジェクトの同一性とは異なる論理的等価性という概念を持っていて、他のインスタンスと比較する必要があるとき</em></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20190921-effective-java-3rd-3/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/20190921-effective-java-3rd-2/">Effective Java 3rd [Chapter 2] - オブジェクトの生成と消滅</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-09-21 </span>
@@ -132,7 +173,29 @@
   
   <div class="post-content">
     <div class="post-summary">
-      オブジェクトの生成と消滅 Effective Java 第 3 版の個人的メモ 項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する 項目 2 数多くのコンストラクタパラ
+      <h1 id="オブジェクトの生成と消滅">オブジェクトの生成と消滅</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#1static">項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する</a></li>
+<li><a href="#2">項目 2 数多くのコンストラクタパラメータに直面した時にはビルダーパターンを検討する。</a></li>
+<li><a href="#3privateenum">項目 3 private のコンストラクタか enum 型でシングルトン特性を強制する</a></li>
+<li><a href="#4private">項目 4 private のコンストラクタでインスタンス化不可能を強制する</a></li>
+<li><a href="#5">項目 5 資源を直接結び付けるよりも依存性注入を選ぶ</a></li>
+<li><a href="#6">項目 6 不必要なオブジェクトの生成を避ける</a></li>
+<li><a href="#7">項目 7 廃れたオブジェクト参照を取り除く</a></li>
+<li><a href="#8finalizercleaner">項目 8 finalizer と cleaner の使用は避けるべし</a></li>
+<li><a href="#9try-finallytry-with-resources">項目 9 try-finally よりも try-with-resources を使うべし</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name1statica項目-1-コンストラクタの代わりに-static-ファクトリーメソッドを検討する">1. <a name='1static'></a>項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<p>コンストラクタの代わりに static ファクトリーメソッドを使用すると様々なメリットがある。
+そのメリットが必要ない時はコンストラクタを使用すればよい。</p>
     </div>
     <div class="read-more">
       <a href="/post/20190921-effective-java-3rd-2/" class="read-more-link">Read more...</a>
@@ -155,7 +218,8 @@
   
   <div class="post-content">
     <div class="post-summary">
-      AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 MattermostWebhookURL にMattermostのIncommi
+      <p>AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。</p>
+<p>AWS CodeBuild の環境変数 <code>MattermostWebhookURL</code> に<code>Mattermost</code>の<code>Incomming Webhook URL</code>を保持しておきます。また、IAM から CodeBuild のロールに <code>AmazonSSMReadOnlyAccess</code>の権限を与えてください。</p>
     </div>
     <div class="read-more">
       <a href="/post/20190914-codebuild_mattermost/" class="read-more-link">Read more...</a>
@@ -178,7 +242,9 @@
   
   <div class="post-content">
     <div class="post-summary">
-      AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 SonarCloudAccessToken に SonarCloud のアクセストークンを保持しておきます
+      <p>AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。</p>
+<p>AWS CodeBuild の環境変数 <code>SonarCloudAccessToken</code> に SonarCloud のアクセストークンを保持しておきます。</p>
+<p>SonarCloud のアクセストークンの発行は、SonarCloud のサイトで <code>ユーザーアイコン &gt; Settings &gt; Personal access token</code> から出来ます。</p>
     </div>
     <div class="read-more">
       <a href="/post/20190909-sonarcloud_codebuild/" class="read-more-link">Read more...</a>
@@ -201,33 +267,11 @@
   
   <div class="post-content">
     <div class="post-summary">
-      先日、Architecting on AWS に参加したので、参加メモを載せておきます。 クラウド繋がりということで、Cloud Native Tokyo 2019 で紹介されていたTr
+      <p>先日、Architecting on AWS に参加したので、<a href="https://drive.google.com/file/d/1UVGxRcfKq2XBBWpN66b8ZQjJuyXirCkH/preview">参加メモ</a>を載せておきます。</p>
+<p>クラウド繋がりということで、Cloud Native Tokyo 2019 で紹介されていた<a href="https://drive.google.com/file/d/1kNd9Au2vWr5H1T-Bmz957qdLl_SV5aa4/preview">Trail Map</a>も載せておきます。</p>
     </div>
     <div class="read-more">
       <a href="/post/20190809-architectiong-on-aws_memo/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20190316-cors-basic_auth/">クロスドメイン制約とBASIC認証</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-03-16 </span>
-      <div class="post-category">
-          <a href="/categories/poc/"> poc </a>
-          </div>
-        <span class="more-meta"> 2536 words </span>
-        <span class="more-meta"> 6 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認
-    </div>
-    <div class="read-more">
-      <a href="/post/20190316-cors-basic_auth/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
@@ -239,7 +283,10 @@
         <i class="iconfont icon-left"></i>
         <span class="prev-text">Prev</span>
       </a>
-    
+    <a class="next" href="/page/11/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
   </nav>
         </div>
         
@@ -297,8 +344,6 @@
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
@@ -313,10 +358,6 @@
           gtag('config', 'G-ZTQ37GBNHR');
         }
       </script>
-    
-  
-
-
 
 
 

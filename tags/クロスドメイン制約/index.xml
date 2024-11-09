@@ -14,7 +14,7 @@
       <link>https://takuto-n.github.io/post/20190316-cors-basic_auth/</link>
       <pubDate>Sat, 16 Mar 2019 23:09:42 +0900</pubDate>
       <guid>https://takuto-n.github.io/post/20190316-cors-basic_auth/</guid>
-      <description>初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認</description>
+      <description>&lt;p&gt;初めての技術系ブログです。&lt;/p&gt;&#xA;&lt;p&gt;ご不明な点がありましたら、お気軽にコメント欄へ記入ください。&lt;/p&gt;&#xA;&lt;p&gt;初回は「&lt;strong&gt;ドメイン X のサイトから、異なるドメイン Y の BASIC 認証つきのサイトにアクセスできるのか&lt;/strong&gt; 」について検証した結果を書きたいと思います。&#xA;検証結果としては、&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

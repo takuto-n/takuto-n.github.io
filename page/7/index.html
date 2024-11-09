@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.128.0 with theme even" />
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/" />
@@ -49,7 +49,8 @@
 
   <meta itemprop="name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta itemprop="description" content="Hugo theme even example site.">
-  <meta itemprop="dateModified" content="2024-07-03T22:39:41+09:00">
+  <meta itemprop="datePublished" content="2024-11-09T11:59:23+09:00">
+  <meta itemprop="dateModified" content="2024-11-09T11:59:23+09:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta name="twitter:description" content="Hugo theme even example site.">
@@ -117,6 +118,31 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20200425-thread-init-at-process-startup/">SpringBootアプリケーション起動直後にスレッドを初期化する方法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-25 </span>
+      <div class="post-category">
+          <a href="/categories/poc/"> poc </a>
+          </div>
+        <span class="more-meta"> 1434 words </span>
+        <span class="more-meta"> 3 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="overview">Overview</h1>
+<legend>スレッド初期化のシーケンス図</legend>
+<p><img src="/img/20200425/thread-init-flow.png" alt=""></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20200425-thread-init-at-process-startup/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/20200408-use-kubernetes-on-gcp/">Using Kubernetes on GCP</a></h1>
@@ -201,33 +227,205 @@
   
   <div class="post-content">
     <div class="post-summary">
-      シリアライズ Effective Java 第 3 版の個人的メモ 項目 85 Java のシリアライズよりも代替手段を選ぶ 項目 86 Serializable を細心の注意を払って実装する 項目 87 カスタムシリアライズ形
+      <h1 id="シリアライズ">シリアライズ</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#85Java">項目 85 Java のシリアライズよりも代替手段を選ぶ</a></li>
+<li><a href="#86Serializable">項目 86 Serializable を細心の注意を払って実装する</a></li>
+<li><a href="#87">項目 87 カスタムシリアライズ形式の使用を検討する</a></li>
+<li><a href="#88readObject">項目 88 防御的に readObject メソッドを書く</a></li>
+<li><a href="#89readResolveenum">項目 89 インスタンス制御に対しては、readResolve より enum 型を選ぶ</a></li>
+<li><a href="#90">項目 90 シリアライズされたインスタンスの代わりに、シリアライズ・プロキシを検討する</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name85javaa項目-85-java-のシリアライズよりも代替手段を選ぶ">1. <a name='85Java'></a>項目 85 Java のシリアライズよりも代替手段を選ぶ</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<ul>
+<li>シリアライズは使うべきでない
+<ul>
+<li>シリアライズは脆弱でリモートコード実行(RCE)やDoS攻撃などの攻撃の弱点となってしまうから</li>
+</ul>
+</li>
+<li>代替手段としてはJSONやProtobufなどのような他の手段を使うべし
+<ul>
+<li>データフォーマットが定まっていてシリアライズよりましだから？
+<ul>
+<li>XML bombもある。Jsonハイジャックもある。</li>
+<li>ユーザコードを叩くかどうかの違い？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>シリアライズが避けられない場合でも、信頼できないデータはデシリアライズするべきでない
+<ul>
+<li>信頼できないデータは攻撃対象となっている可能性があるから</li>
+</ul>
+</li>
+<li>シリアライズが避けられないかつ信頼できないデータをデシリアライズしなければならない場合は、フィルタリングをするべし</li>
+</ul>
+<h3 id="12-a-name-1aシリアライズの脆弱性">1.2. <a name='-1'></a>シリアライズの脆弱性</h3>
+<ul>
+<li>シリアライズは脆弱である
+<ul>
+<li>理由
+<ul>
+<li><a href="https://codezine.jp/article/detail/9150">Apache Commons Collectionsの脆弱性解説 (1/3)：CodeZine（コードジン）</a></li>
+<li><a href="https://blog.tokumaru.org/2017/09/introduction-to-object-injection.html">安全でないデシリアライゼーション(Insecure Deserialization)入門 | 徳丸浩の日記</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ガジェット、ガジェットチェーンによって任意のネイティブコードが実行できてしまうことがある
+<ul>
+<li>Javaのシリアライズ可能な型を持つメソッドをガジェット、ガジェットの組み合わせをガジェットチェーンとよぶ</li>
+<li>実際にガジェットチェーンを用いて任意のネイティブコードが実行する実証実験された
+<ul>
+<li><a href="https://blog.trendmicro.co.jp/archives/12577">主要Javaアプリケーションサーバに影響するJavaライブラリの脆弱性を正しく理解する | トレンドマイクロ セキュリティブログ</a></li>
+<li><a href="https://github.com/frohoff/ysoserial">GitHub - frohoff/ysoserial: A proof-of-concept tool for generating payloads that exploit unsafe Java object deserialization.</a>
+<ul>
+<li>Spring 4.1.4でも実証実験された</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>デシリアライゼーションボムによってDoS攻撃ができてしまうことがある
+<ul>
+<li>デシリアライゼーションボムは、インスタンスのディシリアライズをする場合に、そのフィールドや要素のハッシュコードを計算する必要があることを悪用して、例えば深い入れ子構造になっているHashSetインスタンスなどを作成してデシリアライズさせることで、莫大な計算時間を掛けさせる攻撃手法</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-a-name-1aデシリアライズ時のフィルタリング">1.3. <a name='-1'></a>デシリアライズ時のフィルタリング</h3>
+<ul>
+<li>デシリアライズ時のフィルタリングには<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/ObjectInputFilter.html">ObjectInputFilter (Java SE 11 &amp; JDK 11 )</a>を使うべし
+<ul>
+<li>ホワイトリスト</li>
+<li>Java 9から導入されたが、6,7,8にもバックポートされている
+<ul>
+<li><a href="https://www.infoq.com/jp/news/2017/03/deserialise-filter-backport/">オブジェクトのデシリアライゼーションフィルタがJava 9からバックポートされる</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="14-a-name-1a余談">1.4. <a name='-1'></a>余談</h3>
+<ul>
+<li>シリアライズの扱いずらさ
+<ul>
+<li>送信元と送信先が同じオブジェクトを持たなければならない</li>
+</ul>
+</li>
+<li>どういう局面でシリアライズを使うでしょうか
+<ul>
+<li>セッション</li>
+<li>システム内通信
+<ul>
+<li>EJB(Enterprise Java Bean)
+<ul>
+<li>EJBとは？という方は<a href="https://www.atmarkit.co.jp/fjava/keyword/jkey/jkey03.html">こちら</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-a-name86serializablea項目-86-serializable-を細心の注意を払って実装する">2. <a name='86Serializable'></a>項目 86 Serializable を細心の注意を払って実装する</h2>
+<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>Serializableインターフェースは軽く考えて実装するべきではない
+<ul>
+<li>以下の3つのコストがかかってしまうから
+<ul>
+<li>リリース後のクラスの実装の変更に対する柔軟性の低下</li>
+<li>バグやセキュリティホールの可能性の増大</li>
+<li>テストの負荷の増大</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>継承するために設計されたクラスとインタフェースではSerializableを実装・拡張するべきでない
+<ul>
+<li>サブクラスの実装に手間がかかるから</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-a-nameserializable3aserializable実装に伴う3つのコスト">2.2. <a name='Serializable3'></a>Serializable実装に伴う3つのコスト</h3>
+<h4 id="221-a-name-1aリリース後のクラスの実装の変更に対する柔軟性の低下">2.2.1. <a name='-1'></a>リリース後のクラスの実装の変更に対する柔軟性の低下</h4>
+<ul>
+<li>Serializableを実装したクラスを一旦リリースしてしまうと、その実装を変更することは容易ではない
+<ul>
+<li>クラスをシリアライズ可能にすると、そのシリアライズ形式がクラスの公開APIの一部となり、シリアライズ形式を永久にサポートし続ける必要があるから
+<ul>
+<li>デフォルトのシリアライズ形式の場合は、 privateフィールドも公開されてしまう</li>
+</ul>
+</li>
+<li>serialVersionUIDを明示的に指定しない場合は、コンパイラはクラス名やクラスが実装しているインタフェース名、publicとprotectedのメンバからserialVersionUIDを生成されるするので、メソッドを一つ追加しただけでserialVersionUIDが変更され、互換性が失われるから。
+<ul>
+<li>javaバージョンによって生成されるserialVersionUIDが違う可能性あり。だから指定しましょう</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="222-a-name-1aバグやセキュリティホールの可能性の増大">2.2.2. <a name='-1'></a>バグやセキュリティホールの可能性の増大</h4>
+<ul>
+<li>バグの可能性が増大する理由は、デシリアライズ時のオブジェクトは通常のコンストラクタを使わずに生成されるため、コンストラクタで保証される不変式が保証されないから。</li>
+<li>セキュリティホールについては、項目85参照</li>
+</ul>
+<h4 id="223-a-name-1aテストの負荷の増大">2.2.3. <a name='-1'></a>テストの負荷の増大</h4>
+<ul>
+<li>新たなリリースのインスタンスをシリアライズし、古いリリースのデシリアライズ処理でインスタンスが復元できるを確認する必要がある。 また逆に、古いリリースのインスタンスをシリアライズし、新しいリリースのデシリアライズ処理で復元できるかも確認する必要がある</li>
+<li>これらのテストは、新旧のインスタンス間でシリアライズ/デシリアライズできるかというバイナリ互換性に加えて、 動作が意図しているものかどうかというセマンティクス互換性も検査する必要がある
+<ul>
+<li>互換の一覧
+<ul>
+<li>ソース互換
+<ul>
+<li>ソースをコンパイルできる</li>
+</ul>
+</li>
+<li>バイナリ互換
+<ul>
+<li>バイナリを実行できる</li>
+</ul>
+</li>
+<li>動作の互換性（≒セマンティクス互換性）
+<ul>
+<li>動作が同じ</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="224-a-nameserializablea継承するために設計されたクラスインターフェースに対するserializable実装">2.2.4. <a name='Serializable'></a>継承するために設計されたクラス・インターフェースに対するSerializable実装</h4>
+<ul>
+<li>継承するために設計されたクラスとインタフェースではSerializableを実装・拡張するべきでない
+<ul>
+<li>サブクラスの実装に手間がかかるから</li>
+</ul>
+</li>
+<li>ただし上記には例外があり、「例えば、全ての参加者がSerializableを実装しなければならない何らかのフレームワークに参加するためにクラスやインターフェースが主に存在している場合」は破ってもいい
+<ul>
+<li>例えば、ThrowableはSerializableを実装しているので、リモートメソッド呼び出し(RMI)からの例外を、クライアントに渡せる</li>
+<li>Component、HttpServletもSerializableを実装している</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-a-name87a項目-87-カスタムシリアライズ形式の使用を検討する">3. <a name='87'></a>項目 87 カスタムシリアライズ形式の使用を検討する</h2>
+<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+<p>Javaにおけるシリアライズの実装方法は2通りある。</p>
     </div>
     <div class="read-more">
       <a href="/post/20191109-effective-java-3rd-12/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20191109-effective-java-3rd-11/">Effective Java 3rd [Chapter 11] - 並行性</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-02-22 </span>
-      <div class="post-category">
-          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
-          </div>
-        <span class="more-meta"> 9161 words </span>
-        <span class="more-meta"> 19 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      並行性 Effective Java 第 3 版の個人的メモ 項目 78 共有された可変データへのアクセスを同期する 項目 79 過剰な同期は避ける 項目 80 スレッドよりもエグゼキュータ、タス
-    </div>
-    <div class="read-more">
-      <a href="/post/20191109-effective-java-3rd-11/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
@@ -300,8 +498,6 @@
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
@@ -316,10 +512,6 @@
           gtag('config', 'G-ZTQ37GBNHR');
         }
       </script>
-    
-  
-
-
 
 
 

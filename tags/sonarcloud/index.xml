@@ -14,7 +14,7 @@
       <link>https://takuto-n.github.io/post/20190909-sonarcloud_codebuild/</link>
       <pubDate>Mon, 09 Sep 2019 02:37:45 +0900</pubDate>
       <guid>https://takuto-n.github.io/post/20190909-sonarcloud_codebuild/</guid>
-      <description>AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。 AWS CodeBuild の環境変数 SonarCloudAccessToken に SonarCloud のアクセストークンを保持しておきます</description>
+      <description>&lt;p&gt;AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。&lt;/p&gt;&#xA;&lt;p&gt;AWS CodeBuild の環境変数 &lt;code&gt;SonarCloudAccessToken&lt;/code&gt; に SonarCloud のアクセストークンを保持しておきます。&lt;/p&gt;&#xA;&lt;p&gt;SonarCloud のアクセストークンの発行は、SonarCloud のサイトで &lt;code&gt;ユーザーアイコン &amp;gt; Settings &amp;gt; Personal access token&lt;/code&gt; から出来ます。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

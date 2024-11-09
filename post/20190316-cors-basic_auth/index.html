@@ -16,14 +16,17 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="takuto_n" /><meta name="description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認" /><meta name="keywords" content="CORS, クロスドメイン制約, BASIC認証" />
+<meta name="author" content="takuto_n" /><meta name="description" content="初めての技術系ブログです。
+ご不明な点がありましたら、お気軽にコメント欄へ記入ください。
+初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認証つきのサイトにアクセスできるのか 」について検証した結果を書きたいと思います。 検証結果としては、
+" /><meta name="keywords" content="CORS, クロスドメイン制約, BASIC認証" />
 
 
 
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.128.0 with theme even" />
+<meta name="generator" content="Hugo 0.135.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190316-cors-basic_auth/" />
@@ -41,7 +44,9 @@
 <meta property="og:url" content="https://takuto-n.github.io/post/20190316-cors-basic_auth/">
   <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta property="og:title" content="クロスドメイン制約とBASIC認証">
-  <meta property="og:description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認">
+  <meta property="og:description" content="初めての技術系ブログです。
+ご不明な点がありましたら、お気軽にコメント欄へ記入ください。
+初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認証つきのサイトにアクセスできるのか 」について検証した結果を書きたいと思います。 検証結果としては、">
   <meta property="og:locale" content="ja_jp">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -52,14 +57,18 @@
     <meta property="article:tag" content="BASIC認証">
 
   <meta itemprop="name" content="クロスドメイン制約とBASIC認証">
-  <meta itemprop="description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認">
+  <meta itemprop="description" content="初めての技術系ブログです。
+ご不明な点がありましたら、お気軽にコメント欄へ記入ください。
+初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認証つきのサイトにアクセスできるのか 」について検証した結果を書きたいと思います。 検証結果としては、">
   <meta itemprop="datePublished" content="2019-03-16T23:09:42+09:00">
   <meta itemprop="dateModified" content="2019-03-16T23:09:42+09:00">
   <meta itemprop="wordCount" content="2536">
   <meta itemprop="keywords" content="CORS,クロスドメイン制約,BASIC認証">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="クロスドメイン制約とBASIC認証">
-  <meta name="twitter:description" content="初めての技術系ブログです。 ご不明な点がありましたら、お気軽にコメント欄へ記入ください。 初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認">
+  <meta name="twitter:description" content="初めての技術系ブログです。
+ご不明な点がありましたら、お気軽にコメント欄へ記入ください。
+初回は「ドメイン X のサイトから、異なるドメイン Y の BASIC 認証つきのサイトにアクセスできるのか 」について検証した結果を書きたいと思います。 検証結果としては、">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -345,8 +354,6 @@ preflight リクエストが送られる条件については<a href="https://de
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
@@ -361,10 +368,6 @@ preflight リクエストが送られる条件については<a href="https://de
           gtag('config', 'G-ZTQ37GBNHR');
         }
       </script>
-    
-  
-
-
 
 
 
