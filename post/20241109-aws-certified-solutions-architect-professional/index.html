@@ -56,7 +56,7 @@
   <meta itemprop="description" content="AWS Certified Solutions Architect - Professional の勉強 これから資格取得に向けて学習するため、学習途中でまとめた情報をブログでまとめていきます。">
   <meta itemprop="datePublished" content="2024-11-09T11:59:23+09:00">
   <meta itemprop="dateModified" content="2024-11-09T11:59:23+09:00">
-  <meta itemprop="wordCount" content="1174">
+  <meta itemprop="wordCount" content="2569">
   <meta itemprop="keywords" content="aws,professional,cloud">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="20241109 Aws Certified Solutions Architect Professional">
@@ -134,8 +134,8 @@
         <div class="post-category">
             <a href="/categories/cloud/"> cloud </a>
             </div>
-          <span class="more-meta"> 1174 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 2569 words </span>
+          <span class="more-meta"> 6 mins read </span>
         
       </div>
     </header>
@@ -154,6 +154,16 @@
 <li>1.1. <a href="#1">ネットワーク接続戦略の設計1</a></li>
 <li>1.2. <a href="#2">ネットワークの接続戦略の設計2</a></li>
 <li>1.3. <a href="#-1">信頼性と回復力に優れたアーキテクチャの設計</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#-1">2024/11/13 学習内容</a></li>
+</ol>
+<ul>
+<li>2.1. <a href="#-1">ビジネス要件を満たす導入戦略の設計</a></li>
+<li>2.2. <a href="#-1">事業の継続性を確保するソリューションの設計</a></li>
+<li>2.3. <a href="#-1">パフォーマンス目標を満たすソリューションの設計</a></li>
 </ul>
 </li>
 </ul>
@@ -301,6 +311,218 @@
 </ul>
 </li>
 </ul>
+<h2 id="2-a-name-1a20241113-学習内容">2. <a name='-1'></a>2024/11/13 学習内容</h2>
+<p>AWS Skill Builderの以下のコースで学習</p>
+<p>Exam Prep Standard Course: AWS Certified Solutions Architect - Professional (SAP-C02) (Japanese) 日本語実写</p>
+<h3 id="21-a-name-1aビジネス要件を満たす導入戦略の設計">2.1. <a name='-1'></a>ビジネス要件を満たす導入戦略の設計</h3>
+<p>CloudFrontとLambda@Edgeを使用したトラフィックルーティングについて</p>
+<p>Lambda@Edge + CloudFrontでできること：</p>
+<ol>
+<li>リクエストの制御</li>
+</ol>
+<ul>
+<li>ビューワーリクエスト</li>
+<li>オリジンリクエスト</li>
+<li>オリジンレスポンス</li>
+<li>ビューワーレスポンス
+の4つのポイントで処理可能</li>
+</ul>
+<ol start="2">
+<li>セッション維持とv1/v2ルーティングの例：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// Lambda@Edge (Viewer Request)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">exports</span><span class="p">.</span><span class="nx">handler</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">Records</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">cf</span><span class="p">.</span><span class="nx">request</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Cookieからバージョン情報を取得
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">cookie</span> <span class="o">=</span> <span class="nx">headers</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">||</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">versionCookie</span> <span class="o">=</span> <span class="nx">cookie</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">c</span> <span class="p">=&gt;</span> <span class="nx">c</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;version=&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">versionCookie</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 既存セッションのユーザーは元のバージョンへ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">versionCookie</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;v1&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">request</span><span class="p">.</span><span class="nx">origin</span><span class="p">.</span><span class="nx">custom</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="s1">&#39;/v1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">request</span><span class="p">.</span><span class="nx">origin</span><span class="p">.</span><span class="nx">custom</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="s1">&#39;/v2&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 新規ユーザーは v2 へ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">request</span><span class="p">.</span><span class="nx">origin</span><span class="p">.</span><span class="nx">custom</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="s1">&#39;/v2&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">request</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>CloudFrontの設定：</li>
+</ol>
+<ul>
+<li>複数のオリジンの設定</li>
+<li>キャッシュ動作の設定</li>
+<li>Lambda@Edgeの関連付け</li>
+</ul>
+<p>利点：</p>
+<ul>
+<li>エッジでの高速な判断が可能</li>
+<li>グローバルな展開</li>
+<li>既存セッションの維持</li>
+<li>トラフィックの段階的な移行が可能</li>
+</ul>
+<p>注意点：</p>
+<ul>
+<li>Lambda@Edgeには実行時間制限がある</li>
+<li>関数のサイズ制限がある</li>
+<li>リージョン制限がある（us-east-1でのみ作成可能）</li>
+</ul>
+<h3 id="22-a-name-1a事業の継続性を確保するソリューションの設計">2.2. <a name='-1'></a>事業の継続性を確保するソリューションの設計</h3>
+<p>S3の既存データと新規データの別リージョンへの複製方法</p>
+<ol>
+<li>既存データの複製：
+S3バッチレプリケーション</li>
+</ol>
+<ul>
+<li>バッチ操作ジョブを作成</li>
+<li>既存オブジェクトを一括で別リージョンに複製</li>
+<li>マニフェストファイルで対象オブジェクトを指定</li>
+<li>失敗したジョブの再試行が可能</li>
+</ul>
+<ol start="2">
+<li>新規データの複製：
+S3レプリケーション（CRR: Cross-Region Replication）</li>
+</ol>
+<ul>
+<li>バケットレベルでレプリケーションルールを設定</li>
+<li>新しくアップロードされたオブジェクトを自動複製</li>
+<li>バージョニングの有効化が必要</li>
+</ul>
+<p>設定手順：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1. 送信元・送信先バケットでバージョニングを有効化
+</span></span><span class="line"><span class="cl">2. IAMロールの設定（S3レプリケーション用）
+</span></span><span class="line"><span class="cl">3. レプリケーションルールの作成
+</span></span><span class="line"><span class="cl">4. バッチレプリケーションジョブで既存データを複製
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意点：</p>
+<ul>
+<li>暗号化されたオブジェクトは追加設定が必要</li>
+<li>レプリケーションにはコストが発生</li>
+<li>バケットのバージョニングは必須</li>
+<li>削除マーカーのレプリケーションは別途設定が必要</li>
+</ul>
+<h3 id="23-a-name-1aパフォーマンス目標を満たすソリューションの設計">2.3. <a name='-1'></a>パフォーマンス目標を満たすソリューションの設計</h3>
+<p>最小レイテンシーでコンテンツを提供するためのAWSベストプラクティス</p>
+<ol>
+<li>CloudFrontの設定</li>
+</ol>
+<ul>
+<li>エッジロケーションの活用</li>
+<li>キャッシュ最適化設定</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># キャッシュ戦略</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="l">TTLの最適化</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">動的コンテンツ</span><span class="p">:</span><span class="w"> </span><span class="l">0秒</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">静的コンテンツ</span><span class="p">:</span><span class="w"> </span><span class="l">長めのTTL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="l">Originシールドの有効化</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">二次キャッシュ層の追加</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">オリジンへの負荷軽減</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Route 53の設定</li>
+</ol>
+<ul>
+<li>レイテンシーベースルーティング</li>
+<li>ヘルスチェック設定</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># ルーティングポリシー</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="l">プライマリリージョン設定</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="l">フェイルオーバー設定</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="l">複数リージョンの組み合わせ</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>地理的な最適化</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ユーザー
+</span></span><span class="line"><span class="cl">→ 最寄りのCloudFrontエッジロケーション
+</span></span><span class="line"><span class="cl">→ Route 53で最適なリージョンを選択
+</span></span><span class="line"><span class="cl">→ 最寄りのAWSリージョン
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>追加の最適化策：</li>
+</ol>
+<ul>
+<li>Lambda@Edgeの活用</li>
+<li>CloudFront Functions</li>
+<li>リージョナルエッジキャッシュ</li>
+<li>適切なオリジンの選択（S3, ALB等）</li>
+</ul>
+<p>このような構成により、グローバルでの低レイテンシーを実現できる</p>
     </div>
 
     
