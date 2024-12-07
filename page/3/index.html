@@ -120,61 +120,13 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20220323-circuit-breaker-opossum/">Circuit Breaker Opossum</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/20201222-spring-boot-exception-handler/">Exception Handling on SpringBoot</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2022-03-23 </span>
+      <span class="post-time"> 2020-12-22 </span>
       <div class="post-category">
-          <a href="/categories/node.js/"> node.js </a>
+          <a href="/categories/poc/"> poc </a>
           </div>
-        <span class="more-meta"> 3768 words </span>
-        <span class="more-meta"> 8 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>Circuit Breaker( <a href="https://www.npmjs.com/package/opossum">opossum</a> ) を使ってみたので、サーキットブレーカーの概要を説明した後、簡易実装サンプルとその実行結果について説明します。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/20220323-circuit-breaker-opossum/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20220204-node-import-absolute_path/">Node.js Import AbsolutePath</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-02-04 </span>
-      <div class="post-category">
-          <a href="/categories/node.js/"> node.js </a>
-          </div>
-        <span class="more-meta"> 490 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>Node.js(Typescript)でサーバーサイドアプリを作成する際に、絶対パスでimportするのに躓いたのでまとめておきます。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/20220204-node-import-absolute_path/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20220203-react-learning/">React Learning</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-02-03 </span>
-      <div class="post-category">
-          <a href="/categories/react/"> react </a>
-          </div>
-        <span class="more-meta"> 726 words </span>
+        <span class="more-meta"> 825 words </span>
         <span class="more-meta"> 2 mins read </span>
     </div>
   </header>
@@ -182,58 +134,254 @@
   <div class="post-content">
     <div class="post-summary">
       <h1 id="abstruct">Abstruct</h1>
-<p>Reactの初学者として、2ヶ月ほど学習したので、学習を振り返って、どのコンテンツで学べばよかったのかをまとめておきます。(随時更新予定)</p>
+<p>The three methods of exception handling in SpringBoot are described below.</p>
+<ul>
+<li>How to handle exceptions for each Controller</li>
+<li>How to handle exceptions across all Controllers</li>
+<li>How to handle exceptions by implementing ErrorController</li>
+</ul>
     </div>
     <div class="read-more">
-      <a href="/post/20220203-react-learning/" class="read-more-link">Read more...</a>
+      <a href="/post/20201222-spring-boot-exception-handler/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20220118-oauth2/">OAuth2.0について</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/20201216-springboot-manage-property/">動的プロパティの管理 on SpringBoot</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2022-01-18 </span>
+      <span class="post-time"> 2020-12-16 </span>
       <div class="post-category">
-          <a href="/categories/auth/"> auth </a>
+          <a href="/categories/poc/"> poc </a>
           </div>
-        <span class="more-meta"> 1865 words </span>
+        <span class="more-meta"> 3530 words </span>
+        <span class="more-meta"> 8 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="abstruct">Abstruct</h1>
+<p>AP基盤/業務ロジック上で使用する静的プロパティを管理する方法としては、以下があるかと思います。</p>
+<ul>
+<li>applicaiton.properties にプロパティを記載する。</li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/context/properties/ConfigurationProperties.html">@ConfigurationProperties</a> を使って、オブジェクトにプロパティ値を読み込ませる。</li>
+</ul>
+<blockquote>
+<p>参考：<a href="https://qiita.com/KevinFQ/items/bc5c3b7796bb72fa049c">Spring Bootでプロパティファイルとのバインディング方法 - Qiita</a></p>
+</blockquote>
+<p>この記事では、AP基盤/業務ロジック上で使用する<strong>動的プロパティ</strong>を<code>Map&lt;String, Object&gt;</code>として管理する方法について記載したいと思います。</p>
+<blockquote>
+<p>参考：<a href="https://qiita.com/kazuki43zoo/items/b9e07dc6c6d8a45485de">Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita</a></p>
+</blockquote>
+    </div>
+    <div class="read-more">
+      <a href="/post/20201216-springboot-manage-property/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20201110-windows-file-list/">Windowsでファイルリストを取得する方法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-10 </span>
+      <div class="post-category">
+          <a href="/categories/useful-tools/"> useful-tools </a>
+          </div>
+        <span class="more-meta"> 463 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="abstruct">Abstruct</h1>
+<p>あるディレクトリ配下のファイルリストを取得する際に、<br>
+Linuxだと<a href="https://linux.die.net/man/1/tree">tree</a>コマンドで可能です。
+Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。</p>
+<blockquote>
+<p>2022/4/1 追記<br>
+フォルダリストの場合、コマンドプロンプトで <code>tree</code> コマンドを使えばOK.<br>
+ファイルリストの場合は、以下のpowershellでも可だが、<code>tree /f</code> でもOK.<br>
+参考：<a href="https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/tree">tree | Microsoft Docs</a></p>
+</blockquote>
+    </div>
+    <div class="read-more">
+      <a href="/post/20201110-windows-file-list/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20201103-aws-app-mesh/">AWS App Meshについて調べてみた</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-03 </span>
+      <div class="post-category">
+          <a href="/categories/aws/"> aws </a>
+          </div>
+        <span class="more-meta"> 1549 words </span>
         <span class="more-meta"> 4 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>OAuth2.0について学んだことをまとめておきます。</p>
+      <h1 id="aws-app-mesh">AWS App Mesh</h1>
+<p>AWS App Meshについて概要をまとめて講義する場があったので、<br>
+簡単にAWS Black Beltを参考にまとめました。</p>
+<p>AWS App Meshのリリース日：2019/3/27</p>
     </div>
     <div class="read-more">
-      <a href="/post/20220118-oauth2/" class="read-more-link">Read more...</a>
+      <a href="/post/20201103-aws-app-mesh/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20211227-react-hooks/">React Hooks</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/20201024-grpc-java/">gRPC を使ってみた</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2021-12-27 </span>
+      <span class="post-time"> 2020-10-24 </span>
       <div class="post-category">
-          <a href="/categories/react/"> react </a>
+          <a href="/categories/poc/"> poc </a>
           </div>
-        <span class="more-meta"> 2194 words </span>
+        <span class="more-meta"> 1903 words </span>
+        <span class="more-meta"> 4 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="abstract">Abstract</h1>
+<p>半年ほど前に <a href="https://github.com/LogNet/grpc-spring-boot-starter">Spring boot starter for gRPC framework</a> を使う機会があったので、思い出しながらまとめておきます。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20201024-grpc-java/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20201024-openapi-java/">OpenAPI Generatorを使ってみた</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-10-24 </span>
+      <div class="post-category">
+          <a href="/categories/poc/"> poc </a>
+          </div>
+        <span class="more-meta"> 2126 words </span>
         <span class="more-meta"> 5 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>ReactのHooksについて、基本的な内容をまとめたので載せておきます。</p>
+      <h1 id="abstract">Abstract</h1>
+<p>半年ほど前に <a href="https://github.com/OpenAPITools/openapi-generator">OpenAPI Generator</a> を使う機会があったので、思い出しながらまとめておきます。</p>
     </div>
     <div class="read-more">
-      <a href="/post/20211227-react-hooks/" class="read-more-link">Read more...</a>
+      <a href="/post/20201024-openapi-java/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20200701-dockerfile-and-manifest/">Dockerfile と マニフェストファイル(Deployment)</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-07-01 </span>
+      <div class="post-category">
+          <a href="/categories/docker/"> docker </a>
+          </div>
+        <span class="more-meta"> 1957 words </span>
+        <span class="more-meta"> 4 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="abstract">Abstract</h1>
+<p><code>Dockerfile</code> と <code>Manifest File ( kind: Deployment )</code> を書く機会があったのでまとめておきます。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20200701-dockerfile-and-manifest/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20200614-jmeter-master-slave/">Jmeter Master-Slave構成</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-06-14 </span>
+      <div class="post-category">
+          <a href="/categories/poc/"> poc </a>
+          </div>
+        <span class="more-meta"> 3861 words </span>
+        <span class="more-meta"> 8 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="overview">Overview</h1>
+<legend>Jmeter Master-Slave Overview</legend>
+<p><img src="/img/20200614/jmeter-master-slave-on-aws.png" alt=""></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20200614-jmeter-master-slave/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20200502-memory-check-methods/">Javaプロセスのメモリチェック方法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-02 </span>
+      <div class="post-category">
+          <a href="/categories/poc/"> poc </a>
+          </div>
+        <span class="more-meta"> 1073 words </span>
+        <span class="more-meta"> 3 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="概要">概要</h1>
+<p>Javaプロセスのメモリ使用量をいろいろな方法で調査する機会あったので、まとめておきます。（内容としてはそれぞれあっさりです。）</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20200502-memory-check-methods/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20200502-thread-init-at-process-startup2/">SpringBootアプリケーション起動直後にスレッドを初期化する方法②</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-02 </span>
+      <div class="post-category">
+          <a href="/categories/poc/"> poc </a>
+          </div>
+        <span class="more-meta"> 875 words </span>
+        <span class="more-meta"> 2 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="overview">Overview</h1>
+<legend>スレッド初期化のシーケンス図</legend>
+<p><img src="/img/20200502/thread-init-flow.png" alt=""></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20200502-thread-init-at-process-startup2/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

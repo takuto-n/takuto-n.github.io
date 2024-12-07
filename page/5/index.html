@@ -120,146 +120,384 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20201222-spring-boot-exception-handler/">Exception Handling on SpringBoot</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/20191109-effective-java-3rd-7/">Effective Java 3rd [Chapter 7] - ラムダ式とストリーム</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-12-22 </span>
+      <span class="post-time"> 2019-11-25 </span>
       <div class="post-category">
-          <a href="/categories/poc/"> poc </a>
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
           </div>
-        <span class="more-meta"> 825 words </span>
-        <span class="more-meta"> 2 mins read </span>
+        <span class="more-meta"> 7365 words </span>
+        <span class="more-meta"> 15 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>The three methods of exception handling in SpringBoot are described below.</p>
-<ul>
-<li>How to handle exceptions for each Controller</li>
-<li>How to handle exceptions across all Controllers</li>
-<li>How to handle exceptions by implementing ErrorController</li>
-</ul>
+      <h1 id="ラムダ式とストリーム">ラムダ式とストリーム</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#42">項目 42 匿名クラスよりもラムダ式を選ぶ</a></li>
+<li><a href="#43">項目 43 ラムダよりもメソッド参照を選ぶ</a></li>
+<li><a href="#44">項目 44 標準の関数型インタフェースを使う</a></li>
+<li><a href="#45">項目 45 ストリームを注意して使う</a></li>
+<li><a href="#46">項目 46 ストリームで副作用のない関数を選ぶ</a></li>
+<li><a href="#47StreamCollection">項目 47 戻り値型として Stream よりも Collection を選ぶ</a></li>
+<li><a href="#48">項目 48 ストリームを並列化するときは注意を払う</a></li>
+<li><a href="#URL">参考 URL</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h1 id="effective-java-3rd-勉強会1129">Effective Java 3rd 勉強会(11/29)</h1>
+<p>日時: 2019/11/29 14:00-14:45
+参加者(敬称略): 則兼、岩崎、倉元<br>
+以下、内容。</p>
     </div>
     <div class="read-more">
-      <a href="/post/20201222-spring-boot-exception-handler/" class="read-more-link">Read more...</a>
+      <a href="/post/20191109-effective-java-3rd-7/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20201216-springboot-manage-property/">動的プロパティの管理 on SpringBoot</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/20191109-effective-java-3rd-6/">Effective Java 3rd [Chapter 6] - enum とアノテーション</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-12-16 </span>
+      <span class="post-time"> 2019-11-09 </span>
       <div class="post-category">
-          <a href="/categories/poc/"> poc </a>
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
           </div>
-        <span class="more-meta"> 3530 words </span>
-        <span class="more-meta"> 8 mins read </span>
+        <span class="more-meta"> 4515 words </span>
+        <span class="more-meta"> 10 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>AP基盤/業務ロジック上で使用する静的プロパティを管理する方法としては、以下があるかと思います。</p>
+      <h1 id="enum-とアノテーション">enum とアノテーション</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#34intenum">項目 34 int 定数の代わりに enum を使う</a></li>
+<li><a href="#35">項目 35 序数の代わりにインスタンスフィールドを使う</a></li>
+<li><a href="#36EnumSet">項目 36 ビットフィールドの代わりに EnumSet を使う</a></li>
+<li><a href="#37EnumMap">項目 37 序数インデックスの代わりに EnumMap を使う</a></li>
+<li><a href="#38enum">項目 38 拡張可能な enum をインタフェースで模倣する</a></li>
+<li><a href="#39">項目 39 命名パターンよりアノテーションを選ぶ</a></li>
+<li><a href="#40Override">項目 40 常に Override アノテーションを使う</a></li>
+<li><a href="#41">項目 41 型を定義するためにマーカーインタフェースを使う</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name34intenuma項目-34-int-定数の代わりに-enum-を使う">1. <a name='34intenum'></a>項目 34 int 定数の代わりに enum を使う</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
 <ul>
-<li>applicaiton.properties にプロパティを記載する。</li>
-<li><a href="https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/context/properties/ConfigurationProperties.html">@ConfigurationProperties</a> を使って、オブジェクトにプロパティ値を読み込ませる。</li>
+<li><code>int enum</code>パターン(<code>int</code>定数)は使わないでおきましょう。</li>
+<li><code>enum</code>を使いましょう。
+<ul>
+<li>単に定数として使う。</li>
+<li>定数に対するメソッドが必要であれば、定数固有メソッド</li>
+<li>複数の定数に対して共通のメソッドが必要であれば、戦略<code>enum</code>パターン</li>
 </ul>
-<blockquote>
-<p>参考：<a href="https://qiita.com/KevinFQ/items/bc5c3b7796bb72fa049c">Spring Bootでプロパティファイルとのバインディング方法 - Qiita</a></p>
-</blockquote>
-<p>この記事では、AP基盤/業務ロジック上で使用する<strong>動的プロパティ</strong>を<code>Map&lt;String, Object&gt;</code>として管理する方法について記載したいと思います。</p>
-<blockquote>
-<p>参考：<a href="https://qiita.com/kazuki43zoo/items/b9e07dc6c6d8a45485de">Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita</a></p>
-</blockquote>
+</li>
+</ul>
+<h3 id="12-a-nameintenumaint-enumパターンの欠点">1.2. <a name='intenum'></a><code>int enum</code>パターンの欠点</h3>
+<p>以下の欠点がある。</p>
     </div>
     <div class="read-more">
-      <a href="/post/20201216-springboot-manage-property/" class="read-more-link">Read more...</a>
+      <a href="/post/20191109-effective-java-3rd-6/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20201110-windows-file-list/">Windowsでファイルリストを取得する方法</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/20191103-effective-java-3rd-5/">Effective Java 3rd [Chapter 5] - ジェネリクス</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-11-10 </span>
+      <span class="post-time"> 2019-11-03 </span>
       <div class="post-category">
-          <a href="/categories/useful-tools/"> useful-tools </a>
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
           </div>
-        <span class="more-meta"> 463 words </span>
+        <span class="more-meta"> 6636 words </span>
+        <span class="more-meta"> 14 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="ジェネリクス">ジェネリクス</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#26">項目 26 原型を使わない</a></li>
+<li><a href="#27">項目 27 無検査警告を取り除く</a></li>
+<li><a href="#28">項目 28 配列よりリストを選ぶ</a></li>
+<li><a href="#29">項目 29 ジェネリック型を使う</a></li>
+<li><a href="#30">項目 30 ジェネリックメソッドを使う</a></li>
+<li><a href="#31API">項目 31 API の柔軟性向上のために境界ワイルドカードを使う</a></li>
+<li><a href="#32">項目 32 ジェネリックと可変長引数を注意して組み合わせる</a></li>
+<li><a href="#33">項目 33 型安全な異種コンテナを検討する</a></li>
+<li><a href="#URL">参考 URL</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name26a項目-26-原型を使わない">1. <a name='26'></a>項目 26 原型を使わない</h2>
+<ul>
+<li>Java 1.4 までジェネリクスがなかった。</li>
+<li>Java 5 でジェネリクスが登場した。</li>
+</ul>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<p>ジェネリクスの型パラメータが指定できるときは必ず指定しましょう。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20191103-effective-java-3rd-5/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20191006-effective-java-3rd-4/">Effective Java 3rd [Chapter 4] - クラスとインタフェース</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-10-06 </span>
+      <div class="post-category">
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+          </div>
+        <span class="more-meta"> 11553 words </span>
+        <span class="more-meta"> 24 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="クラスとインタフェース">クラスとインタフェース</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#15">項目 15 クラスとメンバーへのアクセス可能性を最小限にする</a></li>
+<li><a href="#16publicpublic">項目 16 public のクラスでは、public のフィールドではなく、アクセッサーメソッドを使う</a></li>
+<li><a href="#17">項目 17 可変性を最小限にする</a></li>
+<li><a href="#18">項目 18 継承よりコンポジションを選ぶ</a></li>
+<li><a href="#19">項目 19 継承のために設計および文書化する、でなければ継承を禁止する</a></li>
+<li><a href="#20">項目 20 抽象クラスよりインタフェースを選ぶ</a></li>
+<li><a href="#21">項目 21 将来のためにインタフェースを選ぶ</a></li>
+<li><a href="#22">項目 22 型を定義するためだけにインタフェースを使う</a></li>
+<li><a href="#23">項目 23 タグ付クラスよりクラス階層を選ぶ</a></li>
+<li><a href="#24staticstatic">項目 24 非 static のメンバークラスより static のメンバークラスを選ぶ</a></li>
+<li><a href="#25">項目 25 ソースファイルを単一のトップレベルのクラスに限定する</a></li>
+<li><a href="#URL">参考 URL</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name15a項目-15-クラスとメンバーへのアクセス可能性を最小限にする">1. <a name='15'></a>項目 15 クラスとメンバーへのアクセス可能性を最小限にする</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<ul>
+<li>常にアクセス可能性をできる限り小さくするべき</li>
+<li>public のクラスは public のフィールドを持つべきではない</li>
+<li>public static final のフィールドが配列の場合、その配列の内部も不変であることを保証するべき</li>
+</ul>
+<h3 id="12-a-name-1a常にアクセス可能性をできる限り小さくするべき">1.2. <a name='-1'></a>常にアクセス可能性をできる限り小さくするべき</h3>
+<p>情報秘匿(カプセル化)をすると以下の利点が得られるから。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20191006-effective-java-3rd-4/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20190923-useful-tools/">Useful tools</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-09-23 </span>
+      <div class="post-category">
+          <a href="/categories/useful-tools/"> useful tools </a>
+          </div>
+        <span class="more-meta"> 338 words </span>
         <span class="more-meta"> 1 min read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>あるディレクトリ配下のファイルリストを取得する際に、<br>
-Linuxだと<a href="https://linux.die.net/man/1/tree">tree</a>コマンドで可能です。
-Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。</p>
-<blockquote>
-<p>2022/4/1 追記<br>
-フォルダリストの場合、コマンドプロンプトで <code>tree</code> コマンドを使えばOK.<br>
-ファイルリストの場合は、以下のpowershellでも可だが、<code>tree /f</code> でもOK.<br>
-参考：<a href="https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/tree">tree | Microsoft Docs</a></p>
-</blockquote>
+      <p>少しずつ便利だなぁと思ったものを追記していきます。</p>
+<h2 id="複数人でのドキュメント管理">複数人でのドキュメント管理</h2>
+<h3 id="結論">結論</h3>
+<p>複数人でのドキュメント管理になると、このご時世 Git を使うのが基本かと思います。
+(ファイルサーバなどは前のバージョンが管理しづらい。)</p>
     </div>
     <div class="read-more">
-      <a href="/post/20201110-windows-file-list/" class="read-more-link">Read more...</a>
+      <a href="/post/20190923-useful-tools/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20201103-aws-app-mesh/">AWS App Meshについて調べてみた</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/20190921-effective-java-3rd-3/">Effective Java 3rd [Chapter 3] - すべてのオブジェクトに共通のメソッド</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-11-03 </span>
+      <span class="post-time"> 2019-09-21 </span>
       <div class="post-category">
-          <a href="/categories/aws/"> aws </a>
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
           </div>
-        <span class="more-meta"> 1549 words </span>
-        <span class="more-meta"> 4 mins read </span>
+        <span class="more-meta"> 3478 words </span>
+        <span class="more-meta"> 7 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="aws-app-mesh">AWS App Mesh</h1>
-<p>AWS App Meshについて概要をまとめて講義する場があったので、<br>
-簡単にAWS Black Beltを参考にまとめました。</p>
-<p>AWS App Meshのリリース日：2019/3/27</p>
+      <h1 id="すべてのオブジェクトに共通のメソッド">すべてのオブジェクトに共通のメソッド</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#10equalsoverridegeneralcontracts">項目 10 equals の override は一般契約（general contracts）に従うべし</a></li>
+<li><a href="#11equalshashcode">項目 11 equals をオーバーライドする場合は hashcode もオーバーライドせよ</a></li>
+<li><a href="#12toString">項目 12 常に toString をオーバーライドせよ</a></li>
+<li><a href="#13clone">項目 13 clone をオーバーライドするときは注意せよ</a></li>
+<li><a href="#14Comparable">項目 14 Comparable を実装することを考慮せよ</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name10equalsoverridegeneralcontractsa項目-10-equals-の-override-は一般契約general-contractsに従うべし">1. <a name='10equalsoverridegeneralcontracts'></a>項目 10 equals の override は一般契約（general contracts）に従うべし</h2>
+<h3 id="11-a-nameaどういう時にオーバーライドする必要があるのか">1.1. <a name=''></a>どういう時にオーバーライドする必要があるのか？</h3>
+<p><em>クラスが単なるオブジェクトの同一性とは異なる論理的等価性という概念を持っていて、他のインスタンスと比較する必要があるとき</em></p>
     </div>
     <div class="read-more">
-      <a href="/post/20201103-aws-app-mesh/" class="read-more-link">Read more...</a>
+      <a href="/post/20190921-effective-java-3rd-3/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20201024-grpc-java/">gRPC を使ってみた</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/20190921-effective-java-3rd-2/">Effective Java 3rd [Chapter 2] - オブジェクトの生成と消滅</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-10-24 </span>
+      <span class="post-time"> 2019-09-21 </span>
       <div class="post-category">
-          <a href="/categories/poc/"> poc </a>
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
           </div>
-        <span class="more-meta"> 1903 words </span>
-        <span class="more-meta"> 4 mins read </span>
+        <span class="more-meta"> 4815 words </span>
+        <span class="more-meta"> 10 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="abstract">Abstract</h1>
-<p>半年ほど前に <a href="https://github.com/LogNet/grpc-spring-boot-starter">Spring boot starter for gRPC framework</a> を使う機会があったので、思い出しながらまとめておきます。</p>
+      <h1 id="オブジェクトの生成と消滅">オブジェクトの生成と消滅</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#1static">項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する</a></li>
+<li><a href="#2">項目 2 数多くのコンストラクタパラメータに直面した時にはビルダーパターンを検討する。</a></li>
+<li><a href="#3privateenum">項目 3 private のコンストラクタか enum 型でシングルトン特性を強制する</a></li>
+<li><a href="#4private">項目 4 private のコンストラクタでインスタンス化不可能を強制する</a></li>
+<li><a href="#5">項目 5 資源を直接結び付けるよりも依存性注入を選ぶ</a></li>
+<li><a href="#6">項目 6 不必要なオブジェクトの生成を避ける</a></li>
+<li><a href="#7">項目 7 廃れたオブジェクト参照を取り除く</a></li>
+<li><a href="#8finalizercleaner">項目 8 finalizer と cleaner の使用は避けるべし</a></li>
+<li><a href="#9try-finallytry-with-resources">項目 9 try-finally よりも try-with-resources を使うべし</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name1statica項目-1-コンストラクタの代わりに-static-ファクトリーメソッドを検討する">1. <a name='1static'></a>項目 1 コンストラクタの代わりに static ファクトリーメソッドを検討する</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<p>コンストラクタの代わりに static ファクトリーメソッドを使用すると様々なメリットがある。
+そのメリットが必要ない時はコンストラクタを使用すればよい。</p>
     </div>
     <div class="read-more">
-      <a href="/post/20201024-grpc-java/" class="read-more-link">Read more...</a>
+      <a href="/post/20190921-effective-java-3rd-2/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20190914-codebuild_mattermost/">AWS CodebuildからMattermostへの通知</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-09-14 </span>
+      <div class="post-category">
+          <a href="/categories/cicd/"> cicd </a>
+          </div>
+        <span class="more-meta"> 1005 words </span>
+        <span class="more-meta"> 3 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>AWS CodeBuild から Mattermost へ通知させる機会があったので、その方法についての備忘録として残しておきます。</p>
+<p>AWS CodeBuild の環境変数 <code>MattermostWebhookURL</code> に<code>Mattermost</code>の<code>Incomming Webhook URL</code>を保持しておきます。また、IAM から CodeBuild のロールに <code>AmazonSSMReadOnlyAccess</code>の権限を与えてください。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20190914-codebuild_mattermost/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20190909-sonarcloud_codebuild/">AWS CodeBuildとSonarCloudの連携方法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-09-09 </span>
+      <div class="post-category">
+          <a href="/categories/cicd/"> cicd </a>
+          </div>
+        <span class="more-meta"> 408 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>AWS CodeBuild と SonarCloud を連携させる機会があったので、その方法についての備忘録として残しておきます。</p>
+<p>AWS CodeBuild の環境変数 <code>SonarCloudAccessToken</code> に SonarCloud のアクセストークンを保持しておきます。</p>
+<p>SonarCloud のアクセストークンの発行は、SonarCloud のサイトで <code>ユーザーアイコン &gt; Settings &gt; Personal access token</code> から出来ます。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20190909-sonarcloud_codebuild/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20190809-architectiong-on-aws_memo/">Architecting on AWSの参加メモ</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-08-09 </span>
+      <div class="post-category">
+          <a href="/categories/seminar/"> seminar </a>
+          </div>
+        <span class="more-meta"> 85 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>先日、Architecting on AWS に参加したので、<a href="https://drive.google.com/file/d/1UVGxRcfKq2XBBWpN66b8ZQjJuyXirCkH/preview">参加メモ</a>を載せておきます。</p>
+<p>クラウド繋がりということで、Cloud Native Tokyo 2019 で紹介されていた<a href="https://drive.google.com/file/d/1kNd9Au2vWr5H1T-Bmz957qdLl_SV5aa4/preview">Trail Map</a>も載せておきます。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20190809-architectiong-on-aws_memo/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

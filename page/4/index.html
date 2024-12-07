@@ -120,121 +120,870 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20211204-graphql-basic/">GraphQL Language Specifications</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/20200425-thread-init-at-process-startup/">SpringBootアプリケーション起動直後にスレッドを初期化する方法</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2021-12-04 </span>
-      <div class="post-category">
-          <a href="/categories/graphql/"> graphql </a>
-          </div>
-        <span class="more-meta"> 887 words </span>
-        <span class="more-meta"> 2 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>GraphQLの学習にて、基本的な言語仕様をまとめたので載せておきます。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/20211204-graphql-basic/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20210907-google-cloud-storage-and-compute/">Storage and Compute Options on Google Cloud</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-09-07 </span>
-      <div class="post-category">
-          <a href="/categories/gcp/"> gcp </a>
-          </div>
-        <span class="more-meta"> 61 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>Google Cloudの学習にて、ストレージサービスおよびAppサービスについてまとめたので、載せておきます。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/20210907-google-cloud-storage-and-compute/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20210315-at-coder/">第一回 アルゴリズム実技検定(AtCoder)</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-03-15 </span>
-      <div class="post-category">
-          <a href="/categories/competitive-programming/"> competitive-programming </a>
-          </div>
-        <span class="more-meta"> 4242 words </span>
-        <span class="more-meta"> 9 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p><a href="https://atcoder.jp/contests/past201912-open">第一回 アルゴリズム実技検定 過去問 - AtCoder</a> の問題AからHまでをJavaで解いてみました。（問題はAからOまでありますが。。。）</p>
-<p>また、より少ないコード量で、、というよりも、そこまで時間はかけずに、私なりに素直な考え方のコードで解きました。(少し冗長なところはありますが、ご了承ください。)</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/20210315-at-coder/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20210113-springboot-app-create-configmap/">Springboot-App can create/replace Configmap.</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-01-13 </span>
+      <span class="post-time"> 2020-04-25 </span>
       <div class="post-category">
           <a href="/categories/poc/"> poc </a>
           </div>
-        <span class="more-meta"> 1103 words </span>
+        <span class="more-meta"> 1434 words </span>
         <span class="more-meta"> 3 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを変更することができたので、その方法をまとめておきます。</p>
+      <h1 id="overview">Overview</h1>
+<legend>スレッド初期化のシーケンス図</legend>
+<p><img src="/img/20200425/thread-init-flow.png" alt=""></p>
     </div>
     <div class="read-more">
-      <a href="/post/20210113-springboot-app-create-configmap/" class="read-more-link">Read more...</a>
+      <a href="/post/20200425-thread-init-at-process-startup/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20210107-springboot-app-read-configmap/">Springboot-App can pulll the Configmap information.</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/20200408-use-kubernetes-on-gcp/">Using Kubernetes on GCP</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2021-01-07 </span>
+      <span class="post-time"> 2020-04-07 </span>
       <div class="post-category">
-          <a href="/categories/poc/"> poc </a>
+          <a href="/categories/docker/"> docker </a>
           </div>
-        <span class="more-meta"> 2355 words </span>
+        <span class="more-meta"> 882 words </span>
+        <span class="more-meta"> 2 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p><img src="/img/20200408/user-k8s-on-gcp.png" alt=""></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20200408-use-kubernetes-on-gcp/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20200407-jnr-on-docker/">Using JNR on Container</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-07 </span>
+      <div class="post-category">
+          <a href="/categories/docker/"> docker </a>
+          </div>
+        <span class="more-meta"> 1321 words </span>
+        <span class="more-meta"> 3 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p><img src="/img/20200407/using-jnr-on-docker.png" alt=""></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20200407-jnr-on-docker/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20200405-docker-springboot_to_db/">Springboot on Container with jib</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-05 </span>
+      <div class="post-category">
+          <a href="/categories/docker/"> docker </a>
+          </div>
+        <span class="more-meta"> 1656 words </span>
+        <span class="more-meta"> 4 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p><img src="/img/20200405/docker-springboot_db.png" alt=""></p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20200405-docker-springboot_to_db/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20191109-effective-java-3rd-12/">Effective Java 3rd [Chapter 12] - シリアライズ</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-03-07 </span>
+      <div class="post-category">
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+          </div>
+        <span class="more-meta"> 7378 words </span>
+        <span class="more-meta"> 15 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="シリアライズ">シリアライズ</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#85Java">項目 85 Java のシリアライズよりも代替手段を選ぶ</a></li>
+<li><a href="#86Serializable">項目 86 Serializable を細心の注意を払って実装する</a></li>
+<li><a href="#87">項目 87 カスタムシリアライズ形式の使用を検討する</a></li>
+<li><a href="#88readObject">項目 88 防御的に readObject メソッドを書く</a></li>
+<li><a href="#89readResolveenum">項目 89 インスタンス制御に対しては、readResolve より enum 型を選ぶ</a></li>
+<li><a href="#90">項目 90 シリアライズされたインスタンスの代わりに、シリアライズ・プロキシを検討する</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name85javaa項目-85-java-のシリアライズよりも代替手段を選ぶ">1. <a name='85Java'></a>項目 85 Java のシリアライズよりも代替手段を選ぶ</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<ul>
+<li>シリアライズは使うべきでない
+<ul>
+<li>シリアライズは脆弱でリモートコード実行(RCE)やDoS攻撃などの攻撃の弱点となってしまうから</li>
+</ul>
+</li>
+<li>代替手段としてはJSONやProtobufなどのような他の手段を使うべし
+<ul>
+<li>データフォーマットが定まっていてシリアライズよりましだから？
+<ul>
+<li>XML bombもある。Jsonハイジャックもある。</li>
+<li>ユーザコードを叩くかどうかの違い？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>シリアライズが避けられない場合でも、信頼できないデータはデシリアライズするべきでない
+<ul>
+<li>信頼できないデータは攻撃対象となっている可能性があるから</li>
+</ul>
+</li>
+<li>シリアライズが避けられないかつ信頼できないデータをデシリアライズしなければならない場合は、フィルタリングをするべし</li>
+</ul>
+<h3 id="12-a-name-1aシリアライズの脆弱性">1.2. <a name='-1'></a>シリアライズの脆弱性</h3>
+<ul>
+<li>シリアライズは脆弱である
+<ul>
+<li>理由
+<ul>
+<li><a href="https://codezine.jp/article/detail/9150">Apache Commons Collectionsの脆弱性解説 (1/3)：CodeZine（コードジン）</a></li>
+<li><a href="https://blog.tokumaru.org/2017/09/introduction-to-object-injection.html">安全でないデシリアライゼーション(Insecure Deserialization)入門 | 徳丸浩の日記</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ガジェット、ガジェットチェーンによって任意のネイティブコードが実行できてしまうことがある
+<ul>
+<li>Javaのシリアライズ可能な型を持つメソッドをガジェット、ガジェットの組み合わせをガジェットチェーンとよぶ</li>
+<li>実際にガジェットチェーンを用いて任意のネイティブコードが実行する実証実験された
+<ul>
+<li><a href="https://blog.trendmicro.co.jp/archives/12577">主要Javaアプリケーションサーバに影響するJavaライブラリの脆弱性を正しく理解する | トレンドマイクロ セキュリティブログ</a></li>
+<li><a href="https://github.com/frohoff/ysoserial">GitHub - frohoff/ysoserial: A proof-of-concept tool for generating payloads that exploit unsafe Java object deserialization.</a>
+<ul>
+<li>Spring 4.1.4でも実証実験された</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>デシリアライゼーションボムによってDoS攻撃ができてしまうことがある
+<ul>
+<li>デシリアライゼーションボムは、インスタンスのディシリアライズをする場合に、そのフィールドや要素のハッシュコードを計算する必要があることを悪用して、例えば深い入れ子構造になっているHashSetインスタンスなどを作成してデシリアライズさせることで、莫大な計算時間を掛けさせる攻撃手法</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-a-name-1aデシリアライズ時のフィルタリング">1.3. <a name='-1'></a>デシリアライズ時のフィルタリング</h3>
+<ul>
+<li>デシリアライズ時のフィルタリングには<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/ObjectInputFilter.html">ObjectInputFilter (Java SE 11 &amp; JDK 11 )</a>を使うべし
+<ul>
+<li>ホワイトリスト</li>
+<li>Java 9から導入されたが、6,7,8にもバックポートされている
+<ul>
+<li><a href="https://www.infoq.com/jp/news/2017/03/deserialise-filter-backport/">オブジェクトのデシリアライゼーションフィルタがJava 9からバックポートされる</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="14-a-name-1a余談">1.4. <a name='-1'></a>余談</h3>
+<ul>
+<li>シリアライズの扱いずらさ
+<ul>
+<li>送信元と送信先が同じオブジェクトを持たなければならない</li>
+</ul>
+</li>
+<li>どういう局面でシリアライズを使うでしょうか
+<ul>
+<li>セッション</li>
+<li>システム内通信
+<ul>
+<li>EJB(Enterprise Java Bean)
+<ul>
+<li>EJBとは？という方は<a href="https://www.atmarkit.co.jp/fjava/keyword/jkey/jkey03.html">こちら</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-a-name86serializablea項目-86-serializable-を細心の注意を払って実装する">2. <a name='86Serializable'></a>項目 86 Serializable を細心の注意を払って実装する</h2>
+<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>Serializableインターフェースは軽く考えて実装するべきではない
+<ul>
+<li>以下の3つのコストがかかってしまうから
+<ul>
+<li>リリース後のクラスの実装の変更に対する柔軟性の低下</li>
+<li>バグやセキュリティホールの可能性の増大</li>
+<li>テストの負荷の増大</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>継承するために設計されたクラスとインタフェースではSerializableを実装・拡張するべきでない
+<ul>
+<li>サブクラスの実装に手間がかかるから</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-a-nameserializable3aserializable実装に伴う3つのコスト">2.2. <a name='Serializable3'></a>Serializable実装に伴う3つのコスト</h3>
+<h4 id="221-a-name-1aリリース後のクラスの実装の変更に対する柔軟性の低下">2.2.1. <a name='-1'></a>リリース後のクラスの実装の変更に対する柔軟性の低下</h4>
+<ul>
+<li>Serializableを実装したクラスを一旦リリースしてしまうと、その実装を変更することは容易ではない
+<ul>
+<li>クラスをシリアライズ可能にすると、そのシリアライズ形式がクラスの公開APIの一部となり、シリアライズ形式を永久にサポートし続ける必要があるから
+<ul>
+<li>デフォルトのシリアライズ形式の場合は、 privateフィールドも公開されてしまう</li>
+</ul>
+</li>
+<li>serialVersionUIDを明示的に指定しない場合は、コンパイラはクラス名やクラスが実装しているインタフェース名、publicとprotectedのメンバからserialVersionUIDを生成されるするので、メソッドを一つ追加しただけでserialVersionUIDが変更され、互換性が失われるから。
+<ul>
+<li>javaバージョンによって生成されるserialVersionUIDが違う可能性あり。だから指定しましょう</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="222-a-name-1aバグやセキュリティホールの可能性の増大">2.2.2. <a name='-1'></a>バグやセキュリティホールの可能性の増大</h4>
+<ul>
+<li>バグの可能性が増大する理由は、デシリアライズ時のオブジェクトは通常のコンストラクタを使わずに生成されるため、コンストラクタで保証される不変式が保証されないから。</li>
+<li>セキュリティホールについては、項目85参照</li>
+</ul>
+<h4 id="223-a-name-1aテストの負荷の増大">2.2.3. <a name='-1'></a>テストの負荷の増大</h4>
+<ul>
+<li>新たなリリースのインスタンスをシリアライズし、古いリリースのデシリアライズ処理でインスタンスが復元できるを確認する必要がある。 また逆に、古いリリースのインスタンスをシリアライズし、新しいリリースのデシリアライズ処理で復元できるかも確認する必要がある</li>
+<li>これらのテストは、新旧のインスタンス間でシリアライズ/デシリアライズできるかというバイナリ互換性に加えて、 動作が意図しているものかどうかというセマンティクス互換性も検査する必要がある
+<ul>
+<li>互換の一覧
+<ul>
+<li>ソース互換
+<ul>
+<li>ソースをコンパイルできる</li>
+</ul>
+</li>
+<li>バイナリ互換
+<ul>
+<li>バイナリを実行できる</li>
+</ul>
+</li>
+<li>動作の互換性（≒セマンティクス互換性）
+<ul>
+<li>動作が同じ</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="224-a-nameserializablea継承するために設計されたクラスインターフェースに対するserializable実装">2.2.4. <a name='Serializable'></a>継承するために設計されたクラス・インターフェースに対するSerializable実装</h4>
+<ul>
+<li>継承するために設計されたクラスとインタフェースではSerializableを実装・拡張するべきでない
+<ul>
+<li>サブクラスの実装に手間がかかるから</li>
+</ul>
+</li>
+<li>ただし上記には例外があり、「例えば、全ての参加者がSerializableを実装しなければならない何らかのフレームワークに参加するためにクラスやインターフェースが主に存在している場合」は破ってもいい
+<ul>
+<li>例えば、ThrowableはSerializableを実装しているので、リモートメソッド呼び出し(RMI)からの例外を、クライアントに渡せる</li>
+<li>Component、HttpServletもSerializableを実装している</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-a-name87a項目-87-カスタムシリアライズ形式の使用を検討する">3. <a name='87'></a>項目 87 カスタムシリアライズ形式の使用を検討する</h2>
+<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+<p>Javaにおけるシリアライズの実装方法は2通りある。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20191109-effective-java-3rd-12/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20191109-effective-java-3rd-11/">Effective Java 3rd [Chapter 11] - 並行性</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-02-22 </span>
+      <div class="post-category">
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+          </div>
+        <span class="more-meta"> 9161 words </span>
+        <span class="more-meta"> 19 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="並行性">並行性</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#78">項目 78 共有された可変データへのアクセスを同期する</a></li>
+<li><a href="#79">項目 79 過剰な同期は避ける</a></li>
+<li><a href="#80">項目 80 スレッドよりもエグゼキュータ、タスク、ストリームを選ぶ</a></li>
+<li><a href="#81waitnotify">項目 81 wait と notify よりも並行処理ユーティリティを選ぶ</a></li>
+<li><a href="#82">項目 82 スレッド安全性を文書化する</a></li>
+<li><a href="#83">項目 83 遅延初期化を注意して使う</a></li>
+<li><a href="#84">項目 84 スレッドスケジューラに依存しない</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name78a項目-78-共有された可変データへのアクセスを同期する">1. <a name='78'></a>項目 78 共有された可変データへのアクセスを同期する</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<ul>
+<li>synchronizedは同期化を行い、アトミック性と可視性を保証する</li>
+<li>複数スレッドが可変データを共有する場合には、そのデータを読み書きするスレッドは同期を行わなければならない
+<ul>
+<li>同期を行わなければ、あるスレッドで行われた変更が他のスレッドから見えることが保証されないから</li>
+</ul>
+</li>
+<li>volatileはアトミック性は保証しないが、可視性を保証する</li>
+<li>スレッド間通信だけが必要で、相互排他が必要なければ、volatileを使用できるが、正しく使うのは難しい
+<ul>
+<li>相互排他が必要かどうかを判断するのが難しいから</li>
+</ul>
+</li>
+<li>可変データの共有はなるべく回避すべき
+<ul>
+<li>扱いが難しいから</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-a-name-1aアトミック性">1.2. <a name='-1'></a>アトミック性</h3>
+<ul>
+<li>1つのスレッドだけがある時点で1つのメソッドやブロックを実行する性質</li>
+<li>下のようにsynchronizedを使うと、メソッドや処理をアトミックにできる</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">//アトミックな処理</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="13-a-name-1a可視性">1.3. <a name='-1'></a>可視性</h3>
+<ul>
+<li>あるスレッドから変数に書き込んだ値が、別スレッドから観測できる性質</li>
+<li>下記のクラスのバックグラウンドスレッドは停止するか？</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StopThread1</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">stopRequested</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">backgroundThead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">stopRequested</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">backgroundThead</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">stopRequested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>バックグラウンドスレッドは無限ループする可能性がある
+<ul>
+<li>バックグラウンドスレッドからメインスレッドのbackgroundTheadに書き込んだ値が見えるかが保証されないから</li>
+</ul>
+</li>
+<li>下記のクラスのバックグラウンドスレッドは停止するか？</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StopThread2</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">stopRequested</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">requestStop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">stopRequested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">stopRequested</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">stopRequested</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">backgroundThead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">stopRequested</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">backgroundThead</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">requestStop</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>バックグラウンドスレッドは停止することが保証される
+<ul>
+<li>読み込み操作と書き込み操作の両方が同期されていて、バックグラウンドスレッドからメインスレッドのbackgroundTheadに書き込んだ値が見えることが保証されるから</li>
+</ul>
+</li>
+</ul>
+<h3 id="14-a-namevolatileavolatile">1.4. <a name='volatile'></a>volatile</h3>
+<ul>
+<li>volatileはアトミック性は保証しないが、可視性を保証する</li>
+<li>先ほどのStopThread2クラスはvolatileを使うことで、下記のようにより簡単なコードにできる
+<ul>
+<li>synchronizedを相互排他のためではなく、スレッド間通信のためだけにしようしているから</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StopThread3</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">stopRequested</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">backgroundThead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">stopRequested</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">backgroundThead</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">stopRequested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>volatileは「アトミックのように見えて実はアトミックではない」という操作に対して使わないようにする注意が必要
+<ul>
+<li>volatileはアトミック性を保証しないから</li>
+<li>例えば、下記のgenerateSerialNumber()を複数のスレッドから呼び出したら、違う値が帰ってくるか？</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nextSerialNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">generateSerialNumber</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nextSerialNumber</span><span class="o">++</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>違う値が帰ってくることは保証されない
+<ul>
+<li>インクリメントは「アトミックに見えるが実はアトミックでない操作」だから。インクリメントは、値の読み出しと古い値に1を加えた値を書き戻す2つの操作を行う。スレッドが古い値を読み出して新たな値を書き戻す間に、別のスレッドがフィールドを読み出すと、最初のスレッドと同じ値が見えて、同じ値を返してしまう</li>
+</ul>
+</li>
+<li>nextSerialNumber + 1 はまずどこに書き込まれているか？
+<ul>
+<li>スタック上の一時領域</li>
+<li>メモリは参照と書き込みだけしかできない。計算できない。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="15-a-name-1a可変データの共有の回避">1.5. <a name='-1'></a>可変データの共有の回避</h3>
+<ul>
+<li>今までの議論のように、可変データへの共有は難しいので、回避できるのであれば回避すべき</li>
+<li>回避には2つの方法がある
+<ul>
+<li>不変データを共有する</li>
+<li>可変データを共有しない(可変データは単一スレッドで使う)</li>
+</ul>
+</li>
+<li>上記の方針を採用した場合は文書化することが重要
+<ul>
+<li>プログラムが発展する際に方針が維持されるから</li>
+</ul>
+</li>
+<li>AtomicBooleanのようなライブラリを使うと良い。</li>
+</ul>
+<h2 id="2-a-name79a項目-79-過剰な同期は避ける">2. <a name='79'></a>項目 79 過剰な同期は避ける</h2>
+<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<ul>
+<li>同期された領域内では、できる限り少ない処理をするべき
+<ul>
+<li>デッドロックやデータ破壊、パフォーマンス低下の原因となるから</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-a-name-1a過剰な同期によるエラーやデッドロック">2.2. <a name='-1'></a>過剰な同期によるエラーやデッドロック</h3>
+<ul>
+<li>
+<p>下記クラスObservableSetは要素が追加されたら任意の処理ができるSetであり、SetObserverインターフェースはObservableSetのObserverインターフェースである</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20191109-effective-java-3rd-11/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20191109-effective-java-3rd-10/">Effective Java 3rd [Chapter 10] - 例外</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-01-25 </span>
+      <div class="post-category">
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+          </div>
+        <span class="more-meta"> 4333 words </span>
+        <span class="more-meta"> 9 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="例外">例外</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#69">項目 69 例外的状態にだけ例外を使う</a></li>
+<li><a href="#70">項目 70 回復可能な状態にはチェックされる例外を、プログラミングエラーには実行時例外を使う</a></li>
+<li><a href="#71">項目 71 チェックされる例外を不必要に使うのを避ける</a></li>
+<li><a href="#72">項目 72 標準的な例外を使う</a></li>
+<li><a href="#73">項目 73 抽象概念に適した例外をスローする</a></li>
+<li><a href="#74">項目 74 各メソッドがスローするすべての例外を文書化する</a></li>
+<li><a href="#75">項目 75 詳細メッセージにエラー記録情報を含める</a></li>
+<li><a href="#76">項目 76 エラーアトミック性に努める</a></li>
+<li><a href="#77">項目 77 例外を無視しない</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name69a項目-69-例外的状態にだけ例外を使う">1. <a name='69'></a>項目 69 例外的状態にだけ例外を使う</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<p>例外をGOTO文のように、フロー制御に使ってはいけない。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20191109-effective-java-3rd-10/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20191224-awscodeguru/">AWS CodeGuru</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-12-24 </span>
+      <div class="post-category">
+          <a href="/categories/cicd/"> cicd </a>
+          </div>
+        <span class="more-meta"> 2247 words </span>
         <span class="more-meta"> 5 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを取得しに行くことができたので、その方法をまとめておきます。</p>
+      <h1 id="aws-codeguruを使ってみた">AWS CodeGuruを使ってみた</h1>
+<p>AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツール<a href="https://aws.amazon.com/jp/codeguru/">AWS CodeGuru</a>を使ってみました。
+その使用感や解析結果をまとめたいと思います。</p>
     </div>
     <div class="read-more">
-      <a href="/post/20210107-springboot-app-read-configmap/" class="read-more-link">Read more...</a>
+      <a href="/post/20191224-awscodeguru/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20191109-effective-java-3rd-9/">Effective Java 3rd [Chapter 9] - プログラミング一般</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-12-24 </span>
+      <div class="post-category">
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+          </div>
+        <span class="more-meta"> 9276 words </span>
+        <span class="more-meta"> 19 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="プログラミング一般">プログラミング一般</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#57">項目 57 ローカル変数のスコープを最小限にする</a></li>
+<li><a href="#58forfor-each">項目 58 従来の for ループより for-each ループを選ぶ</a></li>
+<li><a href="#59">項目 59 ライブラリを知り、ライブラリを使う</a></li>
+<li><a href="#60floatdouble">項目 60 正確な答えが必要ならば、float と double を避ける</a></li>
+<li><a href="#61boxedprimitiveprimitive">項目 61 ボクシングされたプリミティブ型（boxed primitive）より、プリミティブ型（primitive）を選択すべし</a></li>
+<li><a href="#62">項目 62 他の型が適切な場所では、文字列を避ける</a></li>
+<li><a href="#63">項目 63 文字列結合のパフォーマンスに用心する</a></li>
+<li><a href="#64">項目 64 インタフェースでオブジェクトを参照する</a></li>
+<li><a href="#65">項目 65 リフレクションよりもインタフェースを選ぶ</a></li>
+<li><a href="#66">項目 66 ネイティブメソッドを注意して使う</a></li>
+<li><a href="#67">項目 67 注意して最適化する</a></li>
+<li><a href="#68">項目 68 一般的に受け入れられている命名規約を守る</a></li>
+<li><a href="#URL">参考URL</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name57a項目-57-ローカル変数のスコープを最小限にする">1. <a name='57'></a>項目 57 ローカル変数のスコープを最小限にする</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<ul>
+<li>ローカル変数は初めて使用される時に宣言しましょう
+<ul>
+<li>かなり前段階で宣言されていると、その時点から変更されているかを確認する必要があるから</li>
+</ul>
+</li>
+<li>（ほとんど）全てのローカル変数の宣言時には初期化しましょう
+<ul>
+<li>初期化するための情報がない段階で、宣言すべきではないから</li>
+</ul>
+</li>
+<li>メソッドを小さくして焦点をはっきりさせましょう
+<ul>
+<li>1つのメソッド内で2つの処理があれば、1つ目の処理用のローカル変数が2つ目の処理にも使われているかもしれないので、これを防ぐために <code>1メソッド:1処理</code> としましょう。</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-a-name-1aサンプル">1.2. <a name='-1'></a>サンプル</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 良い例</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Element</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">doSomething</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 悪い例</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">While</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">doSomething</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="na">next</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span><span class="w"> </span><span class="n">i2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c2</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">While</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// バグ(iではなく、i2が正しい。)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">doSomething</span><span class="p">(</span><span class="n">i2</span><span class="p">.</span><span class="na">next</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="13-a-name-1aポイント">1.3. <a name='-1'></a>ポイント</h3>
+<ul>
+<li>使用される直前に、ローカル変数を初期化して宣言しましょう</li>
+<li><code>1メソッド:1処理</code>としましょう</li>
+</ul>
+<blockquote>
+<p>備考：<code>while</code>文ではなく<code>for</code>文を好んで使いましょう。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20191109-effective-java-3rd-9/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20191109-effective-java-3rd-8/">Effective Java 3rd [Chapter 8] - メソッド</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-12-09 </span>
+      <div class="post-category">
+          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
+          </div>
+        <span class="more-meta"> 5234 words </span>
+        <span class="more-meta"> 11 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="メソッド">メソッド</h1>
+<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
+<!-- vscode-markdown-toc -->
+<ol>
+<li><a href="#49">項目 49 パラメータの正当性を検査する</a></li>
+<li><a href="#50">項目 50 必要な場合、防御的にコピーする</a></li>
+<li><a href="#51">項目 51 メソッドのシグネチャを注意深く設計する</a></li>
+<li><a href="#52">項目 52 オーバーロードを注意して使う</a></li>
+<li><a href="#53">項目 53 可変長引数を注意して使う</a></li>
+<li><a href="#54null">項目 54 null ではなく、空コレクションか空配列を返す</a></li>
+<li><a href="#55">項目 55 オプショナルを注意して返す</a></li>
+<li><a href="#56API">項目 56 すべての公開 API 要素に対してドキュメントコメントを書く</a></li>
+<li><a href="#URL">参考URL</a></li>
+</ol>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-a-name49a項目-49-パラメータの正当性を検査する">1. <a name='49'></a>項目 49 パラメータの正当性を検査する</h2>
+<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<ul>
+<li>入力値のチェックをしましょう</li>
+<li>Javadocに入力値の説明と例外の説明は記入しましょう</li>
+</ul>
+<h3 id="12-a-name-1a良い例">1.2. <a name='-1'></a>良い例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">	</span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * 値が(this mod m)であるBigIntegerを返します。
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * このメソッドは、remainderメソッドとは異なり、
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 常に負でないBigIntegerを返します。
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * 
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * @param m 正でなければならない
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * @return this mod m.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * @throws ArithmetricException m &lt;= 0の場合.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">BigInteger</span><span class="w"> </span><span class="nf">mod</span><span class="p">(</span><span class="n">BigInteger</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="na">signum</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArithmeticException</span><span class="p">(</span><span class="s">&#34;Modulus &lt;= 0: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// 計算を行う</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>最初に入力値チェックをすることで、以下を防げる。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20191109-effective-java-3rd-8/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
