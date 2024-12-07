@@ -56,7 +56,7 @@
   <meta itemprop="description" content="AWS Certified Solutions Architect - Professional の勉強 これから資格取得に向けて学習するため、学習途中でまとめた情報をブログでまとめていきます。">
   <meta itemprop="datePublished" content="2024-11-09T11:59:23+09:00">
   <meta itemprop="dateModified" content="2024-11-09T11:59:23+09:00">
-  <meta itemprop="wordCount" content="10530">
+  <meta itemprop="wordCount" content="14326">
   <meta itemprop="keywords" content="aws,professional,cloud">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="20241109 Aws Certified Solutions Architect Professional">
@@ -134,8 +134,8 @@
         <div class="post-category">
             <a href="/categories/cloud/"> cloud </a>
             </div>
-          <span class="more-meta"> 10530 words </span>
-          <span class="more-meta"> 22 mins read </span>
+          <span class="more-meta"> 14326 words </span>
+          <span class="more-meta"> 29 mins read </span>
         
       </div>
     </header>
@@ -1331,6 +1331,456 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 <hr>
 <h4 id="495-a-name-1aまとめ">4.9.5. <a name='-1'></a><strong>まとめ</strong></h4>
 <p>AWS Control Towerは、特にAWS環境をスピーディかつセキュアに管理したい組織にとって最適なサービスです。Landing Zoneの構築、自動化されたガードレール、統一された管理が可能となり、大規模なAWS運用にも柔軟に対応できます。</p>
+<h2 id="2024125-学習内容">2024/12/5 学習内容</h2>
+<p>「<a href="https://www.amazon.co.jp/AWS%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E8%A9%A6%E9%A8%93%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E5%95%8F%E9%A1%8C%E9%9B%86-AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB-%E5%B1%B1%E4%B8%8B%E5%85%89%E6%B4%8B/dp/4815609063">AWS認定資格試験テキスト&amp;問題集 AWS認定ソリューションアーキテクト - プロフェッショナル | 山下光洋 |本 | 通販 | Amazon</a>」で学習。</p>
+<h3 id="cloudformationにおけるカスタムリソースの活用">CloudFormationにおけるカスタムリソースの活用</h3>
+<h4 id="カスタムリソースとは">カスタムリソースとは</h4>
+<p>カスタムリソースは、AWS CloudFormationで標準サポートされていないリソースや特殊な設定を実装するための強力な機能です。</p>
+<h4 id="主な特徴">主な特徴</h4>
+<ol>
+<li>
+<p><strong>柔軟性の高い拡張</strong></p>
+<ul>
+<li>AWS標準リソース外の機能を追加可能</li>
+<li>独自のプロビジョニングロジックを実装できる</li>
+</ul>
+</li>
+<li>
+<p><strong>典型的なユースケース</strong></p>
+<ul>
+<li>特殊な初期設定の実行</li>
+<li>外部システムとの統合</li>
+<li>複雑な設定管理</li>
+<li>標準リソースでは対応できない特殊な要件</li>
+</ul>
+</li>
+</ol>
+<h4 id="実装方法">実装方法</h4>
+<h5 id="基本的な構成要素">基本的な構成要素</h5>
+<ul>
+<li><strong>Lambda関数</strong>: カスタムリソースのロジックを実装</li>
+<li><strong>CloudFormationテンプレート</strong>: カスタムリソースを定義</li>
+</ul>
+<h5 id="実装手順">実装手順</h5>
+<ol>
+<li>
+<p>Lambda関数の作成</p>
+<ul>
+<li>リソースの作成、更新、削除のハンドリング</li>
+<li>CloudFormationからのリクエストを処理</li>
+</ul>
+</li>
+<li>
+<p>CloudFormationテンプレートの設定</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">MyCustomResource</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Custom::MyCustomResourceType&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ServiceToken</span><span class="p">:</span><span class="w"> </span>!<span class="l">GetAtt MyLambdaFunction.Arn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># カスタムパラメータ</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">CustomParam</span><span class="p">:</span><span class="w"> </span><span class="l">Value</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h4 id="注意点">注意点</h4>
+<ul>
+<li>追加の開発とテストが必要</li>
+<li>パフォーマンスへの影響を考慮</li>
+<li>エラーハンドリングを慎重に設計</li>
+</ul>
+<h4 id="メリット">メリット</h4>
+<ul>
+<li>高度なカスタマイズ性</li>
+<li>インフラストラクチャコードへの柔軟な統合</li>
+<li>複雑な要件への対応</li>
+</ul>
+<h4 id="おすすめの活用シーン">おすすめの活用シーン</h4>
+<ul>
+<li>特定のクラウド環境に特化した初期設定</li>
+<li>サードパーティサービスとの連携</li>
+<li>高度な設定管理が必要なプロジェクト</li>
+</ul>
+<p>カスタムリソースは、CloudFormationの機能を大幅に拡張し、より柔軟なインフラストラクチャ管理を可能にする強力な機能です。適切に設計・実装することで、複雑なプロビジョニング要件を効率的に解決できます。</p>
+<h3 id="aws-ec2インスタンスのリタイアメント対応自動化戦略">AWS EC2インスタンスのリタイアメント対応自動化戦略</h3>
+<h4 id="リタイアメントとは">リタイアメントとは</h4>
+<p>AWSのEC2インスタンスでは、ハードウェアの劣化や計画的なメンテナンスにより、インスタンスのホストが「リタイアメント」状態になることがあります。このイベントに対して、システムの可用性と信頼性を維持するための自動化戦略が重要です。</p>
+<h4 id="自動化の核心">自動化の核心</h4>
+<ol>
+<li>
+<p><strong>AWS Health APIとEventBridgeの活用</strong></p>
+<ul>
+<li>リタイアメント予定のインスタンスを事前に検出</li>
+<li>自動対応のトリガーを設定</li>
+</ul>
+</li>
+<li>
+<p><strong>Systems Manager Automationの利用</strong></p>
+<ul>
+<li>インスタンスの停止</li>
+<li>新規インスタンスの自動作成</li>
+<li>最小限のサービス中断</li>
+</ul>
+</li>
+</ol>
+<h4 id="実装のポイント">実装のポイント</h4>
+<h5 id="イベント検出">イベント検出</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">Resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">HostRetirementRule</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::Events::Rule</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">EventPattern</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">source</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="l">aws.health</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">detail-type</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="s2">&#34;AWS Health Event&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">detail</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">EC2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">eventTypeCategory</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">scheduledChange</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">eventTypeCode</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">AWS_EC2_INSTANCE_RETIREMENT_SCHEDULED</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="lambda関数による自動対応">Lambda関数による自動対応</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">instance_id</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;detail&#39;</span><span class="p">][</span><span class="s1">&#39;affectedResources&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 新しいインスタンスの起動</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ec2_client</span><span class="o">.</span><span class="n">run_instances</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ImageId</span><span class="o">=</span><span class="s1">&#39;ami-xxxxxxxx&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">InstanceType</span><span class="o">=</span><span class="n">original_instance_type</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 他の設定</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 古いインスタンスの停止</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ec2_client</span><span class="o">.</span><span class="n">stop_instances</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="n">instance_id</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="メリット-1">メリット</h4>
+<ul>
+<li><strong>プロアクティブな障害対応</strong></li>
+<li><strong>最小限のダウンタイム</strong></li>
+<li><strong>高可用性の維持</strong></li>
+<li><strong>手動操作の削減</strong></li>
+</ul>
+<h4 id="注意点-1">注意点</h4>
+<ul>
+<li>適切なIAMロールの設定</li>
+<li>詳細な設定と事前テスト</li>
+<li>コストへの考慮</li>
+</ul>
+<h4 id="まとめ">まとめ</h4>
+<p>AWS EC2のリタイアメントイベントに対する自動化戦略は、クラウドインフラストラクチャの信頼性と効率性を大幅に向上させます。適切に実装することで、予期せぬダウンタイムを防ぎ、継続的なサービス提供を実現できます。</p>
+<h3 id="aws-s3-バッチオペレーションの包括的ガイド">AWS S3 バッチオペレーションの包括的ガイド</h3>
+<h4 id="バッチオペレーションとは">バッチオペレーションとは</h4>
+<p>S3バッチオペレーションは、数百万のS3オブジェクトを一括で効率的に処理するAWSの強力な機能です。</p>
+<h4 id="主な特徴-1">主な特徴</h4>
+<ol>
+<li>
+<p><strong>大規模オブジェクト処理</strong></p>
+<ul>
+<li>数百万のオブジェクトを一括操作</li>
+<li>手動作業の自動化</li>
+<li>高い並列処理能力</li>
+</ul>
+</li>
+<li>
+<p><strong>サポートされる主な操作</strong></p>
+<ul>
+<li>オブジェクトのコピー</li>
+<li>データ復元</li>
+<li>Lambda関数による変換</li>
+<li>タグ付け</li>
+<li>アクセスコントロールの変更</li>
+</ul>
+</li>
+</ol>
+<h4 id="動作の仕組み">動作の仕組み</h4>
+<ol>
+<li>処理対象のオブジェクトリストを作成</li>
+<li>ジョブの設定と実行</li>
+<li>結果のトラッキング</li>
+<li>レポート生成</li>
+</ol>
+<h4 id="コード例">コード例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">BatchOperationJob</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::S3::Job</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Operation</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LambdaInvoke</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">FunctionArn</span><span class="p">:</span><span class="w"> </span><span class="l">arn:aws:lambda:region:accountid:function:MyTransformFunction</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Manifest</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Location</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">Bucket</span><span class="p">:</span><span class="w"> </span><span class="l">MySourceBucket</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">Key</span><span class="p">:</span><span class="w"> </span><span class="l">manifest.csv</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="メリット-2">メリット</h4>
+<ul>
+<li>大規模処理の効率化</li>
+<li>自動化</li>
+<li>詳細なエラーハンドリング</li>
+<li>包括的なレポーティング</li>
+</ul>
+<h4 id="主なユースケース">主なユースケース</h4>
+<ul>
+<li>大規模データマイグレーション</li>
+<li>コンプライアンス対応</li>
+<li>大量データのアーカイブ処理</li>
+<li>メタデータの一括更新</li>
+</ul>
+<h4 id="注意点-2">注意点</h4>
+<ul>
+<li>追加のコストが発生</li>
+<li>適切な設計が必要</li>
+<li>事前の十分な計画が重要</li>
+</ul>
+<h4 id="まとめ-1">まとめ</h4>
+<p>S3バッチオペレーションは、大規模なストレージ管理を劇的に簡素化する革新的な機能です。適切に活用することで、時間とリソースを大幅に節約できます。</p>
+<h2 id="2024127-学習内容">2024/12/7 学習内容</h2>
+<p>「<a href="https://www.amazon.co.jp/AWS%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E8%A9%A6%E9%A8%93%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E5%95%8F%E9%A1%8C%E9%9B%86-AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB-%E5%B1%B1%E4%B8%8B%E5%85%89%E6%B4%8B/dp/4815609063">AWS認定資格試験テキスト&amp;問題集 AWS認定ソリューションアーキテクト - プロフェッショナル | 山下光洋 |本 | 通販 | Amazon</a>」で学習。</p>
+<h3 id="aws-global-accelerator-のグローバルな静的エニーキャスト-ip-アドレスとは">AWS Global Accelerator のグローバルな静的エニーキャスト IP アドレスとは？</h3>
+<p>AWS Global Accelerator は、アプリケーションのパフォーマンスと可用性を向上させるために設計されたサービスで、その特徴の一つとして <strong>グローバルな静的エニーキャスト IP アドレス</strong> を提供します。この機能により、ユーザーは DNS 設定を変更せずに複数リージョンにまたがるアプリケーションを効率的に運用できます。</p>
+<hr>
+<h3 id="エニーキャスト-ip-アドレスとは">エニーキャスト IP アドレスとは？</h3>
+<p>エニーキャスト（Anycast）IP アドレスは、単一の IP アドレスを複数のネットワークエンドポイントに割り当てる技術です。この仕組みにより、クライアントからのトラフィックが地理的に最も近いエンドポイントに自動的にルーティングされます。</p>
+<p>AWS Global Accelerator では、グローバルに分散されたエッジロケーションを活用し、クライアントからのトラフィックを最適な AWS リージョンのバックエンドに届けます。</p>
+<hr>
+<h3 id="グローバルな静的-ip-アドレスの特徴">グローバルな静的 IP アドレスの特徴</h3>
+<ol>
+<li>
+<p><strong>静的なグローバル IP</strong></p>
+<ul>
+<li>AWS Global Accelerator は、2 つの静的エニーキャスト IP アドレスを提供します。これにより、アプリケーションのバックエンドやリージョンが変更されても、IP アドレスは固定され、DNS 設定を変更する必要がありません。</li>
+</ul>
+</li>
+<li>
+<p><strong>エニーキャストルーティング</strong></p>
+<ul>
+<li>トラフィックは、ユーザーの地理的位置に基づき最適な AWS エッジロケーションにルーティングされ、レイテンシが低減されます。</li>
+</ul>
+</li>
+<li>
+<p><strong>リージョン間の自動フェイルオーバー</strong></p>
+<ul>
+<li>バックエンドの障害時に、トラフィックを別の利用可能なリージョンに自動的にリダイレクトします。</li>
+</ul>
+</li>
+<li>
+<p><strong>セキュリティと信頼性</strong></p>
+<ul>
+<li>トラフィックは AWS グローバルネットワーク上でルーティングされるため、高速かつ安全にデータを転送できます。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="利点">利点</h3>
+<ul>
+<li>
+<p><strong>パフォーマンスの向上</strong><br>
+最も近いエッジロケーションを利用することで、レイテンシを削減し、ユーザー体験を向上。</p>
+</li>
+<li>
+<p><strong>高可用性</strong><br>
+リージョン間の自動フェイルオーバーにより、障害時でもアプリケーションの稼働を維持。</p>
+</li>
+<li>
+<p><strong>運用の簡素化</strong><br>
+静的 IP アドレスにより、DNS 設定やトラフィック管理の手間を軽減。</p>
+</li>
+<li>
+<p><strong>グローバルなリーチ</strong><br>
+世界中のユーザーに最適な接続を提供可能。</p>
+</li>
+</ul>
+<hr>
+<h3 id="典型的なユースケース">典型的なユースケース</h3>
+<ol>
+<li>
+<p><strong>グローバルに展開されたウェブアプリケーション</strong></p>
+<ul>
+<li>単一の固定 IP アドレスで複数のリージョンにまたがるアプリケーションを提供。</li>
+</ul>
+</li>
+<li>
+<p><strong>マルチリージョンの高可用性アプリ</strong></p>
+<ul>
+<li>バックエンドの障害時にトラフィックを他のリージョンに転送し、ダウンタイムを最小化。</li>
+</ul>
+</li>
+<li>
+<p><strong>オンラインゲーム</strong></p>
+<ul>
+<li>世界中のプレイヤーが最も近いエンドポイントに接続し、低レイテンシを実現。</li>
+</ul>
+</li>
+<li>
+<p><strong>API のグローバル配信</strong></p>
+<ul>
+<li>グローバルアクセラレータを利用して API リクエストを最適なエンドポイントにルーティング。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="仕組み">仕組み</h3>
+<ol>
+<li>
+<p><strong>エニーキャスト IP の割り当て</strong></p>
+<ul>
+<li>AWS Global Accelerator により、2 つの固定エニーキャスト IP アドレスが割り当てられます。</li>
+</ul>
+</li>
+<li>
+<p><strong>トラフィックのルーティング</strong></p>
+<ul>
+<li>クライアントからのリクエストが、最も近いエッジロケーション（AWS のグローバルネットワークの入口ポイント）にルーティングされます。</li>
+</ul>
+</li>
+<li>
+<p><strong>バックエンドへの転送</strong></p>
+<ul>
+<li>エッジロケーションから、トラフィックは最適な AWS リージョンのアプリケーションバックエンド（ALB、NLB、EC2 など）に転送されます。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="導入の注意点">導入の注意点</h3>
+<ul>
+<li>
+<p><strong>料金</strong></p>
+<ul>
+<li>Global Accelerator の使用には追加の料金が発生します。コストモデルを十分に理解した上で利用してください。</li>
+</ul>
+</li>
+<li>
+<p><strong>リージョン間転送</strong></p>
+<ul>
+<li>AWS 内部のトラフィックでも、リージョン間データ転送に料金が発生する可能性があります。</li>
+</ul>
+</li>
+<li>
+<p><strong>対応エンドポイント</strong></p>
+<ul>
+<li>Global Accelerator がサポートするエンドポイント（ALB、NLB、EC2 など）を確認してください。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="まとめ-2">まとめ</h3>
+<p>AWS Global Accelerator が提供するグローバルな静的エニーキャスト IP アドレスは、グローバル展開されたアプリケーションにおいてパフォーマンス、可用性、運用効率を大幅に向上させます。特に、マルチリージョン環境でのトラフィック管理や災害復旧が重要なシナリオに適しています。</p>
+<p>固定 IP アドレスでトラフィックを最適化し、ユーザー体験を向上させたい場合は、Global Accelerator を活用する価値があります。</p>
+<p>AWS ElastiCache の Redis と Memcached は、アプリケーションのキャッシュ層として使用される分散型インメモリデータストアですが、それぞれ特徴やユースケースが異なります。以下に主な違いをまとめます。</p>
+<hr>
+<h3 id="aws-elasticache-の-redis-と-memcached-の違い">AWS ElastiCache の Redis と Memcached の違い</h3>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left"><strong>特徴</strong></th>
+          <th style="text-align: left"><strong>Redis</strong></th>
+          <th style="text-align: left"><strong>Memcached</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>データモデル</strong></td>
+          <td style="text-align: left">キーと値だけでなく、リスト・セット・ハッシュなどのデータ構造をサポート</td>
+          <td style="text-align: left">シンプルなキーと値のペア（文字列のみ）</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>永続性</strong></td>
+          <td style="text-align: left">ディスクにデータを保存する永続化が可能</td>
+          <td style="text-align: left">永続化は非対応</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>スケーリング</strong></td>
+          <td style="text-align: left">クラスタリングに対応（自動シャーディング）</td>
+          <td style="text-align: left">マルチノード環境を手動で構成する必要</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>トランザクション</strong></td>
+          <td style="text-align: left">トランザクション（MULTI/EXEC）をサポート</td>
+          <td style="text-align: left">トランザクションは非対応</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>データの有効期限</strong></td>
+          <td style="text-align: left">個別のキーに対して設定可能</td>
+          <td style="text-align: left">個別のキーに対して設定可能</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>プロトコル</strong></td>
+          <td style="text-align: left">Redis プロトコル（独自）</td>
+          <td style="text-align: left">Memcached プロトコル（簡潔で軽量）</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>ユースケース</strong></td>
+          <td style="text-align: left">高度なデータ操作、ランキング、セッションストア</td>
+          <td style="text-align: left">単純なキャッシュや読み取りの高速化</td>
+      </tr>
+  </tbody>
+</table>
     </div>
 
     
