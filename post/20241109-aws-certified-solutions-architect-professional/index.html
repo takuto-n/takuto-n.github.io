@@ -268,16 +268,19 @@
 <li><a href="#-1">2024/12/7 学習内容</a></li>
 </ol>
 <ul>
-<li>6.1. <a href="#AWSGlobalAcceleratorIP">AWS Global Accelerator のグローバルな静的エニーキャスト IP アドレスとは？</a></li>
-<li>6.2. <a href="#IP">エニーキャスト IP アドレスとは？</a></li>
-<li>6.3. <a href="#IP-1">グローバルな静的 IP アドレスの特徴</a></li>
-<li>6.4. <a href="#-1">利点</a></li>
-<li>6.5. <a href="#-1">典型的なユースケース</a></li>
-<li>6.6. <a href="#-1">仕組み</a></li>
-<li>6.7. <a href="#-1">導入の注意点</a></li>
-<li>6.8. <a href="#-1">まとめ</a></li>
-<li>6.9. <a href="#AWSElastiCacheRedisMemcached">AWS ElastiCache の Redis と Memcached の違い</a></li>
-<li>6.10. <a href="#-1">メモ</a></li>
+<li>6.1. <a href="#AWSGlobalAcceleratorIP">AWS Global Accelerator のグローバルな静的エニーキャスト IP アドレスとは？</a>
+<ul>
+<li>6.1.1. <a href="#IP">エニーキャスト IP アドレスとは？</a></li>
+<li>6.1.2. <a href="#IP-1">グローバルな静的 IP アドレスの特徴</a></li>
+<li>6.1.3. <a href="#-1">利点</a></li>
+<li>6.1.4. <a href="#-1">典型的なユースケース</a></li>
+<li>6.1.5. <a href="#-1">仕組み</a></li>
+<li>6.1.6. <a href="#-1">導入の注意点</a></li>
+<li>6.1.7. <a href="#-1">まとめ</a></li>
+</ul>
+</li>
+<li>6.2. <a href="#AWSElastiCacheRedisMemcached">AWS ElastiCache の Redis と Memcached の違い</a></li>
+<li>6.3. <a href="#-1">メモ</a></li>
 </ul>
 </li>
 </ul>
@@ -1661,11 +1664,11 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 <h3 id="61-a-nameawsglobalacceleratoripaaws-global-accelerator-のグローバルな静的エニーキャスト-ip-アドレスとは">6.1. <a name='AWSGlobalAcceleratorIP'></a>AWS Global Accelerator のグローバルな静的エニーキャスト IP アドレスとは？</h3>
 <p>AWS Global Accelerator は、アプリケーションのパフォーマンスと可用性を向上させるために設計されたサービスで、その特徴の一つとして <strong>グローバルな静的エニーキャスト IP アドレス</strong> を提供します。この機能により、ユーザーは DNS 設定を変更せずに複数リージョンにまたがるアプリケーションを効率的に運用できます。</p>
 <hr>
-<h3 id="62-a-nameipaエニーキャスト-ip-アドレスとは">6.2. <a name='IP'></a>エニーキャスト IP アドレスとは？</h3>
+<h4 id="611-a-nameipaエニーキャスト-ip-アドレスとは">6.1.1. <a name='IP'></a>エニーキャスト IP アドレスとは？</h4>
 <p>エニーキャスト（Anycast）IP アドレスは、単一の IP アドレスを複数のネットワークエンドポイントに割り当てる技術です。この仕組みにより、クライアントからのトラフィックが地理的に最も近いエンドポイントに自動的にルーティングされます。</p>
 <p>AWS Global Accelerator では、グローバルに分散されたエッジロケーションを活用し、クライアントからのトラフィックを最適な AWS リージョンのバックエンドに届けます。</p>
 <hr>
-<h3 id="63-a-nameip-1aグローバルな静的-ip-アドレスの特徴">6.3. <a name='IP-1'></a>グローバルな静的 IP アドレスの特徴</h3>
+<h4 id="612-a-nameip-1aグローバルな静的-ip-アドレスの特徴">6.1.2. <a name='IP-1'></a>グローバルな静的 IP アドレスの特徴</h4>
 <ol>
 <li>
 <p><strong>静的なグローバル IP</strong></p>
@@ -1693,7 +1696,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </li>
 </ol>
 <hr>
-<h3 id="64-a-name-1a利点">6.4. <a name='-1'></a>利点</h3>
+<h4 id="613-a-name-1a利点">6.1.3. <a name='-1'></a>利点</h4>
 <ul>
 <li>
 <p><strong>パフォーマンスの向上</strong><br>
@@ -1713,7 +1716,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </li>
 </ul>
 <hr>
-<h3 id="65-a-name-1a典型的なユースケース">6.5. <a name='-1'></a>典型的なユースケース</h3>
+<h4 id="614-a-name-1a典型的なユースケース">6.1.4. <a name='-1'></a>典型的なユースケース</h4>
 <ol>
 <li>
 <p><strong>グローバルに展開されたウェブアプリケーション</strong></p>
@@ -1741,7 +1744,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </li>
 </ol>
 <hr>
-<h3 id="66-a-name-1a仕組み">6.6. <a name='-1'></a>仕組み</h3>
+<h4 id="615-a-name-1a仕組み">6.1.5. <a name='-1'></a>仕組み</h4>
 <ol>
 <li>
 <p><strong>エニーキャスト IP の割り当て</strong></p>
@@ -1763,7 +1766,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </li>
 </ol>
 <hr>
-<h3 id="67-a-name-1a導入の注意点">6.7. <a name='-1'></a>導入の注意点</h3>
+<h4 id="616-a-name-1a導入の注意点">6.1.6. <a name='-1'></a>導入の注意点</h4>
 <ul>
 <li>
 <p><strong>料金</strong></p>
@@ -1785,12 +1788,12 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </li>
 </ul>
 <hr>
-<h3 id="68-a-name-1aまとめ">6.8. <a name='-1'></a>まとめ</h3>
+<h4 id="617-a-name-1aまとめ">6.1.7. <a name='-1'></a>まとめ</h4>
 <p>AWS Global Accelerator が提供するグローバルな静的エニーキャスト IP アドレスは、グローバル展開されたアプリケーションにおいてパフォーマンス、可用性、運用効率を大幅に向上させます。特に、マルチリージョン環境でのトラフィック管理や災害復旧が重要なシナリオに適しています。</p>
 <p>固定 IP アドレスでトラフィックを最適化し、ユーザー体験を向上させたい場合は、Global Accelerator を活用する価値があります。</p>
 <p>AWS ElastiCache の Redis と Memcached は、アプリケーションのキャッシュ層として使用される分散型インメモリデータストアですが、それぞれ特徴やユースケースが異なります。以下に主な違いをまとめます。</p>
 <hr>
-<h3 id="69-a-nameawselasticacheredismemcachedaaws-elasticache-の-redis-と-memcached-の違い">6.9. <a name='AWSElastiCacheRedisMemcached'></a>AWS ElastiCache の Redis と Memcached の違い</h3>
+<h3 id="62-a-nameawselasticacheredismemcachedaaws-elasticache-の-redis-と-memcached-の違い">6.2. <a name='AWSElastiCacheRedisMemcached'></a>AWS ElastiCache の Redis と Memcached の違い</h3>
 <table>
   <thead>
       <tr>
@@ -1837,7 +1840,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
       </tr>
   </tbody>
 </table>
-<h3 id="610-a-name-1aメモ">6.10. <a name='-1'></a>メモ</h3>
+<h3 id="63-a-name-1aメモ">6.3. <a name='-1'></a>メモ</h3>
 <ul>
 <li>AWS Wavelength
 <ul>
