@@ -56,7 +56,7 @@
   <meta itemprop="description" content="AWS Certified Solutions Architect - Professional の勉強 これから資格取得に向けて学習するため、学習途中でまとめた情報をブログでまとめていきます。">
   <meta itemprop="datePublished" content="2024-11-09T11:59:23+09:00">
   <meta itemprop="dateModified" content="2024-11-09T11:59:23+09:00">
-  <meta itemprop="wordCount" content="14326">
+  <meta itemprop="wordCount" content="15038">
   <meta itemprop="keywords" content="aws,professional,cloud">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="20241109 Aws Certified Solutions Architect Professional">
@@ -134,8 +134,8 @@
         <div class="post-category">
             <a href="/categories/cloud/"> cloud </a>
             </div>
-          <span class="more-meta"> 14326 words </span>
-          <span class="more-meta"> 29 mins read </span>
+          <span class="more-meta"> 15038 words </span>
+          <span class="more-meta"> 31 mins read </span>
         
       </div>
     </header>
@@ -177,7 +177,7 @@
 </li>
 <li>
 <ol start="4">
-<li><a href="#-1">2024/12/3 学習内容</a></li>
+<li><a href="#-1">2024/12/03 学習内容</a></li>
 </ol>
 <ul>
 <li>4.1. <a href="#-1">メモ</a></li>
@@ -222,6 +222,62 @@
 <li>4.9.5. <a href="#-1"><strong>まとめ</strong></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li>
+<ol start="5">
+<li><a href="#-1">2024/12/5 学習内容</a></li>
+</ol>
+<ul>
+<li>5.1. <a href="#CloudFormation">CloudFormationにおけるカスタムリソースの活用</a>
+<ul>
+<li>5.1.1. <a href="#-1">カスタムリソースとは</a></li>
+<li>5.1.2. <a href="#-1">主な特徴</a></li>
+<li>5.1.3. <a href="#-1">実装方法</a></li>
+<li>5.1.4. <a href="#-1">注意点</a></li>
+<li>5.1.5. <a href="#-1">メリット</a></li>
+<li>5.1.6. <a href="#-1">おすすめの活用シーン</a></li>
+</ul>
+</li>
+<li>5.2. <a href="#AWSEC2">AWS EC2インスタンスのリタイアメント対応自動化戦略</a>
+<ul>
+<li>5.2.1. <a href="#-1">リタイアメントとは</a></li>
+<li>5.2.2. <a href="#-1">自動化の核心</a></li>
+<li>5.2.3. <a href="#-1">実装のポイント</a></li>
+<li>5.2.4. <a href="#-1">メリット</a></li>
+<li>5.2.5. <a href="#-1">注意点</a></li>
+<li>5.2.6. <a href="#-1">まとめ</a></li>
+</ul>
+</li>
+<li>5.3. <a href="#AWSS3">AWS S3 バッチオペレーションの包括的ガイド</a>
+<ul>
+<li>5.3.1. <a href="#-1">バッチオペレーションとは</a></li>
+<li>5.3.2. <a href="#-1">主な特徴</a></li>
+<li>5.3.3. <a href="#-1">動作の仕組み</a></li>
+<li>5.3.4. <a href="#-1">コード例</a></li>
+<li>5.3.5. <a href="#-1">メリット</a></li>
+<li>5.3.6. <a href="#-1">主なユースケース</a></li>
+<li>5.3.7. <a href="#-1">注意点</a></li>
+<li>5.3.8. <a href="#-1">まとめ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ol start="6">
+<li><a href="#-1">2024/12/7 学習内容</a></li>
+</ol>
+<ul>
+<li>6.1. <a href="#AWSGlobalAcceleratorIP">AWS Global Accelerator のグローバルな静的エニーキャスト IP アドレスとは？</a></li>
+<li>6.2. <a href="#IP">エニーキャスト IP アドレスとは？</a></li>
+<li>6.3. <a href="#IP-1">グローバルな静的 IP アドレスの特徴</a></li>
+<li>6.4. <a href="#-1">利点</a></li>
+<li>6.5. <a href="#-1">典型的なユースケース</a></li>
+<li>6.6. <a href="#-1">仕組み</a></li>
+<li>6.7. <a href="#-1">導入の注意点</a></li>
+<li>6.8. <a href="#-1">まとめ</a></li>
+<li>6.9. <a href="#AWSElastiCacheRedisMemcached">AWS ElastiCache の Redis と Memcached の違い</a></li>
+<li>6.10. <a href="#-1">メモ</a></li>
 </ul>
 </li>
 </ul>
@@ -1331,12 +1387,12 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 <hr>
 <h4 id="495-a-name-1aまとめ">4.9.5. <a name='-1'></a><strong>まとめ</strong></h4>
 <p>AWS Control Towerは、特にAWS環境をスピーディかつセキュアに管理したい組織にとって最適なサービスです。Landing Zoneの構築、自動化されたガードレール、統一された管理が可能となり、大規模なAWS運用にも柔軟に対応できます。</p>
-<h2 id="2024125-学習内容">2024/12/5 学習内容</h2>
+<h2 id="5-a-name-1a2024125-学習内容">5. <a name='-1'></a>2024/12/5 学習内容</h2>
 <p>「<a href="https://www.amazon.co.jp/AWS%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E8%A9%A6%E9%A8%93%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E5%95%8F%E9%A1%8C%E9%9B%86-AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB-%E5%B1%B1%E4%B8%8B%E5%85%89%E6%B4%8B/dp/4815609063">AWS認定資格試験テキスト&amp;問題集 AWS認定ソリューションアーキテクト - プロフェッショナル | 山下光洋 |本 | 通販 | Amazon</a>」で学習。</p>
-<h3 id="cloudformationにおけるカスタムリソースの活用">CloudFormationにおけるカスタムリソースの活用</h3>
-<h4 id="カスタムリソースとは">カスタムリソースとは</h4>
+<h3 id="51-a-namecloudformationacloudformationにおけるカスタムリソースの活用">5.1. <a name='CloudFormation'></a>CloudFormationにおけるカスタムリソースの活用</h3>
+<h4 id="511-a-name-1aカスタムリソースとは">5.1.1. <a name='-1'></a>カスタムリソースとは</h4>
 <p>カスタムリソースは、AWS CloudFormationで標準サポートされていないリソースや特殊な設定を実装するための強力な機能です。</p>
-<h4 id="主な特徴">主な特徴</h4>
+<h4 id="512-a-name-1a主な特徴">5.1.2. <a name='-1'></a>主な特徴</h4>
 <ol>
 <li>
 <p><strong>柔軟性の高い拡張</strong></p>
@@ -1355,7 +1411,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </ul>
 </li>
 </ol>
-<h4 id="実装方法">実装方法</h4>
+<h4 id="513-a-name-1a実装方法">5.1.3. <a name='-1'></a>実装方法</h4>
 <h5 id="基本的な構成要素">基本的な構成要素</h5>
 <ul>
 <li><strong>Lambda関数</strong>: カスタムリソースのロジックを実装</li>
@@ -1394,29 +1450,29 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </div>
 </div></li>
 </ol>
-<h4 id="注意点">注意点</h4>
+<h4 id="514-a-name-1a注意点">5.1.4. <a name='-1'></a>注意点</h4>
 <ul>
 <li>追加の開発とテストが必要</li>
 <li>パフォーマンスへの影響を考慮</li>
 <li>エラーハンドリングを慎重に設計</li>
 </ul>
-<h4 id="メリット">メリット</h4>
+<h4 id="515-a-name-1aメリット">5.1.5. <a name='-1'></a>メリット</h4>
 <ul>
 <li>高度なカスタマイズ性</li>
 <li>インフラストラクチャコードへの柔軟な統合</li>
 <li>複雑な要件への対応</li>
 </ul>
-<h4 id="おすすめの活用シーン">おすすめの活用シーン</h4>
+<h4 id="516-a-name-1aおすすめの活用シーン">5.1.6. <a name='-1'></a>おすすめの活用シーン</h4>
 <ul>
 <li>特定のクラウド環境に特化した初期設定</li>
 <li>サードパーティサービスとの連携</li>
 <li>高度な設定管理が必要なプロジェクト</li>
 </ul>
 <p>カスタムリソースは、CloudFormationの機能を大幅に拡張し、より柔軟なインフラストラクチャ管理を可能にする強力な機能です。適切に設計・実装することで、複雑なプロビジョニング要件を効率的に解決できます。</p>
-<h3 id="aws-ec2インスタンスのリタイアメント対応自動化戦略">AWS EC2インスタンスのリタイアメント対応自動化戦略</h3>
-<h4 id="リタイアメントとは">リタイアメントとは</h4>
+<h3 id="52-a-nameawsec2aaws-ec2インスタンスのリタイアメント対応自動化戦略">5.2. <a name='AWSEC2'></a>AWS EC2インスタンスのリタイアメント対応自動化戦略</h3>
+<h4 id="521-a-name-1aリタイアメントとは">5.2.1. <a name='-1'></a>リタイアメントとは</h4>
 <p>AWSのEC2インスタンスでは、ハードウェアの劣化や計画的なメンテナンスにより、インスタンスのホストが「リタイアメント」状態になることがあります。このイベントに対して、システムの可用性と信頼性を維持するための自動化戦略が重要です。</p>
-<h4 id="自動化の核心">自動化の核心</h4>
+<h4 id="522-a-name-1a自動化の核心">5.2.2. <a name='-1'></a>自動化の核心</h4>
 <ol>
 <li>
 <p><strong>AWS Health APIとEventBridgeの活用</strong></p>
@@ -1434,7 +1490,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </ul>
 </li>
 </ol>
-<h4 id="実装のポイント">実装のポイント</h4>
+<h4 id="523-a-name-1a実装のポイント">5.2.3. <a name='-1'></a>実装のポイント</h4>
 <h5 id="イベント検出">イベント検出</h5>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1505,25 +1561,25 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </span></span><span class="line"><span class="cl">    <span class="n">ec2_client</span><span class="o">.</span><span class="n">stop_instances</span><span class="p">(</span><span class="n">InstanceIds</span><span class="o">=</span><span class="p">[</span><span class="n">instance_id</span><span class="p">])</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="メリット-1">メリット</h4>
+</div><h4 id="524-a-name-1aメリット">5.2.4. <a name='-1'></a>メリット</h4>
 <ul>
 <li><strong>プロアクティブな障害対応</strong></li>
 <li><strong>最小限のダウンタイム</strong></li>
 <li><strong>高可用性の維持</strong></li>
 <li><strong>手動操作の削減</strong></li>
 </ul>
-<h4 id="注意点-1">注意点</h4>
+<h4 id="525-a-name-1a注意点">5.2.5. <a name='-1'></a>注意点</h4>
 <ul>
 <li>適切なIAMロールの設定</li>
 <li>詳細な設定と事前テスト</li>
 <li>コストへの考慮</li>
 </ul>
-<h4 id="まとめ">まとめ</h4>
+<h4 id="526-a-name-1aまとめ">5.2.6. <a name='-1'></a>まとめ</h4>
 <p>AWS EC2のリタイアメントイベントに対する自動化戦略は、クラウドインフラストラクチャの信頼性と効率性を大幅に向上させます。適切に実装することで、予期せぬダウンタイムを防ぎ、継続的なサービス提供を実現できます。</p>
-<h3 id="aws-s3-バッチオペレーションの包括的ガイド">AWS S3 バッチオペレーションの包括的ガイド</h3>
-<h4 id="バッチオペレーションとは">バッチオペレーションとは</h4>
+<h3 id="53-a-nameawss3aaws-s3-バッチオペレーションの包括的ガイド">5.3. <a name='AWSS3'></a>AWS S3 バッチオペレーションの包括的ガイド</h3>
+<h4 id="531-a-name-1aバッチオペレーションとは">5.3.1. <a name='-1'></a>バッチオペレーションとは</h4>
 <p>S3バッチオペレーションは、数百万のS3オブジェクトを一括で効率的に処理するAWSの強力な機能です。</p>
-<h4 id="主な特徴-1">主な特徴</h4>
+<h4 id="532-a-name-1a主な特徴">5.3.2. <a name='-1'></a>主な特徴</h4>
 <ol>
 <li>
 <p><strong>大規模オブジェクト処理</strong></p>
@@ -1544,14 +1600,14 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </ul>
 </li>
 </ol>
-<h4 id="動作の仕組み">動作の仕組み</h4>
+<h4 id="533-a-name-1a動作の仕組み">5.3.3. <a name='-1'></a>動作の仕組み</h4>
 <ol>
 <li>処理対象のオブジェクトリストを作成</li>
 <li>ジョブの設定と実行</li>
 <li>結果のトラッキング</li>
 <li>レポート生成</li>
 </ol>
-<h4 id="コード例">コード例</h4>
+<h4 id="534-a-name-1aコード例">5.3.4. <a name='-1'></a>コード例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1578,38 +1634,38 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">Key</span><span class="p">:</span><span class="w"> </span><span class="l">manifest.csv</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="メリット-2">メリット</h4>
+</div><h4 id="535-a-name-1aメリット">5.3.5. <a name='-1'></a>メリット</h4>
 <ul>
 <li>大規模処理の効率化</li>
 <li>自動化</li>
 <li>詳細なエラーハンドリング</li>
 <li>包括的なレポーティング</li>
 </ul>
-<h4 id="主なユースケース">主なユースケース</h4>
+<h4 id="536-a-name-1a主なユースケース">5.3.6. <a name='-1'></a>主なユースケース</h4>
 <ul>
 <li>大規模データマイグレーション</li>
 <li>コンプライアンス対応</li>
 <li>大量データのアーカイブ処理</li>
 <li>メタデータの一括更新</li>
 </ul>
-<h4 id="注意点-2">注意点</h4>
+<h4 id="537-a-name-1a注意点">5.3.7. <a name='-1'></a>注意点</h4>
 <ul>
 <li>追加のコストが発生</li>
 <li>適切な設計が必要</li>
 <li>事前の十分な計画が重要</li>
 </ul>
-<h4 id="まとめ-1">まとめ</h4>
+<h4 id="538-a-name-1aまとめ">5.3.8. <a name='-1'></a>まとめ</h4>
 <p>S3バッチオペレーションは、大規模なストレージ管理を劇的に簡素化する革新的な機能です。適切に活用することで、時間とリソースを大幅に節約できます。</p>
-<h2 id="2024127-学習内容">2024/12/7 学習内容</h2>
+<h2 id="6-a-name-1a2024127-学習内容">6. <a name='-1'></a>2024/12/7 学習内容</h2>
 <p>「<a href="https://www.amazon.co.jp/AWS%E8%AA%8D%E5%AE%9A%E8%B3%87%E6%A0%BC%E8%A9%A6%E9%A8%93%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E5%95%8F%E9%A1%8C%E9%9B%86-AWS%E8%AA%8D%E5%AE%9A%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%88-%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB-%E5%B1%B1%E4%B8%8B%E5%85%89%E6%B4%8B/dp/4815609063">AWS認定資格試験テキスト&amp;問題集 AWS認定ソリューションアーキテクト - プロフェッショナル | 山下光洋 |本 | 通販 | Amazon</a>」で学習。</p>
-<h3 id="aws-global-accelerator-のグローバルな静的エニーキャスト-ip-アドレスとは">AWS Global Accelerator のグローバルな静的エニーキャスト IP アドレスとは？</h3>
+<h3 id="61-a-nameawsglobalacceleratoripaaws-global-accelerator-のグローバルな静的エニーキャスト-ip-アドレスとは">6.1. <a name='AWSGlobalAcceleratorIP'></a>AWS Global Accelerator のグローバルな静的エニーキャスト IP アドレスとは？</h3>
 <p>AWS Global Accelerator は、アプリケーションのパフォーマンスと可用性を向上させるために設計されたサービスで、その特徴の一つとして <strong>グローバルな静的エニーキャスト IP アドレス</strong> を提供します。この機能により、ユーザーは DNS 設定を変更せずに複数リージョンにまたがるアプリケーションを効率的に運用できます。</p>
 <hr>
-<h3 id="エニーキャスト-ip-アドレスとは">エニーキャスト IP アドレスとは？</h3>
+<h3 id="62-a-nameipaエニーキャスト-ip-アドレスとは">6.2. <a name='IP'></a>エニーキャスト IP アドレスとは？</h3>
 <p>エニーキャスト（Anycast）IP アドレスは、単一の IP アドレスを複数のネットワークエンドポイントに割り当てる技術です。この仕組みにより、クライアントからのトラフィックが地理的に最も近いエンドポイントに自動的にルーティングされます。</p>
 <p>AWS Global Accelerator では、グローバルに分散されたエッジロケーションを活用し、クライアントからのトラフィックを最適な AWS リージョンのバックエンドに届けます。</p>
 <hr>
-<h3 id="グローバルな静的-ip-アドレスの特徴">グローバルな静的 IP アドレスの特徴</h3>
+<h3 id="63-a-nameip-1aグローバルな静的-ip-アドレスの特徴">6.3. <a name='IP-1'></a>グローバルな静的 IP アドレスの特徴</h3>
 <ol>
 <li>
 <p><strong>静的なグローバル IP</strong></p>
@@ -1637,7 +1693,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </li>
 </ol>
 <hr>
-<h3 id="利点">利点</h3>
+<h3 id="64-a-name-1a利点">6.4. <a name='-1'></a>利点</h3>
 <ul>
 <li>
 <p><strong>パフォーマンスの向上</strong><br>
@@ -1657,7 +1713,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </li>
 </ul>
 <hr>
-<h3 id="典型的なユースケース">典型的なユースケース</h3>
+<h3 id="65-a-name-1a典型的なユースケース">6.5. <a name='-1'></a>典型的なユースケース</h3>
 <ol>
 <li>
 <p><strong>グローバルに展開されたウェブアプリケーション</strong></p>
@@ -1685,7 +1741,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </li>
 </ol>
 <hr>
-<h3 id="仕組み">仕組み</h3>
+<h3 id="66-a-name-1a仕組み">6.6. <a name='-1'></a>仕組み</h3>
 <ol>
 <li>
 <p><strong>エニーキャスト IP の割り当て</strong></p>
@@ -1707,7 +1763,7 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </li>
 </ol>
 <hr>
-<h3 id="導入の注意点">導入の注意点</h3>
+<h3 id="67-a-name-1a導入の注意点">6.7. <a name='-1'></a>導入の注意点</h3>
 <ul>
 <li>
 <p><strong>料金</strong></p>
@@ -1729,12 +1785,12 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
 </li>
 </ul>
 <hr>
-<h3 id="まとめ-2">まとめ</h3>
+<h3 id="68-a-name-1aまとめ">6.8. <a name='-1'></a>まとめ</h3>
 <p>AWS Global Accelerator が提供するグローバルな静的エニーキャスト IP アドレスは、グローバル展開されたアプリケーションにおいてパフォーマンス、可用性、運用効率を大幅に向上させます。特に、マルチリージョン環境でのトラフィック管理や災害復旧が重要なシナリオに適しています。</p>
 <p>固定 IP アドレスでトラフィックを最適化し、ユーザー体験を向上させたい場合は、Global Accelerator を活用する価値があります。</p>
 <p>AWS ElastiCache の Redis と Memcached は、アプリケーションのキャッシュ層として使用される分散型インメモリデータストアですが、それぞれ特徴やユースケースが異なります。以下に主な違いをまとめます。</p>
 <hr>
-<h3 id="aws-elasticache-の-redis-と-memcached-の違い">AWS ElastiCache の Redis と Memcached の違い</h3>
+<h3 id="69-a-nameawselasticacheredismemcachedaaws-elasticache-の-redis-と-memcached-の違い">6.9. <a name='AWSElastiCacheRedisMemcached'></a>AWS ElastiCache の Redis と Memcached の違い</h3>
 <table>
   <thead>
       <tr>
@@ -1781,6 +1837,26 @@ S3レプリケーション（CRR: Cross-Region Replication）</li>
       </tr>
   </tbody>
 </table>
+<h3 id="610-a-name-1aメモ">6.10. <a name='-1'></a>メモ</h3>
+<ul>
+<li>AWS Wavelength
+<ul>
+<li>5G ネットワークの超低レイテンシ環境でアプリケーションを実行するためのサービスです。通信事業者（キャリア）の 5G ネットワーク内に AWS のコンピューティングおよびストレージリソースを展開することで、エンドユーザーとの物理的距離を縮め、極めて低い遅延を実現します。</li>
+</ul>
+</li>
+<li>AWS Outposts
+<ul>
+<li>AWS のインフラストラクチャ、サービス、API をお客様のオンプレミス環境に提供するハイブリッドクラウドソリューションです。
+オンプレミスで AWS のサービスを利用することで、低レイテンシ要件を満たしつつ、AWS クラウドと一貫した開発・運用体験を実現します。</li>
+</ul>
+</li>
+<li>Amazon Keyspaces
+<ul>
+<li>Apache Cassandra 向けに完全マネージド型のデータベースサービスを提供する AWS サービスです。
+Cassandra のスケーラブルで高可用性の NoSQL データベースの特性を活かしつつ、インフラストラクチャの管理や運用負担を軽減する設計がされています。</li>
+</ul>
+</li>
+</ul>
     </div>
 
     
