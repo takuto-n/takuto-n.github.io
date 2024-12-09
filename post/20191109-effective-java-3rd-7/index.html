@@ -26,7 +26,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.135.0 with theme even" />
+<meta name="generator" content="Hugo 0.139.3 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-7/" />
@@ -304,36 +304,36 @@ java.lang.FunctionalInterface)</a>にあります。
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">メソッド参照形式</th>
-          <th style="text-align: left">コード</th>
-          <th style="text-align: left">等価ラムダ</th>
+          <th>メソッド参照形式</th>
+          <th>コード</th>
+          <th>等価ラムダ</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">静的メソッド</td>
-          <td style="text-align: left"><code>TypeName::method</code></td>
-          <td style="text-align: left"><code>(args) -&gt; TypeName.method(args)</code></td>
+          <td>静的メソッド</td>
+          <td><code>TypeName::method</code></td>
+          <td><code>(args) -&gt; TypeName.method(args)</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">非静的メソッド（インスタンス#1 の場合）</td>
-          <td style="text-align: left"><code>instance::method</code></td>
-          <td style="text-align: left"><code>(args) -&gt; instance.method(args)</code></td>
+          <td>非静的メソッド（インスタンス#1 の場合）</td>
+          <td><code>instance::method</code></td>
+          <td><code>(args) -&gt; instance.method(args)</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">非静的メソッド（インスタンスなし）</td>
-          <td style="text-align: left"><code>TypeName::method</code></td>
-          <td style="text-align: left"><code>(instance, args) -&gt; instance.method(args)</code></td>
+          <td>非静的メソッド（インスタンスなし）</td>
+          <td><code>TypeName::method</code></td>
+          <td><code>(instance, args) -&gt; instance.method(args)</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">コンストラクタ#2</td>
-          <td style="text-align: left"><code>TypeName::new</code></td>
-          <td style="text-align: left"><code>(args) -&gt; new TypeName(args)</code></td>
+          <td>コンストラクタ#2</td>
+          <td><code>TypeName::new</code></td>
+          <td><code>(args) -&gt; new TypeName(args)</code></td>
       </tr>
       <tr>
-          <td style="text-align: left">配列コンストラクタ</td>
-          <td style="text-align: left"><code>TypeName[]::new</code></td>
-          <td style="text-align: left"><code>(int size) -&gt; new TypeName[size]</code></td>
+          <td>配列コンストラクタ</td>
+          <td><code>TypeName[]::new</code></td>
+          <td><code>(int size) -&gt; new TypeName[size]</code></td>
       </tr>
   </tbody>
 </table>
