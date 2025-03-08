@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220412-set-proxy-and-cert/" />
@@ -178,8 +178,8 @@ NPMやGradleの設定を載せておきます。</p>
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-namenpmanpm">1. <a name='NPM'></a>NPM</h2>
-<h3 id="11-a-nameproxyaproxy">1.1. <a name='Proxy'></a>Proxy</h3>
+<h2 id="1-npm">1. <a name='NPM'></a>NPM</h2>
+<h3 id="11-proxy">1.1. <a name='Proxy'></a>Proxy</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -192,7 +192,7 @@ NPMやGradleの設定を載せておきます。</p>
 </span></span><span class="line"><span class="cl">$ npm config <span class="nb">set</span> https-proxy <span class="o">[</span>プロキシ<span class="o">]</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="12-a-namecertificateacertificate">1.2. <a name='Certificate'></a>Certificate</h3>
+</div><h3 id="12-certificate">1.2. <a name='Certificate'></a>Certificate</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -205,8 +205,8 @@ NPMやGradleの設定を載せておきます。</p>
 </span></span><span class="line"><span class="cl">$ <span class="nb">export</span> <span class="nv">NODE_EXTRA_CA_CERTS</span><span class="o">=[</span>証明書<span class="o">]</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2-a-namegradleagradle">2. <a name='Gradle'></a>Gradle</h2>
-<h3 id="21-a-nameproxy-1aproxy">2.1. <a name='Proxy-1'></a>Proxy</h3>
+</div><h2 id="2-gradle">2. <a name='Gradle'></a>Gradle</h2>
+<h3 id="21-proxy">2.1. <a name='Proxy-1'></a>Proxy</h3>
 <p><code>[ユーザーディレクトリ]/.gradle/gradle.properties</code> を作って、以下を設定する。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -230,7 +230,7 @@ NPMやGradleの設定を載せておきます。</p>
 </span></span><span class="line"><span class="cl">systemProp.https.proxyPassword<span class="o">=[</span>プロキシのポート番号<span class="o">]</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="22-a-namecertificate-1acertificate">2.2. <a name='Certificate-1'></a>Certificate</h3>
+</div><h3 id="22-certificate">2.2. <a name='Certificate-1'></a>Certificate</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -241,7 +241,7 @@ NPMやGradleの設定を載せておきます。</p>
 </span></span><span class="line"><span class="cl"><span class="c1"># default password: changeit </span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="3-a-namereferenceareference">3. <a name='Reference'></a>Reference</h2>
+</div><h2 id="3-reference">3. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="https://www.ibm.com/docs/ja/urbancode-deploy/6.2.1?topic=configuration-changing-passwords-server-keystore">サーバーの鍵ストアのパスワード変更 - IBM Documentation</a></li>
 <li><a href="https://qiita.com/hishida/items/9479fb64a016032c0938">Gradleでのプロキシ設定 - Qiita</a></li>
@@ -306,7 +306,7 @@ NPMやGradleの設定を載せておきます。</p>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

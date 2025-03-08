@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191103-effective-java-3rd-5/" />
@@ -165,12 +165,12 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-name26a項目-26-原型を使わない">1. <a name='26'></a>項目 26 原型を使わない</h2>
+<h2 id="1-項目-26-原型を使わない">1. <a name='26'></a>項目 26 原型を使わない</h2>
 <ul>
 <li>Java 1.4 までジェネリクスがなかった。</li>
 <li>Java 5 でジェネリクスが登場した。</li>
 </ul>
-<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<h3 id="11-結論">1.1. <a name=''></a>結論</h3>
 <p>ジェネリクスの型パラメータが指定できるときは必ず指定しましょう。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -263,8 +263,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">list5</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">111</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2-a-name27a項目-27-無検査警告を取り除く">2. <a name='27'></a>項目 27 無検査警告を取り除く</h2>
-<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+</div><h2 id="2-項目-27-無検査警告を取り除く">2. <a name='27'></a>項目 27 無検査警告を取り除く</h2>
+<h3 id="21-結論">2.1. <a name='-1'></a>結論</h3>
 <p>@SuppressWarnings(&ldquo;unchecked&rdquo;) は気をつけて使いましょう</p>
 <ul>
 <li><code>@SuppressWarnings(&quot;unchecked&quot;)</code>は、クラス、メソッド、変数宣言に付与できる。
@@ -274,8 +274,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="3-a-name28a項目-28-配列よりリストを選ぶ">3. <a name='28'></a>項目 28 配列よりリストを選ぶ</h2>
-<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+<h2 id="3-項目-28-配列よりリストを選ぶ">3. <a name='28'></a>項目 28 配列よりリストを選ぶ</h2>
+<h3 id="31-結論">3.1. <a name='-1'></a>結論</h3>
 <p>配列とリストは次の 2 点で大きく異なる。
 リストの方は、コンパイル時に型安全性を提供するから、バグが発生しにくい。（配列は実行時に型安全性を提供する。）</p>
 <ul>
@@ -293,11 +293,10 @@
 <li>erasure：コンパイル時に型制約を強制し、実行時には要素の型情報を廃棄する。</li>
 </ul>
 <blockquote>
-<p><a href="https://ejje.weblio.jp/content/erasure">erasure</a>の意味は「廃棄」</p>
-</blockquote>
+<p><a href="https://ejje.weblio.jp/content/erasure">erasure</a>の意味は「廃棄」</p></blockquote>
 </li>
 </ul>
-<h4 id="311-a-name-1a配列の場合">3.1.1. <a name='-1'></a>配列の場合</h4>
+<h4 id="311-配列の場合">3.1.1. <a name='-1'></a>配列の場合</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -310,7 +309,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// 実行時にArrayStoreException</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="312-a-name-1aリストの場合">3.1.2. <a name='-1'></a>リストの場合</h4>
+</div><h4 id="312-リストの場合">3.1.2. <a name='-1'></a>リストの場合</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -321,13 +320,13 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Type1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">type1List</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Type2</span><span class="o">&gt;</span><span class="p">();</span><span class="w">  </span><span class="c1">// 互換性のない型</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="32-a-name-1aリストと配列を混在させた場合">3.2. <a name='-1'></a>リストと配列を混在させた場合</h3>
+</div><h3 id="32-リストと配列を混在させた場合">3.2. <a name='-1'></a>リストと配列を混在させた場合</h3>
 <p>リストと配列を混在させてしまった場合は、配列の代わりにリストを使うようにしましょう。</p>
 <ul>
 <li>混在させて、リストを配列にキャストする特殊なケースとして、次項「<a href="#29">項目 29 ジェネリック型を使う</a>」があります。</li>
 </ul>
 <p>単純なジェネリックメソッドで確認する。</p>
-<h4 id="321-a-name1aステップ-1リスト--配列">3.2.1. <a name='1'></a>ステップ 1(リスト → 配列)</h4>
+<h4 id="321-ステップ-1リスト--配列">3.2.1. <a name='1'></a>ステップ 1(リスト → 配列)</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -362,7 +361,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">**/</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="322-a-name2aステップ-2リストキャスト-配列">3.2.2. <a name='2'></a>ステップ 2(リスト[キャスト]→ 配列)</h4>
+</div><h4 id="322-ステップ-2リストキャスト-配列">3.2.2. <a name='2'></a>ステップ 2(リスト[キャスト]→ 配列)</h4>
 <p>リストを配列<code>(E[])</code>にキャストした。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -399,9 +398,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>実行時の<code>E</code>の型が不明で、実行時にリスト(ジェネリクス）の型情報は erasure(廃棄)されているから、キャストの安全性が検査できない。)</p>
-</blockquote>
-<h4 id="323-a-name3aステップ-3リスト--リスト">3.2.3. <a name='3'></a>ステップ 3(リスト → リスト)</h4>
+<p>実行時の<code>E</code>の型が不明で、実行時にリスト(ジェネリクス）の型情報は erasure(廃棄)されているから、キャストの安全性が検査できない。)</p></blockquote>
+<h4 id="323-ステップ-3リスト--リスト">3.2.3. <a name='3'></a>ステップ 3(リスト → リスト)</h4>
 <p>配列<code>(E[])</code>を使わず、リストにした。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -429,8 +427,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="4-a-name29a項目-29-ジェネリック型を使う">4. <a name='29'></a>項目 29 ジェネリック型を使う</h2>
-<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+</div><h2 id="4-項目-29-ジェネリック型を使う">4. <a name='29'></a>項目 29 ジェネリック型を使う</h2>
+<h3 id="41-結論">4.1. <a name='-1'></a>結論</h3>
 <p>以下の場合は、ジェネリクスを利用する良い機会なので使ってみましょう。</p>
 <ul>
 <li>利用者が、メソッドからの戻り値をキャストしないといけない</li>
@@ -550,7 +548,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="42-a-name1-1a補足-1配列を使う理由">4.2. <a name='1-1'></a>補足 1(配列を使う理由)</h3>
+</div><h3 id="42-補足-1配列を使う理由">4.2. <a name='1-1'></a>補足 1(配列を使う理由)</h3>
 <p>Java はリストを直接はサポートしていない。</p>
 <ul>
 <li><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/ArrayList.java#L111">ArrayList</a>などのジェネリック型は配列を使用している。</li>
@@ -559,16 +557,16 @@
 <ul>
 <li><a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/HashMap.java#L149">HashMap</a>などの他のジェネリック型は配列を使用している。</li>
 </ul>
-<h3 id="43-a-name2-1a補足-2ジェネリクスの型の制限">4.3. <a name='2-1'></a>補足 2(ジェネリクスの型の制限)</h3>
+<h3 id="43-補足-2ジェネリクスの型の制限">4.3. <a name='2-1'></a>補足 2(ジェネリクスの型の制限)</h3>
 <p>ジェネリクスの型が制限できる場合は、制限しましょう。</p>
 <p>例：<a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/concurrent/DelayQueue.java#L68">java.util.concurrent.DelayQueue</a>では、<code>DelayQueue&lt;E extends Delayed&gt;</code>としている。</p>
-<h2 id="5-a-name30a項目-30-ジェネリックメソッドを使う">5. <a name='30'></a>項目 30 ジェネリックメソッドを使う</h2>
-<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
+<h2 id="5-項目-30-ジェネリックメソッドを使う">5. <a name='30'></a>項目 30 ジェネリックメソッドを使う</h2>
+<h3 id="51-結論">5.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>ジェネリックメソッドの作り方、使い方を理解しましょう</li>
 <li>再帰型境界を使うことで、型パラメータの機能を制限できる</li>
 </ul>
-<h3 id="52-a-name-1aジェネリックメソッド">5.2. <a name='-1'></a>ジェネリックメソッド</h3>
+<h3 id="52-ジェネリックメソッド">5.2. <a name='-1'></a>ジェネリックメソッド</h3>
 <ul>
 <li>
 <p>ジェネリッククラスと同じように、メソッド単位で型安全性を確保できる</p>
@@ -611,7 +609,7 @@
 </div>
 </div></li>
 </ul>
-<h3 id="53-a-name-1a再帰型境界">5.3. <a name='-1'></a>再帰型境界</h3>
+<h3 id="53-再帰型境界">5.3. <a name='-1'></a>再帰型境界</h3>
 <ul>
 <li>再帰型境界は、<code>T extends HogeInterface</code>のように型パラメータを書くことで、T は HogeInterface が実装されている型であることを制限すること。</li>
 <li>よくある利用法は Comparable インターフェース
@@ -661,7 +659,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="54-a-name-1a余談">5.4. <a name='-1'></a>余談</h3>
+<h3 id="54-余談">5.4. <a name='-1'></a>余談</h3>
 <ul>
 <li>型パラメータの文字としてよく使われる<code>T</code>、<code>E</code>、<code>K</code>、<code>V</code>は何の略なのか</li>
 </ul>
@@ -716,8 +714,8 @@
       </tr>
   </tbody>
 </table>
-<h2 id="6-a-name31apia項目-31-api-の柔軟性向上のために境界ワイルドカードを使う">6. <a name='31API'></a>項目 31 API の柔軟性向上のために境界ワイルドカードを使う</h2>
-<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+<h2 id="6-項目-31-api-の柔軟性向上のために境界ワイルドカードを使う">6. <a name='31API'></a>項目 31 API の柔軟性向上のために境界ワイルドカードを使う</h2>
+<h3 id="61-結論">6.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>最大限の柔軟性のために、プロデューサーかコンシューマーを表す入力パラメータに対してワイルドカード型を使用するべき
 <ul>
@@ -725,7 +723,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="62-a-name-1a境界ワイルドカードを使用しない場合の問題点">6.2. <a name='-1'></a>境界ワイルドカードを使用しない場合の問題点</h3>
+<h3 id="62-境界ワイルドカードを使用しない場合の問題点">6.2. <a name='-1'></a>境界ワイルドカードを使用しない場合の問題点</h3>
 <ul>
 <li>
 <p>下記のような Stack クラスがある。</p>
@@ -843,7 +841,7 @@
 <p>これも不便。</p>
 </li>
 </ul>
-<h3 id="63-a-name-1a境界ワイルドカードでの解決">6.3. <a name='-1'></a>境界ワイルドカードでの解決</h3>
+<h3 id="63-境界ワイルドカードでの解決">6.3. <a name='-1'></a>境界ワイルドカードでの解決</h3>
 <ul>
 <li>
 <p>前述の問題は境界ワイルドカードを使うことで解決できる</p>
@@ -876,7 +874,7 @@
 </div>
 </div></li>
 </ul>
-<h3 id="64-a-namegetputpecsaget--put-原則pecs">6.4. <a name='GETPUTPECS'></a>GET &amp; PUT 原則（PECS）</h3>
+<h3 id="64-get--put-原則pecs">6.4. <a name='GETPUTPECS'></a>GET &amp; PUT 原則（PECS）</h3>
 <ul>
 <li><code>&lt;? extends E&gt;</code>と<code>&lt;? super E&gt;</code>のどちらを使うか決めるための原則
 <ul>
@@ -899,7 +897,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="65-a-namegetputaget--put-原則の例問題">6.5. <a name='GETPUT'></a>GET &amp; PUT 原則の例(問題)</h3>
+<h3 id="65-get--put-原則の例問題">6.5. <a name='GETPUT'></a>GET &amp; PUT 原則の例(問題)</h3>
 <ul>
 <li>
 <p>問 1. 前項目で登場した下記の union メソッドはどのように境界ワイルドカードを付けるべきか？</p>
@@ -999,8 +997,7 @@ s1、s2 は値を提供しているから。</p>
 </div>
 </div><blockquote>
 <p><code>E extends Comparable&lt;? super E&gt;</code>の理由は以下。
-<code>[PECSの原則に従うと] Comparableは常に消費者(consumer)なので、Comparable&lt;T&gt;ではなくComparable&lt;? super T&gt;を常に使用するべき。</code></p>
-</blockquote>
+<code>[PECSの原則に従うと] Comparableは常に消費者(consumer)なので、Comparable&lt;T&gt;ではなくComparable&lt;? super T&gt;を常に使用するべき。</code></p></blockquote>
 </li>
 <li>
 <p>上記の実際の例としては、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ScheduledFuture.html">ScheduledFuture インターフェース</a>がある。</p>
@@ -1018,8 +1015,8 @@ s1、s2 は値を提供しているから。</p>
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">ScheduledFuture</span><span class="o">&lt;?&gt;&gt;</span><span class="w"> </span><span class="n">scheduledFutures</span><span class="o">=</span><span class="p">...;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="7-a-name32a項目-32-ジェネリックと可変長引数を注意して組み合わせる">7. <a name='32'></a>項目 32 ジェネリックと可変長引数を注意して組み合わせる</h2>
-<h3 id="71-a-name-1a結論">7.1. <a name='-1'></a>結論</h3>
+</div><h2 id="7-項目-32-ジェネリックと可変長引数を注意して組み合わせる">7. <a name='32'></a>項目 32 ジェネリックと可変長引数を注意して組み合わせる</h2>
+<h3 id="71-結論">7.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>ジェネリクスと可変長引数を同時に使用する場合は、以下を守った上で <code>@SafeVarargs</code> を付与する
 <ol>
@@ -1029,7 +1026,7 @@ s1、s2 は値を提供しているから。</p>
 </li>
 <li>コレクションをネストさせる等で対処することも検討する</li>
 </ul>
-<h3 id="72-a-name-1aジェネリクスと可変長引数を同時に使用するとタイプアンセーフになる">7.2. <a name='-1'></a>ジェネリクスと可変長引数を同時に使用すると、タイプアンセーフになる。</h3>
+<h3 id="72-ジェネリクスと可変長引数を同時に使用するとタイプアンセーフになる">7.2. <a name='-1'></a>ジェネリクスと可変長引数を同時に使用すると、タイプアンセーフになる。</h3>
 <p>以下のように、ジェネリック型の可変長引数に値を格納するのは安全でないケースが存在する。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1077,7 +1074,7 @@ s1、s2 は値を提供しているから。</p>
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="73-a-name-1a本当にタイプセーフなのかを知るには">7.3. <a name='-1'></a>本当にタイプセーフなのかを知るには</h3>
+</div><h3 id="73-本当にタイプセーフなのかを知るには">7.3. <a name='-1'></a>本当にタイプセーフなのかを知るには</h3>
 <p>可変長配列の引数が以下の両方を満たす状態ならばタイプセーフと言える</p>
 <ol>
 <li>配列を変更していない(要素に値を格納していない)</li>
@@ -1148,8 +1145,7 @@ s1、s2 は値を提供しているから。</p>
 </div><blockquote>
 <p>コレクションがネストした時点で、利用側にミスを誘発しやすい。<br>
 ネストの何段目を操作しているのか混乱しやすく、ミスをコンパイルで発見しにくくなる。<br>
-その場合は、クラスでくるむことで、意図を明確にしやすくなる。</p>
-</blockquote>
+その場合は、クラスでくるむことで、意図を明確にしやすくなる。</p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1198,20 +1194,20 @@ s1、s2 は値を提供しているから。</p>
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="8-a-name33a項目-33-型安全な異種コンテナを検討する">8. <a name='33'></a>項目 33 型安全な異種コンテナを検討する</h2>
-<h3 id="81-a-name-1a結論">8.1. <a name='-1'></a>結論</h3>
-<h4 id="811-a-name-1a前提">8.1.1. <a name='-1'></a>前提</h4>
+</div><h2 id="8-項目-33-型安全な異種コンテナを検討する">8. <a name='33'></a>項目 33 型安全な異種コンテナを検討する</h2>
+<h3 id="81-結論">8.1. <a name='-1'></a>結論</h3>
+<h4 id="811-前提">8.1.1. <a name='-1'></a>前提</h4>
 <ul>
 <li>型安全とは、String 型のインスタンスを要求したときに、その型のインスタンスを返すこと。</li>
 <li>異種コンテナとは、クラスをキー(<code>Key</code>)、そのクラスのインスタンスを値(<code>Value</code>)とするもの</li>
 </ul>
-<h4 id="812-a-name-1aポイント">8.1.2. <a name='-1'></a>ポイント</h4>
+<h4 id="812-ポイント">8.1.2. <a name='-1'></a>ポイント</h4>
 <ul>
 <li>Map は キーとバリューの対応を、型では保証していない。</li>
 <li>put は何も考えずに格納する</li>
 <li>get 時に辻褄が合うように型変換する</li>
 </ul>
-<h3 id="82-a-name-1a型パラメータの個数を可変にする方法">8.2. <a name='-1'></a>型パラメータの個数を可変にする方法</h3>
+<h3 id="82-型パラメータの個数を可変にする方法">8.2. <a name='-1'></a>型パラメータの個数を可変にする方法</h3>
 <p><code>Set&lt;E&gt;</code> は 1 個、 <code>Map&lt;K,V&gt;</code> は 2 個とパラメータ数が固定だが、これを固定したくない(できない)ケースがある。<br>
 代表的なものは、コンテナを実装するとき。
 このケースでは、キーをパラメータ化することで様々な型を受け取れるようにする。</p>
@@ -1290,7 +1286,7 @@ s1、s2 は値を提供しているから。</p>
 ジェネリクスはイレイジャで実行時に消されてしまうので。</li>
 </ul>
 <p>前述の型パラメータは extends を用いて境界を設けることも可能。</p>
-<h2 id="9-a-nameurla参考-url">9. <a name='URL'></a>参考 URL</h2>
+<h2 id="9-参考-url">9. <a name='URL'></a>参考 URL</h2>
 <ul>
 <li><a href="https://marycore.jp/coding/generics-types/">ジェネリクスでよく使われている T や E, A、その他型パラメータの意味 | MaryCore</a></li>
 </ul>
@@ -1354,7 +1350,7 @@ s1、s2 は値を提供しているから。</p>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

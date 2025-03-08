@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-12/" />
@@ -162,8 +162,8 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-name85javaa項目-85-java-のシリアライズよりも代替手段を選ぶ">1. <a name='85Java'></a>項目 85 Java のシリアライズよりも代替手段を選ぶ</h2>
-<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<h2 id="1-項目-85-java-のシリアライズよりも代替手段を選ぶ">1. <a name='85Java'></a>項目 85 Java のシリアライズよりも代替手段を選ぶ</h2>
+<h3 id="11-結論">1.1. <a name=''></a>結論</h3>
 <ul>
 <li>シリアライズは使うべきでない
 <ul>
@@ -187,7 +187,7 @@
 </li>
 <li>シリアライズが避けられないかつ信頼できないデータをデシリアライズしなければならない場合は、フィルタリングをするべし</li>
 </ul>
-<h3 id="12-a-name-1aシリアライズの脆弱性">1.2. <a name='-1'></a>シリアライズの脆弱性</h3>
+<h3 id="12-シリアライズの脆弱性">1.2. <a name='-1'></a>シリアライズの脆弱性</h3>
 <ul>
 <li>シリアライズは脆弱である
 <ul>
@@ -220,7 +220,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="13-a-name-1aデシリアライズ時のフィルタリング">1.3. <a name='-1'></a>デシリアライズ時のフィルタリング</h3>
+<h3 id="13-デシリアライズ時のフィルタリング">1.3. <a name='-1'></a>デシリアライズ時のフィルタリング</h3>
 <ul>
 <li>デシリアライズ時のフィルタリングには<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/ObjectInputFilter.html">ObjectInputFilter (Java SE 11 &amp; JDK 11 )</a>を使うべし
 <ul>
@@ -233,7 +233,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="14-a-name-1a余談">1.4. <a name='-1'></a>余談</h3>
+<h3 id="14-余談">1.4. <a name='-1'></a>余談</h3>
 <ul>
 <li>シリアライズの扱いずらさ
 <ul>
@@ -255,8 +255,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-a-name86serializablea項目-86-serializable-を細心の注意を払って実装する">2. <a name='86Serializable'></a>項目 86 Serializable を細心の注意を払って実装する</h2>
-<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<h2 id="2-項目-86-serializable-を細心の注意を払って実装する">2. <a name='86Serializable'></a>項目 86 Serializable を細心の注意を払って実装する</h2>
+<h3 id="21-結論">2.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>Serializableインターフェースは軽く考えて実装するべきではない
 <ul>
@@ -275,8 +275,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="22-a-nameserializable3aserializable実装に伴う3つのコスト">2.2. <a name='Serializable3'></a>Serializable実装に伴う3つのコスト</h3>
-<h4 id="221-a-name-1aリリース後のクラスの実装の変更に対する柔軟性の低下">2.2.1. <a name='-1'></a>リリース後のクラスの実装の変更に対する柔軟性の低下</h4>
+<h3 id="22-serializable実装に伴う3つのコスト">2.2. <a name='Serializable3'></a>Serializable実装に伴う3つのコスト</h3>
+<h4 id="221-リリース後のクラスの実装の変更に対する柔軟性の低下">2.2.1. <a name='-1'></a>リリース後のクラスの実装の変更に対する柔軟性の低下</h4>
 <ul>
 <li>Serializableを実装したクラスを一旦リリースしてしまうと、その実装を変更することは容易ではない
 <ul>
@@ -293,12 +293,12 @@
 </ul>
 </li>
 </ul>
-<h4 id="222-a-name-1aバグやセキュリティホールの可能性の増大">2.2.2. <a name='-1'></a>バグやセキュリティホールの可能性の増大</h4>
+<h4 id="222-バグやセキュリティホールの可能性の増大">2.2.2. <a name='-1'></a>バグやセキュリティホールの可能性の増大</h4>
 <ul>
 <li>バグの可能性が増大する理由は、デシリアライズ時のオブジェクトは通常のコンストラクタを使わずに生成されるため、コンストラクタで保証される不変式が保証されないから。</li>
 <li>セキュリティホールについては、項目85参照</li>
 </ul>
-<h4 id="223-a-name-1aテストの負荷の増大">2.2.3. <a name='-1'></a>テストの負荷の増大</h4>
+<h4 id="223-テストの負荷の増大">2.2.3. <a name='-1'></a>テストの負荷の増大</h4>
 <ul>
 <li>新たなリリースのインスタンスをシリアライズし、古いリリースのデシリアライズ処理でインスタンスが復元できるを確認する必要がある。 また逆に、古いリリースのインスタンスをシリアライズし、新しいリリースのデシリアライズ処理で復元できるかも確認する必要がある</li>
 <li>これらのテストは、新旧のインスタンス間でシリアライズ/デシリアライズできるかというバイナリ互換性に加えて、 動作が意図しているものかどうかというセマンティクス互換性も検査する必要がある
@@ -325,7 +325,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="224-a-nameserializablea継承するために設計されたクラスインターフェースに対するserializable実装">2.2.4. <a name='Serializable'></a>継承するために設計されたクラス・インターフェースに対するSerializable実装</h4>
+<h4 id="224-継承するために設計されたクラスインターフェースに対するserializable実装">2.2.4. <a name='Serializable'></a>継承するために設計されたクラス・インターフェースに対するSerializable実装</h4>
 <ul>
 <li>継承するために設計されたクラスとインタフェースではSerializableを実装・拡張するべきでない
 <ul>
@@ -339,15 +339,15 @@
 </ul>
 </li>
 </ul>
-<h2 id="3-a-name87a項目-87-カスタムシリアライズ形式の使用を検討する">3. <a name='87'></a>項目 87 カスタムシリアライズ形式の使用を検討する</h2>
-<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+<h2 id="3-項目-87-カスタムシリアライズ形式の使用を検討する">3. <a name='87'></a>項目 87 カスタムシリアライズ形式の使用を検討する</h2>
+<h3 id="31-結論">3.1. <a name='-1'></a>結論</h3>
 <p>Javaにおけるシリアライズの実装方法は2通りある。</p>
 <ul>
 <li>デフォルトシリアライズ形式</li>
 <li>カスタムシリアライズ形式</li>
 </ul>
 <p>基本的に、カスタムを選ぶこと(=後述する、<code>#readObject</code>, <code>#writeObject</code> を実装すること)。</p>
-<h3 id="32-a-name-1aデフォルトシリアライズ形式とは">3.2. <a name='-1'></a>デフォルトシリアライズ形式とは</h3>
+<h3 id="32-デフォルトシリアライズ形式とは">3.2. <a name='-1'></a>デフォルトシリアライズ形式とは</h3>
 <p>単に <code>Implements Serializable</code> しただけの状態。これで、Javaは内部表現をそのままバイナリにする(なにもしないと全部のプロパティが対象になる)。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -514,7 +514,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="33-a-name-1aカスタムシリアライズ形式-とは">3.3. <a name='-1'></a>カスタムシリアライズ形式 とは</h3>
+<h3 id="33-カスタムシリアライズ形式-とは">3.3. <a name='-1'></a>カスタムシリアライズ形式 とは</h3>
 <p><code>implements Serializable</code> と、 <code>readObject</code> メソッド と <code>writeObject</code> メソッドを実装した状態。デフォルトで問題ないと思うかもしれないが、オブジェクトの構造次第では不適切になる。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -790,15 +790,15 @@
 </ul>
 </li>
 </ul>
-<h2 id="4-a-name88readobjecta項目-88-防御的に-readobject-メソッドを書く">4. <a name='88readObject'></a>項目 88 防御的に readObject メソッドを書く</h2>
-<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+<h2 id="4-項目-88-防御的に-readobject-メソッドを書く">4. <a name='88readObject'></a>項目 88 防御的に readObject メソッドを書く</h2>
+<h3 id="41-結論">4.1. <a name='-1'></a>結論</h3>
 <p>何が入ってきても大丈夫なように、readObjectは防御的プログラミングをすべし。</p>
 <ul>
 <li>以前の、防御的コピーのテクニックなどが使える。</li>
 <li>readObjectは、第二のコンストラクタと言える。</li>
 <li>引数のバイトストリームは悪意あるものかもしれないし、実際にシリアライズされたインスタンスである保証もない。</li>
 </ul>
-<h3 id="42-a-name-1aなぜ防御的な必要があるか">4.2. <a name='-1'></a>なぜ防御的な必要があるか</h3>
+<h3 id="42-なぜ防御的な必要があるか">4.2. <a name='-1'></a>なぜ防御的な必要があるか</h3>
 <p>項目87でみたように、デシリアライズはバイト配列をもとにオブジェクトを再現する。
 ということは、「不正なバイナリを食わせられる」とか「改ざんされる」といったことが起き得る。</p>
 <p>なので、以下に従うこと。</p>
@@ -816,8 +816,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="5-a-name89readresolveenuma項目-89-インスタンス制御に対してはreadresolve-より-enum-型を選ぶ">5. <a name='89readResolveenum'></a>項目 89 インスタンス制御に対しては、readResolve より enum 型を選ぶ</h2>
-<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
+<h2 id="5-項目-89-インスタンス制御に対してはreadresolve-より-enum-型を選ぶ">5. <a name='89readResolveenum'></a>項目 89 インスタンス制御に対しては、readResolve より enum 型を選ぶ</h2>
+<h3 id="51-結論">5.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>インスタンス制御(シングルトン等)を強制したい場合は、<code>readResolve</code>よりも<code>enum</code>型を選びましょう。
 <ul>
@@ -830,7 +830,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="52-a-name-1aサンプル">5.2. <a name='-1'></a>サンプル</h3>
+<h3 id="52-サンプル">5.2. <a name='-1'></a>サンプル</h3>
 <p><code>Serializable</code>を継承したEnum型で、<code>readResolve</code>でも対応しているサンプル。</p>
 <ul>
 <li>「非 transient なプロパティ」を含んでいるので不完全。
@@ -984,7 +984,7 @@ JVMによって、宣言されたもの以外のインスタンスはあり得�
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="53-a-name-1a余談">5.3. <a name='-1'></a>余談</h3>
+</div><h3 id="53-余談">5.3. <a name='-1'></a>余談</h3>
 <ul>
 <li>以下の悪意あるバイトストリームの攻撃を、<code>openjdk version &quot;13.0.2&quot; 2020-01-14</code>で実行してみた。
 もし以下のエラーが出ている方は、デフォルトパッケージにクラスを格納すると、ちゃんと？バイトストリーム攻撃が成功すると思います。
@@ -1100,7 +1100,7 @@ JVMによって、宣言されたもの以外のインスタンスはあり得�
 </span></span><span class="line"><span class="cl"><span class="o">[</span>A Fool Such as I<span class="o">]</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="54-a-name-1aポイント">5.4. <a name='-1'></a>ポイント</h3>
+</div><h3 id="54-ポイント">5.4. <a name='-1'></a>ポイント</h3>
 <ul>
 <li>インスタンス制御(シングルトン等)を強制したい場合は、<code>Serializable</code>などは使わず、単に<code>enum</code>型を選びましょう。</li>
 <li>実行時にしかどのようなインスタンスなのかわからない場合は、項目88を参考に。
@@ -1110,8 +1110,8 @@ JVMによって、宣言されたもの以外のインスタンスはあり得�
 </ul>
 </li>
 </ul>
-<h2 id="6-a-name90a項目-90-シリアライズされたインスタンスの代わりにシリアライズプロキシを検討する">6. <a name='90'></a>項目 90 シリアライズされたインスタンスの代わりに、シリアライズ・プロキシを検討する</h2>
-<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+<h2 id="6-項目-90-シリアライズされたインスタンスの代わりにシリアライズプロキシを検討する">6. <a name='90'></a>項目 90 シリアライズされたインスタンスの代わりに、シリアライズ・プロキシを検討する</h2>
+<h3 id="61-結論">6.1. <a name='-1'></a>結論</h3>
 <ul>
 <li><code>Serializable</code>を使わなければいけない時は、シリアライズ・プロキシパターンを使いましょう。
 <ul>
@@ -1119,7 +1119,7 @@ JVMによって、宣言されたもの以外のインスタンスはあり得�
 </ul>
 </li>
 </ul>
-<h3 id="62-a-name-1aシリアライズプロキシパターンのサンプル">6.2. <a name='-1'></a>シリアライズ・プロキシパターンのサンプル</h3>
+<h3 id="62-シリアライズプロキシパターンのサンプル">6.2. <a name='-1'></a>シリアライズ・プロキシパターンのサンプル</h3>
 <p>このパターンを使用すると、防御的コピーによる方法（項目50）と同様に、以下を防げる。</p>
 <ul>
 <li>偽りのバイトストリームによる攻撃</li>
@@ -1261,9 +1261,8 @@ JVMによって、宣言されたもの以外のインスタンスはあり得�
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>補足：<code>Period</code> → <code>SerializationProxy</code> → <code>バイトデータ</code> → <code>SerializationProxy</code> → <code>Period</code>となる。<code>Period</code>の前に<code>SerializationProxy</code>を介し、<code>new Period()</code>が実行されるため、攻撃を防ぐ余地が生まれる。</p>
-</blockquote>
-<h3 id="63-a-name-1aポイント">6.3. <a name='-1'></a>ポイント</h3>
+<p>補足：<code>Period</code> → <code>SerializationProxy</code> → <code>バイトデータ</code> → <code>SerializationProxy</code> → <code>Period</code>となる。<code>Period</code>の前に<code>SerializationProxy</code>を介し、<code>new Period()</code>が実行されるため、攻撃を防ぐ余地が生まれる。</p></blockquote>
+<h3 id="63-ポイント">6.3. <a name='-1'></a>ポイント</h3>
 <p><code>Serializable</code>の実装は、様々な問題があり、極力しようは避けるべきであるが、使う際はシリアライズ・プロキシパターンの利用を検討しましょう。</p>
 <ul>
 <li><code>serialVersionUID</code>の管理</li>
@@ -1330,7 +1329,7 @@ JVMによって、宣言されたもの以外のインスタンスはあり得�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

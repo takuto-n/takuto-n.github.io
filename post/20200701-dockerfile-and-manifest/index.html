@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20200701-dockerfile-and-manifest/" />
@@ -177,7 +177,7 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-namedockerfileadockerfile">1. <a name='Dockerfile'></a>Dockerfile</h2>
+<h2 id="1-dockerfile">1. <a name='Dockerfile'></a>Dockerfile</h2>
 <ul>
 <li>Command
 <div class="highlight"><div class="chroma">
@@ -198,9 +198,8 @@
 <li><a href="https://qiita.com/fist0/items/2fb1c7f894b5bdff79f4">docker images を全削除する - Qiita</a></li>
 <li><a href="https://qiita.com/boiyama/items/9972601ffc240553e1f3">Docker一括削除コマンドまとめ - Qiita</a></li>
 <li><a href="https://qiita.com/shisama/items/48e2eaf1dc356568b0d7">一発ですべてのDockerコンテナを停止・削除、イメージの削除をする - Qiita</a></li>
-</ul>
-</blockquote>
-<h3 id="11-a-namesample-executespringbootjarasample---execute-springboot-jar">1.1. <a name='Sample-ExecuteSpringBootJar'></a>Sample - Execute SpringBoot Jar</h3>
+</ul></blockquote>
+<h3 id="11-sample---execute-springboot-jar">1.1. <a name='Sample-ExecuteSpringBootJar'></a>Sample - Execute SpringBoot Jar</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -215,7 +214,7 @@
 </span></span><span class="line"><span class="cl">ENTRYPOINT <span class="o">[</span><span class="s2">&#34;java&#34;</span>, <span class="s2">&#34;-jar&#34;</span>, <span class="s2">&#34;./app.jar&#34;</span><span class="o">]</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="12-a-namesample-copyfileasample---copy-file">1.2. <a name='Sample-CopyFile'></a>Sample - Copy File</h3>
+</div><h3 id="12-sample---copy-file">1.2. <a name='Sample-CopyFile'></a>Sample - Copy File</h3>
 <ul>
 <li>フォルダ構成
 <div class="highlight"><div class="chroma">
@@ -326,7 +325,7 @@
 </div>
 </div></li>
 </ul>
-<h3 id="13-a-namesample-multi-stagebuildsasample---multi-stage-builds">1.3. <a name='Sample-Multi-stageBuilds'></a>Sample - Multi-stage Builds</h3>
+<h3 id="13-sample---multi-stage-builds">1.3. <a name='Sample-Multi-stageBuilds'></a>Sample - Multi-stage Builds</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -365,7 +364,7 @@
 </span></span><span class="line"><span class="cl">ENTRYPOINT <span class="o">[</span><span class="s2">&#34;java&#34;</span>, <span class="s2">&#34;-jar&#34;</span>, <span class="s2">&#34;./simple-restcontroller-0.0.1-SNAPSHOT.jar&#34;</span><span class="o">]</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2-a-namemanifestfilekinddeploymentamanifest-file--kind-deployment-">2. <a name='ManifestFilekind:Deployment'></a>Manifest File ( kind: Deployment )</h2>
+</div><h2 id="2-manifest-file--kind-deployment-">2. <a name='ManifestFilekind:Deployment'></a>Manifest File ( kind: Deployment )</h2>
 <ul>
 <li>
 <p>Command</p>
@@ -526,7 +525,7 @@
 </div>
 </div></li>
 </ul>
-<h2 id="3-a-nameinaddition-executionresult-samplemulti-stagebuildsain-addition---execution-result---sample-multi-stage-builds">3. <a name='Inaddition-ExecutionResult-SampleMulti-StageBuilds'></a>In addition - Execution Result - Sample Multi-Stage Builds</h2>
+<h2 id="3-in-addition---execution-result---sample-multi-stage-builds">3. <a name='Inaddition-ExecutionResult-SampleMulti-StageBuilds'></a>In addition - Execution Result - Sample Multi-Stage Builds</h2>
 <p>Multi-Stage Buildsにより、約80秒ほどビルドが早くなりました。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -824,7 +823,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/demo
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="4-a-namerefferencearefference">4. <a name='Refference'></a>Refference</h2>
+</div><h2 id="4-refference">4. <a name='Refference'></a>Refference</h2>
 <ul>
 <li><a href="https://qiita.com/cyberblack28/items/0b0ec02bce67a16e2f17">Docker &amp; Docker Compose on CentOS8 - Qiita</a></li>
 <li><a href="https://qiita.com/os1ma/items/f4ce2bb947680be8fdd9">Buildkitを使ってMulti-stage BuildでMavenのキャッシュを効かせる - Qiita</a></li>
@@ -897,7 +896,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

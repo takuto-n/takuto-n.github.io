@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20200614-jmeter-master-slave/" />
@@ -147,13 +147,11 @@
 <p>まずJmeterとは何ですか？については以下のとおりです。</p>
 <blockquote>
 <p>JMeter はJakarta プロジェクト で開発が進められている、パフォーマンス計測用のJavaアプリケーションです。元々はWebアプリケーションのテストのために作成されたもので、さまざまなWebアプリケーションをテストする機能を持っています。<br>
-参考：<a href="https://www.techscore.com/tech/Java/ApacheJakarta/JMeter/1/">1. JMeterの基本 | TECHSCORE(テックスコア)</a></p>
-</blockquote>
+参考：<a href="https://www.techscore.com/tech/Java/ApacheJakarta/JMeter/1/">1. JMeterの基本 | TECHSCORE(テックスコア)</a></p></blockquote>
 <p>軽い負荷をかけて、ちょっと動作を見てみたいなレベルであれば、<a href="https://httpd.apache.org/docs/2.4/programs/ab.html">Apache Bench</a> で良いかと思います。参考：<a href="https://qiita.com/flexfirm/items/ac5a2f53cfa933a37192">Apache Benchでサクッと性能テスト - Qiita</a></p>
 <p>強い負荷をかけて、動作をちゃんと確認したいなレベルであれば、<a href="https://jmeter.apache.org/usermanual/get-started.html">Apache JMeter</a> が選択肢に挙がってきます。</p>
 <blockquote>
-<p>参考までに、他の手段としては、単に複数マシンに <code>ssh</code> で入って、一斉に負荷掛けツールを実行っていうのも選択肢に挙がるかなとは思います。</p>
-</blockquote>
+<p>参考までに、他の手段としては、単に複数マシンに <code>ssh</code> で入って、一斉に負荷掛けツールを実行っていうのも選択肢に挙がるかなとは思います。</p></blockquote>
 <p>では、以下のような目次で説明しておこうと思います。</p>
 <!-- vscode-markdown-toc -->
 <ul>
@@ -240,12 +238,12 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-namejmetersettingexhowtomakejmxajmeter-settingex-how-to-make-jmx">1. <a name='JmeterSettingex..howtomakejmx'></a>Jmeter Setting(ex.. how to make jmx)</h2>
+<h2 id="1-jmeter-settingex-how-to-make-jmx">1. <a name='JmeterSettingex..howtomakejmx'></a>Jmeter Setting(ex.. how to make jmx)</h2>
 <p>まず、JMXの作成方法、そして、Jmeterの設定（Master&amp;Slave側の設定 と Master側だけの設定 と Slave側だけの設定）について説明します。</p>
-<h3 id="11-a-namehowtomakejmxahow-to-make-jmx">1.1. <a name='HowtomakeJMX'></a>How to make JMX</h3>
+<h3 id="11-how-to-make-jmx">1.1. <a name='HowtomakeJMX'></a>How to make JMX</h3>
 <p>以下の図のようにJmeter上で設定し、<code>Save Test Plan as</code> 等で保存すると、JMXファイルができる。</p>
 <p><img src="/img/20200614/jmeter_settings.png" alt=""></p>
-<h4 id="111-a-nameadvancedsettingaadvanced-setting">1.1.1. <a name='AdvancedSetting'></a>Advanced Setting</h4>
+<h4 id="111-advanced-setting">1.1.1. <a name='AdvancedSetting'></a>Advanced Setting</h4>
 <p>実行時に動的にスレッド数やRamp-Up期間(秒)、ループ回数、HTTPのリクエスト先等を設定したくなるかと思います。</p>
 <p>その場合は以下のような手順で出来ます。</p>
 <ol>
@@ -253,11 +251,10 @@
 <li>Jmeterの実行時に、<code>~/jmeter/bin/jmeter -n -t test.jmx -r -Jthread_num=10 -Jramp_up=60</code> などのようにすればOKです。</li>
 </ol>
 <blockquote>
-<p>NOTE: CLIモードのJmeterのオプションについては、<a href="https://jmeter.apache.org/usermanual/get-started.html#non_gui">Apache JMeter - User&rsquo;s Manual: Getting Started</a> を参考にしてください。</p>
-</blockquote>
-<h2 id="2-a-namemaster-slavesettingamaster-slave-setting">2. <a name='Master-SlaveSetting'></a>Master-Slave Setting</h2>
-<h3 id="21-a-namejmetermasterslavessettingsajmeter-master--slaves-settings">2.1. <a name='JmeterMasterSlavesSettings'></a>Jmeter Master &amp; Slave&rsquo;s Settings</h3>
-<h4 id="211-a-namefileplacementafile-placement">2.1.1. <a name='FilePlacement'></a>File Placement</h4>
+<p>NOTE: CLIモードのJmeterのオプションについては、<a href="https://jmeter.apache.org/usermanual/get-started.html#non_gui">Apache JMeter - User&rsquo;s Manual: Getting Started</a> を参考にしてください。</p></blockquote>
+<h2 id="2-master-slave-setting">2. <a name='Master-SlaveSetting'></a>Master-Slave Setting</h2>
+<h3 id="21-jmeter-master--slaves-settings">2.1. <a name='JmeterMasterSlavesSettings'></a>Jmeter Master &amp; Slave&rsquo;s Settings</h3>
+<h4 id="211-file-placement">2.1.1. <a name='FilePlacement'></a>File Placement</h4>
 <p>Master側マシンとSlave側マシンで、<br>
 Jmeterで利用するファイルは、<strong>同じフォルダ構成</strong> にして配置する必要があります。</p>
 <div class="highlight"><div class="chroma">
@@ -302,7 +299,7 @@ Jmeterで利用するファイルは、<strong>同じフォルダ構成</strong>
 </span></span><span class="line"><span class="cl">└── rmi_keystore.jks
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="212-a-nameheapmemorysettingaheap-memory-setting">2.1.2. <a name='HeapMemorySetting'></a>Heap Memory Setting</h4>
+</div><h4 id="212-heap-memory-setting">2.1.2. <a name='HeapMemorySetting'></a>Heap Memory Setting</h4>
 <p>以下のファイルの159行目あたりの <code>: &quot;${HEAP:=&quot;-Xms1g -Xmx1g -XX:MaxMetaspaceSize=256m&quot;}&quot;</code> を設定する。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -312,7 +309,7 @@ Jmeterで利用するファイルは、<strong>同じフォルダ構成</strong>
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vi ~/jmeter/bin/jmeter
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="213-a-nametimestampformatsettingatimestamp-format-setting">2.1.3. <a name='TimeStampFormatSetting'></a>TimeStamp Format Setting</h4>
+</div><h4 id="213-timestamp-format-setting">2.1.3. <a name='TimeStampFormatSetting'></a>TimeStamp Format Setting</h4>
 <p>以下のファイルの531行目あたりの <code>#jmeter.save.saveservice.timestamp_format=yyyy/MM/dd HH:mm:ss.SSS</code> のコメントアウトを外す。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -322,7 +319,7 @@ Jmeterで利用するファイルは、<strong>同じフォルダ構成</strong>
 <pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">vi ~/jmeter/bin/jmeter.properties
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="214-a-namegeneratekeystoreagenerate-keystore">2.1.4. <a name='GenerateKeyStore'></a>Generate KeyStore</h4>
+</div><h4 id="214-generate-keystore">2.1.4. <a name='GenerateKeyStore'></a>Generate KeyStore</h4>
 <p>jmeter-serverとの通信がSSLであるため、
 SSL通信で使用するキーおよび証明書（keystore）の作成が必要です。</p>
 <div class="highlight"><div class="chroma">
@@ -375,8 +372,8 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 </span></span><span class="line"><span class="cl">Copy the generated rmi_keystore.jks to jmeter/bin folder or reference it in property <span class="s1">&#39;server.rmi.ssl.keystore.file&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="22-a-namejmetermasterssettingsajmeter-masters-settings">2.2. <a name='JmeterMastersSettings'></a>Jmeter Master&rsquo;s Settings</h3>
-<h4 id="221-a-nameremotehostsettingsaremote-host-settings">2.2.1. <a name='RemoteHostSettings'></a>Remote Host Settings</h4>
+</div><h3 id="22-jmeter-masters-settings">2.2. <a name='JmeterMastersSettings'></a>Jmeter Master&rsquo;s Settings</h3>
+<h4 id="221-remote-host-settings">2.2.1. <a name='RemoteHostSettings'></a>Remote Host Settings</h4>
 <p>Master側のマシンに、Slaveのマシンはこれだよ！って教えるための設定です。<br>
 以下のファイルの259行目あたりを <code>remote_hosts=aa.aa.aa.aa:1099,bb.bb.bb.bb:1099</code> 等のように、Slaveで利用するマシンのURLを設定する。</p>
 <div class="highlight"><div class="chroma">
@@ -387,8 +384,8 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 <pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">vi ~/jmeter/bin/jmeter.properties
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="23-a-namejmeterslavessettingsajmeter-slaves-settings">2.3. <a name='JmeterSlavesSettings'></a>Jmeter Slave&rsquo;s Settings</h3>
-<h4 id="231-a-namejmeter-serverautomaticstartsettingajmeter-server-automatic-start-setting">2.3.1. <a name='jmeter-serverAutomaticStartSetting'></a>jmeter-server Automatic Start Setting</h4>
+</div><h3 id="23-jmeter-slaves-settings">2.3. <a name='JmeterSlavesSettings'></a>Jmeter Slave&rsquo;s Settings</h3>
+<h4 id="231-jmeter-server-automatic-start-setting">2.3.1. <a name='jmeter-serverAutomaticStartSetting'></a>jmeter-server Automatic Start Setting</h4>
 <p>Slaveのマシンが再起動してしまったとしても、jmeter-serverが自動起動されるようにする設定です。<br>
 以下のファイルの末尾に、<code>/home/centos/jmeter/bin/jmeter-server &amp;</code> を追加する。</p>
 <div class="highlight"><div class="chroma">
@@ -399,7 +396,7 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 <pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sudo vi /etc/rc.d/rc.local
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="3-a-namenb1springbootsimplerestcontrolleranb-1-springboot-simple-restcontroller">3. <a name='N.B1SpringBootSimpleRestController'></a>N.B 1 SpringBoot Simple RestController</h2>
+</div><h2 id="3-nb-1-springboot-simple-restcontroller">3. <a name='N.B1SpringBootSimpleRestController'></a>N.B 1 SpringBoot Simple RestController</h2>
 <p>すごく単純ですが、、、JmeterのSlaveマシンからアクセスを受けるためのSpringBootのRestControllerは以下のようにしました。</p>
 <p><code>host:port/test</code> で受けて、リクエストの累計回数をログに出力し、HTTP STATUS OKを返却するだけのコントローラーです。</p>
 <div class="highlight"><div class="chroma">
@@ -438,8 +435,8 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="4-a-nameexecutionresultaexecution-result">4. <a name='ExecutionResult'></a>Execution Result</h2>
-<h3 id="41-a-namejmeterajmeter">4.1. <a name='Jmeter'></a>Jmeter</h3>
+</div><h2 id="4-execution-result">4. <a name='ExecutionResult'></a>Execution Result</h2>
+<h3 id="41-jmeter">4.1. <a name='Jmeter'></a>Jmeter</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -492,7 +489,7 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 </span></span><span class="line"><span class="cl"><span class="o">[</span>centos@ip-xx-xx-xx-xx ~<span class="o">]</span>$ client_loop: send disconnect: Broken pipe
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="42-a-namerestcontrollerarestcontroller">4.2. <a name='RestController'></a>RestController</h3>
+</div><h3 id="42-restcontroller">4.2. <a name='RestController'></a>RestController</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -563,14 +560,14 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">request</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">3</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="5-a-namefyijmetercustomizeafyi-jmeter-customize">5. <a name='FYIJmeterCustomize'></a>FYI Jmeter Customize</h2>
+</div><h2 id="5-fyi-jmeter-customize">5. <a name='FYIJmeterCustomize'></a>FYI Jmeter Customize</h2>
 <p>こちらは参考までにですが、Jmeterのカスタマイズをする方法も調査してみたので記載しておきます。</p>
 <p>どんな場合にするのかですが、単純なHTTPリクエストじゃなくて、以下のような場合にカスタマイズが必要なのかなと思います。</p>
 <ul>
 <li>動的にある業務データを作成して投げたい場合</li>
 <li>kinesisやmq など特定のソフトウェアに対してデータを投入したい場合</li>
 </ul>
-<h3 id="51-a-namegradlesettingagradle-setting">5.1. <a name='GradleSetting'></a>Gradle Setting</h3>
+<h3 id="51-gradle-setting">5.1. <a name='GradleSetting'></a>Gradle Setting</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -643,8 +640,8 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="52-a-namepreprocessorimplandguisettingapreprocessor-impl-and-gui-setting">5.2. <a name='PreProcessorImplandGUISetting'></a>PreProcessor Impl and GUI Setting</h3>
-<h4 id="521-a-namepreprocessorimplapreprocessor-impl">5.2.1. <a name='PreProcessorImpl'></a>PreProcessor Impl</h4>
+</div><h3 id="52-preprocessor-impl-and-gui-setting">5.2. <a name='PreProcessorImplandGUISetting'></a>PreProcessor Impl and GUI Setting</h3>
+<h4 id="521-preprocessor-impl">5.2.1. <a name='PreProcessorImpl'></a>PreProcessor Impl</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -675,7 +672,7 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="522-a-nameguisettingagui-setting">5.2.2. <a name='GUISetting'></a>GUI Setting</h4>
+</div><h4 id="522-gui-setting">5.2.2. <a name='GUISetting'></a>GUI Setting</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -800,8 +797,8 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="53-a-namesamplerimplandguisettingasampler-impl-and-gui-setting">5.3. <a name='SamplerImplandGUISetting'></a>Sampler Impl and GUI Setting</h3>
-<h4 id="531-a-namesamplerimplasampler-impl">5.3.1. <a name='SamplerImpl'></a>Sampler Impl</h4>
+</div><h3 id="53-sampler-impl-and-gui-setting">5.3. <a name='SamplerImplandGUISetting'></a>Sampler Impl and GUI Setting</h3>
+<h4 id="531-sampler-impl">5.3.1. <a name='SamplerImpl'></a>Sampler Impl</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -912,7 +909,7 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="532-a-nameguisetting-1agui-setting">5.3.2. <a name='GUISetting-1'></a>GUI Setting</h4>
+</div><h4 id="532-gui-setting">5.3.2. <a name='GUISetting-1'></a>GUI Setting</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1055,14 +1052,13 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="54-a-namefileplacement-1afile-placement">5.4. <a name='FilePlacement-1'></a>File Placement</h3>
+</div><h3 id="54-file-placement">5.4. <a name='FilePlacement-1'></a>File Placement</h3>
 <p>上の設定で出来たソースコードを、<code>gradle jar</code> でビルドし、Jarファイルを作成します。</p>
 <p>Jmeterの <code>/lib/ext</code> フォルダに格納することで、カスタマイズされたJarファイルが <code>Jmeter</code> に読み込まれて利用することが出来ます。</p>
 <blockquote>
 <p>Macの場合は、こちらのファイルパスです。<br>
-<code>/usr/local/Cellar/jmeter/5.3/libexec/lib/ext</code></p>
-</blockquote>
-<h2 id="6-a-namereferenceareference">6. <a name='Reference'></a>Reference</h2>
+<code>/usr/local/Cellar/jmeter/5.3/libexec/lib/ext</code></p></blockquote>
+<h2 id="6-reference">6. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="https://qiita.com/marumaru/items/1c79b9fef5bbeb1adb42">AWSでJMeterのMaster/Slave環境を構築（CentOS 7） - Qiita</a></li>
 <li><a href="https://doruby.jp/users/hello_rails/entries/%E8%B5%B0%E3%82%8CJMeter-1">走れJMeter | その他 | DoRuby</a></li>
@@ -1129,7 +1125,7 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

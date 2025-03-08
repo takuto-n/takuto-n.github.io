@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20240703-rate-limiter/" />
@@ -205,7 +205,7 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-nameintroductionaintroduction">1. <a name='Introduction'></a>Introduction</h2>
+<h2 id="1-introduction">1. <a name='Introduction'></a>Introduction</h2>
 <p>レートリミッターは、システムのパフォーマンスと安定性を保つために欠かせないツールです。主な役割と必要性は以下の通りです。</p>
 <ul>
 <li>過負荷防止
@@ -224,9 +224,9 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-a-namewhatisaratelimiterawhat-is-a-rate-limiter">2. <a name='Whatisaratelimiter'></a>What is a rate limiter?</h2>
+<h2 id="2-what-is-a-rate-limiter">2. <a name='Whatisaratelimiter'></a>What is a rate limiter?</h2>
 <p>レートリミッターは、特定の時間枠内で許可されるリクエストやタスクの数を制限する仕組みです。これにより、システムの負荷を管理し、安定したパフォーマンスを維持します。</p>
-<h3 id="21-a-namehowitworksahow-it-works">2.1. <a name='Howitworks'></a>How it works</h3>
+<h3 id="21-how-it-works">2.1. <a name='Howitworks'></a>How it works</h3>
 <ul>
 <li>リクエストの計測
 <ul>
@@ -244,7 +244,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="3-a-nameexamplesofratelimiterusageaexamples-of-rate-limiter-usage">3. <a name='Examplesofratelimiterusage'></a>Examples of rate limiter usage</h2>
+<h2 id="3-examples-of-rate-limiter-usage">3. <a name='Examplesofratelimiterusage'></a>Examples of rate limiter usage</h2>
 <ul>
 <li>サーバーアプリケーション
 <ul>
@@ -259,8 +259,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="31-a-nameexampleofuseinaserverapplicationaexample-of-use-in-a-server-application">3.1. <a name='Exampleofuseinaserverapplication'></a>Example of use in a server application</h3>
-<h4 id="311-a-namehowtoimplementaratelimiterinthegolanguageahow-to-implement-a-rate-limiter-in-the-go-language">3.1.1. <a name='HowtoimplementaratelimiterintheGolanguage'></a>How to implement a rate limiter in the Go language</h4>
+<h3 id="31-example-of-use-in-a-server-application">3.1. <a name='Exampleofuseinaserverapplication'></a>Example of use in a server application</h3>
+<h4 id="311-how-to-implement-a-rate-limiter-in-the-go-language">3.1.1. <a name='HowtoimplementaratelimiterintheGolanguage'></a>How to implement a rate limiter in the Go language</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -324,11 +324,11 @@
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// ★ レートリミッターのコーディングのポイントとなる関数
-</span></span></span><span class="line"><span class="cl"><span class="c1">// limiterが許可した場合のみリクエストを処理できる
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">rateLimiter</span><span class="p">(</span><span class="nx">next</span> <span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">))</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">limiter</span> <span class="o">:=</span> <span class="nx">rate</span><span class="p">.</span><span class="nf">NewLimiter</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1">// 1秒あたり2リクエスト、バーストサイズ4
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// ★ レートリミッターのコーディングのポイントとなる関数</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// limiterが許可した場合のみリクエストを処理できる</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">rateLimiter</span><span class="p">(</span><span class="nx">next</span> <span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">))</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">limiter</span> <span class="o">:=</span> <span class="nx">rate</span><span class="p">.</span><span class="nf">NewLimiter</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1">// 1秒あたり2リクエスト、バーストサイズ4</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">limiter</span><span class="p">.</span><span class="nf">Allow</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nf">next</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -341,7 +341,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="312-a-nameexecutionresultsandtheirexplanationsaexecution-results-and-their-explanations">3.1.2. <a name='Executionresultsandtheirexplanations'></a>Execution results and their explanations</h4>
+</div><h4 id="312-execution-results-and-their-explanations">3.1.2. <a name='Executionresultsandtheirexplanations'></a>Execution results and their explanations</h4>
 <ul>
 <li>正常な応答
 <ul>
@@ -390,7 +390,7 @@
 </span></span><span class="line"><span class="cl"><span class="s2">&#34;The API is currently at full capacity. Please try again later.&#34;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="32-a-nameexampleofuseincloudconfigurationaexample-of-use-in-cloud-configuration">3.2. <a name='Exampleofuseincloudconfiguration'></a>Example of use in cloud configuration</h3>
+</div><h3 id="32-example-of-use-in-cloud-configuration">3.2. <a name='Exampleofuseincloudconfiguration'></a>Example of use in cloud configuration</h3>
 <p>Google CloudではCloud Tasksを利用することでレートリミッターを実現できます。</p>
 <p><img src="/img/20240703/gcp_rate_limiter.png" alt=""></p>
 <p>大まかな処理の流れは以下の通りです。</p>
@@ -420,12 +420,11 @@
 <blockquote>
 <p>Cloud Pub/Sub vs Cloud Tasks<br>
 Cloud Pub/Sub では publisher と subscriber を分離してアーキテクチャを疎結合にすることが前提とされていることに対し、Cloud Tasks は subscriber を明示的に呼び出し、subscriber による処理を制御できることがポイントとなっています。<br>
-配信タイミング・レートを管理することも可能です。</p>
-</blockquote>
-<h2 id="4-a-nameremarksaremarks">4. <a name='Remarks'></a>Remarks</h2>
-<h3 id="41-a-namebestpracticesforratelimitersabest-practices-for-rate-limiters">4.1. <a name='BestPracticesforRateLimiters'></a>Best Practices for Rate Limiters</h3>
+配信タイミング・レートを管理することも可能です。</p></blockquote>
+<h2 id="4-remarks">4. <a name='Remarks'></a>Remarks</h2>
+<h3 id="41-best-practices-for-rate-limiters">4.1. <a name='BestPracticesforRateLimiters'></a>Best Practices for Rate Limiters</h3>
 <p>以下のようなプラクティスを組み合わせることで、効率的なリクエスト制御と管理、堅牢なリトライ戦略の実装、そしてモニタリングとアラート設定による運用の迅速な改善が可能となります。これにより、サービスの安定性と可用性を更に向上させることができます。</p>
-<h4 id="411-a-namecustomizeerrormessagesandsetresponsecodesacustomize-error-messages-and-set-response-codes">4.1.1. <a name='Customizeerrormessagesandsetresponsecodes'></a>Customize error messages and set response codes</h4>
+<h4 id="411-customize-error-messages-and-set-response-codes">4.1.1. <a name='Customizeerrormessagesandsetresponsecodes'></a>Customize error messages and set response codes</h4>
 <ul>
 <li>カスタムエラーメッセージ
 <ul>
@@ -438,7 +437,7 @@ Cloud Pub/Sub では publisher と subscriber を分離してアーキテクチ�
 </ul>
 </li>
 </ul>
-<h4 id="412-a-namequeuingandthrottlingimplementationaqueuing-and-throttling-implementation">4.1.2. <a name='Queuingandthrottlingimplementation'></a>Queuing and throttling implementation</h4>
+<h4 id="412-queuing-and-throttling-implementation">4.1.2. <a name='Queuingandthrottlingimplementation'></a>Queuing and throttling implementation</h4>
 <ul>
 <li>キューイング
 <ul>
@@ -451,7 +450,7 @@ Cloud Pub/Sub では publisher と subscriber を分離してアーキテクチ�
 </ul>
 </li>
 </ul>
-<h4 id="413-a-nameuseofapikeysause-of-api-keys">4.1.3. <a name='UseofAPIKeys'></a>Use of API Keys</h4>
+<h4 id="413-use-of-api-keys">4.1.3. <a name='UseofAPIKeys'></a>Use of API Keys</h4>
 <ul>
 <li>APIキーの発行と管理
 <ul>
@@ -459,7 +458,7 @@ Cloud Pub/Sub では publisher と subscriber を分離してアーキテクチ�
 </ul>
 </li>
 </ul>
-<h4 id="414-a-namemetricsandmonitoringametrics-and-monitoring">4.1.4. <a name='MetricsandMonitoring'></a>Metrics and Monitoring</h4>
+<h4 id="414-metrics-and-monitoring">4.1.4. <a name='MetricsandMonitoring'></a>Metrics and Monitoring</h4>
 <ul>
 <li>メトリクスの収集と可視化
 <ul>
@@ -472,7 +471,7 @@ Cloud Pub/Sub では publisher と subscriber を分離してアーキテクチ�
 </ul>
 </li>
 </ul>
-<h4 id="415-a-nameappropriateuseofcacheaappropriate-use-of-cache">4.1.5. <a name='Appropriateuseofcache'></a>Appropriate use of cache</h4>
+<h4 id="415-appropriate-use-of-cache">4.1.5. <a name='Appropriateuseofcache'></a>Appropriate use of cache</h4>
 <ul>
 <li>レスポンスのキャッシュ
 <ul>
@@ -480,7 +479,7 @@ Cloud Pub/Sub では publisher と subscriber を分離してアーキテクチ�
 </ul>
 </li>
 </ul>
-<h2 id="5-a-namereferenceareference">5. <a name='Reference'></a>Reference</h2>
+<h2 id="5-reference">5. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="https://pkg.go.dev/golang.org/x/time/rate">rate package - golang.org/x/time/rate - Go Packages</a></li>
 <li><a href="https://cloud.google.com/tasks/docs/dual-overview?hl=ja">Cloud Tasks について理解する  |  Cloud Tasks Documentation  |  Google Cloud</a></li>
@@ -500,11 +499,7 @@ Cloud Pub/Sub では publisher と subscriber を分離してアーキテクチ�
           <a href="/tags/sre/">sre</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/20241109-aws-certified-solutions-architect-professional/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">20241109 Aws Certified Solutions Architect Professional</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
+        
         <a class="next" href="/post/20230418-mac-peco-history-selection/">
             <span class="next-text nav-default">ターミナル上で過去に実行したコマンドを選択/実行する方法</span>
             <span class="next-text nav-mobile">Next</span>
@@ -549,7 +544,7 @@ Cloud Pub/Sub では publisher と subscriber を分離してアーキテクチ�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220401-apollo-server-settings/" />
@@ -193,7 +193,7 @@
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 <hr>
-<h2 id="1-a-namefolderstructureafolder-structure">1. <a name='Folderstructure'></a>Folder structure</h2>
+<h2 id="1-folder-structure">1. <a name='Folderstructure'></a>Folder structure</h2>
 <p>今回、紹介するコードのフォルダ構成を載せます。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -235,10 +235,10 @@
 </span></span><span class="line"><span class="cl">├── server.ts
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2-a-namesourcecodeasource-code">2. <a name='SourceCode'></a>Source Code</h2>
+</div><h2 id="2-source-code">2. <a name='SourceCode'></a>Source Code</h2>
 <p>以下、単にソースコードを貼り付けておきます。<br>
 大事なポイントはインラインコメントで記載しておきます。</p>
-<h3 id="21-a-nameservertsaserverts">2.1. <a name='server.ts'></a>server.ts</h3>
+<h3 id="21-serverts">2.1. <a name='server.ts'></a>server.ts</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -315,7 +315,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="22-a-nameinterfaceindextsainterfaceindexts">2.2. <a name='interfaceindex.ts'></a>interface/index.ts</h3>
+</div><h3 id="22-interfaceindexts">2.2. <a name='interfaceindex.ts'></a>interface/index.ts</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -374,7 +374,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="23-a-nameinterfaceerrorhandlertsainterfaceerrorhandlerts">2.3. <a name='interfaceerrorHandler.ts'></a>interface/errorHandler.ts</h3>
+</div><h3 id="23-interfaceerrorhandlerts">2.3. <a name='interfaceerrorHandler.ts'></a>interface/errorHandler.ts</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -403,7 +403,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="24-a-nameinterfacesample1sample1resolvertsainterfacesample1sample1resolverts">2.4. <a name='interfacesample1sample1Resolver.ts'></a>interface/sample1/sample1Resolver.ts</h3>
+</div><h3 id="24-interfacesample1sample1resolverts">2.4. <a name='interfacesample1sample1Resolver.ts'></a>interface/sample1/sample1Resolver.ts</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -500,7 +500,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="25-a-namedomainsample1sample1tsadomainsample1sample1ts">2.5. <a name='domainsample1sample1.ts'></a>domain/sample1/sample1.ts</h3>
+</div><h3 id="25-domainsample1sample1ts">2.5. <a name='domainsample1sample1.ts'></a>domain/sample1/sample1.ts</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -519,7 +519,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="26-a-namedomainmodelsample1resulttsadomainmodelsample1resultts">2.6. <a name='domainmodelSample1Result.ts'></a>domain/model/Sample1Result.ts</h3>
+</div><h3 id="26-domainmodelsample1resultts">2.6. <a name='domainmodelSample1Result.ts'></a>domain/model/Sample1Result.ts</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -532,7 +532,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="27-a-nameinterfacesample2sample2resolvertsainterfacesample2sample2resolverts">2.7. <a name='interfacesample2sample2Resolver.ts'></a>interface/sample2/sample2Resolver.ts</h3>
+</div><h3 id="27-interfacesample2sample2resolverts">2.7. <a name='interfacesample2sample2Resolver.ts'></a>interface/sample2/sample2Resolver.ts</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -625,7 +625,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="28-a-namedomainsample2sample2tsadomainsample2sample2ts">2.8. <a name='domainsample2sample2.ts'></a>domain/sample2/sample2.ts</h3>
+</div><h3 id="28-domainsample2sample2ts">2.8. <a name='domainsample2sample2.ts'></a>domain/sample2/sample2.ts</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -646,7 +646,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="29-a-namedomainmodelsample2resulttsadomainmodelsample2resultts">2.9. <a name='domainmodelSample2Result.ts'></a>domain/model/Sample2Result.ts</h3>
+</div><h3 id="29-domainmodelsample2resultts">2.9. <a name='domainmodelSample2Result.ts'></a>domain/model/Sample2Result.ts</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -659,7 +659,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="3-a-namereferenceareference">3. <a name='Reference'></a>Reference</h2>
+</div><h2 id="3-reference">3. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="https://www.apollographql.com/docs/apollo-server/data/errors/#for-client-responses">Error handling - Apollo GraphQL Docs</a></li>
 <li><a href="https://github.com/confuser/graphql-constraint-directive/blob/master/README.md">graphql-constraint-directive/README.md at master · confuser/graphql-constraint-directive · GitHub</a></li>
@@ -723,7 +723,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

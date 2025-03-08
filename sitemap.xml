@@ -9,70 +9,28 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/post/20241109-aws-certified-solutions-architect-professional/</loc>
-    <lastmod>2024-11-09T11:59:23+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/aws/</loc>
-    <lastmod>2024-11-09T11:59:23+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2024-11-09T11:59:23+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/cloud/</loc>
-    <lastmod>2024-11-09T11:59:23+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/categories/cloud/</loc>
-    <lastmod>2024-11-09T11:59:23+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2024-11-09T11:59:23+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2024-11-09T11:59:23+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/professional/</loc>
-    <lastmod>2024-11-09T11:59:23+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
-    <lastmod>2024-11-09T11:59:23+09:00</lastmod>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://takuto-n.github.io/tags/golang/</loc>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
     <lastmod>2024-07-03T22:39:41+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -93,6 +51,13 @@
   </url>
   
   <url>
+    <loc>https://takuto-n.github.io/categories/sre/</loc>
+    <lastmod>2024-07-03T22:39:41+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://takuto-n.github.io/tags/sre/</loc>
     <lastmod>2024-07-03T22:39:41+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -100,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/sre/</loc>
+    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2024-07-03T22:39:41+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -156,14 +121,14 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/tags/typescript/</loc>
+    <loc>https://takuto-n.github.io/categories/typescript/</loc>
     <lastmod>2022-04-22T22:56:30+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/typescript/</loc>
+    <loc>https://takuto-n.github.io/tags/typescript/</loc>
     <lastmod>2022-04-22T22:56:30+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -191,14 +156,14 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/tags/openapi/</loc>
+    <loc>https://takuto-n.github.io/categories/openapi/</loc>
     <lastmod>2022-04-22T22:17:54+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/openapi/</loc>
+    <loc>https://takuto-n.github.io/tags/openapi/</loc>
     <lastmod>2022-04-22T22:17:54+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -261,14 +226,14 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/tags/node.js/</loc>
+    <loc>https://takuto-n.github.io/categories/node.js/</loc>
     <lastmod>2022-04-12T14:46:25+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/node.js/</loc>
+    <loc>https://takuto-n.github.io/tags/node.js/</loc>
     <lastmod>2022-04-12T14:46:25+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -282,14 +247,14 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/tags/gradle/</loc>
+    <loc>https://takuto-n.github.io/categories/gradle/</loc>
     <lastmod>2022-04-12T09:12:02+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/gradle/</loc>
+    <loc>https://takuto-n.github.io/tags/gradle/</loc>
     <lastmod>2022-04-12T09:12:02+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -401,14 +366,14 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/tags/react/</loc>
+    <loc>https://takuto-n.github.io/categories/react/</loc>
     <lastmod>2022-02-03T20:10:04+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/react/</loc>
+    <loc>https://takuto-n.github.io/tags/react/</loc>
     <lastmod>2022-02-03T20:10:04+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -527,14 +492,14 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/tags/competitive-programming/</loc>
+    <loc>https://takuto-n.github.io/categories/competitive-programming/</loc>
     <lastmod>2021-03-15T22:00:01+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/competitive-programming/</loc>
+    <loc>https://takuto-n.github.io/tags/competitive-programming/</loc>
     <lastmod>2021-03-15T22:00:01+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -681,6 +646,13 @@
   </url>
   
   <url>
+    <loc>https://takuto-n.github.io/tags/aws/</loc>
+    <lastmod>2020-11-03T15:10:12+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://takuto-n.github.io/post/20201103-aws-app-mesh/</loc>
     <lastmod>2020-11-03T15:10:12+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -730,14 +702,14 @@
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/tags/docker/</loc>
+    <loc>https://takuto-n.github.io/categories/docker/</loc>
     <lastmod>2020-07-01T20:49:28+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://takuto-n.github.io/categories/docker/</loc>
+    <loc>https://takuto-n.github.io/tags/docker/</loc>
     <lastmod>2020-07-01T20:49:28+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

@@ -26,7 +26,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190316-cors-basic_auth/" />
@@ -158,8 +158,7 @@
 <ul>
 <li>ブラウザのセキュリティ設定を On にしていればアクセスできません。</li>
 <li>ブラウザのセキュリティ設定を Off にしていればアクセス出来ます。</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <p>以下でその理由について下記の流れで説明していきます。</p>
 <!-- TOC -->
 <ul>
@@ -187,8 +186,7 @@
 <p>2 つ目の方法は、あるドメイン X のサイトに JavaScript を置き、その場所をドメイン Y のサイトにあらかじめ教えておきます。ドメイン Y からドメイン X の JavaScript を取得・実行すると、結果としてドメイン Y からドメイン X のサイト内のデータにアクセスできるという方法です。</p>
 <p>今回は方法 1 で実現できる方法について検証します。</p>
 <blockquote>
-<p>方法 2 の JSONP は、ここでは詳しく説明しませんが、JSONP インジェクションという攻撃を受ける可能性があるため、方法 1 を採用します。</p>
-</blockquote>
+<p>方法 2 の JSONP は、ここでは詳しく説明しませんが、JSONP インジェクションという攻撃を受ける可能性があるため、方法 1 を採用します。</p></blockquote>
 <p><a id="markdown-corscross-origin-resource-sharingについて" name="corscross-origin-resource-sharingについて"></a></p>
 <h2 id="corscross-origin-resource-sharingについて">CORS(Cross Origin Resource Sharing)について</h2>
 <p>CORS(Cross Origin Resource Sharing)は、JavaScript でクロスドメインにアクセスする方法です。さきほど述べていたドメインとオリジンはほぼ同義です。
@@ -203,8 +201,7 @@ preflight リクエストが送られる条件については<a href="https://de
 <li>ブラウザは現在 aaa.com に接続している。</li>
 <li>サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。</li>
 <li>bbb.com では、aaa.com からのアクセス許可設定をしている。</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <ol>
 <li>preflight リクエストなしの場合
 <ol>
@@ -223,8 +220,7 @@ preflight リクエストが送られる条件については<a href="https://de
 </ol>
 <p><strong>パターン ① の場合は 1 往復で済むのに対し、パターン ② の場合は確認作業があるため、2 往復必要ということになります。</strong></p>
 <blockquote>
-<p>ただし、ブラウザのセキュリティ設定が Off であれば preflight リクエストで確認しないため、いずれの場合も必ず 1 往復になります。（preflight リクエストは安全を担保するための確認処理であるため、セキュリティ設定を Off にすれば発生しない。）</p>
-</blockquote>
+<p>ただし、ブラウザのセキュリティ設定が Off であれば preflight リクエストで確認しないため、いずれの場合も必ず 1 往復になります。（preflight リクエストは安全を担保するための確認処理であるため、セキュリティ設定を Off にすれば発生しない。）</p></blockquote>
 <p><a id="markdown-basic認証つきcorsについて" name="basic認証つきcorsについて"></a></p>
 <h2 id="basic-認証つき-cors-について">BASIC 認証つき CORS について</h2>
 <p>最後に本記事の目的である BASIC 認証つき CORS について説明します。</p>
@@ -236,8 +232,7 @@ preflight リクエストが送られる条件については<a href="https://de
 <li>サイト(aaa.com)から別のドメインのサイト(bbb.com)にアクセスする。</li>
 <li>bbb.com では、aaa.com からのアクセス許可設定をしている。</li>
 <li>【追加条件】: アクセス先の bbb.com に BASIC 認証をかけている。</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <p>この状態の時に、CORS が可能かどうかについて述べます。</p>
 <ol>
 <li>BASIC 認証情報付きの CORS(Authorization ヘッダ付き)
@@ -258,8 +253,7 @@ preflight リクエストが送られる条件については<a href="https://de
 <p>上記理由で、通常であればいずれの場合であっても Basic 認証付き CORS はできません。</p>
 <p><strong>しかし、ブラウザのセキュリティ設定が Off であれば、パターン ① は以下のように変わり、Basic 認証付き CORS ができるようになる。</strong></p>
 <blockquote>
-<p>※ブラウザのセキュリティ設定が Off であれば preflight が発生しない。</p>
-</blockquote>
+<p>※ブラウザのセキュリティ設定が Off であれば preflight が発生しない。</p></blockquote>
 <ol>
 <li>BASIC 認証情報付きの CORS(Authorization ヘッダ付き)
 <ol>
@@ -275,8 +269,7 @@ preflight リクエストが送られる条件については<a href="https://de
 <ul>
 <li>ブラウザのセキュリティ設定を On にしていればアクセスできません。</li>
 <li>ブラウザのセキュリティ設定を Off にしていればアクセス出来ます。</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <p>ここまで読んで下さりありがとうございました。</p>
 
     </div>
@@ -334,7 +327,7 @@ preflight リクエストが送られる条件については<a href="https://de
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

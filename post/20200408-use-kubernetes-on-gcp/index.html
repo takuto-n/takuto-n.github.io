@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20200408-use-kubernetes-on-gcp/" />
@@ -171,7 +171,7 @@
 <!-- /vscode-markdown-toc -->
 <p>構成図の通り、<code>GCP</code>の<code>GKE(Google Kubernetes Engine</code>)を使ってみようと思います。</p>
 <p>今回はGUIでボタンを押していくだけで出来ました。</p>
-<h2 id="1-a-nametechnicalelementsatechnical-elements">1. <a name='TechnicalElements'></a>Technical Elements</h2>
+<h2 id="1-technical-elements">1. <a name='TechnicalElements'></a>Technical Elements</h2>
 <ul>
 <li><a href="https://spring.io/projects/spring-boot">Spring Boot</a>
 <ul>
@@ -209,8 +209,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-a-namesettingsofeachtechnicalelementasettings-of-each-technical-element">2. <a name='SettingsofEachTechnicalElement'></a>Settings of Each Technical Element</h2>
-<h3 id="21-a-nameclusteracluster">2.1. <a name='Cluster'></a>Cluster</h3>
+<h2 id="2-settings-of-each-technical-element">2. <a name='SettingsofEachTechnicalElement'></a>Settings of Each Technical Element</h2>
+<h3 id="21-cluster">2.1. <a name='Cluster'></a>Cluster</h3>
 <p><img src="/img/20200408/cluster.png" alt=""></p>
 <p>以下のような事項を決めていきます。</p>
 <p>（参考：<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster?hl=ja">クラスタの作成  |  Kubernetes Engine のドキュメント  |  Google Cloud</a>）</p>
@@ -235,7 +235,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="22-a-nameworkloadaworkload">2.2. <a name='Workload'></a>Workload</h3>
+<h3 id="22-workload">2.2. <a name='Workload'></a>Workload</h3>
 <p><img src="/img/20200408/workload.png" alt=""></p>
 <p>以下のような事項を決めていきます。</p>
 <p>（参考：<a href="https://cloud.google.com/kubernetes-engine/docs/how-to/deploying-workloads-overview?hl=ja">ワークロードのデプロイの概要  |  Kubernetes Engine のドキュメント  |  Google Cloud</a>）</p>
@@ -249,7 +249,7 @@
 <li>環境変数の設定</li>
 <li>アプリケーション名の設定</li>
 </ul>
-<h3 id="23-a-nameingressaingress">2.3. <a name='Ingress'></a>Ingress</h3>
+<h3 id="23-ingress">2.3. <a name='Ingress'></a>Ingress</h3>
 <p><img src="/img/20200408/ingress.png" alt=""></p>
 <p>以下のような事項を決めていきます。</p>
 <p>（参考：<a href="https://cloud.google.com/kubernetes-engine/docs/concepts/ingress?hl=ja">Ingress を使用した HTTP(S) 負荷分散  |  Kubernetes Engine のドキュメント  |  Google Cloud</a>）</p>
@@ -257,7 +257,7 @@
 <li>Ingressタイプの設定</li>
 <li>ホストとパスルールの構成の設定</li>
 </ul>
-<h3 id="24-a-nameloggingalogging">2.4. <a name='Logging'></a>Logging</h3>
+<h3 id="24-logging">2.4. <a name='Logging'></a>Logging</h3>
 <p><img src="/img/20200408/logging.png" alt=""></p>
 <p>AWSの<a href="https://aws.amazon.com/jp/cloudwatch/">CloudWatch</a>やAzureの<a href="https://azure.microsoft.com/ja-jp/services/monitor/">Azure Monitor</a>と同じように、
 各サービスや、K8Sの各podのログをかき集めてくれる。</p>
@@ -321,7 +321,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

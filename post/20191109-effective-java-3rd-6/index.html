@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-6/" />
@@ -164,8 +164,8 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-name34intenuma項目-34-int-定数の代わりに-enum-を使う">1. <a name='34intenum'></a>項目 34 int 定数の代わりに enum を使う</h2>
-<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<h2 id="1-項目-34-int-定数の代わりに-enum-を使う">1. <a name='34intenum'></a>項目 34 int 定数の代わりに enum を使う</h2>
+<h3 id="11-結論">1.1. <a name=''></a>結論</h3>
 <ul>
 <li><code>int enum</code>パターン(<code>int</code>定数)は使わないでおきましょう。</li>
 <li><code>enum</code>を使いましょう。
@@ -176,7 +176,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="12-a-nameintenumaint-enumパターンの欠点">1.2. <a name='intenum'></a><code>int enum</code>パターンの欠点</h3>
+<h3 id="12-int-enumパターンの欠点">1.2. <a name='intenum'></a><code>int enum</code>パターンの欠点</h3>
 <p>以下の欠点がある。</p>
 <ul>
 <li>型安全性が提供されない
@@ -217,7 +217,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ORANGE_BLOOD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">2</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="13-a-nameenuma単なる定数としてのenum">1.3. <a name='enum'></a>単なる定数としての<code>enum</code></h3>
+</div><h3 id="13-単なる定数としてのenum">1.3. <a name='enum'></a>単なる定数としての<code>enum</code></h3>
 <p>以下の利点がある。</p>
 <ul>
 <li>コンパイル時の型安全性が提供される</li>
@@ -241,8 +241,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">ORANGE</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">NAVEL</span><span class="p">,</span><span class="w"> </span><span class="n">TEMPLE</span><span class="p">,</span><span class="w"> </span><span class="n">BLOOD</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="14-a-nameenum-1a定数固有メソッド実装を持つenum">1.4. <a name='enum-1'></a>定数固有メソッド実装を持つ<code>enum</code></h3>
-<h4 id="141-a-name-1a問題が多い例">1.4.1. <a name='-1'></a>問題が多い例</h4>
+</div><h3 id="14-定数固有メソッド実装を持つenum">1.4. <a name='enum-1'></a>定数固有メソッド実装を持つ<code>enum</code></h3>
+<h4 id="141-問題が多い例">1.4.1. <a name='-1'></a>問題が多い例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -279,7 +279,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="142-a-nameenum-1a改善例定数固有メソッド実装を持つenum">1.4.2. <a name='enum-1'></a>改善例(定数固有メソッド実装を持つ<code>enum</code>)</h4>
+</div><h4 id="142-改善例定数固有メソッド実装を持つenum">1.4.2. <a name='enum-1'></a>改善例(定数固有メソッド実装を持つ<code>enum</code>)</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -305,10 +305,9 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>抽象メソッドを具象メソッドでオーバーライドし忘れることがない。</p>
-</blockquote>
-<h3 id="15-a-nameenum-1a戦略enumパターン">1.5. <a name='enum-1'></a>戦略<code>enum</code>パターン</h3>
-<h4 id="151-a-name-1a問題が多い例">1.5.1. <a name='-1'></a>問題が多い例</h4>
+<p>抽象メソッドを具象メソッドでオーバーライドし忘れることがない。</p></blockquote>
+<h3 id="15-戦略enumパターン">1.5. <a name='enum-1'></a>戦略<code>enum</code>パターン</h3>
+<h4 id="151-問題が多い例">1.5.1. <a name='-1'></a>問題が多い例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -377,7 +376,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="152-a-nameenum-1a改善例戦略enumパターン">1.5.2. <a name='enum-1'></a>改善例(戦略<code>enum</code>パターン)</h4>
+</div><h4 id="152-改善例戦略enumパターン">1.5.2. <a name='enum-1'></a>改善例(戦略<code>enum</code>パターン)</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -479,12 +478,11 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>enum 定数を追加するたびに、指定することになるため、指定し忘れることがない。</p>
-</blockquote>
-<h2 id="2-a-name35a項目-35-序数の代わりにインスタンスフィールドを使う">2. <a name='35'></a>項目 35 序数の代わりにインスタンスフィールドを使う</h2>
-<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<p>enum 定数を追加するたびに、指定することになるため、指定し忘れることがない。</p></blockquote>
+<h2 id="2-項目-35-序数の代わりにインスタンスフィールドを使う">2. <a name='35'></a>項目 35 序数の代わりにインスタンスフィールドを使う</h2>
+<h3 id="21-結論">2.1. <a name='-1'></a>結論</h3>
 <p>タイトルのままですが、序数は使わずに、インスタンスフィールドを利用する。</p>
-<h4 id="211-a-name-1a序数を使った例">2.1.1. <a name='-1'></a>序数を使った例</h4>
+<h4 id="211-序数を使った例">2.1.1. <a name='-1'></a>序数を使った例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -525,9 +523,8 @@
 </div>
 </div><blockquote>
 <p>定数が並び替えられたら、正しく動作しなくなるため、良くない。<br>
-11 人は不要で、12 人が必要な場合はダミーが必要、、、</p>
-</blockquote>
-<h4 id="212-a-name-1aインスタンスフィールドを使った例">2.1.2. <a name='-1'></a>インスタンスフィールドを使った例</h4>
+11 人は不要で、12 人が必要な場合はダミーが必要、、、</p></blockquote>
+<h4 id="212-インスタンスフィールドを使った例">2.1.2. <a name='-1'></a>インスタンスフィールドを使った例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -579,14 +576,13 @@
 </div><blockquote>
 <p>余談：<br>
 <a href="https://docs.oracle.com/javase/jp/7/api/java/lang/Enum.html#ordinal()">Enum#ordinal()の JavaDoc</a>に以下のように記載されています。<br>
-このメソッドは、ほとんどのプログラマにとって役に立ちません。それは、EnumSet や EnumMap などの洗練された enum ベースのデータ構造で使用するために設計されています。</p>
-</blockquote>
-<h2 id="3-a-name36enumseta項目-36-ビットフィールドの代わりに-enumset-を使う">3. <a name='36EnumSet'></a>項目 36 ビットフィールドの代わりに EnumSet を使う</h2>
-<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+このメソッドは、ほとんどのプログラマにとって役に立ちません。それは、EnumSet や EnumMap などの洗練された enum ベースのデータ構造で使用するために設計されています。</p></blockquote>
+<h2 id="3-項目-36-ビットフィールドの代わりに-enumset-を使う">3. <a name='36EnumSet'></a>項目 36 ビットフィールドの代わりに EnumSet を使う</h2>
+<h3 id="31-結論">3.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>集合として enum 型を使いたいときは、EnumSet を使用するべき</li>
 </ul>
-<h3 id="32-a-name-1aビットフィールド列挙定数">3.2. <a name='-1'></a>ビットフィールド列挙定数</h3>
+<h3 id="32-ビットフィールド列挙定数">3.2. <a name='-1'></a>ビットフィールド列挙定数</h3>
 <ul>
 <li>下のようにビットフィールド定数を列挙して、集合を表現する方法</li>
 </ul>
@@ -626,7 +622,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="33-a-nameenumsetaenumset">3.3. <a name='EnumSet'></a>EnumSet</h3>
+<h3 id="33-enumset">3.3. <a name='EnumSet'></a>EnumSet</h3>
 <ul>
 <li>EnumSet クラスは単一の enum 型から選ばれた値の集合を効率的に表現できる</li>
 <li>EnumSet は Set の実装クラス</li>
@@ -662,12 +658,12 @@
 </ul>
 </li>
 </ul>
-<h2 id="4-a-name37enummapa項目-37-序数インデックスの代わりに-enummap-を使う">4. <a name='37EnumMap'></a>項目 37 序数インデックスの代わりに EnumMap を使う</h2>
-<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+<h2 id="4-項目-37-序数インデックスの代わりに-enummap-を使う">4. <a name='37EnumMap'></a>項目 37 序数インデックスの代わりに EnumMap を使う</h2>
+<h3 id="41-結論">4.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>enum の列挙子ごとにデータを持ちたい場合は、EnumMap を使うべき</li>
 </ul>
-<h3 id="42-a-name-1a序数インデックス">4.2. <a name='-1'></a>序数インデックス</h3>
+<h3 id="42-序数インデックス">4.2. <a name='-1'></a>序数インデックス</h3>
 <ul>
 <li>ハーブの種類ごとに、ハーブをまとめたいとする。</li>
 <li>序数インデックス(<code>ordinal()</code>)を用いると下のようになる。</li>
@@ -756,7 +752,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="43-a-nameenummapaenummap">4.3. <a name='EnumMap'></a>EnumMap</h3>
+<h3 id="43-enummap">4.3. <a name='EnumMap'></a>EnumMap</h3>
 <ul>
 <li>EnumMap は enum 型をキーとして Map を実装したクラス</li>
 <li>EnumMap で実装すると下のようになる。</li>
@@ -803,11 +799,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="5-a-name38enuma項目-38-拡張可能な-enum-をインタフェースで模倣する">5. <a name='38enum'></a>項目 38 拡張可能な enum をインタフェースで模倣する</h2>
-<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
+<h2 id="5-項目-38-拡張可能な-enum-をインタフェースで模倣する">5. <a name='38enum'></a>項目 38 拡張可能な enum をインタフェースで模倣する</h2>
+<h3 id="51-結論">5.1. <a name='-1'></a>結論</h3>
 <p>Enumは拡張できないけれど拡張性をもたせたい場合がある。
 そのような場合は、インタフェースで型を定義し、Enumでスタンダードな実装を提供すれば良い。このときのEnumを擬似拡張Enumと呼ぶ</p>
-<h3 id="52-a-nameenuma疑似拡張enumの例">5.2. <a name='Enum'></a>疑似拡張Enumの例</h3>
+<h3 id="52-疑似拡張enumの例">5.2. <a name='Enum'></a>疑似拡張Enumの例</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -892,7 +888,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="521-a-name-1a注意点">5.2.1. <a name='-1'></a>注意点</h4>
+</div><h4 id="521-注意点">5.2.1. <a name='-1'></a>注意点</h4>
 <p>Enumであるため、実装の継承を使えない。コードの重複を排除する際は、ヘルパーに切り出す等で対応する。</p>
 <p>引数はインタフェース or Enumのどちらを選択するか</p>
 <ul>
@@ -928,8 +924,8 @@
 <li>Operation を継承していること</li>
 </ul>
 <p>この制約によって、Operation を実装し、Enum であることが保障される。</p>
-<h2 id="6-a-name39a項目-39-命名パターンよりアノテーションを選ぶ">6. <a name='39'></a>項目 39 命名パターンよりアノテーションを選ぶ</h2>
-<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+<h2 id="6-項目-39-命名パターンよりアノテーションを選ぶ">6. <a name='39'></a>項目 39 命名パターンよりアノテーションを選ぶ</h2>
+<h3 id="61-結論">6.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>過去、メソッド名にルールをつけることを強制するツールやフレームワークがあった。</li>
 <li>現在は、アノテーションによって実現されていることがほとんど。
@@ -938,7 +934,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="611-a-name-1a命名パターンとはなにか">6.1.1. <a name='-1'></a>命名パターンとはなにか</h4>
+<h4 id="611-命名パターンとはなにか">6.1.1. <a name='-1'></a>命名パターンとはなにか</h4>
 <p>JUnit 3.x では、 テストメソッドは test から始める必要があった(JUnit4以降、アノテーションで指定するようになった)。</p>
 <p>一言でいうと、命名パターンはミスしやすく、後から確認しにくい、という致命的なデメリットがある。
 細かく言うと以下があがる。</p>
@@ -948,7 +944,7 @@
 <li>利用箇所を限定できない</li>
 <li>アノテーションによる指定の例</li>
 </ul>
-<h4 id="612-a-namejunit5testajunit5の-test-の実装">6.1.2. <a name='JUnit5Test'></a>JUnit5の @Test の実装。</h4>
+<h4 id="612-junit5の-test-の実装">6.1.2. <a name='JUnit5Test'></a>JUnit5の @Test の実装。</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -969,7 +965,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="613-a-name-1a使うときの例">6.1.3. <a name='-1'></a>使うときの例</h4>
+</div><h4 id="613-使うときの例">6.1.3. <a name='-1'></a>使うときの例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -988,7 +984,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="62-a-name-1a値アノテーション">6.2. <a name='-1'></a>値アノテーション</h3>
+</div><h3 id="62-値アノテーション">6.2. <a name='-1'></a>値アノテーション</h3>
 <p>アノテーション宣言時に値を付与することで、より柔軟な宣言が実現できる。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1008,16 +1004,16 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="7-a-name40overridea項目-40-常に-override-アノテーションを使う">7. <a name='40Override'></a>項目 40 常に Override アノテーションを使う</h2>
-<h3 id="71-a-name-1a結論">7.1. <a name='-1'></a>結論</h3>
+</div><h2 id="7-項目-40-常に-override-アノテーションを使う">7. <a name='40Override'></a>項目 40 常に Override アノテーションを使う</h2>
+<h3 id="71-結論">7.1. <a name='-1'></a>結論</h3>
 <p>親クラスのメソッドをオーバーライドするときは、 必ず @Override をつける。例外はなし。</p>
-<h3 id="72-a-name-1a用途">7.2. <a name='-1'></a>用途</h3>
+<h3 id="72-用途">7.2. <a name='-1'></a>用途</h3>
 <ul>
 <li><code>@Override</code> アノテーションが付けられているのに、実際にはオーバーライドしていない場合にはコンパイルエラーとなる</li>
 <li>オーバーライドするつもりがないのに意図せずオーバーライドしてしまう場合には IDE が警告を出してくれる(ことがある)</li>
 </ul>
-<h2 id="8-a-name41a項目-41-型を定義するためにマーカーインタフェースを使う">8. <a name='41'></a>項目 41 型を定義するためにマーカーインタフェースを使う</h2>
-<h3 id="81-a-name-1a結論">8.1. <a name='-1'></a>結論</h3>
+<h2 id="8-項目-41-型を定義するためにマーカーインタフェースを使う">8. <a name='41'></a>項目 41 型を定義するためにマーカーインタフェースを使う</h2>
+<h3 id="81-結論">8.1. <a name='-1'></a>結論</h3>
 <p>マーカーインタフェース、マーカーアノテーションのどちらをつかえばいいか</p>
 <ul>
 <li>型を縛る＝マーカーインタフェース</li>
@@ -1025,7 +1021,7 @@
 </ul>
 <p>Effective Java では、マーカーインタフェースが使える場合はそちらを使うべき とある。</p>
 <p>一般的な Java フレームワークでは、アノテーションベースが主流。</p>
-<h3 id="82-a-namexxxaマーカxxxとは">8.2. <a name='XXX'></a>マーカXXXとは</h3>
+<h3 id="82-マーカxxxとは">8.2. <a name='XXX'></a>マーカXXXとは</h3>
 <ul>
 <li>マーカーインタフェース
 <ul>
@@ -1042,7 +1038,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="83-a-name-1aマーカーインタフェース-の利点欠点">8.3. <a name='-1'></a>マーカーインタフェース の利点/欠点</h3>
+<h3 id="83-マーカーインタフェース-の利点欠点">8.3. <a name='-1'></a>マーカーインタフェース の利点/欠点</h3>
 <ul>
 <li>利点:: マーカーインタフェースは型なので、コンパイル時にチェックできる。
 <ul>
@@ -1115,7 +1111,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

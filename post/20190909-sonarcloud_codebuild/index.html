@@ -26,7 +26,7 @@ SonarCloud のアクセストークンの発行は、SonarCloud のサイトで 
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190909-sonarcloud_codebuild/" />
@@ -154,8 +154,7 @@ SonarCloud のアクセストークンの発行は、SonarCloud のサイトで 
 <p>AWS CodeBuild の環境変数 <code>SonarCloudAccessToken</code> に SonarCloud のアクセストークンを保持しておきます。</p>
 <p>SonarCloud のアクセストークンの発行は、SonarCloud のサイトで <code>ユーザーアイコン &gt; Settings &gt; Personal access token</code> から出来ます。</p>
 <blockquote>
-<p>AWS CodeBuild で環境変数を保持しておくことにより、開発者が間違えてローカル環境で <code>./gradlew clean build sonarqube</code> を打ってしまったとしても、ローカル環境には環境変数 <code>SonarCloudAccessToken</code> がないため失敗にできます。</p>
-</blockquote>
+<p>AWS CodeBuild で環境変数を保持しておくことにより、開発者が間違えてローカル環境で <code>./gradlew clean build sonarqube</code> を打ってしまったとしても、ローカル環境には環境変数 <code>SonarCloudAccessToken</code> がないため失敗にできます。</p></blockquote>
 <p>下記ファイルが、実際の設定内容です。
 <code>[~]</code> 部分は、適宜変更してください。</p>
 <p><em>build.gradle</em></p>
@@ -318,7 +317,7 @@ SonarCloud のアクセストークンの発行は、SonarCloud のサイトで 
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

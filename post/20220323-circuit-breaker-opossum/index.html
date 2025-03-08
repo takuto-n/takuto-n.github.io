@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220323-circuit-breaker-opossum/" />
@@ -192,7 +192,7 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-nameaboutcircuitbreakeraabout-circuit-breaker">1. <a name='AboutCircuitBreaker'></a>About Circuit Breaker</h2>
+<h2 id="1-about-circuit-breaker">1. <a name='AboutCircuitBreaker'></a>About Circuit Breaker</h2>
 <p>サーキットブレーカーとは、あるサービスの障害を検知した場合には通信を遮断、その後サービスの復旧を検知すると通信を復旧させる仕組みのことです。</p>
 <p>複数のマイクロサービスが連動するサービスの場合、一部のマイクロサービスの障害が連鎖的な障害に繋がるカスケード障害を発生させる可能性があります。</p>
 <p>要するに、以下のような事態に陥ってしまうのを防ぐためのものです。</p>
@@ -214,11 +214,10 @@
 </div>
 </div><blockquote>
 <p>サーキットブレーカーの元ネタ<br>
-電気回路のブレーカーのことで、事故や故障で大きな電流が流れたときに自動的に遮断して配線を保護する機構のことを指すらしいです。</p>
-</blockquote>
+電気回路のブレーカーのことで、事故や故障で大きな電流が流れたときに自動的に遮断して配線を保護する機構のことを指すらしいです。</p></blockquote>
 <p>今回は、Node.js のCircuit Breakerライブラリの中でも一番よく使われている <a href="https://www.npmjs.com/package/opossum">opossum</a> を使います。</p>
 <p>参考：<a href="https://www.npmtrends.com/brakes-vs-circuit-breaker-js-vs-circuitbreaker-vs-levee-vs-opossum">brakes vs circuit-breaker-js vs circuitbreaker vs levee vs opossum | npm trends</a></p>
-<h3 id="11-a-namestatetransitiondiagramastate-transition-diagram">1.1. <a name='StateTransitionDiagram'></a>State Transition Diagram</h3>
+<h3 id="11-state-transition-diagram">1.1. <a name='StateTransitionDiagram'></a>State Transition Diagram</h3>
 <p>サーキットブレーカーはステートマシンとして表現されます。</p>
 <p>というのも、サーキットブレーカーには以下の状態(ステート)があり、その状態によって要求された処理を実行をする/しないが決定されるからです。</p>
 <ul>
@@ -252,7 +251,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-a-namesampleapplicationasample-application">2. <a name='SampleApplication'></a>Sample Application</h2>
+<h2 id="2-sample-application">2. <a name='SampleApplication'></a>Sample Application</h2>
 <p>ここまでで説明した Circuit Breakerライブラリ <a href="https://www.npmjs.com/package/opossum">opossum</a> の実装サンプルを以下に載せます。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -444,7 +443,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">})()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="21-a-nameexecutionresultaexecution-result">2.1. <a name='ExecutionResult'></a>Execution Result</h3>
+</div><h3 id="21-execution-result">2.1. <a name='ExecutionResult'></a>Execution Result</h3>
 <p>実行結果に簡易なメモを付けておきます。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -676,7 +675,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">]</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="3-a-namestatisticsastatistics">3. <a name='Statistics'></a>Statistics</h2>
+</div><h2 id="3-statistics">3. <a name='Statistics'></a>Statistics</h2>
 <p><code>opossum</code> ライブラリでは、Circuit Breakerで実行された処理の統計情報を出力することができる。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -742,8 +741,8 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="4-a-namecodingprecautionsacoding-precautions">4. <a name='Codingprecautions'></a>Coding precautions</h2>
-<h3 id="41-a-namestpointa1st-point">4.1. <a name='stPoint'></a>1st Point</h3>
+</div><h2 id="4-coding-precautions">4. <a name='Codingprecautions'></a>Coding precautions</h2>
+<h3 id="41-1st-point">4.1. <a name='stPoint'></a>1st Point</h3>
 <p>以下のようなイベントハンドラ内で例外をスローせず、エラーハンドングは <code>fallback()</code> 内で実装すること。</p>
 <ul>
 <li>timeout</li>
@@ -791,9 +790,9 @@
 </span></span><span class="line"><span class="cl">    <span class="nx">at</span> <span class="nx">processTimers</span> <span class="p">(</span><span class="nx">node</span><span class="o">:</span><span class="nx">internal</span><span class="o">/</span><span class="nx">timers</span><span class="o">:</span><span class="mi">500</span><span class="o">:</span><span class="mi">7</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="42-a-namendpointa2nd-point">4.2. <a name='ndPoint'></a>2nd Point</h3>
+</div><h3 id="42-2nd-point">4.2. <a name='ndPoint'></a>2nd Point</h3>
 <p>接続先単位で CircuitBreaker を作成すること</p>
-<h4 id="421-a-namebadexampleabad-example">4.2.1. <a name='BadExample'></a>Bad Example</h4>
+<h4 id="421-bad-example">4.2.1. <a name='BadExample'></a>Bad Example</h4>
 <p>以下のように、どの接続先にでも対応可能なメソッドを 1つの CircuitBreaker で作成すること。</p>
 <ul>
 <li>理由
@@ -821,7 +820,7 @@
 </span></span><span class="line"><span class="cl"><span class="nx">axiosBackendCall</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;serviceB:8081/register&#39;</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="422-a-namegoodexampleagood-example">4.2.2. <a name='GoodExample'></a>Good Example</h4>
+</div><h4 id="422-good-example">4.2.2. <a name='GoodExample'></a>Good Example</h4>
 <p>以下のように接続先ごとに、CircuitBreaker を作るようにすると良いです。</p>
 <ul>
 <li>理由
@@ -858,7 +857,7 @@
 </span></span><span class="line"><span class="cl"><span class="nx">axiosServiceBCall</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;register&#39;</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="5-a-namereferenceareference">5. <a name='Reference'></a>Reference</h2>
+</div><h2 id="5-reference">5. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="https://github.com/nodeshift/opossum">nodeshift/opossum: Node.js circuit breaker - fails fast ⚡️</a></li>
 <li><a href="https://martinfowler.com/bliki/CircuitBreaker.html">CircuitBreaker</a></li>
@@ -926,7 +925,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

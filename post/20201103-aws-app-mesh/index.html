@@ -26,7 +26,7 @@ AWS App Meshのリリース日：2019/3/27
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20201103-aws-app-mesh/" />
@@ -154,7 +154,7 @@ AWS App Meshのリリース日：2019/3/27">
 <p>AWS App Meshについて概要をまとめて講義する場があったので、<br>
 簡単にAWS Black Beltを参考にまとめました。</p>
 <p>AWS App Meshのリリース日：2019/3/27</p>
-<h2 id="1-a-namea目次">1. <a name=''></a>目次</h2>
+<h2 id="1-目次">1. <a name=''></a>目次</h2>
 <!-- vscode-markdown-toc -->
 <ul>
 <li>
@@ -215,14 +215,14 @@ AWS App Meshのリリース日：2019/3/27">
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="2-a-name-1aサービスメッシュとは">2. <a name='-1'></a>サービスメッシュとは</h2>
+<h2 id="2-サービスメッシュとは">2. <a name='-1'></a>サービスメッシュとは</h2>
 <p>アプリケーションレベルの通信を、アプリケーション自身が制御するのではなくて、インフラストラクチャーで制御できるようにする技術</p>
-<h3 id="21-a-name-1aサービスメッシュがない場合">2.1. <a name='-1'></a>サービスメッシュがない場合</h3>
+<h3 id="21-サービスメッシュがない場合">2.1. <a name='-1'></a>サービスメッシュがない場合</h3>
 <p><img src="/img/20201103/no_service_mesh.png" alt=""></p>
-<h3 id="22-a-name-1aサービスメッシュがある場合">2.2. <a name='-1'></a>サービスメッシュがある場合</h3>
+<h3 id="22-サービスメッシュがある場合">2.2. <a name='-1'></a>サービスメッシュがある場合</h3>
 <p>サービスメッシュ基盤 = AWS App Mesh</p>
 <p><img src="/img/20201103/service_mesh.png" alt=""></p>
-<h3 id="23-a-name-1aサービスメッシュが必要となった背景">2.3. <a name='-1'></a>サービスメッシュが必要となった背景</h3>
+<h3 id="23-サービスメッシュが必要となった背景">2.3. <a name='-1'></a>サービスメッシュが必要となった背景</h3>
 <ul>
 <li>1つのシステム内の各サービスで、いろんな言語(Java, Go, Ruby)やアーキテクチャ(コンテナ, VM)を使うようになってきた。</li>
 <li>サービス間のネットワークが信頼できない。
@@ -265,9 +265,8 @@ AWS App Meshのリリース日：2019/3/27">
 </ul>
 <blockquote>
 <p>通信の可観測性 :<br>
-どのサービスに問題があるのかを一目瞭然にするため。どのチームのサービスに問題があったのかってすぐに分かるほうがいいですよね。</p>
-</blockquote>
-<h3 id="24-a-name-1a解決策">2.4. <a name='-1'></a>解決策</h3>
+どのサービスに問題があるのかを一目瞭然にするため。どのチームのサービスに問題があったのかってすぐに分かるほうがいいですよね。</p></blockquote>
+<h3 id="24-解決策">2.4. <a name='-1'></a>解決策</h3>
 <ul>
 <li>
 <p>共通機能チームが、<strong>ネットワークの信頼性</strong>/<strong>通信の可観測性</strong>のための共通ライブラリを作成しても良いが、以下の問題が発生するんです。</p>
@@ -308,18 +307,18 @@ AWS App Meshのリリース日：2019/3/27">
 </ul>
 </li>
 </ul>
-<h2 id="3-a-nameawsappmeshaaws-app-meshとはどのようなサービスか">3. <a name='AWSAppMesh'></a>AWS App Meshとはどのようなサービスか</h2>
-<h3 id="31-a-name-1a概要">3.1. <a name='-1'></a>概要</h3>
+<h2 id="3-aws-app-meshとはどのようなサービスか">3. <a name='AWSAppMesh'></a>AWS App Meshとはどのようなサービスか</h2>
+<h3 id="31-概要">3.1. <a name='-1'></a>概要</h3>
 <p>App Meshは、簡単な設定でEnvoy Proxyを作ってくれるマネージドサービス。</p>
 <p><img src="/img/20201103/aws-app-mesh-abstruct.png" alt=""></p>
-<h4 id="311-a-name-1a設定方法">3.1.1. <a name='-1'></a>設定方法</h4>
+<h4 id="311-設定方法">3.1.1. <a name='-1'></a>設定方法</h4>
 <p><img src="/img/20201103/how-to-use-app-mesh.png" alt=""></p>
-<h4 id="312-a-name-1aネットワークモデルとは">3.1.2. <a name='-1'></a>ネットワークモデルとは</h4>
+<h4 id="312-ネットワークモデルとは">3.1.2. <a name='-1'></a>ネットワークモデルとは</h4>
 <p><img src="/img/20201103/network-model.png" alt=""></p>
-<h4 id="313-a-nameenvoyaenvoyプロキシの生成">3.1.3. <a name='Envoy'></a>Envoyプロキシの生成</h4>
+<h4 id="313-envoyプロキシの生成">3.1.3. <a name='Envoy'></a>Envoyプロキシの生成</h4>
 <p><img src="/img/20201103/network-model-2-envoy.png" alt=""></p>
-<h2 id="4-a-nameawsappmesh-1aaws-app-meshの使いどころや具体的な機能">4. <a name='AWSAppMesh-1'></a>AWS App Meshの使いどころや具体的な機能</h2>
-<h3 id="41-a-nameawsappmesh-1aaws-app-meshが使えるインフラ">4.1. <a name='AWSAppMesh-1'></a>AWS App Meshが使えるインフラ</h3>
+<h2 id="4-aws-app-meshの使いどころや具体的な機能">4. <a name='AWSAppMesh-1'></a>AWS App Meshの使いどころや具体的な機能</h2>
+<h3 id="41-aws-app-meshが使えるインフラ">4.1. <a name='AWSAppMesh-1'></a>AWS App Meshが使えるインフラ</h3>
 <ul>
 <li>Amazon ECS</li>
 <li>Amazon EC2</li>
@@ -327,12 +326,12 @@ AWS App Meshのリリース日：2019/3/27">
 <li>Kubernetes on EC2</li>
 <li>Amazon EKS</li>
 </ul>
-<h3 id="42-a-nameappmeshaapp-meshのセキュリティ面">4.2. <a name='AppMesh'></a>App Meshのセキュリティ面</h3>
+<h3 id="42-app-meshのセキュリティ面">4.2. <a name='AppMesh'></a>App Meshのセキュリティ面</h3>
 <p><img src="/img/20201103/app-mesh-security.png" alt=""></p>
-<h3 id="43-a-nameappmesh-1aapp-meshの機能面">4.3. <a name='AppMesh-1'></a>App Meshの機能面</h3>
+<h3 id="43-app-meshの機能面">4.3. <a name='AppMesh-1'></a>App Meshの機能面</h3>
 <p>一言で言うと、高機能なL7LBです。
 <img src="/img/20201103/app-mesh-func.png" alt=""></p>
-<h3 id="44-a-name-1a利用性">4.4. <a name='-1'></a>利用性</h3>
+<h3 id="44-利用性">4.4. <a name='-1'></a>利用性</h3>
 <p>通信の可観測性を担保するために、</p>
 <ul>
 <li>メトリクス
@@ -357,17 +356,16 @@ AWS App Meshのリリース日：2019/3/27">
 <p><img src="/img/20201103/app-meth-example.png" alt=""></p>
 <blockquote>
 <p>CW: Cloud Watch Agent<br>
-X-Ray: X-Ray デーモン</p>
-</blockquote>
-<h3 id="45-a-name-1a利用料金">4.5. <a name='-1'></a>利用料金</h3>
+X-Ray: X-Ray デーモン</p></blockquote>
+<h3 id="45-利用料金">4.5. <a name='-1'></a>利用料金</h3>
 <ul>
 <li>App Meshの利用による追加料金はない</li>
 <li>Envoy Proxyを稼働するためのリソースに対して料金が発生</li>
 <li>AWS X-Ray, Amazon CloudWatch Logsなど連携先のサービスの料金が発生</li>
 </ul>
-<h2 id="5-a-name-1aまとめ">5. <a name='-1'></a>まとめ</h2>
+<h2 id="5-まとめ">5. <a name='-1'></a>まとめ</h2>
 <p><img src="/img/20201103/matome.png" alt=""></p>
-<h2 id="6-a-name-1aリファレンス">6. <a name='-1'></a>リファレンス</h2>
+<h2 id="6-リファレンス">6. <a name='-1'></a>リファレンス</h2>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=IC7sxVh7HNM&amp;feature=youtu.be&amp;ab_channel=AmazonWebServicesJapan%E5%85%AC%E5%BC%8F">【AWS Black Belt Online Seminar】AWS App Mesh - YouTube</a></li>
 <li><a href="https://i-beam.org/2019/01/22/hello-envoy/">Envoy Proxyに入門した - Folioscope</a></li>
@@ -431,7 +429,7 @@ X-Ray: X-Ray デーモン</p>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

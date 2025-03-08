@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-9/" />
@@ -169,8 +169,8 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-name57a項目-57-ローカル変数のスコープを最小限にする">1. <a name='57'></a>項目 57 ローカル変数のスコープを最小限にする</h2>
-<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<h2 id="1-項目-57-ローカル変数のスコープを最小限にする">1. <a name='57'></a>項目 57 ローカル変数のスコープを最小限にする</h2>
+<h3 id="11-結論">1.1. <a name=''></a>結論</h3>
 <ul>
 <li>ローカル変数は初めて使用される時に宣言しましょう
 <ul>
@@ -188,7 +188,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="12-a-name-1aサンプル">1.2. <a name='-1'></a>サンプル</h3>
+<h3 id="12-サンプル">1.2. <a name='-1'></a>サンプル</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -225,16 +225,15 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="13-a-name-1aポイント">1.3. <a name='-1'></a>ポイント</h3>
+</div><h3 id="13-ポイント">1.3. <a name='-1'></a>ポイント</h3>
 <ul>
 <li>使用される直前に、ローカル変数を初期化して宣言しましょう</li>
 <li><code>1メソッド:1処理</code>としましょう</li>
 </ul>
 <blockquote>
-<p>備考：<code>while</code>文ではなく<code>for</code>文を好んで使いましょう。</p>
-</blockquote>
-<h2 id="2-a-name58forfor-eacha項目-58-従来の-for-ループより-for-each-ループを選ぶ">2. <a name='58forfor-each'></a>項目 58 従来の for ループより for-each ループを選ぶ</h2>
-<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<p>備考：<code>while</code>文ではなく<code>for</code>文を好んで使いましょう。</p></blockquote>
+<h2 id="2-項目-58-従来の-for-ループより-for-each-ループを選ぶ">2. <a name='58forfor-each'></a>項目 58 従来の for ループより for-each ループを選ぶ</h2>
+<h3 id="21-結論">2.1. <a name='-1'></a>結論</h3>
 <p>「簡潔」&amp;「バグ予防」にもなるので、<br>
 以下の場合を除いて、<code>for</code>文ではなく<code>for-each</code>文を使いましょう</p>
 <ul>
@@ -257,9 +256,8 @@
 <blockquote>
 <p>Collectionに対して変更できるが、フェイルファストには気を付けましょう。<br>
 Collectionによっては、iteratorおよびlistIteratorメソッドによって返されるイテレータは、フェイルファストです。イテレータの作成後に、イテレータ自体のremoveまたはaddメソッド以外の方法でリストが構造的に変更されると、イテレータはConcurrentModificationExceptionをスローします。
-<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/ArrayList.html">https://docs.oracle.com/javase/jp/8/docs/api/java/util/ArrayList.html</a></p>
-</blockquote>
-<h3 id="22-a-name-1aサンプル">2.2. <a name='-1'></a>サンプル</h3>
+<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/ArrayList.html">https://docs.oracle.com/javase/jp/8/docs/api/java/util/ArrayList.html</a></p></blockquote>
+<h3 id="22-サンプル">2.2. <a name='-1'></a>サンプル</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -331,8 +329,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>外側のコレクション(<code>suits</code>)のイテレータに対して<code>next()</code>が過剰に呼び出されて、<code>NoSuchElementException</code>がスローされるため。</p>
-</blockquote>
+<p>外側のコレクション(<code>suits</code>)のイテレータに対して<code>next()</code>が過剰に呼び出されて、<code>NoSuchElementException</code>がスローされるため。</p></blockquote>
 <p><em>GoodIterator.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -364,7 +361,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="23-a-name-1aポイント">2.3. <a name='-1'></a>ポイント</h3>
+</div><h3 id="23-ポイント">2.3. <a name='-1'></a>ポイント</h3>
 <p>以下の場合を除いて、<code>for</code>文ではなく<code>for-each</code>文を使いましょう</p>
 <ul>
 <li>フィルタリング（要素の削除）</li>
@@ -372,9 +369,8 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 <li>並列イテレーション</li>
 </ul>
 <blockquote>
-<p><code>for-each</code>文を使えるようにするため、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Iterable.html">Iterable</a>を実装しましょう。</p>
-</blockquote>
-<h3 id="24-a-nameiterablea付録--iterableの実装-">2.4. <a name='Iterable'></a>付録 ( Iterableの実装 )</h3>
+<p><code>for-each</code>文を使えるようにするため、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Iterable.html">Iterable</a>を実装しましょう。</p></blockquote>
+<h3 id="24-付録--iterableの実装-">2.4. <a name='Iterable'></a>付録 ( Iterableの実装 )</h3>
 <p><em>Main.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -639,8 +635,8 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="3-a-name59a項目-59-ライブラリを知りライブラリを使う">3. <a name='59'></a>項目 59 ライブラリを知り、ライブラリを使う</h2>
-<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+</div><h2 id="3-項目-59-ライブラリを知りライブラリを使う">3. <a name='59'></a>項目 59 ライブラリを知り、ライブラリを使う</h2>
+<h3 id="31-結論">3.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>標準ライブラリを使いましょう
 <ul>
@@ -656,7 +652,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </li>
 <li>標準ライブラリ（<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/package-summary.html">java.lang</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/package-summary.html">java.util</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/io/package-summary.html">java.io</a>）の内容は知っておきましょう</li>
 </ul>
-<h3 id="32-a-name-1aサンプル">3.2. <a name='-1'></a>サンプル</h3>
+<h3 id="32-サンプル">3.2. <a name='-1'></a>サンプル</h3>
 <p>便利なライブラリとして以下の2つは知っておきましょう</p>
 <ul>
 <li><a href="https://docs.oracle.com/javase/jp/8/docs/technotes/guides/collections/index.html">Collections Framework</a>
@@ -672,7 +668,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ul>
 </li>
 </ul>
-<h3 id="33-a-name-1aポイント">3.3. <a name='-1'></a>ポイント</h3>
+<h3 id="33-ポイント">3.3. <a name='-1'></a>ポイント</h3>
 <ul>
 <li>無駄な努力はしないでください</li>
 <li>ライブラリが存在するのかを知らなかったら調べてください
@@ -682,8 +678,8 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </li>
 <li>あなたのコードよりもライブラリの方が優れています</li>
 </ul>
-<h2 id="4-a-name60floatdoublea項目-60-正確な答えが必要ならばfloat-と-double-を避ける">4. <a name='60floatdouble'></a>項目 60 正確な答えが必要ならば、float と double を避ける</h2>
-<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+<h2 id="4-項目-60-正確な答えが必要ならばfloat-と-double-を避ける">4. <a name='60floatdouble'></a>項目 60 正確な答えが必要ならば、float と double を避ける</h2>
+<h3 id="41-結論">4.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>金銭計算など正確な計算が必要な場合は、<code>float</code> と <code>double</code> を使わないでおきましょう
 <ul>
@@ -693,7 +689,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ul>
 </li>
 </ul>
-<h3 id="42-a-name-1a理由">4.2. <a name='-1'></a>理由</h3>
+<h3 id="42-理由">4.2. <a name='-1'></a>理由</h3>
 <p>丸めの誤差が発生するから。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -805,7 +801,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </div>
 </div></li>
 </ul>
-<h3 id="43-a-name-1a-備考">4.3. <a name='-1'></a> 備考</h3>
+<h3 id="43--備考">4.3. <a name='-1'></a> 備考</h3>
 <p>正確に計算できなければ、<code>ArithmeticException</code>がスローされる。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -835,8 +831,8 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="5-a-name61boxedprimitiveprimitivea項目-61-ボクシングされたプリミティブ型boxed-primitiveよりプリミティブ型primitiveを選択すべし">5. <a name='61boxedprimitiveprimitive'></a>項目 61 ボクシングされたプリミティブ型（boxed primitive）より、プリミティブ型（primitive）を選択すべし</h2>
-<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
+</div><h2 id="5-項目-61-ボクシングされたプリミティブ型boxed-primitiveよりプリミティブ型primitiveを選択すべし">5. <a name='61boxedprimitiveprimitive'></a>項目 61 ボクシングされたプリミティブ型（boxed primitive）より、プリミティブ型（primitive）を選択すべし</h2>
+<h3 id="51-結論">5.1. <a name='-1'></a>結論</h3>
 <p>基本データ型の方が演算が速く、処理の危険性がないため、<br>
 以下の場合を除いて、ボクシングされたプリミティブ型(<code>Integer</code>や<code>Double</code>, <code>Boolean</code>など)よりもプリミティブ型(<code>int</code>や<code>double</code>, <code>boolean</code>など)を使いましょう。</p>
 <ul>
@@ -844,8 +840,8 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 <li><code>ThreadLocal&lt;T&gt;</code>を利用する場合</li>
 <li>リフレクションによりメソッドを呼び出す必要がある場合</li>
 </ul>
-<h3 id="52-a-name-1aサンプル">5.2. <a name='-1'></a>サンプル</h3>
-<h4 id="521-a-name-1a演算速度">5.2.1. <a name='-1'></a>演算速度</h4>
+<h3 id="52-サンプル">5.2. <a name='-1'></a>サンプル</h3>
+<h4 id="521-演算速度">5.2.1. <a name='-1'></a>演算速度</h4>
 <p>プリミティブ型の方が10倍ほど速いですね。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -931,7 +927,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="522-a-name-1a処理の危険性">5.2.2. <a name='-1'></a>処理の危険性</h4>
+</div><h4 id="522-処理の危険性">5.2.2. <a name='-1'></a>処理の危険性</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -962,12 +958,11 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ol>
 <blockquote>
 <p>備考：<code>naturalOrder.compare(new Integer(1), null);</code>とすると、<code>NullPointerException</code>がスローされる。<br>
-ボクシングされたプリミティブ型では、<code>null</code>が入る可能性があることにも注意。</p>
-</blockquote>
-<h3 id="53-a-name-1aポイント">5.3. <a name='-1'></a>ポイント</h3>
+ボクシングされたプリミティブ型では、<code>null</code>が入る可能性があることにも注意。</p></blockquote>
+<h3 id="53-ポイント">5.3. <a name='-1'></a>ポイント</h3>
 <p>ボクシングされたプリミティブ型の使用を強いられない限り、プリミティブ型を使いましょう。</p>
-<h2 id="6-a-name62a項目-62-他の型が適切な場所では文字列を避ける">6. <a name='62'></a>項目 62 他の型が適切な場所では、文字列を避ける</h2>
-<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+<h2 id="6-項目-62-他の型が適切な場所では文字列を避ける">6. <a name='62'></a>項目 62 他の型が適切な場所では、文字列を避ける</h2>
+<h3 id="61-結論">6.1. <a name='-1'></a>結論</h3>
 <p>以下の場合、文字列を使うべきではないです。</p>
 <ul>
 <li>他の値型に対する代替
@@ -1000,7 +995,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ul>
 </li>
 </ul>
-<h3 id="62-a-name-1aサンプル">6.2. <a name='-1'></a>サンプル</h3>
+<h3 id="62-サンプル">6.2. <a name='-1'></a>サンプル</h3>
 <p><strong>偽造不可能なキー(<em>capability</em>)に対する代替</strong> について例を示します。</p>
 <p>以下は、2つの独立したクライアントが、それぞれのスレッドローカル変数に同じ名前のキーを使用すると、共有することになるため不完全。</p>
 <div class="highlight"><div class="chroma">
@@ -1060,14 +1055,13 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>備考：<code>ThreadLocal</code>は副作用が強いので、使用する際は気を付けた方が良いですね。</p>
-</blockquote>
-<h2 id="7-a-name63a項目-63-文字列結合のパフォーマンスに用心する">7. <a name='63'></a>項目 63 文字列結合のパフォーマンスに用心する</h2>
-<h3 id="71-a-name-1a結論">7.1. <a name='-1'></a>結論</h3>
+<p>備考：<code>ThreadLocal</code>は副作用が強いので、使用する際は気を付けた方が良いですね。</p></blockquote>
+<h2 id="7-項目-63-文字列結合のパフォーマンスに用心する">7. <a name='63'></a>項目 63 文字列結合のパフォーマンスに用心する</h2>
+<h3 id="71-結論">7.1. <a name='-1'></a>結論</h3>
 <p>簡単な文字列結合でなく、<br>
 <code>n</code>個の文字列を結合する場合は<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a>を使いましょう。<br>
 <code>String</code>は不変(<em>immutable</em>)なので、2つの文字列が結合される場合、両方の内容がコピーされるので。</p>
-<h3 id="72-a-name-1aサンプル">7.2. <a name='-1'></a>サンプル</h3>
+<h3 id="72-サンプル">7.2. <a name='-1'></a>サンプル</h3>
 <p>80文字の固定長の文字列連結の場合、<br>
 <em>Fast.java</em> は <em>Slow.java</em> と比べて、85倍速い。<br>
 <code>StringBuilder b = new StringBuilder();</code>とした場合は、50倍速い。by <code>Joshua Bloch</code></p>
@@ -1114,10 +1108,9 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>備考：定数の文字列連結の場合は、<code>+</code>による連結だとコンパイル時に行われるので、実行時のコストは0になる。</p>
-</blockquote>
-<h2 id="8-a-name64a項目-64-インタフェースでオブジェクトを参照する">8. <a name='64'></a>項目 64 インタフェースでオブジェクトを参照する</h2>
-<h3 id="81-a-name-1a結論">8.1. <a name='-1'></a>結論</h3>
+<p>備考：定数の文字列連結の場合は、<code>+</code>による連結だとコンパイル時に行われるので、実行時のコストは0になる。</p></blockquote>
+<h2 id="8-項目-64-インタフェースでオブジェクトを参照する">8. <a name='64'></a>項目 64 インタフェースでオブジェクトを参照する</h2>
+<h3 id="81-結論">8.1. <a name='-1'></a>結論</h3>
 <p>実装を切り替える際に、宣言の1行を変更するだけで済むので、<br>
 オブジェクト参照には、</p>
 <ul>
@@ -1146,10 +1139,10 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ul>
 </li>
 </ul>
-<h3 id="82-a-name-1aポイント">8.2. <a name='-1'></a>ポイント</h3>
+<h3 id="82-ポイント">8.2. <a name='-1'></a>ポイント</h3>
 <p>プログラムを柔軟にするために、APIの場合はインタフェースを使うようにしましょう。</p>
-<h2 id="9-a-name65a項目-65-リフレクションよりもインタフェースを選ぶ">9. <a name='65'></a>項目 65 リフレクションよりもインタフェースを選ぶ</h2>
-<h3 id="91-a-name-1a結論">9.1. <a name='-1'></a>結論</h3>
+<h2 id="9-項目-65-リフレクションよりもインタフェースを選ぶ">9. <a name='65'></a>項目 65 リフレクションよりもインタフェースを選ぶ</h2>
+<h3 id="91-結論">9.1. <a name='-1'></a>結論</h3>
 <p>リフレクションは、ある種の洗練されたシステムプログラミング処理では強力ですが、<br>
 以下の欠点があるので、インタフェース(もしくは、スーパークラス)を使いましょう</p>
 <ul>
@@ -1170,7 +1163,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ul>
 </li>
 </ul>
-<h3 id="92-a-name-1aサンプル">9.2. <a name='-1'></a>サンプル</h3>
+<h3 id="92-サンプル">9.2. <a name='-1'></a>サンプル</h3>
 <p>基本的にリフレクションは使わないのですが、強力な機構であるので紹介します。</p>
 <p>以下のように<code>Set</code>インタフェースにアクセスすることができる。<br>
 使用例としては以下。</p>
@@ -1179,8 +1172,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 <li>汎用的な<code>Set</code>のパフォーマンス解析ツール</li>
 </ul>
 <blockquote>
-<p>某プロジェクトでは、<code>Athena</code>からの取得結果を<code>varchar/integer/double</code>のいずれかに変換するために利用している。</p>
-</blockquote>
+<p>某プロジェクトでは、<code>Athena</code>からの取得結果を<code>varchar/integer/double</code>のいずれかに変換するために利用している。</p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1261,16 +1253,16 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="93-a-name-1aポイント">9.3. <a name='-1'></a>ポイント</h3>
+</div><h3 id="93-ポイント">9.3. <a name='-1'></a>ポイント</h3>
 <p>どの型が来ても良い場合にリフレクションは使えるが、<br>
 そうではない限りインタフェースを使いましょう。</p>
-<h2 id="10-a-name66a項目-66-ネイティブメソッドを注意して使う">10. <a name='66'></a>項目 66 ネイティブメソッドを注意して使う</h2>
-<h3 id="101-a-name-1a結論">10.1. <a name='-1'></a>結論</h3>
+<h2 id="10-項目-66-ネイティブメソッドを注意して使う">10. <a name='66'></a>項目 66 ネイティブメソッドを注意して使う</h2>
+<h3 id="101-結論">10.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>低レベルのリソースや古いライブラリへアクセスするためのネイティブメソッドの使用は正当であるが、できるだけ局所的にし、徹底的にテストするべき</li>
 <li>パフォーマンス改善のためにネイティブメソッドを使用するべきでない</li>
 </ul>
-<h3 id="102-a-name-1aネイティブメソッドとは">10.2. <a name='-1'></a>ネイティブメソッドとは</h3>
+<h3 id="102-ネイティブメソッドとは">10.2. <a name='-1'></a>ネイティブメソッドとは</h3>
 <ul>
 <li>
 <p>ネイティブメソッドとは、CやC++などのネイティブのプログラミング言語で書かれた特別なメソッド</p>
@@ -1324,18 +1316,17 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </li>
 </ul>
 <blockquote>
-<p>グルーコード：もともと互換性がない部分同士を結合するためだけに働くコード</p>
-</blockquote>
-<h3 id="103-a-name-1aまとめ">10.3. <a name='-1'></a>まとめ</h3>
+<p>グルーコード：もともと互換性がない部分同士を結合するためだけに働くコード</p></blockquote>
+<h3 id="103-まとめ">10.3. <a name='-1'></a>まとめ</h3>
 <p>以下のネイティブメソッドの使い方は正当</p>
 <ul>
 <li>低レベルのリソースや古いライブラリへアクセスするための使用は正当である</li>
 </ul>
 <p>ただし、多くの欠点があるため、できるだけ局所的にし、徹底的にテストするようにする。</p>
-<h3 id="104-a-name-1a余談">10.4. <a name='-1'></a>余談</h3>
+<h3 id="104-余談">10.4. <a name='-1'></a>余談</h3>
 <p>現在(2020年1月)、Project PanamaでJNR(Java Native Runtime)がJEP(JDK Enhancement Proposals)として要望されている</p>
-<h2 id="11-a-name67a項目-67-注意して最適化する">11. <a name='67'></a>項目 67 注意して最適化する</h2>
-<h3 id="111-a-name-1a結論">11.1. <a name='-1'></a>結論</h3>
+<h2 id="11-項目-67-注意して最適化する">11. <a name='67'></a>項目 67 注意して最適化する</h2>
+<h3 id="111-結論">11.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>
 <p>実装時には、速いプログラムよりも良いプログラムを目指すべし</p>
@@ -1376,7 +1367,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ul>
 </li>
 </ul>
-<h3 id="112-a-name-1a余談">11.2. <a name='-1'></a>余談</h3>
+<h3 id="112-余談">11.2. <a name='-1'></a>余談</h3>
 <p>性能試験はどうなったらゴールなのかはやる前に決めておく必要がある</p>
 <ul>
 <li>性能試験をするということは性能目標があるはずなのでそれを満たしたら終わり</li>
@@ -1402,8 +1393,8 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ul>
 </li>
 </ul>
-<h2 id="12-a-name68a項目-68-一般的に受け入れられている命名規約を守る">12. <a name='68'></a>項目 68 一般的に受け入れられている命名規約を守る</h2>
-<h3 id="121-a-name-1a結論">12.1. <a name='-1'></a>結論</h3>
+<h2 id="12-項目-68-一般的に受け入れられている命名規約を守る">12. <a name='68'></a>項目 68 一般的に受け入れられている命名規約を守る</h2>
+<h3 id="121-結論">12.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>一般的に受け入れられている命名規約を守るべき
 <ul>
@@ -1411,13 +1402,13 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ul>
 </li>
 </ul>
-<h3 id="122-a-name-1a命名規約の種類">12.2. <a name='-1'></a>命名規約の種類</h3>
+<h3 id="122-命名規約の種類">12.2. <a name='-1'></a>命名規約の種類</h3>
 <p>命名規約の種類は以下の2つに分けられる</p>
 <ul>
 <li>活字的命名規約</li>
 <li>文法的命名規約</li>
 </ul>
-<h4 id="1221-a-name-1a活字的命名規約">12.2.1. <a name='-1'></a>活字的命名規約</h4>
+<h4 id="1221-活字的命名規約">12.2.1. <a name='-1'></a>活字的命名規約</h4>
 <ul>
 <li>
 <p>ピリオドで区切られた要素を持ち、階層的であるべき</p>
@@ -1465,7 +1456,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ul>
 </li>
 </ul>
-<h4 id="1222-a-name-1a文法的命名規約">12.2.2. <a name='-1'></a>文法的命名規約</h4>
+<h4 id="1222-文法的命名規約">12.2.2. <a name='-1'></a>文法的命名規約</h4>
 <p>文法的命名規約は活字的命名規約よりも柔軟で議論の余地がある</p>
 <ul>
 <li>パッケージ名
@@ -1550,12 +1541,12 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
 </ul>
 </li>
 </ul>
-<h3 id="123-a-name-1a余談">12.3. <a name='-1'></a>余談</h3>
+<h3 id="123-余談">12.3. <a name='-1'></a>余談</h3>
 <ul>
 <li><a href="https://www.oreilly.co.jp/books/9784873115658/">Readable Code</a> を読むと良さそう</li>
 <li>フィールド名も他の人が見るから気を付けた方が良さそう。</li>
 </ul>
-<h2 id="13-a-nameurla参考url">13. <a name='URL'></a>参考URL</h2>
+<h2 id="13-参考url">13. <a name='URL'></a>参考URL</h2>
 <ul>
 <li><a href="http://mindalign.sblo.jp/article/183499180.html">Java Iterableインターフェース/Iteratorインターフェースの実装例</a></li>
 </ul>
@@ -1619,7 +1610,7 @@ Collectionによっては、iteratorおよびlistIteratorメソッドによっ�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

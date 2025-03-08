@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20200405-docker-springboot_to_db/" />
@@ -213,7 +213,7 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-nametechnicalelementsatechnical-elements">1. <a name='TechnicalElements'></a>Technical Elements</h2>
+<h2 id="1-technical-elements">1. <a name='TechnicalElements'></a>Technical Elements</h2>
 <ul>
 <li><a href="https://spring.io/projects/spring-boot">Spring Boot</a>
 <ul>
@@ -241,9 +241,9 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-a-namecodingsettingsofeachtechnicalelementacoding--settings-of-each-technical-element">2. <a name='CodingSettingsofEachTechnicalElement'></a>Coding &amp; Settings of Each Technical Element</h2>
-<h3 id="21-a-namespringbootaspringboot">2.1. <a name='SpringBoot'></a>SpringBoot</h3>
-<h4 id="211-a-namespringbootapplicationaspringbootapplication">2.1.1. <a name='SpringBootApplication'></a>SpringBootApplication</h4>
+<h2 id="2-coding--settings-of-each-technical-element">2. <a name='CodingSettingsofEachTechnicalElement'></a>Coding &amp; Settings of Each Technical Element</h2>
+<h3 id="21-springboot">2.1. <a name='SpringBoot'></a>SpringBoot</h3>
+<h4 id="211-springbootapplication">2.1.1. <a name='SpringBootApplication'></a>SpringBootApplication</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -262,7 +262,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="212-a-namerestcontrollerarestcontroller">2.1.2. <a name='RestController'></a>RestController</h4>
+</div><h4 id="212-restcontroller">2.1.2. <a name='RestController'></a>RestController</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -307,7 +307,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="213-a-namedtoadto">2.1.3. <a name='DTO'></a>DTO</h4>
+</div><h4 id="213-dto">2.1.3. <a name='DTO'></a>DTO</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -326,7 +326,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="214-a-namemapperamapper">2.1.4. <a name='Mapper'></a>Mapper</h4>
+</div><h4 id="214-mapper">2.1.4. <a name='Mapper'></a>Mapper</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -357,7 +357,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="215-a-nameapplicationpropertiesaapplicationproperties">2.1.5. <a name='Application.properties'></a>Application.properties</h4>
+</div><h4 id="215-applicationproperties">2.1.5. <a name='Application.properties'></a>Application.properties</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -374,7 +374,7 @@
 </span></span><span class="line"><span class="cl">spring.datasource.initialization-mode=always
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="216-a-namebuildgradleabuildgradle">2.1.6. <a name='build.gradle'></a>build.gradle</h4>
+</div><h4 id="216-buildgradle">2.1.6. <a name='build.gradle'></a>build.gradle</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -439,8 +439,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="22-a-namejib-gradle-pluginajib-gradle-plugin">2.2. <a name='jib-gradle-plugin'></a>jib-gradle-plugin</h3>
-<h4 id="221-a-namebuildgradle-1abuildgradle">2.2.1. <a name='build.gradle-1'></a>build.gradle</h4>
+</div><h3 id="22-jib-gradle-plugin">2.2. <a name='jib-gradle-plugin'></a>jib-gradle-plugin</h3>
+<h4 id="221-buildgradle">2.2.1. <a name='build.gradle-1'></a>build.gradle</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -455,8 +455,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="3-a-namebuildandrunabuild-and-run">3. <a name='BuildandRun'></a>Build and Run</h2>
-<h3 id="31-a-namebuildabuild">3.1. <a name='Build'></a>Build</h3>
+</div><h2 id="3-build-and-run">3. <a name='BuildandRun'></a>Build and Run</h2>
+<h3 id="31-build">3.1. <a name='Build'></a>Build</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -465,7 +465,7 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ gradle jibDockerBuild --image<span class="o">=</span>springio/gs-spring-boot-docker
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="32-a-namerunarun">3.2. <a name='Run'></a>Run</h3>
+</div><h3 id="32-run">3.2. <a name='Run'></a>Run</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -474,8 +474,8 @@
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ docker run -e <span class="s2">&#34;SPRING_PROFILES_ACTIVE=prod&#34;</span> -p 8080:8080 -t springio/gs-spring-boot-docker
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="33-a-nameconrainerrepositorypushpullaconrainer-repository-への-push-と-pull">3.3. <a name='ConrainerRepositorypushpull'></a>Conrainer Repository への push と pull</h3>
-<h4 id="331-a-namedockerpushadocker-push">3.3.1. <a name='dockerpush'></a>docker push</h4>
+</div><h3 id="33-conrainer-repository-への-push-と-pull">3.3. <a name='ConrainerRepositorypushpull'></a>Conrainer Repository への push と pull</h3>
+<h4 id="331-docker-push">3.3.1. <a name='dockerpush'></a>docker push</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -496,7 +496,7 @@
 </span></span><span class="line"><span class="cl">$ docker push gcr.io/<span class="o">[</span>GCPのプロジェクトID<span class="o">]</span>/springio/gs-spring-boot-docker:tag1
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="332-a-namedockerpulldockerrunadocker-pull--docker-run">3.3.2. <a name='dockerpulldockerrun'></a>docker pull &amp; docker run</h4>
+</div><h4 id="332-docker-pull--docker-run">3.3.2. <a name='dockerpulldockerrun'></a>docker pull &amp; docker run</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -525,8 +525,8 @@
 </span></span><span class="line"><span class="cl">$ docker run -e <span class="s2">&#34;SPRING_PROFILES_ACTIVE=prod&#34;</span> -p 8080:8080 -t 2c3be3672b39
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="4-a-nametroubleatrouble">4. <a name='Trouble'></a>Trouble</h2>
-<h3 id="41-a-namespringbootappdbaspringboot-app-から外部db-等へのアクセスができない">4.1. <a name='SpringBootAppDB'></a>SpringBoot App から外部(DB 等)へのアクセスができない</h3>
+</div><h2 id="4-trouble">4. <a name='Trouble'></a>Trouble</h2>
+<h3 id="41-springboot-app-から外部db-等へのアクセスができない">4.1. <a name='SpringBootAppDB'></a>SpringBoot App から外部(DB 等)へのアクセスができない</h3>
 <p><code>docker run</code>実行時の以下の警告は解決しないといけない。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -538,7 +538,7 @@
 </div>
 </div><p><code>sudo sysctl -w net.ipv4.ip_forward=1</code>を実行することで、<code>IPV4</code>のフォーワーディングができるようになる。</p>
 <p>これを実施することで、コンテナ内から外部(DB 等)へのアクセスができるようになる。</p>
-<h3 id="42-a-namegcrgooglecontainerregistrydockerimagepushagcrgoogle-container-registryに-docker-image-を登録pushできない">4.2. <a name='GCRGoogleContainerRegistryDockerImagepush'></a><code>GCR(Google Container Registry)</code>に Docker Image を登録(push)できない</h3>
+<h3 id="42-gcrgoogle-container-registryに-docker-image-を登録pushできない">4.2. <a name='GCRGoogleContainerRegistryDockerImagepush'></a><code>GCR(Google Container Registry)</code>に Docker Image を登録(push)できない</h3>
 <p><code>docker-credential-gcr</code>コマンドによるリポジトリの認証が必要だった。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -558,7 +558,7 @@
 </span></span><span class="line"><span class="cl">$ docker-credential-gcr configure-docker
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="5-a-nameexecutionresultaexecution-result">5. <a name='ExecutionResult'></a>Execution Result</h2>
+</div><h2 id="5-execution-result">5. <a name='ExecutionResult'></a>Execution Result</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -621,7 +621,7 @@
 </span></span><span class="line"><span class="cl">2020-04-07 08:24:59.320  INFO <span class="m">1</span> --- <span class="o">[</span>nio-8080-exec-1<span class="o">]</span> c.e.springboothelloworld.RestController  : <span class="nv">id</span> <span class="o">=</span> 3, <span class="nv">name</span> <span class="o">=</span> user03
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="6-a-namereferenceurlareference-url">6. <a name='ReferenceURL'></a>Reference URL</h2>
+</div><h2 id="6-reference-url">6. <a name='ReferenceURL'></a>Reference URL</h2>
 <ul>
 <li><a href="https://sioyaki.com/entry/2017/02/19/154412">Docker ビルド時の IPv4 forwarding is disabled エラーの解決方法 – 塩焼きブログ</a></li>
 <li><a href="https://cloud.google.com/container-registry/docs/advanced-authentication?hl=ja">認証方法  |  Container Registry のドキュメント  |  Google Cloud</a></li>
@@ -685,7 +685,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20210107-springboot-app-read-configmap/" />
@@ -145,12 +145,10 @@
       <h1 id="abstruct">Abstruct</h1>
 <p>KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを取得しに行くことができたので、その方法をまとめておきます。</p>
 <blockquote>
-<p>Pod上にマウントされたConfigMapが更新されるのを待つのではなく、直接取得しに行く方法です。</p>
-</blockquote>
+<p>Pod上にマウントされたConfigMapが更新されるのを待つのではなく、直接取得しに行く方法です。</p></blockquote>
 <blockquote>
 <p>追記：fabric8io/kubernetes-client を使用した方がConfigMapの変更イベントをトリガーにできるため、より簡単に実現できます。<br>
-参考：<a href="https://github.com/fabric8io/kubernetes-client/blob/master/kubernetes-examples/src/main/java/io/fabric8/kubernetes/examples/WatchExample.java">kubernetes-client/WatchExample.java at master · fabric8io/kubernetes-client</a></p>
-</blockquote>
+参考：<a href="https://github.com/fabric8io/kubernetes-client/blob/master/kubernetes-examples/src/main/java/io/fabric8/kubernetes/examples/WatchExample.java">kubernetes-client/WatchExample.java at master · fabric8io/kubernetes-client</a></p></blockquote>
 <h2 id="environment">Environment</h2>
 <ul>
 <li>minikube
@@ -250,8 +248,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p><code>eval $(minikube docker-env)</code> の必要性については、<a href="https://qiita.com/loftkun/items/1cfc94799406882bde02">こちらのブログ</a>がわかりやすかったです。</p>
-</blockquote>
+<p><code>eval $(minikube docker-env)</code> の必要性については、<a href="https://qiita.com/loftkun/items/1cfc94799406882bde02">こちらのブログ</a>がわかりやすかったです。</p></blockquote>
 <h2 id="what-to-create">What to create</h2>
 <ul>
 <li>ConfigMap
@@ -316,11 +313,11 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ui_properties_file_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;user-interface.properties&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">game.properties</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
 </span></span></span><span class="line"><span class="cl"><span class="sd">    enemy.types: aliens,monsters
-</span></span></span><span class="line"><span class="cl"><span class="sd">    player.maximum-lives: 5</span><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="sd">    player.maximum-lives: 5</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">user-interface.properties</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
 </span></span></span><span class="line"><span class="cl"><span class="sd">    color.good: purple
 </span></span></span><span class="line"><span class="cl"><span class="sd">    color.bad: yellow
-</span></span></span><span class="line"><span class="cl"><span class="sd">    allow.textmode: true</span><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="sd">    allow.textmode: true</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>ConfigMapの作成方法は以下。</p>
@@ -975,7 +972,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

@@ -26,7 +26,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-7/" />
@@ -172,8 +172,8 @@
 <p>日時: 2019/11/29 14:00-14:45
 参加者(敬称略): 則兼、岩崎、倉元<br>
 以下、内容。</p>
-<h2 id="1-a-name42a項目-42-匿名クラスよりもラムダ式を選ぶ">1. <a name='42'></a>項目 42 匿名クラスよりもラムダ式を選ぶ</h2>
-<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<h2 id="1-項目-42-匿名クラスよりもラムダ式を選ぶ">1. <a name='42'></a>項目 42 匿名クラスよりもラムダ式を選ぶ</h2>
+<h3 id="11-結論">1.1. <a name=''></a>結論</h3>
 <p>以下の場合は、ラムダ式を使いましょう。</p>
 <ul>
 <li>数行のコードで済む</li>
@@ -181,7 +181,7 @@
 <li>関数型インターフェースの型しか使用しない</li>
 </ul>
 <p>それ以外の場合は、匿名クラスを使いましょう。</p>
-<h3 id="12-a-name-1a匿名クラスでの実装">1.2. <a name='-1'></a>匿名クラスでの実装</h3>
+<h3 id="12-匿名クラスでの実装">1.2. <a name='-1'></a>匿名クラスでの実装</h3>
 <p><em>Anonymous.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -206,8 +206,7 @@
 </div><p>1 行で済んでおり、自分への参照は不要なので、ラムダ式の方が良いですね。</p>
 <blockquote>
 <p>そもそも匿名クラスとは、、<br>
-以下のように記述される処理のことですね。</p>
-</blockquote>
+以下のように記述される処理のことですね。</p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -220,7 +219,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">};</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="13-a-name-1aラムダ式での実装">1.3. <a name='-1'></a>ラムダ式での実装</h3>
+</div><h3 id="13-ラムダ式での実装">1.3. <a name='-1'></a>ラムダ式での実装</h3>
 <p><em>Anonymous.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -247,8 +246,7 @@
 <p>数行で済んでおり、自分への参照はしておらず、<code>Collections.sort</code>の第 2 引数が関数型インターフェース(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Comparator.html">Comparator</a>)なので、ラムダ式が向いていますね。</p>
 <blockquote>
 <p>関数型インタフェースとは、、<br>
-関数型インターフェースの条件は、大雑把に言って、定義されている抽象メソッドが 1 つだけあるインターフェース。(static メソッドや Object クラスにあるデフォルトメソッドはカウントしない。）</p>
-</blockquote>
+関数型インターフェースの条件は、大雑把に言って、定義されている抽象メソッドが 1 つだけあるインターフェース。(static メソッドや Object クラスにあるデフォルトメソッドはカウントしない。）</p></blockquote>
 <p>Java8 での関数型インタフェース一覧は<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">Oracle Java SE 8 (Uses of Class
 java.lang.FunctionalInterface)</a>にあります。
 3rd party 製のライブラリで<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/FunctionalInterface.html">@FunctionalInterface</a>が付いているインタフェースも、関数型インタフェースですね。</p>
@@ -257,17 +255,16 @@ java.lang.FunctionalInterface)</a>にあります。
 <li>コンパイルエラーにしてくれる。</li>
 <li>IDEがもっとよい書き方を提案してくれる。</li>
 </ul>
-<h2 id="2-a-name43a項目-43-ラムダよりもメソッド参照を選ぶ">2. <a name='43'></a>項目 43 ラムダよりもメソッド参照を選ぶ</h2>
-<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<h2 id="2-項目-43-ラムダよりもメソッド参照を選ぶ">2. <a name='43'></a>項目 43 ラムダよりもメソッド参照を選ぶ</h2>
+<h3 id="21-結論">2.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>メソッド参照の利点：ラムダ式よりも簡潔に書ける。</li>
 <li>ただし、同クラスにあるメソッドを用いる場合は、ラムダ式の方が簡潔に書ける場合がある。</li>
 </ul>
-<h3 id="22-a-name-1aメソッド参照">2.2. <a name='-1'></a>メソッド参照</h3>
+<h3 id="22-メソッド参照">2.2. <a name='-1'></a>メソッド参照</h3>
 <blockquote>
 <p>メソッド参照とは、、<br>
-関数型インターフェース（抽象メソッドが 1 つだけ定義されているインターフェース）の変数にメソッドそのものを代入することが出来る。これを「メソッド参照」と呼ぶ。</p>
-</blockquote>
+関数型インターフェース（抽象メソッドが 1 つだけ定義されているインターフェース）の変数にメソッドそのものを代入することが出来る。これを「メソッド参照」と呼ぶ。</p></blockquote>
 <p><em>MethodRefAndLambdaExpression.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -298,7 +295,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>メソッド参照の方が、簡潔に記載できていますね。</p>
-<h3 id="23-a-name-1aメソッド参照について深掘り">2.3. <a name='-1'></a>メソッド参照について深掘り</h3>
+<h3 id="23-メソッド参照について深掘り">2.3. <a name='-1'></a>メソッド参照について深掘り</h3>
 <p>メソッド参照には、下記 5 種類がある。</p>
 <p>上記の例は、<code>System</code>クラスの<code>static</code>フィールド<code>out</code>の<code>println</code>メソッドなので、静的メソッド参照だったんですね。</p>
 <table>
@@ -339,16 +336,14 @@ java.lang.FunctionalInterface)</a>にあります。
 </table>
 <blockquote>
 <p>#1 :
-<code>instance</code>は、インスタンスへの参照を評価する任意の式です。例えば、<code>getInstance()::method</code> 、<code>this::method</code>のように書けます。</p>
-</blockquote>
+<code>instance</code>は、インスタンスへの参照を評価する任意の式です。例えば、<code>getInstance()::method</code> 、<code>this::method</code>のように書けます。</p></blockquote>
 <blockquote>
 <p>#2 :
-<code>TypeName</code>が非静的な内部クラスである場合、コンストラクタ参照は外部クラスインスタンスのスコープ内でのみ有効です。（つまり、外からコンストラクタが見れる場合使えますよ。という内容です。）</p>
-</blockquote>
-<h2 id="3-a-name44a項目-44-標準の関数型インタフェースを使う">3. <a name='44'></a>項目 44 標準の関数型インタフェースを使う</h2>
+<code>TypeName</code>が非静的な内部クラスである場合、コンストラクタ参照は外部クラスインスタンスのスコープ内でのみ有効です。（つまり、外からコンストラクタが見れる場合使えますよ。という内容です。）</p></blockquote>
+<h2 id="3-項目-44-標準の関数型インタフェースを使う">3. <a name='44'></a>項目 44 標準の関数型インタフェースを使う</h2>
 <p>基本的には、標準の関数型インタフェースで事足りる。
 しかし、特定の場合に限っては独自の関数インタフェースを定義する必要がある。</p>
-<h3 id="31-a-name-1a標準の関数型インタフェース">3.1. <a name='-1'></a>標準の関数型インタフェース</h3>
+<h3 id="31-標準の関数型インタフェース">3.1. <a name='-1'></a>標準の関数型インタフェース</h3>
 <ul>
 <li>
 <p>使いやすく、すでに組み込まれている様々なメソッドの恩恵にあずかれる。</p>
@@ -368,7 +363,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <p>性能の観点から、プリミティブ型に対応していない関数型インターフェースには、プリミティブ型をボクシングしたオブジェクトは使わないでおきましょう。</p>
 </li>
 </ul>
-<h3 id="32-a-name-1a独自の関数型インタフェース">3.2. <a name='-1'></a>独自の関数型インタフェース</h3>
+<h3 id="32-独自の関数型インタフェース">3.2. <a name='-1'></a>独自の関数型インタフェース</h3>
 <p>以下の場合、独自の関数型インタフェースを作成しましょう。</p>
 <ul>
 <li>広く使われ、説明的な名前によってメリットがある場合</li>
@@ -387,9 +382,8 @@ java.lang.FunctionalInterface)</a>にあります。
 <p>作成するときは、<code>@FunctionalInterface</code>を使いましょう。書き方に誤りがある場合、コンパイルエラーにしてくれます。</p>
 <blockquote>
 <p>同じ名前のメソッドで、異なる関数型インタフェースを引数に持つのは、ユーザーにとって曖昧となるのでやめましょう。<br>
-例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ExecutorService.html"><code>ExecutorService.submit()</code></a>は、異なる関数インタフェース「<code>Runnable</code>」と「<code>Callable&lt;T&gt;</code>」を引数に持っているのでよくありません。</p>
-</blockquote>
-<h3 id="33-a-name-1a標準の関数型インタフェースについての余談">3.3. <a name='-1'></a>標準の関数型インタフェースについての余談</h3>
+例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ExecutorService.html"><code>ExecutorService.submit()</code></a>は、異なる関数インタフェース「<code>Runnable</code>」と「<code>Callable&lt;T&gt;</code>」を引数に持っているのでよくありません。</p></blockquote>
+<h3 id="33-標準の関数型インタフェースについての余談">3.3. <a name='-1'></a>標準の関数型インタフェースについての余談</h3>
 <p>各標準の関数型インタフェースについて以下の観点でまとめておきます。</p>
 <ul>
 <li>従来の書き方</li>
@@ -397,7 +391,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <li>lambda 式を使った書き方</li>
 <li>呼び出し方</li>
 </ul>
-<h4 id="331-a-namefunctiontafunctiont">3.3.1. <a name='FunctionT'></a>Function<T></h4>
+<h4 id="331-function">3.3.1. <a name='FunctionT'></a>Function<T></h4>
 <ul>
 <li>従来の書き方</li>
 </ul>
@@ -456,7 +450,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">R</span><span class="w"> </span><span class="n">returnValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">functionalInstance</span><span class="p">.</span><span class="na">apply</span><span class="p">((</span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="n">argument</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="332-a-nameconsumertaconsumert">3.3.2. <a name='ConsumerT'></a>Consumer<T></h4>
+</div><h4 id="332-consumer">3.3.2. <a name='ConsumerT'></a>Consumer<T></h4>
 <ul>
 <li>従来の書き方</li>
 </ul>
@@ -515,7 +509,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">consumer</span><span class="p">.</span><span class="na">accept</span><span class="p">((</span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="n">argument</span><span class="p">)</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="333-a-namesuppliertasuppliert">3.3.3. <a name='SupplierT'></a>Supplier<T></h4>
+</div><h4 id="333-supplier">3.3.3. <a name='SupplierT'></a>Supplier<T></h4>
 <ul>
 <li>従来の書き方</li>
 </ul>
@@ -574,7 +568,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">supplier</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="334-a-namepredicatetapredicatet">3.3.4. <a name='PredicateT'></a>Predicate<T></h4>
+</div><h4 id="334-predicate">3.3.4. <a name='PredicateT'></a>Predicate<T></h4>
 <p>偶奇判定を例に記載します。</p>
 <ul>
 <li>従来の書き方</li>
@@ -634,7 +628,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">boolean</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checker</span><span class="p">.</span><span class="na">test</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="335-a-nameunaryoperatortaunaryoperatort">3.3.5. <a name='UnaryOperatorT'></a>UnaryOperator<T></h4>
+</div><h4 id="335-unaryoperator">3.3.5. <a name='UnaryOperatorT'></a>UnaryOperator<T></h4>
 <p>String を強調させるメソッドを例に記載します。</p>
 <ul>
 <li>従来の書き方</li>
@@ -694,7 +688,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">newText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">operator</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">text</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="336-a-namebinaryoperatortabinaryoperatort">3.3.6. <a name='BinaryOperatorT'></a>BinaryOperator<T></h4>
+</div><h4 id="336-binaryoperator">3.3.6. <a name='BinaryOperatorT'></a>BinaryOperator<T></h4>
 <p>足し算メソッドを例に記載します。</p>
 <ul>
 <li>従来の書き方</li>
@@ -758,8 +752,8 @@ java.lang.FunctionalInterface)</a>にあります。
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binaryOperator</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">2</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="4-a-name45a項目-45-ストリームを注意して使う">4. <a name='45'></a>項目 45 ストリームを注意して使う</h2>
-<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+</div><h2 id="4-項目-45-ストリームを注意して使う">4. <a name='45'></a>項目 45 ストリームを注意して使う</h2>
+<h3 id="41-結論">4.1. <a name='-1'></a>結論</h3>
 <p>Stream 処理により簡単になる場合は、主に以下である。<br>
 いつ<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a>を使うべきかという、かっちりとしたルールはない。</p>
 <ul>
@@ -775,12 +769,11 @@ java.lang.FunctionalInterface)</a>にあります。
 <li>char 型の値の Stream 処理</li>
 <li>コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream 処理にしない。</li>
 </ul>
-<h3 id="42-a-namestreamastream-処理ばかりで複雑になる場合">4.2. <a name='Stream'></a>Stream 処理ばかりで、複雑になる場合</h3>
-<h4 id="421-a-name-1a改善前">4.2.1. <a name='-1'></a>改善前</h4>
+<h3 id="42-stream-処理ばかりで複雑になる場合">4.2. <a name='Stream'></a>Stream 処理ばかりで、複雑になる場合</h3>
+<h4 id="421-改善前">4.2.1. <a name='-1'></a>改善前</h4>
 <p>ファイル内の単語(行単位)を、アナグラムごとにまとめて、指定数以上含まれている場合は出力するプログラム。</p>
 <blockquote>
-<p>アナグラム（anagram）とは、言葉遊びの一つで、単語または文の中の文字をいくつか入れ替えることによって、全く別の意味にさせる遊びである。<a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%8A%E3%82%B0%E3%83%A9%E3%83%A0">Wikipedia</a></p>
-</blockquote>
+<p>アナグラム（anagram）とは、言葉遊びの一つで、単語または文の中の文字をいくつか入れ替えることによって、全く別の意味にさせる遊びである。<a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%8A%E3%82%B0%E3%83%A9%E3%83%A0">Wikipedia</a></p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -836,7 +829,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">group</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">group</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;:&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">group</span><span class="p">).</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="422-a-name-1a改善後">4.2.2. <a name='-1'></a>改善後</h4>
+</div><h4 id="422-改善後">4.2.2. <a name='-1'></a>改善後</h4>
 <p>ファイル内の単語(行単位)を、アナグラムごとにまとめて、指定数以上含まれている場合は出力するプログラム。</p>
 <p>悪い例でややこしかった、文字列ソートの部分を<code>alphabetize</code>メソッドに切り出しているので、わかりやすくなっていますね。</p>
 <div class="highlight"><div class="chroma">
@@ -877,7 +870,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="43-a-namecharstreamachar-型の値の-stream-処理">4.3. <a name='charStream'></a>char 型の値の Stream 処理</h3>
+</div><h3 id="43-char-型の値の-stream-処理">4.3. <a name='charStream'></a>char 型の値の Stream 処理</h3>
 <p><code>char</code>型の<code>Stream</code>処理は直感的でない動きをしうるので、原則として<code>char</code>型の値を<code>Stream</code>処理で扱うべきでない。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -901,30 +894,28 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="c1">// &#34;Hello, world!&#34;が表示</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="44-a-namestreamaコードブロック内で出来ることを捨ててまでstream-処理にしない">4.4. <a name='...Stream'></a>コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream 処理にしない。</h3>
+</div><h3 id="44-コードブロック内で出来ることを捨ててまでstream-処理にしない">4.4. <a name='...Stream'></a>コードブロック内(<code>{...}</code>)で出来ることを捨ててまで、Stream 処理にしない。</h3>
 <p>関数型オブジェクトを使用した<code>Stream</code>処理で出来ず、コードブロック内(<code>{...}</code>)で出来ること。</p>
 <ul>
 <li>ローカル変数の使用(ラムダ式では<code>final</code>でないと使用できない。)</li>
 <li>内部メソッドの<code>return</code>, ループ内での<code>break</code>/<code>continue</code>, 例外スロー（ラムダ式では出来ない。）</li>
 </ul>
-<h2 id="5-a-name46a項目-46-ストリームで副作用のない関数を選ぶ">5. <a name='46'></a>項目 46 ストリームで副作用のない関数を選ぶ</h2>
-<h3 id="51-a-name-1a前提">5.1. <a name='-1'></a>前提</h3>
+<h2 id="5-項目-46-ストリームで副作用のない関数を選ぶ">5. <a name='46'></a>項目 46 ストリームで副作用のない関数を選ぶ</h2>
+<h3 id="51-前提">5.1. <a name='-1'></a>前提</h3>
 <p><code>Stream</code>の最も重要なところは、<strong>純粋関数のみによる演算</strong> であること。</p>
 <blockquote>
-<p>純粋関数とは、副作用を持たない関数のことである。副作用とは、変数の再代入や入出力などによってプログラムの状態が変化することを指します。</p>
-</blockquote>
+<p>純粋関数とは、副作用を持たない関数のことである。副作用とは、変数の再代入や入出力などによってプログラムの状態が変化することを指します。</p></blockquote>
 <blockquote>
 <p>副作用があることによるデメリット<br>
 ・全体の流れが分かりづらくなる可能性がある。<br>
-・速度が落ち、並列処理時の問題が出る可能性がある。</p>
-</blockquote>
-<h3 id="52-a-name-1a結論">5.2. <a name='-1'></a>結論</h3>
+・速度が落ち、並列処理時の問題が出る可能性がある。</p></blockquote>
+<h3 id="52-結論">5.2. <a name='-1'></a>結論</h3>
 <p>副作用を持たないようにするため、ストリーム処理は以下のようにする。</p>
 <ul>
 <li><code>forEach</code>は、ストリームの演算の結果を示すためだけに利用する。</li>
 <li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html"><code>Collectors</code></a>を利用する。</li>
 </ul>
-<h3 id="53-a-nameforeachaforeachはストリームの演算の結果を示すためだけに利用する">5.3. <a name='forEach'></a><code>forEach</code>は、ストリームの演算の結果を示すためだけに利用する。</h3>
+<h3 id="53-foreachはストリームの演算の結果を示すためだけに利用する">5.3. <a name='forEach'></a><code>forEach</code>は、ストリームの演算の結果を示すためだけに利用する。</h3>
 <p>ファイルに含まれる単語の頻度を求めるプログラム。</p>
 <p>以下は、ストリーム内で、外部の状態（<code>freq</code>変数）を変更しているため(副作用を持つため)、良くない。</p>
 <div class="highlight"><div class="chroma">
@@ -967,9 +958,9 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="54-a-namecollectorshttpsdocsoraclecomjavasejp8docsapijavautilstreamcollectorshtmlacollectorshttpsdocsoraclecomjavasejp8docsapijavautilstreamcollectorshtmlを利用する">5.4. <a name='Collectorshttps:docs.oracle.comjavasejp8docsapijavautilstreamCollectors.html'></a><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html"><code>Collectors</code></a>を利用する。</h3>
+</div><h3 id="54-collectorsを利用する">5.4. <a name='Collectorshttps:docs.oracle.comjavasejp8docsapijavautilstreamCollectors.html'></a><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html"><code>Collectors</code></a>を利用する。</h3>
 <p>ストリームパイプラインの可読性のために、Collectors のメンバーは static インポートしておくべき。</p>
-<h4 id="541-a-nametosettocollectiontolistatoset-tocollection-tolist">5.4.1. <a name='toSettoCollectiontoList'></a>toSet(), toCollection(), toList()</h4>
+<h4 id="541-toset-tocollection-tolist">5.4.1. <a name='toSettoCollectiontoList'></a>toSet(), toCollection(), toList()</h4>
 <p><code>toSet(), toCollection(), toList()</code>を利用した例。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -985,7 +976,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">toList</span><span class="p">());</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="542-a-nametomapatomap">5.4.2. <a name='toMap'></a>toMap()</h4>
+</div><h4 id="542-tomap">5.4.2. <a name='toMap'></a>toMap()</h4>
 <p><code>toSet(), toCollection(), toList()</code>以外は、ストリームを Map にするためのものがほとんどである。</p>
 <p><code>toMap()</code>を使ったサンプルを載せる。</p>
 <div class="highlight"><div class="chroma">
@@ -1040,7 +1031,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">));</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="543-a-namegroupingbyagroupingby">5.4.3. <a name='groupingBy'></a>groupingBy()</h4>
+</div><h4 id="543-groupingby">5.4.3. <a name='groupingBy'></a>groupingBy()</h4>
 <p><code>groupingBy()</code>は、<code>classifier</code>をもとに要素をカテゴリー分けした Map を生成する。</p>
 <p><code>classifier</code>には、以下のサンプルの<code>t -&gt; t.length()</code> や 「項目 45 ストリームを注意して使う」で紹介した<code>alphabetize(word)</code>が該当する。</p>
 <div class="highlight"><div class="chroma">
@@ -1086,7 +1077,7 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// {a=2, bar=1, c=1, foo=1, zzz=1}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="544-a-name-1aその他のメソッド">5.4.4. <a name='-1'></a>その他のメソッド</h4>
+</div><h4 id="544-その他のメソッド">5.4.4. <a name='-1'></a>その他のメソッド</h4>
 <p><code>downstream collector</code>としての利用に特化した以下のメソッドは、<code>collect(counting())</code>のように利用してはいけない。
 <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html"><code>Stream</code></a>に同様の機能があるため。</p>
 <ul>
@@ -1153,12 +1144,11 @@ java.lang.FunctionalInterface)</a>にあります。
 </li>
 </ul>
 <blockquote>
-<p><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html">Collectors</a>や<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html">Stream</a>の利用方法については、こちらのブログ(<a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a>, <a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a>)が入門として(大まかに把握するのに)良さそうである。</p>
-</blockquote>
-<h2 id="6-a-name47streamcollectiona項目-47-戻り値型として-stream-よりも-collection-を選ぶ">6. <a name='47StreamCollection'></a>項目 47 戻り値型として Stream よりも Collection を選ぶ</h2>
-<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+<p><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html">Collectors</a>や<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html">Stream</a>の利用方法については、こちらのブログ(<a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a>, <a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a>)が入門として(大まかに把握するのに)良さそうである。</p></blockquote>
+<h2 id="6-項目-47-戻り値型として-stream-よりも-collection-を選ぶ">6. <a name='47StreamCollection'></a>項目 47 戻り値型として Stream よりも Collection を選ぶ</h2>
+<h3 id="61-結論">6.1. <a name='-1'></a>結論</h3>
 <p>連続した要素をどの型で返すべきか？については、Collection一択</p>
-<h3 id="62-a-name-1a選択肢にはなにがあるか">6.2. <a name='-1'></a>選択肢にはなにがあるか</h3>
+<h3 id="62-選択肢にはなにがあるか">6.2. <a name='-1'></a>選択肢にはなにがあるか</h3>
 <p>以下4択。</p>
 <ul>
 <li>ストリーム</li>
@@ -1166,7 +1156,7 @@ java.lang.FunctionalInterface)</a>にあります。
 <li>collectionインターフェース</li>
 <li>配列</li>
 </ul>
-<h3 id="63-a-name-1aストリームで返す">6.3. <a name='-1'></a>ストリームで返す</h3>
+<h3 id="63-ストリームで返す">6.3. <a name='-1'></a>ストリームで返す</h3>
 <p>StreamはIterableを継承していない。
 ストリームを処理する場合には、さらに加工が必要。</p>
 <p>for-eachの場合は、Streamのiteratorメソッドを使うしかない。</p>
@@ -1203,26 +1193,26 @@ java.lang.FunctionalInterface)</a>にあります。
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>これを簡素にするクラスをつくってもいいが、このようにユーザコード側が煩雑になることを理解する。</p>
-<h3 id="64-a-nameiterableaiterable-で返す">6.4. <a name='Iterable'></a>Iterable で返す</h3>
+<h3 id="64-iterable-で返す">6.4. <a name='Iterable'></a>Iterable で返す</h3>
 <p>ストリームと同じなので割愛</p>
-<h3 id="65-a-namecollectionacollection-で返す">6.5. <a name='collection'></a>collection で返す</h3>
+<h3 id="65-collection-で返す">6.5. <a name='collection'></a>collection で返す</h3>
 <p>CollectionインターフェースはIterableのサブタイプであり、ストリームのメソッドも持っているので、イテレーション処理でもストリーム処理でも対応できる。
 そのため、連続した要素を返すメソッドの最適な戻り値型は、たいていの場合、Collectionとなる。</p>
 <p>もし返却する連続要素が十分小さければ、ArrayListやHashSetなどのCollectionを実装したものを返せばいいのだが、Collectionとして返却するために、大きな連続要素をメモリに蓄えることはすべきでない(このときは、StreamやIteratorも可。JDBCのResultSetと同じといっても良い。)。</p>
 <p>返却する連続要素が、大きいけれど簡潔に表現できるものであれば、特別にcollectionを実装してやることを考える。</p>
-<h3 id="66-a-name-1a先輩からいただいたありがたいお言葉">6.6. <a name='-1'></a>先輩からいただいたありがたいお言葉</h3>
+<h3 id="66-先輩からいただいたありがたいお言葉">6.6. <a name='-1'></a>先輩からいただいたありがたいお言葉</h3>
 <p>そもそも、複数の値を返却するAPIが、Streamを返却するということに違和感があります。
 たいていのAPIは、「XXXという条件のものを全部くれ」という言い方になるので、集合であることが普通です。<br>
 Streamだと、その名の通り「流れ」になるので、継続的に流れてくる(なので、前の要素には戻らない)、という意味がでてきます。
 集合とは違う概念が混ざってくる認識です。<br>
 <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html">https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html</a>
 を読んでみると違いが書いています。</p>
-<h2 id="7-a-name48a項目-48-ストリームを並列化するときは注意を払う">7. <a name='48'></a>項目 48 ストリームを並列化するときは注意を払う</h2>
-<h3 id="71-a-name-1a結論">7.1. <a name='-1'></a>結論</h3>
+<h2 id="7-項目-48-ストリームを並列化するときは注意を払う">7. <a name='48'></a>項目 48 ストリームを並列化するときは注意を払う</h2>
+<h3 id="71-結論">7.1. <a name='-1'></a>結論</h3>
 <p>気軽に並列化できる点は素晴らしいのですが、その裏の仕組みが変わるわけでは有りません。
 並列処理独特の考慮点がなくなるわけではないので、慎重に使いましょう。</p>
-<h3 id="72-a-name-1a得意不得意">7.2. <a name='-1'></a>得意/不得意</h3>
-<h4 id="721-a-name-1a得意">7.2.1. <a name='-1'></a>得意</h4>
+<h3 id="72-得意不得意">7.2. <a name='-1'></a>得意/不得意</h3>
+<h4 id="721-得意">7.2.1. <a name='-1'></a>得意</h4>
 <p>要素1つで独立した操作ができるとき</p>
 <ul>
 <li>Collectionに対して処理する
@@ -1243,13 +1233,13 @@ Streamだと、その名の通り「流れ」になるので、継続的に流�
 </ul>
 </li>
 </ul>
-<h4 id="722-a-name-1a不得意">7.2.2. <a name='-1'></a>不得意</h4>
+<h4 id="722-不得意">7.2.2. <a name='-1'></a>不得意</h4>
 <p>他の要素と関係を踏まえた操作のとき</p>
 <ul>
 <li>limit</li>
 <li>collectメソッドによって行われる可変リダクション操作(と書いてあるが、ケースバイケース)</li>
 </ul>
-<h4 id="723-a-name-1a一例">7.2.3. <a name='-1'></a>一例</h4>
+<h4 id="723-一例">7.2.3. <a name='-1'></a>一例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1278,7 +1268,7 @@ Streamだと、その名の通り「流れ」になるので、継続的に流�
 </div>
 </div><p>paralellの有りなしで、↑のような話だと恩恵を受けやすい。</p>
 <p>paralellなしだと3秒、paralellありだと1秒くらい(環境によって差がある)</p>
-<h4 id="724-a-name-1a並列化すると起きる問題">7.2.4. <a name='-1'></a>並列化すると起きる問題</h4>
+<h4 id="724-並列化すると起きる問題">7.2.4. <a name='-1'></a>並列化すると起きる問題</h4>
 <p>ストリームだから起きるというわけではなくが、ストリームだから手軽にかけてしまい、ついつい起こしてしまいやすい、ことになる。</p>
 <p>一言で言えば、副作用がない処理をする、なのだが、StreamのJavadocには重要なことが書いてある。</p>
 <ul>
@@ -1286,7 +1276,7 @@ Streamだと、その名の通り「流れ」になるので、継続的に流�
 <li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html#NonInterference">非干渉</a></li>
 <li><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/package-summary.html#Statelessness">ステートレス</a></li>
 </ul>
-<h2 id="8-a-nameurla参考-url">8. <a name='URL'></a>参考 URL</h2>
+<h2 id="8-参考-url">8. <a name='URL'></a>参考 URL</h2>
 <ul>
 <li><a href="https://qiita.com/nannany/items/7fa3bf6c3e7d69af8efd">effective java 3rd まとめ</a></li>
 <li><a href="https://qiita.com/minebreaker/items/de3b264093fd7c9639af">Effective Java Third Edition 2 版からの更新点 個人的メモ</a></li>
@@ -1371,7 +1361,7 @@ Streamだと、その名の通り「流れ」になるので、継続的に流�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

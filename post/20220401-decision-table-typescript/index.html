@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220401-decision-table-typescript/" />
@@ -174,14 +174,14 @@
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 <hr>
-<h2 id="1-a-nameaboutdecisiontableaabout-decisiontable">1. <a name='AboutDecisionTable'></a>About DecisionTable</h2>
+<h2 id="1-about-decisiontable">1. <a name='AboutDecisionTable'></a>About DecisionTable</h2>
 <p>決定表については、以下の記事などを参照してください。</p>
 <ul>
 <li><a href="https://shiftasia.com/ja/column/%E3%83%87%E3%82%B7%E3%82%B8%E3%83%A7%E3%83%B3%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%EF%BC%88%E6%B1%BA%E5%AE%9A%E8%A1%A8%EF%BC%89%E3%81%A8%E3%81%AF/">デシジョンテーブル（決定表）とは｜その概要から作り方までわかりやすくご紹介 | SHIFT ASIA -ソフトウェア品質保証のプロフェッショナル-</a></li>
 <li><a href="https://www.techscore.com/blog/2019/03/29/decisiontable/">デシジョンテーブル使ってますか？ | TECHSCORE BLOG</a></li>
 </ul>
-<h2 id="2-a-namesourcecodeasource-code">2. <a name='SourceCode'></a>Source Code</h2>
-<h3 id="21-a-namedicisiontableadicision-table">2.1. <a name='DicisionTable'></a>Dicision Table</h3>
+<h2 id="2-source-code">2. <a name='SourceCode'></a>Source Code</h2>
+<h3 id="21-dicision-table">2.1. <a name='DicisionTable'></a>Dicision Table</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -256,15 +256,15 @@
 </span><span class="lnt">70
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">DecisionTable</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">conditionCheckers</span>: <span class="kt">ConditionChecker</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;[]</span> <span class="o">=</span> <span class="p">[]</span>
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">DecisionTable</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">conditionCheckers</span>: <span class="kt">ConditionChecker</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;[]</span> <span class="o">=</span> <span class="p">[]</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nx">run</span> <span class="o">=</span> <span class="p">(</span><span class="nx">settings</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">conditionCheckers</span><span class="p">.</span><span class="nx">find</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">check</span><span class="p">(</span><span class="nx">settings</span><span class="p">))</span><span class="o">?</span><span class="p">.</span><span class="nx">result</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">ConditionChecker</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">ConditionChecker</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">_result</span>: <span class="kt">R</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">_predicates</span><span class="o">:</span> <span class="p">((</span><span class="nx">x</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">boolean</span><span class="p">)[]</span>
 </span></span><span class="line"><span class="cl">
@@ -288,47 +288,47 @@
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">predicates</span><span class="p">.</span><span class="nx">every</span><span class="p">((</span><span class="nx">f</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">f</span><span class="p">(</span><span class="nx">settings</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">DecisionTableConditionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">when</span><span class="p">(...</span><span class="nx">predicates</span><span class="o">:</span> <span class="p">((</span><span class="nx">x</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">boolean</span><span class="p">)[])</span><span class="o">:</span> <span class="nx">DecisionTableActionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">DecisionTableConditionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">when</span><span class="p">(...</span><span class="nx">predicates</span><span class="o">:</span> <span class="p">((</span><span class="nx">x</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">boolean</span><span class="p">)[])</span><span class="o">:</span> <span class="nx">DecisionTableActionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">DecisionTableActionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">when</span><span class="p">(...</span><span class="nx">predicates</span><span class="o">:</span> <span class="p">((</span><span class="nx">x</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">boolean</span><span class="p">)[])</span><span class="o">:</span> <span class="nx">DecisionTableActionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">then</span><span class="p">(</span><span class="nx">result</span>: <span class="kt">R</span><span class="p">)</span><span class="o">:</span> <span class="nx">DecisionTableEntryBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">DecisionTableActionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">when</span><span class="p">(...</span><span class="nx">predicates</span><span class="o">:</span> <span class="p">((</span><span class="nx">x</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">boolean</span><span class="p">)[])</span><span class="o">:</span> <span class="nx">DecisionTableActionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">then</span><span class="p">(</span><span class="nx">result</span>: <span class="kt">R</span><span class="p">)</span><span class="o">:</span> <span class="nx">DecisionTableEntryBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">DecisionTableEntryBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">entry</span><span class="p">()</span><span class="o">:</span> <span class="nx">DecisionTableInstanceBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">DecisionTableEntryBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">entry</span><span class="p">()</span><span class="o">:</span> <span class="nx">DecisionTableInstanceBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">DecisionTableInstanceBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">when</span><span class="p">(...</span><span class="nx">predicates</span><span class="o">:</span> <span class="p">((</span><span class="nx">x</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">boolean</span><span class="p">)[])</span><span class="o">:</span> <span class="nx">DecisionTableActionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">build</span><span class="p">()</span><span class="o">:</span> <span class="nx">DecisionTable</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">interface</span> <span class="nx">DecisionTableInstanceBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">when</span><span class="p">(...</span><span class="nx">predicates</span><span class="o">:</span> <span class="p">((</span><span class="nx">x</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">boolean</span><span class="p">)[])</span><span class="o">:</span> <span class="nx">DecisionTableActionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">build</span><span class="p">()</span><span class="o">:</span> <span class="nx">DecisionTable</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">DecisionTableBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">decisionTable</span>: <span class="kt">DecisionTable</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DecisionTable</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">tmpConditionChecker</span>: <span class="kt">ConditionChecker</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">class</span> <span class="nx">DecisionTableBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">decisionTable</span>: <span class="kt">DecisionTable</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DecisionTable</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">tmpConditionChecker</span>: <span class="kt">ConditionChecker</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="nx">when</span><span class="p">(...</span><span class="nx">predicates</span><span class="o">:</span> <span class="p">((</span><span class="nx">x</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">boolean</span><span class="p">)[])</span><span class="o">:</span> <span class="nx">DecisionTableBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">tmpConditionChecker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConditionChecker</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="nx">when</span><span class="p">(...</span><span class="nx">predicates</span><span class="o">:</span> <span class="p">((</span><span class="nx">x</span>: <span class="kt">T</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kr">boolean</span><span class="p">)[])</span><span class="o">:</span> <span class="nx">DecisionTableBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">tmpConditionChecker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConditionChecker</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;()</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">tmpConditionChecker</span><span class="p">.</span><span class="nx">predicates</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">predicates</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="nx">then</span><span class="p">(</span><span class="nx">result</span>: <span class="kt">R</span><span class="p">)</span><span class="o">:</span> <span class="nx">DecisionTableBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="nx">then</span><span class="p">(</span><span class="nx">result</span>: <span class="kt">R</span><span class="p">)</span><span class="o">:</span> <span class="nx">DecisionTableBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">tmpConditionChecker</span><span class="p">.</span><span class="nx">result</span> <span class="o">=</span> <span class="nx">result</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="nx">entry</span><span class="p">()</span><span class="o">:</span> <span class="nx">DecisionTableBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="nx">entry</span><span class="p">()</span><span class="o">:</span> <span class="nx">DecisionTableBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">decisionTable</span><span class="p">.</span><span class="nx">conditionCheckers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tmpConditionChecker</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="nx">build</span><span class="p">()</span><span class="o">:</span> <span class="nx">DecisionTable</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">public</span> <span class="nx">build</span><span class="p">()</span><span class="o">:</span> <span class="nx">DecisionTable</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">decisionTable</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">createBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;()</span><span class="o">:</span> <span class="nx">DecisionTableConditionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nx">DecisionTableBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="err">,</span> <span class="na">R</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">createBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;()</span><span class="o">:</span> <span class="nx">DecisionTableConditionBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nx">DecisionTableBuilder</span><span class="p">&lt;</span><span class="nt">T</span><span class="p">,</span> <span class="na">R</span><span class="p">&gt;()</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="22-a-nametestcodeatest-code">2.2. <a name='TestCode'></a>Test Code</h3>
+</div><h3 id="22-test-code">2.2. <a name='TestCode'></a>Test Code</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -365,7 +365,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">test</span><span class="p">(</span><span class="s1">&#39;正常系&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">builder</span> <span class="o">=</span> <span class="nx">createBuilder</span><span class="p">&lt;</span><span class="nt">State</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">builder</span> <span class="o">=</span> <span class="nx">createBuilder</span><span class="p">&lt;</span><span class="nt">State</span><span class="p">,</span> <span class="na">string</span><span class="p">&gt;()</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">decisionTable</span> <span class="o">=</span> <span class="nx">builder</span>
 </span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">when</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="nx">_</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">_</span><span class="p">.</span><span class="nx">field1</span> <span class="o">===</span> <span class="mi">100</span><span class="p">,</span>
@@ -443,7 +443,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

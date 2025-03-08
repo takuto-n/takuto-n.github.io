@@ -24,7 +24,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20201222-spring-boot-exception-handler/" />
@@ -200,9 +200,9 @@ How to handle exceptions for each Controller How to handle exceptions across all
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-namehowtohandleexceptionsforeachcontrollerahow-to-handle-exceptions-for-each-controller">1. <a name='HowtohandleexceptionsforeachController'></a>How to handle exceptions for each Controller</h2>
+<h2 id="1-how-to-handle-exceptions-for-each-controller">1. <a name='HowtohandleexceptionsforeachController'></a>How to handle exceptions for each Controller</h2>
 <p>The Point is <code>@ExceptionHandler(Pattern1Exception.class)</code>.</p>
-<h3 id="11-a-namepattern1exceptionapattern1exception">1.1. <a name='Pattern1Exception'></a>Pattern1Exception</h3>
+<h3 id="11-pattern1exception">1.1. <a name='Pattern1Exception'></a>Pattern1Exception</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -219,7 +219,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="12-a-namepattern1restcontrollerapattern1restcontroller">1.2. <a name='Pattern1RestController'></a>Pattern1RestController</h3>
+</div><h3 id="12-pattern1restcontroller">1.2. <a name='Pattern1RestController'></a>Pattern1RestController</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -276,9 +276,9 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2-a-namehowtohandleexceptionsacrossallcontrollersahow-to-handle-exceptions-across-all-controllers">2. <a name='HowtohandleexceptionsacrossallControllers'></a>How to handle exceptions across all Controllers</h2>
+</div><h2 id="2-how-to-handle-exceptions-across-all-controllers">2. <a name='HowtohandleexceptionsacrossallControllers'></a>How to handle exceptions across all Controllers</h2>
 <p>The Point is <code>@RestControllerAdvice</code> and <code>@ExceptionHandler(Pattern2Exception.class)</code>.</p>
-<h3 id="21-a-namepattern2controlleradviceapattern2controlleradvice">2.1. <a name='Pattern2ControllerAdvice'></a>Pattern2ControllerAdvice</h3>
+<h3 id="21-pattern2controlleradvice">2.1. <a name='Pattern2ControllerAdvice'></a>Pattern2ControllerAdvice</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -311,7 +311,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="22-a-namepattern2exceptionapattern2exception">2.2. <a name='Pattern2Exception'></a>Pattern2Exception</h3>
+</div><h3 id="22-pattern2exception">2.2. <a name='Pattern2Exception'></a>Pattern2Exception</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -328,7 +328,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="23-a-namepattern2restcontroller1apattern2restcontroller1">2.3. <a name='Pattern2RestController1'></a>Pattern2RestController1</h3>
+</div><h3 id="23-pattern2restcontroller1">2.3. <a name='Pattern2RestController1'></a>Pattern2RestController1</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -369,7 +369,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="24-a-namepattern2restcontroller2apattern2restcontroller2">2.4. <a name='Pattern2RestController2'></a>Pattern2RestController2</h3>
+</div><h3 id="24-pattern2restcontroller2">2.4. <a name='Pattern2RestController2'></a>Pattern2RestController2</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -410,7 +410,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="3-a-namehowtohandleexceptionsbyimplementingerrorcontrollerahow-to-handle-exceptions-by-implementing-errorcontroller">3. <a name='HowtohandleexceptionsbyimplementingErrorController'></a>How to handle exceptions by implementing ErrorController</h2>
+</div><h2 id="3-how-to-handle-exceptions-by-implementing-errorcontroller">3. <a name='HowtohandleexceptionsbyimplementingErrorController'></a>How to handle exceptions by implementing ErrorController</h2>
 <p><a href="https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/web/servlet/error/BasicErrorController.java">BasicErrorController.java</a> was used as a reference.</p>
 <p>The points are as follows.</p>
 <ul>
@@ -426,7 +426,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </ul>
 </li>
 </ul>
-<h3 id="31-a-namemybasicerrorcontrolleramybasicerrorcontroller">3.1. <a name='MyBasicErrorController'></a>MyBasicErrorController</h3>
+<h3 id="31-mybasicerrorcontroller">3.1. <a name='MyBasicErrorController'></a>MyBasicErrorController</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -537,7 +537,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="32-a-namepattern3exceptionapattern3exception">3.2. <a name='Pattern3Exception'></a>Pattern3Exception</h3>
+</div><h3 id="32-pattern3exception">3.2. <a name='Pattern3Exception'></a>Pattern3Exception</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -554,7 +554,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="33-a-namepattern3restcontrollerapattern3restcontroller">3.3. <a name='Pattern3RestController'></a>Pattern3RestController</h3>
+</div><h3 id="33-pattern3restcontroller">3.3. <a name='Pattern3RestController'></a>Pattern3RestController</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -595,7 +595,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="4-a-namebuildgradleabuildgradle">4. <a name='build.gradle'></a>build.gradle</h2>
+</div><h2 id="4-buildgradle">4. <a name='build.gradle'></a>build.gradle</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -668,7 +668,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="5-a-namereferenceareference">5. <a name='Reference'></a>Reference</h2>
+</div><h2 id="5-reference">5. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="http://terasolunaorg.github.io/guideline/5.6.0.RELEASE/ja/ArchitectureInDetail/WebApplicationDetail/ExceptionHandling.html#exception-handling-pattern-label">4.2. 例外ハンドリング — TERASOLUNA Server Framework for Java (5.x) Development Guideline 5.6.0.RELEASE documentation</a></li>
 <li><a href="https://qiita.com/NagaokaKenichi/items/2f199134a881a776b717">Springで例外ハンドリング - Qiita</a></li>
@@ -735,7 +735,7 @@ How to handle exceptions for each Controller How to handle exceptions across all
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

@@ -29,7 +29,7 @@ Linuxだとtreeコマンドで可能です。 Windowsだとどうしたら良い
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20201110-windows-file-list/" />
@@ -170,8 +170,7 @@ Windowsだとどうしたら良いのか調べたので、メモとして残し�
 <p>2022/4/1 追記<br>
 フォルダリストの場合、コマンドプロンプトで <code>tree</code> コマンドを使えばOK.<br>
 ファイルリストの場合は、以下のpowershellでも可だが、<code>tree /f</code> でもOK.<br>
-参考：<a href="https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/tree">tree | Microsoft Docs</a></p>
-</blockquote>
+参考：<a href="https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/tree">tree | Microsoft Docs</a></p></blockquote>
 <!-- vscode-markdown-toc -->
 <ul>
 <li>
@@ -194,7 +193,7 @@ Windowsだとどうしたら良いのか調べたので、メモとして残し�
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-namecommandacommand">1. <a name='Command'></a>Command</h2>
+<h2 id="1-command">1. <a name='Command'></a>Command</h2>
 <p>Windowsの<a href="https://docs.microsoft.com/ja-jp/powershell/">PowerShell</a>で以下のコマンドを実行する。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -204,7 +203,7 @@ Windowsだとどうしたら良いのか調べたので、メモとして残し�
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-ChildItem ./ -Recurse | ? { !$_.PSIsContainer } | % { $_.FullName }
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="11-a-nameexplanationaexplanation">1.1. <a name='Explanation'></a>Explanation</h3>
+</div><h3 id="11-explanation">1.1. <a name='Explanation'></a>Explanation</h3>
 <ul>
 <li><code>Get-ChildItem ./ -Recurse</code>
 <ul>
@@ -224,7 +223,7 @@ Windowsだとどうしたら良いのか調べたので、メモとして残し�
 </ul>
 </li>
 </ul>
-<h3 id="12-a-nameexecutionresultaexecution-result">1.2. <a name='ExecutionResult'></a>Execution Result</h3>
+<h3 id="12-execution-result">1.2. <a name='ExecutionResult'></a>Execution Result</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -239,7 +238,7 @@ Windowsだとどうしたら良いのか調べたので、メモとして残し�
 </span></span><span class="line"><span class="cl">C:<span class="se">\U</span>sers<span class="se">\u</span>sername<span class="se">\t</span>est<span class="se">\b</span>-c<span class="se">\c</span>.txt
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2-a-namerefferencearefference">2. <a name='Refference'></a>Refference</h2>
+</div><h2 id="2-refference">2. <a name='Refference'></a>Refference</h2>
 <ul>
 <li><a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-childitem?view=powershell-7">Get-ChildItem (Microsoft.PowerShell.Management) - PowerShell | Microsoft Docs</a></li>
 <li><a href="https://win.just4fun.biz/?PowerShell/%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E3%81%BF%E3%80%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%81%BF%E3%81%AE%E4%B8%80%E8%A6%A7%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">PowerShell/ディレクトリのみ、ファイルのみの一覧を表示する方法 - Windowsと暮らす</a></li>
@@ -305,7 +304,7 @@ Windowsだとどうしたら良いのか調べたので、メモとして残し�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

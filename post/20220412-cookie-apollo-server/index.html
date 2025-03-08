@@ -25,7 +25,7 @@ Request → (cookie) → BFF → (cookie) → Backend
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220412-cookie-apollo-server/" />
@@ -149,8 +149,7 @@ Request → (cookie) → BFF → (cookie) → Backend">
       <h1 id="abstruct">Abstruct</h1>
 <p>Cookie情報を、BFF(Backend for Frontend)で受け取って、Backend側へ送信するサンプルコードを載せておきます。</p>
 <blockquote>
-<p>Request → (cookie) → BFF → (cookie) → Backend</p>
-</blockquote>
+<p>Request → (cookie) → BFF → (cookie) → Backend</p></blockquote>
 <!-- vscode-markdown-toc -->
 <ul>
 <li>
@@ -174,8 +173,8 @@ Request → (cookie) → BFF → (cookie) → Backend">
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-namesamplecodeasample-code">1. <a name='SampleCode'></a>Sample Code</h2>
-<h3 id="11-a-namerequestarequest">1.1. <a name='Request'></a>Request</h3>
+<h2 id="1-sample-code">1. <a name='SampleCode'></a>Sample Code</h2>
+<h3 id="11-request">1.1. <a name='Request'></a>Request</h3>
 <p><a href="https://curl.se/docs/manpage.html">curl</a> の <code>-b</code> オプションでCookieを送れるので、今回はこちらを利用しました。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -193,7 +192,7 @@ Request → (cookie) → BFF → (cookie) → Backend">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -v --request POST -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -b <span class="s1">&#39;name=taro; age=20&#39;</span> -d <span class="s1">&#39;{ &#34;query&#34;: &#34;query { sample(id: \&#34;001\&#34;) {result}}&#34; }&#39;</span> http://localhost:4000/graphql
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="12-a-namebffabff">1.2. <a name='BFF'></a>BFF</h3>
+</div><h3 id="12-bff">1.2. <a name='BFF'></a>BFF</h3>
 <p>ApolloServer のプラグインの中で、Cookieを受け取って、Backendへ通信するHTTP Client(axios) に Cookie情報をセットします。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -253,7 +252,7 @@ Request → (cookie) → BFF → (cookie) → Backend">
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="13-a-namebackendabackend">1.3. <a name='Backend'></a>Backend</h3>
+</div><h3 id="13-backend">1.3. <a name='Backend'></a>Backend</h3>
 <ul>
 <li>
 <p>使用するライブラリ</p>
@@ -299,7 +298,7 @@ Request → (cookie) → BFF → (cookie) → Backend">
 </div>
 </div></li>
 </ul>
-<h2 id="2-a-namereferenceareference">2. <a name='Reference'></a>Reference</h2>
+<h2 id="2-reference">2. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="https://www.apollographql.com/docs/apollo-server/integrations/plugins/">Creating Apollo Server plugins - Apollo GraphQL Docs</a></li>
 <li><a href="https://saikeblog.com/2019/03/17/curl%E3%81%A7cookie%E3%82%92%E9%80%81%E4%BF%A1%E3%81%99%E3%82%8B2%E3%81%A4%E3%81%AE%E6%96%B9%E6%B3%95/">curlでcookieを送信する方法 – さいけの技術ブログ</a></li>
@@ -364,7 +363,7 @@ Request → (cookie) → BFF → (cookie) → Backend">
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

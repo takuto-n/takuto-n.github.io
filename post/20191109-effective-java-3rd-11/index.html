@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-11/" />
@@ -163,8 +163,8 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-name78a項目-78-共有された可変データへのアクセスを同期する">1. <a name='78'></a>項目 78 共有された可変データへのアクセスを同期する</h2>
-<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<h2 id="1-項目-78-共有された可変データへのアクセスを同期する">1. <a name='78'></a>項目 78 共有された可変データへのアクセスを同期する</h2>
+<h3 id="11-結論">1.1. <a name=''></a>結論</h3>
 <ul>
 <li>synchronizedは同期化を行い、アトミック性と可視性を保証する</li>
 <li>複数スレッドが可変データを共有する場合には、そのデータを読み書きするスレッドは同期を行わなければならない
@@ -184,7 +184,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="12-a-name-1aアトミック性">1.2. <a name='-1'></a>アトミック性</h3>
+<h3 id="12-アトミック性">1.2. <a name='-1'></a>アトミック性</h3>
 <ul>
 <li>1つのスレッドだけがある時点で1つのメソッドやブロックを実行する性質</li>
 <li>下のようにsynchronizedを使うと、メソッドや処理をアトミックにできる</li>
@@ -201,7 +201,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="13-a-name-1a可視性">1.3. <a name='-1'></a>可視性</h3>
+</div><h3 id="13-可視性">1.3. <a name='-1'></a>可視性</h3>
 <ul>
 <li>あるスレッドから変数に書き込んだ値が、別スレッドから観測できる性質</li>
 <li>下記のクラスのバックグラウンドスレッドは停止するか？</li>
@@ -309,7 +309,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="14-a-namevolatileavolatile">1.4. <a name='volatile'></a>volatile</h3>
+<h3 id="14-volatile">1.4. <a name='volatile'></a>volatile</h3>
 <ul>
 <li>volatileはアトミック性は保証しないが、可視性を保証する</li>
 <li>先ほどのStopThread2クラスはvolatileを使うことで、下記のようにより簡単なコードにできる
@@ -391,7 +391,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="15-a-name-1a可変データの共有の回避">1.5. <a name='-1'></a>可変データの共有の回避</h3>
+<h3 id="15-可変データの共有の回避">1.5. <a name='-1'></a>可変データの共有の回避</h3>
 <ul>
 <li>今までの議論のように、可変データへの共有は難しいので、回避できるのであれば回避すべき</li>
 <li>回避には2つの方法がある
@@ -407,8 +407,8 @@
 </li>
 <li>AtomicBooleanのようなライブラリを使うと良い。</li>
 </ul>
-<h2 id="2-a-name79a項目-79-過剰な同期は避ける">2. <a name='79'></a>項目 79 過剰な同期は避ける</h2>
-<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<h2 id="2-項目-79-過剰な同期は避ける">2. <a name='79'></a>項目 79 過剰な同期は避ける</h2>
+<h3 id="21-結論">2.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>同期された領域内では、できる限り少ない処理をするべき
 <ul>
@@ -416,7 +416,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="22-a-name-1a過剰な同期によるエラーやデッドロック">2.2. <a name='-1'></a>過剰な同期によるエラーやデッドロック</h3>
+<h3 id="22-過剰な同期によるエラーやデッドロック">2.2. <a name='-1'></a>過剰な同期によるエラーやデッドロック</h3>
 <ul>
 <li>
 <p>下記クラスObservableSetは要素が追加されたら任意の処理ができるSetであり、SetObserverインターフェースはObservableSetのObserverインターフェースである</p>
@@ -610,7 +610,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="23-a-name-1aパフォーマンスの低下">2.3. <a name='-1'></a>パフォーマンスの低下</h3>
+<h3 id="23-パフォーマンスの低下">2.3. <a name='-1'></a>パフォーマンスの低下</h3>
 <ul>
 <li>過剰な同期によってパフォーマンスの低下が起こることがある
 <ul>
@@ -618,7 +618,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="24-a-name-1a余談">2.4. <a name='-1'></a>余談</h3>
+<h3 id="24-余談">2.4. <a name='-1'></a>余談</h3>
 <ul>
 <li>synchronized(this)
 <ul>
@@ -721,13 +721,12 @@
 </div><blockquote>
 <p>余談：ロックストライピングについては以下のサイトを見ておくと良いかも。<br>
 ・<a href="https://www.ibm.com/developerworks/jp/java/library/j-jtp08223/index.html">Javaの理論と実践: 優れたHashMapの構築</a><br>
-・<a href="http://aoking.hatenablog.jp/entry/20120730/1343639402">ストライピングロックを試す - にょきにょきブログ</a></p>
-</blockquote>
-<h2 id="3-a-name80a項目-80-スレッドよりもエグゼキュータタスクストリームを選ぶ">3. <a name='80'></a>項目 80 スレッドよりもエグゼキュータ、タスク、ストリームを選ぶ</h2>
-<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+・<a href="http://aoking.hatenablog.jp/entry/20120730/1343639402">ストライピングロックを試す - にょきにょきブログ</a></p></blockquote>
+<h2 id="3-項目-80-スレッドよりもエグゼキュータタスクストリームを選ぶ">3. <a name='80'></a>項目 80 スレッドよりもエグゼキュータ、タスク、ストリームを選ぶ</h2>
+<h3 id="31-結論">3.1. <a name='-1'></a>結論</h3>
 <p>並列処理では、 Java SE 5 から導入された エグゼキュータ、タスク を使う。<br>
 この機構は、 Java 7 で ForkJoin 機構により強化され、Java 8 で Lambda/Stream でさらに使いやすくなった。 Java 1.4 まででは Java.util.Thread を使うしかなかったが、低レイヤなAPIのため扱いがデリケートであり、もはや直接使う理由はない。</p>
-<h3 id="32-a-name-1a並列処理の軌跡">3.2. <a name='-1'></a>並列処理の軌跡</h3>
+<h3 id="32-並列処理の軌跡">3.2. <a name='-1'></a>並列処理の軌跡</h3>
 <p>Executorを使うことで、処理の開始、待ち合わせ、周期的実行、といったよくある並列処理のユースケースがカバーされる。<br>
 並列処理はデリケートでありバグっていても試験で見つけることが難しいので、この領域で言語標準ライブラリでサポートしてもらえるのは重要。</p>
 <p>以下は、並列処理の機能追加によって、どのように記法が変わっていったかを一巡りするソース。</p>
@@ -850,7 +849,7 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>なお、Java7のForkJoinは、Java5のExecutorをベースにしている。同様に、Java8のparallel-streamはForkJoinをベースにしている。</p>
-<h4 id="321-a-nameexecutoraexecutor-の種類">3.2.1. <a name='Executor'></a>Executor の種類</h4>
+<h4 id="321-executor-の種類">3.2.1. <a name='Executor'></a>Executor の種類</h4>
 <p>いくつか種類があるので知っておくと良い。</p>
 <p>使うときは、 <a href="https://docs.oracle.com/javase/jp/11/docs/api/java.base/java/util/concurrent/Executors.html">https://docs.oracle.com/javase/jp/11/docs/api/java.base/java/util/concurrent/Executors.html</a> を利用すると簡単に使える。<br>
 一般的なスレッドプールがだいたい網羅されているユーティリティクラス。<br>
@@ -862,7 +861,7 @@
 <li>newScheduledThreadPool : タイマー付きスレッドプール</li>
 <li>newSingleThreadExecutor : 1本だけのスレッドプール</li>
 </ul>
-<h4 id="322-a-namespringframeworkaspring-framework-のサポート">3.2.2. <a name='SpringFramework'></a>Spring Framework のサポート</h4>
+<h4 id="322-spring-framework-のサポート">3.2.2. <a name='SpringFramework'></a>Spring Framework のサポート</h4>
 <p>Springは、Java標準に対しさらに機能を追加したり、インタフェースを統一したクラスを提供している。</p>
 <p><a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/task/TaskExecutor.html">https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/task/TaskExecutor.html</a> を起点に拡張している。よく使うのは以下の2つ。</p>
 <ul>
@@ -872,11 +871,11 @@
 <p>リファレンスは<a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#scheduling">こちら</a></p>
 <p>SpringのWebやIntegration、Batchなどを支える並列処理ライブラリ。<br>
 ExecutorServiceをベースにしているので、できることは大きくは変わらないが、設定項目のわかりやすさ、DI時の扱いやすさから、SpringベースのAPならばこちらを使うことを考えるとよい。</p>
-<h2 id="4-a-name81waitnotifya項目-81-wait-と-notify-よりも並行処理ユーティリティを選ぶ">4. <a name='81waitnotify'></a>項目 81 wait と notify よりも並行処理ユーティリティを選ぶ</h2>
-<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+<h2 id="4-項目-81-wait-と-notify-よりも並行処理ユーティリティを選ぶ">4. <a name='81waitnotify'></a>項目 81 wait と notify よりも並行処理ユーティリティを選ぶ</h2>
+<h3 id="41-結論">4.1. <a name='-1'></a>結論</h3>
 <p>Object.wait() , Object.notify() といったスレッド制御の機構は、非常に扱いづらい。<br>
 Java 5 からの java.util.concurrent は並列実行でインスタンスを編集するケースや、同期化についてもサポートしているので、<code>wait</code>/<code>notify</code> は使わないこと。</p>
-<h4 id="411-a-name-1a何を使うのか">4.1.1. <a name='-1'></a>何を使うのか</h4>
+<h4 id="411-何を使うのか">4.1.1. <a name='-1'></a>何を使うのか</h4>
 <ul>
 <li>コンカレントコレクション
 <ul>
@@ -938,7 +937,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">es</span><span class="p">.</span><span class="na">shutdown</span><span class="p">();</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="42-a-namewaitnotifyawaitnotifyの難しさ">4.2. <a name='waitnotify'></a>wait/notifyの難しさ</h3>
+</div><h3 id="42-waitnotifyの難しさ">4.2. <a name='waitnotify'></a>wait/notifyの難しさ</h3>
 <p>wait()、notify()、notifyAll() を呼び出すためにはロックが必要。</p>
 <p><a href="https://docs.oracle.com/javase/jp/11/docs/api/java.base/java/lang/Object.html#wait(long,int)">https://docs.oracle.com/javase/jp/11/docs/api/java.base/java/lang/Object.html#wait(long,int)</a></p>
 <p>に書いてある。</p>
@@ -1008,8 +1007,8 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>このようなデリケートな処理をミスなく実装しきるのは困難なため、 <code>java.util.concurrent</code> のようなライブラリを使うべし。</p>
-<h2 id="5-a-name82a項目-82-スレッド安全性を文書化する">5. <a name='82'></a>項目 82 スレッド安全性を文書化する</h2>
-<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
+<h2 id="5-項目-82-スレッド安全性を文書化する">5. <a name='82'></a>項目 82 スレッド安全性を文書化する</h2>
+<h3 id="51-結論">5.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>スレッド安全性について「クラスのJavaDocに書く」もしくはアノテーションを付けましょう。
 <ul>
@@ -1025,9 +1024,8 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 <p>備考：スレッド安全性のアノテーションについて<br>
 ・<a href="https://jcip.net/annotations/doc/net/jcip/annotations/Immutable.html">Immutable</a><br>
 ・<a href="https://jcip.net/annotations/doc/net/jcip/annotations/ThreadSafe.html">ThreadSafe</a><br>
-・<a href="https://jcip.net/annotations/doc/net/jcip/annotations/NotThreadSafe.html">NotThreadSafe</a></p>
-</blockquote>
-<h4 id="511-a-name-1aスレッド安全性のレベル">5.1.1. <a name='-1'></a>スレッド安全性のレベル</h4>
+・<a href="https://jcip.net/annotations/doc/net/jcip/annotations/NotThreadSafe.html">NotThreadSafe</a></p></blockquote>
+<h4 id="511-スレッド安全性のレベル">5.1.1. <a name='-1'></a>スレッド安全性のレベル</h4>
 <p>スレッド安全性のレベルとして、一般的なものとして以下があります。</p>
 <ul>
 <li>不変(<code>Immutable</code>)
@@ -1068,9 +1066,8 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 ・<a href="https://github.com/eclipse/openj9/blob/master/jcl/src/java.base/share/classes/java/lang/System.java#L791">System#runFinalizersOnExit</a>で、<code>Runtime.runFinalizersOnExit(flag);</code>を呼んでいる。<br>
 ・<a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/lang/Runtime.java#L303">Runtime#runFinalizersOnExit</a>で、<code>Shutdown.setRunFinalizersOnExit(value);</code>を呼んでいる。<br>
 ・上記メソッドにより、終了時に各オブジェクトの finalize() メソッドが必ず呼び出されるようになる。<br>
-・その際、もし並行して実行されているオブジェクトがあると危険。ということなのかな。</p>
-</blockquote>
-<h3 id="52-a-name-1aサンプル">5.2. <a name='-1'></a>サンプル</h3>
+・その際、もし並行して実行されているオブジェクトがあると危険。ということなのかな。</p></blockquote>
+<h3 id="52-サンプル">5.2. <a name='-1'></a>サンプル</h3>
 <ul>
 <li>無条件スレッドセーフ</li>
 </ul>
@@ -1097,8 +1094,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>備考：lockオブジェクトを<code>private static final</code>にしていれば、複数のインスタンスで1つのlockオブジェクトとなり、JVM上で1つしか実行できないようにする等はできる。</p>
-</blockquote>
+<p>備考：lockオブジェクトを<code>private static final</code>にしていれば、複数のインスタンスで1つのlockオブジェクトとなり、JVM上で1つしか実行できないようにする等はできる。</p></blockquote>
 <p>同期化する箇所を、局所化する際にロックオブジェクトを使う例。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1164,7 +1160,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>イテレータによる走査中にmapに変更が加わると、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/ConcurrentModificationException.html">ConcurrentModificationException</a>が発生するため。</p>
-<h3 id="53-a-name-1aポイント">5.3. <a name='-1'></a>ポイント</h3>
+<h3 id="53-ポイント">5.3. <a name='-1'></a>ポイント</h3>
 <ul>
 <li>ユーザにとって、スレッドセーフなのかどうかを示すために、以下をしましょう。
 <ul>
@@ -1173,8 +1169,8 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </ul>
 </li>
 </ul>
-<h2 id="6-a-name83a項目-83-遅延初期化を注意して使う">6. <a name='83'></a>項目 83 遅延初期化を注意して使う</h2>
-<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+<h2 id="6-項目-83-遅延初期化を注意して使う">6. <a name='83'></a>項目 83 遅延初期化を注意して使う</h2>
+<h3 id="61-結論">6.1. <a name='-1'></a>結論</h3>
 <p>ほとんどの場合は、普通に初期化しましょう。</p>
 <ul>
 <li>遅延初期化はもろ刃の剣であるため。
@@ -1203,8 +1199,8 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </ul>
 </li>
 </ul>
-<h3 id="62-a-name-1aサンプル">6.2. <a name='-1'></a>サンプル</h3>
-<h4 id="621-a-name-1aインスタンスフィールドの遅延初期化">6.2.1. <a name='-1'></a>インスタンスフィールドの遅延初期化</h4>
+<h3 id="62-サンプル">6.2. <a name='-1'></a>サンプル</h3>
+<h4 id="621-インスタンスフィールドの遅延初期化">6.2.1. <a name='-1'></a>インスタンスフィールドの遅延初期化</h4>
 <h5 id="二重チェックイデオム">二重チェックイデオム</h5>
 <ul>
 <li>初回アクセス時、ロックする。</li>
@@ -1244,8 +1240,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </div>
 </div><blockquote>
 <p>備考：ローカル変数<code>result</code>は厳密には不要。<br>
-しかし、約25%のパフォーマンス改善のために使用している。2回目以降のアクセス時に、<code>field</code>値の読み込みが1回しか行われないよう保証している。</p>
-</blockquote>
+しかし、約25%のパフォーマンス改善のために使用している。2回目以降のアクセス時に、<code>field</code>値の読み込みが1回しか行われないよう保証している。</p></blockquote>
 <p>「Java 5からダブルチェックイデオムが使えるようになった。Java 1.4まで機能しそうに見えて、機能しなかった。」ということを知っておきましょう。</p>
 <h5 id="単一チェックイデオム">単一チェックイデオム</h5>
 <ul>
@@ -1276,9 +1271,8 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </div>
 </div><blockquote>
 <p>普段使用するのに対しては、非標準な技法だけれども、アーキテクチャによっては、フィールドへのアクセスが速くなります。<br>
-理由は、同期しないので別スレッドの処理を待たなくなるから。</p>
-</blockquote>
-<h4 id="622-a-namestaticastaticフィールドの遅延初期化">6.2.2. <a name='static'></a>staticフィールドの遅延初期化</h4>
+理由は、同期しないので別スレッドの処理を待たなくなるから。</p></blockquote>
+<h4 id="622-staticフィールドの遅延初期化">6.2.2. <a name='static'></a>staticフィールドの遅延初期化</h4>
 <p>クラスが初めて見られたときに、初期化するというクラスローダの仕組みを利用している。</p>
 <p><code>getField()</code>が初めて呼ばれた時に、初めて<code>FieldHolder.field</code>が読み出されて、初期化される。</p>
 <div class="highlight"><div class="chroma">
@@ -1309,9 +1303,8 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </div>
 </div><blockquote>
 <p>Springを使っている場合は、アノテーション<code>@Lazy(true)</code>を使うことが多いでしょう。<br>
-テストのしやすさも、Javaだと<code>ClassLoader</code>を触らないとダメだが、Spring管理だとUTの範囲ではなくなる。SIとかに回せる。</p>
-</blockquote>
-<h3 id="63-a-name-1aポイント">6.3. <a name='-1'></a>ポイント</h3>
+テストのしやすさも、Javaだと<code>ClassLoader</code>を触らないとダメだが、Spring管理だとUTの範囲ではなくなる。SIとかに回せる。</p></blockquote>
+<h3 id="63-ポイント">6.3. <a name='-1'></a>ポイント</h3>
 <p>遅延初期化は普通は使わないけれど、利用するシーンとしては以下。</p>
 <ul>
 <li>パフォーマンス目標を達成するため。</li>
@@ -1330,8 +1323,8 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </ul>
 </li>
 </ul>
-<h2 id="7-a-name84a項目-84-スレッドスケジューラに依存しない">7. <a name='84'></a>項目 84 スレッドスケジューラに依存しない</h2>
-<h3 id="71-a-name-1a結論">7.1. <a name='-1'></a>結論</h3>
+<h2 id="7-項目-84-スレッドスケジューラに依存しない">7. <a name='84'></a>項目 84 スレッドスケジューラに依存しない</h2>
+<h3 id="71-結論">7.1. <a name='-1'></a>結論</h3>
 <p>アプリケーションの動作の正しさに関して、スレッドスケジューラに依存してはいけない。</p>
 <ul>
 <li>スレッドスケジューラは、「どのスレッドをどのくらいの時間実行するか」を決める。その決定は、OSのポリシーによって異なる可能性があるから。</li>
@@ -1355,15 +1348,13 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 <li>もしメモリが足りてもCPUが対応できなくなっていく。</li>
 <li>context switchが多くなる。（コンピュータの処理装置(CPU)が現在実行している処理の流れ(プロセス、スレッド)を一時停止し、別のものに切り替えて実行を再開すること。）</li>
 <li>結論として、スレッド数には限界値を設けましょう。</li>
-</ol>
-</blockquote>
-<h3 id="72-a-name-1aサンプル">7.2. <a name='-1'></a>サンプル</h3>
+</ol></blockquote>
+<h3 id="72-サンプル">7.2. <a name='-1'></a>サンプル</h3>
 <p>スレッドは<code>busy wait</code>を行うべきではない。<br>
 <code>busy wait</code>は、プロセッサへの負荷をかなり増大させて、他のスレッドができる処理の量を減らしてしまう可能性がある。</p>
 <blockquote>
 <p><code>busy wait</code>とは、プロセスが条件に成り立つかどうかを定期的にチェックする手法の一種。<br>
-今回は、何かが起きるのを待つ(カウントが0かどうかを確認する)ために共有されたオブジェクトを繰り返し検査している。</p>
-</blockquote>
+今回は、何かが起きるのを待つ(カウントが0かどうかを確認する)ために共有されたオブジェクトを繰り返し検査している。</p></blockquote>
 <p><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/CountDownLatch.html">CountDownLatch (Java Platform SE 8 )</a>を遅くしたサンプルプログラム。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1445,7 +1436,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="73-a-name-1aポイント">7.3. <a name='-1'></a>ポイント</h3>
+</div><h3 id="73-ポイント">7.3. <a name='-1'></a>ポイント</h3>
 <p>アプリケーションの動作の正しさに関して、スレッドスケジューラに依存してはいけない。</p>
 <ul>
 <li>スレッドスケジューラはOSのポリシー依存であるため。</li>
@@ -1512,7 +1503,7 @@ Java 5 からの java.util.concurrent は並列実行でインスタンスを編
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

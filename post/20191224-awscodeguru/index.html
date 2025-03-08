@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191224-awscodeguru/" />
@@ -146,8 +146,7 @@
 <p>AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツール<a href="https://aws.amazon.com/jp/codeguru/">AWS CodeGuru</a>を使ってみました。
 その使用感や解析結果をまとめたいと思います。</p>
 <blockquote>
-<p>参考：使用したのは<code>CodeGuru Reviewer </code>のみで<code>CodeGuru Profiler</code>は使っていません。</p>
-</blockquote>
+<p>参考：使用したのは<code>CodeGuru Reviewer </code>のみで<code>CodeGuru Profiler</code>は使っていません。</p></blockquote>
 <!-- vscode-markdown-toc -->
 <ul>
 <li>
@@ -198,7 +197,7 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-namea結論">1. <a name=''></a>結論</h2>
+<h2 id="1-結論">1. <a name=''></a>結論</h2>
 <p>利用者は以下のような方かなと。</p>
 <ul>
 <li>他の静的解析ツールも使っている
@@ -209,17 +208,17 @@
 <li>AWSのAPIの使用方法が合っているかよくわからないので確認したい</li>
 <li>お金に余裕がある</li>
 </ul>
-<h3 id="11-a-name-1a使用感">1.1. <a name='-1'></a>使用感</h3>
+<h3 id="11-使用感">1.1. <a name='-1'></a>使用感</h3>
 <ul>
 <li><code>AWS CodeCommit</code>や<code>Github</code>との連携は簡単</li>
 <li>解析結果はプルリクエストに対して、レビューア(AWS CodeGuru Bot)の指摘として表示される</li>
 </ul>
-<h3 id="12-a-name-1a解析結果">1.2. <a name='-1'></a>解析結果</h3>
+<h3 id="12-解析結果">1.2. <a name='-1'></a>解析結果</h3>
 <ul>
 <li>一般的な静的解析ツール（<code>FindBugs</code>や<code>SonarQube</code>、<code>Coverity</code>、<code>IDEによる指摘</code>など）で発見されるバグは、ほとんど指摘されない</li>
 <li>AWSのAPIの使い方に関する指摘は鋭い</li>
 </ul>
-<h2 id="2-a-name-1a前提">2. <a name='-1'></a>前提</h2>
+<h2 id="2-前提">2. <a name='-1'></a>前提</h2>
 <p><code>Amazon CodeGuru</code> は、「自動化されたコードレビュー」と「アプリケーションパフォーマンスの推奨事項を提供する」機械学習サービスです。（引用元：https://aws.amazon.com/jp/codeguru/）</p>
 <p>以下のような静的解析ツールの仲間ですね。</p>
 <ul>
@@ -228,9 +227,8 @@
 <li><a href="https://www.synopsys.com/ja-jp/software-integrity/security-testing/static-analysis-sast.html">Coverity</a></li>
 </ul>
 <blockquote>
-<p>現状(2019/12時点)では、Amazon CodeGuruはJava言語のみ対応。</p>
-</blockquote>
-<h3 id="21-a-name-1a連携できるバージョン管理システム">2.1. <a name='-1'></a>連携できるバージョン管理システム</h3>
+<p>現状(2019/12時点)では、Amazon CodeGuruはJava言語のみ対応。</p></blockquote>
+<h3 id="21-連携できるバージョン管理システム">2.1. <a name='-1'></a>連携できるバージョン管理システム</h3>
 <p>以下の２つに対応（今回はAWS CodeCommitを使用した）</p>
 <ul>
 <li>Github</li>
@@ -238,15 +236,14 @@
 </ul>
 <p><img src="/img/20191224/AWS_CodeGuru_Repository.PNG" alt=""></p>
 <p>参考URL : <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html">https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/integrations.html</a></p>
-<h3 id="22-a-name-1a解析単価">2.2. <a name='-1'></a>解析単価</h3>
+<h3 id="22-解析単価">2.2. <a name='-1'></a>解析単価</h3>
 <p>まぁまぁ高いので、使う際は気をつけましょう。。<br>
 今後、巨大なMR作って事故る人出るかもしれないですね、、、</p>
 <blockquote>
 <p>コード 100 行あたり 0.75 USD<br>
-例：10,000行のコードだったら、75USD(2019/12時点で約8200円)</p>
-</blockquote>
+例：10,000行のコードだったら、75USD(2019/12時点で約8200円)</p></blockquote>
 <p>引用元：https://aws.amazon.com/jp/codeguru/pricing/</p>
-<h3 id="23-a-name-1a指摘の観点">2.3. <a name='-1'></a>指摘の観点</h3>
+<h3 id="23-指摘の観点">2.3. <a name='-1'></a>指摘の観点</h3>
 <ul>
 <li>AWS Best Practices
 <ul>
@@ -275,8 +272,8 @@
 </li>
 </ul>
 <p>引用元：https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html</p>
-<h2 id="3-a-name-1a使用感">3. <a name='-1'></a>使用感</h2>
-<h3 id="31-a-name-1aセットアップについて">3.1. <a name='-1'></a>セットアップについて</h3>
+<h2 id="3-使用感">3. <a name='-1'></a>使用感</h2>
+<h3 id="31-セットアップについて">3.1. <a name='-1'></a>セットアップについて</h3>
 <p>参考URLに記載の通りであるが、以下の手順で、10分ほどあれば完了するので簡単。</p>
 <ol>
 <li>CodeCommit の初期設定（リポジトリ作成画面に<code>AWS CodeGuru</code>との連携オプションあり。）</li>
@@ -288,14 +285,13 @@
 <li>CodeCommit コンソールに接続し、リポジトリを複製する</li>
 </ol>
 <p>参考URL : <a href="https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html">https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html</a></p>
-<h3 id="32-a-name-1a運用性について">3.2. <a name='-1'></a>運用性について</h3>
+<h3 id="32-運用性について">3.2. <a name='-1'></a>運用性について</h3>
 <p>マージリクエストに対して、レビュアーのような立場でソースコードに指摘をしてくれるので、運用上指摘を見逃すことがない。</p>
 <blockquote>
-<p>指摘場所は、<code>AWS CodeCommit</code>のアクティビティ画面</p>
-</blockquote>
+<p>指摘場所は、<code>AWS CodeCommit</code>のアクティビティ画面</p></blockquote>
 <p><img src="/img/20191224/CodeGuru%E3%81%AB%E3%82%88%E3%82%8B%E6%8C%87%E6%91%98.png" alt=""></p>
-<h2 id="4-a-name-1a指摘結果">4. <a name='-1'></a>指摘結果</h2>
-<h3 id="41-a-name-1a指摘されなかったコード">4.1. <a name='-1'></a>指摘されなかったコード</h3>
+<h2 id="4-指摘結果">4. <a name='-1'></a>指摘結果</h2>
+<h3 id="41-指摘されなかったコード">4.1. <a name='-1'></a>指摘されなかったコード</h3>
 <p>下のコードはいずれも他の静的解析ツールで指摘されるのですが、、<code>AWS CodeGuru</code>では指摘されなかったです。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -471,7 +467,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="42-a-name-1a指摘されたコード">4.2. <a name='-1'></a>指摘されたコード</h3>
+</div><h3 id="42-指摘されたコード">4.2. <a name='-1'></a>指摘されたコード</h3>
 <p>一般的なコーディングに対する指摘ですね。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -522,12 +518,11 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results.</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="5-a-name-1a余談">5. <a name='-1'></a>余談</h2>
+</div><h2 id="5-余談">5. <a name='-1'></a>余談</h2>
 <p>某約20KStepのJavaプロジェクトに対して、<code>AWS CodeGuru</code>をかけたのですが、ヒットしたのは「指摘されたコード」に記載のAWSのAPIに関する2種類の指摘のみでした。。</p>
 <p>これからユーザからのフィードバックを受けてどんどん賢くなっていくとのことなので、今後に期待しましょう！</p>
 <blockquote>
-<p>「某約20KStepのJavaプロジェクト」は、SonarQubeによるバグ指摘はない状態となっています。</p>
-</blockquote>
+<p>「某約20KStepのJavaプロジェクト」は、SonarQubeによるバグ指摘はない状態となっています。</p></blockquote>
 
     </div>
 
@@ -588,7 +583,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-8/" />
@@ -165,13 +165,13 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-name49a項目-49-パラメータの正当性を検査する">1. <a name='49'></a>項目 49 パラメータの正当性を検査する</h2>
-<h3 id="11-a-namea結論">1.1. <a name=''></a>結論</h3>
+<h2 id="1-項目-49-パラメータの正当性を検査する">1. <a name='49'></a>項目 49 パラメータの正当性を検査する</h2>
+<h3 id="11-結論">1.1. <a name=''></a>結論</h3>
 <ul>
 <li>入力値のチェックをしましょう</li>
 <li>Javadocに入力値の説明と例外の説明は記入しましょう</li>
 </ul>
-<h3 id="12-a-name-1a良い例">1.2. <a name='-1'></a>良い例</h3>
+<h3 id="12-良い例">1.2. <a name='-1'></a>良い例</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -214,9 +214,8 @@
 <li>処理で例外が出ずに、変な値が返却されてしまうこと（これは最悪の場合）</li>
 </ul>
 <blockquote>
-<p>余談：<code>@throws ArithmetricException m &lt;= 0の場合.</code>の<code>@throws</code>はメソッドに<code>throws</code>がついていないので忘れがちかもしれないなと思いました。（IDEで自動的に付加されないので。）</p>
-</blockquote>
-<h3 id="13-a-name-1aアサーションの紹介">1.3. <a name='-1'></a>アサーションの紹介</h3>
+<p>余談：<code>@throws ArithmetricException m &lt;= 0の場合.</code>の<code>@throws</code>はメソッドに<code>throws</code>がついていないので忘れがちかもしれないなと思いました。（IDEで自動的に付加されないので。）</p></blockquote>
+<h3 id="13-アサーションの紹介">1.3. <a name='-1'></a>アサーションの紹介</h3>
 <p><code>private</code>メソッド（外部には公開しない）の場合は、そのパッケージの作成者として、どのような状況でメソッドが呼び出されるのかを
 <a href="https://www.ipa.go.jp/security/awareness/vendor/programmingv1/a03_05.html">アサーション</a>を用いて入力値の検査をすべき。</p>
 <div class="highlight"><div class="chroma">
@@ -285,15 +284,15 @@
 </div>
 </div><p><code>-ea</code>(<code>-enableassertions</code>)をつけた場合のみ<code>assert</code>は有効になる。
 <code>-ea</code>を付けなければ、<code>assert</code>は有効にならないので、実運用時にコストは発生しない。</p>
-<h2 id="2-a-name50a項目-50-必要な場合防御的にコピーする">2. <a name='50'></a>項目 50 必要な場合、防御的にコピーする</h2>
-<h3 id="21-a-name-1a結論">2.1. <a name='-1'></a>結論</h3>
+<h2 id="2-項目-50-必要な場合防御的にコピーする">2. <a name='50'></a>項目 50 必要な場合、防御的にコピーする</h2>
+<h3 id="21-結論">2.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>クライアントが信頼できない場合は、防御的にコピーしましょう</li>
 <li>クライアントが信頼できて、コピーのコストが非常に高い場合は、Javadocに記載しても良いです。</li>
 </ul>
-<h3 id="22-a-name-1a防御的コピー">2.2. <a name='-1'></a>防御的コピー</h3>
+<h3 id="22-防御的コピー">2.2. <a name='-1'></a>防御的コピー</h3>
 <p>クライアントが、クラスの不等式を破壊するために徹底した努力をすると想定しましょう。</p>
-<h4 id="221-a-name-1a悪い例">2.2.1. <a name='-1'></a>悪い例</h4>
+<h4 id="221-悪い例">2.2.1. <a name='-1'></a>悪い例</h4>
 <p><code>Date</code>はmutable（フィールドを変更可能なオブジェクト）です。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -377,7 +376,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">end</span><span class="p">().</span><span class="na">setYear</span><span class="p">(</span><span class="n">78</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="222-a-name-1a良い例">2.2.2. <a name='-1'></a>良い例</h4>
+</div><h4 id="222-良い例">2.2.2. <a name='-1'></a>良い例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -448,10 +447,9 @@
 </div>
 </div><blockquote>
 <p>もし<code>Date</code>のコピーが非常にコストの高い行為であり、クライアントが信頼できる場合は、<br>
-&ldquo;影響を受ける要素を変更しないこと&quot;をクライアントの責任であると、Javadocに示すことで対応しても良い。</p>
-</blockquote>
-<h2 id="3-a-name51a項目-51-メソッドのシグネチャを注意深く設計する">3. <a name='51'></a>項目 51 メソッドのシグネチャを注意深く設計する</h2>
-<h3 id="31-a-name-1a結論">3.1. <a name='-1'></a>結論</h3>
+&ldquo;影響を受ける要素を変更しないこと&quot;をクライアントの責任であると、Javadocに示すことで対応しても良い。</p></blockquote>
+<h2 id="3-項目-51-メソッドのシグネチャを注意深く設計する">3. <a name='51'></a>項目 51 メソッドのシグネチャを注意深く設計する</h2>
+<h3 id="31-結論">3.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>メソッド名を注意深く選ぶべし</li>
 <li>便利なメソッドを提供しすぎないようにするべし</li>
@@ -459,7 +457,7 @@
 <li>パラメータ型に関しては、クラスよりインタフェースを選ぶべし</li>
 <li>booleanパラメータよりは2つの要素を持つenum型を使用するべし</li>
 </ul>
-<h3 id="32-a-name-1aメソッド名を注意深く選ぶべし">3.2. <a name='-1'></a>メソッド名を注意深く選ぶべし</h3>
+<h3 id="32-メソッド名を注意深く選ぶべし">3.2. <a name='-1'></a>メソッド名を注意深く選ぶべし</h3>
 <p>APIを使う人が誤解なく使えるようにするために、以下をすること</p>
 <ul>
 <li>標準命名規約に従う</li>
@@ -470,12 +468,12 @@
 </ul>
 </li>
 </ul>
-<h3 id="33-a-name-1a便利なメソッドを提供しすぎないようにするべし">3.3. <a name='-1'></a>便利なメソッドを提供しすぎないようにするべし</h3>
+<h3 id="33-便利なメソッドを提供しすぎないようにするべし">3.3. <a name='-1'></a>便利なメソッドを提供しすぎないようにするべし</h3>
 <ul>
 <li>提供するか迷ったらやめるべき</li>
 <li>【理由】多くのメソッドを用意すると、学習、使用、文書化、テスト、保守を困難にするから</li>
 </ul>
-<h3 id="34-a-name-1a長いパラメータのリストを避けるべし">3.4. <a name='-1'></a>長いパラメータのリストを避けるべし</h3>
+<h3 id="34-長いパラメータのリストを避けるべし">3.4. <a name='-1'></a>長いパラメータのリストを避けるべし</h3>
 <ul>
 <li>特に同じ型のパラメータが続くことは避けるべき
 <ul>
@@ -504,7 +502,7 @@
 <ol start="3">
 <li>引数が多いコンストラクタの引数が多い場合は、ビルダーパターンを使う。</li>
 </ol>
-<h3 id="35-a-name-1aパラメータ型に関してはクラスよりインタフェースを選ぶべし">3.5. <a name='-1'></a>パラメータ型に関しては、クラスよりインタフェースを選ぶべし</h3>
+<h3 id="35-パラメータ型に関してはクラスよりインタフェースを選ぶべし">3.5. <a name='-1'></a>パラメータ型に関しては、クラスよりインタフェースを選ぶべし</h3>
 <ul>
 <li>パラメータの型は実装クラスよりもインタフェースを使用するべき
 <ul>
@@ -513,19 +511,19 @@
 </li>
 <li>【理由】制約をゆるくするため。</li>
 </ul>
-<h3 id="36-a-nameboolean2enumabooleanパラメータよりは2つの要素を持つenum型を使用するべし">3.6. <a name='boolean2enum'></a>booleanパラメータよりは2つの要素を持つenum型を使用するべし</h3>
+<h3 id="36-booleanパラメータよりは2つの要素を持つenum型を使用するべし">3.6. <a name='boolean2enum'></a>booleanパラメータよりは2つの要素を持つenum型を使用するべし</h3>
 <p>enum型を使用したほうが利用者にとってわかりやすいから。また、新たな状態を追加しやすいから。</p>
 <ul>
 <li>例：Thermometer型があったとして、<code>Thermometer.newInstance(true)</code>より、<code>Thermometer.newInstance(TemperatureScale.CELSIUS)</code>の方が、分かりやすい。<br>
 また、簡単に<code>TemperatureScale.KELVIN</code>を追加できる。</li>
 </ul>
-<h2 id="4-a-name52a項目-52-オーバーロードを注意して使う">4. <a name='52'></a>項目 52 オーバーロードを注意して使う</h2>
-<h3 id="41-a-name-1a結論">4.1. <a name='-1'></a>結論</h3>
+<h2 id="4-項目-52-オーバーロードを注意して使う">4. <a name='52'></a>項目 52 オーバーロードを注意して使う</h2>
+<h3 id="41-結論">4.1. <a name='-1'></a>結論</h3>
 <ul>
 <li>パラメータの数が同一のオーバーロードされたメソッドを提供するべきでない</li>
 </ul>
-<h3 id="42-a-name-1aオーバーロード">4.2. <a name='-1'></a>オーバーロード</h3>
-<h4 id="421-a-name_1aコードと実行結果_その1">4.2.1. <a name='_1'></a>コードと実行結果_その1</h4>
+<h3 id="42-オーバーロード">4.2. <a name='-1'></a>オーバーロード</h3>
+<h4 id="421-コードと実行結果_その1">4.2.1. <a name='_1'></a>コードと実行結果_その1</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -578,7 +576,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="422-a-name_2aコードと実行結果_その2">4.2.2. <a name='_2'></a>コードと実行結果_その2</h4>
+</div><h4 id="422-コードと実行結果_その2">4.2.2. <a name='_2'></a>コードと実行結果_その2</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -643,10 +641,9 @@
 </div>
 </div><blockquote>
 <p>オーバーロードされたどのメソッドが呼び出されるかの選択はコンパイル時に行われるため。<br>
-上の例では、3回のループで、パラメータのコンパイル時の型は<code>Collection&lt;?&gt;</code>であるので、<code>classify(Collection&lt;?&gt; s)</code>が呼び出される。</p>
-</blockquote>
-<h3 id="43-a-name-1aオーバーライド">4.3. <a name='-1'></a>オーバーライド</h3>
-<h4 id="431-a-name_3aコードと実行結果_その3">4.3.1. <a name='_3'></a>コードと実行結果_その3</h4>
+上の例では、3回のループで、パラメータのコンパイル時の型は<code>Collection&lt;?&gt;</code>であるので、<code>classify(Collection&lt;?&gt; s)</code>が呼び出される。</p></blockquote>
+<h3 id="43-オーバーライド">4.3. <a name='-1'></a>オーバーライド</h3>
+<h4 id="431-コードと実行結果_その3">4.3.1. <a name='_3'></a>コードと実行結果_その3</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -724,9 +721,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>オーバーライドは実行時に呼び出されるメソッドが決められるため。</p>
-</blockquote>
-<h3 id="44-a-name-1aオーバーロードの利用">4.4. <a name='-1'></a>オーバーロードの利用</h3>
+<p>オーバーライドは実行時に呼び出されるメソッドが決められるため。</p></blockquote>
+<h3 id="44-オーバーロードの利用">4.4. <a name='-1'></a>オーバーロードの利用</h3>
 <ul>
 <li>最も安全な方針は、 <strong>パラメータの数が同一のオーバーロードされたメソッドを提供しないこと</strong>
 <ul>
@@ -758,8 +754,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="5-a-name53a項目-53-可変長引数を注意して使う">5. <a name='53'></a>項目 53 可変長引数を注意して使う</h2>
-<h3 id="51-a-name-1a結論">5.1. <a name='-1'></a>結論</h3>
+<h2 id="5-項目-53-可変長引数を注意して使う">5. <a name='53'></a>項目 53 可変長引数を注意して使う</h2>
+<h3 id="51-結論">5.1. <a name='-1'></a>結論</h3>
 <p>すべての引数の型が同じでも、全部可変長ではなく、一部のみにしたほうがいいことがある。</p>
 <p>ex) 必須パラメータ と オプションパラメータ で分けたいとき。</p>
 <div class="highlight"><div class="chroma">
@@ -828,10 +824,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="6-a-name54nulla項目-54-null-ではなく空コレクションか空配列を返す">6. <a name='54null'></a>項目 54 null ではなく、空コレクションか空配列を返す</h2>
-<h3 id="61-a-name-1a結論">6.1. <a name='-1'></a>結論</h3>
+</div><h2 id="6-項目-54-null-ではなく空コレクションか空配列を返す">6. <a name='54null'></a>項目 54 null ではなく、空コレクションか空配列を返す</h2>
+<h3 id="61-結論">6.1. <a name='-1'></a>結論</h3>
 <p>nullよりも、 空オブジェクト を常に使うこと。</p>
-<h3 id="62-a-name-1a理由">6.2. <a name='-1'></a>理由</h3>
+<h3 id="62-理由">6.2. <a name='-1'></a>理由</h3>
 <ul>
 <li>nullが返ってくる -&gt; 使う側は常にnullチェックを強制される。</li>
 <li>場合によっては、コレクションが空or要素があるのどちらかを考慮せずコードがかける。</li>
@@ -853,8 +849,8 @@
 <li>null と 空オブジェクト で意味が異なる場合は、もちろん、両方の意味を定義して使い分けること</li>
 <li>古いAPIだと 空オブジェクトで良い場面でnullを使っているケースがある</li>
 </ul>
-<h2 id="7-a-name55a項目-55-オプショナルを注意して返す">7. <a name='55'></a>項目 55 オプショナルを注意して返す</h2>
-<h3 id="71-a-name-1a結論">7.1. <a name='-1'></a>結論</h3>
+<h2 id="7-項目-55-オプショナルを注意して返す">7. <a name='55'></a>項目 55 オプショナルを注意して返す</h2>
+<h3 id="71-結論">7.1. <a name='-1'></a>結論</h3>
 <p>java8 から <code>Optional&lt;T&gt;</code> が入ってきた。定義をjavadocから引用すると…</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -872,7 +868,7 @@
 <li>if文のブロックを可読性の高いシンプルなコードに置き換えることができる</li>
 <li>lambdaと相性がよいので、stream処理のmap、filterに自然に組み込むことができる</li>
 </ul>
-<h3 id="72-a-name-1a補足">7.2. <a name='-1'></a>補足</h3>
+<h3 id="72-補足">7.2. <a name='-1'></a>補足</h3>
 <ul>
 <li>Optionalが戻り値であるメソッドからnullを返してはならない。これを行うと、Optionalを導入した意味がなくなる。
 <ul>
@@ -880,8 +876,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="8-a-name56apia項目-56-すべての公開-api-要素に対してドキュメントコメントを書く">8. <a name='56API'></a>項目 56 すべての公開 API 要素に対してドキュメントコメントを書く</h2>
-<h3 id="81-a-name-1a結論">8.1. <a name='-1'></a>結論</h3>
+<h2 id="8-項目-56-すべての公開-api-要素に対してドキュメントコメントを書く">8. <a name='56API'></a>項目 56 すべての公開 API 要素に対してドキュメントコメントを書く</h2>
+<h3 id="81-結論">8.1. <a name='-1'></a>結論</h3>
 <p>(状況に応じて、できる範囲で)必ず書きなさい。</p>
 <ul>
 <li>利用者の範囲
@@ -918,7 +914,7 @@ etc&hellip;</li>
 </li>
 <li>Java5では@literalと@code</li>
 </ul>
-<h3 id="82-a-name-1a書き方">8.2. <a name='-1'></a>書き方</h3>
+<h3 id="82-書き方">8.2. <a name='-1'></a>書き方</h3>
 <p><a href="http://www.oracle.com/technetwork/java/javase/tech/index-137868.html">How to Write Doc Comments</a>
 <a href="https://www.amazon.co.jp/">https://www.amazon.co.jp/</a>エンジニアのためのJavadoc再入門講座-現場で使えるAPI仕様書の作り方-佐藤-竜一/dp/4798119482</p>
 <p>結局、一言でいうと、「制約を順序立てて記述する」ことを念頭に置くと、だいたい大丈夫です。</p>
@@ -930,7 +926,7 @@ etc&hellip;</li>
 </ul>
 <p>意外とわすれがちなのは、スレッドセーフかどうか、シリアライズ関連。
 特別な考慮事項があれば記述すること。</p>
-<h2 id="9-a-nameurla参考url">9. <a name='URL'></a>参考URL</h2>
+<h2 id="9-参考url">9. <a name='URL'></a>参考URL</h2>
 <ul>
 <li><a href="https://techacademy.jp/magazine/19024">assertの使い方！Javaのアサーションを使う方法【初心者向け】</a></li>
 </ul>
@@ -994,7 +990,7 @@ etc&hellip;</li>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

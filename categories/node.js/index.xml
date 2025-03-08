@@ -14,7 +14,7 @@
       <link>https://takuto-n.github.io/post/20220412-cookie-apollo-server/</link>
       <pubDate>Tue, 12 Apr 2022 14:46:25 +0900</pubDate>
       <guid>https://takuto-n.github.io/post/20220412-cookie-apollo-server/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;Cookie情報を、BFF(Backend for Frontend)で受け取って、Backend側へ送信するサンプルコードを載せておきます。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Request → (cookie) → BFF → (cookie) → Backend&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;Cookie情報を、BFF(Backend for Frontend)で受け取って、Backend側へ送信するサンプルコードを載せておきます。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Request → (cookie) → BFF → (cookie) → Backend&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>Proxy and certificate settings in NPM and Gradle</title>

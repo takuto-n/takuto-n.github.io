@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20200502-thread-init-at-process-startup2/" />
@@ -171,7 +171,7 @@
 <p>Tomcatのスレッドプールに直接タスクを依頼する方法がわかったため、<a href="https://takuto-n.github.io/post/20200425-thread-init-at-process-startup/">前回</a>の続きとして記載します。</p>
 <p>処理フローは概要の「スレッド初期化のシーケンス図」の通りです。</p>
 <p>以下、実際のプログラムを載せておきます。</p>
-<h2 id="1-a-namethreadinitializer2athreadinitializer2">1. <a name='ThreadInitializer2'></a>ThreadInitializer2</h2>
+<h2 id="1-threadinitializer2">1. <a name='ThreadInitializer2'></a>ThreadInitializer2</h2>
 <ul>
 <li><code>main thread</code>で実行されるプログラムは、<code>onApplicationEvent</code>メソッド。</li>
 <li><code>tomcat thread</code>で実行されるプログラムは、<code>threadInit</code>メソッド。</li>
@@ -292,7 +292,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2-a-nameexecutionresultaexecution-result">2. <a name='Executionresult'></a>Execution result</h2>
+</div><h2 id="2-execution-result">2. <a name='Executionresult'></a>Execution result</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -371,7 +371,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">2020</span><span class="o">-</span><span class="n">05</span><span class="o">-</span><span class="n">02</span><span class="w"> </span><span class="n">14</span><span class="p">:</span><span class="n">50</span><span class="p">:</span><span class="n">15</span><span class="p">.</span><span class="na">992</span><span class="w">  </span><span class="n">INFO</span><span class="w"> </span><span class="n">65733</span><span class="w"> </span><span class="o">---</span><span class="w"> </span><span class="o">[</span><span class="w">           </span><span class="n">main</span><span class="o">]</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">e</span><span class="p">.</span><span class="na">t</span><span class="p">.</span><span class="na">ThreadInitOnDeploymentApplication</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="n">Started</span><span class="w"> </span><span class="n">ThreadInitOnDeploymentApplication</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">14</span><span class="p">.</span><span class="na">269</span><span class="w"> </span><span class="nf">seconds</span><span class="w"> </span><span class="p">(</span><span class="n">JVM</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">15</span><span class="p">.</span><span class="na">023</span><span class="p">)</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="3-a-namereferenceareference">3. <a name='Reference'></a>Reference</h2>
+</div><h2 id="3-reference">3. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="https://github.com/spring-projects/spring-boot/issues/4657">Allow the embedded web server to be shut down gracefully · Issue #4657 · spring-projects/spring-boot</a></li>
 </ul>
@@ -434,7 +434,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

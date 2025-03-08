@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/" />
@@ -161,13 +161,12 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-name10equalsoverridegeneralcontractsa項目-10-equals-の-override-は一般契約general-contractsに従うべし">1. <a name='10equalsoverridegeneralcontracts'></a>項目 10 equals の override は一般契約（general contracts）に従うべし</h2>
-<h3 id="11-a-nameaどういう時にオーバーライドする必要があるのか">1.1. <a name=''></a>どういう時にオーバーライドする必要があるのか？</h3>
+<h2 id="1-項目-10-equals-の-override-は一般契約general-contractsに従うべし">1. <a name='10equalsoverridegeneralcontracts'></a>項目 10 equals の override は一般契約（general contracts）に従うべし</h2>
+<h3 id="11-どういう時にオーバーライドする必要があるのか">1.1. <a name=''></a>どういう時にオーバーライドする必要があるのか？</h3>
 <p><em>クラスが単なるオブジェクトの同一性とは異なる論理的等価性という概念を持っていて、他のインスタンスと比較する必要があるとき</em></p>
 <blockquote>
-<p>ただし、スーパークラスが equals をオーバーライドしていないこと。</p>
-</blockquote>
-<h3 id="12-a-name-1aどうやってオーバーライドすれば良いのか">1.2. <a name='-1'></a>どうやってオーバーライドすれば良いのか？</h3>
+<p>ただし、スーパークラスが equals をオーバーライドしていないこと。</p></blockquote>
+<h3 id="12-どうやってオーバーライドすれば良いのか">1.2. <a name='-1'></a>どうやってオーバーライドすれば良いのか？</h3>
 <p><em>一般契約(反射性, 対照性, 推移性, 整合性, 非 null 性)に従うこと</em></p>
 <p>以下のツールを使うと簡単に一般契約に従ったコードにできる。</p>
 <ol>
@@ -179,8 +178,7 @@
 <code>@Data</code>が後で処理されるようになっていると、<code>setter()</code>がないからである。この場合はどうしようもない。。</li>
 </ul>
 <blockquote>
-<p>Annotation Processor は、コンパイル時に処理される。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、<code>setter/getter/equals/hashCode/toString</code>メソッドのバイトコードを<code>.class</code>に突っ込んでくれる。</p>
-</blockquote>
+<p>Annotation Processor は、コンパイル時に処理される。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、<code>setter/getter/equals/hashCode/toString</code>メソッドのバイトコードを<code>.class</code>に突っ込んでくれる。</p></blockquote>
 <ol start="2">
 <li>Eclipse や Intellij の自動生成機能</li>
 </ol>
@@ -188,8 +186,8 @@
 <li>GUI で簡単に生成可能</li>
 <li>欠点：メンバ変数を追加した際には、その都度、GUI で実行しないといけないから手間である。</li>
 </ul>
-<h2 id="2-a-name11equalshashcodea項目-11-equals-をオーバーライドする場合は-hashcode-もオーバーライドせよ">2. <a name='11equalshashcode'></a>項目 11 equals をオーバーライドする場合は hashcode もオーバーライドせよ</h2>
-<h3 id="21-a-namehashcodeahashcode-もオーバーライドしないとどうなるのか">2.1. <a name='hashcode'></a>hashcode もオーバーライドしないとどうなるのか？</h3>
+<h2 id="2-項目-11-equals-をオーバーライドする場合は-hashcode-もオーバーライドせよ">2. <a name='11equalshashcode'></a>項目 11 equals をオーバーライドする場合は hashcode もオーバーライドせよ</h2>
+<h3 id="21-hashcode-もオーバーライドしないとどうなるのか">2.1. <a name='hashcode'></a>hashcode もオーバーライドしないとどうなるのか？</h3>
 <p><em>論理的に等しいが、<code>hashCode</code>の値は異なることになってしまう。</em></p>
 <p>論理的に等しいのに異なってしまうのはおかしいので、<code>hashCode</code>も同じであるべきである。</p>
 <ol start="5">
@@ -245,19 +243,17 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="22-a-namevolatilea余談volatile-修飾子について">2.2. <a name='volatile'></a>【余談】volatile 修飾子について</h3>
+</div><h3 id="22-余談volatile-修飾子について">2.2. <a name='volatile'></a>【余談】volatile 修飾子について</h3>
 <blockquote>
-<p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」で説明されるらしいですが、、この章に出てきたので。</p>
-</blockquote>
-<h4 id="221-a-namevolatile-1avolatile-修飾子とは">2.2.1. <a name='volatile-1'></a>volatile 修飾子とは？</h4>
+<p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」で説明されるらしいですが、、この章に出てきたので。</p></blockquote>
+<h4 id="221-volatile-修飾子とは">2.2.1. <a name='volatile-1'></a>volatile 修飾子とは？</h4>
 <p><code>volatile修飾子</code>をつけると、「必ずメモリに書く」ようになる。</p>
 <blockquote>
 <p>並列処理などで、<code>あるインスタンスA</code>の<code>メンバ変数X</code>を更新する際、通常はスレッドキャッシュに書き込まれた後、メモリに書き込まれる。
-これをスレッドキャッシュへの書き込みをせず、メモリ書き込みを最初からさせるようにするのが、<code>volatile修飾子</code>である。</p>
-</blockquote>
+これをスレッドキャッシュへの書き込みをせず、メモリ書き込みを最初からさせるようにするのが、<code>volatile修飾子</code>である。</p></blockquote>
 <p>ただし、<a href="https://qiita.com/YukiMiyatake/items/0062c24b8a576eaab920">「volatile で排他制御出来ると、いつから思ってた？ atomic や synchronized 使うべし」</a>に記載があるように、<code>volatile修飾子</code>では排他制御はできない。。</p>
 <p>そのため、結局は、<code>atomic</code>や<code>synchronized</code>を使って、排他制御することになる。</p>
-<h4 id="222-a-namevolatile-1avolatile修飾子の使い所について">2.2.2. <a name='volatile-1'></a><code>volatile修飾子</code>の使い所について</h4>
+<h4 id="222-volatile修飾子の使い所について">2.2.2. <a name='volatile-1'></a><code>volatile修飾子</code>の使い所について</h4>
 <p>項番 78 を見たところ、以下の double-checked locking の話が出ているが、<a href="https://www.ibm.com/developerworks/jp/java/library/j-dcl/index.html">double-checked locking と Singleton パターン</a>を読んだところ、結局、<code>volatile修飾子</code>は使えず、<code>同期化を受け入れる</code>か、<code>static field</code> を使うようである、、、つまり<code>volatile修飾子</code>は使われないよう、、、いつ使うねん。。笑</p>
 <p><em>Singleton.java</em></p>
 <div class="highlight"><div class="chroma">
@@ -287,10 +283,9 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」まで、とりあえずは放置しておくことにする。</p>
-</blockquote>
-<h2 id="3-a-name12tostringa項目-12-常に-tostring-をオーバーライドせよ">3. <a name='12toString'></a>項目 12 常に toString をオーバーライドせよ</h2>
-<h3 id="31-a-namevolatile-1aまとめ">3.1 <a name='volatile-1'></a>まとめ</h3>
+<p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」まで、とりあえずは放置しておくことにする。</p></blockquote>
+<h2 id="3-項目-12-常に-tostring-をオーバーライドせよ">3. <a name='12toString'></a>項目 12 常に toString をオーバーライドせよ</h2>
+<h3 id="31-まとめ">3.1 <a name='volatile-1'></a>まとめ</h3>
 <ul>
 <li>toString には、フィールド値を含んだ情報を提示しましょう。
 <ul>
@@ -327,8 +322,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="4-a-name13clonea項目-13-clone-をオーバーライドするときは注意せよ">4. <a name='13clone'></a>項目 13 clone をオーバーライドするときは注意せよ</h2>
-<h3 id="41-a-namevolatile-1aはじめに">4.1 <a name='volatile-1'></a>はじめに</h3>
+<h2 id="4-項目-13-clone-をオーバーライドするときは注意せよ">4. <a name='13clone'></a>項目 13 clone をオーバーライドするときは注意せよ</h2>
+<h3 id="41-はじめに">4.1 <a name='volatile-1'></a>はじめに</h3>
 <ul>
 <li>
 <p>Cloneable インタフェースはオブジェクトが複製を許可していることを示すだけの空のインターフェースだよ。</p>
@@ -343,7 +338,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="42-a-namevolatile-1a結論">4.2 <a name='volatile-1'></a>結論</h3>
+<h3 id="42-結論">4.2 <a name='volatile-1'></a>結論</h3>
 <ul>
 <li>
 <p>純粋な Java の世界では、<code>clone</code>メソッドを使わずに、<code>copyFactory</code>メソッドで複製できるように作る方法がいいよ。</p>
@@ -355,8 +350,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="5-a-name14comparablea項目-14-comparable-を実装することを考慮せよ">5. <a name='14Comparable'></a>項目 14 Comparable を実装することを考慮せよ</h2>
-<h3 id="51-a-namevolatile-1aはじめに">5.1 <a name='volatile-1'></a>はじめに</h3>
+<h2 id="5-項目-14-comparable-を実装することを考慮せよ">5. <a name='14Comparable'></a>項目 14 Comparable を実装することを考慮せよ</h2>
+<h3 id="51-はじめに">5.1 <a name='volatile-1'></a>はじめに</h3>
 <ul>
 <li>
 <p><code>compareTo()</code>は、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Comparable.html">Comparable インタフェース</a>の唯一のメソッド</p>
@@ -381,7 +376,7 @@
 <p><code>compareTo</code>契約(equals の契約と同様)を破っていると、<code>compareTo()</code>メソッドに依存しているクラス（<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeSet.html">TreeSet</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/TreeMap.html">TreeMap</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html">Collections</a>, <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Arrays.html">Arrays</a>など）が機能しなくなるので気をつけましょう。</p>
 </li>
 </ul>
-<h3 id="52-a-namevolatile-1aどのように実装するか">5.2 <a name='volatile-1'></a>どのように実装するか</h3>
+<h3 id="52-どのように実装するか">5.2 <a name='volatile-1'></a>どのように実装するか</h3>
 <ul>
 <li><code>compareTo</code>メソッドを実装している２つの例を確認しましょう。</li>
 </ul>
@@ -507,14 +502,12 @@
 <li><em>PhoneNumber_1.java</em> は<em>PhoneNumber_2.java</em> と比べて計算量が多くて遅いけれど、確実に動作する。</li>
 <li><em>PhoneNumber_2.java</em> は　<em>PhoneNumber_1.java</em> と比べて計算量が少なくて速いが、最小値と最大値の差が、int の最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう。</li>
 </ul>
-<h3 id="53-a-namevolatile-1a結論">5.3 <a name='volatile-1'></a>結論</h3>
+<h3 id="53-結論">5.3 <a name='volatile-1'></a>結論</h3>
 <p>最小値と最大値の差が、int の最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう可能性がある、もしくは、数値の比較ではない場合、<em>PhoneNumber_1.java</em> のように実装しましょう。そうでなければ、<em>PhoneNumber_2.java</em> のように実装しましょう。</p>
 <blockquote>
-<p>java 標準の<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性がある、もしくは、数値での比較では無いので、<em>PhoneNumber_1.java</em> のように実装しています。</p>
-</blockquote>
+<p>java 標準の<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性がある、もしくは、数値での比較では無いので、<em>PhoneNumber_1.java</em> のように実装しています。</p></blockquote>
 <blockquote>
-<p>java 標準の<a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、<em>PhoneNumber_2.java</em> のように実装しています。</p>
-</blockquote>
+<p>java 標準の<a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、<em>PhoneNumber_2.java</em> のように実装しています。</p></blockquote>
 
     </div>
 
@@ -575,7 +568,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★

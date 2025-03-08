@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.139.5 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20201024-openapi-java/" />
@@ -150,14 +150,12 @@
 <code>OpenAPI Generator</code> はそのスキーマを定義して、ソースを自動生成するための一つのツールです。<br>
 <code>OpenAPI</code>と比較されるものとして他には、<code>gRPC</code> や <code>GraphQL</code> などがあります。それらについては、<a href="https://employment.en-japan.com/engineerhub/entry/2019/08/22/103000">エンジニアHubの記事</a>で比較されています。</p>
 <blockquote>
-<p>備考：スキーマ駆動開発(SDD)は、2015年7月に掲載された論文<a href="https://www.researchgate.net/publication/280105467_Schema-Driven_Development_of_Semantic_MediaWikis">Schema-Driven Development of Semantic MediaWikis</a>が元ネタで、現在では、DeNAやFreeeなどが採用しているようです。</p>
-</blockquote>
+<p>備考：スキーマ駆動開発(SDD)は、2015年7月に掲載された論文<a href="https://www.researchgate.net/publication/280105467_Schema-Driven_Development_of_Semantic_MediaWikis">Schema-Driven Development of Semantic MediaWikis</a>が元ネタで、現在では、DeNAやFreeeなどが採用しているようです。</p></blockquote>
 <p>また、<a href="https://github.com/OpenAPITools">Open API</a> と <a href="https://github.com/swagger-api">Swagger</a> は基本的には同じなのですが、別のプロジェクトとして開発されています。
 経緯がややこしいのですが、SpeakerDeckの<a href="https://speakerdeck.com/akihito_nakano/gunmaweb34?slide=37">平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜</a>で、詳しく説明されているので、気になる方はそちらを参考にしてください。</p>
 <p>前置きが長くなってしまいましたが、本記事では、Spring Frameworkを使う前提で、<code>Open API ver3.0</code> について触れます。</p>
 <blockquote>
-<p>備考：OpenAPI Generator で使える言語やフレームワークは、<a href="https://github.com/OpenAPITools/openapi-generator#overview">公式サイト</a>に記載されています。</p>
-</blockquote>
+<p>備考：OpenAPI Generator で使える言語やフレームワークは、<a href="https://github.com/OpenAPITools/openapi-generator#overview">公式サイト</a>に記載されています。</p></blockquote>
 <!-- vscode-markdown-toc -->
 <ul>
 <li>
@@ -194,13 +192,13 @@
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-<h2 id="1-a-namewhatyouneedtousetheopenapiawhat-you-need-to-use-the-open-api">1. <a name='WhatyouneedtousetheOpenAPI'></a>What you need to use the Open API</h2>
+<h2 id="1-what-you-need-to-use-the-open-api">1. <a name='WhatyouneedtousetheOpenAPI'></a>What you need to use the Open API</h2>
 <p>必要なものは以下です。</p>
 <ul>
 <li>APIを定義するYAMLファイル</li>
 <li>YAMLファイルからソースコード/ドキュメントを生成するための設定ファイル</li>
 </ul>
-<h3 id="11-a-nameyamlfileayaml-file">1.1. <a name='YAMLFILE'></a>YAML FILE</h3>
+<h3 id="11-yaml-file">1.1. <a name='YAMLFILE'></a>YAML FILE</h3>
 <p>YAMLファイルに定義するものは、主に以下の3つです。</p>
 <ul>
 <li>メタ情報
@@ -514,7 +512,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Access to Products</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="12-a-namegradlesettingfileagradle-setting-file">1.2. <a name='GradleSettingFile'></a>Gradle Setting File</h3>
+</div><h3 id="12-gradle-setting-file">1.2. <a name='GradleSettingFile'></a>Gradle Setting File</h3>
 <p>OpenAPI を Gradle で使うにあたって、<a href="https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-gradle-plugin">Openapi-generator-gradle-plugin</a> の公式サイトが参考になります。</p>
 <p>また、Gradleプロパティは、以下の設定にしています。<br>
 単に、<code>build.gradle</code> にある設定値を一元管理するためです。</p>
@@ -528,15 +526,14 @@
 </span></span><span class="line"><span class="cl"><span class="na">sampleStoreService</span><span class="o">=</span><span class="s">userstore</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="121-a-namegenerateserversidefileagenerate-server-side-file">1.2.1. <a name='GenerateServerSideFile'></a>Generate Server Side File</h4>
+</div><h4 id="121-generate-server-side-file">1.2.1. <a name='GenerateServerSideFile'></a>Generate Server Side File</h4>
 <p><code>ConfigOptions</code> の設定により、生成されるソースが変更されます。<br>
 <a href="https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/spring.md">openapi-generator/spring.md</a> にSpringの場合の全オプションについて記載されています。</p>
 <p>また、<code>supportingFiles</code> の設定により、出力されるソースを制限することができます。</p>
 <blockquote>
 <p>備考：<br>
 後から分かったのですが、<code>.openapi-generator-ignore</code> の設定により、出力対象を制限することができるようです。<br>
-参考URL : <a href="https://openapi-generator.tech/docs/customization/#ignore-file-format">OpenAPI-Generator Customization</a></p>
-</blockquote>
+参考URL : <a href="https://openapi-generator.tech/docs/customization/#ignore-file-format">OpenAPI-Generator Customization</a></p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -601,7 +598,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="122-a-namegenerateclientsidefileagenerate-client-side-file">1.2.2. <a name='GenerateClientSideFile'></a>Generate Client Side File</h4>
+</div><h4 id="122-generate-client-side-file">1.2.2. <a name='GenerateClientSideFile'></a>Generate Client Side File</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -666,7 +663,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="123-a-namegenerateapidocumentsagenerate-api-documents">1.2.3. <a name='GenerateAPIDocuments'></a>Generate API Documents</h4>
+</div><h4 id="123-generate-api-documents">1.2.3. <a name='GenerateAPIDocuments'></a>Generate API Documents</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -699,14 +696,14 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2-a-namenoteanote">2. <a name='Note'></a>Note</h2>
-<h3 id="21-a-namerdpartydocumentgenerationtoola3rd-party-document-generation-tool">2.1. <a name='rdPartyDocumentGenerationTool'></a>3rd Party Document Generation Tool</h3>
+</div><h2 id="2-note">2. <a name='Note'></a>Note</h2>
+<h3 id="21-3rd-party-document-generation-tool">2.1. <a name='rdPartyDocumentGenerationTool'></a>3rd Party Document Generation Tool</h3>
 <p>Open APIで、ドキュメントを生成する際は、個人的には公式の方法よりも<a href="https://github.com/Redocly/redoc">ReDoc</a>がおすすめです。<br>
 リンクを張っておきますが、<a href="http://redocly.github.io/redoc/#operation/addPet">こんな感じ</a>で見れて、めっちゃいい感じです。</p>
 <p>公式の方法で、<code>html</code> として出力すると、以下の画像ようになります。
 （<del>少し殺風景な感じです。</del>）
 <img src="/img/20201024/openapi-generated-html.png" alt=""></p>
-<h2 id="3-a-namerefferencearefference">3. <a name='Refference'></a>Refference</h2>
+<h2 id="3-refference">3. <a name='Refference'></a>Refference</h2>
 <ul>
 <li><a href="https://blog.spacemarket.com/code/schema-driven/">スキーマ駆動でAPI開発を行う | スペースマーケットブログ</a></li>
 <li><a href="https://github.com/OpenAPITools/openapi-generator">OpenAPITools/openapi-generator: OpenAPI Generator allows generation of API client libraries (SDK generation), server stubs, documentation and configuration automatically given an OpenAPI Spec (v2, v3)</a></li>
@@ -774,7 +771,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2024
+    2025
     <span class="heart">
       
       ★
