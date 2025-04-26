@@ -56,7 +56,7 @@
   <meta itemprop="description" content="Abstract C#でAWS Secrets Managerをローカルエミュレータ（LocalStack）上で使ってみました。">
   <meta itemprop="datePublished" content="2025-04-26T21:53:49+09:00">
   <meta itemprop="dateModified" content="2025-04-26T21:53:49+09:00">
-  <meta itemprop="wordCount" content="663">
+  <meta itemprop="wordCount" content="893">
   <meta itemprop="keywords" content="aws,secrets manager,csharp">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Using AWS Secrets Manager with LocalStack and C#">
@@ -134,7 +134,7 @@
         <div class="post-category">
             <a href="/categories/aws/"> aws </a>
             </div>
-          <span class="more-meta"> 663 words </span>
+          <span class="more-meta"> 893 words </span>
           <span class="more-meta"> 2 mins read </span>
         
       </div>
@@ -263,83 +263,125 @@
 <p><em>Program.cs</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Amazon.SecretsManager</span><span class="p">;</span>
@@ -378,8 +420,20 @@
 </span></span><span class="line"><span class="cl">        <span class="c1">// Secretの取得処理</span>
 </span></span><span class="line"><span class="cl">        <span class="k">try</span>
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">secretValue</span> <span class="p">=</span> <span class="k">await</span> <span class="n">GetSecret</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">secretName</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Retrieved secret: {secretValue}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">GetSecretAsync</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">secretName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">response</span> <span class="k">is</span> <span class="n">not</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">var</span> <span class="n">secret</span> <span class="p">=</span> <span class="n">DecodeString</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(!</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">secret</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;The decoded secret value is: {secret}.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;No secret value was returned.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="k">catch</span> <span class="p">(</span><span class="n">AmazonSecretsManagerException</span> <span class="n">ex</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
@@ -401,14 +455,14 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="cs">/// Retrieves the secret value from AWS Secrets Manager.</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// Asynchronously retrieves the value of a secret from AWS Secrets Manager.</span>
 </span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;param name=&#34;client&#34;&gt;An instance of &lt;see cref=&#34;IAmazonSecretsManager&#34;/&gt; used to communicate with Secrets Manager.&lt;/param&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;param name=&#34;secretName&#34;&gt;The name or ARN of the secret to retrieve.&lt;/param&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;returns&gt;The secret string associated with the specified secret.&lt;/returns&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;param name=&#34;client&#34;&gt;The &lt;see cref=&#34;IAmazonSecretsManager&#34;/&gt; client used to communicate with the Secrets Manager service.&lt;/param&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;param name=&#34;secretName&#34;&gt;The name or ARN of the secret to retrieve from Secrets Manager.&lt;/param&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;returns&gt;A &lt;see cref=&#34;Task&#34;/&gt; that represents the asynchronous operation, containing a &lt;see cref=&#34;GetSecretValueResponse&#34;/&gt; that holds the secret value.&lt;/returns&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;exception cref=&#34;AmazonSecretsManagerException&#34;&gt;Thrown when the request to Secrets Manager fails.&lt;/exception&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;exception cref=&#34;Exception&#34;&gt;Thrown when an unexpected error occurs.&lt;/exception&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">GetSecret</span><span class="p">(</span><span class="n">IAmazonSecretsManager</span> <span class="n">client</span><span class="p">,</span> <span class="kt">string</span> <span class="n">secretName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;exception cref=&#34;Exception&#34;&gt;Thrown when an unexpected error occurs during the retrieval of the secret.&lt;/exception&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">GetSecretValueResponse</span><span class="p">&gt;</span> <span class="n">GetSecretAsync</span><span class="p">(</span><span class="n">IAmazonSecretsManager</span> <span class="n">client</span><span class="p">,</span> <span class="kt">string</span> <span class="n">secretName</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="n">GetSecretValueRequest</span>
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
@@ -416,7 +470,37 @@
 </span></span><span class="line"><span class="cl">        <span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="n">GetSecretValueAsync</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">response</span><span class="p">.</span><span class="n">SecretString</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">response</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// Decodes the secret returned by the call to GetSecretValueAsync and</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// returns it to the calling program.</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;param name=&#34;response&#34;&gt;A GetSecretValueResponse object containing</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// the requested secret value returned by GetSecretValueAsync.&lt;/param&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;returns&gt;A string representing the decoded secret value.&lt;/returns&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">string</span> <span class="n">DecodeString</span><span class="p">(</span><span class="n">GetSecretValueResponse</span> <span class="n">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Decrypts secret using the associated AWS Key Management Service</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Customer Master Key (CMK.) Depending on whether the secret is a</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// string or binary value, one of these fields will be populated.</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">SecretString</span> <span class="k">is</span> <span class="n">not</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">secret</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">SecretString</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">secret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">SecretBinary</span> <span class="k">is</span> <span class="n">not</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">memoryStream</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">SecretBinary</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">StreamReader</span> <span class="n">reader</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StreamReader</span><span class="p">(</span><span class="n">memoryStream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">decodedBinarySecret</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="n">Convert</span><span class="p">.</span><span class="n">FromBase64String</span><span class="p">(</span><span class="n">reader</span><span class="p">.</span><span class="n">ReadToEnd</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">decodedBinarySecret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -442,6 +526,7 @@
 <ul>
 <li><a href="https://docs.localstack.cloud/user-guide/aws/secretsmanager/">Secrets Manager | Docs</a></li>
 <li><a href="https://docs.localstack.cloud/getting-started/installation/#docker-compose">Installation | Docs</a></li>
+<li><a href="https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/csharp_secrets-manager_code_examples.html">Secrets Manager examples using SDK for .NET - AWS SDK for .NET (version 3)</a></li>
 </ul>
     </div>
 
