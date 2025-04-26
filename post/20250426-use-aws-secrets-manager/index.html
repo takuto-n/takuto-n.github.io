@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>20250426 Use Aws Secrets Manager - Little by little and bit by bit - マイペースにこつこつと</title>
+  <title>Using AWS Secrets Manager with LocalStack and C# - Little by little and bit by bit - マイペースにこつこつと</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -41,7 +41,7 @@
 
 <meta property="og:url" content="https://takuto-n.github.io/post/20250426-use-aws-secrets-manager/">
   <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
-  <meta property="og:title" content="20250426 Use Aws Secrets Manager">
+  <meta property="og:title" content="Using AWS Secrets Manager with LocalStack and C#">
   <meta property="og:description" content="Abstract C#でAWS Secrets Managerをローカルエミュレータ（LocalStack）上で使ってみました。">
   <meta property="og:locale" content="ja_jp">
   <meta property="og:type" content="article">
@@ -52,14 +52,14 @@
     <meta property="article:tag" content="Secrets Manager">
     <meta property="article:tag" content="Csharp">
 
-  <meta itemprop="name" content="20250426 Use Aws Secrets Manager">
+  <meta itemprop="name" content="Using AWS Secrets Manager with LocalStack and C#">
   <meta itemprop="description" content="Abstract C#でAWS Secrets Managerをローカルエミュレータ（LocalStack）上で使ってみました。">
   <meta itemprop="datePublished" content="2025-04-26T21:53:49+09:00">
   <meta itemprop="dateModified" content="2025-04-26T21:53:49+09:00">
-  <meta itemprop="wordCount" content="645">
+  <meta itemprop="wordCount" content="663">
   <meta itemprop="keywords" content="aws,secrets manager,csharp">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="20250426 Use Aws Secrets Manager">
+  <meta name="twitter:title" content="Using AWS Secrets Manager with LocalStack and C#">
   <meta name="twitter:description" content="Abstract C#でAWS Secrets Managerをローカルエミュレータ（LocalStack）上で使ってみました。">
 
 <!--[if lte IE 9]>
@@ -127,14 +127,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">20250426 Use Aws Secrets Manager</h1>
+      <h1 class="post-title">Using AWS Secrets Manager with LocalStack and C#</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2025-04-26 </span>
         <div class="post-category">
             <a href="/categories/aws/"> aws </a>
             </div>
-          <span class="more-meta"> 645 words </span>
+          <span class="more-meta"> 663 words </span>
           <span class="more-meta"> 2 mins read </span>
         
       </div>
@@ -144,8 +144,40 @@
     <div class="post-content">
       <h1 id="abstract">Abstract</h1>
 <p>C#でAWS Secrets Managerをローカルエミュレータ（LocalStack）上で使ってみました。</p>
-<h2 id="introduction">Introduction</h2>
-<h3 id="preparation">Preparation</h3>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Introduction">Introduction</a></li>
+</ol>
+<ul>
+<li>1.1. <a href="#Preparation">Preparation</a></li>
+<li>1.2. <a href="#CreateSecret">Create Secret</a></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li><a href="#CSourceCode">C# Source Code</a></li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li><a href="#ExecutionResult">Execution Result</a></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li><a href="#Reference">Reference</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+<h2 id="1-introduction">1. <a name='Introduction'></a>Introduction</h2>
+<h3 id="11-preparation">1.1. <a name='Preparation'></a>Preparation</h3>
 <ol>
 <li>
 <p>Install the package</p>
@@ -203,7 +235,7 @@
 </div>
 </div></li>
 </ol>
-<h3 id="create-secret">Create Secret</h3>
+<h3 id="12-create-secret">1.2. <a name='CreateSecret'></a>Create Secret</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -227,7 +259,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="c-source-code">C# Source Code</h2>
+</div><h2 id="2-c-source-code">2. <a name='CSourceCode'></a>C# Source Code</h2>
 <p><em>Program.cs</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -389,7 +421,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="execution-result">Execution Result</h2>
+</div><h2 id="3-execution-result">3. <a name='ExecutionResult'></a>Execution Result</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -406,7 +438,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="reference">Reference</h2>
+</div><h2 id="4-reference">4. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="https://docs.localstack.cloud/user-guide/aws/secretsmanager/">Secrets Manager | Docs</a></li>
 <li><a href="https://docs.localstack.cloud/getting-started/installation/#docker-compose">Installation | Docs</a></li>
