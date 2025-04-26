@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 03 Jul 2024 22:39:41 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 26 Apr 2025 21:53:49 +0900</lastBuildDate>
     <atom:link href="https://takuto-n.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Aws</title>
+      <link>https://takuto-n.github.io/categories/aws/</link>
+      <pubDate>Sat, 26 Apr 2025 21:53:49 +0900</pubDate>
+      <guid>https://takuto-n.github.io/categories/aws/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Sre</title>
       <link>https://takuto-n.github.io/categories/sre/</link>
@@ -91,13 +98,6 @@
       <link>https://takuto-n.github.io/categories/poc/</link>
       <pubDate>Wed, 13 Jan 2021 19:35:35 +0900</pubDate>
       <guid>https://takuto-n.github.io/categories/poc/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Aws</title>
-      <link>https://takuto-n.github.io/categories/aws/</link>
-      <pubDate>Tue, 03 Nov 2020 15:10:12 +0900</pubDate>
-      <guid>https://takuto-n.github.io/categories/aws/</guid>
       <description></description>
     </item>
     <item>

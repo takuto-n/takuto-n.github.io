@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Secrets Manager on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/tags/secrets-manager/</link>
+    <description>Recent content in Secrets Manager on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
+    <language>ja-jp</language>
+    <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 26 Apr 2025 21:53:49 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/tags/secrets-manager/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>20250426 Use Aws Secrets Manager</title>
+      <link>https://takuto-n.github.io/post/20250426-use-aws-secrets-manager/</link>
+      <pubDate>Sat, 26 Apr 2025 21:53:49 +0900</pubDate>
+      <guid>https://takuto-n.github.io/post/20250426-use-aws-secrets-manager/</guid>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;&#xA;&lt;p&gt;C#でAWS Secrets Managerをローカルエミュレータ（LocalStack）上で使ってみました。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
