@@ -59,7 +59,7 @@
 レートリミッターは、システムの過負荷を防ぎ、安定したパフォーマンスを維持するためのツールです。一定の時間内に処理できるリクエストやタスクの数を制限することで、システムの信頼性と可用性を向上させることに寄与します。">
   <meta itemprop="datePublished" content="2024-07-03T22:39:41+09:00">
   <meta itemprop="dateModified" content="2024-07-03T22:39:41+09:00">
-  <meta itemprop="wordCount" content="3129">
+  <meta itemprop="wordCount" content="3144">
   <meta itemprop="keywords" content="rate limiter,golang,sre">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Rate Limiterについて調べてみた">
@@ -138,7 +138,7 @@
         <div class="post-category">
             <a href="/categories/sre/"> sre </a>
             </div>
-          <span class="more-meta"> 3129 words </span>
+          <span class="more-meta"> 3144 words </span>
           <span class="more-meta"> 7 mins read </span>
         
       </div>
@@ -300,9 +300,25 @@
 </span><span class="lnt">35
 </span><span class="lnt">36
 </span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;encoding/json&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;net/http&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;golang.org/x/time/rate&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nf">rateLimiterTest</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -379,7 +395,7 @@
 </span></span><span class="line"><span class="cl"><span class="s2">&#34;Hello! You&#39;ve reached the API. How can I assist you today?&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># バースト対応</span>
-</span></span><span class="line"><span class="cl">takuto-n@MacBook-Air goapp % <span class="k">for</span> i in <span class="o">{</span>1..2<span class="o">}</span><span class="p">;</span> <span class="k">do</span> curl http://localhost:8080/ping<span class="p">;</span> <span class="k">done</span>
+</span></span><span class="line"><span class="cl">takuto-n@MacBook-Air goapp % <span class="k">for</span> i in <span class="o">{</span>1..6<span class="o">}</span><span class="p">;</span> <span class="k">do</span> curl http://localhost:8080/ping<span class="p">;</span> <span class="k">done</span>
 </span></span><span class="line"><span class="cl"><span class="c1">## 最初の4件はバースト対応で問題なく処理できている。</span>
 </span></span><span class="line"><span class="cl"><span class="s2">&#34;Hello! You&#39;ve reached the API. How can I assist you today?&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="s2">&#34;Hello! You&#39;ve reached the API. How can I assist you today?&#34;</span>
