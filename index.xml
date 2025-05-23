@@ -7,7 +7,7 @@
     <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 26 Apr 2025 21:53:49 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 24 May 2025 00:14:13 +0900</lastBuildDate>
     <atom:link href="https://takuto-n.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About takuto_n</title>
@@ -15,6 +15,13 @@
       <pubDate>Thu, 12 Sep 2019 21:38:52 +0800</pubDate>
       <guid>https://takuto-n.github.io/about/about/</guid>
       <description>&lt;img src=&#34;https://takuto-n.github.io/img/lucky.JPG&#34; width=40%&gt;&#xA;&lt;p&gt;テニス・スノーボード、一眼レフが好きです。&lt;/p&gt;&#xA;&lt;p&gt;写真は&lt;a href=&#34;https://www.instagram.com/takuto_no/&#34;&gt;Instagram&lt;/a&gt;にアップロードしています。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;経歴&#34;&gt;経歴&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;全国高校化学グランドコンテスト　金賞&lt;/li&gt;&#xA;&lt;li&gt;大阪教育大学　首席卒業&lt;/li&gt;&#xA;&lt;li&gt;奈良先端科学技術大学院大学　情報科学研究科　プログラミングコンテスト 2位&lt;/li&gt;&#xA;&lt;li&gt;某大手SIer勤務&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;!-- &#xA;It makes use of a variety of open source projects including:&#xA;&#xA;* [Cobra](https://github.com/spf13/cobra)&#xA;* [Viper](https://github.com/spf13/viper)&#xA;* [J Walter Weatherman](https://github.com/spf13/jWalterWeatherman)&#xA;* [Cast](https://github.com/spf13/cast)&#xA;&#xA;Learn more and contribute on [GitHub](https://github.com/gohugoio).&#xA;--&gt;</description>
+    </item>
+    <item>
+      <title>Using AWS Cognito with cognito-local and Java</title>
+      <link>https://takuto-n.github.io/post/20250524-java-cognito-sample/</link>
+      <pubDate>Sat, 24 May 2025 00:14:13 +0900</pubDate>
+      <guid>https://takuto-n.github.io/post/20250524-java-cognito-sample/</guid>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;&#xA;&lt;p&gt;JavaでAWS Cognitoをローカルエミュレータ（cognito-local）上で使ってみました。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Using AWS Secrets Manager with LocalStack and C#</title>
