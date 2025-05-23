@@ -56,7 +56,7 @@
   <meta itemprop="description" content="Abstract JavaでAWS Cognitoをローカルエミュレータ（cognito-local）上で使ってみました。">
   <meta itemprop="datePublished" content="2025-05-24T00:14:13+09:00">
   <meta itemprop="dateModified" content="2025-05-24T00:14:13+09:00">
-  <meta itemprop="wordCount" content="908">
+  <meta itemprop="wordCount" content="998">
   <meta itemprop="keywords" content="aws,cognito,java">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Using AWS Cognito with cognito-local and Java">
@@ -134,7 +134,7 @@
         <div class="post-category">
             <a href="/categories/aws/"> aws </a>
             </div>
-          <span class="more-meta"> 908 words </span>
+          <span class="more-meta"> 998 words </span>
           <span class="more-meta"> 2 mins read </span>
         
       </div>
@@ -332,10 +332,34 @@
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ docker compose up -d
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 検証時</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Dockerコンテナ起動</span>
+</span></span><span class="line"><span class="cl">$ colima start
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## cognito-local起動</span>
+</span></span><span class="line"><span class="cl">$ docker compose up -d
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 検証終了時</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## cognito-local停止</span>
+</span></span><span class="line"><span class="cl">$ docker compose down
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Dockerコンテナ停止</span>
+</span></span><span class="line"><span class="cl">$ colima stop
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
