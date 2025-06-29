@@ -7,7 +7,7 @@
     <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 24 May 2025 00:14:13 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 29 Jun 2025 23:33:44 +0900</lastBuildDate>
     <atom:link href="https://takuto-n.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About takuto_n</title>
@@ -15,6 +15,13 @@
       <pubDate>Thu, 12 Sep 2019 21:38:52 +0800</pubDate>
       <guid>https://takuto-n.github.io/about/about/</guid>
       <description>&lt;img src=&#34;https://takuto-n.github.io/img/lucky.JPG&#34; width=40%&gt;&#xA;&lt;p&gt;テニス・スノーボード、一眼レフが好きです。&lt;/p&gt;&#xA;&lt;p&gt;写真は&lt;a href=&#34;https://www.instagram.com/takuto_no/&#34;&gt;Instagram&lt;/a&gt;にアップロードしています。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;経歴&#34;&gt;経歴&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;全国高校化学グランドコンテスト　金賞&lt;/li&gt;&#xA;&lt;li&gt;大阪教育大学　首席卒業&lt;/li&gt;&#xA;&lt;li&gt;奈良先端科学技術大学院大学　情報科学研究科　プログラミングコンテスト 2位&lt;/li&gt;&#xA;&lt;li&gt;某大手SIer勤務&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;!-- &#xA;It makes use of a variety of open source projects including:&#xA;&#xA;* [Cobra](https://github.com/spf13/cobra)&#xA;* [Viper](https://github.com/spf13/viper)&#xA;* [J Walter Weatherman](https://github.com/spf13/jWalterWeatherman)&#xA;* [Cast](https://github.com/spf13/cast)&#xA;&#xA;Learn more and contribute on [GitHub](https://github.com/gohugoio).&#xA;--&gt;</description>
+    </item>
+    <item>
+      <title>Decision Table - Typescript version</title>
+      <link>https://takuto-n.github.io/post/20250629-decision-table-csharp/</link>
+      <pubDate>Sun, 29 Jun 2025 23:33:44 +0900</pubDate>
+      <guid>https://takuto-n.github.io/post/20250629-decision-table-csharp/</guid>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;C#でDecision Table(決定表) を作ってみたので、載せておきます。&lt;/p&gt;&#xA;&lt;p&gt;決定表は、「条件」と「その条件のときの値」を関連付けて定義できるユーティリティとして便利なのですが、なかなかライブラリとして世の中に転がっておらず、typescriptで以前作ったものをC#で書き換えました。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Using AWS Cognito with cognito-local and Java</title>

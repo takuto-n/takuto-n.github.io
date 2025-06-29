@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 24 May 2025 00:14:13 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 29 Jun 2025 23:33:44 +0900</lastBuildDate>
     <atom:link href="https://takuto-n.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Typescript</title>
+      <link>https://takuto-n.github.io/categories/typescript/</link>
+      <pubDate>Sun, 29 Jun 2025 23:33:44 +0900</pubDate>
+      <guid>https://takuto-n.github.io/categories/typescript/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Aws</title>
       <link>https://takuto-n.github.io/categories/aws/</link>
@@ -28,13 +35,6 @@
       <link>https://takuto-n.github.io/categories/useful-tools/</link>
       <pubDate>Tue, 18 Apr 2023 18:39:05 +0900</pubDate>
       <guid>https://takuto-n.github.io/categories/useful-tools/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Typescript</title>
-      <link>https://takuto-n.github.io/categories/typescript/</link>
-      <pubDate>Fri, 22 Apr 2022 22:56:30 +0900</pubDate>
-      <guid>https://takuto-n.github.io/categories/typescript/</guid>
       <description></description>
     </item>
     <item>

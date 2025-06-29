@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.5 with theme even" />
+<meta name="generator" content="Hugo 0.147.8 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/" />
@@ -49,8 +49,8 @@
 
   <meta itemprop="name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta itemprop="description" content="Hugo theme even example site.">
-  <meta itemprop="datePublished" content="2025-05-24T00:14:13+09:00">
-  <meta itemprop="dateModified" content="2025-05-24T00:14:13+09:00">
+  <meta itemprop="datePublished" content="2025-06-29T23:33:44+09:00">
+  <meta itemprop="dateModified" content="2025-06-29T23:33:44+09:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta name="twitter:description" content="Hugo theme even example site.">
@@ -118,6 +118,30 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20200502-memory-check-methods/">Javaプロセスのメモリチェック方法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-02 </span>
+      <div class="post-category">
+          <a href="/categories/poc/"> poc </a>
+          </div>
+        <span class="more-meta"> 1073 words </span>
+        <span class="more-meta"> 3 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="概要">概要</h1>
+<p>Javaプロセスのメモリ使用量をいろいろな方法で調査する機会あったので、まとめておきます。（内容としてはそれぞれあっさりです。）</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/20200502-memory-check-methods/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/20200502-thread-init-at-process-startup2/">SpringBootアプリケーション起動直後にスレッドを初期化する方法②</a></h1>
@@ -816,114 +840,6 @@
     </div>
     <div class="read-more">
       <a href="/post/20191224-awscodeguru/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20191109-effective-java-3rd-9/">Effective Java 3rd [Chapter 9] - プログラミング一般</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-12-24 </span>
-      <div class="post-category">
-          <a href="/categories/effective-java-3rd/"> effective-java-3rd </a>
-          </div>
-        <span class="more-meta"> 9276 words </span>
-        <span class="more-meta"> 19 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="プログラミング一般">プログラミング一般</h1>
-<p><a href="https://www.amazon.co.jp/Effective-Java-%E7%AC%AC3%E7%89%88-%E3%82%B8%E3%83%A7%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%BB%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF-ebook/dp/B07RHX1K53/ref=pd_sim_351_1/356-5415616-7898815?_encoding=UTF8&amp;pd_rd_i=B07RHX1K53&amp;pd_rd_r=383aeb39-63f8-4e11-8223-4445dcae3221&amp;pd_rd_w=6vTRe&amp;pd_rd_wg=Sdyd4&amp;pf_rd_p=2e61d088-fdb1-443a-804b-afc322ee8b23&amp;pf_rd_r=70HV42TR992CCFQP7KDA&amp;psc=1&amp;refRID=70HV42TR992CCFQP7KDA">Effective Java 第 3 版</a>の個人的メモ</p>
-<!-- vscode-markdown-toc -->
-<ol>
-<li><a href="#57">項目 57 ローカル変数のスコープを最小限にする</a></li>
-<li><a href="#58forfor-each">項目 58 従来の for ループより for-each ループを選ぶ</a></li>
-<li><a href="#59">項目 59 ライブラリを知り、ライブラリを使う</a></li>
-<li><a href="#60floatdouble">項目 60 正確な答えが必要ならば、float と double を避ける</a></li>
-<li><a href="#61boxedprimitiveprimitive">項目 61 ボクシングされたプリミティブ型（boxed primitive）より、プリミティブ型（primitive）を選択すべし</a></li>
-<li><a href="#62">項目 62 他の型が適切な場所では、文字列を避ける</a></li>
-<li><a href="#63">項目 63 文字列結合のパフォーマンスに用心する</a></li>
-<li><a href="#64">項目 64 インタフェースでオブジェクトを参照する</a></li>
-<li><a href="#65">項目 65 リフレクションよりもインタフェースを選ぶ</a></li>
-<li><a href="#66">項目 66 ネイティブメソッドを注意して使う</a></li>
-<li><a href="#67">項目 67 注意して最適化する</a></li>
-<li><a href="#68">項目 68 一般的に受け入れられている命名規約を守る</a></li>
-<li><a href="#URL">参考URL</a></li>
-</ol>
-<!-- vscode-markdown-toc-config
-	numbering=true
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->
-<h2 id="1-項目-57-ローカル変数のスコープを最小限にする">1. <a name='57'></a>項目 57 ローカル変数のスコープを最小限にする</h2>
-<h3 id="11-結論">1.1. <a name=''></a>結論</h3>
-<ul>
-<li>ローカル変数は初めて使用される時に宣言しましょう
-<ul>
-<li>かなり前段階で宣言されていると、その時点から変更されているかを確認する必要があるから</li>
-</ul>
-</li>
-<li>（ほとんど）全てのローカル変数の宣言時には初期化しましょう
-<ul>
-<li>初期化するための情報がない段階で、宣言すべきではないから</li>
-</ul>
-</li>
-<li>メソッドを小さくして焦点をはっきりさせましょう
-<ul>
-<li>1つのメソッド内で2つの処理があれば、1つ目の処理用のローカル変数が2つ目の処理にも使われているかもしれないので、これを防ぐために <code>1メソッド:1処理</code> としましょう。</li>
-</ul>
-</li>
-</ul>
-<h3 id="12-サンプル">1.2. <a name='-1'></a>サンプル</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 良い例</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Element</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">doSomething</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 悪い例</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">While</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">doSomething</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="na">next</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Element</span><span class="o">&gt;</span><span class="w"> </span><span class="n">i2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c2</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">While</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// バグ(iではなく、i2が正しい。)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">doSomething</span><span class="p">(</span><span class="n">i2</span><span class="p">.</span><span class="na">next</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="13-ポイント">1.3. <a name='-1'></a>ポイント</h3>
-<ul>
-<li>使用される直前に、ローカル変数を初期化して宣言しましょう</li>
-<li><code>1メソッド:1処理</code>としましょう</li>
-</ul>
-<blockquote>
-<p>備考：<code>while</code>文ではなく<code>for</code>文を好んで使いましょう。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/20191109-effective-java-3rd-9/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
