@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-6/" />
@@ -305,7 +305,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>抽象メソッドを具象メソッドでオーバーライドし忘れることがない。</p></blockquote>
+<p>抽象メソッドを具象メソッドでオーバーライドし忘れることがない。</p>
+</blockquote>
 <h3 id="15-戦略enumパターン">1.5. <a name='enum-1'></a>戦略<code>enum</code>パターン</h3>
 <h4 id="151-問題が多い例">1.5.1. <a name='-1'></a>問題が多い例</h4>
 <div class="highlight"><div class="chroma">
@@ -478,7 +479,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>enum 定数を追加するたびに、指定することになるため、指定し忘れることがない。</p></blockquote>
+<p>enum 定数を追加するたびに、指定することになるため、指定し忘れることがない。</p>
+</blockquote>
 <h2 id="2-項目-35-序数の代わりにインスタンスフィールドを使う">2. <a name='35'></a>項目 35 序数の代わりにインスタンスフィールドを使う</h2>
 <h3 id="21-結論">2.1. <a name='-1'></a>結論</h3>
 <p>タイトルのままですが、序数は使わずに、インスタンスフィールドを利用する。</p>
@@ -523,7 +525,8 @@
 </div>
 </div><blockquote>
 <p>定数が並び替えられたら、正しく動作しなくなるため、良くない。<br>
-11 人は不要で、12 人が必要な場合はダミーが必要、、、</p></blockquote>
+11 人は不要で、12 人が必要な場合はダミーが必要、、、</p>
+</blockquote>
 <h4 id="212-インスタンスフィールドを使った例">2.1.2. <a name='-1'></a>インスタンスフィールドを使った例</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -576,7 +579,8 @@
 </div><blockquote>
 <p>余談：<br>
 <a href="https://docs.oracle.com/javase/jp/7/api/java/lang/Enum.html#ordinal()">Enum#ordinal()の JavaDoc</a>に以下のように記載されています。<br>
-このメソッドは、ほとんどのプログラマにとって役に立ちません。それは、EnumSet や EnumMap などの洗練された enum ベースのデータ構造で使用するために設計されています。</p></blockquote>
+このメソッドは、ほとんどのプログラマにとって役に立ちません。それは、EnumSet や EnumMap などの洗練された enum ベースのデータ構造で使用するために設計されています。</p>
+</blockquote>
 <h2 id="3-項目-36-ビットフィールドの代わりに-enumset-を使う">3. <a name='36EnumSet'></a>項目 36 ビットフィールドの代わりに EnumSet を使う</h2>
 <h3 id="31-結論">3.1. <a name='-1'></a>結論</h3>
 <ul>

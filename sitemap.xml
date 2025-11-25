@@ -9,8 +9,78 @@
   </url>
   
   <url>
+    <loc>https://takuto-n.github.io/tags/activemq/</loc>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://takuto-n.github.io/categories/</loc>
-    <lastmod>2025-06-29T23:33:44+09:00</lastmod>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/iot/</loc>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/</loc>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/categories/mqtt/</loc>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/mqtt/</loc>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/20251125-mqtt-sample/</loc>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/post/</loc>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/python/</loc>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/springboot/</loc>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://takuto-n.github.io/tags/</loc>
+    <lastmod>2025-11-25T23:00:10+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -31,27 +101,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/post/20250629-decision-table-csharp/</loc>
-    <lastmod>2025-06-29T23:33:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/</loc>
-    <lastmod>2025-06-29T23:33:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/post/</loc>
-    <lastmod>2025-06-29T23:33:44+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/</loc>
     <lastmod>2025-06-29T23:33:44+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -591,13 +640,6 @@
   
   <url>
     <loc>https://takuto-n.github.io/categories/poc/</loc>
-    <lastmod>2021-01-13T19:35:35+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://takuto-n.github.io/tags/springboot/</loc>
     <lastmod>2021-01-13T19:35:35+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

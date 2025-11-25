@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20210107-springboot-app-read-configmap/" />
@@ -145,10 +145,12 @@
       <h1 id="abstruct">Abstruct</h1>
 <p>KubernetesのPod上で動作するSpringBootアプリケーションからConfigMapを取得しに行くことができたので、その方法をまとめておきます。</p>
 <blockquote>
-<p>Pod上にマウントされたConfigMapが更新されるのを待つのではなく、直接取得しに行く方法です。</p></blockquote>
+<p>Pod上にマウントされたConfigMapが更新されるのを待つのではなく、直接取得しに行く方法です。</p>
+</blockquote>
 <blockquote>
 <p>追記：fabric8io/kubernetes-client を使用した方がConfigMapの変更イベントをトリガーにできるため、より簡単に実現できます。<br>
-参考：<a href="https://github.com/fabric8io/kubernetes-client/blob/master/kubernetes-examples/src/main/java/io/fabric8/kubernetes/examples/WatchExample.java">kubernetes-client/WatchExample.java at master · fabric8io/kubernetes-client</a></p></blockquote>
+参考：<a href="https://github.com/fabric8io/kubernetes-client/blob/master/kubernetes-examples/src/main/java/io/fabric8/kubernetes/examples/WatchExample.java">kubernetes-client/WatchExample.java at master · fabric8io/kubernetes-client</a></p>
+</blockquote>
 <h2 id="environment">Environment</h2>
 <ul>
 <li>minikube
@@ -248,7 +250,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p><code>eval $(minikube docker-env)</code> の必要性については、<a href="https://qiita.com/loftkun/items/1cfc94799406882bde02">こちらのブログ</a>がわかりやすかったです。</p></blockquote>
+<p><code>eval $(minikube docker-env)</code> の必要性については、<a href="https://qiita.com/loftkun/items/1cfc94799406882bde02">こちらのブログ</a>がわかりやすかったです。</p>
+</blockquote>
 <h2 id="what-to-create">What to create</h2>
 <ul>
 <li>ConfigMap

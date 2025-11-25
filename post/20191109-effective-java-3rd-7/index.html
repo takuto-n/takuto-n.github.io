@@ -26,7 +26,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191109-effective-java-3rd-7/" />
@@ -206,7 +206,8 @@
 </div><p>1 行で済んでおり、自分への参照は不要なので、ラムダ式の方が良いですね。</p>
 <blockquote>
 <p>そもそも匿名クラスとは、、<br>
-以下のように記述される処理のことですね。</p></blockquote>
+以下のように記述される処理のことですね。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -246,7 +247,8 @@
 <p>数行で済んでおり、自分への参照はしておらず、<code>Collections.sort</code>の第 2 引数が関数型インターフェース(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Comparator.html">Comparator</a>)なので、ラムダ式が向いていますね。</p>
 <blockquote>
 <p>関数型インタフェースとは、、<br>
-関数型インターフェースの条件は、大雑把に言って、定義されている抽象メソッドが 1 つだけあるインターフェース。(static メソッドや Object クラスにあるデフォルトメソッドはカウントしない。）</p></blockquote>
+関数型インターフェースの条件は、大雑把に言って、定義されている抽象メソッドが 1 つだけあるインターフェース。(static メソッドや Object クラスにあるデフォルトメソッドはカウントしない。）</p>
+</blockquote>
 <p>Java8 での関数型インタフェース一覧は<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/class-use/FunctionalInterface.html">Oracle Java SE 8 (Uses of Class
 java.lang.FunctionalInterface)</a>にあります。
 3rd party 製のライブラリで<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/FunctionalInterface.html">@FunctionalInterface</a>が付いているインタフェースも、関数型インタフェースですね。</p>
@@ -264,7 +266,8 @@ java.lang.FunctionalInterface)</a>にあります。
 <h3 id="22-メソッド参照">2.2. <a name='-1'></a>メソッド参照</h3>
 <blockquote>
 <p>メソッド参照とは、、<br>
-関数型インターフェース（抽象メソッドが 1 つだけ定義されているインターフェース）の変数にメソッドそのものを代入することが出来る。これを「メソッド参照」と呼ぶ。</p></blockquote>
+関数型インターフェース（抽象メソッドが 1 つだけ定義されているインターフェース）の変数にメソッドそのものを代入することが出来る。これを「メソッド参照」と呼ぶ。</p>
+</blockquote>
 <p><em>MethodRefAndLambdaExpression.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -336,10 +339,12 @@ java.lang.FunctionalInterface)</a>にあります。
 </table>
 <blockquote>
 <p>#1 :
-<code>instance</code>は、インスタンスへの参照を評価する任意の式です。例えば、<code>getInstance()::method</code> 、<code>this::method</code>のように書けます。</p></blockquote>
+<code>instance</code>は、インスタンスへの参照を評価する任意の式です。例えば、<code>getInstance()::method</code> 、<code>this::method</code>のように書けます。</p>
+</blockquote>
 <blockquote>
 <p>#2 :
-<code>TypeName</code>が非静的な内部クラスである場合、コンストラクタ参照は外部クラスインスタンスのスコープ内でのみ有効です。（つまり、外からコンストラクタが見れる場合使えますよ。という内容です。）</p></blockquote>
+<code>TypeName</code>が非静的な内部クラスである場合、コンストラクタ参照は外部クラスインスタンスのスコープ内でのみ有効です。（つまり、外からコンストラクタが見れる場合使えますよ。という内容です。）</p>
+</blockquote>
 <h2 id="3-項目-44-標準の関数型インタフェースを使う">3. <a name='44'></a>項目 44 標準の関数型インタフェースを使う</h2>
 <p>基本的には、標準の関数型インタフェースで事足りる。
 しかし、特定の場合に限っては独自の関数インタフェースを定義する必要がある。</p>
@@ -382,7 +387,8 @@ java.lang.FunctionalInterface)</a>にあります。
 <p>作成するときは、<code>@FunctionalInterface</code>を使いましょう。書き方に誤りがある場合、コンパイルエラーにしてくれます。</p>
 <blockquote>
 <p>同じ名前のメソッドで、異なる関数型インタフェースを引数に持つのは、ユーザーにとって曖昧となるのでやめましょう。<br>
-例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ExecutorService.html"><code>ExecutorService.submit()</code></a>は、異なる関数インタフェース「<code>Runnable</code>」と「<code>Callable&lt;T&gt;</code>」を引数に持っているのでよくありません。</p></blockquote>
+例：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ExecutorService.html"><code>ExecutorService.submit()</code></a>は、異なる関数インタフェース「<code>Runnable</code>」と「<code>Callable&lt;T&gt;</code>」を引数に持っているのでよくありません。</p>
+</blockquote>
 <h3 id="33-標準の関数型インタフェースについての余談">3.3. <a name='-1'></a>標準の関数型インタフェースについての余談</h3>
 <p>各標準の関数型インタフェースについて以下の観点でまとめておきます。</p>
 <ul>
@@ -773,7 +779,8 @@ java.lang.FunctionalInterface)</a>にあります。
 <h4 id="421-改善前">4.2.1. <a name='-1'></a>改善前</h4>
 <p>ファイル内の単語(行単位)を、アナグラムごとにまとめて、指定数以上含まれている場合は出力するプログラム。</p>
 <blockquote>
-<p>アナグラム（anagram）とは、言葉遊びの一つで、単語または文の中の文字をいくつか入れ替えることによって、全く別の意味にさせる遊びである。<a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%8A%E3%82%B0%E3%83%A9%E3%83%A0">Wikipedia</a></p></blockquote>
+<p>アナグラム（anagram）とは、言葉遊びの一つで、単語または文の中の文字をいくつか入れ替えることによって、全く別の意味にさせる遊びである。<a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%8A%E3%82%B0%E3%83%A9%E3%83%A0">Wikipedia</a></p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -904,11 +911,13 @@ java.lang.FunctionalInterface)</a>にあります。
 <h3 id="51-前提">5.1. <a name='-1'></a>前提</h3>
 <p><code>Stream</code>の最も重要なところは、<strong>純粋関数のみによる演算</strong> であること。</p>
 <blockquote>
-<p>純粋関数とは、副作用を持たない関数のことである。副作用とは、変数の再代入や入出力などによってプログラムの状態が変化することを指します。</p></blockquote>
+<p>純粋関数とは、副作用を持たない関数のことである。副作用とは、変数の再代入や入出力などによってプログラムの状態が変化することを指します。</p>
+</blockquote>
 <blockquote>
 <p>副作用があることによるデメリット<br>
 ・全体の流れが分かりづらくなる可能性がある。<br>
-・速度が落ち、並列処理時の問題が出る可能性がある。</p></blockquote>
+・速度が落ち、並列処理時の問題が出る可能性がある。</p>
+</blockquote>
 <h3 id="52-結論">5.2. <a name='-1'></a>結論</h3>
 <p>副作用を持たないようにするため、ストリーム処理は以下のようにする。</p>
 <ul>
@@ -1144,7 +1153,8 @@ java.lang.FunctionalInterface)</a>にあります。
 </li>
 </ul>
 <blockquote>
-<p><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html">Collectors</a>や<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html">Stream</a>の利用方法については、こちらのブログ(<a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a>, <a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a>)が入門として(大まかに把握するのに)良さそうである。</p></blockquote>
+<p><a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Collectors.html">Collectors</a>や<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html">Stream</a>の利用方法については、こちらのブログ(<a href="http://www.ne.jp/asahi/hishidama/home/tech/java/collector.html#minBy">Java Collector</a>, <a href="http://www.ne.jp/asahi/hishidama/home/tech/java/stream.html#Stream.collect">Java Stream</a>)が入門として(大まかに把握するのに)良さそうである。</p>
+</blockquote>
 <h2 id="6-項目-47-戻り値型として-stream-よりも-collection-を選ぶ">6. <a name='47StreamCollection'></a>項目 47 戻り値型として Stream よりも Collection を選ぶ</h2>
 <h3 id="61-結論">6.1. <a name='-1'></a>結論</h3>
 <p>連続した要素をどの型で返すべきか？については、Collection一択</p>

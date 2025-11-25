@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/" />
@@ -49,8 +49,8 @@
 
   <meta itemprop="name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta itemprop="description" content="Hugo theme even example site.">
-  <meta itemprop="datePublished" content="2025-06-29T23:33:44+09:00">
-  <meta itemprop="dateModified" content="2025-06-29T23:33:44+09:00">
+  <meta itemprop="datePublished" content="2025-11-25T23:00:10+09:00">
+  <meta itemprop="dateModified" content="2025-11-25T23:00:10+09:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta name="twitter:description" content="Hugo theme even example site.">
@@ -118,6 +118,86 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/20251125-mqtt-sample/">MQTT Sample Application</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2025-11-25 </span>
+      <div class="post-category">
+          <a href="/categories/mqtt/"> mqtt </a>
+          </div>
+        <span class="more-meta"> 1882 words </span>
+        <span class="more-meta"> 4 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="abstract">Abstract</h1>
+<p>AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、
+ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT）
+という構成でミニマムなサンプルを作りました。</p>
+<p>ローカルで MQTT を試したいときや、IoT Core の代替実装を検証したいときなどに役立つと思うので、手順をまとめておきます。</p>
+<!-- vscode-markdown-toc -->
+<ul>
+<li>
+<ol>
+<li><a href="#Overview">Overview</a></li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><a href="#ActiveMQClassicMQTT">ActiveMQ Classic（MQTT）をローカルで起動する</a></li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li><a href="#SpringBootJMS">Spring Boot（JMS）側の設定</a></li>
+</ol>
+<ul>
+<li>3.1. <a href="#JMSTopicMQTTTopic">JMS Topic（MQTT に対応する Topic 名）</a></li>
+<li>3.2. <a href="#SpringBootProducerListener">Spring Boot の Producer / Listener</a>
+<ul>
+<li>3.2.1. <a href="#ProducerJMSMQTT">Producer（JMS → MQTT）</a></li>
+<li>3.2.2. <a href="#ListenerMQTTJMS">Listener（MQTT → JMS）</a></li>
+<li>3.2.3. <a href="#TestController">TestController（動作テスト用）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ol start="4">
+<li><a href="#PythonPahoMQTT">Python（Paho MQTT）クライアント</a></li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li><a href="#curlPOST">curl（POST）</a></li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li><a href="#ExecutionResult">Execution Result</a></li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li><a href="#Summary">Summary</a></li>
+</ol>
+</li>
+</ul>
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+    </div>
+    <div class="read-more">
+      <a href="/post/20251125-mqtt-sample/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/20250629-decision-table-csharp/">Decision Table - C# version</a></h1>
@@ -331,36 +411,11 @@ macでも同様に、gitbash で ctrl + rでhistoryをもとに過去に実行�
       <h1 id="abstruct">Abstruct</h1>
 <p>Cookie情報を、BFF(Backend for Frontend)で受け取って、Backend側へ送信するサンプルコードを載せておきます。</p>
 <blockquote>
-<p>Request → (cookie) → BFF → (cookie) → Backend</p></blockquote>
+<p>Request → (cookie) → BFF → (cookie) → Backend</p>
+</blockquote>
     </div>
     <div class="read-more">
       <a href="/post/20220412-cookie-apollo-server/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/20220412-set-proxy-and-cert/">Proxy and certificate settings in NPM and Gradle</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-04-12 </span>
-      <div class="post-category">
-          <a href="/categories/node.js/"> node.js </a>
-          <a href="/categories/gradle/"> gradle </a>
-          </div>
-        <span class="more-meta"> 629 words </span>
-        <span class="more-meta"> 2 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="abstruct">Abstruct</h1>
-<p>インターネット接続に、証明書が必要な環境であったり、プロキシ設定が必要な環境の場合の
-NPMやGradleの設定を載せておきます。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/20220412-set-proxy-and-cert/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

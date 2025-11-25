@@ -23,7 +23,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20200614-jmeter-master-slave/" />
@@ -147,11 +147,13 @@
 <p>まずJmeterとは何ですか？については以下のとおりです。</p>
 <blockquote>
 <p>JMeter はJakarta プロジェクト で開発が進められている、パフォーマンス計測用のJavaアプリケーションです。元々はWebアプリケーションのテストのために作成されたもので、さまざまなWebアプリケーションをテストする機能を持っています。<br>
-参考：<a href="https://www.techscore.com/tech/Java/ApacheJakarta/JMeter/1/">1. JMeterの基本 | TECHSCORE(テックスコア)</a></p></blockquote>
+参考：<a href="https://www.techscore.com/tech/Java/ApacheJakarta/JMeter/1/">1. JMeterの基本 | TECHSCORE(テックスコア)</a></p>
+</blockquote>
 <p>軽い負荷をかけて、ちょっと動作を見てみたいなレベルであれば、<a href="https://httpd.apache.org/docs/2.4/programs/ab.html">Apache Bench</a> で良いかと思います。参考：<a href="https://qiita.com/flexfirm/items/ac5a2f53cfa933a37192">Apache Benchでサクッと性能テスト - Qiita</a></p>
 <p>強い負荷をかけて、動作をちゃんと確認したいなレベルであれば、<a href="https://jmeter.apache.org/usermanual/get-started.html">Apache JMeter</a> が選択肢に挙がってきます。</p>
 <blockquote>
-<p>参考までに、他の手段としては、単に複数マシンに <code>ssh</code> で入って、一斉に負荷掛けツールを実行っていうのも選択肢に挙がるかなとは思います。</p></blockquote>
+<p>参考までに、他の手段としては、単に複数マシンに <code>ssh</code> で入って、一斉に負荷掛けツールを実行っていうのも選択肢に挙がるかなとは思います。</p>
+</blockquote>
 <p>では、以下のような目次で説明しておこうと思います。</p>
 <!-- vscode-markdown-toc -->
 <ul>
@@ -251,7 +253,8 @@
 <li>Jmeterの実行時に、<code>~/jmeter/bin/jmeter -n -t test.jmx -r -Jthread_num=10 -Jramp_up=60</code> などのようにすればOKです。</li>
 </ol>
 <blockquote>
-<p>NOTE: CLIモードのJmeterのオプションについては、<a href="https://jmeter.apache.org/usermanual/get-started.html#non_gui">Apache JMeter - User&rsquo;s Manual: Getting Started</a> を参考にしてください。</p></blockquote>
+<p>NOTE: CLIモードのJmeterのオプションについては、<a href="https://jmeter.apache.org/usermanual/get-started.html#non_gui">Apache JMeter - User&rsquo;s Manual: Getting Started</a> を参考にしてください。</p>
+</blockquote>
 <h2 id="2-master-slave-setting">2. <a name='Master-SlaveSetting'></a>Master-Slave Setting</h2>
 <h3 id="21-jmeter-master--slaves-settings">2.1. <a name='JmeterMasterSlavesSettings'></a>Jmeter Master &amp; Slave&rsquo;s Settings</h3>
 <h4 id="211-file-placement">2.1.1. <a name='FilePlacement'></a>File Placement</h4>
@@ -1057,7 +1060,8 @@ SSL通信で使用するキーおよび証明書（keystore）の作成が必要
 <p>Jmeterの <code>/lib/ext</code> フォルダに格納することで、カスタマイズされたJarファイルが <code>Jmeter</code> に読み込まれて利用することが出来ます。</p>
 <blockquote>
 <p>Macの場合は、こちらのファイルパスです。<br>
-<code>/usr/local/Cellar/jmeter/5.3/libexec/lib/ext</code></p></blockquote>
+<code>/usr/local/Cellar/jmeter/5.3/libexec/lib/ext</code></p>
+</blockquote>
 <h2 id="6-reference">6. <a name='Reference'></a>Reference</h2>
 <ul>
 <li><a href="https://qiita.com/marumaru/items/1c79b9fef5bbeb1adb42">AWSでJMeterのMaster/Slave環境を構築（CentOS 7） - Qiita</a></li>

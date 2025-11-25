@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191006-effective-java-3rd-4/" />
@@ -202,7 +202,8 @@
 <blockquote>
 <p>モジュールシステムは、このような記述をし、以下を定義するために使用するもの。<br>
 ・ どのパッケージを外部から見えるようにするか<br>
-・ 他のどのモジュールに依存するか<br></p></blockquote>
+・ 他のどのモジュールに依存するか<br></p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -221,7 +222,8 @@
 <p>スレッドセーフにできないから。</p>
 <p>メソッドには<code>synchronized</code>が付けれるが、フィールド値には<code>synchronized</code>を付けれないので<code>getter</code>/<code>setter</code>を利用するようにしましょう。</p>
 <blockquote>
-<p>public static final のフィールドは定数として使ってよい</p></blockquote>
+<p>public static final のフィールドは定数として使ってよい</p>
+</blockquote>
 <h3 id="14-public-static-final-のフィールドが配列の場合参照されるオブジェクトが不変であることを保証するべき">1.4. <a name='publicstaticfinal'></a>public static final のフィールドが配列の場合、参照されるオブジェクトが不変であることを保証するべき</h3>
 <p>以下のようなコードを記載すると、<code>VALUES</code>のアドレスは<code>final</code>であるが、要素は<code>final</code>ではない。</p>
 <div class="highlight"><div class="chroma">
@@ -281,7 +283,8 @@
 </li>
 </ul>
 <blockquote>
-<p>備考：配列は低レイヤな扱いになってしまうので、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html"><code>java.util.Collections</code></a>を使うようにすると良さそう。</p></blockquote>
+<p>備考：配列は低レイヤな扱いになってしまうので、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collections.html"><code>java.util.Collections</code></a>を使うようにすると良さそう。</p>
+</blockquote>
 <h2 id="2-項目-16-public-のクラスではpublic-のフィールドではなくアクセッサーメソッドを使う">2. <a name='16publicpublic'></a>項目 16 public のクラスでは、public のフィールドではなく、アクセッサーメソッドを使う</h2>
 <h3 id="21-結論">2.1. <a name='-1'></a>結論</h3>
 <ul>
@@ -309,13 +312,15 @@
 </div><h3 id="23-クラスがパッケージプライベートprivate-のネストしたクラスの場合そのフィールドは公開しても良い">2.3. <a name='private'></a>クラスがパッケージプライベート/private のネストしたクラスの場合、そのフィールドは公開しても良い</h3>
 <p>外部からアクセスされる心配がなく、コードの可読性が上がるから。</p>
 <blockquote>
-<p><code>Intellij</code>や<code>Eclipse</code>の機能で自動的に検出されるから、意識しなくても大丈夫そう。</p></blockquote>
+<p><code>Intellij</code>や<code>Eclipse</code>の機能で自動的に検出されるから、意識しなくても大丈夫そう。</p>
+</blockquote>
 <h2 id="3-項目-17-可変性を最小限にする">3. <a name='17'></a>項目 17 可変性を最小限にする</h2>
 <h3 id="31-不変クラスとは">3.1. <a name='-1'></a>不変クラスとは</h3>
 <p>インスタンスに保持される全ての情報は、生成時に提供され、その後は変更できないクラスのこと。</p>
 <p>例として、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html"><code>java.lang.String</code></a>、基本データ型のラッパークラス(<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Integer.html"><code>java.lang.Integer</code></a>等)、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigInteger.html"><code>java.math.BigInteger</code></a> 、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/math/BigDecimal.html"><code>java.math.BigDecimal</code></a>などが挙げられます。</p>
 <blockquote>
-<p>備考：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Integer.html"><code>java.lang.Integer</code></a>のオブジェクトで、以下のようなコードを実行すると、毎回新しいインスタンスが生成される。</p></blockquote>
+<p>備考：<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Integer.html"><code>java.lang.Integer</code></a>のオブジェクトで、以下のようなコードを実行すると、毎回新しいインスタンスが生成される。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -345,7 +350,8 @@
 <blockquote>
 <p>備考：コンパニオンクラスの<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/StringBuilder.html"><code>java.lang.StringBuilder</code></a>について調べてみた。
 <a href="https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/lang/AbstractStringBuilder.java#L412"><code>AbstractStringBuilder#append</code></a>を見てみると、内部で
-<code>char[] value</code>のように持っておき、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html"><code>java.lang.String</code></a>を何度も生成しないように工夫していた。</p></blockquote>
+<code>char[] value</code>のように持っておき、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html"><code>java.lang.String</code></a>を何度も生成しないように工夫していた。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -818,7 +824,8 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 <p>とはいえ、</p>
 <blockquote>
 <p>本来、良い API ドキュメントは<strong>何するのか</strong>を記述し、どのように行うかは記述するべきではない。
-継承されるクラスには、実装の詳細を記述する必要がある。理由は、<strong>継承によってカプセル化が破壊されやすいため</strong>。</p></blockquote>
+継承されるクラスには、実装の詳細を記述する必要がある。理由は、<strong>継承によってカプセル化が破壊されやすいため</strong>。</p>
+</blockquote>
 <p>という一文の通り、良い API ドキュメントでは、手厚いドキュメントはあまり好ましいことではない。
 付け加えるならば、本来 API は何も考えずに使える(脳死できる)ことが望ましく、
 最新の注意を払う時点でバグを生む。</p>
@@ -969,7 +976,8 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>備考：<a href="https://dzone.com/articles/interface-default-methods-java">java8 から Interface にデフォルトメソッドを定義できる</a>ようになりましたね。</p></blockquote>
+<p>備考：<a href="https://dzone.com/articles/interface-default-methods-java">java8 から Interface にデフォルトメソッドを定義できる</a>ようになりましたね。</p>
+</blockquote>
 <h3 id="62-インタフェースの-good-point">6.2. <a name='GoodPoint'></a>インタフェースの Good Point</h3>
 <h4 id="621-既存クラスに新たなインタフェースを実装しやすいこと">6.2.1. <a name='-1'></a>既存クラスに新たなインタフェースを実装しやすいこと</h4>
 <p>インタフェースでは単に実装するだけで良いが、抽象クラスでは継承階層を意識しなければいけない。（抽象クラスが、複数の既存クラスで継承されていたら悩まされることに、、、）</p>
@@ -1137,7 +1145,8 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 </div><h4 id="624-抽象クラスと組み合わせること骨格実装クラスでよりユーザーにとって便利になること">6.2.4. <a name='-1'></a>抽象クラスと組み合わせること(骨格実装クラス)で、よりユーザーにとって便利になること</h4>
 <p>骨格実装クラスにより、プログラマがインタフェースを独自実装する際の手助けになる。下記、<code>setValue(V value)</code>メソッドのコメントはありがたいですね。</p>
 <blockquote>
-<p>下記、 <em>AbstractMapEntry.java</em> の良い点は、単なる抽象クラスではなくて、インタフェースを実装しているから、型定義に関しての制約が課されることがない。</p></blockquote>
+<p>下記、 <em>AbstractMapEntry.java</em> の良い点は、単なる抽象クラスではなくて、インタフェースを実装しているから、型定義に関しての制約が課されることがない。</p>
+</blockquote>
 <p><em>AbstractMapEntry.java</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1230,7 +1239,8 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 </div><h3 id="63-余談抽象クラスの利点">6.3. <a name='-1'></a>余談(抽象クラスの利点)</h3>
 <p>**「抽象クラス : 実装クラス = 1 : 多」**となるのであれば、インタフェースよりも抽象クラスを使いましょう。理由は、抽象クラスにメソッドを追加すれば、全ての実装クラスに反映されて容易だから。（インタフェースの場合は、反映先のクラス数が多く、大変になる。）</p>
 <blockquote>
-<p>極端な例ですが、、今から<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/List.html"><code>List&lt;E&gt;</code></a>インタフェースに新たな public メソッドを追加すると、影響範囲は大変なことになりますよね。笑</p></blockquote>
+<p>極端な例ですが、、今から<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/List.html"><code>List&lt;E&gt;</code></a>インタフェースに新たな public メソッドを追加すると、影響範囲は大変なことになりますよね。笑</p>
+</blockquote>
 <h2 id="7-項目-21-将来のためにインタフェースを選ぶ">7. <a name='21'></a>項目 21 将来のためにインタフェースを選ぶ</h2>
 <p><a href="https://dzone.com/articles/interface-default-methods-java">Java8 ではデフォルトメソッド構文が追加された</a>が、以下のことには気をつけておきましょう。</p>
 <ul>
@@ -1241,7 +1251,8 @@ is-a 関係にあれば使える局面があるが、使うべき局面は多く
 <blockquote>
 <p>例として、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/Collection.html#removeIf-java.util.function.Predicate-">Collection に removeIf がデフォルトメソッドとして追加された</a>。<br>
 しかし、<code>Collection</code> を <code>implements</code> している <a href="https://commons.apache.org/proper/commons-collections/apidocs/org/apache/commons/collections4/collection/SynchronizedCollection.html">Apache Commons ライブラリの SynchronizedCollection</a> でこの <code>removeIf()</code> を呼び出した際には、同期されないメソッドとして呼び出され、<code>SynchronizedCollection</code> 使用における約束事が破られてしまう。<br>
-Java ライブラリではこれと同様のことを防ぐため、<a href="https://github.com/apache/commons-collections/blob/master/src/main/java/org/apache/commons/collections4/collection/SynchronizedCollection.java#L193">Collections.synchronizedCollection において removeIf() をオーバーライド</a>して対処している。</p></blockquote>
+Java ライブラリではこれと同様のことを防ぐため、<a href="https://github.com/apache/commons-collections/blob/master/src/main/java/org/apache/commons/collections4/collection/SynchronizedCollection.java#L193">Collections.synchronizedCollection において removeIf() をオーバーライド</a>して対処している。</p>
+</blockquote>
 <h2 id="8-項目-22-型を定義するためだけにインタフェースを使う">8. <a name='22'></a>項目 22 型を定義するためだけにインタフェースを使う</h2>
 <p>インタフェースの使用方法</p>
 <ul>

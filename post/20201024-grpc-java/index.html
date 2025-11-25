@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20201024-grpc-java/" />
@@ -152,7 +152,8 @@
 <li>スキーマ(<code>.proto</code>)を定義することで、サーバー側/クライアント側のソースコードを自動生成できる。</li>
 </ul>
 <blockquote>
-<p>備考：前回の記事（<a href="https://takuto-n.github.io/post/20201024-openapi-java/">OpenAPI Generatorを使ってみた</a>）で出てきたOpen APIと同じようなものです。</p></blockquote>
+<p>備考：前回の記事（<a href="https://takuto-n.github.io/post/20201024-openapi-java/">OpenAPI Generatorを使ってみた</a>）で出てきたOpen APIと同じようなものです。</p>
+</blockquote>
 <p>gRPCがサポートしている言語は、<a href="https://www.grpc.io/docs/languages/">公式サイト</a>に載っている通りです。<br>
 今回は、SpringBoot(Java)を使って、gRPCを使ってみました。</p>
 <p>各言語でのクイックスタートは、<a href="https://grpc.io/docs/languages/java/">Java – gRPC</a>などから参照できます。</p>
@@ -284,7 +285,8 @@
 <p><code>.proto</code>ファイルが、Inputです。<br>
 <code>.proto</code>ファイルの記載方法は、Googleのドキュメント「<a href="https://developers.google.com/protocol-buffers/docs/proto3">Language Guide (proto3)</a>」に記載されています。</p>
 <blockquote>
-<p>備考：3年前でかなり古いですが、proto3なのでセーフ？ Googleのドキュメントの日本語訳が、Qiitaの記事「<a href="https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6">Proto3 Language Guide（和訳）</a>」に載っていました。</p></blockquote>
+<p>備考：3年前でかなり古いですが、proto3なのでセーフ？ Googleのドキュメントの日本語訳が、Qiitaの記事「<a href="https://qiita.com/CyLomw/items/9aa4551bd6bb9c0818b6">Proto3 Language Guide（和訳）</a>」に載っていました。</p>
+</blockquote>
 <p><em>helloworld.proto</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -387,7 +389,8 @@
 <p>自動生成されたものを簡単にテストしました。<br>
 テストコードは書いておかないと、<a href="https://twitter.com/t_wada?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">@t_wada</a> さんに怒られますよね。。。</p>
 <blockquote>
-<p>参考：<a href="https://www.slideshare.net/t_wada/test-strategy-and-tactics">組織にテストを書く文化を根付かせる戦略と戦術</a></p></blockquote>
+<p>参考：<a href="https://www.slideshare.net/t_wada/test-strategy-and-tactics">組織にテストを書く文化を根付かせる戦略と戦術</a></p>
+</blockquote>
 <h3 id="41-server-source-code">4.1. <a name='ServerSourceCode'></a>Server Source Code</h3>
 <p><em>SampleGrpcSpringbootApplication.java</em></p>
 <div class="highlight"><div class="chroma">

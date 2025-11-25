@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>ja-jp</language>
     <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 29 Jun 2025 23:33:44 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 25 Nov 2025 23:00:10 +0900</lastBuildDate>
     <atom:link href="https://takuto-n.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MQTT Sample Application</title>
+      <link>https://takuto-n.github.io/post/20251125-mqtt-sample/</link>
+      <pubDate>Tue, 25 Nov 2025 23:00:10 +0900</pubDate>
+      <guid>https://takuto-n.github.io/post/20251125-mqtt-sample/</guid>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;&#xA;&lt;p&gt;AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、&#xA;ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT）&#xA;という構成でミニマムなサンプルを作りました。&lt;/p&gt;&#xA;&lt;p&gt;ローカルで MQTT を試したいときや、IoT Core の代替実装を検証したいときなどに役立つと思うので、手順をまとめておきます。&lt;/p&gt;&#xA;&lt;!-- vscode-markdown-toc --&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#Overview&#34;&gt;Overview&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;2&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#ActiveMQClassicMQTT&#34;&gt;ActiveMQ Classic（MQTT）をローカルで起動する&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;3&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#SpringBootJMS&#34;&gt;Spring Boot（JMS）側の設定&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;3.1. &lt;a href=&#34;#JMSTopicMQTTTopic&#34;&gt;JMS Topic（MQTT に対応する Topic 名）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;3.2. &lt;a href=&#34;#SpringBootProducerListener&#34;&gt;Spring Boot の Producer / Listener&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;3.2.1. &lt;a href=&#34;#ProducerJMSMQTT&#34;&gt;Producer（JMS → MQTT）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;3.2.2. &lt;a href=&#34;#ListenerMQTTJMS&#34;&gt;Listener（MQTT → JMS）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;3.2.3. &lt;a href=&#34;#TestController&#34;&gt;TestController（動作テスト用）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;4&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#PythonPahoMQTT&#34;&gt;Python（Paho MQTT）クライアント&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;5&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#curlPOST&#34;&gt;curl（POST）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;6&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#ExecutionResult&#34;&gt;Execution Result&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;7&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#Summary&#34;&gt;Summary&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;!-- vscode-markdown-toc-config&#xA;&#x9;numbering=true&#xA;&#x9;autoSave=true&#xA;&#x9;/vscode-markdown-toc-config --&gt;&#xA;&lt;!-- /vscode-markdown-toc --&gt;</description>
+    </item>
     <item>
       <title>Decision Table - C# version</title>
       <link>https://takuto-n.github.io/post/20250629-decision-table-csharp/</link>
@@ -70,7 +77,7 @@
       <link>https://takuto-n.github.io/post/20220412-cookie-apollo-server/</link>
       <pubDate>Tue, 12 Apr 2022 14:46:25 +0900</pubDate>
       <guid>https://takuto-n.github.io/post/20220412-cookie-apollo-server/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;Cookie情報を、BFF(Backend for Frontend)で受け取って、Backend側へ送信するサンプルコードを載せておきます。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Request → (cookie) → BFF → (cookie) → Backend&lt;/p&gt;&lt;/blockquote&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;Cookie情報を、BFF(Backend for Frontend)で受け取って、Backend側へ送信するサンプルコードを載せておきます。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Request → (cookie) → BFF → (cookie) → Backend&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>Proxy and certificate settings in NPM and Gradle</title>
@@ -175,14 +182,14 @@
       <link>https://takuto-n.github.io/post/20201216-springboot-manage-property/</link>
       <pubDate>Wed, 16 Dec 2020 18:39:39 +0900</pubDate>
       <guid>https://takuto-n.github.io/post/20201216-springboot-manage-property/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;AP基盤/業務ロジック上で使用する静的プロパティを管理する方法としては、以下があるかと思います。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;applicaiton.properties にプロパティを記載する。&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/context/properties/ConfigurationProperties.html&#34;&gt;@ConfigurationProperties&lt;/a&gt; を使って、オブジェクトにプロパティ値を読み込ませる。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;参考：&lt;a href=&#34;https://qiita.com/KevinFQ/items/bc5c3b7796bb72fa049c&#34;&gt;Spring Bootでプロパティファイルとのバインディング方法 - Qiita&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;この記事では、AP基盤/業務ロジック上で使用する&lt;strong&gt;動的プロパティ&lt;/strong&gt;を&lt;code&gt;Map&amp;lt;String, Object&amp;gt;&lt;/code&gt;として管理する方法について記載したいと思います。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;参考：&lt;a href=&#34;https://qiita.com/kazuki43zoo/items/b9e07dc6c6d8a45485de&#34;&gt;Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;AP基盤/業務ロジック上で使用する静的プロパティを管理する方法としては、以下があるかと思います。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;applicaiton.properties にプロパティを記載する。&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/context/properties/ConfigurationProperties.html&#34;&gt;@ConfigurationProperties&lt;/a&gt; を使って、オブジェクトにプロパティ値を読み込ませる。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;参考：&lt;a href=&#34;https://qiita.com/KevinFQ/items/bc5c3b7796bb72fa049c&#34;&gt;Spring Bootでプロパティファイルとのバインディング方法 - Qiita&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;この記事では、AP基盤/業務ロジック上で使用する&lt;strong&gt;動的プロパティ&lt;/strong&gt;を&lt;code&gt;Map&amp;lt;String, Object&amp;gt;&lt;/code&gt;として管理する方法について記載したいと思います。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;参考：&lt;a href=&#34;https://qiita.com/kazuki43zoo/items/b9e07dc6c6d8a45485de&#34;&gt;Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>Windowsでファイルリストを取得する方法</title>
       <link>https://takuto-n.github.io/post/20201110-windows-file-list/</link>
       <pubDate>Tue, 10 Nov 2020 19:37:47 +0900</pubDate>
       <guid>https://takuto-n.github.io/post/20201110-windows-file-list/</guid>
-      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;あるディレクトリ配下のファイルリストを取得する際に、&lt;br&gt;&#xA;Linuxだと&lt;a href=&#34;https://linux.die.net/man/1/tree&#34;&gt;tree&lt;/a&gt;コマンドで可能です。&#xA;Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;2022/4/1 追記&lt;br&gt;&#xA;フォルダリストの場合、コマンドプロンプトで &lt;code&gt;tree&lt;/code&gt; コマンドを使えばOK.&lt;br&gt;&#xA;ファイルリストの場合は、以下のpowershellでも可だが、&lt;code&gt;tree /f&lt;/code&gt; でもOK.&lt;br&gt;&#xA;参考：&lt;a href=&#34;https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/tree&#34;&gt;tree | Microsoft Docs&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;</description>
+      <description>&lt;h1 id=&#34;abstruct&#34;&gt;Abstruct&lt;/h1&gt;&#xA;&lt;p&gt;あるディレクトリ配下のファイルリストを取得する際に、&lt;br&gt;&#xA;Linuxだと&lt;a href=&#34;https://linux.die.net/man/1/tree&#34;&gt;tree&lt;/a&gt;コマンドで可能です。&#xA;Windowsだとどうしたら良いのか調べたので、メモとして残しておきます。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;2022/4/1 追記&lt;br&gt;&#xA;フォルダリストの場合、コマンドプロンプトで &lt;code&gt;tree&lt;/code&gt; コマンドを使えばOK.&lt;br&gt;&#xA;ファイルリストの場合は、以下のpowershellでも可だが、&lt;code&gt;tree /f&lt;/code&gt; でもOK.&lt;br&gt;&#xA;参考：&lt;a href=&#34;https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/tree&#34;&gt;tree | Microsoft Docs&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>AWS App Meshについて調べてみた</title>

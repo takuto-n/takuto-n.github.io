@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20201024-openapi-java/" />
@@ -150,12 +150,14 @@
 <code>OpenAPI Generator</code> はそのスキーマを定義して、ソースを自動生成するための一つのツールです。<br>
 <code>OpenAPI</code>と比較されるものとして他には、<code>gRPC</code> や <code>GraphQL</code> などがあります。それらについては、<a href="https://employment.en-japan.com/engineerhub/entry/2019/08/22/103000">エンジニアHubの記事</a>で比較されています。</p>
 <blockquote>
-<p>備考：スキーマ駆動開発(SDD)は、2015年7月に掲載された論文<a href="https://www.researchgate.net/publication/280105467_Schema-Driven_Development_of_Semantic_MediaWikis">Schema-Driven Development of Semantic MediaWikis</a>が元ネタで、現在では、DeNAやFreeeなどが採用しているようです。</p></blockquote>
+<p>備考：スキーマ駆動開発(SDD)は、2015年7月に掲載された論文<a href="https://www.researchgate.net/publication/280105467_Schema-Driven_Development_of_Semantic_MediaWikis">Schema-Driven Development of Semantic MediaWikis</a>が元ネタで、現在では、DeNAやFreeeなどが採用しているようです。</p>
+</blockquote>
 <p>また、<a href="https://github.com/OpenAPITools">Open API</a> と <a href="https://github.com/swagger-api">Swagger</a> は基本的には同じなのですが、別のプロジェクトとして開発されています。
 経緯がややこしいのですが、SpeakerDeckの<a href="https://speakerdeck.com/akihito_nakano/gunmaweb34?slide=37">平静を保ち、コードを生成せよ 〜 OpenAPI Generator誕生の背景と軌跡 〜</a>で、詳しく説明されているので、気になる方はそちらを参考にしてください。</p>
 <p>前置きが長くなってしまいましたが、本記事では、Spring Frameworkを使う前提で、<code>Open API ver3.0</code> について触れます。</p>
 <blockquote>
-<p>備考：OpenAPI Generator で使える言語やフレームワークは、<a href="https://github.com/OpenAPITools/openapi-generator#overview">公式サイト</a>に記載されています。</p></blockquote>
+<p>備考：OpenAPI Generator で使える言語やフレームワークは、<a href="https://github.com/OpenAPITools/openapi-generator#overview">公式サイト</a>に記載されています。</p>
+</blockquote>
 <!-- vscode-markdown-toc -->
 <ul>
 <li>
@@ -533,7 +535,8 @@
 <blockquote>
 <p>備考：<br>
 後から分かったのですが、<code>.openapi-generator-ignore</code> の設定により、出力対象を制限することができるようです。<br>
-参考URL : <a href="https://openapi-generator.tech/docs/customization/#ignore-file-format">OpenAPI-Generator Customization</a></p></blockquote>
+参考URL : <a href="https://openapi-generator.tech/docs/customization/#ignore-file-format">OpenAPI-Generator Customization</a></p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1

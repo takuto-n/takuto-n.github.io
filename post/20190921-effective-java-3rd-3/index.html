@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190921-effective-java-3rd-3/" />
@@ -165,7 +165,8 @@
 <h3 id="11-どういう時にオーバーライドする必要があるのか">1.1. <a name=''></a>どういう時にオーバーライドする必要があるのか？</h3>
 <p><em>クラスが単なるオブジェクトの同一性とは異なる論理的等価性という概念を持っていて、他のインスタンスと比較する必要があるとき</em></p>
 <blockquote>
-<p>ただし、スーパークラスが equals をオーバーライドしていないこと。</p></blockquote>
+<p>ただし、スーパークラスが equals をオーバーライドしていないこと。</p>
+</blockquote>
 <h3 id="12-どうやってオーバーライドすれば良いのか">1.2. <a name='-1'></a>どうやってオーバーライドすれば良いのか？</h3>
 <p><em>一般契約(反射性, 対照性, 推移性, 整合性, 非 null 性)に従うこと</em></p>
 <p>以下のツールを使うと簡単に一般契約に従ったコードにできる。</p>
@@ -178,7 +179,8 @@
 <code>@Data</code>が後で処理されるようになっていると、<code>setter()</code>がないからである。この場合はどうしようもない。。</li>
 </ul>
 <blockquote>
-<p>Annotation Processor は、コンパイル時に処理される。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、<code>setter/getter/equals/hashCode/toString</code>メソッドのバイトコードを<code>.class</code>に突っ込んでくれる。</p></blockquote>
+<p>Annotation Processor は、コンパイル時に処理される。<code>lombok</code>の<code>@Data</code>の場合は、コンパイル時に、<code>setter/getter/equals/hashCode/toString</code>メソッドのバイトコードを<code>.class</code>に突っ込んでくれる。</p>
+</blockquote>
 <ol start="2">
 <li>Eclipse や Intellij の自動生成機能</li>
 </ol>
@@ -245,12 +247,14 @@
 </div>
 </div><h3 id="22-余談volatile-修飾子について">2.2. <a name='volatile'></a>【余談】volatile 修飾子について</h3>
 <blockquote>
-<p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」で説明されるらしいですが、、この章に出てきたので。</p></blockquote>
+<p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」で説明されるらしいですが、、この章に出てきたので。</p>
+</blockquote>
 <h4 id="221-volatile-修飾子とは">2.2.1. <a name='volatile-1'></a>volatile 修飾子とは？</h4>
 <p><code>volatile修飾子</code>をつけると、「必ずメモリに書く」ようになる。</p>
 <blockquote>
 <p>並列処理などで、<code>あるインスタンスA</code>の<code>メンバ変数X</code>を更新する際、通常はスレッドキャッシュに書き込まれた後、メモリに書き込まれる。
-これをスレッドキャッシュへの書き込みをせず、メモリ書き込みを最初からさせるようにするのが、<code>volatile修飾子</code>である。</p></blockquote>
+これをスレッドキャッシュへの書き込みをせず、メモリ書き込みを最初からさせるようにするのが、<code>volatile修飾子</code>である。</p>
+</blockquote>
 <p>ただし、<a href="https://qiita.com/YukiMiyatake/items/0062c24b8a576eaab920">「volatile で排他制御出来ると、いつから思ってた？ atomic や synchronized 使うべし」</a>に記載があるように、<code>volatile修飾子</code>では排他制御はできない。。</p>
 <p>そのため、結局は、<code>atomic</code>や<code>synchronized</code>を使って、排他制御することになる。</p>
 <h4 id="222-volatile修飾子の使い所について">2.2.2. <a name='volatile-1'></a><code>volatile修飾子</code>の使い所について</h4>
@@ -283,7 +287,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」まで、とりあえずは放置しておくことにする。</p></blockquote>
+<p>項番 78「共有される mutable なデータには、同期したアクセスをすべし」まで、とりあえずは放置しておくことにする。</p>
+</blockquote>
 <h2 id="3-項目-12-常に-tostring-をオーバーライドせよ">3. <a name='12toString'></a>項目 12 常に toString をオーバーライドせよ</h2>
 <h3 id="31-まとめ">3.1 <a name='volatile-1'></a>まとめ</h3>
 <ul>
@@ -505,9 +510,11 @@
 <h3 id="53-結論">5.3 <a name='volatile-1'></a>結論</h3>
 <p>最小値と最大値の差が、int の最大値(<code>2^31 - 1</code>)を超えていたらオーバーフローしてしまう可能性がある、もしくは、数値の比較ではない場合、<em>PhoneNumber_1.java</em> のように実装しましょう。そうでなければ、<em>PhoneNumber_2.java</em> のように実装しましょう。</p>
 <blockquote>
-<p>java 標準の<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性がある、もしくは、数値での比較では無いので、<em>PhoneNumber_1.java</em> のように実装しています。</p></blockquote>
+<p>java 標準の<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/math/BigDecimal.java#L2623">BigDecimal#compareTo()</a>とか、<a href="https://github.com/frohoff/jdk8u-dev-jdk/blob/master/src/share/classes/java/sql/Timestamp.java#L478">Timestamp#compareTo()</a>は、オーバーフローする可能性がある、もしくは、数値での比較では無いので、<em>PhoneNumber_1.java</em> のように実装しています。</p>
+</blockquote>
 <blockquote>
-<p>java 標準の<a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、<em>PhoneNumber_2.java</em> のように実装しています。</p></blockquote>
+<p>java 標準の<a href="http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/dc4322602480/src/share/classes/java/lang/Byte.java#l457">Byte#compareTo()</a>は、オーバーフローする可能性がないので、<em>PhoneNumber_2.java</em> のように実装しています。</p>
+</blockquote>
 
     </div>
 

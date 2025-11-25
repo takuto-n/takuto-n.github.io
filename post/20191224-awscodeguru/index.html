@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191224-awscodeguru/" />
@@ -146,7 +146,8 @@
 <p>AWS re:Invent 2019で発表された機械学習を応用したソースコード解析ツール<a href="https://aws.amazon.com/jp/codeguru/">AWS CodeGuru</a>を使ってみました。
 その使用感や解析結果をまとめたいと思います。</p>
 <blockquote>
-<p>参考：使用したのは<code>CodeGuru Reviewer </code>のみで<code>CodeGuru Profiler</code>は使っていません。</p></blockquote>
+<p>参考：使用したのは<code>CodeGuru Reviewer </code>のみで<code>CodeGuru Profiler</code>は使っていません。</p>
+</blockquote>
 <!-- vscode-markdown-toc -->
 <ul>
 <li>
@@ -227,7 +228,8 @@
 <li><a href="https://www.synopsys.com/ja-jp/software-integrity/security-testing/static-analysis-sast.html">Coverity</a></li>
 </ul>
 <blockquote>
-<p>現状(2019/12時点)では、Amazon CodeGuruはJava言語のみ対応。</p></blockquote>
+<p>現状(2019/12時点)では、Amazon CodeGuruはJava言語のみ対応。</p>
+</blockquote>
 <h3 id="21-連携できるバージョン管理システム">2.1. <a name='-1'></a>連携できるバージョン管理システム</h3>
 <p>以下の２つに対応（今回はAWS CodeCommitを使用した）</p>
 <ul>
@@ -241,7 +243,8 @@
 今後、巨大なMR作って事故る人出るかもしれないですね、、、</p>
 <blockquote>
 <p>コード 100 行あたり 0.75 USD<br>
-例：10,000行のコードだったら、75USD(2019/12時点で約8200円)</p></blockquote>
+例：10,000行のコードだったら、75USD(2019/12時点で約8200円)</p>
+</blockquote>
 <p>引用元：https://aws.amazon.com/jp/codeguru/pricing/</p>
 <h3 id="23-指摘の観点">2.3. <a name='-1'></a>指摘の観点</h3>
 <ul>
@@ -288,7 +291,8 @@
 <h3 id="32-運用性について">3.2. <a name='-1'></a>運用性について</h3>
 <p>マージリクエストに対して、レビュアーのような立場でソースコードに指摘をしてくれるので、運用上指摘を見逃すことがない。</p>
 <blockquote>
-<p>指摘場所は、<code>AWS CodeCommit</code>のアクティビティ画面</p></blockquote>
+<p>指摘場所は、<code>AWS CodeCommit</code>のアクティビティ画面</p>
+</blockquote>
 <p><img src="/img/20191224/CodeGuru%E3%81%AB%E3%82%88%E3%82%8B%E6%8C%87%E6%91%98.png" alt=""></p>
 <h2 id="4-指摘結果">4. <a name='-1'></a>指摘結果</h2>
 <h3 id="41-指摘されなかったコード">4.1. <a name='-1'></a>指摘されなかったコード</h3>
@@ -522,7 +526,8 @@
 <p>某約20KStepのJavaプロジェクトに対して、<code>AWS CodeGuru</code>をかけたのですが、ヒットしたのは「指摘されたコード」に記載のAWSのAPIに関する2種類の指摘のみでした。。</p>
 <p>これからユーザからのフィードバックを受けてどんどん賢くなっていくとのことなので、今後に期待しましょう！</p>
 <blockquote>
-<p>「某約20KStepのJavaプロジェクト」は、SonarQubeによるバグ指摘はない状態となっています。</p></blockquote>
+<p>「某約20KStepのJavaプロジェクト」は、SonarQubeによるバグ指摘はない状態となっています。</p>
+</blockquote>
 
     </div>
 

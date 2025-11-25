@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191103-effective-java-3rd-5/" />
@@ -293,7 +293,8 @@
 <li>erasure：コンパイル時に型制約を強制し、実行時には要素の型情報を廃棄する。</li>
 </ul>
 <blockquote>
-<p><a href="https://ejje.weblio.jp/content/erasure">erasure</a>の意味は「廃棄」</p></blockquote>
+<p><a href="https://ejje.weblio.jp/content/erasure">erasure</a>の意味は「廃棄」</p>
+</blockquote>
 </li>
 </ul>
 <h4 id="311-配列の場合">3.1.1. <a name='-1'></a>配列の場合</h4>
@@ -398,7 +399,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>実行時の<code>E</code>の型が不明で、実行時にリスト(ジェネリクス）の型情報は erasure(廃棄)されているから、キャストの安全性が検査できない。)</p></blockquote>
+<p>実行時の<code>E</code>の型が不明で、実行時にリスト(ジェネリクス）の型情報は erasure(廃棄)されているから、キャストの安全性が検査できない。)</p>
+</blockquote>
 <h4 id="323-ステップ-3リスト--リスト">3.2.3. <a name='3'></a>ステップ 3(リスト → リスト)</h4>
 <p>配列<code>(E[])</code>を使わず、リストにした。</p>
 <div class="highlight"><div class="chroma">
@@ -997,7 +999,8 @@ s1、s2 は値を提供しているから。</p>
 </div>
 </div><blockquote>
 <p><code>E extends Comparable&lt;? super E&gt;</code>の理由は以下。
-<code>[PECSの原則に従うと] Comparableは常に消費者(consumer)なので、Comparable&lt;T&gt;ではなくComparable&lt;? super T&gt;を常に使用するべき。</code></p></blockquote>
+<code>[PECSの原則に従うと] Comparableは常に消費者(consumer)なので、Comparable&lt;T&gt;ではなくComparable&lt;? super T&gt;を常に使用するべき。</code></p>
+</blockquote>
 </li>
 <li>
 <p>上記の実際の例としては、<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/concurrent/ScheduledFuture.html">ScheduledFuture インターフェース</a>がある。</p>
@@ -1145,7 +1148,8 @@ s1、s2 は値を提供しているから。</p>
 </div><blockquote>
 <p>コレクションがネストした時点で、利用側にミスを誘発しやすい。<br>
 ネストの何段目を操作しているのか混乱しやすく、ミスをコンパイルで発見しにくくなる。<br>
-その場合は、クラスでくるむことで、意図を明確にしやすくなる。</p></blockquote>
+その場合は、クラスでくるむことで、意図を明確にしやすくなる。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1

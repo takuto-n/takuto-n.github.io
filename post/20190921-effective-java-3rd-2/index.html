@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20190921-effective-java-3rd-2/" />
@@ -274,7 +274,8 @@
 <li>利点：メンバ変数に final 修飾子をつけておけば、生成後にメンバ変数を変更できないため、インスタンス生成時の状態であることを保証できる。</li>
 </ul>
 <blockquote>
-<p>また下記のような Builder パターンは、fluent API として知られており、<code>assertThat(&quot;hoge&quot;).isEqualTo(&quot;Hoge&quot;);</code>のように、左から右へ流し読み(一読)できるようになっている。</p></blockquote>
+<p>また下記のような Builder パターンは、fluent API として知られており、<code>assertThat(&quot;hoge&quot;).isEqualTo(&quot;Hoge&quot;);</code>のように、左から右へ流し読み(一読)できるようになっている。</p>
+</blockquote>
 <p><em>Builder パターンのクラス例</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -485,7 +486,8 @@
 </li>
 </ul>
 <blockquote>
-<p><code>public final</code>とすることで、継承をさせる隙すら与えない。</p></blockquote>
+<p><code>public final</code>とすることで、継承をさせる隙すら与えない。</p>
+</blockquote>
 <h3 id="43-インスタンス化不可能にする理由">4.3. <a name='-1'></a>インスタンス化不可能にする理由</h3>
 <ul>
 <li>インスタンス化する必要がないのであれば、使う人に考えさせないようにインスタンス化不可能にするべき</li>
@@ -550,7 +552,8 @@
 <li>コンストラクタインジェクション</li>
 <li>セッターインジェクション</li>
 <li>フィールドインジェクション（Spring なら@Autowired）</li>
-</ul></blockquote>
+</ul>
+</blockquote>
 <h2 id="6-項目-6-不必要なオブジェクトの生成を避ける">6. <a name='6'></a>項目 6 不必要なオブジェクトの生成を避ける</h2>
 <h3 id="61-結論">6.1. <a name='-1'></a>結論</h3>
 <p>一度生成されたら変更されないオブジェクトは再利用したり、自動ボクシングに注意したりすることで、パフォーマンスを落とさないようにしよう。</p>
@@ -579,7 +582,8 @@
 </ul>
 <blockquote>
 <p>自動ボクシングにも時間がかかる。
-インスタンス生成が走るため。int -&gt; Integer など。</p></blockquote>
+インスタンス生成が走るため。int -&gt; Integer など。</p>
+</blockquote>
 <h2 id="7-項目-7-廃れたオブジェクト参照を取り除く">7. <a name='7'></a>項目 7 廃れたオブジェクト参照を取り除く</h2>
 <h3 id="71-参照について">7.1. <a name='-1'></a>参照について</h3>
 <ul>
@@ -608,7 +612,8 @@
 </li>
 </ul>
 <blockquote>
-<p>強参照が無くなったオブジェクトは、GC の対象となる。</p></blockquote>
+<p>強参照が無くなったオブジェクトは、GC の対象となる。</p>
+</blockquote>
 <h3 id="73-気をつけること">7.3. <a name='-1'></a>気をつけること</h3>
 <p>MAP などは、強参照で保持し続けるため、個数の上限を決めて、LRU(Least Recently Used)や FIFO などのアルゴリズムで対処しましょう。</p>
 <p>以下のライブラリを使うという方法もある。</p>
@@ -769,7 +774,8 @@
 </div><p><em>豆知識</em></p>
 <blockquote>
 <p>try 句内で例外が発生し、finally 句でも例外が発生すると、finally 句の例外だけがエラーメッセージとして出る。<br>
-以下のように、finally 句で出た例外を揉み消せば、try 句内で出た例外がスローされるよ。</p></blockquote>
+以下のように、finally 句で出た例外を揉み消せば、try 句内で出た例外がスローされるよ。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1

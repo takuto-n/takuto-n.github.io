@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mqtt on Little by little and bit by bit - マイペースにこつこつと</title>
+    <link>https://takuto-n.github.io/categories/mqtt/</link>
+    <description>Recent content in Mqtt on Little by little and bit by bit - マイペースにこつこつと</description>
+    <generator>Hugo</generator>
+    <language>ja-jp</language>
+    <copyright>&lt;a href=&#34;https://www.instagram.com/takuto_no&#34;&gt;takuto-n&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 25 Nov 2025 23:00:10 +0900</lastBuildDate>
+    <atom:link href="https://takuto-n.github.io/categories/mqtt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MQTT Sample Application</title>
+      <link>https://takuto-n.github.io/post/20251125-mqtt-sample/</link>
+      <pubDate>Tue, 25 Nov 2025 23:00:10 +0900</pubDate>
+      <guid>https://takuto-n.github.io/post/20251125-mqtt-sample/</guid>
+      <description>&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;&#xA;&lt;p&gt;AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、&#xA;ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT）&#xA;という構成でミニマムなサンプルを作りました。&lt;/p&gt;&#xA;&lt;p&gt;ローカルで MQTT を試したいときや、IoT Core の代替実装を検証したいときなどに役立つと思うので、手順をまとめておきます。&lt;/p&gt;&#xA;&lt;!-- vscode-markdown-toc --&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#Overview&#34;&gt;Overview&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;2&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#ActiveMQClassicMQTT&#34;&gt;ActiveMQ Classic（MQTT）をローカルで起動する&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;3&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#SpringBootJMS&#34;&gt;Spring Boot（JMS）側の設定&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;3.1. &lt;a href=&#34;#JMSTopicMQTTTopic&#34;&gt;JMS Topic（MQTT に対応する Topic 名）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;3.2. &lt;a href=&#34;#SpringBootProducerListener&#34;&gt;Spring Boot の Producer / Listener&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;3.2.1. &lt;a href=&#34;#ProducerJMSMQTT&#34;&gt;Producer（JMS → MQTT）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;3.2.2. &lt;a href=&#34;#ListenerMQTTJMS&#34;&gt;Listener（MQTT → JMS）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;3.2.3. &lt;a href=&#34;#TestController&#34;&gt;TestController（動作テスト用）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;4&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#PythonPahoMQTT&#34;&gt;Python（Paho MQTT）クライアント&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;5&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#curlPOST&#34;&gt;curl（POST）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;6&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#ExecutionResult&#34;&gt;Execution Result&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ol start=&#34;7&#34;&gt;&#xA;&lt;li&gt;&lt;a href=&#34;#Summary&#34;&gt;Summary&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;!-- vscode-markdown-toc-config&#xA;&#x9;numbering=true&#xA;&#x9;autoSave=true&#xA;&#x9;/vscode-markdown-toc-config --&gt;&#xA;&lt;!-- /vscode-markdown-toc --&gt;</description>
+    </item>
+  </channel>
+</rss>

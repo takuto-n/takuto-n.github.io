@@ -27,7 +27,7 @@ applicaiton.properties にプロパティを記載する。 @ConfigurationProper
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.147.8 with theme even" />
+<meta name="generator" content="Hugo 0.152.2 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20201216-springboot-manage-property/" />
@@ -161,10 +161,12 @@ applicaiton.properties にプロパティを記載する。 @ConfigurationProper
 <li><a href="https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/context/properties/ConfigurationProperties.html">@ConfigurationProperties</a> を使って、オブジェクトにプロパティ値を読み込ませる。</li>
 </ul>
 <blockquote>
-<p>参考：<a href="https://qiita.com/KevinFQ/items/bc5c3b7796bb72fa049c">Spring Bootでプロパティファイルとのバインディング方法 - Qiita</a></p></blockquote>
+<p>参考：<a href="https://qiita.com/KevinFQ/items/bc5c3b7796bb72fa049c">Spring Bootでプロパティファイルとのバインディング方法 - Qiita</a></p>
+</blockquote>
 <p>この記事では、AP基盤/業務ロジック上で使用する<strong>動的プロパティ</strong>を<code>Map&lt;String, Object&gt;</code>として管理する方法について記載したいと思います。</p>
 <blockquote>
-<p>参考：<a href="https://qiita.com/kazuki43zoo/items/b9e07dc6c6d8a45485de">Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita</a></p></blockquote>
+<p>参考：<a href="https://qiita.com/kazuki43zoo/items/b9e07dc6c6d8a45485de">Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita</a></p>
+</blockquote>
 <!-- vscode-markdown-toc -->
 <ul>
 <li>
@@ -224,7 +226,8 @@ applicaiton.properties にプロパティを記載する。 @ConfigurationProper
 <h2 id="1-class-diagram-overview">1. <a name='ClassDiagramOverview'></a>Class Diagram Overview</h2>
 <p><img src="/img/20201216/class-diagram.jpg" alt=""></p>
 <blockquote>
-<p><a href="http://amateras.osdn.jp/cgi-bin/fswiki/wiki.cgi?page=AmaterasUML">AmaterasUML - Project Amateras</a> を使ってクラス図を自動生成してみました。</p></blockquote>
+<p><a href="http://amateras.osdn.jp/cgi-bin/fswiki/wiki.cgi?page=AmaterasUML">AmaterasUML - Project Amateras</a> を使ってクラス図を自動生成してみました。</p>
+</blockquote>
 <h3 id="11-folder-structureoverview">1.1. <a name='FolderStructureOverview'></a>Folder Structure(Overview)</h3>
 <p>フォルダ構成は以下のとおりです。</p>
 <div class="highlight"><div class="chroma">
@@ -319,7 +322,8 @@ applicaiton.properties にプロパティを記載する。 @ConfigurationProper
 </ul>
 <blockquote>
 <p>Spring Frameworkが提供しているEnvironmentインタフェース（<code>ConfigurableEnvironment</code>） だと何でもできてしまうので、この部品でラップしています。<br>
-参考：<a href="https://qiita.com/kazuki43zoo/items/0ce92fce6d6f3b7bf8eb">Spring Bootの外部設定値の扱い方を理解する - Qiita</a></p></blockquote>
+参考：<a href="https://qiita.com/kazuki43zoo/items/0ce92fce6d6f3b7bf8eb">Spring Bootの外部設定値の扱い方を理解する - Qiita</a></p>
+</blockquote>
 <h3 id="17-mymappropertysourceoverview">1.7. <a name='MyMapPropertySourceOverview'></a>MyMapPropertySource(Overview)</h3>
 <p><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/InitializingBean.html">InitializingBean</a>を実装して、<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/env/EnumerablePropertySource.html">EnumerablePropertySource</a> を拡張したクラス。</p>
 <p><code>@Override</code> して3つのAPIを提供する。</p>
@@ -930,7 +934,8 @@ applicaiton.properties にプロパティを記載する。 @ConfigurationProper
 <p><code>Map&lt;String, Object&gt;</code> ではなくて、 <code>DataSource</code> を使った場合も記載しておきます。<br>
 (<code>フォルダ構成</code> と <code>本題と異なるソースコード/設定ファイル</code> のみ。)</p>
 <blockquote>
-<p><a href="https://qiita.com/kazuki43zoo/items/b9e07dc6c6d8a45485de#environment%E3%81%B8%E3%81%AE%E9%81%A9%E7%94%A8">Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita</a> を実装させて頂いただけです。</p></blockquote>
+<p><a href="https://qiita.com/kazuki43zoo/items/b9e07dc6c6d8a45485de#environment%E3%81%B8%E3%81%AE%E9%81%A9%E7%94%A8">Spring Frameworkで設定値(プロパティ値)をデータベースから取得する方法 - Qiita</a> を実装させて頂いただけです。</p>
+</blockquote>
 <h3 id="31-folder-structuredigression">3.1. <a name='FolderStructureDigression'></a>Folder Structure(Digression)</h3>
 <p>フォルダ構成は以下のとおりです。</p>
 <div class="highlight"><div class="chroma">
