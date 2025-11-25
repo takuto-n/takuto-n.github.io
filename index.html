@@ -137,60 +137,6 @@
 <p>AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、
 ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT）
 という構成でミニマムなサンプルを作りました。</p>
-<p>ローカルで MQTT を試したいときや、IoT Core の代替実装を検証したいときなどに役立つと思うので、手順をまとめておきます。</p>
-<!-- vscode-markdown-toc -->
-<ul>
-<li>
-<ol>
-<li><a href="#Overview">Overview</a></li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li><a href="#ActiveMQClassicMQTT">ActiveMQ Classic（MQTT）をローカルで起動する</a></li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li><a href="#SpringBootJMS">Spring Boot（JMS）側の設定</a></li>
-</ol>
-<ul>
-<li>3.1. <a href="#JMSTopicMQTTTopic">JMS Topic（MQTT に対応する Topic 名）</a></li>
-<li>3.2. <a href="#SpringBootProducerListener">Spring Boot の Producer / Listener</a>
-<ul>
-<li>3.2.1. <a href="#ProducerJMSMQTT">Producer（JMS → MQTT）</a></li>
-<li>3.2.2. <a href="#ListenerMQTTJMS">Listener（MQTT → JMS）</a></li>
-<li>3.2.3. <a href="#TestController">TestController（動作テスト用）</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<ol start="4">
-<li><a href="#PythonPahoMQTT">Python（Paho MQTT）クライアント</a></li>
-</ol>
-</li>
-<li>
-<ol start="5">
-<li><a href="#curlPOST">curl（POST）</a></li>
-</ol>
-</li>
-<li>
-<ol start="6">
-<li><a href="#ExecutionResult">Execution Result</a></li>
-</ol>
-</li>
-<li>
-<ol start="7">
-<li><a href="#Summary">Summary</a></li>
-</ol>
-</li>
-</ul>
-<!-- vscode-markdown-toc-config
-	numbering=true
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->
     </div>
     <div class="read-more">
       <a href="/post/20251125-mqtt-sample/" class="read-more-link">Read more...</a>

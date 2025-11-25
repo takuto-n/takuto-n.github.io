@@ -17,8 +17,7 @@
 
 
 <meta name="author" content="takuto_n" /><meta name="description" content="Abstract AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、 ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT） という構成でミニマムなサンプルを作りました。
-ローカルで MQTT を試したいときや、IoT Core の代替実装を検証したいときなどに役立つと思うので、手順をまとめておきます。
-Overview ActiveMQ Classic（MQTT）をローカルで起動する Spring Boot（JMS）側の設定 3.1. JMS Topic（MQTT に対応する Topic 名） 3.2. Spring Boot の Producer / Listener 3.2.1. Producer（JMS → MQTT） 3.2.2. Listener（MQTT → JMS） 3.2.3. TestController（動作テスト用） Python（Paho MQTT）クライアント curl（POST） Execution Result Summary " /><meta name="keywords" content="mqtt, python" />
+" /><meta name="keywords" content="mqtt, python" />
 
 
 
@@ -43,9 +42,7 @@ Overview ActiveMQ Classic（MQTT）をローカルで起動する Spring Boot（
 <meta property="og:url" content="https://takuto-n.github.io/post/20251125-mqtt-sample/">
   <meta property="og:site_name" content="Little by little and bit by bit - マイペースにこつこつと">
   <meta property="og:title" content="MQTT Sample Application">
-  <meta property="og:description" content="Abstract AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、 ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT） という構成でミニマムなサンプルを作りました。
-ローカルで MQTT を試したいときや、IoT Core の代替実装を検証したいときなどに役立つと思うので、手順をまとめておきます。
-Overview ActiveMQ Classic（MQTT）をローカルで起動する Spring Boot（JMS）側の設定 3.1. JMS Topic（MQTT に対応する Topic 名） 3.2. Spring Boot の Producer / Listener 3.2.1. Producer（JMS → MQTT） 3.2.2. Listener（MQTT → JMS） 3.2.3. TestController（動作テスト用） Python（Paho MQTT）クライアント curl（POST） Execution Result Summary">
+  <meta property="og:description" content="Abstract AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、 ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT） という構成でミニマムなサンプルを作りました。">
   <meta property="og:locale" content="ja_jp">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -58,18 +55,14 @@ Overview ActiveMQ Classic（MQTT）をローカルで起動する Spring Boot（
     <meta property="article:tag" content="Iot">
 
   <meta itemprop="name" content="MQTT Sample Application">
-  <meta itemprop="description" content="Abstract AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、 ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT） という構成でミニマムなサンプルを作りました。
-ローカルで MQTT を試したいときや、IoT Core の代替実装を検証したいときなどに役立つと思うので、手順をまとめておきます。
-Overview ActiveMQ Classic（MQTT）をローカルで起動する Spring Boot（JMS）側の設定 3.1. JMS Topic（MQTT に対応する Topic 名） 3.2. Spring Boot の Producer / Listener 3.2.1. Producer（JMS → MQTT） 3.2.2. Listener（MQTT → JMS） 3.2.3. TestController（動作テスト用） Python（Paho MQTT）クライアント curl（POST） Execution Result Summary">
+  <meta itemprop="description" content="Abstract AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、 ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT） という構成でミニマムなサンプルを作りました。">
   <meta itemprop="datePublished" content="2025-11-25T23:00:10+09:00">
   <meta itemprop="dateModified" content="2025-11-25T23:00:10+09:00">
   <meta itemprop="wordCount" content="1882">
   <meta itemprop="keywords" content="mqtt,python">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="MQTT Sample Application">
-  <meta name="twitter:description" content="Abstract AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、 ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT） という構成でミニマムなサンプルを作りました。
-ローカルで MQTT を試したいときや、IoT Core の代替実装を検証したいときなどに役立つと思うので、手順をまとめておきます。
-Overview ActiveMQ Classic（MQTT）をローカルで起動する Spring Boot（JMS）側の設定 3.1. JMS Topic（MQTT に対応する Topic 名） 3.2. Spring Boot の Producer / Listener 3.2.1. Producer（JMS → MQTT） 3.2.2. Listener（MQTT → JMS） 3.2.3. TestController（動作テスト用） Python（Paho MQTT）クライアント curl（POST） Execution Result Summary">
+  <meta name="twitter:description" content="Abstract AWS IoT Core を使っていた Python アプリを、ローカル環境でも動作できるようにしたかったため、 ActiveMQ Classic（MQTTブローカー）＋ Spring Boot（JMS）＋ Python（Paho MQTT） という構成でミニマムなサンプルを作りました。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
