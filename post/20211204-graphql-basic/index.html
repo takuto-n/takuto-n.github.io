@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.152.2 with theme even" />
+<meta name="generator" content="Hugo 0.159.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20211204-graphql-basic/" />
@@ -255,10 +255,10 @@
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">user1</span><span class="o">:</span> <span class="nx">user</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span> <span class="s2">&#34;takuto-n&#34;</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="p">...</span><span class="nx">commonFields</span> <span class="c1">// fragment spead
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">user2</span><span class="o">:</span> <span class="nx">user</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span> <span class="s2">&#34;satou&#34;</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="p">...</span><span class="nx">commonFields</span> <span class="c1">// fragment spead
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">fragment</span> <span class="nx">commonFields</span> <span class="nx">on</span> <span class="nx">User</span> <span class="p">{</span>
@@ -327,7 +327,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// Query
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">query</span><span class="p">(</span><span class="nx">$login</span><span class="o">:</span> <span class="nb">String</span><span class="o">!</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">query</span><span class="p">(</span><span class="nx">$login</span><span class="o">:</span> <span class="nb">String</span><span class="o">!</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">user</span><span class="p">(</span><span class="nx">login</span><span class="o">:</span> <span class="nx">$login</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">bio</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">name</span>
@@ -335,7 +335,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//query variables
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;login&#34;</span><span class="o">:</span> <span class="s2">&#34;takuto-n&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -540,7 +540,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// Query
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">query</span> <span class="nx">searchRepositories</span><span class="p">(</span><span class="nx">$first</span><span class="o">:</span> <span class="nx">Int</span><span class="p">,</span> <span class="nx">$after</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">$last</span><span class="o">:</span> <span class="nx">Int</span><span class="p">,</span> <span class="nx">$before</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">$query</span><span class="o">:</span> <span class="nb">String</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">query</span> <span class="nx">searchRepositories</span><span class="p">(</span><span class="nx">$first</span><span class="o">:</span> <span class="nx">Int</span><span class="p">,</span> <span class="nx">$after</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">$last</span><span class="o">:</span> <span class="nx">Int</span><span class="p">,</span> <span class="nx">$before</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">$query</span><span class="o">:</span> <span class="nb">String</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">search</span><span class="p">(</span><span class="nx">first</span><span class="o">:</span> <span class="nx">$first</span><span class="p">,</span> <span class="nx">after</span><span class="o">:</span> <span class="nx">$after</span><span class="p">,</span> <span class="nx">last</span><span class="o">:</span> <span class="nx">$last</span><span class="p">,</span> <span class="nx">before</span><span class="o">:</span> <span class="nx">$before</span><span class="p">,</span> <span class="nx">query</span><span class="o">:</span> <span class="nx">$query</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">REPOSITORY</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">repositoryCount</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">pageInfo</span> <span class="p">{</span>
@@ -563,7 +563,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Query Variables
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;first&#34;</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;after&#34;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;last&#34;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -631,7 +631,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2025
+    2026
     <span class="heart">
       
       ★
@@ -658,7 +658,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }

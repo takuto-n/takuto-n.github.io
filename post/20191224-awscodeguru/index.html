@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.152.2 with theme even" />
+<meta name="generator" content="Hugo 0.159.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20191224-awscodeguru/" />
@@ -386,32 +386,32 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// ひどいコード1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="n">test1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test1&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="n">test2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test2&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="n">test3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test3&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="n">test4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test4&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="n">test1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test1&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="n">test2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test2&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="n">test3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test3&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="n">test4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test4&#34;</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// ひどいコード2</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">do</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">do</span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">//処理</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// ひどいコード3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// ひどいコード4</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// リソースのcloseなし</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// リソースのcloseなし</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="n">src</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="n">dst</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// ひどいコード5</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 引用元：https://qiita.com/negi111111/items/510daace637b7c57c2da</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClassSample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ひどいコード5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 引用元：https://qiita.com/negi111111/items/510daace637b7c57c2da</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClassSample</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">args</span><span class="o">[]</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">proc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -468,7 +468,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello! World!&#34;</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="42-指摘されたコード">4.2. <a name='-1'></a>指摘されたコード</h3>
@@ -485,12 +485,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span><span class="w"> </span><span class="n">dateString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;2016/01/01 00:00:00&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SimpleDateFormat</span><span class="w"> </span><span class="n">sdf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s">&#34;yyyy/MM/dd HH:mm:ss&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Long</span><span class="w"> </span><span class="n">epochTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdf</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">dateString</span><span class="p">).</span><span class="na">getTime</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">epochTime</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">SimpleDateFormat</span><span class="w"> </span><span class="n">sdf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s">&#34;yyyy/MM/dd HH:mm:ss&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">Long</span><span class="w"> </span><span class="n">epochTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdf</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">dateString</span><span class="p">).</span><span class="na">getTime</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">epochTime</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 指摘内容</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 「タイムゾーンの指定がない」</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 指摘内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 「タイムゾーンの指定がない」</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>以下はAWSのAPIについての指摘です。結構詳しく記載されていて「流石です」という所感です。</p>
@@ -504,8 +504,8 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">new</span><span class="w"> </span><span class="n">BasicAWSCredentials</span><span class="p">(</span><span class="n">EnvProp</span><span class="p">.</span><span class="na">getAccesskey</span><span class="p">(),</span><span class="w"> </span><span class="n">EnvProp</span><span class="p">.</span><span class="na">getSecretkey</span><span class="p">())));</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 指摘内容</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// If possible, use temporary security credentials (IAM roles) instead of long-term access keys. Long-term access keys, such as those associated with IAM users and AWS account root users, remain valid until you manually revoke them. However, temporary security credentials obtained through IAM roles and other features of the AWS Security Token Service expire after a short period of time. Use temporary security credentials to help reduce your risk in case credentials are accidentally exposed. Learn more about best practices for managing AWS access keys.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 指摘内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// If possible, use temporary security credentials (IAM roles) instead of long-term access keys. Long-term access keys, such as those associated with IAM users and AWS account root users, remain valid until you manually revoke them. However, temporary security credentials obtained through IAM roles and other features of the AWS Security Token Service expire after a short period of time. Use temporary security credentials to help reduce your risk in case credentials are accidentally exposed. Learn more about best practices for managing AWS access keys.</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -518,8 +518,8 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">getQueryResultsResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">amazonAthena</span><span class="p">.</span><span class="na">getQueryResults</span><span class="p">(</span><span class="n">getQueryResultsRequest</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 指摘内容</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 指摘内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results.</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="5-余談">5. <a name='-1'></a>余談</h2>
@@ -588,7 +588,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2025
+    2026
     <span class="heart">
       
       ★
@@ -615,7 +615,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }

@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.152.2 with theme even" />
+<meta name="generator" content="Hugo 0.159.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20250524-java-cognito-sample/" />
@@ -287,7 +287,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Cognito-localが起動するまで待機</span>
 </span></span><span class="line"><span class="cl">sleep <span class="m">10</span>
 </span></span><span class="line"><span class="cl">
@@ -296,29 +296,29 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># ユーザープールの作成</span>
 </span></span><span class="line"><span class="cl"><span class="nv">USER_POOL_ID</span><span class="o">=</span><span class="k">$(</span>aws cognito-idp create-user-pool <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --pool-name <span class="s2">&#34;test-pool&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --policies <span class="s2">&#34;PasswordPolicy={MinimumLength=8,RequireUppercase=false,RequireLowercase=false,RequireNumbers=false,RequireSymbols=false}&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --query <span class="s1">&#39;UserPool.Id&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --output text<span class="k">)</span>
+</span></span></span><span class="line"><span class="cl">  --pool-name <span class="s2">&#34;test-pool&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --policies <span class="s2">&#34;PasswordPolicy={MinimumLength=8,RequireUppercase=false,RequireLowercase=false,RequireNumbers=false,RequireSymbols=false}&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --query <span class="s1">&#39;UserPool.Id&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --output text<span class="k">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Created User Pool: </span><span class="nv">$USER_POOL_ID</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># ユーザープールクライアントの作成</span>
 </span></span><span class="line"><span class="cl"><span class="nv">CLIENT_ID</span><span class="o">=</span><span class="k">$(</span>aws cognito-idp create-user-pool-client <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --user-pool-id <span class="s2">&#34;</span><span class="nv">$USER_POOL_ID</span><span class="s2">&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --client-name <span class="s2">&#34;test-client&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --generate-secret <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --query <span class="s1">&#39;UserPoolClient.ClientId&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --output text<span class="k">)</span>
+</span></span></span><span class="line"><span class="cl">  --user-pool-id <span class="s2">&#34;</span><span class="nv">$USER_POOL_ID</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --client-name <span class="s2">&#34;test-client&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --generate-secret <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --query <span class="s1">&#39;UserPoolClient.ClientId&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --output text<span class="k">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Created User Pool Client: </span><span class="nv">$CLIENT_ID</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># テストユーザーの作成</span>
 </span></span><span class="line"><span class="cl">aws cognito-idp admin-create-user <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --user-pool-id <span class="nv">$USER_POOL_ID</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --username <span class="s2">&#34;testuser@example.com&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --temporary-password <span class="s2">&#34;TempPass123!&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --message-action <span class="s2">&#34;SUPPRESS&#34;</span>
+</span></span></span><span class="line"><span class="cl">  --user-pool-id <span class="nv">$USER_POOL_ID</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --username <span class="s2">&#34;testuser@example.com&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --temporary-password <span class="s2">&#34;TempPass123!&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --message-action <span class="s2">&#34;SUPPRESS&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Created test user: testuser@example.com&#34;</span>
 </span></span><span class="line"><span class="cl">
@@ -482,28 +482,28 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.cognito_sample.controller</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.auth.AWSStaticCredentialsProvider</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.auth.BasicAWSCredentials</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.client.builder.AwsClientBuilder</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClientBuilder</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.services.cognitoidp.model.*</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestHeader</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.auth.AWSStaticCredentialsProvider</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.auth.BasicAWSCredentials</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.client.builder.AwsClientBuilder</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClientBuilder</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.amazonaws.services.cognitoidp.model.*</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestHeader</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.stream.Collectors</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.stream.Collectors</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">/**
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * Controller for interacting with AWS Cognito User Pools.
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * 
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * This controller provides endpoints for checking the health of the service,
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * debugging connection to Cognito, and listing users in a user pool.
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * It uses a locally running Cognito endpoint for development/testing purposes.
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RestController</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CognitoUserController</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nd">@RestController</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CognitoUserController</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AWSCognitoIdentityProvider</span><span class="w"> </span><span class="n">cognitoClient</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -589,7 +589,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Error listing users: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">();</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="3-execution-result">3. <a name='ExecutionResult'></a>Execution Result</h2>
@@ -675,7 +675,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2025
+    2026
     <span class="heart">
       
       ★
@@ -702,7 +702,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }

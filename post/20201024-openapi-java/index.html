@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.152.2 with theme even" />
+<meta name="generator" content="Hugo 0.159.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20201024-openapi-java/" />
@@ -374,7 +374,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">openapi</span><span class="p">:</span><span class="w"> </span><span class="m">3.0.0</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">info</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">info</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">Sample API</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">A short description of API.</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">termsOfService</span><span class="p">:</span><span class="w"> </span><span class="l">http://example.com/terms/</span><span class="w">
@@ -386,10 +386,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Apache 2.0</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">http://www.apache.org/licenses/LICENSE-2.0.html</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">1.0.0</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">servers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">servers</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">http://localhost:8080/v1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Development server</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">paths</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">/users</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">tags</span><span class="p">:</span><span class="w">
@@ -477,7 +477,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">                  </span>- <span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Orange</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="nt">price</span><span class="p">:</span><span class="w"> </span><span class="m">150</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">components</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">components</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">schemas</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">User</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">object</span><span class="w">
@@ -505,9 +505,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">price</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">integer</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="m">1200</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">security</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">security</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">tags</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">users</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Access to Users</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">products</span><span class="w">
@@ -583,8 +583,8 @@
 </span></span><span class="line"><span class="cl">    <span class="n">generateApiDocumentation</span> <span class="o">=</span> <span class="kc">false</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Spring Option Doc
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/spring.md
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">configOptions</span> <span class="o">=</span> <span class="o">[</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/spring.md
+</span></span></span><span class="line"><span class="cl">    <span class="n">configOptions</span> <span class="o">=</span> <span class="o">[</span>
 </span></span><span class="line"><span class="cl">            <span class="n">title</span>                  <span class="o">:</span> <span class="s2">&#34;userstore&#34;</span><span class="o">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">groupId</span>                <span class="o">:</span> <span class="s2">&#34;openapi&#34;</span><span class="o">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">delegatePattern</span>        <span class="o">:</span> <span class="s2">&#34;true&#34;</span><span class="o">,</span>
@@ -648,8 +648,8 @@
 </span></span><span class="line"><span class="cl">    <span class="n">generateApiDocumentation</span> <span class="o">=</span> <span class="kc">false</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Java Option Doc
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/java.md
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">configOptions</span> <span class="o">=</span> <span class="o">[</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/java.md
+</span></span></span><span class="line"><span class="cl">    <span class="n">configOptions</span> <span class="o">=</span> <span class="o">[</span>
 </span></span><span class="line"><span class="cl">            <span class="n">title</span>                  <span class="o">:</span> <span class="s2">&#34;userstore&#34;</span><span class="o">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">groupId</span>                <span class="o">:</span> <span class="s2">&#34;openapi&#34;</span><span class="o">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">delegatePattern</span>        <span class="o">:</span> <span class="s2">&#34;true&#34;</span><span class="o">,</span>
@@ -692,11 +692,11 @@
 </span></span><span class="line"><span class="cl">    <span class="n">invokerPackage</span> <span class="o">=</span> <span class="s2">&#34;openapi.sample.${sampleStoreService}.clientapi.${openApiVersion}&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// HTML2 Option Doc
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/html2.md
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/html2.md
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 以下のイシューが対応されるまで、Schemaは空で出力されてしまいます。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// https://github.com/OpenAPITools/openapi-generator/issues/3788
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// https://github.com/OpenAPITools/openapi-generator/issues/3788
+</span></span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="2-note">2. <a name='Note'></a>Note</h2>
@@ -774,7 +774,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2025
+    2026
     <span class="heart">
       
       ★
@@ -801,7 +801,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }

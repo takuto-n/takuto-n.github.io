@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.152.2 with theme even" />
+<meta name="generator" content="Hugo 0.159.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220401-decision-table-typescript/" />
@@ -376,10 +376,10 @@
 </span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// hit
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">expect</span><span class="p">(</span><span class="nx">decisionTable</span><span class="p">.</span><span class="nx">run</span><span class="p">({</span> <span class="nx">field1</span>: <span class="kt">100</span><span class="p">,</span> <span class="nx">field2</span><span class="o">:</span> <span class="s1">&#39;test&#39;</span> <span class="p">})).</span><span class="nx">toBe</span><span class="p">(</span><span class="s1">&#39;return sample&#39;</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">expect</span><span class="p">(</span><span class="nx">decisionTable</span><span class="p">.</span><span class="nx">run</span><span class="p">({</span> <span class="nx">field1</span>: <span class="kt">100</span><span class="p">,</span> <span class="nx">field2</span><span class="o">:</span> <span class="s1">&#39;test&#39;</span> <span class="p">})).</span><span class="nx">toBe</span><span class="p">(</span><span class="s1">&#39;return sample&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// not hit ( return undefined )
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">expect</span><span class="p">(</span><span class="nx">decisionTable</span><span class="p">.</span><span class="nx">run</span><span class="p">({</span> <span class="nx">field1</span>: <span class="kt">0</span><span class="p">,</span> <span class="nx">field2</span><span class="o">:</span> <span class="s1">&#39;hogehoge&#39;</span> <span class="p">})).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">undefined</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">expect</span><span class="p">(</span><span class="nx">decisionTable</span><span class="p">.</span><span class="nx">run</span><span class="p">({</span> <span class="nx">field1</span>: <span class="kt">0</span><span class="p">,</span> <span class="nx">field2</span><span class="o">:</span> <span class="s1">&#39;hogehoge&#39;</span> <span class="p">})).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">undefined</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -443,7 +443,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2025
+    2026
     <span class="heart">
       
       ★
@@ -470,7 +470,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }

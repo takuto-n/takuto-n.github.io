@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.152.2 with theme even" />
+<meta name="generator" content="Hugo 0.159.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220323-circuit-breaker-opossum/" />
@@ -356,7 +356,7 @@
 </span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">OpenBreakerError</span><span class="p">,</span> <span class="nx">SemaphoreError</span><span class="p">,</span> <span class="nx">ShutdownError</span><span class="p">,</span> <span class="nx">TimeoutError</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@/error/Error&#39;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// サーキットブレーカーから返却されるエラーコード
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">ErrorCode</span> <span class="o">=</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">ErrorCode</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">OPEN</span><span class="o">:</span> <span class="s1">&#39;EOPENBREAKER&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">SHUTDOWN</span><span class="o">:</span> <span class="s1">&#39;ESHUTDOWN&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">TIMEOUT</span><span class="o">:</span> <span class="s1">&#39;ETIMEDOUT&#39;</span><span class="p">,</span>
@@ -364,20 +364,20 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="nx">as</span> <span class="kr">const</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// サーキットブレーカーの対象となる非同期関数を実装
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">async</span> <span class="kd">function</span> <span class="nx">slowEcho</span><span class="p">(</span><span class="nx">message</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">waitSecond</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">slowEcho</span><span class="p">(</span><span class="nx">message</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">waitSecond</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">await</span> <span class="nx">wait</span><span class="p">(</span><span class="nx">waitSecond</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">message</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">timeout</span><span class="o">:</span> <span class="mi">3000</span><span class="p">,</span> <span class="c1">// If our function takes longer than 3 seconds, trigger a failure
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">errorThresholdPercentage</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span> <span class="c1">// When 50% of requests fail, trip the circuit
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">resetTimeout</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span> <span class="c1">// After 30 seconds, try again.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">capacity</span><span class="o">:</span> <span class="mi">10</span> <span class="c1">// The number of concurrent executions is 10
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">errorThresholdPercentage</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span> <span class="c1">// When 50% of requests fail, trip the circuit
+</span></span></span><span class="line"><span class="cl">  <span class="nx">resetTimeout</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span> <span class="c1">// After 30 seconds, try again.
+</span></span></span><span class="line"><span class="cl">  <span class="nx">capacity</span><span class="o">:</span> <span class="mi">10</span> <span class="c1">// The number of concurrent executions is 10
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// CircuitBreakerに引数で実装した非同期関数を渡す
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">breaker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CircuitBreaker</span><span class="p">(</span><span class="nx">slowEcho</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">breaker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CircuitBreaker</span><span class="p">(</span><span class="nx">slowEcho</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">breaker</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span>
@@ -394,12 +394,12 @@
 </span></span><span class="line"><span class="cl"><span class="nx">breaker</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;semaphoreLocked&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">logWithTime</span><span class="p">(</span><span class="s1">&#39;semaphoreLocked&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">//&#39;Breaker is at capacity and cannot execute the request&#39;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">})</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// fallbackで非同期関数でエラーが発生した場合の処理を実装
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 引数の最後に、`error` が渡されることは、公式ドキュメントに明記されていないため、
 </span></span></span><span class="line"><span class="cl"><span class="c1">// opossum のソースコードを読んで、仕様を理解した。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">breaker</span><span class="p">.</span><span class="nx">fallback</span><span class="p">((</span><span class="nx">message</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">waitSecond</span><span class="o">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="p">{</span> <span class="nx">code</span><span class="o">:</span> <span class="nx">string</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">breaker</span><span class="p">.</span><span class="nx">fallback</span><span class="p">((</span><span class="nx">message</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">waitSecond</span><span class="o">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="p">{</span> <span class="nx">code</span><span class="o">:</span> <span class="nx">string</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">msg</span> <span class="o">=</span> <span class="sb">`Sorry, out of service right now. But your parameters are: </span><span class="si">${</span><span class="nx">message</span><span class="si">}</span><span class="sb">, </span><span class="si">${</span><span class="nx">waitSecond</span><span class="si">}</span><span class="sb">`</span>
 </span></span><span class="line"><span class="cl">  <span class="k">switch</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">ErrorCode</span><span class="p">.</span><span class="nx">OPEN</span><span class="o">:</span>
@@ -416,27 +416,27 @@
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// [0, 1, 2, ...]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">waitSeconds</span> <span class="o">=</span> <span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">keys</span><span class="p">()]</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">waitSeconds</span> <span class="o">=</span> <span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">keys</span><span class="p">()]</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">;(</span><span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// 失敗率が 50% を超えると、openになり、全てのリクエストを拒否するようになる。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">waitSeconds</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">waitSeconds</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">waitSecond</span> <span class="o">=</span> <span class="nx">waitSeconds</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">(</span><span class="sb">`waitSecond = </span><span class="si">${</span><span class="nx">waitSecond</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">breaker</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;hello.&#39;</span><span class="p">,</span> <span class="nx">waitSecond</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">log</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// しばらく時間が経つと、half open になる。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">log</span><span class="p">(</span><span class="sb">`waitSecond = 10`</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">log</span><span class="p">(</span><span class="sb">`waitSecond = 10`</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">await</span> <span class="nx">wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// half openの間に成功するリクエストがあると、close になる。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">log</span><span class="p">(</span><span class="sb">`sucess request`</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nx">log</span><span class="p">(</span><span class="sb">`sucess request`</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">await</span> <span class="nx">breaker</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;hello.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">log</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// capacityで設定した 10 を超える並列数で実行すると、
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// semaphoreLocked 状態となる。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// この状態になると、11個目のリクエストが来た際、fallbackの処理が実行されるようになる。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">parallelNum</span> <span class="o">=</span> <span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="mi">11</span><span class="p">).</span><span class="nx">keys</span><span class="p">()]</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// semaphoreLocked 状態となる。
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// この状態になると、11個目のリクエストが来た際、fallbackの処理が実行されるようになる。
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">parallelNum</span> <span class="o">=</span> <span class="p">[...</span><span class="nb">Array</span><span class="p">(</span><span class="mi">11</span><span class="p">).</span><span class="nx">keys</span><span class="p">()]</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">ret</span> <span class="o">=</span> <span class="kr">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">parallelNum</span><span class="p">.</span><span class="nx">map</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">breaker</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;hello.&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">  <span class="p">);</span>
@@ -763,7 +763,7 @@
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">breaker</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">logWithTime</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span> <span class="c1">// ← ここで例外はスローしないこと
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">})</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -926,7 +926,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2025
+    2026
     <span class="heart">
       
       ★
@@ -953,7 +953,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }

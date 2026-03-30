@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.152.2 with theme even" />
+<meta name="generator" content="Hugo 0.159.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20200405-docker-springboot_to_db/" />
@@ -255,11 +255,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@SpringBootApplication</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SpringbootHelloworldApplication</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SpringbootHelloworldApplication</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">SpringbootHelloworldApplication</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="212-restcontroller">2.1.2. <a name='RestController'></a>RestController</h4>
@@ -287,8 +287,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@RestController</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Slf4j</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RestController</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nd">@Slf4j</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RestController</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Autowired</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SampleMapper</span><span class="w"> </span><span class="n">sampleMapper</span><span class="p">;</span><span class="w">
@@ -304,7 +304,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">sampleTableList</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">sampleTable</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&#34;id = {}, name = {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">sampleTable</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">sampleTable</span><span class="p">.</span><span class="na">getName</span><span class="p">()));</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="213-dto">2.1.3. <a name='DTO'></a>DTO</h4>
@@ -319,11 +319,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Getter</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Setter</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleTable</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nd">@Setter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleTable</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="214-mapper">2.1.4. <a name='Mapper'></a>Mapper</h4>
@@ -344,7 +344,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mapper</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">SampleMapper</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">SampleMapper</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Insert</span><span class="p">(</span><span class="s">&#34;INSERT INTO sample_table (id, name) VALUES (#{id}, #{name})&#34;</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Options</span><span class="p">(</span><span class="n">useGeneratedKeys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">keyProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;id&#34;</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">SampleTable</span><span class="w"> </span><span class="n">sampleTable</span><span class="p">);</span><span class="w">
@@ -354,7 +354,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Select</span><span class="p">(</span><span class="s">&#34;SELECT id, name FROM sample_table&#34;</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SampleTable</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectAll</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="215-applicationproperties">2.1.5. <a name='Application.properties'></a>Application.properties</h4>
@@ -413,11 +413,11 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">boot</span><span class="err">&#39;</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="err">&#39;</span><span class="n">2</span><span class="p">.</span><span class="na">2</span><span class="p">.</span><span class="na">2</span><span class="p">.</span><span class="na">RELEASE</span><span class="err">&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="err">&#39;</span><span class="n">io</span><span class="p">.</span><span class="na">spring</span><span class="p">.</span><span class="na">dependency</span><span class="o">-</span><span class="n">management</span><span class="err">&#39;</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="err">&#39;</span><span class="n">1</span><span class="p">.</span><span class="na">0</span><span class="p">.</span><span class="na">8</span><span class="p">.</span><span class="na">RELEASE</span><span class="err">&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="err">&#39;</span><span class="n">java</span><span class="err">&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 省略</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 省略</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// lombok</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">compileOnly</span><span class="w"> </span><span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="na">projectlombok</span><span class="p">:</span><span class="n">lombok</span><span class="err">&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">testCompileOnly</span><span class="w"> </span><span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="na">projectlombok</span><span class="p">:</span><span class="n">lombok</span><span class="err">&#39;</span><span class="w">
@@ -436,7 +436,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">testImplementation</span><span class="p">(</span><span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">boot</span><span class="p">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">test</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">exclude</span><span class="w"> </span><span class="n">group</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;</span><span class="n">org</span><span class="p">.</span><span class="na">junit</span><span class="p">.</span><span class="na">vintage</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">module</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;</span><span class="n">junit</span><span class="o">-</span><span class="n">vintage</span><span class="o">-</span><span class="n">engine</span><span class="err">&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="22-jib-gradle-plugin">2.2. <a name='jib-gradle-plugin'></a>jib-gradle-plugin</h3>
@@ -452,7 +452,7 @@
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">plugins</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// for docker image</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="s">&#34;com.google.cloud.tools.jib&#34;</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s">&#34;2.1.0&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="3-build-and-run">3. <a name='BuildandRun'></a>Build and Run</h2>
@@ -596,7 +596,7 @@
 </span></span><span class="line"><span class="cl">  .   ____          _            __ _ _
 </span></span><span class="line"><span class="cl"> /<span class="se">\\</span> / ___<span class="s1">&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
 </span></span></span><span class="line"><span class="cl"><span class="s1">( ( )\___ | &#39;</span>_ <span class="p">|</span> <span class="s1">&#39;_| | &#39;</span>_ <span class="se">\/</span> _<span class="sb">`</span> <span class="p">|</span> <span class="se">\ \ \ \
-</span></span></span><span class="line"><span class="cl"><span class="se"></span> <span class="se">\\</span>/  ___<span class="o">)</span><span class="p">|</span> <span class="p">|</span>_<span class="o">)</span><span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">||</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span>  <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span>
+</span></span></span><span class="line"><span class="cl"> <span class="se">\\</span>/  ___<span class="o">)</span><span class="p">|</span> <span class="p">|</span>_<span class="o">)</span><span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">||</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span>  <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span>
 </span></span><span class="line"><span class="cl">  <span class="s1">&#39;  |____| .__|_| |_|_| |_\__, | / / / /
 </span></span></span><span class="line"><span class="cl"><span class="s1"> =========|_|==============|___/=/_/_/_/
 </span></span></span><span class="line"><span class="cl"><span class="s1"> :: Spring Boot ::        (v2.2.2.RELEASE)
@@ -685,7 +685,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2025
+    2026
     <span class="heart">
       
       ★
@@ -712,7 +712,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }

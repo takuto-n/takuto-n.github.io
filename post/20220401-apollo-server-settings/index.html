@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="X-cHa5YCntcalAElm7jCMVPMxAGT78i0k_36G7sZ0cA" />
 
 
-<meta name="generator" content="Hugo 0.152.2 with theme even" />
+<meta name="generator" content="Hugo 0.159.1 with theme even" />
 
 
 <link rel="canonical" href="https://takuto-n.github.io/post/20220401-apollo-server-settings/" />
@@ -295,8 +295,8 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ApolloServer</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">schema</span><span class="p">,</span> <span class="c1">// ★ポイント1 スキーマの設定
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">formatError</span><span class="p">,</span> <span class="c1">// ★ポイント2 エラーハンドラーの設定
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nx">formatError</span><span class="p">,</span> <span class="c1">// ★ポイント2 エラーハンドラーの設定
+</span></span></span><span class="line"><span class="cl">    <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">ApolloServerPluginLandingPageProductionDefault</span><span class="p">({</span> <span class="nx">footer</span>: <span class="kt">false</span> <span class="p">}),</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">ApolloServerPluginDrainHttpServer</span><span class="p">({</span> <span class="nx">httpServer</span> <span class="p">}),</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">ApolloServerPluginInlineTraceDisabled</span><span class="p">(),</span>
@@ -358,8 +358,8 @@
 </span></span><span class="line"><span class="cl">  <span class="nx">schemas</span><span class="o">:</span> <span class="p">[</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">constraintDirective</span><span class="p">()(</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// ポイント1 スキーマ定義とリゾルバーの関連付け
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// ポイント2 constraintDirectiveTypeDefs によって、graphql-constraint-directive で設定したバリデーションルールが適用される。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">makeExecutableSchema</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// ポイント2 constraintDirectiveTypeDefs によって、graphql-constraint-directive で設定したバリデーションルールが適用される。
+</span></span></span><span class="line"><span class="cl">      <span class="nx">makeExecutableSchema</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">resolvers</span>: <span class="kt">sample1Resolver</span><span class="p">(),</span>
 </span></span><span class="line"><span class="cl">        <span class="nx">typeDefs</span><span class="o">:</span> <span class="p">[</span><span class="nx">constraintDirectiveTypeDefs</span><span class="p">,</span> <span class="nx">checkAuthSettingsDef</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">      <span class="p">})</span>
@@ -397,7 +397,7 @@
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">code</span> <span class="o">=</span> <span class="nx">error</span><span class="o">?</span><span class="p">.</span><span class="nx">extensions</span><span class="p">.</span><span class="nx">code</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">===</span> <span class="s1">&#39;GRAPHQL_VALIDATION_FAILED&#39;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// return a custom object
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="k">new</span> <span class="nx">ValidationError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="nx">ValidationError</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">error</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -488,7 +488,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="sb">  }
 </span></span></span><span class="line"><span class="cl"><span class="sb">`</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// ポイント1 ↑のschema定義にて、`@constraint(minLength: 5)` というバリデーションルールを定義している。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">sample1Resolver</span> <span class="o">=</span> <span class="p">()</span><span class="o">:</span> <span class="nx">GraphQLResolverMap</span><span class="p">&lt;</span><span class="nt">object</span><span class="p">&gt;</span> <span class="o">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">Query</span><span class="o">:</span> <span class="p">{</span>
@@ -640,7 +640,7 @@
 <pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Sample2Result</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@/domain/model/Sample2Result&#39;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// ID存在チェック
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kd">function</span> <span class="nx">sample2</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Sample2Result</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">sample2</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">Sample2Result</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;sample2: &#39;</span> <span class="o">+</span> <span class="nx">id</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">{</span> <span class="nx">result</span>: <span class="kt">true</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -723,7 +723,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2025
+    2026
     <span class="heart">
       
       ★
@@ -750,7 +750,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZTQ37GBNHR"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
